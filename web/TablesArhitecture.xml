@@ -1,0 +1,134 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<Table1>
+    <TableName>Institute</TableName>
+    <Field1>
+        <FieldName>ID</FieldName>
+        <FieldType>VARCHAR</FieldType>
+        <FieldSize>14</FieldSize>
+        <FieldNull></FieldNull>
+    </Field1>
+    <Field2>
+        <FieldName>longName</FieldName>
+        <FieldType>VARHCAR</FieldType>
+        <FieldSize>70</FieldSize>
+        <FieldNull></FieldNull>
+    </Field2>
+    <Field3>
+        <FieldName>shortName</FieldName>
+        <FieldType>VARCHAR</FieldType>
+        <FieldSize>10</FieldSize>
+        <FieldNull></FieldNull>
+    </Field3>
+    <Field4>
+        <FieldName>FacultysIDlist</FieldName>
+        <FieldType>TEXT</FieldType>
+        <FieldSize>750</FieldSize>
+        <FieldNull></FieldNull>
+    </Field4>
+    <PrimaryKey></PrimaryKey>
+</Table1>
+<Table2>
+<TableName>Faculty</TableName>
+<Field1>
+    <FieldName>ID</FieldName>
+    <FieldType>VARCHAR</FieldType>
+    <FieldSize>14</FieldSize>
+    <FieldNull></FieldNull>
+</Field1>
+<Field2>
+    <FieldName>longName</FieldName>
+    <FieldType>VARHCAR</FieldType>
+    <FieldSize>70</FieldSize>
+    <FieldNull></FieldNull>
+</Field2>
+<Field3>
+    <FieldName>shortName</FieldName>
+    <FieldType>VARCHAR</FieldType>
+    <FieldSize>10</FieldSize>
+    <FieldNull></FieldNull>
+</Field3>
+<Field4>
+    <FieldName>ChairsIDlist</FieldName>
+    <FieldType>TEXT</FieldType>
+    <FieldSize>750</FieldSize>
+    <FieldNull></FieldNull>
+</Field4>
+<PrimaryKey></PrimaryKey>
+</Table2>
+<Table3>
+<TableName>Chair</TableName>
+<Field1>
+    <FieldName>ID</FieldName>
+    <FieldType>VARCHAR</FieldType>
+    <FieldSize>14</FieldSize>
+    <FieldNull></FieldNull>
+</Field1>
+<Field2>
+    <FieldName>longName</FieldName>
+    <FieldType>VARHCAR</FieldType>
+    <FieldSize>70</FieldSize>
+    <FieldNull></FieldNull>
+</Field2>
+<Field3>
+    <FieldName>shortName</FieldName>
+    <FieldType>VARCHAR</FieldType>
+    <FieldSize>10</FieldSize>
+    <FieldNull></FieldNull>
+</Field3>
+<Field4>
+    <FieldName>GroupsIDlist1</FieldName>
+    <FieldType>TEXT</FieldType>
+    <FieldSize>750</FieldSize>
+    <FieldNull></FieldNull>
+</Field4>
+<Field5>
+    <FieldName>GroupsIDlist2</FieldName>
+    <FieldType>TEXT</FieldType>
+    <FieldSize>750</FieldSize>
+    <FieldNull></FieldNull>
+</Field5>
+<Field6>
+    <FieldName>GroupsIDlist3</FieldName>
+    <FieldType>TEXT</FieldType>
+    <FieldSize>750</FieldSize>
+    <FieldNull></FieldNull>
+</Field6>
+<Field7>
+    <FieldName>GroupsIDlist4</FieldName>
+    <FieldType>TEXT</FieldType>
+    <FieldSize>750</FieldSize>
+    <FieldNull></FieldNull>
+</Field7>
+<Field8>
+    <FieldName>GroupsIDlist5</FieldName>
+    <FieldType>TEXT</FieldType>
+    <FieldSize>750</FieldSize>
+    <FieldNull></FieldNull>
+</Field8>
+<Field9>
+    <FieldName>GroupsIDlist6</FieldName>
+    <FieldType>TEXT</FieldType>
+    <FieldSize>750</FieldSize>
+    <FieldNull></FieldNull>
+</Field9>
+<Field10>
+    <FieldName>TaechersIDlist</FieldName>
+    <FieldType>TEXT</FieldType>
+    <FieldSize>750</FieldSize>
+    <FieldNull></FieldNull>
+</Field10>
+<Field11>
+    <FieldName>EmployeesIDlist</FieldName>
+    <FieldType>TEXT</FieldType>
+    <FieldSize>750</FieldSize>
+    <FieldNull></FieldNull>
+</Field11>
+<Field12>
+    <FieldName>DisciplinesIDlist</FieldName>
+    <FieldType>TEXT</FieldType>
+    <FieldSize>750</FieldSize>
+    <FieldNull></FieldNull>
+</Field12>
+<PrimaryKey></PrimaryKey>
+</Table3>

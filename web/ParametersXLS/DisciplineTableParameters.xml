@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<Table1>
+    <TableName>Discipline</TableName>
+    <Field1>
+        <FieldName>ID</FieldName>
+        <FieldType>INT</FieldType>
+        <FieldSize>6</FieldSize>
+        <FieldNull>NOT NULL</FieldNull>
+        <Fieldkey>PRIMARY KEY</Fieldkey>
+    </Field1>
+    <Field2>
+        <FieldName>nameOfDiscipline</FieldName>
+        <FieldType>VARCHAR</FieldType>
+        <FieldSize>70</FieldSize>
+        <FieldNull>NOT NULL</FieldNull>
+    </Field2>
+    <Field3>
+        <FieldName>courseNumber</FieldName>
+        <FieldType>VARCHAR</FieldType>
+        <FieldSize>2</FieldSize>
+        <FieldNull>NOT NULL</FieldNull>
+    </Field3>
+    <Field4>
+        <FieldName>semesterNumber</FieldName>
+        <FieldType>VARCHAR</FieldType>
+        <FieldSize>1</FieldSize>
+        <FieldNull>NOT NULL</FieldNull>
+    </Field4>
+    <Field5>
+        <FieldName>countOfLessons</FieldName>
+        <FieldType>VARCHAR</FieldType>
+        <FieldSize>2</FieldSize>
+        <FieldNull>NOT NULL</FieldNull>
+    </Field5>
+    <Field6>
+        <FieldName>countOfPraktice</FieldName>
+        <FieldType>VARCHAR</FieldType>
+        <FieldSize>2</FieldSize>
+        <FieldNull>NOT NULL</FieldNull>
+    </Field6>
+    <Field7>
+        <FieldName>exam</FieldName>
+        <FieldType>VARCHAR</FieldType>
+        <FieldSize>5</FieldSize>
+        <FieldNull>NOT NULL</FieldNull>
+    </Field7>
+    <Field8>
+        <FieldName>chairID</FieldName>
+        <FieldType>INT</FieldType>
+        <FieldSize>6</FieldSize>
+        <FieldNull>NOT NULL</FieldNull>
+    </Field8>
+</Table1>

@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<Table1>
+    <TableName>Timetable</TableName>
+    <Field1>
+        <FieldName>groupID</FieldName>
+        <FieldType>VARCHAR</FieldType>
+        <FieldSize>20</FieldSize>
+        <FieldNull>NOT NULL</FieldNull>
+    </Field1>
+    <Field2>
+        <FieldName>maxCountOfDays</FieldName>
+        <FieldType>INT</FieldType>
+        <FieldSize></FieldSize>
+        <FieldNull></FieldNull>
+    </Field2>
+    <Field3>
+        <FieldName>countOfWeeks</FieldName>
+        <FieldType>INT</FieldType>
+        <FieldSize></FieldSize>
+        <FieldNull></FieldNull>
+    </Field3>
+    <Field4>
+        <FieldName>ID</FieldName>
+        <FieldType>VARCHAR</FieldType>
+        <FieldSize>20</FieldSize>
+        <FieldNull>NOT NULL</FieldNull>
+        <Fieldkey>PRIMARY KEY</Fieldkey>
+    </Field4>
+    <Field5>
+        <FieldName>Days</FieldName>
+        <FieldType>TEXT</FieldType>
+        <FieldSize></FieldSize>
+        <FieldNull></FieldNull>
+    </Field5>
+</Table1>
