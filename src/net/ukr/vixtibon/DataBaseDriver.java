@@ -392,10 +392,11 @@ public class DataBaseDriver {
         System.out.println("Goodbye!");
     }
 
-    public void stringProcessor(String st){
+    public boolean stringProcessor(String st){
         System.out.println("stringProcessor");
         Connection conn = null;
         Statement stmt = null;
+        boolean result = false;
         try {
             //STEP 2: Register JDBC driver
             Class.forName(JDBC_DRIVER).newInstance();
@@ -413,12 +414,15 @@ public class DataBaseDriver {
 
             stmt.executeUpdate(sql);
             System.out.println("Created table in given database...");
+            result = true;
         } catch (SQLException se) {
             //Handle errors for JDBC
             se.printStackTrace();
+            result = false;
         } catch (Exception e) {
             //Handle errors for Class.forName
             e.printStackTrace();
+            result = false;
         } finally {
             //finally block used to close resources
             try {
@@ -432,8 +436,9 @@ public class DataBaseDriver {
             } catch (SQLException se) {
                 se.printStackTrace();
             }
+            result = false;
         }
-        System.out.println("Goodbye!");
+        return result;
     }
     public void tableCreator(String pathToXML) {
         System.out.println("tableCreator");

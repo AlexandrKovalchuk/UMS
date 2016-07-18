@@ -1,3 +1,4 @@
+<%@ page import="servlets.SessionsList" %>
 <%--
   Created by IntelliJ IDEA.
   User: alex
@@ -9,6 +10,16 @@
 <link rel="stylesheet" type="text/css" href="css\admin_styles.css">
 <html>
 <head>
+
+    <%
+        SessionsList sl = new SessionsList();
+        Cookie[] cookies = request.getCookies();
+        System.out.println("cookies size " + cookies.length);
+        String result = sl.sessionControl(cookies,"admin");
+        if(!result.equals("success")){
+            response.sendRedirect(result);
+        }
+    %>
     <%
         if(request.getParameter("action").equals("create")){
     %>
@@ -40,6 +51,7 @@
     </h5>
 </div>
 <br />
+<div class = "pageTitleText">
     <%
     if(request.getParameter("action").equals("create")){
     %>
@@ -47,20 +59,20 @@
             <table>
                 <input type="hidden"  name="tableNameParameter" value="Institute">
                 <tr>
-                    <td>long name:</td>
+                    <td><h2>Long name:</h2></td>
                     <td>
                         <input type="text" name="longName" data-hint=" please enter name of institute">
                     </td>
                 </tr>
                 <tr>
-                    <td>short name:</td>
+                    <td><h2>Short name:</h2></td>
                     <td>
                         <input type="text" name="shortName" data-hint=" please ABR">
                     </td>
                 </tr>
                 <tr>
                     <td colspan=2>
-                        <input type="submit" value="Додати" >
+                        <button onclick="submit" value="Log In" class="controlButton"><h2>Add</h2></button>
                     </td>
                 </tr>
             </table>
@@ -80,5 +92,6 @@
     <%
         }
     %>
+</div>
 </body>
 </html>

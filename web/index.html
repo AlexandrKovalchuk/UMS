@@ -2,15 +2,22 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="main_css\styles_for_Main_page.css">
     <title>Welcome page</title>
 </head>
-<div class = "needToFix">
-    <h4>
-        this page need to be fixed
-    </h4>
-</div>
+
 <body>
-Wlcome to our university
-<a href="LogIn.jsp">Enter</a><br />
+<div class = "pageTitleText">
+    <h5>
+        Welcome to University!
+    </h5>
+</div>
+<br>
+<tr>
+    <td >
+        <button onclick="window.location.href='LogIn.jsp?message=ok'" value="Enter" class="controlButton"><h2>Enter</h2></button>
+        <br>
+    </td>
+</tr>
 </body>
 </html>

@@ -1,5 +1,6 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="net.ukr.vixtibon.*" %>
+<%@ page import="servlets.SessionsList" %>
 <%--
   Created by IntelliJ IDEA.
   User: alex
@@ -8,6 +9,15 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+    SessionsList sl = new SessionsList();
+    Cookie[] cookies = request.getCookies();
+    System.out.println("cookies size " + cookies.length);
+    String result = sl.sessionControl(cookies,"admin");
+    if(!result.equals("success")){
+        response.sendRedirect(result);
+    }
+%>
 <%
     int stepIndex = 0;
     stepIndex = Integer.parseInt(request.getParameter("step"));

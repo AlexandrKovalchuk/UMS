@@ -5,67 +5,82 @@
 <html>
 
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <script type="text/javascript" src="common/js/form_init.js" id="form_init_script"
-            data-name="">
-    </script>
-    <link rel="stylesheet" type="text/css" href="theme/sky/css/default.css?version=364"
-          id="theme" />
-    <title>
-    </title>
+    <link rel="stylesheet" type="text/css" href="main_css\styles_for_LogIn_page.css">
+    <title>LOG IN PAGE</title>
 </head>
 
 <body>
+<%
+if(request.getParameter("message").equals("ok")) {
+%>
 <form action="LogInServlet" method="Get" >
+    <%
+        }
+    %>
 
-    <div class = "needToFix">
-        <h4>
-            this page need to be fixed
-        </h4>
-    </div>
-    <div class="fb-form-header" id="fb-form-header1" style="min-height: 20px;">
-        <a class="fb-link-logo" id="fb-link-logo1" href="" target="_blank"><img title="Alternative text" class="fb-logo" id="fb-logo1" style="display: none;" alt="Alternative text" src="common/images/image_default.png"/></a>
-    </div>
-    <div class="section" id="section1">
 
-        <div class="column ui-sortable" id="column1">
-            <div class="fb-item fb-100-item-column" id="item1">
-                <div class="fb-header fb-item-alignment-center">
-                    <h2 style="font-family: georgia; display: inline;">
-                        &#1030;&#1053;&#1057;&#1058;&#1048;&#1058;&#1059;&#1058;
-                    </h2>
-                </div>
-            </div>
-            <div class="fb-item fb-33-item-column" id="item4">
-                <div class="fb-grouplabel">
-                    <label id="item4_label_0" style="display: inline;">&#1083;&#1054;&#1043;&#1030;&#1053;</label>
-                </div>
-                <div class="fb-input-box">
-                    <input name="username" id="item4_text_1" type="text" maxlength="254" placeholder=""
-                           autocomplete="off" data-hint="" />
-                </div>
-            </div>
-            <div class="fb-item fb-33-item-column" id="item5" style="opacity: 1;">
-                <div class="fb-grouplabel">
-                    <label id="item5_label_0" style="display: inline;">&#1087;&#1040;&#1056;&#1054;&#1051;&#1068;</label>
-                </div>
-                <div class="fb-input-box">
-                    <input name="password" id="item5_password_1" type="text" maxlength="254"
-                           placeholder="" autocomplete="off" data-hint="" />
-                </div>
-            </div>
+    <div class = "pageTitleText">
+        <h5>
+            Welcome to Log In Page!
+        </h5>
+    </div>
+
+    <div class = "itemsBlock">
+<%
+if(request.getParameter("message").equals("wrongLogin")) {
+    %>
+        <br>
+        <div class = "redInfo">
+            <h4 class="payAttention">
+                Incorrect login or password!
+            </h4>
         </div>
+        <br>
+        <tr>
+            <td >
+                <button onclick="window.location.href='LogIn.jsp?message=ok'"  class="controlButton"><h2>Try Again</h2></button>
+                <br>
+            </td>
+        </tr>
+        <br>
+        <%
+}else if(request.getParameter("message").equals("ok")){
+
+%>
+    <table>
+        <input type="hidden"  name="tableNameParameter" value="Institute">
+        <tr>
+            <td><h2>Login Name:</h2></td>
+            <td>
+                <input name="username" type="text"  data-hint="" />
+            </td>
+        </tr>
+        <tr>
+            <td><h2>Password:</h2></td>
+            <td>
+                <input name="password" type="text" maxlength="254"
+                       placeholder="" autocomplete="off" data-hint="" />
+            </td>
+        </tr>
+        <tr>
+            <td >
+                <button onclick="submit" value="Log In" class="controlButton"><h2>Log In</h2></button>
+                <br>
+            </td>
+        </tr>
+        <br>
+    </table>
+        <%
+        }
+        %>
     </div>
-    <div class="fb-captcha fb-item-alignment-center" id="fb-captcha_control"
-         style="display: none; cursor: default;">
-        <img src="editordata/images/recaptcha.png" />
-    </div>
-    <div class="fb-item-alignment-left fb-footer" id="fb-submit-button-div"
-         style="min-height: 1px;">
-        <input class="fb-button-special" id="fb-submit-button" style="background-image: url('theme/sky/images/btn_submit.png');"
-               type="submit" data-regular="url('file:///C:/Users/alex/AppData/Local/Temp/FormBuilder/theme/sky/images/btn_submit.png')"
-               value="&#1059;&#1074;&#1110;&#1081;&#1090;&#1080;" />
-    </div>
-</form>
+            <%
+        if(request.getParameter("message").equals("ok")) {
+        %>
+        </form  >
+            <%
+                }
+            %>
+
 </body>
 </html>

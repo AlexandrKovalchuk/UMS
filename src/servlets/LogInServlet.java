@@ -1,6 +1,7 @@
 package servlets;
 
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -47,20 +48,57 @@ public class LogInServlet extends HttpServlet {
                        //wellcome user page load
                        access = logPas[2];
                        String levelPart = "";
+
+                       Session s = new Session();
+                       SessionsList sl = new SessionsList();
+                       String ID = s.sessionIDGenerator();
+                       boolean flag = true;
+
+                       while(flag){
+                           if(sl.sessionsList.containsKey(ID)){
+                               ID = s.sessionIDGenerator();
+                           }else{
+                               flag = false;
+                           }
+                       }
+
+
                        //System.out.println("doPost 5_3 User name and pass " +username+" "+password+" " + access);
                        if(access.equals("hr")){
                            levelPart += "Hello employee";
-                           resp.sendRedirect("Employee/EmployeePage.html");
+                           s.setSessionID(ID);
+                           s.setSessionType("employee");
+                           sl.sessionsList.put(s.getSessionID(),s);
+                           Cookie cookie = new Cookie("SessionID", s.getSessionID());
+                           resp.addCookie(cookie);
+                           resp.sendRedirect("Employee/EmployeePage.jsp");
                            //System.out.println("access 1 " + levelPart);
                        }else if(access.equals("tc")){
                            levelPart += "Hello teacher";
+                           s.setSessionID(ID);
+                           s.setSessionType("teacher");
+                           sl.sessionsList.put(s.getSessionID(),s);
+                           Cookie cookie = new Cookie("SessionID", s.getSessionID());
+                           resp.addCookie(cookie);
+                           resp.sendRedirect("Teacher/TeacherPage.jsp");
                            //System.out.println("access 2 " + levelPart);
                        }else if(access.equals("st")){
                            levelPart += "Hello student";
+                           s.setSessionID(ID);
+                           s.setSessionType("student");
+                           sl.sessionsList.put(s.getSessionID(),s);
+                           Cookie cookie = new Cookie("SessionID", s.getSessionID());
+                           resp.addCookie(cookie);
+                           resp.sendRedirect("Student/StudentPage.jsp");
                            //System.out.println("access 3 " + levelPart);
                        }else if(access.equals("ad")){
                            levelPart += "Hello admin";
-                           resp.sendRedirect("Admin/AdminPage.html");
+                           s.setSessionID(ID);
+                           s.setSessionType("admin");
+                           sl.sessionsList.put(s.getSessionID(),s);
+                           Cookie cookie = new Cookie("SessionID", s.getSessionID());
+                           resp.addCookie(cookie);
+                           resp.sendRedirect("Admin/AdminPage.jsp");
                            //System.out.println("access 4 " + levelPart);
                        }
                        partofanswer = "!" + levelPart + " <br> " +
@@ -77,9 +115,7 @@ public class LogInServlet extends HttpServlet {
                        break;
                    }else{
                        //incorrect password page load
-                       partofanswer = "incorrect login or password";
-                       out.println();
-                       System.out.println("doPost 8 ");
+                       resp.sendRedirect("LogIn.jsp?message=wrongLogin");
 
                        break;
                    }
@@ -95,29 +131,12 @@ public class LogInServlet extends HttpServlet {
                partofanswer = "this user absent in base";
                out.println();
                System.out.println("doPost 10 ");
+               resp.sendRedirect("LogIn.jsp?message=wrongLogin");
 
            }
        } catch (FileNotFoundException e) {
            e.printStackTrace();
        }
-
-       answer = "<!DOCTYPE html PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" +" +
-               "http://www.w3.org/TR/html4/loose.dtd\">\n" +
-               "<html> \n" +
-               "<head> \n" +
-               "<meta http-equiv=\"Content-Type\" content=\"text/html; " +
-               "charset=ISO-8859-1\"> \n" +
-               "<title> Crunchify.com JSP Servlet Example  </title> \n" +
-               "</head> \n" +
-               "<body> <div align='center'> \n" +
-               "<style= \"font-size=\"12px\" color='black'\"" + "\">" +
-               partofanswer +
-               "</font></body> \n" +
-               "</html>";
-
-       //out.println (answer);
-
-       //System.out.println("RESULT do get 3" +username+" "+password);
           }
 
 

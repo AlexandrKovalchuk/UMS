@@ -364,7 +364,12 @@ public class FormReaderServlet extends HttpServlet {
             */
         }
         qs.showSet();
-        d.stringProcessor(d.insertQuery(qs));
+        boolean success = d.stringProcessor(d.insertQuery(qs));
+        if(success){
+            response.sendRedirect("Admin/ActionResult.jsp?result=success"+"&type=0");
+        }else if(!success){
+            response.sendRedirect("Admin/ActionResult.jsp?result=unsuccess");
+        }
     }
 
 }
