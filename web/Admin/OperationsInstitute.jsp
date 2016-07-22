@@ -1,4 +1,8 @@
 <%@ page import="servlets.SessionsList" %>
+<%@ page import="net.ukr.vixtibon.DataBaseDriver" %>
+<%@ page import="net.ukr.vixtibon.Faculty" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="net.ukr.vixtibon.Institute" %>
 <%--
   Created by IntelliJ IDEA.
   User: alex
@@ -58,6 +62,7 @@
         <form action="/FormReaderServlet" method="post" accept-charset="UTF-8">
             <table>
                 <input type="hidden"  name="tableNameParameter" value="Institute">
+                <input type="hidden"  name="operation" value="create">
                 <tr>
                     <td><h2>Long name:</h2></td>
                     <td>
@@ -72,7 +77,7 @@
                 </tr>
                 <tr>
                     <td colspan=2>
-                        <button onclick="submit" value="Log In" class="controlButton"><h2>Add</h2></button>
+                        <button onclick="submit"  class="controlButton"><h2>Add</h2></button>
                     </td>
                 </tr>
             </table>
@@ -83,8 +88,45 @@
 
     <%
     }else if(request.getParameter("action").equals("delete")){
+        DataBaseDriver d = new DataBaseDriver();
+        ArrayList<Faculty> objList = d.getDateFaculty("SELECT longName, shortName, instituteID, ID FROM faculty WHERE instituteID='" +request.getParameter("ID") + "'" );
+        ArrayList<Institute> institutes = d.getDateInstitute("SELECT longName, shortName, ID FROM institute WHERE ID='" +request.getParameter("ID") + "'");
     %>
+    <form action="/FormReaderServlet" method="post" accept-charset="UTF-8">
+        <input type="hidden"  name="operation" value="delete">
+        <input type="hidden"  name="tableNameParameter" value="Institute">
+        <input type="hidden"  name="id" value=<%out.print(institutes.get(0).getID());%>>
 
+        <%if(objList.size() > 0){%>
+        <div class = "yelowInfo">
+            <br>
+            <div>
+                <h2>Data which will be affected is:</h2>
+            </div>
+            <div>
+                <%
+                for(Faculty f: objList){
+                %>
+                    <h3><%out.print(f.getLongName());%></h3>
+                <%
+                }
+                %>
+            </div>
+        </div>
+        <%}%>
+            <div>
+                <h2>Would you like to continue?</h2>
+                <tr>
+                    <td >
+                        <button onclick="submit"  class="controlButton"><h2>Yes</h2></button>
+                    </td>
+
+                </tr>
+            </div>
+    </form>
+    <td >
+        <button onclick="window.location.href='AdminPage.jsp'"  class="controlButton"><h2>No</h2></button>
+    </td>
     <%
     }else{
     %>

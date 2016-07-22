@@ -22,6 +22,8 @@ public class Group implements Serializable {
 
     public QuerySet qs = new QuerySet();
 
+    public Group(){}
+
     public Group(int wave,int ID, int chairID) {
         this.wave = wave;
         String str = "";
@@ -38,6 +40,8 @@ public class Group implements Serializable {
     public void setID(int ID) {
         this.ID = ID;
     }
+
+
 
     public void updateQuerySetParameter(String key, String update){
         QueryBean qb = new QueryBean();
@@ -103,6 +107,9 @@ public class Group implements Serializable {
     public void setFullGroupName(String chairShortName){
         fullGroupName = chairShortName + "-" + wave + groupIndex;
         updateQuerySetParameter("fullGroupName",fullGroupName);
+    }
+    public void setFGN(String name){
+        this.fullGroupName = name;
     }
     public void addStudent(Student student){
         StudentsList.add(student);

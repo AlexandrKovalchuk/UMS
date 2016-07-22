@@ -30,11 +30,11 @@
     if(request.getParameter("selectFrom").equals("institute")){
         objListI = d.getDateInstitute("SELECT longName, shortName, ID FROM institute");
     }else if(request.getParameter("selectFrom").equals("faculty")){
-        objListF = d.getDateFaculty("SELECT longName, shortName, ID FROM faculty WHERE instituteID = '" +request.getParameter("ID") +"'");
+        objListF = d.getDateFaculty("SELECT longName, shortName, instituteID, ID FROM faculty WHERE instituteID = '" +request.getParameter("ID") +"'");
     }else if(request.getParameter("selectFrom").equals("chair")){
-         objListC = d.getDateChair("SELECT longName, shortName, ID FROM chair WHERE facultyID = '" +request.getParameter("ID") +"'");
+         objListC = d.getDateChair("SELECT longName, shortName, facultyID, ID FROM chair WHERE facultyID = '" +request.getParameter("ID") +"'");
     }else if(request.getParameter("selectFrom").equals("emploee")){
-        objListC = d.getDateChair("SELECT name, lastName, ID FROM emploee WHERE chairID = '" +request.getParameter("ID") +"'");
+        objListC = d.getDateChair("SELECT name, lastName, chairID, ID FROM emploee WHERE chairID = '" +request.getParameter("ID") +"'");
     }
 %>
 <link rel="stylesheet" type="text/css" href="css\admin_styles.css">

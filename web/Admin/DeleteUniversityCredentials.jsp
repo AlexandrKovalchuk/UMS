@@ -36,7 +36,7 @@
 </div>
 <br />
 <%
-    d.deleteItem("institute", request.getParameter("ID"));
+
     if(objList.size()!=0) {
 
         for (Faculty f : objList) {

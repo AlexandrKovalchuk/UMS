@@ -55,7 +55,7 @@
 <%
     if(request.getParameter("action").equals("create")){
 %>
-
+<input type="hidden"  name="operation" value="create">
 <%
 }else if(request.getParameter("action").equals("update")){
 %>

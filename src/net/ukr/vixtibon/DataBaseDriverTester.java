@@ -20,7 +20,7 @@ public class DataBaseDriverTester {
         */
         // faculty COMPLETED
         System.out.println("Institute table create " + dbd.createTableString("C:\\Users\\alex\\IdeaProjects\\UMS\\UMS\\web\\ParametersXLS\\\\InstituteTableParameters.xml"));
-
+        ArrayList<Faculty> f = dbd.getDateFaculty("SELECT longName,  ID FROM faculty ;" );
         //Faculty f = new Faculty("test long name 1","test short name 1",1,"table_name",1);
        // f.addChair(new Chair("test long Chair name 1","test short Chair name 1",1,1,"table_name"));
        // f.addChair(new Chair("test long Chair name 2","test short Chair name 2",2,1,"table_name"));

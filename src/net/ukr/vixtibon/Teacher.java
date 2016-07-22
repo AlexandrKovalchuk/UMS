@@ -127,4 +127,8 @@ public class Teacher extends Person implements Serializable {
             System. out .println(" discipline : " + d.getNameOfDiscipline());
         }
     }
+
+    public void setDisciplines(String info){
+        System. out .println("setDisciplines in progress");
+    }
 }

@@ -19,524 +19,47 @@ import java.sql.*;
  */
 public class DataBaseDriver {
 
-    // JDBC driver name and database URL
     static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
     static final String DB_URL = "jdbc:mysql://localhost:3306/institute";
-//?useUnicode=true&characterEncoding=utf-8
-    //  Database credentials
     static final String USER = "javatest";
     static final String PASS = "testpass";
 
+    Connection conn = null;
+    Statement stmt = null;
 
 
-    //Tales creation
-    //Table creator read info about table from XML file and add table with appropriate fields to data base
-
-    public int findFreeID(String tableName){
-        int ID = 0;
-        int counter = 0;
-        boolean flag = false;
-
-        Connection conn = null;
-        Statement stmt = null;
+//Tales creation function
+//Table creator read info about table from XML file and add table with appropriate fields to data base
+public void tableCreator(String pathToXML) {
+    System.out.println("tableCreator");
+    try {
+        //STEP 2: Register JDBC driver
+        Class.forName(JDBC_DRIVER).newInstance();
+        conn = DriverManager.getConnection(DB_URL, USER, PASS);
+        stmt = conn.createStatement();
+        String sql = createTableString(pathToXML);
+        stmt.executeUpdate(sql);
+    } catch (SQLException se) {
+        //Handle errors for JDBC
+        se.printStackTrace();
+    } catch (Exception e) {
+        //Handle errors for Class.forName
+        e.printStackTrace();
+    } finally {
+        //finally block used to close resources
         try {
-            //STEP 2: Register JDBC driver
-            Class.forName(JDBC_DRIVER).newInstance();
-
-            //STEP 3: Open a connection
-            conn = DriverManager.getConnection(DB_URL, USER, PASS);
-
-            //STEP 4: Execute a query
-            System.out.println("findFreeID Creating table in given database...");
-            stmt = conn.createStatement();
-            String sql = "SELECT  ID FROM " + tableName + ";";
-
-            ResultSet rs = stmt.executeQuery(sql);
-
-            while(rs.next()){
-                System.out.println("findFreeID " + counter + " " + rs.getInt("ID") );
-                if(counter == rs.getInt("ID")){
-                    counter++;
-                }else {
-                    flag = true;
-                    ID = counter;
-                    break;
-                }
-            }
-
-            if(!flag) {
-                ID = counter;
-                System.out.println("findFreeID false" + ID);
-            }
-
-            rs.close();
-
+            if (stmt != null)
+                conn.close();
         } catch (SQLException se) {
-            //Handle errors for JDBC
-            se.printStackTrace();
-        } catch (Exception e) {
-            //Handle errors for Class.forName
-            e.printStackTrace();
-        } finally {
-            //finally block used to close resources
-            try {
-                if (stmt != null)
-                    conn.close();
-            } catch (SQLException se) {
-            }// do nothing
-            try {
-                if (conn != null)
-                    conn.close();
-            } catch (SQLException se) {
-                se.printStackTrace();
-            }
-        }
-        System.out.println("Goodbye!");
-
-        return ID;
-    }
-
-    public void deleteItem(String tableName, String queryID){
-        Connection conn = null;
-        Statement stmt = null;
+        }// do nothing
         try {
-            //STEP 2: Register JDBC driver
-            Class.forName(JDBC_DRIVER).newInstance();
-
-            //STEP 3: Open a connection
-            System.out.println("Connecting to a selected database...");
-            conn = DriverManager.getConnection(DB_URL, USER, PASS);
-            System.out.println("Connected database successfully...");
-
-            //STEP 4: Execute a query
-            System.out.println("Creating table in given database...");
-            stmt = conn.createStatement();
-            String sql = "DELETE FROM " + tableName + " WHERE id='" +queryID +"' LIMIT 1;";
-            System.out.println("DELETE QUERY is " + sql);
-            stmt.executeUpdate(sql);
-
+            if (conn != null)
+                conn.close();
         } catch (SQLException se) {
-            //Handle errors for JDBC
             se.printStackTrace();
-        } catch (Exception e) {
-            //Handle errors for Class.forName
-            e.printStackTrace();
-        } finally {
-            //finally block used to close resources
-            try {
-                if (stmt != null)
-                    conn.close();
-            } catch (SQLException se) {
-            }// do nothing
-            try {
-                if (conn != null)
-                    conn.close();
-            } catch (SQLException se) {
-                se.printStackTrace();
-            }
-        }
-        System.out.println("Goodbye!");
-    }
-
-    public ArrayList<Chair> getDateChair(String select){
-        ArrayList<Chair> objList = new ArrayList<Chair>();
-        Connection conn = null;
-        Statement stmt = null;
-        try {
-            //STEP 2: Register JDBC driver
-            Class.forName(JDBC_DRIVER).newInstance();
-
-            //STEP 3: Open a connection
-            System.out.println("Connecting to a selected database...");
-            conn = DriverManager.getConnection(DB_URL, USER, PASS);
-            System.out.println("Connected database successfully...");
-
-            //STEP 4: Execute a query
-            System.out.println("Creating table in given database...");
-            stmt = conn.createStatement();
-
-            ResultSet rs = stmt.executeQuery(select);
-
-            while (rs.next()){
-                Chair i = new Chair();
-                i.setLongName(rs.getString("longName"));
-                System.out.println("i.setLongName : " + i.getLongName());
-                i.setShortName(rs.getString("shortName"));
-                System.out.println("i.setShortName : " + i.getShortName());
-                i.setID(rs.getInt("ID"));
-                System.out.println("i.setID : " + i.getID());
-                i.setFacultyID(rs.getInt("facultyID"));
-                System.out.println("i.setfacultyID : " + i.getFacultyID());
-                objList.add(i);
-            }
-            rs.close();
-
-        } catch (SQLException se) {
-            //Handle errors for JDBC
-            se.printStackTrace();
-        } catch (Exception e) {
-            //Handle errors for Class.forName
-            e.printStackTrace();
-        } finally {
-            //finally block used to close resources
-            try {
-                if (stmt != null)
-                    conn.close();
-            } catch (SQLException se) {
-            }// do nothing
-            try {
-                if (conn != null)
-                    conn.close();
-            } catch (SQLException se) {
-                se.printStackTrace();
-            }
-        }
-        System.out.println("Goodbye!");
-        return objList;
-    }
-
-    public ArrayList<Faculty> getDateFaculty(String select){
-        ArrayList<Faculty> objList = new ArrayList<Faculty>();
-        Connection conn = null;
-        Statement stmt = null;
-        try {
-            //STEP 2: Register JDBC driver
-            Class.forName(JDBC_DRIVER).newInstance();
-
-            //STEP 3: Open a connection
-            System.out.println("Connecting to a selected database...");
-            conn = DriverManager.getConnection(DB_URL, USER, PASS);
-            System.out.println("Connected database successfully...");
-
-            //STEP 4: Execute a query
-            System.out.println("Creating table in given database...");
-            stmt = conn.createStatement();
-
-            ResultSet rs = stmt.executeQuery(select);
-
-            while (rs.next()){
-                Faculty i = new Faculty();
-                i.setLongName(rs.getString("longName"));
-                System.out.println("i.setLongName : " + i.getLongName());
-                i.setShortName(rs.getString("shortName"));
-                System.out.println("i.setShortName : " + i.getShortName());
-                i.setID(rs.getInt("ID"));
-                System.out.println("i.setID : " + i.getID());
-                //i.setInstituteID(rs.getString("instituteID"));
-                System.out.println("i.setInstituteID : " + i.getInstituteID());
-                objList.add(i);
-            }
-            rs.close();
-
-        } catch (SQLException se) {
-            //Handle errors for JDBC
-            se.printStackTrace();
-        } catch (Exception e) {
-            //Handle errors for Class.forName
-            e.printStackTrace();
-        } finally {
-            //finally block used to close resources
-            try {
-                if (stmt != null)
-                    conn.close();
-            } catch (SQLException se) {
-            }// do nothing
-            try {
-                if (conn != null)
-                    conn.close();
-            } catch (SQLException se) {
-                se.printStackTrace();
-            }
-        }
-        System.out.println("Goodbye!");
-        return objList;
-    }
-    public  ArrayList<Institute> getDateInstitute(String select){
-        ArrayList<Institute> objList = new ArrayList<Institute>();
-        Connection conn = null;
-        Statement stmt = null;
-        try {
-            //STEP 2: Register JDBC driver
-            Class.forName(JDBC_DRIVER).newInstance();
-
-            //STEP 3: Open a connection
-            System.out.println("Connecting to a selected database...");
-            conn = DriverManager.getConnection(DB_URL, USER, PASS);
-            System.out.println("Connected database successfully...");
-
-            //STEP 4: Execute a query
-            System.out.println("Creating table in given database...");
-            stmt = conn.createStatement();
-
-            ResultSet rs = stmt.executeQuery(select);
-
-            while (rs.next()){
-                Institute i = new Institute();
-                i.setLongName(rs.getString("longName"));
-                i.setShortName(rs.getString("shortName"));
-                i.setID(rs.getInt("ID"));
-                System.out.println("i.setLongName : " + i.getLongName());
-                System.out.println("i.setShortName : " + i.getShortName());
-                System.out.println("i.setID : " + i.getID());
-                objList.add(i);
-            }
-            rs.close();
-
-        } catch (SQLException se) {
-            //Handle errors for JDBC
-            se.printStackTrace();
-        } catch (Exception e) {
-            //Handle errors for Class.forName
-            e.printStackTrace();
-        } finally {
-            //finally block used to close resources
-            try {
-                if (stmt != null)
-                    conn.close();
-            } catch (SQLException se) {
-            }// do nothing
-            try {
-                if (conn != null)
-                    conn.close();
-            } catch (SQLException se) {
-                se.printStackTrace();
-            }
-        }
-        System.out.println("Goodbye!");
-        return objList;
-    }
-
-    public void getTablesNames(){
-        Connection conn = null;
-        Statement stmt = null;
-        try {
-            Class.forName(JDBC_DRIVER).newInstance();
-            conn = DriverManager.getConnection(DB_URL, USER, PASS);
-            DatabaseMetaData m = conn.getMetaData();
-            ResultSet tables = m.getTables(conn.getCatalog(),null,"TAB_%",null);
-            for(int i = 0; i < tables.getMetaData().getColumnCount();i++){
-                System.out.println("Table name is : " + tables.getMetaData().getTableName(i));
-            }
-        } catch (SQLException se) {
-            //Handle errors for JDBC
-            se.printStackTrace();
-        } catch (Exception e) {
-            //Handle errors for Class.forName
-            e.printStackTrace();
-        } finally {
-            //finally block used to close resources
-            try {
-                if (stmt != null)
-                    conn.close();
-            } catch (SQLException se) {
-            }// do nothing
-            try {
-                if (conn != null)
-                    conn.close();
-            } catch (SQLException se) {
-                se.printStackTrace();
-            }
         }
     }
-
-    public void selectObject(String st){
-        System.out.println("sselectObject");
-        Connection conn = null;
-        Statement stmt = null;
-        try {
-            //STEP 2: Register JDBC driver
-            Class.forName(JDBC_DRIVER).newInstance();
-
-            //STEP 3: Open a connection
-            System.out.println("Connecting to a selected database...");
-            conn = DriverManager.getConnection(DB_URL, USER, PASS);
-            System.out.println("Connected database successfully...");
-
-            //STEP 4: Execute a query
-            System.out.println("Creating table in given database...");
-            stmt = conn.createStatement();
-
-            ResultSet rs = stmt.executeQuery(st);
-
-            while (rs.next()){
-                Institute i = new Institute();
-                i.setLongName(rs.getString("longName"));
-                i.setShortName(rs.getString("shortName"));
-                i.setID(rs.getInt("ID"));
-                System.out.println("i.setLongName : " + i.getLongName());
-                System.out.println("i.setShortName : " + i.getShortName());
-                System.out.println("i.setID : " + i.getID());
-            }
-            rs.close();
-
-        } catch (SQLException se) {
-            //Handle errors for JDBC
-            se.printStackTrace();
-        } catch (Exception e) {
-            //Handle errors for Class.forName
-            e.printStackTrace();
-        } finally {
-            //finally block used to close resources
-            try {
-                if (stmt != null)
-                    conn.close();
-            } catch (SQLException se) {
-            }// do nothing
-            try {
-                if (conn != null)
-                    conn.close();
-            } catch (SQLException se) {
-                se.printStackTrace();
-            }
-        }
-        System.out.println("Goodbye!");
-    }
-
-    public boolean stringProcessor(String st){
-        System.out.println("stringProcessor");
-        Connection conn = null;
-        Statement stmt = null;
-        boolean result = false;
-        try {
-            //STEP 2: Register JDBC driver
-            Class.forName(JDBC_DRIVER).newInstance();
-
-            //STEP 3: Open a connection
-            System.out.println("Connecting to a selected database...");
-            conn = DriverManager.getConnection(DB_URL, USER, PASS);
-            System.out.println("Connected database successfully...");
-
-            //STEP 4: Execute a query
-            System.out.println("Creating table in given database...");
-            stmt = conn.createStatement();
-
-            String sql = st;
-
-            stmt.executeUpdate(sql);
-            System.out.println("Created table in given database...");
-            result = true;
-        } catch (SQLException se) {
-            //Handle errors for JDBC
-            se.printStackTrace();
-            result = false;
-        } catch (Exception e) {
-            //Handle errors for Class.forName
-            e.printStackTrace();
-            result = false;
-        } finally {
-            //finally block used to close resources
-            try {
-                if (stmt != null)
-                    conn.close();
-            } catch (SQLException se) {
-            }// do nothing
-            try {
-                if (conn != null)
-                    conn.close();
-            } catch (SQLException se) {
-                se.printStackTrace();
-            }
-            result = false;
-        }
-        return result;
-    }
-    public void tableCreator(String pathToXML) {
-        System.out.println("tableCreator");
-        Connection conn = null;
-        Statement stmt = null;
-        try {
-            //STEP 2: Register JDBC driver
-            Class.forName(JDBC_DRIVER).newInstance();
-
-            //STEP 3: Open a connection
-            System.out.println("Connecting to a selected database...");
-            conn = DriverManager.getConnection(DB_URL, USER, PASS);
-            System.out.println("Connected database successfully...");
-
-            //STEP 4: Execute a query
-            System.out.println("Creating table in given database...");
-            stmt = conn.createStatement();
-
-            String sql = createTableString(pathToXML);
-
-            stmt.executeUpdate(sql);
-            System.out.println("Created table in given database...");
-        } catch (SQLException se) {
-            //Handle errors for JDBC
-            se.printStackTrace();
-        } catch (Exception e) {
-            //Handle errors for Class.forName
-            e.printStackTrace();
-        } finally {
-            //finally block used to close resources
-            try {
-                if (stmt != null)
-                    conn.close();
-            } catch (SQLException se) {
-            }// do nothing
-            try {
-                if (conn != null)
-                    conn.close();
-            } catch (SQLException se) {
-                se.printStackTrace();
-            }
-        }
-        System.out.println("Goodbye!");
-    }
-
-
-
-
-    //Tables managing
-    //Statement creator read info about statement from array which include names of table field is first row
-    //and data in second row
-    public void statementCreator(QueryDataToProces qdtp){
-
-    }
-
-    public void statementUpdater(QueryDataToProces qdtp){
-
-    }
-
-    public String updateQuery(QuerySet qs){
-        String UpdateQuery = "Update INTO ";
-
-        return UpdateQuery;
-    }
-
-    public String insertQuery(QuerySet qs) throws UnsupportedEncodingException {
-        String UpdateQuery = "INSERT INTO ";
-        String tableName = "";
-        String listOfParameters = " (";
-        String listOfValues = "VALUES (";
-        Short counter = 0;
-
-        for(Map.Entry<String, QueryBean> entry : qs.getSet().entrySet()){
-            QueryBean qb = entry.getValue();
-            System.out.println("query data " + qb.getFieldName() + " " + qb.getFieldData("") + " " + qb.getFieldData(0));
-            if(qb.getTableName()!=null){
-                tableName = qb.getTableName();
-            }
-            listOfParameters += qb.getFieldName();
-
-            listOfValues += (qb.getFieldData("")==null?qb.getFieldData(0):"'" + qb.getFieldData("") + "'");
-            //System.out.println("counter " + counter + " qs.getSet().size() " + qs.getSet().size());
-            if(counter == (qs.getSet().size() - 1)){
-                listOfParameters += ") ";
-                listOfValues += ");";
-            }else{
-                listOfParameters += ", ";
-                listOfValues += ", ";
-            }
-            counter++;
-        }
-        UpdateQuery += tableName + listOfParameters + listOfValues;
-        //byte middle[] = UpdateQuery.getBytes();
-        //String result = new String(middle,"UTF-8");
-        System.out.println("UpdateQuery: " + UpdateQuery);
-        return UpdateQuery;
-    }
-
+}
     public String createTableString(String parametersLocation){
         String CreateTableSQLString = "";
         CreateTableSQLString = CreateTableSQLString + "CREATE TABLE " ;
@@ -550,7 +73,7 @@ public class DataBaseDriver {
             Element root = document.getDocumentElement();
             NodeList nl = root.getChildNodes();
             String primaryKey = "";
-;
+            ;
             for(int i = 0; i < nl.getLength(); i++) {
 
                 Node n = nl.item(i);
@@ -635,4 +158,825 @@ public class DataBaseDriver {
         System.out.println(" CreateTableSQLString : " + CreateTableSQLString);
         return CreateTableSQLString;
     }
+// get object functions
+    // get institute objects ------------------------------------------------------------------------------------------
+public  ArrayList<Institute> getDateInstitute(String select){
+    ArrayList<Institute> objList = new ArrayList<Institute>();
+    try {
+        //STEP 2: Register JDBC driver
+        Class.forName(JDBC_DRIVER).newInstance();
+        conn = DriverManager.getConnection(DB_URL, USER, PASS);
+        stmt = conn.createStatement();
+        ResultSet rs = stmt.executeQuery(select);
+
+        while (rs.next()){
+            Institute i = new Institute();
+            if(select.contains("longName")) {
+                i.setLongName(rs.getString("longName"));
+            }
+            if(select.contains("shortName")) {
+                i.setShortName(rs.getString("shortName"));
+            }
+            if(select.contains("ID")) {
+                i.setID(rs.getInt("ID"));
+            }
+            objList.add(i);
+        }
+        rs.close();
+
+    } catch (SQLException se) {
+        //Handle errors for JDBC
+        se.printStackTrace();
+    } catch (Exception e) {
+        //Handle errors for Class.forName
+        e.printStackTrace();
+    } finally {
+        //finally block used to close resources
+        try {
+            if (stmt != null)
+                conn.close();
+        } catch (SQLException se) {
+        }// do nothing
+        try {
+            if (conn != null)
+                conn.close();
+        } catch (SQLException se) {
+            se.printStackTrace();
+        }
+    }
+    return objList;
+}
+    // get faculty objects --------------------------------------------------------------------------------------------
+public ArrayList<Faculty> getDateFaculty(String select){
+    ArrayList<Faculty> objList = new ArrayList<Faculty>();
+    System.out.println("getDateFaculty 1");
+    try {
+        //STEP 2: Register JDBC driver
+        Class.forName(JDBC_DRIVER).newInstance();
+        conn = DriverManager.getConnection(DB_URL, USER, PASS);
+        stmt = conn.createStatement();
+        ResultSet rs = stmt.executeQuery(select);
+        System.out.println("getDateFaculty 2");
+        while (rs.next()){
+            Faculty i = new Faculty();
+            if(select.contains("longName")) {
+                i.setLongName(rs.getString("longName"));
+            }
+            if(select.contains("shortName")) {
+                i.setShortName(rs.getString("shortName"));
+            }
+            if(select.contains("ID")) {
+                i.setID(rs.getInt("ID"));
+            }
+            if(select.contains("instituteID")) {
+                i.setInstituteID(rs.getInt("instituteID"));
+            }
+            objList.add(i);
+            System.out.println("getDateFaculty 3");
+        }
+        rs.close();
+
+    } catch (SQLException se) {
+        //Handle errors for JDBC
+        se.printStackTrace();
+    } catch (Exception e) {
+        //Handle errors for Class.forName
+        e.printStackTrace();
+    } finally {
+        //finally block used to close resources
+        try {
+            if (stmt != null)
+                conn.close();
+        } catch (SQLException se) {
+        }// do nothing
+        try {
+            if (conn != null)
+                conn.close();
+        } catch (SQLException se) {
+            se.printStackTrace();
+        }
+    }
+    return objList;
+}
+    // get chair objects ----------------------------------------------------------------------------------------------
+public ArrayList<Chair> getDateChair(String select){
+    ArrayList<Chair> objList = new ArrayList<Chair>();
+
+    try {
+        //STEP 2: Register JDBC driver
+        Class.forName(JDBC_DRIVER).newInstance();
+        conn = DriverManager.getConnection(DB_URL, USER, PASS);
+        stmt = conn.createStatement();
+        ResultSet rs = stmt.executeQuery(select);
+
+        while (rs.next()){
+            Chair i = new Chair();
+            if(select.contains("longName")) {
+                i.setLongName(rs.getString("longName"));
+            }
+            if(select.contains("shortName")) {
+                i.setShortName(rs.getString("shortName"));
+            }
+            if(select.contains("ID")) {
+                i.setID(rs.getInt("ID"));
+            }
+            if(select.contains("facultyID")) {
+                i.setFacultyID(rs.getInt("facultyID"));
+            }
+            objList.add(i);
+        }
+        rs.close();
+
+    } catch (SQLException se) {
+        //Handle errors for JDBC
+        se.printStackTrace();
+    } catch (Exception e) {
+        //Handle errors for Class.forName
+        e.printStackTrace();
+    } finally {
+        //finally block used to close resources
+        try {
+            if (stmt != null)
+                conn.close();
+        } catch (SQLException se) {
+        }// do nothing
+        try {
+            if (conn != null)
+                conn.close();
+        } catch (SQLException se) {
+            se.printStackTrace();
+        }
+    }
+    return objList;
+}
+    // get group objects ----------------------------------------------------------------------------------------------
+    public ArrayList<Group> getDateGroup(String select){
+        ArrayList<Group> objList = new ArrayList<Group>();
+
+        try {
+            //STEP 2: Register JDBC driver
+            Class.forName(JDBC_DRIVER).newInstance();
+            conn = DriverManager.getConnection(DB_URL, USER, PASS);
+            stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(select);
+
+            while (rs.next()){
+                Group i = new Group();
+                if(select.contains("fullGroupName")) {
+                    i.setFGN(rs.getString("fullGroupName"));
+                }
+                if(select.contains("ID")) {
+                    i.setID(rs.getInt("ID"));
+                }
+                if(select.contains("chairID")) {
+                    i.setID(rs.getInt("chairID"));
+                }
+                if(select.contains("courseNumber")) {
+                    i.setID(rs.getInt("courseNumber"));
+                }
+                objList.add(i);
+            }
+            rs.close();
+
+        } catch (SQLException se) {
+            //Handle errors for JDBC
+            se.printStackTrace();
+        } catch (Exception e) {
+            //Handle errors for Class.forName
+            e.printStackTrace();
+        } finally {
+            //finally block used to close resources
+            try {
+                if (stmt != null)
+                    conn.close();
+            } catch (SQLException se) {
+            }// do nothing
+            try {
+                if (conn != null)
+                    conn.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+        }
+        return objList;
+    }
+    // get emploee objects --------------------------------------------------------------------------------------------
+    public ArrayList<Employee> getDateEmployee(String select){
+        ArrayList<Employee> objList = new ArrayList<Employee>();
+
+        try {
+            //STEP 2: Register JDBC driver
+            Class.forName(JDBC_DRIVER).newInstance();
+            conn = DriverManager.getConnection(DB_URL, USER, PASS);
+            stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(select);
+
+            while (rs.next()){
+                Employee i = new Employee();
+                if(select.contains("name")) {
+                    i.setName(rs.getString("name"));
+                }
+                if(select.contains("lastName")) {
+                    i.setSecondName(rs.getString("lastName"));
+                }
+                if(select.contains("fathersName")) {
+                    i.setSurname(rs.getString("fathersName"));
+                }
+                if(select.contains("personalID")) {
+                    i.setPersonalID(rs.getString("personalID"));
+                }
+                if(select.contains("sex")) {
+                    i.setSex(rs.getString("sex"));
+                }
+                if(select.contains("email")) {
+                    i.setEmail(rs.getString("email"));
+                }
+                if(select.contains("phoneNumber")) {
+                    i.setPhoneNumber(rs.getString("phoneNumber"));
+                }
+                if(select.contains("dateOfBorn")) {
+                    i.stringToDate(rs.getString("dateOfBorn"));
+                }
+                if(select.contains("address")) {
+                    i.setAddress(rs.getString("address"));
+                }
+                if(select.contains("pasport")) {
+                    i.setPasport(rs.getString("pasport"));
+                }
+                if(select.contains("login")) {
+                    i.setLogin(rs.getString("login"));
+                }
+                if(select.contains("office")) {
+                    i.setOffice(rs.getString("office"));
+                }
+                if(select.contains("ID")) {
+                    i.setID(rs.getInt("ID"));
+                }
+                if(select.contains("chairID")) {
+                    i.setChairID(rs.getInt("chairID"));
+                }
+                objList.add(i);
+            }
+            rs.close();
+
+        } catch (SQLException se) {
+            //Handle errors for JDBC
+            se.printStackTrace();
+        } catch (Exception e) {
+            //Handle errors for Class.forName
+            e.printStackTrace();
+        } finally {
+            //finally block used to close resources
+            try {
+                if (stmt != null)
+                    conn.close();
+            } catch (SQLException se) {
+            }// do nothing
+            try {
+                if (conn != null)
+                    conn.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+        }
+        return objList;
+    }
+    // get teacher objects --------------------------------------------------------------------------------------------
+    public ArrayList<Teacher> getDateTeacher(String select){
+        ArrayList<Teacher> objList = new ArrayList<Teacher>();
+
+        try {
+            //STEP 2: Register JDBC driver
+            Class.forName(JDBC_DRIVER).newInstance();
+            conn = DriverManager.getConnection(DB_URL, USER, PASS);
+            stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(select);
+
+            while (rs.next()){
+                Teacher i = new Teacher();
+                if(select.contains("name")) {
+                    i.setName(rs.getString("name"));
+                }
+                if(select.contains("lastName")) {
+                    i.setSecondName(rs.getString("lastName"));
+                }
+                if(select.contains("fathersName")) {
+                    i.setSurname(rs.getString("fathersName"));
+                }
+                if(select.contains("personalID")) {
+                    i.setPersonalID(rs.getString("personalID"));
+                }
+                if(select.contains("sex")) {
+                    i.setSex(rs.getString("sex"));
+                }
+                if(select.contains("email")) {
+                    i.setEmail(rs.getString("email"));
+                }
+                if(select.contains("phoneNumber")) {
+                    i.setPhoneNumber(rs.getString("phoneNumber"));
+                }
+                if(select.contains("dateOfBorn")) {
+                    i.stringToDate(rs.getString("dateOfBorn"));
+                }
+                if(select.contains("address")) {
+                    i.setAddress(rs.getString("address"));
+                }
+                if(select.contains("pasport")) {
+                    i.setPasport(rs.getString("pasport"));
+                }
+                if(select.contains("login")) {
+                    i.setLogin(rs.getString("login"));
+                }
+                if(select.contains("office")) {
+                    i.setOffice(rs.getString("office"));
+                }
+                if(select.contains("level")) {
+                    i.setLevel(rs.getString("level"));
+                }
+                if(select.contains("DisciplinesList")) {
+                    i.setDisciplines(rs.getString("DisciplinesList"));
+                }
+                if(select.contains("ID")) {
+                    i.setID(rs.getInt("ID"));
+                }
+                if(select.contains("chairID")) {
+                    i.setChairID(rs.getInt("chairID"));
+                }
+                objList.add(i);
+            }
+            rs.close();
+
+        } catch (SQLException se) {
+            //Handle errors for JDBC
+            se.printStackTrace();
+        } catch (Exception e) {
+            //Handle errors for Class.forName
+            e.printStackTrace();
+        } finally {
+            //finally block used to close resources
+            try {
+                if (stmt != null)
+                    conn.close();
+            } catch (SQLException se) {
+            }// do nothing
+            try {
+                if (conn != null)
+                    conn.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+        }
+        return objList;
+    }
+    // get student objects --------------------------------------------------------------------------------------------
+    public ArrayList<Student> getDateStudent(String select){
+        ArrayList<Student> objList = new ArrayList<Student>();
+
+        try {
+            //STEP 2: Register JDBC driver
+            Class.forName(JDBC_DRIVER).newInstance();
+            conn = DriverManager.getConnection(DB_URL, USER, PASS);
+            stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(select);
+
+            while (rs.next()){
+                Student i = new Student();
+                if(select.contains("name")) {
+                    i.setName(rs.getString("name"));
+                }
+                if(select.contains("lastName")) {
+                    i.setSecondName(rs.getString("lastName"));
+                }
+                if(select.contains("fathersName")) {
+                    i.setSurname(rs.getString("fathersName"));
+                }
+                if(select.contains("personalID")) {
+                    i.setPersonalID(rs.getString("personalID"));
+                }
+                if(select.contains("sex")) {
+                    i.setSex(rs.getString("sex"));
+                }
+                if(select.contains("email")) {
+                    i.setEmail(rs.getString("email"));
+                }
+                if(select.contains("phoneNumber")) {
+                    i.setPhoneNumber(rs.getString("phoneNumber"));
+                }
+                if(select.contains("dateOfBorn")) {
+                    i.stringToDate(rs.getString("dateOfBorn"));
+                }
+                if(select.contains("address")) {
+                    i.setAddress(rs.getString("address"));
+                }
+                if(select.contains("pasport")) {
+                    i.setPasport(rs.getString("pasport"));
+                }
+                if(select.contains("login")) {
+                    i.setLogin(rs.getString("login"));
+                }
+                if(select.contains("indexBook")) {
+                    i.setIndexBook(rs.getString("indexBook"));
+                }
+                if(select.contains("DisciplinesNames")) {
+                    System. out .print("DisciplinesNames need to fix ");
+                }
+                if(select.contains("Attendance")) {
+                    i.Attendance = i.stringToArray(rs.getString("Attendance"));
+                }
+                if(select.contains("Progress")) {
+                    i.Progress = i.stringToArray(rs.getString("Progress"));
+                }
+                if(select.contains("ID")) {
+                    i.setID(rs.getInt("ID"));
+                }
+                if(select.contains("chairID")) {
+                    i.setChairID(rs.getInt("chairID"));
+                }
+                objList.add(i);
+            }
+            rs.close();
+
+        } catch (SQLException se) {
+            //Handle errors for JDBC
+            se.printStackTrace();
+        } catch (Exception e) {
+            //Handle errors for Class.forName
+            e.printStackTrace();
+        } finally {
+            //finally block used to close resources
+            try {
+                if (stmt != null)
+                    conn.close();
+            } catch (SQLException se) {
+            }// do nothing
+            try {
+                if (conn != null)
+                    conn.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+        }
+        return objList;
+    }
+    // get discipline objects -----------------------------------------------------------------------------------------
+    public ArrayList<Discipline> getDateDiscipline(String select){
+        ArrayList<Discipline> objList = new ArrayList<Discipline>();
+
+        try {
+            //STEP 2: Register JDBC driver
+            Class.forName(JDBC_DRIVER).newInstance();
+            conn = DriverManager.getConnection(DB_URL, USER, PASS);
+            stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(select);
+
+            while (rs.next()){
+                Discipline i = new Discipline();
+                if(select.contains("ID")) {
+                    i.setID(rs.getInt("ID"));
+                }
+                if(select.contains("nameOfDiscipline")) {
+                    i.setNameOfDiscipline(rs.getString("nameOfDiscipline"));
+                }
+                if(select.contains("courseNumber")) {
+                    i.setCourseNumber(rs.getInt("courseNumber"));
+                }
+                if(select.contains("semesterNumber")) {
+                    i.setSemesterNumber(rs.getInt("semesterNumber"));
+                }
+                if(select.contains("countOfLessons")) {
+                    i.setCountOfLessons(rs.getInt("countOfLessons"));
+                }
+                if(select.contains("countOfPraktice")) {
+                    i.setCountOfPraktice(rs.getInt("countOfPraktice"));
+                }
+                if(select.contains("exam")) {
+                    i.setExam(rs.getBoolean("exam"));
+                }
+                if(select.contains("chairID")) {
+                    i.setChairID(rs.getInt("chairID"));
+                }
+                objList.add(i);
+            }
+            rs.close();
+
+        } catch (SQLException se) {
+            //Handle errors for JDBC
+            se.printStackTrace();
+        } catch (Exception e) {
+            //Handle errors for Class.forName
+            e.printStackTrace();
+        } finally {
+            //finally block used to close resources
+            try {
+                if (stmt != null)
+                    conn.close();
+            } catch (SQLException se) {
+            }// do nothing
+            try {
+                if (conn != null)
+                    conn.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+        }
+        return objList;
+    }
+    // get timetable objects ------------------------------------------------------------------------------------------
+    public ArrayList<Timetable> getDateTimetable(String select){
+        ArrayList<Timetable> objList = new ArrayList<Timetable>();
+
+        try {
+            //STEP 2: Register JDBC driver
+            Class.forName(JDBC_DRIVER).newInstance();
+            conn = DriverManager.getConnection(DB_URL, USER, PASS);
+            stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(select);
+
+            while (rs.next()){
+                Timetable i = new Timetable();
+                if(select.contains("ID")) {
+                    i.setID(rs.getInt("ID"));
+                }
+                if(select.contains("groupID")) {
+                    i.setGroupID(rs.getInt("groupID"));
+                }
+                if(select.contains("FileName")) {
+                    i.setDataFromJson(rs.getString("FileName"));
+                }
+                objList.add(i);
+            }
+            rs.close();
+
+        } catch (SQLException se) {
+            //Handle errors for JDBC
+            se.printStackTrace();
+        } catch (Exception e) {
+            //Handle errors for Class.forName
+            e.printStackTrace();
+        } finally {
+            //finally block used to close resources
+            try {
+                if (stmt != null)
+                    conn.close();
+            } catch (SQLException se) {
+            }// do nothing
+            try {
+                if (conn != null)
+                    conn.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+        }
+        return objList;
+    }
+// processing functions
+    public String insertQuery(QuerySet qs) throws UnsupportedEncodingException {
+        String UpdateQuery = "INSERT INTO ";
+        String tableName = "";
+        String listOfParameters = " (";
+        String listOfValues = "VALUES (";
+        Short counter = 0;
+        for(Map.Entry<String, QueryBean> entry : qs.getSet().entrySet()){
+            QueryBean qb = entry.getValue();
+            System.out.println("query data " + qb.getFieldName() + " " + qb.getFieldData("") + " " + qb.getFieldData(0));
+            if(qb.getTableName()!=null){
+                tableName = qb.getTableName();
+            }
+            listOfParameters += qb.getFieldName();
+
+            listOfValues += (qb.getFieldData("")==null?qb.getFieldData(0):"'" + qb.getFieldData("") + "'");
+            if(counter == (qs.getSet().size() - 1)){
+                listOfParameters += ") ";
+                listOfValues += ");";
+            }else{
+                listOfParameters += ", ";
+                listOfValues += ", ";
+            }
+            counter++;
+        }
+        UpdateQuery += tableName + listOfParameters + listOfValues;
+        //byte middle[] = UpdateQuery.getBytes();
+        //String result = new String(middle,"UTF-8");
+        System.out.println("UpdateQuery: " + UpdateQuery);
+        return UpdateQuery;
+    }
+    public boolean stringProcessor(String st){
+        System.out.println("stringProcessor");
+        boolean result = false;
+        try {
+            //STEP 2: Register JDBC driver
+            Class.forName(JDBC_DRIVER).newInstance();
+            conn = DriverManager.getConnection(DB_URL, USER, PASS);
+            stmt = conn.createStatement();
+            String sql = st;
+            stmt.executeUpdate(sql);
+            result = true;
+        } catch (SQLException se) {
+            //Handle errors for JDBC
+            se.printStackTrace();
+            result = false;
+        } catch (Exception e) {
+            //Handle errors for Class.forName
+            e.printStackTrace();
+            result = false;
+        } finally {
+            //finally block used to close resources
+            try {
+                if (stmt != null)
+                    conn.close();
+            } catch (SQLException se) {
+                result = false;
+            }// do nothing
+            try {
+                if (conn != null)
+                    conn.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+                result = false;
+            }
+        }
+        return result;
+    }
+
+public boolean deleteItem(String tableName, int queryID){
+    try {
+        Class.forName(JDBC_DRIVER).newInstance();
+        conn = DriverManager.getConnection(DB_URL, USER, PASS);
+        stmt = conn.createStatement();
+        String sql = "DELETE FROM " + tableName + " WHERE id='" +queryID +"' LIMIT 1;";
+        stmt.executeUpdate(sql);
+        return true;
+    } catch (SQLException se) {
+        //Handle errors for JDBC
+        se.printStackTrace();
+        return false;
+    } catch (Exception e) {
+        //Handle errors for Class.forName
+        e.printStackTrace();
+        return false;
+    } finally {
+        //finally block used to close resources
+        try {
+            if (stmt != null)
+                conn.close();
+        } catch (SQLException se) {
+            return false;
+        }// do nothing
+        try {
+            if (conn != null)
+                conn.close();
+        } catch (SQLException se) {
+            se.printStackTrace();
+            return false;
+        }
+    }
+}
+// help functions //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    public int findFreeID(String tableName){
+        int ID = 1;
+        int counter = 1;
+        boolean flag = false;
+        try {
+            //STEP 2: Register JDBC driver
+            Class.forName(JDBC_DRIVER).newInstance();
+            conn = DriverManager.getConnection(DB_URL, USER, PASS);
+            stmt = conn.createStatement();
+            String sql = "SELECT  ID FROM " + tableName + ";";
+            ResultSet rs = stmt.executeQuery(sql);
+
+            while(rs.next()){
+                if(counter == rs.getInt("ID")){
+                    counter++;
+                }else {
+                    if(counter != 0) {
+                        flag = true;
+                        ID = counter;
+                        break;
+                    }else{
+                        counter++;
+                    }
+                }
+            }
+            if(!flag) {
+                ID = counter;
+            }
+            rs.close();
+
+        } catch (SQLException se) {
+            //Handle errors for JDBC
+            se.printStackTrace();
+        } catch (Exception e) {
+            //Handle errors for Class.forName
+            e.printStackTrace();
+        } finally {
+            //finally block used to close resources
+            try {
+                if (stmt != null)
+                    conn.close();
+            } catch (SQLException se) {
+            }// do nothing
+            try {
+                if (conn != null)
+                    conn.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+        }
+        return ID;
+    }
+
+    public void getTablesNames(){
+        Connection conn = null;
+        Statement stmt = null;
+        try {
+            Class.forName(JDBC_DRIVER).newInstance();
+            conn = DriverManager.getConnection(DB_URL, USER, PASS);
+            DatabaseMetaData m = conn.getMetaData();
+            ResultSet tables = m.getTables(conn.getCatalog(),null,"TAB_%",null);
+            for(int i = 0; i < tables.getMetaData().getColumnCount();i++){
+                System.out.println("Table name is : " + tables.getMetaData().getTableName(i));
+            }
+        } catch (SQLException se) {
+            //Handle errors for JDBC
+            se.printStackTrace();
+        } catch (Exception e) {
+            //Handle errors for Class.forName
+            e.printStackTrace();
+        } finally {
+            //finally block used to close resources
+            try {
+                if (stmt != null)
+                    conn.close();
+            } catch (SQLException se) {
+            }// do nothing
+            try {
+                if (conn != null)
+                    conn.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+        }
+    }
+// end ----------------------------------------------------------------------------------------------------------------
+
+    // tresh-----------------------------------------------------------------------------------------------------------
+    public void selectObject(String st){
+        System.out.println("sselectObject");
+        Connection conn = null;
+        Statement stmt = null;
+        try {
+            //STEP 2: Register JDBC driver
+            Class.forName(JDBC_DRIVER).newInstance();
+
+            //STEP 3: Open a connection
+            System.out.println("Connecting to a selected database...");
+            conn = DriverManager.getConnection(DB_URL, USER, PASS);
+            System.out.println("Connected database successfully...");
+
+            //STEP 4: Execute a query
+            System.out.println("Creating table in given database...");
+            stmt = conn.createStatement();
+
+            ResultSet rs = stmt.executeQuery(st);
+
+            while (rs.next()){
+                Institute i = new Institute();
+                i.setLongName(rs.getString("longName"));
+                i.setShortName(rs.getString("shortName"));
+                i.setID(rs.getInt("ID"));
+                System.out.println("i.setLongName : " + i.getLongName());
+                System.out.println("i.setShortName : " + i.getShortName());
+                System.out.println("i.setID : " + i.getID());
+            }
+            rs.close();
+
+        } catch (SQLException se) {
+            //Handle errors for JDBC
+            se.printStackTrace();
+        } catch (Exception e) {
+            //Handle errors for Class.forName
+            e.printStackTrace();
+        } finally {
+            //finally block used to close resources
+            try {
+                if (stmt != null)
+                    conn.close();
+            } catch (SQLException se) {
+            }// do nothing
+            try {
+                if (conn != null)
+                    conn.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+        }
+        System.out.println("Goodbye!");
+    }
+
+    public String updateQuery(QuerySet qs){
+        String UpdateQuery = "Update INTO ";
+        return UpdateQuery;
+    }
+
+
 }

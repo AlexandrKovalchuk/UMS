@@ -50,8 +50,15 @@ public class Generator {
      */
 
     String[] tapleParametersList = {
-
-            "C:\\Users\\alex\\IdeaProjects\\UMS\\UMS\\web\\ParametersXLS\\\\InstituteTableParameters.xml"
+            "C:\\Users\\alex\\IdeaProjects\\UMS\\UMS\\web\\ParametersXLS\\\\InstituteTableParameters.xml",
+            "C:\\Users\\alex\\IdeaProjects\\UMS\\UMS\\web\\ParametersXLS\\\\FacultyTableParameters.xml",
+            "C:\\Users\\alex\\IdeaProjects\\UMS\\UMS\\web\\ParametersXLS\\\\ChairTableParameters.xml",
+            "C:\\Users\\alex\\IdeaProjects\\UMS\\UMS\\web\\ParametersXLS\\\\GroupTableParameters.xml",
+            "C:\\Users\\alex\\IdeaProjects\\UMS\\UMS\\web\\ParametersXLS\\\\EmployeeTableParameters.xml",
+            "C:\\Users\\alex\\IdeaProjects\\UMS\\UMS\\web\\ParametersXLS\\\\TeacherTableParameters.xml",
+            "C:\\Users\\alex\\IdeaProjects\\UMS\\UMS\\web\\ParametersXLS\\\\StudentTableParameters.xml",
+            "C:\\Users\\alex\\IdeaProjects\\UMS\\UMS\\web\\ParametersXLS\\\\DisciplineTableParameters.xml",
+            "C:\\Users\\alex\\IdeaProjects\\UMS\\UMS\\web\\ParametersXLS\\\\TimeTableTableParameters.xml"
     };
 
 
@@ -96,7 +103,7 @@ public void setupBase(String[] list) {
 
 
         //openFacultys("Facultys.txt", KPI.getID());
-
+/*
         for(Faculty i: KPI.getFacultys()){
             System.out.println("Short name : " + i.getShortName() + " - " + i.getLongName() );
             ArrayList<Chair> AC = openChairs(i.getShortName() + ".txt", i.getShortName(), i.getID(), "Chair");
@@ -106,7 +113,7 @@ public void setupBase(String[] list) {
             System. out .println("############# Faculty insert query: " + d.insertQuery(i.qs));
             d.stringProcessor(d.insertQuery(i.qs));
         }
-
+*/
         //info
 /*
         for(Faculty f: KPI.getFacultys()){

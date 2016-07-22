@@ -25,7 +25,6 @@
         <FieldType>VARCHAR</FieldType>
         <FieldSize>10</FieldSize>
         <FieldNull>NOT NULL</FieldNull>
-
     </Field4>
     <Field5>
         <FieldName>sex</FieldName>
@@ -75,24 +74,6 @@
         <FieldSize>100</FieldSize>
         <FieldNull>NOT NULL</FieldNull>
     </Field12>
-    <Field13>
-        <FieldName>faculty</FieldName>
-        <FieldType>VARCHAR</FieldType>
-        <FieldSize>70</FieldSize>
-        <FieldNull>NOT NULL</FieldNull>
-    </Field13>
-    <Field14>
-        <FieldName>chair</FieldName>
-        <FieldType>VARCHAR</FieldType>
-        <FieldSize>70</FieldSize>
-        <FieldNull>NOT NULL</FieldNull>
-    </Field14>
-    <Field15>
-        <FieldName>fullIdentifier</FieldName>
-        <FieldType>VARCHAR</FieldType>
-        <FieldSize>15</FieldSize>
-        <FieldNull>NOT NULL</FieldNull>
-    </Field15>
     <Field16>
         <FieldName>ID</FieldName>
         <FieldType>INT</FieldType>

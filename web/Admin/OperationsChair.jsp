@@ -1,4 +1,6 @@
 <%@ page import="servlets.SessionsList" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="net.ukr.vixtibon.*" %>
 <%--
   Created by IntelliJ IDEA.
   User: alex
@@ -59,6 +61,7 @@
 <form action="/FormReaderServlet" method="post" accept-charset="UTF-8">
     <table>
         <input type="hidden"  name="tableNameParameter" value="chair">
+        <input type="hidden"  name="operation" value="create">
         <input type="hidden"  name="facultyID" value=<%out.print(request.getParameter("ID"));%>>
         <tr>
             <td>long name:</td>
@@ -86,8 +89,50 @@
 
 <%
 }else if(request.getParameter("action").equals("delete")){
+    DataBaseDriver d = new DataBaseDriver();
+    ArrayList<Employee> EobjList = d.getDateEmployee("SELECT longName, shortName, chairID, ID FROM Employee WHERE chairID='" + request.getParameter("ID") + "'");
+    ArrayList<Teacher> TobjList = d.getDateTeacher("SELECT longName, shortName, chairID, ID FROM Teacher WHERE chairID='" +request.getParameter("ID") + "'" );
+    ArrayList<Group> GobjList = d.getDateGroup("SELECT longName, shortName, chairID, ID FROM Group WHERE chairID='" +request.getParameter("ID") + "'" );
+    ArrayList<Discipline> DobjList = d.getDateDiscipline("SELECT longName, shortName, chairID, ID FROM Discipline WHERE chairID='" +request.getParameter("ID") + "'" );
+    ArrayList<Timetable> TTobjList = d.getDateTimetable("SELECT longName, shortName, chairID, ID FROM Timetable WHERE chairID='" +request.getParameter("ID") + "'" );
+    ArrayList<Chair> chairs = d.getDateChair("SELECT longName, shortName, ID FROM chair WHERE ID='" + request.getParameter("ID") + "'");
 %>
+<form action="/FormReaderServlet" method="post" accept-charset="UTF-8">
+    <input type="hidden"  name="operation" value="delete">
+    <input type="hidden"  name="tableNameParameter" value="chair">
+    <input type="hidden"  name="id" value=<%out.print(chairs.get(0).getID());%>>
 
+    <%if(objList.size() > 0){%>
+    <div class = "yelowInfo">
+        <div>
+            <h2>Data which will be affected is:</h2>
+        </div>
+        <div>
+            <%
+                for(Employee f: objList){
+                    out.print(f.getLongName());
+                }
+            %>
+        </div>
+    </div>
+    <%}%>
+
+    <div>
+        <h2>Would you like to continue?</h2>
+        <tr>
+            <td >
+                <button onclick="submit"  class="controlButton"><h2>Yes</h2></button>
+            </td>
+            <br>
+            <td >
+                <button onclick="window.location.href='AdminPage.jsp'"  class="controlButton"><h2>No</h2></button>
+            </td>
+        </tr>
+    </div>
+</form>
+<td >
+    <button onclick="window.location.href='AdminPage.jsp'"  class="controlButton"><h2>No</h2></button>
+</td>
 <%
 }else{
 %>

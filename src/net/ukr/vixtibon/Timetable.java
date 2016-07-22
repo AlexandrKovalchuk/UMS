@@ -40,6 +40,14 @@ public class Timetable implements Serializable {
         this.ID = ID;
     }
 
+    public int getGroupID() {
+        return groupID;
+    }
+
+    public void setGroupID(int groupID) {
+        this.groupID = groupID;
+    }
+
     public int countOfDays(Calendar startsemesterDate, Calendar endsemesterDate){
         int count = 0;
         if(startsemesterDate.get(Calendar.YEAR) == endsemesterDate.get(Calendar.YEAR)){
@@ -157,6 +165,10 @@ public class Timetable implements Serializable {
         }
 
 
+    }
+
+    public void setDataFromJson(String fileName){
+        System. out .println("setDataFromJson function need to fix ");
     }
 
     public void showTimeTable(){

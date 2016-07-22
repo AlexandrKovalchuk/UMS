@@ -21,10 +21,4 @@
         <FieldSize>10</FieldSize>
         <FieldNull></FieldNull>
     </Field3>
-    <Field4>
-        <FieldName>FacultysIDlist</FieldName>
-        <FieldType>TEXT</FieldType>
-        <FieldSize>750</FieldSize>
-        <FieldNull></FieldNull>
-    </Field4>
 </Table1>

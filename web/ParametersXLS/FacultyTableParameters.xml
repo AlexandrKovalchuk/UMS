@@ -22,15 +22,9 @@
         <FieldNull></FieldNull>
     </Field3>
     <Field4>
-        <FieldName>ChairsList</FieldName>
-        <FieldType>TEXT</FieldType>
-        <FieldSize>750</FieldSize>
-        <FieldNull></FieldNull>
-    </Field4>
-    <Field5>
         <FieldName>instituteID</FieldName>
         <FieldType>INT</FieldType>
         <FieldSize>6</FieldSize>
         <FieldNull>NOT NULL</FieldNull>
-    </Field5>
+    </Field4>
 </Table1>

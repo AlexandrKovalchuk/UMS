@@ -68,30 +68,12 @@
         <FieldType>VARCHAR</FieldType>
         <FieldSize>10</FieldSize>
     </Field11>
-    <Field12>
-        <FieldName>faculty</FieldName>
-        <FieldType>VARCHAR</FieldType>
-        <FieldSize>70</FieldSize>
-        <FieldNull>NOT NULL</FieldNull>
-    </Field12>
     <Field13>
         <FieldName>indexBook</FieldName>
         <FieldType>VARCHAR</FieldType>
         <FieldSize>20</FieldSize>
         <FieldNull>NOT NULL</FieldNull>
     </Field13>
-    <Field14>
-        <FieldName>fullIdentifier</FieldName>
-        <FieldType>VARCHAR</FieldType>
-        <FieldSize>20</FieldSize>
-        <FieldNull>NOT NULL</FieldNull>
-    </Field14>
-    <Field14>
-        <FieldName>stindex</FieldName>
-        <FieldType>VARCHAR</FieldType>
-        <FieldSize>20</FieldSize>
-        <FieldNull>NOT NULL</FieldNull>
-    </Field14>
     <Field16>
         <FieldName>DisciplinesNames</FieldName>
         <FieldType>TEXT</FieldType>
@@ -123,10 +105,4 @@
     <FieldSize>6</FieldSize>
     <FieldNull>NOT NULL</FieldNull>
 </Field20>
-    <Field21>
-        <FieldName>chairID</FieldName>
-        <FieldType>INT</FieldType>
-        <FieldSize>6</FieldSize>
-        <FieldNull>NOT NULL</FieldNull>
-    </Field21>
 </Table1>

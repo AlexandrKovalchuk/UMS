@@ -19,6 +19,7 @@ import java.util.Map;
 public class FormReaderServlet extends HttpServlet {
     public QuerySet qs = new QuerySet();
     String tableNameParameter = null;
+    String operation = null;
 
     protected void  doGet(HttpServletRequest request, HttpServletResponse response) throws  IOException {
 
@@ -27,9 +28,13 @@ public class FormReaderServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         System. out .println("FormReaderServlet dopost method in" );
         tableNameParameter = request.getParameter("tableNameParameter");
+        operation = request.getParameter("operation");
         System. out .println("FormReaderServlet dopost 1 " + tableNameParameter);
         Enumeration paramNames = request.getParameterNames();
         DataBaseDriver d = new DataBaseDriver();
+        int LocationID = 0;
+        boolean success = false;
+
 
         if(tableNameParameter.equals("Institute")) {
             String longName = "";
@@ -66,6 +71,7 @@ public class FormReaderServlet extends HttpServlet {
                     shortName = paramValue;
                 }else if(paramName.equals("facultyID")){
                     facultyID = Integer.parseInt(paramValue);
+                    LocationID = facultyID;
                 }
                 System.out.println("FormReaderServlet dopost 2 i counter " + paramName + " " + paramValue);
             }
@@ -88,6 +94,7 @@ public class FormReaderServlet extends HttpServlet {
                     shortName = paramValue;
                 } else if (paramName.equals("instituteID")) {
                     instituteID = Integer.parseInt(paramValue);
+                    LocationID = instituteID;
                 }
             }
             ID = d.findFreeID("faculty");
@@ -164,6 +171,7 @@ public class FormReaderServlet extends HttpServlet {
                     chair = paramValue;
                 }else if (paramName.equals("chairID")) {
                     chairID = Integer.parseInt(paramValue);
+                    LocationID = chairID;
                 }else if (paramName.equals("bday")) {
                     bday = Integer.parseInt(paramValue);
                 }else if (paramName.equals("bmonth")) {
@@ -364,11 +372,71 @@ public class FormReaderServlet extends HttpServlet {
             */
         }
         qs.showSet();
-        boolean success = d.stringProcessor(d.insertQuery(qs));
+
+        if(operation.equals("create")){
+            success = d.stringProcessor(d.insertQuery(qs));
+        }else if(operation.equals("update")){
+            success = d.stringProcessor(d.insertQuery(qs));
+        }else if(operation.equals("delete")){
+            int id = Integer.parseInt(request.getParameter("id"));
+            success = d.deleteItem(request.getParameter("tableNameParameter"),id);
+            if(request.getParameter("tableNameParameter").equals("Institute")){
+                d.stringProcessor("UPDATE faculty SET instituteID = '0' WHERE instituteID ='" + id + "';");
+            }else if(request.getParameter("tableNameParameter").equals("faculty")){
+                d.stringProcessor("UPDATE chair SET facultyID = '0' WHERE facultyID ='" + id + "';");
+            }else if(request.getParameter("tableNameParameter").equals("chair")){
+                d.stringProcessor("UPDATE emploee SET chairID = '0' WHERE chairID ='" + id + "';");
+                d.stringProcessor("UPDATE teacher SET chairID = '0' WHERE chairID ='" + id + "';");
+                d.stringProcessor("UPDATE discipline SET chairID = '0' WHERE chairID ='" + id + "';");
+                d.stringProcessor("UPDATE group SET chairID = '0' WHERE chairID ='" + id + "';");
+            }
+        }
         if(success){
-            response.sendRedirect("Admin/ActionResult.jsp?result=success"+"&type=0");
+            if(operation.equals("create")){
+                response.sendRedirect("Admin/ActionResult.jsp?result=success"+"&type=" +
+                        (tableNameParameter.equals("Institute")?"Institute":"")+
+                        (tableNameParameter.equals("chair")?"chair":"")+
+                        (tableNameParameter.equals("Employee")?"Employee":"")+
+                        (tableNameParameter.equals("faculty")?"faculty":"")+
+                        "&action=create" + "&locationID=" + LocationID);
+            }else if(operation.equals("update")){
+                response.sendRedirect("Admin/ActionResult.jsp?result=success"+"&type=" +
+                        (tableNameParameter.equals("Institute")?"Institute":"")+
+                        (tableNameParameter.equals("chair")?"chair":"")+
+                        (tableNameParameter.equals("Employee")?"Employee":"")+
+                        (tableNameParameter.equals("faculty")?"faculty":"")+
+                        "&action=update" + "&locationID=" + LocationID);
+            }else if(operation.equals("delete")){
+                response.sendRedirect("Admin/ActionResult.jsp?result=success"+"&type=" +
+                        (tableNameParameter.equals("Institute")?"Institute":"")+
+                        (tableNameParameter.equals("chair")?"chair":"")+
+                        (tableNameParameter.equals("Employee")?"Employee":"")+
+                        (tableNameParameter.equals("faculty")?"faculty":"")+
+                        "&action=delete" + "&locationID=" + LocationID);
+            }
         }else if(!success){
-            response.sendRedirect("Admin/ActionResult.jsp?result=unsuccess");
+            if(operation.equals("create")){
+                response.sendRedirect("Admin/ActionResult.jsp?result=unsuccess"+"&type=" +
+                        (tableNameParameter.equals("Institute")?"Institute":"")+
+                        (tableNameParameter.equals("chair")?"chair":"")+
+                        (tableNameParameter.equals("Employee")?"Employee":"")+
+                        (tableNameParameter.equals("faculty")?"faculty":"")+
+                        "&action=create" + "&locationID=" + LocationID);
+            }else if(operation.equals("update")){
+                response.sendRedirect("Admin/ActionResult.jsp?result=success"+"&type=" +
+                        (tableNameParameter.equals("Institute")?"Institute":"")+
+                        (tableNameParameter.equals("chair")?"chair":"")+
+                        (tableNameParameter.equals("Employee")?"Employee":"")+
+                        (tableNameParameter.equals("faculty")?"faculty":"")+
+                        "&action=update" + "&locationID=" + LocationID);
+            }else if(operation.equals("delete")){
+                response.sendRedirect("Admin/ActionResult.jsp?result=success"+"&type=" +
+                        (tableNameParameter.equals("Institute")?"Institute":"")+
+                        (tableNameParameter.equals("chair")?"chair":"")+
+                        (tableNameParameter.equals("Employee")?"Employee":"")+
+                        (tableNameParameter.equals("faculty")?"faculty":"")+
+                        "&action=delete" + "&locationID=" + LocationID);
+            }
         }
     }
 

@@ -2,14 +2,6 @@
 
 <Table1>
     <TableName>GTGROUP</TableName>
-    <Field1>
-        <FieldName>wave</FieldName>
-        <FieldType>INT</FieldType>
-    </Field1>
-    <Field2>
-        <FieldName>groupIndex</FieldName>
-        <FieldType>INT</FieldType>
-    </Field2>
     <Field3>
         <FieldName>fullGroupName</FieldName>
         <FieldType>VARCHAR</FieldType>
@@ -33,18 +25,4 @@
         <FieldName>courseNumber</FieldName>
         <FieldType>INT</FieldType>
     </Field6>
-    <Field7>
-        <FieldName>groupTimeTable</FieldName>
-        <FieldType>VARCHAR</FieldType>
-        <FieldSize>20</FieldSize>
-        <FieldNull>NOT NULL</FieldNull>
-    </Field7>
-    <Field8>
-        <FieldName>DisciplineList</FieldName>
-        <FieldType>TEXT</FieldType>
-    </Field8>
-    <Field9>
-        <FieldName>StudentsList</FieldName>
-        <FieldType>TEXT</FieldType>
-    </Field9>
 </Table1>

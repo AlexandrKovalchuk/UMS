@@ -80,24 +80,6 @@
         <FieldSize>15</FieldSize>
         <FieldNull>NOT NULL</FieldNull>
     </Field13>
-    <Field14>
-        <FieldName>faculty</FieldName>
-        <FieldType>VARCHAR</FieldType>
-        <FieldSize>70</FieldSize>
-        <FieldNull>NOT NULL</FieldNull>
-    </Field14>
-    <Field15>
-        <FieldName>chair</FieldName>
-        <FieldType>VARCHAR</FieldType>
-        <FieldSize>70</FieldSize>
-        <FieldNull>NOT NULL</FieldNull>
-    </Field15>
-    <Field16>
-        <FieldName>fullIdentifier</FieldName>
-        <FieldType>VARCHAR</FieldType>
-        <FieldSize>15</FieldSize>
-        <FieldNull>NOT NULL</FieldNull>
-    </Field16>
     <Field17>
         <FieldName>DisciplinesList</FieldName>
         <FieldType>TEXT</FieldType>

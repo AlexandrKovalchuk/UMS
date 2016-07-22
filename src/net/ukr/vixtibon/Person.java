@@ -60,6 +60,14 @@ public class Person implements Serializable {
         qs.add(new QueryBean(null,"pasport",pasport));
     }
 
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
     public int getID() {
         return ID;
     }
@@ -68,17 +76,15 @@ public class Person implements Serializable {
         this.ID = ID;
     }
 
-    public Date stringToDate(String str){
-        Date outdate = null;
+    public Calendar stringToDate(String str){
+        Calendar outdate = null;
         String[] splitedData = null;
         int i = 0;
         for(String input: str.split("#")){
             splitedData[i] = input;
             i++;
         }
-        outdate.setDate(Integer.parseInt(splitedData[0]));
-        outdate.setMonth(Integer.parseInt(splitedData[1]));
-        outdate.setYear(Integer.parseInt(splitedData[2]));
+        outdate.set(Integer.parseInt(splitedData[2]), Integer.parseInt(splitedData[1]), Integer.parseInt(splitedData[0]));
         return outdate;
     }
 
