@@ -117,6 +117,16 @@
                 <div>
                     <tr>
                         <td colspan=2>
+                            <button onclick="window.location.href='Selector.jsp?action=move&selectFrom=institute&step=2'" class="topicButton" >
+                                <h1>Move Faculty </h1>
+                            </button>
+                        </td>
+                    </tr>
+                </div>
+                <br />
+                <div>
+                    <tr>
+                        <td colspan=2>
                             <button onclick="window.location.href='Selector.jsp?action=delete&selectFrom=institute&step=2'" class="topicButton" >
                                 <h1>Delete Faculty Credentials</h1>
                             </button>
@@ -150,6 +160,16 @@
                 <div>
                     <tr>
                         <td colspan=2>
+                            <button onclick="window.location.href='Selector.jsp?action=move&selectFrom=institute&step=3'" class="topicButton" >
+                                <h1>Move Chair </h1>
+                            </button>
+                        </td>
+                    </tr>
+                </div>
+                <br />
+                <div>
+                    <tr>
+                        <td colspan=2>
                             <button onclick="window.location.href='Selector.jsp?action=delete&selectFrom=institute&step=3'" class="topicButton" >
                                 <h1>Delete Chair Credentials</h1>
                             </button>
@@ -175,6 +195,16 @@
                         <td colspan=2>
                             <button onclick="window.location.href='Selector.jsp?action=update&selectFrom=institute&step=4'" class="topicButton" >
                                 <h1>Update Employee Credentials</h1>
+                            </button>
+                        </td>
+                    </tr>
+                </div>
+                <br />
+                <div>
+                    <tr>
+                        <td colspan=2>
+                            <button onclick="window.location.href='Selector.jsp?action=move&selection=no&selectFrom=institute&step=4'" class="topicButton" >
+                                <h1>Move Employee</h1>
                             </button>
                         </td>
                     </tr>

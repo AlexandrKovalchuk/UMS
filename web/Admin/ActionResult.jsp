@@ -12,25 +12,58 @@
     <link rel="stylesheet" type="text/css" href="css\admin_styles.css">
 </head>
 <body>
-<%if(request.getParameter("result").equals("success")){%>
-<div class = "pageTitleTextGood">
+<%if(request.getParameter("result").equals("nomysqlconnection")){%>
+<div class = "pageTitleTextBad">
     <h5>
-        Operation was success!
+        Connection absent!
         <br />
-        Would you like to add item to the same location?
+        No connection with database.
     </h5>
+    <td colspan=2>
+        <button onclick="window.location.href='AdminPage.jsp'" class="controlButton" >
+            <h1>OK</h1>
+        </button>
+    </td>
 </div>
 <%}%>
+
 <%if(request.getParameter("result").equals("unsuccess")){%>
 <div class = "pageTitleTextBad">
     <h5>
         Operation was unsuccess!
         <br />
-        Would you like to try again?
+        Please try again?
     </h5>
+    <td colspan=2>
+        <button onclick="window.location.href='AdminPage.jsp'" class="controlButton" >
+            <h1>OK</h1>
+        </button>
+    </td>
+    <br />
+    <h5> </h5>
 </div>
 <%}%>
 <br/>
+
+<%if(request.getParameter("result").equals("success")){%>
+<div class = "pageTitleTextGood">
+    <h5>
+        Operation was success!
+        <br />
+        <%
+            if(request.getParameter("action").equals("create")){
+                %>Would you like to add item to the same location?<%
+            }else if(request.getParameter("action").equals("update")){
+
+            }else if(request.getParameter("action").equals("move")){
+
+            }else if(request.getParameter("action").equals("delete")){
+
+            }
+        %>
+    </h5>
+</div>
+
 <div class = "pageTitleText">
     <tr>
         <%if(request.getParameter("action").equals("create")){%>
@@ -64,12 +97,16 @@
         <%}%>
 
         <%}%>
+
         <td colspan=2>
             <button onclick="window.location.href='AdminPage.jsp'" class="controlButton" >
-                <h1>No</h1>
+                <h1><%out.print(request.getParameter("action").equals("create")?"No":"OK");%></h1>
             </button>
         </td>
+        <br />
     </tr>
 </div>
+<%}%>
+
 </body>
 </html>

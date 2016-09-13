@@ -39,9 +39,9 @@ public class Person implements Serializable {
         this.name = name;
         qs.add(new QueryBean(null,"name",name));
         this.lastName = secondName;
-        qs.add(new QueryBean(null,"secondName",secondName));
+        qs.add(new QueryBean(null,"lastName",secondName));
         this.fathersName = surname;
-        qs.add(new QueryBean(null,"surname",surname));
+        qs.add(new QueryBean(null,"fathersName",surname));
         this.personalID = personalID;
         qs.add(new QueryBean(null,"personalID",personalID));
         this.sex = sex;

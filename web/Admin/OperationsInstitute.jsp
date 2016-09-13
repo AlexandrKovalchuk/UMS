@@ -63,14 +63,14 @@
             <table>
                 <input type="hidden"  name="tableNameParameter" value="Institute">
                 <input type="hidden"  name="operation" value="create">
-                <tr>
-                    <td><h2>Long name:</h2></td>
+                <tr class = "textInputLabel">
+                    <td>Long name:</td>
                     <td>
                         <input type="text" name="longName" data-hint=" please enter name of institute">
                     </td>
                 </tr>
-                <tr>
-                    <td><h2>Short name:</h2></td>
+                <tr class = "textInputLabel">
+                    <td>Short name:</td>
                     <td>
                         <input type="text" name="shortName" data-hint=" please ABR">
                     </td>

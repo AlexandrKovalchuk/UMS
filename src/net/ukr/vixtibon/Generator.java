@@ -513,14 +513,14 @@ public void setupBase(String[] list) {
             return new Employee(emploeeIDCounter,randomString(MaleNames),randomString(MaleSurnames),null,indifCode,"M",null,generatePhoneNumber(),
                     personDate,"Украина "+ city +" "+randomString(Street)+" "+generateHouseNumber()+" "+rn.nextInt(100)+" "+generatePostIndex(),
                     generatePasportSeria()+" "+pasportNumber+" "+randomString(gumvs)+" "+city+" "+pasportDate,
-                    "HR",faculty,chair,chairID);
+                    "HR",chairID);
 
         }else{
             return new Employee(emploeeIDCounter,randomString(FemaleNames),randomString(FemaleSurnames),null,indifCode,"F",null,generatePhoneNumber(),
                     personDate,
                     "Украина "+ city +" "+randomString(Street)+" "+generateHouseNumber()+" "+rn.nextInt(100)+" "+generatePostIndex(),
                     generatePasportSeria()+" "+pasportNumber+" "+randomString(gumvs)+" "+city+" "+pasportDate,
-                    "HR",faculty,chair,chairID);
+                    "HR",chairID);
 
         }
 

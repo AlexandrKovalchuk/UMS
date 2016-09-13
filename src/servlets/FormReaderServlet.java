@@ -79,6 +79,7 @@ public class FormReaderServlet extends HttpServlet {
 
             Chair c = new Chair(longName, shortName,ID, facultyID, tableNameParameter);
             qs = c.qs;
+            System.out.println("chair done ");
         }else if(tableNameParameter.equals("faculty")) {
             System.out.println("FormReaderServlet dopost 2 i Faculty " );
             String longName = "";
@@ -102,7 +103,8 @@ public class FormReaderServlet extends HttpServlet {
             Faculty f = new Faculty(longName, shortName,ID, tableNameParameter,instituteID);
 
             qs = f.qs;
-        }else if(tableNameParameter.equals("Employee")) {
+        }else if(tableNameParameter.equals("employee")) {
+            System.out.println("FormReaderServlet dopost Employee 1 ");
             String name = "";
             String secondName = "";
             String surname = "";
@@ -113,14 +115,14 @@ public class FormReaderServlet extends HttpServlet {
             String address = "";
             String pasport = "";
             String office = "";
-            String faculty = "";
-            String chair = "";
             int chairID = 0;
             int ID = 0;
             int bday = 0;
             int bmonth = 0;
             int byear = 0;
+            System.out.println("FormReaderServlet dopost Employee 2 ");
             while (paramNames.hasMoreElements()) {
+                System.out.println("FormReaderServlet dopost Employee 3 ");
                 String paramName = (String) paramNames.nextElement();
                 String paramValue = new String(request.getParameter(paramName).getBytes("iso-8859-1"),"UTF-8");
                 if (paramName.equals("name")) {
@@ -165,10 +167,6 @@ public class FormReaderServlet extends HttpServlet {
                     pasport += paramValue + " ";
                 }else if (paramName.equals("office")) {
                     office = paramValue;
-                }else if (paramName.equals("faculty")) {
-                    faculty = paramValue;
-                }else if (paramName.equals("chair")) {
-                    chair = paramValue;
                 }else if (paramName.equals("chairID")) {
                     chairID = Integer.parseInt(paramValue);
                     LocationID = chairID;
@@ -181,12 +179,13 @@ public class FormReaderServlet extends HttpServlet {
                 }
                 System.out.println("FormReaderServlet dopost 2 i counter " + paramName + " " + paramValue);
             }
+            System.out.println("FormReaderServlet dopost Employee 4 ");
             Calendar mc = Calendar.getInstance();
             mc.set(byear, bmonth, bday);
             ID = d.findFreeID("employee");
 
             Employee e = new Employee(ID,name, secondName, surname, personalID, sex, email, phoneNumber,
-                    mc, address, pasport, office, faculty, chair, chairID);
+                    mc, address, pasport, office, chairID);
             qs = e.qs;
         }else if(tableNameParameter.equals("Teacher")) {
             String name = "";
@@ -375,8 +374,26 @@ public class FormReaderServlet extends HttpServlet {
 
         if(operation.equals("create")){
             success = d.stringProcessor(d.insertQuery(qs));
-        }else if(operation.equals("update")){
+        }else if(operation.equals("update")) {
             success = d.stringProcessor(d.insertQuery(qs));
+        }else if(operation.equals("move")){
+            int idToChange = 0;
+            if(request.getParameter("tableNameParameter").equals("faculty")){
+                idToChange = Integer.parseInt(request.getParameter("instituteID"));
+            }else if(request.getParameter("tableNameParameter").equals("chair")){
+                idToChange = Integer.parseInt(request.getParameter("facultyID"));
+            }else if(request.getParameter("tableNameParameter").equals("emploee")
+                    |request.getParameter("tableNameParameter").equals("discipline")
+                    |request.getParameter("tableNameParameter").equals("teacher")
+                    |request.getParameter("tableNameParameter").equals("timetable")
+                    |request.getParameter("tableNameParameter").equals("group")){
+                idToChange = Integer.parseInt(request.getParameter("chairID"));
+            }else if(request.getParameter("tableNameParameter").equals("student")){
+                idToChange = Integer.parseInt(request.getParameter("groupID"));
+            }
+
+            success = d.moveItem(request.getParameter("tableNameParameter"),Integer.parseInt(request.getParameter("id")),idToChange);
+
         }else if(operation.equals("delete")){
             int id = Integer.parseInt(request.getParameter("id"));
             success = d.deleteItem(request.getParameter("tableNameParameter"),id);
@@ -406,6 +423,13 @@ public class FormReaderServlet extends HttpServlet {
                         (tableNameParameter.equals("Employee")?"Employee":"")+
                         (tableNameParameter.equals("faculty")?"faculty":"")+
                         "&action=update" + "&locationID=" + LocationID);
+            }else if(operation.equals("move")){
+                response.sendRedirect("Admin/ActionResult.jsp?result=success"+"&type=" +
+                        (tableNameParameter.equals("Institute")?"Institute":"")+
+                        (tableNameParameter.equals("chair")?"chair":"")+
+                        (tableNameParameter.equals("Employee")?"Employee":"")+
+                        (tableNameParameter.equals("faculty")?"faculty":"")+
+                        "&action=move" + "&locationID=" + LocationID);
             }else if(operation.equals("delete")){
                 response.sendRedirect("Admin/ActionResult.jsp?result=success"+"&type=" +
                         (tableNameParameter.equals("Institute")?"Institute":"")+

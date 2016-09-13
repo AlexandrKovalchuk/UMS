@@ -30,6 +30,23 @@ public class DataBaseDriver {
 
 //Tales creation function
 //Table creator read info about table from XML file and add table with appropriate fields to data base
+
+public boolean connectionCheck(){
+    boolean reachable = false;
+    System.out.println("connectionCheck 1" + reachable);
+    try {
+        Class.forName(JDBC_DRIVER).newInstance();
+        conn = DriverManager.getConnection(DB_URL, USER, PASS);
+        reachable = conn.isValid(10);
+        System.out.println("connectionCheck 2" + reachable);
+        return reachable;
+    } catch (Exception e) {
+        e.printStackTrace();
+        System.out.println("connectionCheck 3" + reachable);
+        return reachable;
+    }
+}
+
 public void tableCreator(String pathToXML) {
     System.out.println("tableCreator");
     try {
@@ -796,6 +813,59 @@ public ArrayList<Chair> getDateChair(String select){
             }
         }
         return result;
+    }
+
+    public boolean moveItem(String tableName, int queryID, int ID){
+        try {
+            Class.forName(JDBC_DRIVER).newInstance();
+            conn = DriverManager.getConnection(DB_URL, USER, PASS);
+            stmt = conn.createStatement();
+            String sql = null;
+            if(tableName.equals("faculty")){
+                sql = "UPDATE faculty SET instituteID='"+ ID +"' WHERE id=" + queryID +";";
+            }else if(tableName.equals("chair")){
+                sql = "UPDATE chair SET facultyID='"+ ID +"' WHERE id=" + queryID +";";
+            }else if(tableName.equals("group")){
+                sql = "UPDATE group SET chairID='"+ ID +"' WHERE id=" + queryID +";";
+            }else if(tableName.equals("discipline")){
+                sql = "UPDATE discipline SET chairID='"+ ID +"' WHERE id=" + queryID +";";
+            }else if(tableName.equals("student")){
+                sql = "UPDATE student SET groupID='"+ ID +"' WHERE id=" + queryID +";";
+            }else if(tableName.equals("teacher")){
+                sql = "UPDATE teacher SET chairID='"+ ID +"' WHERE id=" + queryID +";";
+            }else if(tableName.equals("timetable")){
+                sql = "UPDATE timetable SET chairID='"+ ID +"' WHERE id=" + queryID +";";
+            }else if(tableName.equals("employee")){
+                sql = "UPDATE employee SET chairID='"+ ID +"' WHERE id=" + queryID +";";
+            }
+            //"DELETE FROM " + tableName + " WHERE id='" +queryID +"' LIMIT 1;";
+            System.out.println(sql);
+            stmt.executeUpdate(sql);
+            return true;
+        } catch (SQLException se) {
+            //Handle errors for JDBC
+            se.printStackTrace();
+            return false;
+        } catch (Exception e) {
+            //Handle errors for Class.forName
+            e.printStackTrace();
+            return false;
+        } finally {
+            //finally block used to close resources
+            try {
+                if (stmt != null)
+                    conn.close();
+            } catch (SQLException se) {
+                return false;
+            }// do nothing
+            try {
+                if (conn != null)
+                    conn.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+                return false;
+            }
+        }
     }
 
 public boolean deleteItem(String tableName, int queryID){
