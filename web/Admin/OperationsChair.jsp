@@ -135,8 +135,8 @@
     }
 }else if(request.getParameter("action").equals("delete")){
     DataBaseDriver d = new DataBaseDriver();
-    ArrayList<Employee> EobjList = d.getDateEmployee("SELECT longName, shortName, chairID, ID FROM Employee WHERE chairID='" + request.getParameter("ID") + "'");
-    ArrayList<Teacher> TobjList = d.getDateTeacher("SELECT longName, shortName, chairID, ID FROM Teacher WHERE chairID='" +request.getParameter("ID") + "'" );
+    ArrayList<Employee> EobjList = d.getDateEmployee("SELECT name, lastName, chairID, ID FROM Employee WHERE chairID='" + request.getParameter("ID") + "'");
+    ArrayList<Teacher> TobjList = d.getDateTeacher("SELECT name, lastName,, chairID, ID FROM Teacher WHERE chairID='" +request.getParameter("ID") + "'" );
     ArrayList<Group> GobjList = d.getDateGroup("SELECT longName, shortName, chairID, ID FROM Group WHERE chairID='" +request.getParameter("ID") + "'" );
     ArrayList<Discipline> DobjList = d.getDateDiscipline("SELECT longName, shortName, chairID, ID FROM Discipline WHERE chairID='" +request.getParameter("ID") + "'" );
     ArrayList<Timetable> TTobjList = d.getDateTimetable("SELECT longName, shortName, chairID, ID FROM Timetable WHERE chairID='" +request.getParameter("ID") + "'" );

@@ -81,7 +81,7 @@
             </button>
         </td>
         <%}%>
-        <%if(request.getParameter("type").equals("Employee")){%>
+        <%if(request.getParameter("type").equals("employee")){%>
         <td colspan=2>
             <button onclick="window.location.href='OperationsEmploee.jsp?action=create&ID='+<%out.print(request.getParameter("locationID"));%>" class="controlButton" >
                 <h1>Yes</h1>

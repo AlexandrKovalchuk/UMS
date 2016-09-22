@@ -76,6 +76,16 @@
         <div>
             <tr>
                 <td colspan=2>
+                    <button onclick="window.location.href='MainInfo.jsp'" class="controlButton" >
+                        <h1>Main Info</h1>
+                    </button>
+                </td>
+            </tr>
+        </div>
+        <br />
+        <div>
+            <tr>
+                <td colspan=2>
                     <button onclick="document.location.href='/LogOutServlet'" class="controlButton" >
                         <h1>Log Out</h1>
                     </button>

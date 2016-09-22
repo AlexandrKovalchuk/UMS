@@ -382,15 +382,20 @@ public class FormReaderServlet extends HttpServlet {
                 idToChange = Integer.parseInt(request.getParameter("instituteID"));
             }else if(request.getParameter("tableNameParameter").equals("chair")){
                 idToChange = Integer.parseInt(request.getParameter("facultyID"));
-            }else if(request.getParameter("tableNameParameter").equals("emploee")
-                    |request.getParameter("tableNameParameter").equals("discipline")
-                    |request.getParameter("tableNameParameter").equals("teacher")
-                    |request.getParameter("tableNameParameter").equals("timetable")
-                    |request.getParameter("tableNameParameter").equals("group")){
+            }else if(request.getParameter("tableNameParameter").equals("employee")){
+                idToChange = Integer.parseInt(request.getParameter("chairID"));
+            }else if(request.getParameter("tableNameParameter").equals("discipline")){
+                idToChange = Integer.parseInt(request.getParameter("chairID"));
+            }else if(request.getParameter("tableNameParameter").equals("teacher")){
+                idToChange = Integer.parseInt(request.getParameter("chairID"));
+            }else if(request.getParameter("tableNameParameter").equals("timetable")){
+                idToChange = Integer.parseInt(request.getParameter("chairID"));
+            }else if(request.getParameter("tableNameParameter").equals("group")){
                 idToChange = Integer.parseInt(request.getParameter("chairID"));
             }else if(request.getParameter("tableNameParameter").equals("student")){
                 idToChange = Integer.parseInt(request.getParameter("groupID"));
             }
+            System.out.println("idToChange   " + idToChange);
 
             success = d.moveItem(request.getParameter("tableNameParameter"),Integer.parseInt(request.getParameter("id")),idToChange);
 
@@ -413,28 +418,28 @@ public class FormReaderServlet extends HttpServlet {
                 response.sendRedirect("Admin/ActionResult.jsp?result=success"+"&type=" +
                         (tableNameParameter.equals("Institute")?"Institute":"")+
                         (tableNameParameter.equals("chair")?"chair":"")+
-                        (tableNameParameter.equals("Employee")?"Employee":"")+
+                        (tableNameParameter.equals("employee")?"employee":"")+
                         (tableNameParameter.equals("faculty")?"faculty":"")+
                         "&action=create" + "&locationID=" + LocationID);
             }else if(operation.equals("update")){
                 response.sendRedirect("Admin/ActionResult.jsp?result=success"+"&type=" +
                         (tableNameParameter.equals("Institute")?"Institute":"")+
                         (tableNameParameter.equals("chair")?"chair":"")+
-                        (tableNameParameter.equals("Employee")?"Employee":"")+
+                        (tableNameParameter.equals("employee")?"employee":"")+
                         (tableNameParameter.equals("faculty")?"faculty":"")+
                         "&action=update" + "&locationID=" + LocationID);
             }else if(operation.equals("move")){
                 response.sendRedirect("Admin/ActionResult.jsp?result=success"+"&type=" +
                         (tableNameParameter.equals("Institute")?"Institute":"")+
                         (tableNameParameter.equals("chair")?"chair":"")+
-                        (tableNameParameter.equals("Employee")?"Employee":"")+
+                        (tableNameParameter.equals("employee")?"employee":"")+
                         (tableNameParameter.equals("faculty")?"faculty":"")+
                         "&action=move" + "&locationID=" + LocationID);
             }else if(operation.equals("delete")){
                 response.sendRedirect("Admin/ActionResult.jsp?result=success"+"&type=" +
                         (tableNameParameter.equals("Institute")?"Institute":"")+
                         (tableNameParameter.equals("chair")?"chair":"")+
-                        (tableNameParameter.equals("Employee")?"Employee":"")+
+                        (tableNameParameter.equals("employee")?"employee":"")+
                         (tableNameParameter.equals("faculty")?"faculty":"")+
                         "&action=delete" + "&locationID=" + LocationID);
             }
@@ -443,21 +448,21 @@ public class FormReaderServlet extends HttpServlet {
                 response.sendRedirect("Admin/ActionResult.jsp?result=unsuccess"+"&type=" +
                         (tableNameParameter.equals("Institute")?"Institute":"")+
                         (tableNameParameter.equals("chair")?"chair":"")+
-                        (tableNameParameter.equals("Employee")?"Employee":"")+
+                        (tableNameParameter.equals("employee")?"employee":"")+
                         (tableNameParameter.equals("faculty")?"faculty":"")+
                         "&action=create" + "&locationID=" + LocationID);
             }else if(operation.equals("update")){
                 response.sendRedirect("Admin/ActionResult.jsp?result=success"+"&type=" +
                         (tableNameParameter.equals("Institute")?"Institute":"")+
                         (tableNameParameter.equals("chair")?"chair":"")+
-                        (tableNameParameter.equals("Employee")?"Employee":"")+
+                        (tableNameParameter.equals("employee")?"employee":"")+
                         (tableNameParameter.equals("faculty")?"faculty":"")+
                         "&action=update" + "&locationID=" + LocationID);
             }else if(operation.equals("delete")){
                 response.sendRedirect("Admin/ActionResult.jsp?result=success"+"&type=" +
                         (tableNameParameter.equals("Institute")?"Institute":"")+
                         (tableNameParameter.equals("chair")?"chair":"")+
-                        (tableNameParameter.equals("Employee")?"Employee":"")+
+                        (tableNameParameter.equals("employee")?"employee":"")+
                         (tableNameParameter.equals("faculty")?"faculty":"")+
                         "&action=delete" + "&locationID=" + LocationID);
             }

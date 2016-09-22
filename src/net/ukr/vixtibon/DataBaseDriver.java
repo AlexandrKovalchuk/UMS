@@ -380,6 +380,7 @@ public ArrayList<Chair> getDateChair(String select){
     // get emploee objects --------------------------------------------------------------------------------------------
     public ArrayList<Employee> getDateEmployee(String select){
         ArrayList<Employee> objList = new ArrayList<Employee>();
+        System.out.println("getDateEmployee 1" + select);
 
         try {
             //STEP 2: Register JDBC driver
@@ -389,6 +390,7 @@ public ArrayList<Chair> getDateChair(String select){
             ResultSet rs = stmt.executeQuery(select);
 
             while (rs.next()){
+                System.out.println("getDateEmployee 2");
                 Employee i = new Employee();
                 if(select.contains("name")) {
                     i.setName(rs.getString("name"));
@@ -816,6 +818,7 @@ public ArrayList<Chair> getDateChair(String select){
     }
 
     public boolean moveItem(String tableName, int queryID, int ID){
+        System.out.println("moveItem " + tableName +" "+ queryID +" "+ ID);
         try {
             Class.forName(JDBC_DRIVER).newInstance();
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
@@ -839,7 +842,7 @@ public ArrayList<Chair> getDateChair(String select){
                 sql = "UPDATE employee SET chairID='"+ ID +"' WHERE id=" + queryID +";";
             }
             //"DELETE FROM " + tableName + " WHERE id='" +queryID +"' LIMIT 1;";
-            System.out.println(sql);
+            System.out.println("moveItem " + sql);
             stmt.executeUpdate(sql);
             return true;
         } catch (SQLException se) {

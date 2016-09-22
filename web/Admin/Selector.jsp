@@ -37,8 +37,8 @@
         objListF = d.getDateFaculty("SELECT longName, shortName, instituteID, ID FROM faculty WHERE instituteID = '" +request.getParameter("ID") +"'");
     }else if(request.getParameter("selectFrom").equals("chair")){
          objListC = d.getDateChair("SELECT longName, shortName, facultyID, ID FROM chair WHERE facultyID = '" +request.getParameter("ID") +"'");
-    }else if(request.getParameter("selectFrom").equals("emploee")){
-        objListC = d.getDateChair("SELECT name, lastName, chairID, ID FROM emploee WHERE chairID = '" +request.getParameter("ID") +"'");
+    }else if(request.getParameter("selectFrom").equals("employee")){
+        objListE = d.getDateEmployee("SELECT name, lastName, chairID, ID FROM employee WHERE chairID = '" +request.getParameter("ID") +"'");
     }
 %>
 <link rel="stylesheet" type="text/css" href="css\admin_styles.css">
@@ -221,77 +221,42 @@
                 System.out.println("selector chair 2");
                 for(Chair c: objListC){
                     %><div><tr><td colspan=2>
-                        <button onclick="window.location.href='<%out.print("Selector.jsp?action=" + request.getParameter("action") + "&ID=" + c.getID() + "&selectFrom=emploee" + "&step=" + stepIndex);%>' " class="itemButton" >
+                        <button onclick="window.location.href='<%out.print("Selector.jsp?action=" + request.getParameter("action") + "&ID=" + c.getID() + "&selectFrom=employee" + "&step=" + stepIndex);%>' " class="itemButton" >
                             <h1><%out.print(c.getLongName());%></h1> </button></td></tr></div><br /><%
                 }
                 %><div><tr><td colspan=2>
-                <button onclick="window.location.href='<%out.print("Selector.jsp?action=" + request.getParameter("action") + "&ID=0" + "&selectFrom=emploee" + "&step=" + stepIndex);%>' " class="itemButton" >
+                <button onclick="window.location.href='<%out.print("Selector.jsp?action=" + request.getParameter("action") + "&ID=0" + "&selectFrom=employee" + "&step=" + stepIndex);%>' " class="itemButton" >
                     <h1>None</h1> </button></td></tr></div><%
             }
-    }else if(request.getParameter("selectFrom").equals("emploee")){
-                        System.out.println("selector emploee");
-         if(request.getParameter("step").equals("1")){
-             if(objListE.size() > 0){
-              for(Employee e: objListE){
-              %>
-                <div>
-                    <tr>
-                        <td colspan=2>
-                            <button onclick="window.location.href='<%out.print("OperationsEmploee.jsp?action=" + request.getParameter("action") + "&ID=" + e.getPersonalID());%>' " class="itemButton" >
-                                <h1><%out.print(e.getName());%> </h1> <h1><%out.print(e.getSecondName());%> </h1></button>
-                        </td>
-                    </tr>
-                </div>
+    }else if(request.getParameter("selectFrom").equals("employee")){
+        System.out.println("selector employee :" + objListE.size());
+        if(request.getParameter("step").equals("1")){
+            if(objListE.size() > 0){
+                for(Employee e: objListE){
+                    %><div><tr><td colspan=2>
+                            <button onclick="window.location.href='<%out.print("OperationsEmploee.jsp?action=" + request.getParameter("action") + "&ID=" + e.getID() + "&selection=no");%>' " class="itemButton" >
+                                <h1><%out.print(e.getName()+ " " +e.getSecondName());%> </h1></button></td></tr></div><br /><%
+                }
+            }else{
+                %><div class = "yelowInfo"><h4 class="payAttention">
+                        There is no data to <%out.print(request.getParameter("action"));%></h4></div>
                 <br />
-              <%
-              }
-              }else{
-              %>
-                <div class = "yelowInfo">
-                    <h4 class="payAttention">
-                        There is no data to <%out.print(request.getParameter("action"));%>
-                    </h4>
-                </div>
-                <br />
-                <div>
-                    <tr>
-                        <td colspan=2>
-                            <button onclick="window.location.href='AdminPage.html'" class="topicButton" >
-                                <h1>Go To Main Page</h1>
-                            </button>
-                        </td>
-                    </tr>
-                </div>
-                <%
-        }
-         }else{
-            stepIndex--;
-              for(Employee e: objListE){
-
-                  %>
-                    <div>
-                        <tr>
-                            <td colspan=2>
-                                <button onclick="window.location.href='<%out.print("Selector.jsp?action=" + request.getParameter("action") + "&ID=" + e.getPersonalID() + "&selectFrom=emploee" + "&step=" + stepIndex);%>' " class="itemButton" >
-                                    <h1><%out.print(e.getName());%> </h1> <h1><%out.print(e.getSecondName());%> </h1> </button>
-                            </td>
-                        </tr>
-                    </div>
-                    <br />
-              <%
-              }
-              %>
-                    <div>
-                        <tr>
-                            <td colspan=2>
-                                <button onclick="window.location.href='<%out.print("Selector.jsp?action=" + request.getParameter("action") + "&ID=0" + "&selectFrom=emploee" + "&step=" + stepIndex);%>' " class="itemButton" >
-                                    <h1>None</h1> </button>
-                            </td>
-                        </tr>
-                    </div>
-               <%
+                <div><tr><td colspan=2>
+                    <button onclick="window.location.href='AdminPage.html'" class="topicButton" >
+                    <h1>Go To Main Page</h1></button></td></tr></div><%
             }
+        }else{
+            stepIndex--;
+            for(Employee e: objListE){
+                %><div><tr><td colspan=2>
+                    <button onclick="window.location.href='<%out.print("Selector.jsp?action=" + request.getParameter("action") + "&ID=" + e.getID() + "&selectFrom=emploee" + "&step=" + stepIndex);%>' " class="itemButton" >
+                    <h1><%out.print(e.getName()+ " " +e.getSecondName());%> </h1> </button></td></tr></div><br /><%
+            }
+            %><div><tr><td colspan=2>
+                <button onclick="window.location.href='<%out.print("Selector.jsp?action=" + request.getParameter("action") + "&ID=0" + "&selectFrom=emploee" + "&step=" + stepIndex);%>' " class="itemButton" >
+                <h1>None</h1> </button></td></tr></div><%
         }
+    }
     %>
 
 </div>

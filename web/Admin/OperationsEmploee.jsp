@@ -1,4 +1,6 @@
 <%@ page import="servlets.SessionsList" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="net.ukr.vixtibon.*" %>
 <%--
   Created by IntelliJ IDEA.
   User: alex
@@ -214,7 +216,7 @@
             </td>
         </tr>
 
-        
+
         <tr class = "textInputLabel">
             <td colspan=2>
                 <button onclick="submit"  class="controlButton"><h2>Add</h2></button>
@@ -228,9 +230,68 @@
 %>
 
 <%
-}else if(request.getParameter("action").equals("delete")){
+}else if(request.getParameter("action").equals("move")){
+    if(request.getParameter("selection").equals("no")){
+        DataBaseDriver d = new DataBaseDriver();
+        ArrayList<Institute> IobjList = d.getDateInstitute("SELECT longName, shortName, ID FROM institute");
+        ArrayList<Faculty> FobjList = d.getDateFaculty("SELECT longName, shortName, ID, instituteID FROM faculty");
+        ArrayList<Chair> CobjList = d.getDateChair("SELECT longName, shortName, ID, facultyID FROM chair");
+        for(Institute i: IobjList){
+            %><h1><%out.print(i.getLongName());%></h1><%
+            for(Faculty f: FobjList){
+                if(f.getInstituteID() == i.getID()){
+                %><h1><%out.print(f.getLongName());%></h1><%
+                    for(Chair c: CobjList){
+                        if(c.getFacultyID() == f.getID()){
+                            %><div><tr><td colspan=2>
+                                <button onclick="window.location.href='<%out.print("OperationsEmploee.jsp?action=move&selection=yes&ID="+ request.getParameter("ID")
+                                +"&chairID=" + c.getID());%>' " class="itemButton" ><h1><%out.print(c.getLongName());%></h1> </button></td></tr><br/></div><%
+                        }
+                    }
+                }
+            }
+        }
+%><td colspan=2>
+    <button onclick="window.location.href='<%out.print("OperationsEmploee.jsp?action=move&selection=yes&ID="+ request.getParameter("ID")
+                +"&chairID=0");%>' " class="itemButton" ><h1>None</h1> </button></td></tr><%
+}else if(request.getParameter("selection").equals("yes")){
 %>
+<form action="/FormReaderServlet" method="post" accept-charset="UTF-8">
+    <input type="hidden"  name="operation" value="move">
+    <input type="hidden"  name="tableNameParameter" value="employee">
+    <input type="hidden"  name="chairID" value=<%out.print(request.getParameter("chairID"));%>>
+    <input type="hidden"  name="id" value=<%out.print(request.getParameter("ID"));%>>
+    <div>
+        <h2>Would you like to continue?</h2>
+        <tr><td >
+            <button onclick="submit"  class="controlButton"><h2>Yes</h2></button></td><td >
+            <button onclick="window.location.href='AdminPage.jsp'"  class="controlButton"><h2>No</h2></button>
+        </td></tr>
+    </div>
+</form>
+<%
+    }
+}else if(request.getParameter("action").equals("delete")){
+    DataBaseDriver d = new DataBaseDriver();
+    ArrayList<Employee> employees = d.getDateEmployee("SELECT name, lastName, ID FROM employee WHERE ID='" +request.getParameter("ID") + "'");
+%>
+<form action="/FormReaderServlet" method="post" accept-charset="UTF-8">
+    <input type="hidden"  name="operation" value="delete">
+    <input type="hidden"  name="tableNameParameter" value="employee">
+    <input type="hidden"  name="id" value=<%out.print(employees.get(0).getID());%>>
 
+    <div>
+        <h2>Would you like to continue?</h2>
+        <tr>
+            <td >
+                <button onclick="submit"  class="controlButton"><h2>Yes</h2></button>
+            </td>
+        </tr>
+    </div>
+</form>
+<td >
+    <button onclick="window.location.href='AdminPage.jsp'"  class="controlButton"><h2>No</h2></button>
+</td>
 <%
 }else{
 %>
