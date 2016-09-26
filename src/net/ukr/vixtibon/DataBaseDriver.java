@@ -5,6 +5,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import javax.management.Query;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.File;
@@ -779,6 +780,19 @@ public ArrayList<Chair> getDateChair(String select){
         System.out.println("UpdateQuery: " + UpdateQuery);
         return UpdateQuery;
     }
+
+    public String updateQuery(QuerySet qs, String tableName, int ID){
+        String UpdateQuery = "UPDATE ";
+        UpdateQuery = UpdateQuery + tableName + " " + "SET ";
+        for(Map.Entry<String, QueryBean> entry : qs.getSet().entrySet()){
+            QueryBean qb = entry.getValue();
+            System.out.println("query data " + qb.getFieldName() + " " + qb.getFieldData("") + " " + qb.getFieldData(0));
+            UpdateQuery = UpdateQuery + qb.getFieldName() + "=" + (qb.getFieldData("")==null?qb.getFieldData(0):"'" + qb.getFieldData("") + "'") + ", ";
+        }
+        UpdateQuery = UpdateQuery + "WHERE id=" + ID + ";";
+        return UpdateQuery;
+    }
+
     public boolean stringProcessor(String st){
         System.out.println("stringProcessor");
         boolean result = false;

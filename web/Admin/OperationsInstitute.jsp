@@ -33,6 +33,10 @@
     %>
     <title>Update University Credentials</title>
     <%
+    }else if(request.getParameter("action").equals("move")){
+    %>
+    <title>Move University Credentials</title>
+    <%
     }else if(request.getParameter("action").equals("delete")){
     %>
     <title>Delete University Credentials</title>
@@ -50,6 +54,7 @@
         Welcome to
         <%out.print(request.getParameter("action").equals("create")?"Create":"");%>
         <%out.print(request.getParameter("action").equals("update")?"Update":"");%>
+        <%out.print(request.getParameter("action").equals("move")?"Move":"");%>
         <%out.print(request.getParameter("action").equals("delete")?"Delete":"");%>
         University Credentials Page!
     </h5>
@@ -84,8 +89,33 @@
         </form>
     <%
     }else if(request.getParameter("action").equals("update")){
+        DataBaseDriver d = new DataBaseDriver();
+        ArrayList<Institute> i = d.getDateInstitute("SELECT longName, shortName, ID FROM institute");
     %>
-
+    <form action="/FormReaderServlet" method="post" accept-charset="UTF-8">
+        <table>
+            <input type="hidden"  name="tableNameParameter" value="Institute">
+            <input type="hidden"  name="operation" value="update">
+            <input type="hidden"  name="ID" value=<%out.print(i.get(0).getID());%>>
+            <tr class = "textInputLabel">
+                <td>Long name:</td>
+                <td>
+                    <input type="text" name="longName" data-hint=" please enter name of institute" value=<%out.print(i.get(0).getLongName());%>>
+                </td>
+            </tr>
+            <tr class = "textInputLabel">
+                <td>Short name:</td>
+                <td>
+                    <input type="text" name="shortName" data-hint=" please ABR" value=<%out.print(i.get(0).getShortName());%>>
+                </td>
+            </tr>
+            <tr>
+                <td colspan=2>
+                    <button onclick="submit"  class="controlButton"><h2>Update</h2></button>
+                </td>
+            </tr>
+        </table>
+    </form>
     <%
     }else if(request.getParameter("action").equals("delete")){
         DataBaseDriver d = new DataBaseDriver();

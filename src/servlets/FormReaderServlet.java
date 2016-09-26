@@ -7,11 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.net.URLDecoder;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Enumeration;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by alex on 06/06/2016.
@@ -47,12 +43,18 @@ public class FormReaderServlet extends HttpServlet {
                     longName = paramValue;
                 }else if(paramName.equals("shortName")){
                     shortName = paramValue;
+                }else if(paramName.equals("ID")){
+                    ID = Integer.parseInt(paramValue);
                 }
+
                 System.out.println("FormReaderServlet dopost 2 i counter " + paramName + " " + paramValue);
             }
-            ID= d.findFreeID("Institute");
 
-            System.out.println("FormReaderServlet dopost 2  value " + ID);
+            if(operation.equals("create")) {
+                ID = d.findFreeID("Institute");
+            }
+
+            System.out.println("FormReaderServlet dopost 2  institute value " + ID);
             Institute i = new Institute(longName,shortName,ID,tableNameParameter);
             qs = i.qs;
 
@@ -375,7 +377,18 @@ public class FormReaderServlet extends HttpServlet {
         if(operation.equals("create")){
             success = d.stringProcessor(d.insertQuery(qs));
         }else if(operation.equals("update")) {
-            success = d.stringProcessor(d.insertQuery(qs));
+            QuerySet qsToUpdate = new QuerySet();
+            QuerySet qsNotModyfied = new QuerySet();
+            String tnp = request.getParameter("tableNameParameter");
+            int ID = Integer.parseInt(request.getParameter("ID"));
+            if(tnp.equals("institute")){
+                ArrayList<Institute> i = d.getDateInstitute("SELECT longName, shortName, ID FROM institute WHERE ID =" + ID);
+                qsNotModyfied = i.get(0).qs;
+                
+
+            }
+            d.updateQuery(qsToUpdate,tnp,ID);
+            success = d.stringProcessor(d.updateQuery(qsToUpdate));
         }else if(operation.equals("move")){
             int idToChange = 0;
             if(request.getParameter("tableNameParameter").equals("faculty")){
