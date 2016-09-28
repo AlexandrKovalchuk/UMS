@@ -116,7 +116,7 @@
                     <div>
                         <tr>
                             <td colspan=2>
-                                <button onclick="window.location.href='AdminPage.html'" class="topicButton" >
+                                <button onclick="window.location.href='AdminPage.jsp'" class="topicButton" >
                                     <h1>Go To Main Page</h1>
                                 </button>
                             </td>
@@ -176,7 +176,7 @@
                     %><div class = "yelowInfo"><h4 class="payAttention">
                         There is no data to <%out.print(request.getParameter("action"));%></h4></div><br />
                     <div><tr><td colspan=2>
-                            <button onclick="window.location.href='AdminPage.html'" class="topicButton" ><h1>Go To Main Page</h1></button></td></tr></div><%
+                            <button onclick="window.location.href='AdminPage.jsp'" class="topicButton" ><h1>Go To Main Page</h1></button></td></tr></div><%
                 }
             }
         }else{
@@ -213,7 +213,7 @@
                     }else{
                         %><div class = "yelowInfo"><h4 class="payAttention">There is no data to <%out.print(request.getParameter("action"));%></h4></div><br />
                         <div><tr><td colspan=2>
-                            <button onclick="window.location.href='AdminPage.html'" class="topicButton" ><h1>Go To Main Page</h1></button></td></tr></div><%
+                            <button onclick="window.location.href='AdminPage.jsp'" class="topicButton" ><h1>Go To Main Page</h1></button></td></tr></div><%
                     }
                 }
             }else{
@@ -242,7 +242,7 @@
                         There is no data to <%out.print(request.getParameter("action"));%></h4></div>
                 <br />
                 <div><tr><td colspan=2>
-                    <button onclick="window.location.href='AdminPage.html'" class="topicButton" >
+                    <button onclick="window.location.href='AdminPage.jsp'" class="topicButton" >
                     <h1>Go To Main Page</h1></button></td></tr></div><%
             }
         }else{

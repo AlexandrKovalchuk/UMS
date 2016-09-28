@@ -28,6 +28,7 @@ public class Person implements Serializable {
     public QuerySet qs = new QuerySet();
 
     public Person() {
+
     }
 
     public Person(int ID,String name, String secondName, String surname, String personalID, String sex, String email, String phoneNumber,
@@ -60,6 +61,10 @@ public class Person implements Serializable {
         qs.add(new QueryBean(null,"pasport",pasport));
     }
 
+    public Calendar getDateOfBorn() {
+        return dateOfBorn;
+    }
+
     public String getLogin() {
         return login;
     }
@@ -77,11 +82,13 @@ public class Person implements Serializable {
     }
 
     public Calendar stringToDate(String str){
-        Calendar outdate = null;
-        String[] splitedData = null;
+        Calendar outdate = Calendar.getInstance();
+        String[] splitedData = new String[3];
         int i = 0;
+        System.out.println("stringToDate " + i );
         for(String input: str.split("#")){
             splitedData[i] = input;
+            System.out.println("stringToDate " + i + " " + splitedData[i]);
             i++;
         }
         outdate.set(Integer.parseInt(splitedData[2]), Integer.parseInt(splitedData[1]), Integer.parseInt(splitedData[0]));

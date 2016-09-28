@@ -90,7 +90,7 @@
     <%
     }else if(request.getParameter("action").equals("update")){
         DataBaseDriver d = new DataBaseDriver();
-        ArrayList<Institute> i = d.getDateInstitute("SELECT longName, shortName, ID FROM institute");
+        ArrayList<Institute> i = d.getDateInstitute("SELECT longName, shortName, ID FROM institute WHERE id=" + request.getParameter("ID"));
     %>
     <form action="/FormReaderServlet" method="post" accept-charset="UTF-8">
         <table>

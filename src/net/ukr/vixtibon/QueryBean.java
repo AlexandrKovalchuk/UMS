@@ -5,10 +5,10 @@ package net.ukr.vixtibon;
  */
 public class QueryBean {
     private Byte counter = 0;
-    private String tableName;
-    private String fieldName;
-    private String SfieldData;
-    private int IfieldData;
+    private String tableName = null;
+    private String fieldName = null;
+    private String SfieldData = null;
+    private int IfieldData = 0;
 
     public QueryBean(){
         //System.out.println("QueryBean created");
@@ -30,7 +30,7 @@ public class QueryBean {
     }
 
     public void show(){
-        //System.out.println("QueryBean Info " +tableName +" " + fieldName + " " +fieldData);
+        System.out.println("QueryBean Info " +tableName +" " + fieldName + " " +SfieldData + " " + IfieldData);
     }
 
     public void setCounter(Byte counter) {

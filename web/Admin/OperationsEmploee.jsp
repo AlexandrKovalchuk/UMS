@@ -1,6 +1,7 @@
 <%@ page import="servlets.SessionsList" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="net.ukr.vixtibon.*" %>
+<%@ page import="java.util.Calendar" %>
 <%--
   Created by IntelliJ IDEA.
   User: alex
@@ -136,77 +137,14 @@
         <tr class = "textInputLabel">
             <td> Країна</td>
             <td>
-                <input type="text" name="country">
+                <input type="text" name="address">
             </td>
-            <td>   Місто</td>
-            <td>
-                <input type="text" name="city">
-            </td>
-        </tr>
-        <tr class = "textInputLabel">
-            <td> Вулиця</td>
-            <td>
-                <input type="text" name="street">
-            </td>
-            <td> Будинок</td>
-            <td>
-                <input type="text" name="house">
-            </td>
-            <td> Квартира</td>
-            <td>
-                <input type="int" name="appartment">
-            </td>
-        </tr>
-        <tr class = "textInputLabel">
-            <td> Поштовий індех</td>
-            <td>
-                <input type="text" name="postIndex">
-            </td>
-
         </tr>
         <tr class = "textInputLabel">
             <td>Паспортні данні:</td>
-        </tr>
-        <tr class = "textInputLabel">
-            <td> Серія</td>
             <td>
-                <input type="text" name="seria">
+                <input type="text" name="pasport">
             </td>
-            <td> Номер</td>
-            <td>
-                <input type="long" name="number">
-            </td>
-
-        </tr>
-        <tr class = "textInputLabel">
-            <td>Де виданий паспорт:</td>
-            <td>
-                <input type="text" name="whereIssued">
-            </td>
-        </tr>
-        <tr class = "textInputLabel">
-            <td>Ким виданий паспорт:</td>
-            <td>
-                <input type="text" name="issuedByWhom">
-            </td>
-        </tr>
-        <tr class = "textInputLabel">
-            <td>Коли виданий паспорт:</td>
-        </tr>
-        <tr class = "textInputLabel">
-            <td>День</td>
-            <td>
-                <input type="int" name="day">
-            </td>
-            <td>   Місяць</td>
-            <td>
-                <input type="text" name="month">
-            </td>
-            <td>   Рік</td>
-            <td>
-                <input type="int" name="year">
-            </td>
-
         </tr>
 
         <tr class = "textInputLabel">
@@ -227,7 +165,109 @@
 
 <%
 }else if(request.getParameter("action").equals("update")){
+    DataBaseDriver d = new DataBaseDriver();
+    ArrayList<Employee> f = d.getDateEmployee("SELECT name, lastName, fathersName, personalID, sex, email, phoneNumber" +
+            ", dateOfBorn, address, pasport, login, office, ID, chairID FROM employee WHERE ID =" + request.getParameter("ID"));
 %>
+<form action="/FormReaderServlet" method="post" accept-charset="UTF-8">
+    <table>
+        <input type="hidden"  name="tableNameParameter" value="employee">
+        <input type="hidden"  name="operation" value="update">
+        <input type="hidden"  name="ID" value=<%out.print(request.getParameter("ID"));%>>
+        <tr class = "textInputLabel">
+        <tr class = "textInputLabel">
+            <td>Ім'я:</td>
+            <td>
+                <input type="text" name="name" value=<%out.print(f.get(0).getName());%>>
+            </td>
+        </tr>
+        <tr class = "textInputLabel">
+            <td>Прізвище:</td>
+            <td>
+                <input type="text" name="lastName" value=<%out.print(f.get(0).getSecondName());%>>
+            </td>
+        </tr>
+        <tr class = "textInputLabel">
+            <td>По Батькові:</td>
+            <td>
+                <input type="text" name="fathersName" value=<%out.print(f.get(0).getSurname());%>>
+            </td>
+        </tr>
+        <tr class = "textInputLabel">
+            <td>Ідентифікаційний код:</td>
+            <td>
+                <input type="text" name="personalID" value=<%out.print(f.get(0).getPersonalID());%>>
+            </td>
+        </tr>
+        <tr class = "textInputLabel">
+            <td>Стать:</td>
+            <td>
+                <input type="radio" name="sex" value="m" <%out.print(f.get(0).getSex().equals("m")?"checked":"");%>>Чоловіча<br>
+                <input type="radio" name="sex" value="f" <%out.print(f.get(0).getSex().equals("f")?"checked":"");%>>Жіноча
+            </td>
+        </tr>
+        <tr class = "textInputLabel">
+            <td>Пошта:</td>
+            <td>
+                <input type="text" name="email" value=<%out.print(f.get(0).getEmail());%>>
+            </td>
+        </tr>
+        <tr class = "textInputLabel">
+            <td>Телефон:</td>
+            <td>
+                <input type="text" name="phoneNumber" value=<%out.print(f.get(0).getPhoneNumber());%>>
+            </td>
+        </tr>
+        <tr class = "textInputLabel">
+            <td>Дата народження:</td>
+        </tr>
+        <tr class = "textInputLabel">
+            <td>День</td>
+            <td>
+                <input type="int" name="bday" value=<%out.print(f.get(0).getDateOfBorn().get(Calendar.DAY_OF_MONTH));%>>
+            </td>
+            <td>   Місяць</td>
+            <td>
+                <input type="text" name="bmonth" value=<%out.print(f.get(0).getDateOfBorn().get(Calendar.MONTH));%>>
+            </td>
+            <td>   Рік</td>
+            <td>
+                <input type="int" name="byear" value=<%out.print(f.get(0).getDateOfBorn().get(Calendar.YEAR));%>>
+            </td>
+
+        </tr>
+        <tr class = "textInputLabel">
+            <td>Адресса:</td>
+        </tr>
+        <tr class = "textInputLabel">
+            <td>
+                <input type="text" name="address" value=<%out.print(f.get(0).getAddress());%>>
+            </td>
+        </tr>
+        <tr class = "textInputLabel">
+            <td>Паспортні данні:</td>
+        </tr>
+        <tr class = "textInputLabel">
+            <td>
+                <input type="text" name="pasport" value=<%out.print(f.get(0).getAddress());%>>
+            </td>
+        </tr>
+
+        <tr class = "textInputLabel">
+            <td>Посада:</td>
+            <td>
+                <input type="text" name="office" value=<%out.print(f.get(0).getOffice());%>>
+            </td>
+        </tr>
+
+
+        <tr class = "textInputLabel">
+            <td colspan=2>
+                <button onclick="submit"  class="controlButton"><h2>Add</h2></button>
+            </td>
+        </tr>
+    </table>
+</form>
 
 <%
 }else if(request.getParameter("action").equals("move")){

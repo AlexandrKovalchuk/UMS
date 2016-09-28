@@ -94,9 +94,34 @@
 
 <%
 }else if(request.getParameter("action").equals("update")){
-%>
-
-<%
+    DataBaseDriver d = new DataBaseDriver();
+    ArrayList<Chair> f = d.getDateChair("SELECT longName, shortName, ID FROM chair WHERE id=" + request.getParameter("ID"));
+        %>
+    <form action="/FormReaderServlet" method="post" accept-charset="UTF-8">
+        <table>
+            <input type="hidden"  name="tableNameParameter" value="chair">
+            <input type="hidden"  name="operation" value="update">
+            <input type="hidden"  name="ID" value=<%out.print(f.get(0).getID());%>>
+            <tr class = "textInputLabel">
+                <td>Long name:</td>
+                <td>
+                    <input type="text" name="longName" data-hint=" please enter name of institute" value=<%out.print(f.get(0).getLongName());%>>
+                </td>
+            </tr>
+            <tr class = "textInputLabel">
+                <td>Short name:</td>
+                <td>
+                    <input type="text" name="shortName" data-hint=" please ABR" value=<%out.print(f.get(0).getShortName());%>>
+                </td>
+            </tr>
+            <tr>
+                <td colspan=2>
+                    <button onclick="submit"  class="controlButton"><h2>Update</h2></button>
+                </td>
+            </tr>
+        </table>
+    </form>
+        <%
 }else if(request.getParameter("action").equals("move")){
     if(request.getParameter("selection").equals("no")){
         DataBaseDriver d = new DataBaseDriver();

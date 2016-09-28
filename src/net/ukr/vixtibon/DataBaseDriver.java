@@ -10,6 +10,7 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.File;
 import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -415,6 +416,7 @@ public ArrayList<Chair> getDateChair(String select){
                     i.setPhoneNumber(rs.getString("phoneNumber"));
                 }
                 if(select.contains("dateOfBorn")) {
+                    System.out.println("dateOfBorn " + rs.getString("dateOfBorn"));
                     i.stringToDate(rs.getString("dateOfBorn"));
                 }
                 if(select.contains("address")) {
@@ -784,12 +786,18 @@ public ArrayList<Chair> getDateChair(String select){
     public String updateQuery(QuerySet qs, String tableName, int ID){
         String UpdateQuery = "UPDATE ";
         UpdateQuery = UpdateQuery + tableName + " " + "SET ";
+        int counter = qs.getSet().size();
         for(Map.Entry<String, QueryBean> entry : qs.getSet().entrySet()){
             QueryBean qb = entry.getValue();
             System.out.println("query data " + qb.getFieldName() + " " + qb.getFieldData("") + " " + qb.getFieldData(0));
-            UpdateQuery = UpdateQuery + qb.getFieldName() + "=" + (qb.getFieldData("")==null?qb.getFieldData(0):"'" + qb.getFieldData("") + "'") + ", ";
+            UpdateQuery = UpdateQuery + qb.getFieldName() + "=" + (qb.getFieldData("")==null?qb.getFieldData(0):"'" + qb.getFieldData("") + "'");
+            if(counter!=1){
+                UpdateQuery = UpdateQuery + ", ";
+            }
+            counter--;
         }
         UpdateQuery = UpdateQuery + "WHERE id=" + ID + ";";
+        System.out.println("update query : " + UpdateQuery);
         return UpdateQuery;
     }
 
