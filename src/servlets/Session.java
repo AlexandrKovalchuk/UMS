@@ -8,6 +8,7 @@ import java.util.Random;
 public class Session {
     private String sessionID = "";
     private String sessionType = "";
+    private int areaAccessID = 0;
 
 
     public String getSessionID() {
@@ -18,12 +19,20 @@ public class Session {
         return sessionType;
     }
 
+    public int getAreaAccessID() {
+        return areaAccessID;
+    }
+
     public void setSessionID(String sessionID) {
         this.sessionID = sessionID;
     }
 
     public void setSessionType(String sessionType) {
         this.sessionType = sessionType;
+    }
+
+    public void setAreaAccessID(int areaAccessID) {
+        this.areaAccessID = areaAccessID;
     }
 
     public String sessionIDGenerator(){

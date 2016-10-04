@@ -33,7 +33,8 @@ public void showSet(){
 
     for(Map.Entry<String, QueryBean> entry : getSet().entrySet()){
         QueryBean qb = entry.getValue();
-        System. out .println("QueryBean contain " + " " + qb.getTableName() + " " +  qb.getFieldName() + " " +  qb.getFieldData("") + " " +  qb.getFieldData(0));
+        qb.show();
+        //System. out .println("QueryBean contain " + " " + qb.getTableName() + " " +  qb.getFieldName() + " " +  qb.getFieldData("") + " " +  qb.getFieldData(0));
     }
 }
 

@@ -398,10 +398,10 @@ public ArrayList<Chair> getDateChair(String select){
                     i.setName(rs.getString("name"));
                 }
                 if(select.contains("lastName")) {
-                    i.setSecondName(rs.getString("lastName"));
+                    i.setlastName(rs.getString("lastName"));
                 }
                 if(select.contains("fathersName")) {
-                    i.setSurname(rs.getString("fathersName"));
+                    i.setfathersName(rs.getString("fathersName"));
                 }
                 if(select.contains("personalID")) {
                     i.setPersonalID(rs.getString("personalID"));
@@ -480,10 +480,10 @@ public ArrayList<Chair> getDateChair(String select){
                     i.setName(rs.getString("name"));
                 }
                 if(select.contains("lastName")) {
-                    i.setSecondName(rs.getString("lastName"));
+                    i.setlastName(rs.getString("lastName"));
                 }
                 if(select.contains("fathersName")) {
-                    i.setSurname(rs.getString("fathersName"));
+                    i.setfathersName(rs.getString("fathersName"));
                 }
                 if(select.contains("personalID")) {
                     i.setPersonalID(rs.getString("personalID"));
@@ -567,10 +567,10 @@ public ArrayList<Chair> getDateChair(String select){
                     i.setName(rs.getString("name"));
                 }
                 if(select.contains("lastName")) {
-                    i.setSecondName(rs.getString("lastName"));
+                    i.setlastName(rs.getString("lastName"));
                 }
                 if(select.contains("fathersName")) {
-                    i.setSurname(rs.getString("fathersName"));
+                    i.setfathersName(rs.getString("fathersName"));
                 }
                 if(select.contains("personalID")) {
                     i.setPersonalID(rs.getString("personalID"));

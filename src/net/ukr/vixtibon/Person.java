@@ -186,14 +186,14 @@ public class Person implements Serializable {
         updateQuerySetParameter("name",name);
     }
 
-    public void setSecondName(String secondName) {
+    public void setlastName(String secondName) {
         this.lastName = secondName;
-        updateQuerySetParameter("secondName",secondName);
+        updateQuerySetParameter("lastName",secondName);
     }
 
-    public void setSurname(String surname) {
+    public void setfathersName(String surname) {
         this.fathersName = surname;
-        updateQuerySetParameter("surname",surname);
+        updateQuerySetParameter("fathersName",surname);
     }
 
     public void setPersonalID(String personalID) {

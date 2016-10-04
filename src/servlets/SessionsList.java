@@ -40,4 +40,31 @@ public class SessionsList {
         }
         return result;
     }
+
+    public  Session getSession(Cookie[] cookies){
+        Session s = new Session();
+        if(cookies.length == 0){
+            System.out.println("cookies absent ");
+            return  null;
+        }else{
+            for(int i = 0; i < cookies.length ; i++){
+                Cookie cookie = cookies[i];
+                if(cookie.getName().equals("SessionID")){
+                    cookie.getValue();
+                    if(sessionsList.containsKey(cookie.getValue())){
+                            s = sessionsList.get(cookie.getValue());
+                            return  s;
+
+                    }else{
+                        System.out.println("appropriate session ID absent in list cookie ");
+                        return  null;
+                    }
+                }else{
+                    System.out.println("appropriate cookie absent ");
+                    return  null;
+                }
+            }
+        }
+        return s;
+    }
 }

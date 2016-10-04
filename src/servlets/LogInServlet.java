@@ -1,11 +1,15 @@
 package servlets;
 
+import net.ukr.vixtibon.DataBaseDriver;
+import net.ukr.vixtibon.Employee;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
+import java.util.ArrayList;
 
 /**
  * Created by alex on 10/30/2015.
@@ -28,6 +32,8 @@ public class LogInServlet extends HttpServlet {
        password = req.getParameter("password");
        System.out.println("RESULT do get 2" +username+" "+password);
        PrintWriter out = resp.getWriter();
+
+       DataBaseDriver d = new DataBaseDriver();
 
        try {
            System.out.println("doPost 3 ");
@@ -68,6 +74,8 @@ public class LogInServlet extends HttpServlet {
                            levelPart += "Hello employee";
                            s.setSessionID(ID);
                            s.setSessionType("employee");
+                           ArrayList<Employee> e = d.getDateEmployee("SELECT chairID, login, ID  FROM employee WHERE login='" + username +"'");
+                           s.setAreaAccessID(e.get(0).getChairID());
                            sl.sessionsList.put(s.getSessionID(),s);
                            Cookie cookie = new Cookie("SessionID", s.getSessionID());
                            resp.addCookie(cookie);

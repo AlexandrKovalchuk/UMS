@@ -49,26 +49,26 @@ public class Discipline  implements Serializable {
     public Discipline(int ID, String nameOfDiscipline, int courseNumber, int semesterNumber, int countOfLessons, boolean exam, int countOfPraktice
             , int chairID) {
         this.ID = ID;
-        qs.add(new QueryBean("Discipline","ID",ID));
+        qs.add(new QueryBean("discipline","ID",ID));
         this.nameOfDiscipline = nameOfDiscipline;
-        qs.add(new QueryBean("Discipline","nameOfDiscipline",nameOfDiscipline));
+        qs.add(new QueryBean("discipline","nameOfDiscipline",nameOfDiscipline));
         this.courseNumber = courseNumber;
         String str = "";
-        qs.add(new QueryBean("Discipline","courseNumber", str + courseNumber));
+        qs.add(new QueryBean("discipline","courseNumber", str + courseNumber));
         this.semesterNumber = semesterNumber;
         str = "";
-        qs.add(new QueryBean("Discipline","semesterNumber",str + semesterNumber));
+        qs.add(new QueryBean("discipline","semesterNumber",str + semesterNumber));
         this.countOfLessons = countOfLessons;
         str = "";
-        qs.add(new QueryBean("Discipline","countOfLessons",str + countOfLessons));
+        qs.add(new QueryBean("discipline","countOfLessons",str + countOfLessons));
         this.countOfPraktice = countOfPraktice;
         str = "";
-        qs.add(new QueryBean("Discipline","countOfPraktice",str + countOfPraktice));
+        qs.add(new QueryBean("discipline","countOfPraktice",str + countOfPraktice));
         this.exam = exam;
         str = "";
-        qs.add(new QueryBean("Discipline","exam",str + exam));
+        qs.add(new QueryBean("discipline","exam",str + exam));
         this.chairID = chairID;
-        qs.add(new QueryBean("Discipline","chairID",chairID));
+        qs.add(new QueryBean("discipline","chairID",chairID));
     }
     public  Discipline(){}
     public String getFirstLetter(String s){

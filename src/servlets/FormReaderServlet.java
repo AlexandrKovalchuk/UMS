@@ -32,7 +32,52 @@ public class FormReaderServlet extends HttpServlet {
         boolean success = false;
 
 
-        if(tableNameParameter.equals("Institute")) {
+        if(tableNameParameter.equals("discipline")) {
+            String nameOfDiscipline = "";
+            int ID = 0;
+            int courseNumber = 0;
+            int semesterNumber = 0;
+            int countOfLessons = 0;
+            int countOfPraktice = 0;
+            boolean exam = false;
+            int chairID = 0;
+            while (paramNames.hasMoreElements()) {
+                String paramName = (String) paramNames.nextElement();
+                String paramValue = new String(request.getParameter(paramName).getBytes("iso-8859-1"),"UTF-8");
+                if(paramName.equals("nameOfDiscipline")){
+                    nameOfDiscipline = paramValue;
+                }else if(paramName.equals("courseNumber")){
+                    courseNumber = Integer.parseInt(paramValue);
+                }else if(paramName.equals("semesterNumber")){
+                    semesterNumber = Integer.parseInt(paramValue);
+                }else if(paramName.equals("countOfLessons")){
+                    countOfLessons = Integer.parseInt(paramValue);
+                }else if(paramName.equals("countOfPraktice")){
+                    countOfPraktice = Integer.parseInt(paramValue);
+                }else if(paramName.equals("chairID")){
+                    chairID = Integer.parseInt(paramValue);
+                }else if(paramName.equals("exam")){
+                    if(paramValue.equals("true")) {
+                        exam = true;
+                    }else if(paramValue.equals("false")){
+                        exam = false;
+                    }
+                }else if(paramName.equals("ID")){
+                    ID = Integer.parseInt(paramValue);
+                }
+
+                System.out.println("FormReaderServlet dopost 2 i counter " + paramName + " " + paramValue);
+            }
+
+            if(operation.equals("create")) {
+                ID = d.findFreeID("discipline");
+            }
+
+            System.out.println("FormReaderServlet dopost 2  institute value " + ID);
+            Discipline i = new Discipline(ID,nameOfDiscipline,courseNumber,semesterNumber,countOfLessons,exam,countOfPraktice,chairID);
+            qs = i.qs;
+
+        }else if(tableNameParameter.equals("Institute")) {
             String longName = "";
             String shortName = "";
             int ID = 0;
@@ -402,9 +447,17 @@ public class FormReaderServlet extends HttpServlet {
                         ", dateOfBorn, address, pasport, login, office, ID, chairID FROM employee WHERE ID =" + ID);
                 qsNotModyfied = i.get(0).qs;
             }
+            System.out.println("qs set from form");
+            qs.showSet();
+            System.out.println("qsNotModyfied  set from form");
+            qsNotModyfied.showSet();
             for(Map.Entry<String, QueryBean> entry : qsNotModyfied.getSet().entrySet()){
                 QueryBean qbnm = entry.getValue();
                 QueryBean qbta = qs.getSet().get(entry.getKey());
+                System.out.println("qbnm");
+                qbnm.show();
+                System.out.println("qbta");
+                qbta.show();
                 if((qbnm.getFieldData("a") == null)&(qbta.getFieldData("a") == null)){
                     if(qbnm.getFieldData(0)==qbta.getFieldData(0)){
                         continue;
