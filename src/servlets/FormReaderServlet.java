@@ -446,6 +446,10 @@ public class FormReaderServlet extends HttpServlet {
                 ArrayList<Employee> i = d.getDateEmployee("SELECT name, lastName, fathersName, personalID, sex, email, phoneNumber" +
                         ", dateOfBorn, address, pasport, login, office, ID, chairID FROM employee WHERE ID =" + ID);
                 qsNotModyfied = i.get(0).qs;
+            }else if(tnp.equals("discipline")){
+                ArrayList<Discipline> i = d.getDateDiscipline("SELECT nameOfDiscipline, courseNumber,semesterNumber,countOfLessons," +
+                        "countOfPraktice,exam, ID FROM discipline WHERE id=" + ID);
+                qsNotModyfied = i.get(0).qs;
             }
             System.out.println("qs set from form");
             qs.showSet();

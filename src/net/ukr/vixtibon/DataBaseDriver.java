@@ -391,55 +391,57 @@ public ArrayList<Chair> getDateChair(String select){
             stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(select);
 
-            while (rs.next()){
+            while (rs.next()) {
                 System.out.println("getDateEmployee 2");
                 Employee i = new Employee();
-                if(select.contains("name")) {
+                if (select.contains("name")) {
                     i.setName(rs.getString("name"));
                 }
-                if(select.contains("lastName")) {
+                if (select.contains("lastName")) {
                     i.setlastName(rs.getString("lastName"));
                 }
-                if(select.contains("fathersName")) {
+                if (select.contains("fathersName")) {
                     i.setfathersName(rs.getString("fathersName"));
                 }
-                if(select.contains("personalID")) {
+                if (select.contains("personalID")) {
                     i.setPersonalID(rs.getString("personalID"));
                 }
-                if(select.contains("sex")) {
+                if (select.contains("sex")) {
                     i.setSex(rs.getString("sex"));
                 }
-                if(select.contains("email")) {
+                if (select.contains("email")) {
                     i.setEmail(rs.getString("email"));
                 }
-                if(select.contains("phoneNumber")) {
+                if (select.contains("phoneNumber")) {
                     i.setPhoneNumber(rs.getString("phoneNumber"));
                 }
-                if(select.contains("dateOfBorn")) {
+                if (select.contains("dateOfBorn")) {
                     System.out.println("dateOfBorn " + rs.getString("dateOfBorn"));
                     i.stringToDate(rs.getString("dateOfBorn"));
                 }
-                if(select.contains("address")) {
+                if (select.contains("address")) {
                     i.setAddress(rs.getString("address"));
                 }
-                if(select.contains("pasport")) {
+                if (select.contains("pasport")) {
                     i.setPasport(rs.getString("pasport"));
                 }
-                if(select.contains("login")) {
-                    i.setLogin(rs.getString("login"));
+                if (select.contains("login")) {
+                    if (select.contains("login")) {
+                        i.setLogin(rs.getString("login"));
+                    }
+                    if (select.contains("office")) {
+                        i.setOffice(rs.getString("office"));
+                    }
+                    if (select.contains("ID")) {
+                        i.setID(rs.getInt("ID"));
+                    }
+                    if (select.contains("chairID")) {
+                        i.setChairID(rs.getInt("chairID"));
+                    }
+                    objList.add(i);
                 }
-                if(select.contains("office")) {
-                    i.setOffice(rs.getString("office"));
-                }
-                if(select.contains("ID")) {
-                    i.setID(rs.getInt("ID"));
-                }
-                if(select.contains("chairID")) {
-                    i.setChairID(rs.getInt("chairID"));
-                }
-                objList.add(i);
+                rs.close();
             }
-            rs.close();
 
         } catch (SQLException se) {
             //Handle errors for JDBC
@@ -649,6 +651,7 @@ public ArrayList<Chair> getDateChair(String select){
             Class.forName(JDBC_DRIVER).newInstance();
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
             stmt = conn.createStatement();
+            System.out.println(select);
             ResultSet rs = stmt.executeQuery(select);
 
             while (rs.next()){

@@ -47,6 +47,6 @@ public class Session {
     }
 
     public void sessionInfo(){
-        System.out.println("Session Info " + sessionID + " " + sessionType);
+        System.out.println("Session Info " + sessionID + " " + sessionType + " " + areaAccessID);
     }
 }

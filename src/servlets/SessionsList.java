@@ -43,16 +43,22 @@ public class SessionsList {
 
     public  Session getSession(Cookie[] cookies){
         Session s = new Session();
+        System.out.println("getSession 1");
         if(cookies.length == 0){
-            System.out.println("cookies absent ");
+            System.out.println("cookies absent 1");
             return  null;
         }else{
+            System.out.println("getSession 2");
             for(int i = 0; i < cookies.length ; i++){
                 Cookie cookie = cookies[i];
+                System.out.println("getSession 3");
                 if(cookie.getName().equals("SessionID")){
-                    cookie.getValue();
+                    //cookie.getValue();
+                    System.out.println("getSession 4");
+                    System.out.println("cookies present 2 " + cookie.getValue());
                     if(sessionsList.containsKey(cookie.getValue())){
                             s = sessionsList.get(cookie.getValue());
+                        s.sessionInfo();
                             return  s;
 
                     }else{
@@ -61,7 +67,7 @@ public class SessionsList {
                     }
                 }else{
                     System.out.println("appropriate cookie absent ");
-                    return  null;
+                    continue;
                 }
             }
         }

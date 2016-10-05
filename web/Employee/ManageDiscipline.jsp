@@ -20,9 +20,10 @@
         int areaID = 0;
         if(!result.equals("success")){
             response.sendRedirect(result);
-            Session s = sl.getSession(cookies);
-            areaID = s.getAreaAccessID();
         }
+        Session s = sl.getSession(cookies);
+        s.sessionInfo();
+        areaID = s.getAreaAccessID();
         int step = 0;
         step = Integer.parseInt(request.getParameter("step"));
     %>
@@ -144,7 +145,7 @@ if(Integer.parseInt(request.getParameter("step")) == 0){
         <%
     }else {
         DataBaseDriver d = new DataBaseDriver();
-        ArrayList<Discipline> dsc = d.getDateDiscipline("SELECT ID, nameOfDiscipline  FROM discipline WHERE chairID='" + areaID +"'");
+        ArrayList<Discipline> dsc = d.getDateDiscipline("SELECT ID, nameOfDiscipline, chairID  FROM discipline WHERE chairID=" + areaID +"");
         for(Discipline entry: dsc){
             %>
                 <div>
@@ -163,6 +164,59 @@ if(Integer.parseInt(request.getParameter("step")) == 0){
 }else if(Integer.parseInt(request.getParameter("step")) == 2){
             DataBaseDriver d = new DataBaseDriver();
             if(request.getParameter("action").equals("update")){
+                ArrayList<Discipline> i = d.getDateDiscipline("SELECT nameOfDiscipline, courseNumber,semesterNumber,countOfLessons," +
+                        "countOfPraktice,exam, ID FROM discipline WHERE id=" + request.getParameter("ID"));
+                %>
+                    <form action="/FormReaderServlet" method="post" accept-charset="UTF-8">
+                        <table>
+                            <input type="hidden"  name="tableNameParameter" value="discipline">
+                            <input type="hidden"  name="operation" value="update">
+                            <input type="hidden"  name="ID" value=<%out.print(i.get(0).getID());%>>
+                            <tr class = "textInputLabel">
+                                <td>Name Of Discipline:</td>
+                                <td>
+                                    <input type="text" name="nameOfDiscipline" value=<%out.print(i.get(0).getNameOfDiscipline());%>>
+                                </td>
+                            </tr>
+                            <tr class = "textInputLabel">
+                                <td>Cource Number:</td>
+                                <td>
+                                    <input type="text" name="courseNumber" value=<%out.print(i.get(0).getCourseNumber());%>>
+                                </td>
+                            </tr>
+                            <tr class = "textInputLabel">
+                                <td>Semester Number:</td>
+                                <td>
+                                    <input type="text" name="semesterNumber" value=<%out.print(i.get(0).getSemesterNumber());%>>
+                                </td>
+                            </tr>
+                            <tr class = "textInputLabel">
+                                <td>Count Of Lessons:</td>
+                                <td>
+                                    <input type="text" name="countOfLessons" value=<%out.print(i.get(0).getCountOfLessons());%>>
+                                </td>
+                            </tr>
+                            <tr class = "textInputLabel">
+                                <td>Count Of Praktice:</td>
+                                <td>
+                                    <input type="text" name="countOfPraktice" value=<%out.print(i.get(0).getCountOfPraktice());%>>
+                                </td>
+                            </tr>
+                            <tr class = "textInputLabel">
+                                <td>Exam:</td>
+                                <td>
+                                    <input type="radio" name="exam" value="true" <%out.print(i.get(0).isExam()?"checked":"");%>>Yes<br>
+                                    <input type="radio" name="exam" value="false" <%out.print(!i.get(0).isExam()?"checked":"");%>>No<br>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan=2>
+                                    <button onclick="submit"  class="controlButton"><h2>Add</h2></button>
+                                </td>
+                            </tr>
+                        </table>
+                    </form>
+                <%
 
             }else if(request.getParameter("action").equals("move")){
 
