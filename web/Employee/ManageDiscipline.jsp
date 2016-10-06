@@ -3,6 +3,7 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="net.ukr.vixtibon.Discipline" %>
 <%@ page import="servlets.Session" %>
+<%@ page import="net.ukr.vixtibon.Chair" %>
 <%--
   Created by IntelliJ IDEA.
   User: alex
@@ -146,19 +147,36 @@ if(Integer.parseInt(request.getParameter("step")) == 0){
     }else {
         DataBaseDriver d = new DataBaseDriver();
         ArrayList<Discipline> dsc = d.getDateDiscipline("SELECT ID, nameOfDiscipline, chairID  FROM discipline WHERE chairID=" + areaID +"");
-        for(Discipline entry: dsc){
-            %>
-                <div>
-                    <tr>
-                        <td colspan=2>
-                            <button onclick="window.location.href='<%out.print("ManageDiscipline.jsp?step=2&action=" + request.getParameter("action") + "&ID=" + entry.getID());%>' " class="itemButton" >
-                                <h1><%out.print(entry.getNameOfDiscipline());%></h1> </button>
-                        </td>
-                    </tr>
+        if(!request.getParameter("action").equals("move")){
+            for(Discipline entry: dsc){
+                %>
+                    <div>
+                        <tr>
+                            <td colspan=2>
+                                <button onclick="window.location.href='<%out.print("ManageDiscipline.jsp?step=2&action=" + request.getParameter("action") + "&ID=" + entry.getID());%>' " class="itemButton" >
+                                    <h1><%out.print(entry.getNameOfDiscipline());%></h1> </button>
+                            </td>
+                        </tr>
+                    </div>
+                    <br />
+                <%
+            }
+        }else{
+                ArrayList<Discipline> ndsc = d.getDateDiscipline("SELECT ID, nameOfDiscipline, chairID  FROM discipline WHERE chairID=0");
+                ArrayList<Chair> c = d.getDateChair("SELECT longName, shortName, ID FROM chair WHERE id=" + areaID);
+                %>
+                <ul class="tab">
+                    <li class="active"><a data-toggle="tab" href="#chair"><%out.print(c.get(0).getLongName());%></a></li>
+                    <li><a data-toggle="tab" href="#none">None</a></li>
+                </ul>
+                <div id="chair" >
+                    <h3>chair</h3>
                 </div>
-                <br />
-            <%
-        }
+                <div id="none" >
+                    <h3>none</h3>
+                </div>
+                <%
+            }
     }
     //create
 }else if(Integer.parseInt(request.getParameter("step")) == 2){

@@ -932,7 +932,7 @@ public boolean deleteItem(String tableName, int queryID){
 // help functions //////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public int findFreeID(String tableName){
         int ID = 1;
-        int counter = 1;
+        int previous = 0;
         boolean flag = false;
         try {
             //STEP 2: Register JDBC driver
@@ -943,22 +943,21 @@ public boolean deleteItem(String tableName, int queryID){
             ResultSet rs = stmt.executeQuery(sql);
 
             while(rs.next()){
-                if(counter == rs.getInt("ID")){
-                    counter++;
-                }else {
-                    if(counter != 0) {
-                        flag = true;
-                        ID = counter;
-                        break;
-                    }else{
-                        counter++;
-                    }
+                if((rs.getInt("ID")-previous)>1){
+                    ID = previous + 1;
+                    flag = true;
+                    break;
+                }else{
+                    previous = rs.getInt("ID");
+                    flag = false;
+                    continue;
                 }
             }
             if(!flag) {
-                ID = counter;
+                ID = previous + 1;
             }
             rs.close();
+            System.out.println("findFreeID ID : " + ID);
 
         } catch (SQLException se) {
             //Handle errors for JDBC

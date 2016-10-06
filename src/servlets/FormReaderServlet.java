@@ -514,60 +514,77 @@ public class FormReaderServlet extends HttpServlet {
                 d.stringProcessor("UPDATE group SET chairID = '0' WHERE chairID ='" + id + "';");
             }
         }
+
+        String redirectResult = "";
+        String table = "" + (tableNameParameter.equals("Institute")?"Institute":"")+(tableNameParameter.equals("chair")?"chair":"")+
+                (tableNameParameter.equals("employee")?"employee":"")+(tableNameParameter.equals("faculty")?"faculty":"")+
+                (tableNameParameter.equals("discipline")?"discipline":"")+
+                (tableNameParameter.equals("student")?"student":"")+(tableNameParameter.equals("teacher")?"teacher":"")+
+                (tableNameParameter.equals("gtgroup")?"gtgroup":"")+(tableNameParameter.equals("timetable")?"timetable":"");
+        System.out.println("redirectResult : " + table);
         if(success){
             if(operation.equals("create")){
-                response.sendRedirect("Admin/ActionResult.jsp?result=success"+"&type=" +
-                        (tableNameParameter.equals("Institute")?"Institute":"")+
-                        (tableNameParameter.equals("chair")?"chair":"")+
-                        (tableNameParameter.equals("employee")?"employee":"")+
-                        (tableNameParameter.equals("faculty")?"faculty":"")+
-                        "&action=create" + "&locationID=" + LocationID);
+                if((table.equals("Institute"))|(table.equals("chair"))|(table.equals("employee"))|(table.equals("faculty"))){
+                    redirectResult = redirectResult + "Admin/ActionResult.jsp?result=success&type=" + table
+                            +"&action=create" + "&locationID=" + LocationID;
+                }else if((table.equals("student"))|(table.equals("gtgroup"))|(table.equals("teacher"))|(table.equals("discipline"))|(table.equals("timetable"))){
+                    redirectResult = redirectResult + "Employee/EmployeeActionResult.jsp?result=success";
+                }
             }else if(operation.equals("update")){
-                response.sendRedirect("Admin/ActionResult.jsp?result=success"+"&type=" +
-                        (tableNameParameter.equals("Institute")?"Institute":"")+
-                        (tableNameParameter.equals("chair")?"chair":"")+
-                        (tableNameParameter.equals("employee")?"employee":"")+
-                        (tableNameParameter.equals("faculty")?"faculty":"")+
-                        "&action=update" + "&locationID=" + LocationID);
+                if((table.equals("Institute"))|(table.equals("chair"))|(table.equals("employee"))|(table.equals("faculty"))){
+                    redirectResult = redirectResult + "Admin/ActionResult.jsp?result=success&type=" + table
+                            +"&action=update" + "&locationID=" + LocationID;
+                }else if((table.equals("student"))|(table.equals("gtgroup"))|(table.equals("teacher"))|(table.equals("discipline"))|(table.equals("timetable"))){
+                    redirectResult = redirectResult + "Employee/EmployeeActionResult.jsp?result=success";
+                }
             }else if(operation.equals("move")){
-                response.sendRedirect("Admin/ActionResult.jsp?result=success"+"&type=" +
-                        (tableNameParameter.equals("Institute")?"Institute":"")+
-                        (tableNameParameter.equals("chair")?"chair":"")+
-                        (tableNameParameter.equals("employee")?"employee":"")+
-                        (tableNameParameter.equals("faculty")?"faculty":"")+
-                        "&action=move" + "&locationID=" + LocationID);
+                if((table.equals("Institute"))|(table.equals("chair"))|(table.equals("employee"))|(table.equals("faculty"))){
+                    redirectResult = redirectResult + "Admin/ActionResult.jsp?result=success&type=" + table
+                            +"&action=move" + "&locationID=" + LocationID;
+                }else if((table.equals("student"))|(table.equals("gtgroup"))|(table.equals("teacher"))|(table.equals("discipline"))|(table.equals("timetable"))){
+                    redirectResult = redirectResult + "Employee/EmployeeActionResult.jsp?result=success";
+                }
             }else if(operation.equals("delete")){
-                response.sendRedirect("Admin/ActionResult.jsp?result=success"+"&type=" +
-                        (tableNameParameter.equals("Institute")?"Institute":"")+
-                        (tableNameParameter.equals("chair")?"chair":"")+
-                        (tableNameParameter.equals("employee")?"employee":"")+
-                        (tableNameParameter.equals("faculty")?"faculty":"")+
-                        "&action=delete" + "&locationID=" + LocationID);
+                if((table.equals("Institute"))|(table.equals("chair"))|(table.equals("employee"))|(table.equals("faculty"))){
+                    redirectResult = redirectResult + "Admin/ActionResult.jsp?result=success&type=" + table
+                            +"&action=delete" + "&locationID=" + LocationID;
+                }else if((table.equals("student"))|(table.equals("gtgroup"))|(table.equals("teacher"))|(table.equals("discipline"))|(table.equals("timetable"))){
+                    redirectResult = redirectResult + "Employee/EmployeeActionResult.jsp?result=success";
+                }
             }
         }else if(!success){
             if(operation.equals("create")){
-                response.sendRedirect("Admin/ActionResult.jsp?result=unsuccess"+"&type=" +
-                        (tableNameParameter.equals("Institute")?"Institute":"")+
-                        (tableNameParameter.equals("chair")?"chair":"")+
-                        (tableNameParameter.equals("employee")?"employee":"")+
-                        (tableNameParameter.equals("faculty")?"faculty":"")+
-                        "&action=create" + "&locationID=" + LocationID);
+                if((table.equals("Institute"))|(table.equals("chair"))|(table.equals("employee"))|(table.equals("faculty"))){
+                    redirectResult = redirectResult + "Admin/ActionResult.jsp?result=unsuccess&type=" + table
+                            +"&action=create" + "&locationID=" + LocationID;
+                }else if((table.equals("student"))|(table.equals("gtgroup"))|(table.equals("teacher"))|(table.equals("discipline"))|(table.equals("timetable"))){
+                    redirectResult = redirectResult + "Employee/EmployeeActionResult.jsp?result=unsuccess";
+                }
             }else if(operation.equals("update")){
-                response.sendRedirect("Admin/ActionResult.jsp?result=success"+"&type=" +
-                        (tableNameParameter.equals("Institute")?"Institute":"")+
-                        (tableNameParameter.equals("chair")?"chair":"")+
-                        (tableNameParameter.equals("employee")?"employee":"")+
-                        (tableNameParameter.equals("faculty")?"faculty":"")+
-                        "&action=update" + "&locationID=" + LocationID);
+                if((table.equals("Institute"))|(table.equals("chair"))|(table.equals("employee"))|(table.equals("faculty"))){
+                    redirectResult = redirectResult + "Admin/ActionResult.jsp?result=unsuccess&type=" + table
+                            +"&action=update" + "&locationID=" + LocationID;
+                }else if((table.equals("student"))|(table.equals("gtgroup"))|(table.equals("teacher"))|(table.equals("discipline"))|(table.equals("timetable"))){
+                    redirectResult = redirectResult + "Employee/EmployeeActionResult.jsp?result=unsuccess";
+                }
+            }else if(operation.equals("move")){
+                if((table.equals("Institute"))|(table.equals("chair"))|(table.equals("employee"))|(table.equals("faculty"))){
+                    redirectResult = redirectResult + "Admin/ActionResult.jsp?result=unsuccess&type=" + table
+                            +"&action=move" + "&locationID=" + LocationID;
+                }else if((table.equals("student"))|(table.equals("gtgroup"))|(table.equals("teacher"))|(table.equals("discipline"))|(table.equals("timetable"))){
+                    redirectResult = redirectResult + "Employee/EmployeeActionResult.jsp?result=unsuccess";
+                }
             }else if(operation.equals("delete")){
-                response.sendRedirect("Admin/ActionResult.jsp?result=success"+"&type=" +
-                        (tableNameParameter.equals("Institute")?"Institute":"")+
-                        (tableNameParameter.equals("chair")?"chair":"")+
-                        (tableNameParameter.equals("employee")?"employee":"")+
-                        (tableNameParameter.equals("faculty")?"faculty":"")+
-                        "&action=delete" + "&locationID=" + LocationID);
+                if((table.equals("Institute"))|(table.equals("chair"))|(table.equals("employee"))|(table.equals("faculty"))){
+                    redirectResult = redirectResult + "Admin/ActionResult.jsp?result=unsuccess&type=" + table
+                            +"&action=delete" + "&locationID=" + LocationID;
+                }else if((table.equals("student"))|(table.equals("gtgroup"))|(table.equals("teacher"))|(table.equals("discipline"))|(table.equals("timetable"))){
+                    redirectResult = redirectResult + "Employee/EmployeeActionResult.jsp?result=unsuccess";
+                }
             }
         }
+        System.out.println("redirectResult : " + redirectResult);
+        response.sendRedirect(redirectResult);
     }
 
 }
