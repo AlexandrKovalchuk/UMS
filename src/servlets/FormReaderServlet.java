@@ -227,7 +227,7 @@ public class FormReaderServlet extends HttpServlet {
             Employee e = new Employee(ID,name, secondName, surname, personalID, sex, email, phoneNumber,
                     mc, address, pasport, office, chairID);
             qs = e.qs;
-        }else if(tableNameParameter.equals("Teacher")) {
+        }else if(tableNameParameter.equals("teacher")) {
             String name = "";
             String secondName = "";
             String surname = "";
@@ -240,12 +240,13 @@ public class FormReaderServlet extends HttpServlet {
             String office = "";
             String level = "";
             String faculty = "";
-            String chair = "";
+            String DisciplinesList = "";
             int chairID = 0;
             int ID = 0;
             int bday = 0;
             int bmonth = 0;
             int byear = 0;
+            int i = 0;
             while (paramNames.hasMoreElements()) {
                 String paramName = (String) paramNames.nextElement();
                 String paramValue = new String(request.getParameter(paramName).getBytes("iso-8859-1"),"UTF-8");
@@ -263,38 +264,14 @@ public class FormReaderServlet extends HttpServlet {
                     email = paramValue;
                 }else if (paramName.equals("phoneNumber")) {
                     phoneNumber = paramValue;
-                }else if (paramName.equals("country")) {
-                    address += paramValue + " ";
-                }else if (paramName.equals("city")) {
-                    address += paramValue + " ";
-                }else if (paramName.equals("street")) {
-                    address += paramValue + " ";
-                }else if (paramName.equals("house")) {
-                    address += paramValue + " ";
-                }else if (paramName.equals("appartment")) {
-                    address += paramValue + " ";
-                }else if (paramName.equals("postIndex")) {
-                    address += paramValue + " ";
-                }else if (paramName.equals("seria")) {
-                    pasport += paramValue + " ";
-                }else if (paramName.equals("number")) {
-                    pasport += paramValue + " ";
-                }else if (paramName.equals("whereIssued")) {
-                    pasport += paramValue + " ";
-                }else if (paramName.equals("issuedByWhom")) {
-                    pasport += paramValue + " ";
-                }else if (paramName.equals("day")) {
-                    pasport += paramValue + "/";
-                }else if (paramName.equals("month")) {
-                    pasport += paramValue + "/";
-                }else if (paramName.equals("year")) {
-                    pasport += paramValue + " ";
+                }else if (paramName.equals("address")) {
+                    address = paramValue ;
+                }else if (paramName.equals("pasport")) {
+                    pasport = paramValue;
                 }else if (paramName.equals("office")) {
                     office = paramValue;
                 }else if (paramName.equals("faculty")) {
                     faculty = paramValue;
-                }else if (paramName.equals("chair")) {
-                    chair = paramValue;
                 }else if (paramName.equals("chairID")) {
                     chairID = Integer.parseInt(paramValue);
                 }else if (paramName.equals("bday")) {
@@ -307,6 +284,8 @@ public class FormReaderServlet extends HttpServlet {
                     level = paramValue;
                 }else if(paramName.equals("ID")){
                     ID = Integer.parseInt(paramValue);
+                }else if(paramName.contains("DS")){
+                    DisciplinesList = DisciplinesList + paramValue + "#";
                 }
                 if(operation.equals("create")) {
                     ID = d.findFreeID("Teacher");
@@ -320,10 +299,14 @@ public class FormReaderServlet extends HttpServlet {
                 ID = d.findFreeID("teacher");
             }
             Teacher t = new Teacher(ID,name, secondName,  surname,  personalID,  sex,  email,  phoneNumber,
-                    mc,  address,  pasport,  office, level,  faculty,  chair,  chairID);
-
+                    mc,  address,  pasport,  office, level, chairID);
+            QueryBean qb = new QueryBean("teacher","DisciplinesList",DisciplinesList);
+            t.qs.add(qb);
 
             qs = t.qs;
+            System.out.println("teacher set is: ");
+            qs.showSet();
+
         }else if(tableNameParameter.equals("Student")) {
             String name = "";
             String secondName = "";

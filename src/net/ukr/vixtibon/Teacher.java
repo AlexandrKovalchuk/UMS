@@ -14,17 +14,7 @@ public class Teacher extends Person implements Serializable {
     private String level;
     private String faculty;
     private String chair;
-    private String fullIdentifier;
     private int chairID;
-
-    public void setFullIdentifier() {
-        this.fullIdentifier = getFirstLetter(getName())+getFirstLetter(getSecondName())+getSex()+getPersonalID();
-    }
-
-    public String getFullIdentifier() {
-
-        return fullIdentifier;
-    }
 
     ArrayList<Discipline> disciplines = new ArrayList<>();
 
@@ -32,18 +22,12 @@ public class Teacher extends Person implements Serializable {
     }
 
     public Teacher(int ID, String name, String secondName, String surname, String personalID, String sex, String email, String phoneNumber,
-                   Calendar dateOfBorn, String address, String pasport, String office, String level, String faculty, String chair, int chairID) {
+                   Calendar dateOfBorn, String address, String pasport, String office, String level,  int chairID) {
         super(ID,name, secondName, surname, personalID, sex, email, phoneNumber, dateOfBorn, address, pasport);
         this.office = office;
         qs.add(new QueryBean("Teacher","office",office));
         this.level = level;
         qs.add(new QueryBean("Teacher","level",level));
-        this.faculty = faculty;
-        qs.add(new QueryBean("Teacher","faculty",faculty));
-        this.chair = chair;
-        qs.add(new QueryBean("Teacher","chair",chair));
-        setFullIdentifier();
-        qs.add(new QueryBean("Teacher","fullIdentifier",fullIdentifier));
         qs.add(new QueryBean("Teacher","DisciplinesList",""));
         this.chairID = chairID;
         qs.add(new QueryBean("Teacher","chairID",chairID));

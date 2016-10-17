@@ -542,13 +542,13 @@ public void setupBase(String[] list) {
             return new Teacher(teacherIDCounter,randomString(MaleNames),randomString(MaleSurnames),null,indifCode,"M",null,generatePhoneNumber(),
                     personDate,"Украина "+ city +" "+randomString(Street)+" "+generateHouseNumber()+" "+rn.nextInt(100)+" "+generatePostIndex(),
                     generatePasportSeria()+" "+pasportNumber+" "+randomString(gumvs)+" "+city+" "+pasportDate,
-                    officeGenerate(),levelGenerate(),faculty,chair,chairID);
+                    officeGenerate(),levelGenerate(),chairID);
         }else{
             return new Teacher(teacherIDCounter,randomString(FemaleNames),randomString(FemaleSurnames),null,indifCode,"F",null,generatePhoneNumber(),
                     personDate,
                     "Украина "+ city +" "+randomString(Street)+" "+generateHouseNumber()+" "+rn.nextInt(100)+" "+generatePostIndex(),
                     generatePasportSeria()+" "+pasportNumber+" "+randomString(gumvs)+" "+city+" "+pasportDate,
-                    officeGenerate(),levelGenerate(),faculty,chair,chairID);
+                    officeGenerate(),levelGenerate(),chairID);
         }
     }
 

@@ -46,7 +46,7 @@
         <div>
             <tr>
                 <td colspan=2>
-                    <button onclick="window.location.href='SelectOperation.jsp?type=faculty'" class="topicButton" >
+                    <button onclick="window.location.href='ManageTeacherCredentials.jsp?step=0&action='" class="topicButton" >
                         <h1>Manage Teacher Credentials</h1>
                     </button>
                 </td>

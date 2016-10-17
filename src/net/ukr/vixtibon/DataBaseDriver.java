@@ -518,6 +518,14 @@ public ArrayList<Chair> getDateChair(String select){
                     i.setLevel(rs.getString("level"));
                 }
                 if(select.contains("DisciplinesList")) {
+
+                    String dl = rs.getString("DisciplinesList");
+                    String[] dla = dl.split("#");
+                    ArrayList<Discipline> d = new ArrayList<>();
+                    for(int y = 0; y < dla.length; y++){
+                        d.add(getDateDiscipline("SELECT ID, nameOfDiscipline, chairID  FROM discipline WHERE ID=" + dla[y]).get(0));
+                    }
+                    i.disciplines = d;
                     i.setDisciplines(rs.getString("DisciplinesList"));
                 }
                 if(select.contains("ID")) {

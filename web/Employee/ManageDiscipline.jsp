@@ -30,6 +30,7 @@
     %>
     <title>Manage Discipline Page</title>
     <link rel="stylesheet" type="text/css" href="sources\employee_css.css">
+
 </head>
 <body>
 
@@ -84,6 +85,16 @@ if(Integer.parseInt(request.getParameter("step")) == 0){
                 <td colspan=2>
                     <button onclick="window.location.href='ManageDiscipline.jsp?step=1&action=delete'" class="topicButton" >
                         <h1>Delete Discipline</h1>
+                    </button>
+                </td>
+            </tr>
+        </div>
+        <br />
+        <div>
+            <tr>
+                <td colspan=2>
+                    <button onclick="window.location.href='ManageDiscipline.jsp?step=1&action=info'" class="topicButton" >
+                        <h1>Show Discipline info</h1>
                     </button>
                 </td>
             </tr>
@@ -163,18 +174,40 @@ if(Integer.parseInt(request.getParameter("step")) == 0){
             }
         }else{
                 ArrayList<Discipline> ndsc = d.getDateDiscipline("SELECT ID, nameOfDiscipline, chairID  FROM discipline WHERE chairID=0");
-                ArrayList<Chair> c = d.getDateChair("SELECT longName, shortName, ID FROM chair WHERE id=" + areaID);
                 %>
-                <ul class="tab">
-                    <li class="active"><a data-toggle="tab" href="#chair"><%out.print(c.get(0).getLongName());%></a></li>
-                    <li><a data-toggle="tab" href="#none">None</a></li>
-                </ul>
-                <div id="chair" >
-                    <h3>chair</h3>
-                </div>
-                <div id="none" >
-                    <h3>none</h3>
-                </div>
+                    <h2>From Department to NONE</h2>
+                        <%
+                            for(Discipline entry: dsc){
+                        %>
+                                <div>
+                                    <tr>
+                                        <td colspan=2>
+                                            <button onclick="window.location.href='<%out.print("ManageDiscipline.jsp?step=2&action=" + request.getParameter("action") + "&ID=" + entry.getID()+ "&chairID=0");%>' " class="itemButton" >
+                                                <h1><%out.print(entry.getNameOfDiscipline());%></h1> </button>
+                                        </td>
+                                    </tr>
+                                </div>
+                                <br />
+                                <%
+                                    }
+                        %>
+
+                    <h2>From NONE to Department</h2>
+                        <%
+                            for(Discipline entry: ndsc){
+                        %>
+                                <div>
+                                    <tr>
+                                        <td colspan=2>
+                                            <button onclick="window.location.href='<%out.print("ManageDiscipline.jsp?step=2&action=" + request.getParameter("action") + "&ID=" + entry.getID()+ "&chairID=" + areaID);%>' " class="itemButton" >
+                                                <h1><%out.print(entry.getNameOfDiscipline());%></h1> </button>
+                                        </td>
+                                    </tr>
+                                </div>
+                                <br />
+                                <%
+                                    }
+                        %>
                 <%
             }
     }
@@ -237,17 +270,88 @@ if(Integer.parseInt(request.getParameter("step")) == 0){
                 <%
 
             }else if(request.getParameter("action").equals("move")){
-
+                %>
+                    <form action="/FormReaderServlet" method="post" accept-charset="UTF-8">
+                        <input type="hidden"  name="operation" value="move">
+                        <input type="hidden"  name="tableNameParameter" value="discipline">
+                        <input type="hidden"  name="chairID" value=<%out.print(request.getParameter("chairID"));%>>
+                        <input type="hidden"  name="id" value=<%out.print(request.getParameter("ID"));%>>
+                        <div>
+                            <h2>Would you like to continue?</h2>
+                            <tr><td >
+                                <button onclick="submit"  class="controlButton"><h2>Yes</h2></button></td><td >
+                                <button onclick="window.location.href='EmployeePage.jsp'"  class="controlButton"><h2>No</h2></button>
+                            </td></tr>
+                        </div>
+                    </form>
+                <%
             }else if(request.getParameter("action").equals("delete")){
             %>
                 <form action="/FormReaderServlet" method="post" accept-charset="UTF-8">
                     <input type="hidden"  name="operation" value="delete">
                     <input type="hidden"  name="tableNameParameter" value="discipline">
                     <input type="hidden"  name="id" value=<%out.print(request.getParameter("ID"));%>>
+                    <div>
+                        <h2>Delete </h2>
+                        <h2>Would you like to continue?</h2>
+                        <tr>
+                            <td >
+                                <button onclick="submit"  class="controlButton"><h2>Yes</h2></button>
+                            </td>
+                        </tr>
+                    </div>
                 </form>
                 <td >
-                    <button onclick="window.location.href='AdminPage.jsp'"  class="controlButton"><h2>No</h2></button>
+                    <button onclick="window.location.href='EmployeePage.jsp'"  class="controlButton"><h2>No</h2></button>
                 </td>
+            <%
+            }else if(request.getParameter("action").equals("info")){
+                ArrayList<Discipline> i = d.getDateDiscipline("SELECT nameOfDiscipline, courseNumber,semesterNumber,countOfLessons," +
+                        "countOfPraktice,exam, ID FROM discipline WHERE id=" + request.getParameter("ID"));
+                %>
+                <table>
+                    <tr class = "textInputLabel">
+                        <td>Name Of Discipline:</td>
+                        <td>
+                            <%out.print(i.get(0).getNameOfDiscipline());%>
+                        </td>
+                    </tr>
+                    <tr class = "textInputLabel">
+                        <td>Cource Number:</td>
+                        <td>
+                            <%out.print(i.get(0).getCourseNumber());%>
+                        </td>
+                    </tr>
+                    <tr class = "textInputLabel">
+                        <td>Semester Number:</td>
+                        <td>
+                            <%out.print(i.get(0).getSemesterNumber());%>
+                        </td>
+                    </tr>
+                    <tr class = "textInputLabel">
+                        <td>Count Of Lessons:</td>
+                        <td>
+                            <%out.print(i.get(0).getCountOfLessons());%>
+                        </td>
+                    </tr>
+                    <tr class = "textInputLabel">
+                        <td>Count Of Praktice:</td>
+                        <td>
+                            <%out.print(i.get(0).getCountOfPraktice());%>
+                        </td>
+                    </tr>
+                    <tr class = "textInputLabel">
+                        <td>Exam:</td>
+                        <td>
+                            <%out.print(i.get(0).isExam()?"Yes":"No");%>
+                        </td>
+                    </tr>
+                </table>
+                <tr>
+                    <button onclick="window.location.href='EmployeePage.jsp'" class="controlButton" >
+                        <h1>OK</h1>
+                    </button>
+                </tr>
             <%
             }else{
                 %>
