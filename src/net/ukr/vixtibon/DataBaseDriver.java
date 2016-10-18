@@ -480,12 +480,15 @@ public ArrayList<Chair> getDateChair(String select){
                 Teacher i = new Teacher();
                 if(select.contains("name")) {
                     i.setName(rs.getString("name"));
+                    System.out.println("name" + i.getName());
                 }
                 if(select.contains("lastName")) {
                     i.setlastName(rs.getString("lastName"));
+                    System.out.println("lastName" + i.getName());
                 }
                 if(select.contains("fathersName")) {
                     i.setfathersName(rs.getString("fathersName"));
+                    System.out.println("fathersName" + i.getSecondName());
                 }
                 if(select.contains("personalID")) {
                     i.setPersonalID(rs.getString("personalID"));
@@ -523,10 +526,9 @@ public ArrayList<Chair> getDateChair(String select){
                     String[] dla = dl.split("#");
                     ArrayList<Discipline> d = new ArrayList<>();
                     for(int y = 0; y < dla.length; y++){
-                        d.add(getDateDiscipline("SELECT ID, nameOfDiscipline, chairID  FROM discipline WHERE ID=" + dla[y]).get(0));
+                        i.addDiscipline(getDateDiscipline("SELECT ID, nameOfDiscipline, chairID  FROM discipline WHERE ID=" + dla[y]).get(0));
                     }
-                    i.disciplines = d;
-                    i.setDisciplines(rs.getString("DisciplinesList"));
+                    //i.setDisciplines(rs.getString("DisciplinesList"));
                 }
                 if(select.contains("ID")) {
                     i.setID(rs.getInt("ID"));

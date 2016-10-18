@@ -305,6 +305,7 @@ public class FormReaderServlet extends HttpServlet {
 
             qs = t.qs;
             System.out.println("teacher set is: ");
+            System.out.println("teacher set is DisciplinesList: " + DisciplinesList);
             qs.showSet();
 
         }else if(tableNameParameter.equals("Student")) {
@@ -432,6 +433,10 @@ public class FormReaderServlet extends HttpServlet {
             }else if(tnp.equals("discipline")){
                 ArrayList<Discipline> i = d.getDateDiscipline("SELECT nameOfDiscipline, courseNumber,semesterNumber,countOfLessons," +
                         "countOfPraktice,exam, ID FROM discipline WHERE id=" + ID);
+                qsNotModyfied = i.get(0).qs;
+            }else if(tnp.equals("teacher")){
+                ArrayList<Teacher> i = d.getDateTeacher("SELECT name, lastName, fathersName, personalID, sex, email, phoneNumber" +
+                       ", dateOfBorn, address, pasport, login, office, level, DisciplinesList, ID, chairID  FROM teacher WHERE id=" + ID);
                 qsNotModyfied = i.get(0).qs;
             }
             System.out.println("qs set from form");

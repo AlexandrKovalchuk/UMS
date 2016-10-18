@@ -4,6 +4,7 @@
 <%@ page import="net.ukr.vixtibon.Discipline" %>
 <%@ page import="net.ukr.vixtibon.Teacher" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="java.util.Calendar" %>
 <%--
   Created by IntelliJ IDEA.
   User: alex
@@ -222,23 +223,23 @@
 </form>
 <%
 }else {
-    ArrayList<Teacher> dsc = d.getDateTeacher("SELECT ID, name, lastname chairID  FROM teacher WHERE chairID=" + areaID + "");
+    ArrayList<Teacher> dsc = d.getDateTeacher("SELECT ID, name, lastName, office, chairID  FROM teacher WHERE chairID=" + areaID + "");
     if(!request.getParameter("action").equals("move")){
         for(Teacher entry: dsc){
-%>
-<div>
-    <tr>
-        <td colspan=2>
-            <button onclick="window.location.href='<%out.print("ManageTeacherCredentials.jsp?step=2&action=" + request.getParameter("action") + "&ID=" + entry.getID());%>' " class="itemButton" >
-                <h1><%out.print(entry.getOffice() + " " +entry.getSecondName() + " " + entry.getName());%></h1> </button>
-        </td>
-    </tr>
-</div>
-<br />
-<%
+            %>
+            <div>
+                <tr>
+                    <td colspan=2>
+                        <button onclick="window.location.href='<%out.print("ManageTeacherCredentials.jsp?step=2&action=" + request.getParameter("action") + "&ID=" + entry.getID());%>' " class="itemButton" >
+                            <h1><%out.print(entry.getOffice() + " " +entry.getSecondName() + " " + entry.getName());%></h1> </button>
+                    </td>
+                </tr>
+            </div>
+            <br />
+            <%
     }
 }else{
-    ArrayList<Teacher> ndsc = d.getDateTeacher("SELECT ID, name, lastname chairID  FROM teacher WHERE chairID=0");
+    ArrayList<Teacher> ndsc = d.getDateTeacher("SELECT ID, name, lastName, office, chairID  FROM teacher WHERE chairID=0");
 %>
 <h2>From Department to NONE</h2>
 <%
@@ -279,50 +280,127 @@
     //create
 }else if(Integer.parseInt(request.getParameter("step")) == 2){
     if(request.getParameter("action").equals("update")){
-        ArrayList<Discipline> i = d.getDateDiscipline("SELECT nameOfDiscipline, courseNumber,semesterNumber,countOfLessons," +
-                "countOfPraktice,exam, ID FROM discipline WHERE id=" + request.getParameter("ID"));
+        ArrayList<Teacher> i = d.getDateTeacher("SELECT name, lastName, fathersName, personalID, sex, email, phoneNumber" +
+                ", dateOfBorn, address, pasport, login, office, level, DisciplinesList, ID, chairID  FROM teacher WHERE id=" + request.getParameter("ID"));
 %>
 <form action="/FormReaderServlet" method="post" accept-charset="UTF-8">
     <table>
-        <input type="hidden"  name="tableNameParameter" value="discipline">
+        <input type="hidden"  name="tableNameParameter" value="teacher">
         <input type="hidden"  name="operation" value="update">
-        <input type="hidden"  name="ID" value=<%out.print(i.get(0).getID());%>>
+        <input type="hidden"  name="ID" value= <%out.print(request.getParameter("ID"));%>>
         <tr class = "textInputLabel">
-            <td>Name Of Discipline:</td>
+        <tr class = "textInputLabel">
+            <td>Ім'я:</td>
             <td>
-                <input type="text" name="nameOfDiscipline" value=<%out.print(i.get(0).getNameOfDiscipline());%>>
+                <input type="text" name="name" value=<%out.print(i.get(0).getName());%>>
             </td>
         </tr>
         <tr class = "textInputLabel">
-            <td>Cource Number:</td>
+            <td>Прізвище:</td>
             <td>
-                <input type="text" name="courseNumber" value=<%out.print(i.get(0).getCourseNumber());%>>
+                <input type="text" name="lastName" value=<%out.print(i.get(0).getSecondName());%>>
             </td>
         </tr>
         <tr class = "textInputLabel">
-            <td>Semester Number:</td>
+            <td>По Батькові:</td>
             <td>
-                <input type="text" name="semesterNumber" value=<%out.print(i.get(0).getSemesterNumber());%>>
+                <input type="text" name="fathersName" value=<%out.print(i.get(0).getSurname());%>>
             </td>
         </tr>
         <tr class = "textInputLabel">
-            <td>Count Of Lessons:</td>
+            <td>Ідентифікаційний код:</td>
             <td>
-                <input type="text" name="countOfLessons" value=<%out.print(i.get(0).getCountOfLessons());%>>
+                <input type="text" name="personalID" value=<%out.print(i.get(0).getPersonalID());%>>
             </td>
         </tr>
         <tr class = "textInputLabel">
-            <td>Count Of Praktice:</td>
+            <td>Стать:</td>
             <td>
-                <input type="text" name="countOfPraktice" value=<%out.print(i.get(0).getCountOfPraktice());%>>
+                <input type="radio" name="sex" value="m" <%out.print(i.get(0).getSex().equals("m")?"checked":"");%>>Чоловіча<br>
+                <input type="radio" name="sex" value="f" <%out.print(i.get(0).getSex().equals("f")?"checked":"");%>>Жіноча
             </td>
         </tr>
         <tr class = "textInputLabel">
-            <td>Exam:</td>
+            <td>Пошта:</td>
             <td>
-                <input type="radio" name="exam" value="true" <%out.print(i.get(0).isExam()?"checked":"");%>>Yes<br>
-                <input type="radio" name="exam" value="false" <%out.print(!i.get(0).isExam()?"checked":"");%>>No<br>
+                <input type="text" name="email" value=<%out.print(i.get(0).getEmail());%>>
             </td>
+        </tr>
+        <tr class = "textInputLabel">
+            <td>Телефон:</td>
+            <td>
+                <input type="text" name="phoneNumber" value=<%out.print(i.get(0).getPhoneNumber());%>>
+            </td>
+        </tr>
+        <tr class = "textInputLabel">
+            <td>Дата народження:</td>
+        </tr>
+        <tr class = "textInputLabel">
+            <td>День</td>
+            <td>
+                <input type="int" name="bday" value=<%out.print(i.get(0).getDateOfBorn().get(Calendar.DAY_OF_MONTH));%>>
+            </td>
+            <td>   Місяць</td>
+            <td>
+                <input type="text" name="bmonth" value=<%out.print(i.get(0).getDateOfBorn().get(Calendar.MONTH));%>>
+            </td>
+            <td>   Рік</td>
+            <td>
+                <input type="int" name="byear" value=<%out.print(i.get(0).getDateOfBorn().get(Calendar.YEAR));%>>
+            </td>
+
+        </tr>
+        <tr class = "textInputLabel">
+            <td>Адресса:</td>
+        </tr>
+        <tr class = "textInputLabel">
+            <td> Країна</td>
+            <td>
+                <input type="text" name="address" value=<%out.print(i.get(0).getAddress());%>>
+            </td>
+        </tr>
+        <tr class = "textInputLabel">
+            <td>Паспортні данні:</td>
+            <td>
+                <input type="text" name="pasport" value=<%out.print(i.get(0).getPasport());%>>
+            </td>
+        </tr>
+
+        <tr class = "textInputLabel">
+            <td>Посада:</td>
+            <td>
+                <input type="text" name="office" value=<%out.print(i.get(0).getOffice());%>>
+            </td>
+        </tr>
+
+        <tr>
+            <td>Науковий ступінь:</td>
+            <td>
+                <input type="text" name="level" value=<%out.print(i.get(0).getLevel());%>>
+            </td>
+        </tr>
+        <tr>
+            <%
+                ArrayList<Discipline> ds = d.getDateDiscipline("SELECT ID, nameOfDiscipline, chairID  FROM discipline WHERE chairID=" + areaID +"");
+                int y = 0;
+                boolean flag = false;
+                for(Discipline entry: ds){
+                    for(Discipline tds: i.get(0).getDisciplines()){
+                        if(entry.getID() == tds.getID()){
+                            flag = true;
+                            break;
+                        }else{
+                            flag = false;
+                        }
+                    }
+                    %>
+                    <input type="checkbox" name="DS<%out.print(y);%>" value=<%out.print(entry.getID());%>
+                        <%out.print(flag?"checked":"");%>><%out.print(entry.getNameOfDiscipline());%><br>
+                    <%
+                    flag = false;
+                            y++;
+                }
+            %>
         </tr>
         <tr>
             <td colspan=2>
@@ -330,7 +408,7 @@
             </td>
         </tr>
     </table>
-</form>
+    </form>
 <%
 
 }else if(request.getParameter("action").equals("move")){

@@ -18,6 +18,10 @@ public class Teacher extends Person implements Serializable {
 
     ArrayList<Discipline> disciplines = new ArrayList<>();
 
+    public ArrayList<Discipline> getDisciplines(){
+        return  disciplines;
+    }
+
     public Teacher() {
     }
 
