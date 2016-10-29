@@ -24,6 +24,17 @@ public class Group implements Serializable {
 
     public Group(){}
 
+    public Group(int ID, String fullGroupName, int courseNumber, int chairID){
+        this.ID = ID;
+        qs.add(new QueryBean("gtgroup","ID",ID));
+        this.fullGroupName = fullGroupName;
+        qs.add(new QueryBean("gtgroup","fullGroupName",fullGroupName));
+        this.courseNumber = courseNumber;
+        qs.add(new QueryBean("gtgroup","courseNumber",courseNumber));
+        this.chairID = chairID;
+        qs.add(new QueryBean("gtgroup","chairID",chairID));
+    }
+
     public Group(int wave,int ID, int chairID) {
         this.wave = wave;
         String str = "";
@@ -43,6 +54,9 @@ public class Group implements Serializable {
 
 
 
+    public  ArrayList<Student> getStudentsList(){
+        return StudentsList;
+    }
     public void updateQuerySetParameter(String key, String update){
         QueryBean qb = new QueryBean();
         if(qs.getSet().containsKey(key)) {
@@ -107,6 +121,9 @@ public class Group implements Serializable {
     public void setFullGroupName(String chairShortName){
         fullGroupName = chairShortName + "-" + wave + groupIndex;
         updateQuerySetParameter("fullGroupName",fullGroupName);
+    }
+    public void setSetStudents (ArrayList<Student> st){
+        StudentsList = st;
     }
     public void setFGN(String name){
         this.fullGroupName = name;

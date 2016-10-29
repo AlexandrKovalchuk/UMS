@@ -448,45 +448,118 @@
 </td>
 <%
 }else if(request.getParameter("action").equals("info")){
-    ArrayList<Teacher> i = d.getDateTeacher("SELECT nameOfDiscipline, courseNumber,semesterNumber,countOfLessons," +
-            "countOfPraktice,exam, ID FROM discipline WHERE id=" + request.getParameter("ID"));
+    ArrayList<Teacher> i = d.getDateTeacher("SELECT name, lastName, fathersName, personalID, sex, email, phoneNumber" +
+            ", dateOfBorn, address, pasport, login, office, level, DisciplinesList, ID, chairID  FROM teacher WHERE id=" + request.getParameter("ID"));
 %>
 <table>
     <tr class = "textInputLabel">
-        <td>Name Of Discipline:</td>
+        <td>Ім'я:</td>
         <td>
-            <%//out.print(i.get(0).getNameOfDiscipline());%>
+            <%out.print(i.get(0).getName());%>
         </td>
     </tr>
     <tr class = "textInputLabel">
-        <td>Cource Number:</td>
+        <td>Прізвище:</td>
         <td>
-            <%//out.print(i.get(0).getCourseNumber());%>
+            <%out.print(i.get(0).getSecondName());%>
         </td>
     </tr>
     <tr class = "textInputLabel">
-        <td>Semester Number:</td>
+        <td>По Батькові:</td>
         <td>
-            <%//out.print(i.get(0).getSemesterNumber());%>
+            <%out.print(i.get(0).getSurname());%>
         </td>
     </tr>
     <tr class = "textInputLabel">
-        <td>Count Of Lessons:</td>
+        <td>Ідентифікаційний код:</td>
         <td>
-            <%//out.print(i.get(0).getCountOfLessons());%>
+            <%out.print(i.get(0).getPersonalID());%>
         </td>
     </tr>
     <tr class = "textInputLabel">
-        <td>Count Of Praktice:</td>
+        <td>Стать:</td>
         <td>
-            <%//out.print(i.get(0).getCountOfPraktice());%>
+            <%out.print(i.get(0).getSex().equals("m")?"Чоловіча":"Жіноча");%>
         </td>
     </tr>
     <tr class = "textInputLabel">
-        <td>Exam:</td>
+        <td>Пошта:</td>
         <td>
-            <%//out.print(i.get(0).isExam()?"Yes":"No");%>
+            <%out.print(i.get(0).getEmail());%>
         </td>
+    </tr>
+    <tr class = "textInputLabel">
+        <td>Телефон:</td>
+        <td>
+            <%out.print(i.get(0).getPhoneNumber());%>
+        </td>
+    </tr>
+    <tr class = "textInputLabel">
+        <td>Дата народження:</td>
+    </tr>
+    <tr class = "textInputLabel">
+        <td>День</td>
+        <td>
+            <%out.print(i.get(0).getDateOfBorn().get(Calendar.DAY_OF_MONTH));%>
+        </td>
+        <td>   Місяць</td>
+        <td>
+            <%out.print(i.get(0).getDateOfBorn().get(Calendar.MONTH));%>
+        </td>
+        <td>   Рік</td>
+        <td>
+            <%out.print(i.get(0).getDateOfBorn().get(Calendar.YEAR));%>
+        </td>
+
+    </tr>
+    <tr class = "textInputLabel">
+        <td>Адресса:</td>
+        <td>
+            <%out.print(i.get(0).getAddress());%>
+        </td>
+    </tr>
+    <tr class = "textInputLabel">
+        <td>Паспортні данні:</td>
+        <td>
+            <%out.print(i.get(0).getPasport());%>
+        </td>
+    </tr>
+
+    <tr class = "textInputLabel">
+        <td>Посада:</td>
+        <td>
+            <%out.print(i.get(0).getOffice());%>
+        </td>
+    </tr>
+
+    <tr>
+        <td>Науковий ступінь:</td>
+        <td>
+            <%out.print(i.get(0).getLevel());%>
+        </td>
+    </tr>
+    <tr>
+        <td>Disciplines:</td>
+        <%
+            ArrayList<Discipline> ds = d.getDateDiscipline("SELECT ID, nameOfDiscipline, chairID  FROM discipline WHERE chairID=" + areaID +"");
+            int y = 0;
+            boolean flag = false;
+            for(Discipline entry: ds){
+                for(Discipline tds: i.get(0).getDisciplines()){
+                    if(entry.getID() == tds.getID()){
+                        flag = true;
+                        %>
+                        <%out.print(entry.getNameOfDiscipline());%><br>
+                        <%
+                        break;
+                    }else{
+                        flag = false;
+                    }
+                }
+                flag = false;
+                y++;
+            }
+        %>
     </tr>
 </table>
 <tr>

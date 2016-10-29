@@ -85,6 +85,8 @@ public class LogInServlet extends HttpServlet {
                            levelPart += "Hello teacher";
                            s.setSessionID(ID);
                            s.setSessionType("teacher");
+                           ArrayList<Employee> e = d.getDateEmployee("SELECT chairID, login, ID  FROM teacher WHERE login='" + username +"'");
+                           s.setAreaAccessID(e.get(0).getChairID());
                            sl.sessionsList.put(s.getSessionID(),s);
                            Cookie cookie = new Cookie("SessionID", s.getSessionID());
                            resp.addCookie(cookie);

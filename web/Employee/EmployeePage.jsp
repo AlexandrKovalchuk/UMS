@@ -1,3 +1,7 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql" %>
 <%@ page import="servlets.SessionsList" %>
 <%--
   Created by IntelliJ IDEA.
@@ -30,6 +34,9 @@
         Please choose action:
     </h5>
 </div>
+
+<c:set var="step" value="${0}" scope="page"/>
+<c:set var="action" value="none" scope="page"/>
 
 <div class="itemsBlock">
     <div>
@@ -64,13 +71,13 @@
         </div>
         <br />
         <div>
-            <tr>
+            <form action="ManageGroupCredentials.jsp" method="post">
+                <input type="hidden"  name="action" value="none">
+                <input type="hidden"  name="step" value="0">
                 <td colspan=2>
-                    <button onclick="window.location.href='SelectOperation.jsp?type=emploee'" class="topicButton" >
-                        <h1>Manage Group Credentials</h1>
-                    </button>
+                    <button onclick="submit"  class="topicButton"><h2>Manage Group Credentials</h2></button>
                 </td>
-            </tr>
+            </form>
         </div>
         <br />
         <div>

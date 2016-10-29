@@ -32,7 +32,35 @@ public class FormReaderServlet extends HttpServlet {
         boolean success = false;
 
 
-        if(tableNameParameter.equals("discipline")) {
+        if(tableNameParameter.equals("gtgroup")) {
+            int ID = 0;
+            String fullGroupName = "";
+            int courseNumber = 0;
+            int chairID = 0;
+            while (paramNames.hasMoreElements()) {
+                String paramName = (String) paramNames.nextElement();
+                String paramValue = new String(request.getParameter(paramName).getBytes("iso-8859-1"),"UTF-8");
+                if(paramName.equals("fullGroupName")){
+                    fullGroupName = paramValue;
+                }else if(paramName.equals("courseNumber")){
+                    courseNumber = Integer.parseInt(paramValue);
+                }else if(paramName.equals("chairID")){
+                    chairID = Integer.parseInt(paramValue);
+                }else if(paramName.equals("ID")){
+                    ID = Integer.parseInt(paramValue);
+                }
+                System.out.println("FormReaderServlet dopost 2 i counter " + paramName + " " + paramValue);
+            }
+
+            if(operation.equals("create")) {
+                ID = d.findFreeID("gtgroup");
+            }
+
+            System.out.println("FormReaderServlet dopost 2  institute value " + ID);
+            Group i = new Group(ID,fullGroupName,courseNumber,chairID);
+            qs = i.qs;
+
+        }else if(tableNameParameter.equals("discipline")) {
             String nameOfDiscipline = "";
             int ID = 0;
             int courseNumber = 0;
@@ -438,6 +466,9 @@ public class FormReaderServlet extends HttpServlet {
                 ArrayList<Teacher> i = d.getDateTeacher("SELECT name, lastName, fathersName, personalID, sex, email, phoneNumber" +
                        ", dateOfBorn, address, pasport, login, office, level, DisciplinesList, ID, chairID  FROM teacher WHERE id=" + ID);
                 qsNotModyfied = i.get(0).qs;
+            }else if(tnp.equals("gtgroup")){
+                ArrayList<Group> i = d.getDateGroup("SELECT ID, fullGroupName, chairID, courseNumber FROM gtgroup WHERE id=" + ID);
+                qsNotModyfied = i.get(0).qs;
             }
             System.out.println("qs set from form");
             qs.showSet();
@@ -479,17 +510,17 @@ public class FormReaderServlet extends HttpServlet {
                 idToChange = Integer.parseInt(request.getParameter("chairID"));
             }else if(request.getParameter("tableNameParameter").equals("timetable")){
                 idToChange = Integer.parseInt(request.getParameter("chairID"));
-            }else if(request.getParameter("tableNameParameter").equals("group")){
+            }else if(request.getParameter("tableNameParameter").equals("gtgroup")){
                 idToChange = Integer.parseInt(request.getParameter("chairID"));
             }else if(request.getParameter("tableNameParameter").equals("student")){
                 idToChange = Integer.parseInt(request.getParameter("groupID"));
             }
             System.out.println("idToChange   " + idToChange);
 
-            success = d.moveItem(request.getParameter("tableNameParameter"),Integer.parseInt(request.getParameter("id")),idToChange);
+            success = d.moveItem(request.getParameter("tableNameParameter"),Integer.parseInt(request.getParameter("ID")),idToChange);
 
         }else if(operation.equals("delete")){
-            int id = Integer.parseInt(request.getParameter("id"));
+            int id = Integer.parseInt(request.getParameter("ID"));
             success = d.deleteItem(request.getParameter("tableNameParameter"),id);
             if(request.getParameter("tableNameParameter").equals("Institute")){
                 d.stringProcessor("UPDATE faculty SET instituteID = '0' WHERE instituteID ='" + id + "';");

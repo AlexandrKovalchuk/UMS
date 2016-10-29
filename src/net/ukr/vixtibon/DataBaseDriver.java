@@ -348,10 +348,10 @@ public ArrayList<Chair> getDateChair(String select){
                     i.setID(rs.getInt("ID"));
                 }
                 if(select.contains("chairID")) {
-                    i.setID(rs.getInt("chairID"));
+                    i.setChairID(rs.getInt("chairID"));
                 }
                 if(select.contains("courseNumber")) {
-                    i.setID(rs.getInt("courseNumber"));
+                    i.setCourseNumber(rs.getInt("courseNumber"));
                 }
                 objList.add(i);
             }
@@ -809,7 +809,7 @@ public ArrayList<Chair> getDateChair(String select){
             }
             counter--;
         }
-        UpdateQuery = UpdateQuery + "WHERE id=" + ID + ";";
+        UpdateQuery = UpdateQuery + " WHERE id=" + ID + ";";
         System.out.println("update query : " + UpdateQuery);
         return UpdateQuery;
     }
@@ -863,8 +863,8 @@ public ArrayList<Chair> getDateChair(String select){
                 sql = "UPDATE faculty SET instituteID='"+ ID +"' WHERE id=" + queryID +";";
             }else if(tableName.equals("chair")){
                 sql = "UPDATE chair SET facultyID='"+ ID +"' WHERE id=" + queryID +";";
-            }else if(tableName.equals("group")){
-                sql = "UPDATE group SET chairID='"+ ID +"' WHERE id=" + queryID +";";
+            }else if(tableName.equals("gtgroup")){
+                sql = "UPDATE gtgroup SET chairID='"+ ID +"' WHERE id=" + queryID +";";
             }else if(tableName.equals("discipline")){
                 sql = "UPDATE discipline SET chairID='"+ ID +"' WHERE id=" + queryID +";";
             }else if(tableName.equals("student")){
