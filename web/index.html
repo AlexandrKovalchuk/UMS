@@ -7,17 +7,20 @@
 </head>
 
 <body>
-<div class = "pageTitleText">
-    <h5>
-        Welcome to University!
-    </h5>
-</div>
-<br>
-<tr>
-    <td >
-        <button onclick="window.location.href='LogIn.jsp?message=ok'" value="Enter" class="controlButton"><h2>Enter</h2></button>
-        <br>
-    </td>
-</tr>
+    <div class = "pageTitleText">
+        <h5>
+            Welcome to University!
+        </h5>
+    </div>
+    <br>
+
+    <form action="LogIn.jsp" method="get">
+        <tr>
+            <td >
+                <button onclick="submit" value="Enter" class="controlButton"><h2>Enter</h2></button>
+                <br>
+            </td>
+        </tr>
+    </form>
 </body>
 </html>

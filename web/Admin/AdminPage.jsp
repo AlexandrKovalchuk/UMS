@@ -9,17 +9,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head lang="en">
-    <%
-        SessionsList sl = new SessionsList();
-        Cookie[] cookies = request.getCookies();
-        String result = sl.sessionControl(cookies,"admin");
-        if(!result.equals("success")){
-            response.sendRedirect(result);
-        }
-    %>
     <meta charset="UTF-8">
     <title>Administrator Page</title>
-    <link rel="stylesheet" type="text/css" href="css\admin_styles.css">
+    <link rel="stylesheet" type="text/css" href="Admin/css/admin_styles.css">
 </head>
 <body>
 
@@ -33,56 +25,49 @@
 
 <div class="itemsBlock">
     <div>
-        <div>
-            <tr>
-                <td colspan=2>
-                    <button onclick="window.location.href='SelectOperation.jsp?type=institute'" class="topicButton" >
-                        <h1>Manage University Credentials</h1>
-                    </button>
-                </td>
-            </tr>
-        </div>
-        <br />
-        <div>
-            <tr>
-                <td colspan=2>
-                    <button onclick="window.location.href='SelectOperation.jsp?type=faculty'" class="topicButton" >
-                        <h1>Manage Faculty Credentials</h1>
-                    </button>
-                </td>
-            </tr>
-        </div>
-        <br />
-        <div>
-            <tr>
-                <td colspan=2>
-                    <button onclick="window.location.href='SelectOperation.jsp?type=chair'" class="topicButton" >
-                        <h1>Manage Chair Credentials</h1>
-                    </button>
-                </td>
-            </tr>
-        </div>
-        <br />
-        <div>
-            <tr>
-                <td colspan=2>
-                    <button onclick="window.location.href='SelectOperation.jsp?type=emploee'" class="topicButton" >
-                        <h1>Manage Employee Credentials</h1>
-                    </button>
-                </td>
-            </tr>
-        </div>
-        <br />
-        <div>
-            <tr>
-                <td colspan=2>
-                    <button onclick="window.location.href='MainInfo.jsp'" class="controlButton" >
-                        <h1>Main Info</h1>
-                    </button>
-                </td>
-            </tr>
-        </div>
-        <br />
+        <form action="SelectOperation.jsp" method="post">
+            <input type="hidden"  name="type" value="institute">
+            <td colspan=2>
+                <button onclick="submit"  class="topicButton"><h2>Manage University Credentials</h2></button>
+            </td>
+        </form>
+    </div>
+    <br />
+    <div>
+        <form action="SelectOperation.jsp" method="post">
+            <input type="hidden"  name="type" value="faculty">
+            <td colspan=2>
+                <button onclick="submit"  class="topicButton"><h2>Manage Faculty Credentials</h2></button>
+            </td>
+        </form>
+    </div>
+    <br />
+    <div>
+    <form action="SelectOperation.jsp" method="post">
+        <input type="hidden"  name="type" value="chair">
+        <td colspan=2>
+            <button onclick="submit"  class="topicButton"><h2>Manage Chair Credentials</h2></button>
+        </td>
+    </form>
+    </div>
+    <br />
+    <div>
+        <form action="SelectOperation.jsp" method="post">
+            <input type="hidden"  name="type" value="emploee">
+            <td colspan=2>
+                <button onclick="submit"  class="topicButton"><h2>Manage Employee Credentials</h2></button>
+            </td>
+        </form>
+    </div>
+    <br />
+    <div>
+        <form action="MainInfo.jsp" method="post">
+            <td colspan=2>
+                <button onclick="submit"  class="topicButton"><h2>Main Info</h2></button>
+            </td>
+        </form>
+    </div>
+    <br />
         <div>
             <tr>
                 <td colspan=2>
@@ -95,6 +80,5 @@
         <br />
     </div>
 </div>
-
 </body>
 </html>

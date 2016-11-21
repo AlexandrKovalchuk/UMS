@@ -1,7 +1,5 @@
 package servlets;
 
-import net.ukr.vixtibon.Institute;
-
 import javax.servlet.http.HttpServlet;
 
 /**

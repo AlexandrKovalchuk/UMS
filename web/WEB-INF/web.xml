@@ -13,7 +13,7 @@
 
     <servlet>
         <servlet-name>LogInServlet</servlet-name>
-        <servlet-class>servlets.LogInServlet</servlet-class>
+        <servlet-class>net.ukr.vixtibon.servlets.controllers.login.LogInServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -23,7 +23,7 @@
 
     <servlet>
         <servlet-name>LogOutServlet</servlet-name>
-        <servlet-class>servlets.LogOutServlet</servlet-class>
+        <servlet-class>net.ukr.vixtibon.servlets.controllers.login.LogOutServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>

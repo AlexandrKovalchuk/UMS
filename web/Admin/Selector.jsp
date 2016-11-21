@@ -1,6 +1,10 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="net.ukr.vixtibon.*" %>
 <%@ page import="servlets.SessionsList" %>
+<%@ page import="net.ukr.vixtibon.base_objects.departments.Department" %>
+<%@ page import="net.ukr.vixtibon.base_objects.persons.Employee" %>
+<%@ page import="net.ukr.vixtibon.base_objects.departments.Faculty" %>
+<%@ page import="net.ukr.vixtibon.base_objects.departments.Institute" %>
 <%--
   Created by IntelliJ IDEA.
   User: alex
@@ -24,7 +28,7 @@
     DataBaseDriver d = new DataBaseDriver();
     ArrayList<Institute> objListI = new ArrayList<Institute>();
     ArrayList<Faculty> objListF = new ArrayList<Faculty>();
-    ArrayList<Chair> objListC = new ArrayList<Chair>();
+    ArrayList<Department> objListC = new ArrayList<Department>();
     ArrayList<Employee> objListE = new ArrayList<Employee>();
 
     if(d.connectionCheck() == false){
@@ -195,7 +199,7 @@
         System.out.println("selector chair");
         if(request.getParameter("step").equals("1")){
             if(request.getParameter("action").equals("create")){
-                    for(Chair c: objListC){
+                    for(Department c: objListC){
                         %><div><tr><td colspan=2>
                             <button onclick="window.location.href='<%out.print("OperationsEmploee.jsp?action=" + request.getParameter("action") + "&ID=" + c.getID());%>' " class="itemButton" >
                             <h1><%out.print(c.getLongName());%></h1> </button></td></tr></div><br /><%
@@ -205,7 +209,7 @@
                                 <h1>None</h1> </button></td></tr></div><%
                 }else{
                     if(objListC.size() > 0){
-                        for(Chair c: objListC){
+                        for(Department c: objListC){
                             %><div><tr><td colspan=2>
                                 <button onclick="window.location.href='<%out.print("OperationsChair.jsp?action=" + request.getParameter("action") + "&ID=" + c.getID() + "&selection=no");%>' " class="itemButton" >
                                 <h1><%out.print(c.getLongName());%></h1> </button></td></tr></div><br /><%
@@ -219,7 +223,7 @@
             }else{
                 stepIndex--;
                 System.out.println("selector chair 2");
-                for(Chair c: objListC){
+                for(Department c: objListC){
                     %><div><tr><td colspan=2>
                         <button onclick="window.location.href='<%out.print("Selector.jsp?action=" + request.getParameter("action") + "&ID=" + c.getID() + "&selectFrom=employee" + "&step=" + stepIndex);%>' " class="itemButton" >
                             <h1><%out.print(c.getLongName());%></h1> </button></td></tr></div><br /><%

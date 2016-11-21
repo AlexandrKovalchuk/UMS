@@ -1,8 +1,13 @@
 <%@ page import="servlets.SessionsList" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="net.ukr.vixtibon.*" %>
-<%@ page import="net.ukr.vixtibon.Chair" %>
-<%@ page import="net.ukr.vixtibon.Employee" %>
+<%@ page import="net.ukr.vixtibon.base_objects.departments.Department" %>
+<%@ page import="net.ukr.vixtibon.base_objects.persons.Employee" %>
+<%@ page import="net.ukr.vixtibon.base_objects.persons.Teacher" %>
+<%@ page import="net.ukr.vixtibon.base_objects.departments.Faculty" %>
+<%@ page import="net.ukr.vixtibon.base_objects.departments.Institute" %>
+<%@ page import="net.ukr.vixtibon.base_objects.stady_process.Discipline" %>
+<%@ page import="net.ukr.vixtibon.base_objects.stady_process.Timetable" %>
 <%--
   Created by IntelliJ IDEA.
   User: alex
@@ -95,7 +100,7 @@
 <%
 }else if(request.getParameter("action").equals("update")){
     DataBaseDriver d = new DataBaseDriver();
-    ArrayList<Chair> f = d.getDateChair("SELECT longName, shortName, ID FROM chair WHERE id=" + request.getParameter("ID"));
+    ArrayList<Department> f = d.getDateChair("SELECT longName, shortName, ID FROM chair WHERE id=" + request.getParameter("ID"));
         %>
     <form action="/FormReaderServlet" method="post" accept-charset="UTF-8">
         <table>
@@ -165,7 +170,7 @@
     ArrayList<Group> GobjList = d.getDateGroup("SELECT longName, shortName, chairID, ID FROM Group WHERE chairID='" +request.getParameter("ID") + "'" );
     ArrayList<Discipline> DobjList = d.getDateDiscipline("SELECT longName, shortName, chairID, ID FROM Discipline WHERE chairID='" +request.getParameter("ID") + "'" );
     ArrayList<Timetable> TTobjList = d.getDateTimetable("SELECT longName, shortName, chairID, ID FROM Timetable WHERE chairID='" +request.getParameter("ID") + "'" );
-    ArrayList<Chair> chairs = d.getDateChair("SELECT longName, shortName, ID FROM chair WHERE ID='" + request.getParameter("ID") + "'");
+    ArrayList<Department> chairs = d.getDateChair("SELECT longName, shortName, ID FROM chair WHERE ID='" + request.getParameter("ID") + "'");
 %>
 <form action="/FormReaderServlet" method="post" accept-charset="UTF-8">
     <input type="hidden"  name="operation" value="delete">

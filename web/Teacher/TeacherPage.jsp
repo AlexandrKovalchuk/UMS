@@ -10,16 +10,8 @@
 <html>
 <head>
 <head>
-    <%
-        SessionsList sl = new SessionsList();
-        Cookie[] cookies = request.getCookies();
-        String result = sl.sessionControl(cookies,"teacher");
-        if(!result.equals("success")){
-            response.sendRedirect(result);
-        }
-    %>
     <title>Teacher Page</title>
-    <link rel="stylesheet" type="text/css" href="sources\teacher_css.css">
+    <link rel="stylesheet" type="text/css" href="Teacher/sources/teacher_css.css">
 </head>
 </head>
 <body>

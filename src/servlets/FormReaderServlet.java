@@ -1,6 +1,12 @@
 package servlets;
 
 import net.ukr.vixtibon.*;
+import net.ukr.vixtibon.base_objects.departments.Department;
+import net.ukr.vixtibon.base_objects.departments.Faculty;
+import net.ukr.vixtibon.base_objects.departments.Institute;
+import net.ukr.vixtibon.base_objects.persons.Employee;
+import net.ukr.vixtibon.base_objects.persons.Teacher;
+import net.ukr.vixtibon.base_objects.stady_process.Discipline;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -18,6 +24,7 @@ public class FormReaderServlet extends HttpServlet {
     String operation = null;
 
     protected void  doGet(HttpServletRequest request, HttpServletResponse response) throws  IOException {
+        request.setAttribute("chair",new Department());
 
     }
 
@@ -128,8 +135,8 @@ public class FormReaderServlet extends HttpServlet {
             }
 
             System.out.println("FormReaderServlet dopost 2  institute value " + ID);
-            Institute i = new Institute(longName,shortName,ID,tableNameParameter);
-            qs = i.qs;
+            //Institute i = new Institute(longName,shortName,ID,tableNameParameter);
+            //qs = i.qs;
 
         }else if(tableNameParameter.equals("chair")){
             String longName = "";
@@ -157,8 +164,8 @@ public class FormReaderServlet extends HttpServlet {
                 ID= d.findFreeID("chair");
             }
 
-            Chair c = new Chair(longName, shortName,ID, facultyID, tableNameParameter);
-            qs = c.qs;
+            //Department c = new Department(longName, shortName,ID, facultyID, tableNameParameter);
+            //qs = c.qs;
             System.out.println("chair done ");
         }else if(tableNameParameter.equals("faculty")) {
             System.out.println("FormReaderServlet dopost 2 i Faculty " );
@@ -185,9 +192,9 @@ public class FormReaderServlet extends HttpServlet {
                 ID = d.findFreeID("faculty");
             }
 
-            Faculty f = new Faculty(longName, shortName,ID, tableNameParameter,instituteID);
+            //Faculty f = new Faculty(longName, shortName,ID, tableNameParameter,instituteID);
 
-            qs = f.qs;
+            //qs = f.qs;
         }else if(tableNameParameter.equals("employee")) {
             System.out.println("FormReaderServlet dopost Employee 1 ");
             String name = "";
@@ -447,13 +454,13 @@ public class FormReaderServlet extends HttpServlet {
             int ID = Integer.parseInt(request.getParameter("ID"));
             if(tnp.equals("Institute")){
                 ArrayList<Institute> i = d.getDateInstitute("SELECT longName, shortName, ID FROM institute WHERE ID =" + ID);
-                qsNotModyfied = i.get(0).qs;
+                //qsNotModyfied = i.get(0).qs;
             }else if(tnp.equals("faculty")){
                 ArrayList<Faculty> i = d.getDateFaculty("SELECT longName, shortName, ID FROM faculty WHERE ID =" + ID);
-                qsNotModyfied = i.get(0).qs;
+                //qsNotModyfied = i.get(0).qs;
             }else if(tnp.equals("chair")){
-                ArrayList<Chair> i = d.getDateChair("SELECT longName, shortName, ID FROM chair WHERE ID =" + ID);
-                qsNotModyfied = i.get(0).qs;
+                ArrayList<Department> i = d.getDateChair("SELECT longName, shortName, ID FROM chair WHERE ID =" + ID);
+                //qsNotModyfied = i.get(0).qs;
             }else if(tnp.equals("employee")){
                 ArrayList<Employee> i = d.getDateEmployee("SELECT name, lastName, fathersName, personalID, sex, email, phoneNumber" +
                         ", dateOfBorn, address, pasport, login, office, ID, chairID FROM employee WHERE ID =" + ID);

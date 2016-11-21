@@ -1,9 +1,9 @@
 <%@ page import="servlets.SessionsList" %>
 <%@ page import="net.ukr.vixtibon.DataBaseDriver" %>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="net.ukr.vixtibon.Discipline" %>
+<%@ page import="net.ukr.vixtibon.base_objects.stady_process.Discipline" %>
 <%@ page import="servlets.Session" %>
-<%@ page import="net.ukr.vixtibon.Chair" %>
+<%@ page import="net.ukr.vixtibon.base_objects.departments.Department" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>

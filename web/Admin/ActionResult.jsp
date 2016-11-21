@@ -1,3 +1,7 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql" %>
 <%--
   Created by IntelliJ IDEA.
   User: alex
@@ -12,7 +16,7 @@
     <link rel="stylesheet" type="text/css" href="css\admin_styles.css">
 </head>
 <body>
-<%if(request.getParameter("result").equals("nomysqlconnection")){%>
+<c:if test = "${param.result eq 'nomysqlconnection'}">
 <div class = "pageTitleTextBad">
     <h5>
         Connection absent!
@@ -25,9 +29,8 @@
         </button>
     </td>
 </div>
-<%}%>
-
-<%if(request.getParameter("result").equals("unsuccess")){%>
+</c:if>
+<c:if test = "${param.result eq 'unsuccess'}">
 <div class = "pageTitleTextBad">
     <h5>
         Operation was unsuccess!
@@ -42,71 +45,75 @@
     <br />
     <h5> </h5>
 </div>
-<%}%>
+</c:if>
 <br/>
-
-<%if(request.getParameter("result").equals("success")){%>
+<c:if test = "${param.result eq 'success'}">
 <div class = "pageTitleTextGood">
     <h5>
         Operation was success!
         <br />
-        <%
-            if(request.getParameter("action").equals("create")){
-                %>Would you like to add item to the same location?<%
-            }else if(request.getParameter("action").equals("update")){
-
-            }else if(request.getParameter("action").equals("move")){
-
-            }else if(request.getParameter("action").equals("delete")){
-
-            }
-        %>
+    <c:if test = "${param.action eq 'create'}">
+        Would you like to add item to the same location?
+    </c:if>
+    <c:if test = "${param.action eq 'update'}">
+        NEED TO COMPLETE!!!!!!!!!
+    </c:if>
+        <c:if test = "${param.action eq 'move'}">
+            NEED TO COMPLETE!!!!!!!!!
+        </c:if>
+        <c:if test = "${param.action eq 'delete'}">
+            NEED TO COMPLETE!!!!!!!!!
+        </c:if>
     </h5>
 </div>
 
 <div class = "pageTitleText">
     <tr>
-        <%if(request.getParameter("action").equals("create")){%>
-        <%if(request.getParameter("type").equals("Institute")){%>
+        <c:if test = "${param.action eq 'create'}">
+            <c:if test = "${param.type eq 'Institute'}">
         <td colspan=2>
             <button onclick="window.location.href='OperationsInstitute.jsp?action=create'" class="controlButton" >
                 <h1>Yes</h1>
             </button>
         </td>
-        <%}%>
-        <%if(request.getParameter("type").equals("chair")){%>
+        </c:if>
+            <c:if test = "${param.type eq 'chair'}">
         <td colspan=2>
-            <button onclick="window.location.href='OperationsChair.jsp?action=create&ID='+<%out.print(request.getParameter("locationID"));%>" class="controlButton" >
+            <button onclick="window.location.href='OperationsChair.jsp?action=create&ID='<c:out value="${param.locationID}"/>" class="controlButton" >
                 <h1>Yes</h1>
             </button>
         </td>
-        <%}%>
-        <%if(request.getParameter("type").equals("employee")){%>
+        </c:if>
+            <c:if test = "${param.type eq 'employee'}">
         <td colspan=2>
-            <button onclick="window.location.href='OperationsEmploee.jsp?action=create&ID='+<%out.print(request.getParameter("locationID"));%>" class="controlButton" >
+            <button onclick="window.location.href='OperationsEmploee.jsp?action=create&ID='<c:out value="${param.locationID}"/>" class="controlButton" >
                 <h1>Yes</h1>
             </button>
         </td>
-        <%}%>
-        <%if(request.getParameter("type").equals("faculty")){%>
+        </c:if>
+            <c:if test = "${param.type eq 'faculty'}">
         <td colspan=2>
-            <button onclick="window.location.href='OperationsFaculty.jsp?action=create&ID='+<%out.print(request.getParameter("locationID"));%>" class="controlButton" >
+            <button onclick="window.location.href='OperationsFaculty.jsp?action=create&ID='<c:out value="${param.locationID}"/>" class="controlButton" >
                 <h1>Yes</h1>
             </button>
         </td>
-        <%}%>
+        </c:if>
 
-        <%}%>
+        </c:if>
 
         <td colspan=2>
             <button onclick="window.location.href='AdminPage.jsp'" class="controlButton" >
-                <h1><%out.print(request.getParameter("action").equals("create")?"No":"OK");%></h1>
+                <c:if test = "${param.action eq 'create'}">
+                    <h1>No</h1>
+                </c:if>
+                <c:if test = "${param.action ne 'create'}">
+                    <h1>OK</h1>
+                </c:if>
             </button>
         </td>
         <br />
     </tr>
 </div>
-<%}%>
-
+</c:if>
 </body>
 </html>

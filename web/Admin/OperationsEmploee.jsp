@@ -2,6 +2,10 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="net.ukr.vixtibon.*" %>
 <%@ page import="java.util.Calendar" %>
+<%@ page import="net.ukr.vixtibon.base_objects.departments.Department" %>
+<%@ page import="net.ukr.vixtibon.base_objects.persons.Employee" %>
+<%@ page import="net.ukr.vixtibon.base_objects.departments.Faculty" %>
+<%@ page import="net.ukr.vixtibon.base_objects.departments.Institute" %>
 <%--
   Created by IntelliJ IDEA.
   User: alex
@@ -275,13 +279,13 @@
         DataBaseDriver d = new DataBaseDriver();
         ArrayList<Institute> IobjList = d.getDateInstitute("SELECT longName, shortName, ID FROM institute");
         ArrayList<Faculty> FobjList = d.getDateFaculty("SELECT longName, shortName, ID, instituteID FROM faculty");
-        ArrayList<Chair> CobjList = d.getDateChair("SELECT longName, shortName, ID, facultyID FROM chair");
+        ArrayList<Department> CobjList = d.getDateChair("SELECT longName, shortName, ID, facultyID FROM chair");
         for(Institute i: IobjList){
             %><h1><%out.print(i.getLongName());%></h1><%
             for(Faculty f: FobjList){
                 if(f.getInstituteID() == i.getID()){
                 %><h1><%out.print(f.getLongName());%></h1><%
-                    for(Chair c: CobjList){
+                    for(Department c: CobjList){
                         if(c.getFacultyID() == f.getID()){
                             %><div><tr><td colspan=2>
                                 <button onclick="window.location.href='<%out.print("OperationsEmploee.jsp?action=move&selection=yes&ID="+ request.getParameter("ID")

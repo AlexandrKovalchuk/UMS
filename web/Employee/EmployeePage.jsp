@@ -13,16 +13,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <%
-        SessionsList sl = new SessionsList();
-        Cookie[] cookies = request.getCookies();
-        String result = sl.sessionControl(cookies,"employee");
-        if(!result.equals("success")){
-            response.sendRedirect(result);
-        }
-    %>
     <title>Department Page</title>
-    <link rel="stylesheet" type="text/css" href="sources\employee_css.css">
+    <link rel="stylesheet" type="text/css" href="Employee/sources/employee_css.css">
 </head>
 
 <body>
@@ -41,23 +33,23 @@
 <div class="itemsBlock">
     <div>
         <div>
-            <tr>
+            <form action="ManageDiscipline.jsp" method="post">
+                <input type="hidden"  name="action" value="none">
+                <input type="hidden"  name="step" value="0">
                 <td colspan=2>
-                    <button onclick="window.location.href='ManageDiscipline.jsp?step=0&action='" class="topicButton" >
-                        <h1>Manage Discipline Credentials</h1>
-                    </button>
+                    <button onclick="submit"  class="topicButton"><h2>Manage Discipline Credentials</h2></button>
                 </td>
-            </tr>
+            </form>
         </div>
         <br />
         <div>
-            <tr>
+            <form action="ManageTeacherCredentials.jsp" method="post">
+                <input type="hidden"  name="action" value="none">
+                <input type="hidden"  name="step" value="0">
                 <td colspan=2>
-                    <button onclick="window.location.href='ManageTeacherCredentials.jsp?step=0&action='" class="topicButton" >
-                        <h1>Manage Teacher Credentials</h1>
-                    </button>
+                    <button onclick="submit"  class="topicButton"><h2>Manage Teacher Credentials</h2></button>
                 </td>
-            </tr>
+            </form>
         </div>
         <br />
         <div>

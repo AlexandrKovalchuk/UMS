@@ -1,8 +1,8 @@
 <%@ page import="servlets.Session" %>
 <%@ page import="servlets.SessionsList" %>
 <%@ page import="net.ukr.vixtibon.DataBaseDriver" %>
-<%@ page import="net.ukr.vixtibon.Discipline" %>
-<%@ page import="net.ukr.vixtibon.Teacher" %>
+<%@ page import="net.ukr.vixtibon.base_objects.stady_process.Discipline" %>
+<%@ page import="net.ukr.vixtibon.base_objects.persons.Teacher" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="java.util.Calendar" %>
 <%--

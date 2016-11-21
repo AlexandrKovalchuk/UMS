@@ -1,4 +1,8 @@
 <%@ page import="servlets.SessionsList" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql" %>
 <%--
   Created by IntelliJ IDEA.
   User: alex
@@ -18,38 +22,22 @@
             response.sendRedirect(result);
         }
     %>
-    <%
-    if(request.getParameter("type").equals("institute")){
-        %>
-        <title>Manage University Credentials</title>
-        <%
-    }else if(request.getParameter("type").equals("faculty")){
-        %>
-        <title>Manage Faculty Credentials</title>
-        <%
-    }else if(request.getParameter("type").equals("chair")){
-        %>
-        <title>Manage Chair Credentials</title>
-        <%
-    }else if(request.getParameter("type").equals("emploee")){
-        %>
-        <title>Manage Employee Credentials</title>
-        <%
-    }else{
-        %>
-        <title>Warning</title>
-        <%
-    }
-    %>
+    <title>
+        <c:if test = "${param.type eq 'institute'}"> Manage University Credentials</c:if>
+        <c:if test = "${param.type eq 'faculty'}"> Manage Faculty Credentials</c:if>
+        <c:if test = "${param.type eq 'chair'}"> Manage Chair Credentials</c:if>
+        <c:if test = "${param.type eq 'emploee'}"> Manage Employee Credentials</c:if>
+    </title>
+
 </head>
 <body>
 <div class = "pageTitleText">
     <h5>
         Welcome to Manage
-        <%out.print(request.getParameter("type").equals("institute")?"University":"");%>
-        <%out.print(request.getParameter("type").equals("faculty")?"Faculty":"");%>
-        <%out.print(request.getParameter("type").equals("chair")?"Chair":"");%>
-        <%out.print(request.getParameter("type").equals("emploee")?"Employee":"");%>
+        <c:if test = "${param.type eq 'institute'}"> University </c:if>
+        <c:if test = "${param.type eq 'faculty'}"> Faculty </c:if>
+        <c:if test = "${param.type eq 'chair'}"> Chair </c:if>
+        <c:if test = "${param.type eq 'emploee'}"> Employee </c:if>
          Credentials Page!
         <br />
         Please choose action:
@@ -58,175 +46,177 @@
 <br />
 <div class="itemsBlock">
     <div>
-    <%
-    if(request.getParameter("type").equals("institute")){
-    %>
-                <div>
-                    <tr>
-                        <td colspan=2>
-                            <button onclick="window.location.href='OperationsInstitute.jsp?action=create'" class="topicButton" >
-                                <h1>Create University Credentials</h1>
-                            </button>
-                        </td>
-                    </tr>
-                </div>
-                <br />
-                <div>
-                    <tr>
-                        <td colspan=2>
-                            <button onclick="window.location.href='Selector.jsp?action=update&selectFrom=institute&step=1'" class="topicButton" >
-                                <h1>Update University Credentials</h1>
-                            </button>
-                        </td>
-                    </tr>
-                </div>
-                <br />
-                <div>
-                    <tr>
-                        <td colspan=2>
-                            <button onclick="window.location.href='Selector.jsp?action=delete&selectFrom=institute&step=1'" class="topicButton" >
-                                <h1>Delete University Credentials</h1>
-                            </button>
-                        </td>
-                    </tr>
-                </div>
-                <br />
-    <%
-    }else if(request.getParameter("type").equals("faculty")){
-    %>
-                <div>
-                    <tr>
-                        <td colspan=2>
-                            <button onclick="window.location.href='Selector.jsp?action=create&selectFrom=institute&step=1'" class="topicButton" >
-                                <h1>Create Faculty Credentials</h1>
-                            </button>
-                        </td>
-                    </tr>
-                </div>
-                <br />
-                <div>
-                    <tr>
-                        <td colspan=2>
-                            <button onclick="window.location.href='Selector.jsp?action=update&selectFrom=institute&step=2'" class="topicButton" >
-                                <h1>Update Faculty Credentials</h1>
-                            </button>
-                        </td>
-                    </tr>
-                </div>
-                <br />
-                <div>
-                    <tr>
-                        <td colspan=2>
-                            <button onclick="window.location.href='Selector.jsp?action=move&selectFrom=institute&step=2'" class="topicButton" >
-                                <h1>Move Faculty </h1>
-                            </button>
-                        </td>
-                    </tr>
-                </div>
-                <br />
-                <div>
-                    <tr>
-                        <td colspan=2>
-                            <button onclick="window.location.href='Selector.jsp?action=delete&selectFrom=institute&step=2'" class="topicButton" >
-                                <h1>Delete Faculty Credentials</h1>
-                            </button>
-                        </td>
-                    </tr>
-                </div>
-                <br />
-    <%
-    }else if(request.getParameter("type").equals("chair")){
-    %>
-                <div>
-                    <tr>
-                        <td colspan=2>
-                            <button onclick="window.location.href='Selector.jsp?action=create&selectFrom=institute&step=2'" class="topicButton" >
-                                <h1>Create Chair Credentials</h1>
-                            </button>
-                        </td>
-                    </tr>
-                </div>
-                <br />
-                <div>
-                    <tr>
-                        <td colspan=2>
-                            <button onclick="window.location.href='Selector.jsp?action=update&selectFrom=institute&step=3'" class="topicButton" >
-                                <h1>Update Chair Credentials</h1>
-                            </button>
-                        </td>
-                    </tr>
-                </div>
-                <br />
-                <div>
-                    <tr>
-                        <td colspan=2>
-                            <button onclick="window.location.href='Selector.jsp?action=move&selectFrom=institute&step=3'" class="topicButton" >
-                                <h1>Move Chair </h1>
-                            </button>
-                        </td>
-                    </tr>
-                </div>
-                <br />
-                <div>
-                    <tr>
-                        <td colspan=2>
-                            <button onclick="window.location.href='Selector.jsp?action=delete&selectFrom=institute&step=3'" class="topicButton" >
-                                <h1>Delete Chair Credentials</h1>
-                            </button>
-                        </td>
-                    </tr>
-                </div>
-                <br />
-    <%
-    }else if(request.getParameter("type").equals("emploee")){
-    %>
-                <div>
-                    <tr>
-                        <td colspan=2>
-                            <button onclick="window.location.href='Selector.jsp?action=create&selectFrom=institute&step=3'" class="topicButton" >
-                                <h1>Create Employee Credentials</h1>
-                            </button>
-                        </td>
-                    </tr>
-                </div>
-                <br />
-                <div>
-                    <tr>
-                        <td colspan=2>
-                            <button onclick="window.location.href='Selector.jsp?action=update&selectFrom=institute&step=4'" class="topicButton" >
-                                <h1>Update Employee Credentials</h1>
-                            </button>
-                        </td>
-                    </tr>
-                </div>
-                <br />
-                <div>
-                    <tr>
-                        <td colspan=2>
-                            <button onclick="window.location.href='Selector.jsp?action=move&selection=no&selectFrom=institute&step=4'" class="topicButton" >
-                                <h1>Move Employee</h1>
-                            </button>
-                        </td>
-                    </tr>
-                </div>
-                <br />
-                <div>
-                    <tr>
-                        <td colspan=2>
-                            <button onclick="window.location.href='Selector.jsp?action=delete&selectFrom=institute&step=4'" class="topicButton" >
-                                <h1>Delete Employee Credentials</h1>
-                            </button>
-                        </td>
-                    </tr>
-                </div>
-                <br />
-    <%
-    }else{
-%>
-<title>Warning</title>
-<%
-    }
-%>
+    <c:if test = "${param.type eq 'institute'}">
+        <div>
+            <form action="OperationsInstitute.jsp" method="post">
+                <input type="hidden"  name="action" value="create">
+                <td colspan=2>
+                    <button onclick="submit"  class="topicButton"><h2>Create University Credentials</h2></button>
+                </td>
+            </form>
+        </div>
+        <br />
+        <div>
+            <form action="Selector.jsp" method="post">
+                <input type="hidden"  name="action" value="update">
+                <input type="hidden"  name="selectFrom" value="institute">
+                <input type="hidden"  name="step" value="1">
+                <td colspan=2>
+                    <button onclick="submit"  class="topicButton"><h2>Update University Credentials</h2></button>
+                </td>
+            </form>
+        </div>
+        <br />
+        <div>
+            <form action="Selector.jsp" method="post">
+                <input type="hidden"  name="action" value="delete">
+                <input type="hidden"  name="selectFrom" value="institute">
+                <input type="hidden"  name="step" value="1">
+                <td colspan=2>
+                    <button onclick="submit"  class="topicButton"><h2>Delete University Credentials</h2></button>
+                </td>
+            </form>
+        </div>
+        <br />
+    </c:if>
+    <c:if test = "${param.type eq 'faculty'}">
+        <div>
+            <form action="Selector.jsp" method="post">
+                <input type="hidden"  name="action" value="create">
+                <input type="hidden"  name="selectFrom" value="institute">
+                <input type="hidden"  name="step" value="1">
+                <td colspan=2>
+                    <button onclick="submit"  class="topicButton"><h2>Create Faculty Credentials</h2></button>
+                </td>
+            </form>
+        </div>
+        <br />
+        <div>
+            <form action="Selector.jsp" method="post">
+                <input type="hidden"  name="action" value="update">
+                <input type="hidden"  name="selectFrom" value="institute">
+                <input type="hidden"  name="step" value="2">
+                <td colspan=2>
+                    <button onclick="submit"  class="topicButton"><h2>Update Faculty Credentials</h2></button>
+                </td>
+            </form>
+        </div>
+        <br />
+        <div>
+            <form action="Selector.jsp" method="post">
+                <input type="hidden"  name="action" value="move">
+                <input type="hidden"  name="selectFrom" value="institute">
+                <input type="hidden"  name="step" value="2">
+                <td colspan=2>
+                    <button onclick="submit"  class="topicButton"><h2>Move Faculty</h2></button>
+                </td>
+            </form>
+        </div>
+        <br />
+        <div>
+            <form action="Selector.jsp" method="post">
+                <input type="hidden"  name="action" value="delete">
+                <input type="hidden"  name="selectFrom" value="institute">
+                <input type="hidden"  name="step" value="2">
+                <td colspan=2>
+                    <button onclick="submit"  class="topicButton"><h2>Delete Faculty Credentials</h2></button>
+                </td>
+            </form>
+        </div>
+        <br />
+    </c:if>
+    <c:if test = "${param.type eq 'chair'}">
+        <div>
+            <form action="Selector.jsp" method="post">
+                <input type="hidden"  name="action" value="create">
+                <input type="hidden"  name="selectFrom" value="institute">
+                <input type="hidden"  name="step" value="2">
+                <td colspan=2>
+                    <button onclick="submit"  class="topicButton"><h2>Create Chair Credentials</h2></button>
+                </td>
+            </form>
+        </div>
+        <br />
+        <div>
+            <form action="Selector.jsp" method="post">
+                <input type="hidden"  name="action" value="update">
+                <input type="hidden"  name="selectFrom" value="institute">
+                <input type="hidden"  name="step" value="3">
+                <td colspan=2>
+                    <button onclick="submit"  class="topicButton"><h2>Update Chair Credentials</h2></button>
+                </td>
+            </form>
+        </div>
+        <br />
+        <div>
+            <form action="Selector.jsp" method="post">
+                <input type="hidden"  name="action" value="move">
+                <input type="hidden"  name="selectFrom" value="institute">
+                <input type="hidden"  name="step" value="3">
+                <td colspan=2>
+                    <button onclick="submit"  class="topicButton"><h2>Move Chair</h2></button>
+                </td>
+            </form>
+        </div>
+        <br />
+        <div>
+            <form action="Selector.jsp" method="post">
+                <input type="hidden"  name="action" value="delete">
+                <input type="hidden"  name="selectFrom" value="institute">
+                <input type="hidden"  name="step" value="3">
+                <td colspan=2>
+                    <button onclick="submit"  class="topicButton"><h2>Delete Chair Credentials</h2></button>
+                </td>
+            </form>
+        </div>
+        <br />
+    </c:if>
+    <c:if test = "${param.type eq 'emploee'}">
+        <div>
+            <form action="Selector.jsp" method="post">
+                <input type="hidden"  name="action" value="create">
+                <input type="hidden"  name="selectFrom" value="institute">
+                <input type="hidden"  name="step" value="3">
+                <td colspan=2>
+                    <button onclick="submit"  class="topicButton"><h2>Create Employee Credentials</h2></button>
+                </td>
+            </form>
+        </div>
+        <br />
+        <div>
+            <form action="Selector.jsp" method="post">
+                <input type="hidden"  name="action" value="update">
+                <input type="hidden"  name="selectFrom" value="institute">
+                <input type="hidden"  name="step" value="4">
+                <td colspan=2>
+                    <button onclick="submit"  class="topicButton"><h2>Update Employee Credentials</h2></button>
+                </td>
+            </form>
+        </div>
+        <br />
+        <div>
+            <form action="Selector.jsp" method="post">
+                <input type="hidden"  name="action" value="move">
+                <input type="hidden"  name="selectFrom" value="institute">
+                <input type="hidden"  name="step" value="4">
+                <td colspan=2>
+                    <button onclick="submit"  class="topicButton"><h2>Move Employee</h2></button>
+                </td>
+            </form>
+        </div>
+        <br />
+        <div>
+            <form action="Selector.jsp" method="post">
+                <input type="hidden"  name="action" value="delete">
+                <input type="hidden"  name="selectFrom" value="institute">
+                <input type="hidden"  name="step" value="4">
+                <td colspan=2>
+                    <button onclick="submit"  class="topicButton"><h2>Delete Employee Credentials</h2></button>
+                </td>
+            </form>
+        </div>
+        <br />
+    </c:if>
 </div>
 </div>
 </body>
