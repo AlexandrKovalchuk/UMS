@@ -25,8 +25,7 @@
 
 <div class="itemsBlock">
     <div>
-        <form action="SelectOperation.jsp" method="post">
-            <input type="hidden"  name="type" value="institute">
+        <form action="InstituteFormControllerServlet" method="post">
             <td colspan=2>
                 <button onclick="submit"  class="topicButton"><h2>Manage University Credentials</h2></button>
             </td>
@@ -69,13 +68,11 @@
     </div>
     <br />
         <div>
-            <tr>
+            <form action="LogOutServlet" method="post">
                 <td colspan=2>
-                    <button onclick="document.location.href='/LogOutServlet'" class="controlButton" >
-                        <h1>Log Out</h1>
-                    </button>
+                    <button onclick="submit"  class="topicButton"><h2>Log Out</h2></button>
                 </td>
-            </tr>
+            </form>
         </div>
         <br />
     </div>

@@ -41,5 +41,15 @@
         <url-pattern>/FormReaderServlet</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>InstituteFormControllerServlet</servlet-name>
+        <servlet-class>net.ukr.vixtibon.servlets.controllers.depatments.InstituteFormControllerServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>InstituteFormControllerServlet</servlet-name>
+        <url-pattern>/InstituteFormControllerServlet</url-pattern>
+    </servlet-mapping>
+
 
 </web-app>

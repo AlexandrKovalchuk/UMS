@@ -8,10 +8,7 @@ import servlets.Session;
 import servlets.SessionsList;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.*;
 import java.io.*;
 import java.util.ArrayList;
 
@@ -34,13 +31,19 @@ public class LogInServlet extends HttpServlet {
             request.getRequestDispatcher("LogIn.jsp").forward(request, response);
         }else {
             if(password.equals(lib.getPassword())){
+                HttpSession session=request.getSession();
+                session.setAttribute("username",username);
                 if(lib.getAccess().equals("admin")){
+                    session.setAttribute("type","admin");
                     request.getRequestDispatcher("Admin/AdminPage.jsp").forward(request, response);
                 }else if(lib.getAccess().equals("employee")){
+                    session.setAttribute("type","employee");
                     request.getRequestDispatcher("Employee/EmployeePage.jsp").forward(request, response);
                 }else if(lib.getAccess().equals("teacher")){
+                    session.setAttribute("type","teacher");
                     request.getRequestDispatcher("Teacher/TeacherPage.jsp").forward(request, response);
                 }else if(lib.getAccess().equals("student")){
+                    session.setAttribute("type","student");
                     request.getRequestDispatcher("Student/StudentPage.jsp").forward(request, response);
                 }else{
                     request.setAttribute("wrongPasswordOrLogIn", "errorInAccess");

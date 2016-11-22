@@ -18,16 +18,6 @@
 <link rel="stylesheet" type="text/css" href="css\admin_styles.css">
 <html>
 <head>
-
-    <%
-        SessionsList sl = new SessionsList();
-        Cookie[] cookies = request.getCookies();
-        System.out.println("cookies size " + cookies.length);
-        String result = sl.sessionControl(cookies,"admin");
-        if(!result.equals("success")){
-            response.sendRedirect(result);
-        }
-    %>
     <title>
         <c:if test = "${param.action eq 'create'}"> Create University Credentials</c:if>
         <c:if test = "${param.action eq 'update'}"> Update University Credentials</c:if>

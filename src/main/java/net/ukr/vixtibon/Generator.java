@@ -15,7 +15,6 @@ import java.util.*;
  * Created by akovalchuk on 5/21/2015.
  */
 public class Generator {
-    private static ArrayList<LogInSettings> LogIns = new ArrayList<>();
     private ArrayList<String> FemaleNames = openStringsArray("FemaleNames.txt");
     private ArrayList<String> MaleNames = openStringsArray("MaleNames.txt");
     private ArrayList<String> FemaleSurnames = openStringsArray("FemaleSurnames.txt");
@@ -483,15 +482,7 @@ public void setupBase(String[] list) {
             sb.append("");
             sb.append(studentNumber);
             String strI = sb.toString();
-            //System. out .println("generateListOfStudents 13");
-            LogInSettings lis;
-            //System. out .println("generateListOfStudents 14" + toLatinConverter(chairShortName) +" "+ String.valueOf(wave) +" "+ String.valueOf(groupIndex) +" "+ "st" +" "+ strI +" "+ LogIns.size() +" "+ "");
 
-            String entry = toLatinConverter(chairShortName) + String.valueOf(wave) + String.valueOf(groupIndex);
-            //System. out .println("entry " +entry);
-            lis = students.get(i).generateLogIn(entry,"st",strI,LogIns,"");
-            //System. out .println("generateListOfStudents 15");
-            LogIns.add(lis);
 
 
         }
