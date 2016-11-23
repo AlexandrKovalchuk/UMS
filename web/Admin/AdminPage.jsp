@@ -25,7 +25,8 @@
 
 <div class="itemsBlock">
     <div>
-        <form action="InstituteFormControllerServlet" method="post">
+        <form action="AdminPageController" method="post">
+            <input type="hidden"  name="elementType" value="institute">
             <td colspan=2>
                 <button onclick="submit"  class="topicButton"><h2>Manage University Credentials</h2></button>
             </td>
@@ -33,8 +34,8 @@
     </div>
     <br />
     <div>
-        <form action="SelectOperation.jsp" method="post">
-            <input type="hidden"  name="type" value="faculty">
+        <form action="AdminPageController" method="post">
+            <input type="hidden"  name="elementType" value="faculty">
             <td colspan=2>
                 <button onclick="submit"  class="topicButton"><h2>Manage Faculty Credentials</h2></button>
             </td>
@@ -42,17 +43,17 @@
     </div>
     <br />
     <div>
-    <form action="SelectOperation.jsp" method="post">
-        <input type="hidden"  name="type" value="chair">
+    <form action="AdminPageController" method="post">
+        <input type="hidden"  name="elementType" value="department">
         <td colspan=2>
-            <button onclick="submit"  class="topicButton"><h2>Manage Chair Credentials</h2></button>
+            <button onclick="submit"  class="topicButton"><h2>Manage Department Credentials</h2></button>
         </td>
     </form>
     </div>
     <br />
     <div>
-        <form action="SelectOperation.jsp" method="post">
-            <input type="hidden"  name="type" value="emploee">
+        <form action="AdminPageController" method="post">
+            <input type="hidden"  name="elementType" value="employee">
             <td colspan=2>
                 <button onclick="submit"  class="topicButton"><h2>Manage Employee Credentials</h2></button>
             </td>
@@ -60,7 +61,8 @@
     </div>
     <br />
     <div>
-        <form action="MainInfo.jsp" method="post">
+        <form action="AdminPageController" method="post">
+            <input type="hidden"  name="elementType" value="mainInfo">
             <td colspan=2>
                 <button onclick="submit"  class="topicButton"><h2>Main Info</h2></button>
             </td>

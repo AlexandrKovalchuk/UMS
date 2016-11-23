@@ -1,4 +1,4 @@
-package net.ukr.vixtibon.servlets.controllers.depatments;
+package net.ukr.vixtibon.servlets.controllers.persons.employee;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -7,12 +7,10 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * Created by alex on 08/11/2016.
+ * Created by alex on 23/11/2016.
  */
-public class InstituteFormControllerServlet extends HttpServlet {
+public class EmployeePageController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        if(request.getParameter("operationType").equals(null)){
-            request.getRequestDispatcher("Admin/OperationsInstitute.jsp").forward(request, response);
-        }
+
     }
 }

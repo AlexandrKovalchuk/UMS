@@ -42,13 +42,93 @@
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>InstituteFormControllerServlet</servlet-name>
-        <servlet-class>net.ukr.vixtibon.servlets.controllers.depatments.InstituteFormControllerServlet</servlet-class>
+        <servlet-name>AdminPageController</servlet-name>
+        <servlet-class>net.ukr.vixtibon.servlets.controllers.depatments.AdminPageController</servlet-class>
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>InstituteFormControllerServlet</servlet-name>
-        <url-pattern>/InstituteFormControllerServlet</url-pattern>
+        <servlet-name>AdminPageController</servlet-name>
+        <url-pattern>/AdminPageController</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>InstitutePageController</servlet-name>
+        <servlet-class>net.ukr.vixtibon.servlets.controllers.depatments.institute.InstitutePageController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>InstitutePageController</servlet-name>
+        <url-pattern>/InstitutePageController</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>CreateInstitutePageController</servlet-name>
+        <servlet-class>net.ukr.vixtibon.servlets.controllers.depatments.institute.CreateInstitutePageController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>CreateInstitutePageController</servlet-name>
+        <url-pattern>/CreateInstitutePageController</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>UpdateInstitutePageController</servlet-name>
+        <servlet-class>net.ukr.vixtibon.servlets.controllers.depatments.institute.UpdateInstitutePageController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>UpdateInstitutePageController</servlet-name>
+        <url-pattern>/UpdateInstitutePageController</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>DeleteInstitutePageController</servlet-name>
+        <servlet-class>net.ukr.vixtibon.servlets.controllers.depatments.institute.DeleteInstitutePageController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>DeleteInstitutePageController</servlet-name>
+        <url-pattern>/DeleteInstitutePageController</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ShowInstituteInfoPageController</servlet-name>
+        <servlet-class>net.ukr.vixtibon.servlets.controllers.depatments.institute.ShowInstituteInfoPageController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>ShowInstituteInfoPageController</servlet-name>
+        <url-pattern>/ShowInstituteInfoPageController</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>FacultyPageController</servlet-name>
+        <servlet-class>net.ukr.vixtibon.servlets.controllers.depatments.faculty.FacultyPageController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>FacultyPageController</servlet-name>
+        <url-pattern>/FacultyPageController</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>DepartmentPageController</servlet-name>
+        <servlet-class>net.ukr.vixtibon.servlets.controllers.depatments.department.DepartmentPageController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>DepartmentPageController</servlet-name>
+        <url-pattern>/DepartmentPageController</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>EmployeePageController</servlet-name>
+        <servlet-class>net.ukr.vixtibon.servlets.controllers.persons.employee.EmployeePageController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>EmployeePageController</servlet-name>
+        <url-pattern>/EmployeePageController</url-pattern>
     </servlet-mapping>
 
 
