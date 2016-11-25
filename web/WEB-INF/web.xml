@@ -131,5 +131,14 @@
         <url-pattern>/EmployeePageController</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>ActionResultPageController</servlet-name>
+        <servlet-class>net.ukr.vixtibon.servlets.controllers.ActionResultPageController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>ActionResultPageController</servlet-name>
+        <url-pattern>/ActionResultPageController</url-pattern>
+    </servlet-mapping>
 
 </web-app>

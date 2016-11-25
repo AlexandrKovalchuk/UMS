@@ -24,7 +24,9 @@ public class CreateInstitutePageController extends HttpServlet {
                 result = d.create(i);
                 if(result){
                     request.setAttribute("result", "success");
+                    request.setAttribute("menu", "institute");
                 }else{
+                    request.setAttribute("menu", "institute");
                     request.setAttribute("result", "unsuccess");
                 }
                 request.getRequestDispatcher("ActionResultPageController").forward(request, response);
