@@ -112,6 +112,56 @@
     </servlet-mapping>
 
     <servlet>
+        <servlet-name>CreateFacultyPageController</servlet-name>
+        <servlet-class>net.ukr.vixtibon.servlets.controllers.depatments.faculty.CreateFacultyPageController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>CreateFacultyPageController</servlet-name>
+        <url-pattern>/CreateFacultyPageController</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>UpdateFacultyPageController</servlet-name>
+        <servlet-class>net.ukr.vixtibon.servlets.controllers.depatments.faculty.UpdateFacultyPageController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>UpdateFacultyPageController</servlet-name>
+        <url-pattern>/UpdateFacultyPageController</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>MoveFacultyPageController</servlet-name>
+        <servlet-class>net.ukr.vixtibon.servlets.controllers.depatments.faculty.MoveFacultyPageController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>MoveFacultyPageController</servlet-name>
+        <url-pattern>/MoveFacultyPageController</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>DeleteFacultyPageController</servlet-name>
+        <servlet-class>net.ukr.vixtibon.servlets.controllers.depatments.faculty.DeleteFacultyPageController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>DeleteFacultyPageController</servlet-name>
+        <url-pattern>/DeleteFacultyPageController</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ShowInfoFacultyPageController</servlet-name>
+        <servlet-class>net.ukr.vixtibon.servlets.controllers.depatments.faculty.ShowInfoFacultyPageController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>ShowInfoFacultyPageController</servlet-name>
+        <url-pattern>/ShowInfoFacultyPageController</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>DepartmentPageController</servlet-name>
         <servlet-class>net.ukr.vixtibon.servlets.controllers.depatments.department.DepartmentPageController</servlet-class>
     </servlet>

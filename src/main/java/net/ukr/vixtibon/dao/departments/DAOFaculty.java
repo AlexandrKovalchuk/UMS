@@ -89,7 +89,7 @@ public class DAOFaculty  extends AbstractController<Faculty,Integer> {
 
     @Override
     public boolean create(Faculty entity){
-        String Create_Faculty_Statemet = "INSERT INTO faculty (ID,longName,shortName) VALUES ('"+findFreeID("faculty")+"','"+entity.getLongName() + "','" + entity.getShortName()+"');";
+        String Create_Faculty_Statemet = "INSERT INTO faculty (ID,longName,shortName, instituteID) VALUES ('"+findFreeID("faculty")+"','"+entity.getLongName() + "','" + entity.getShortName()+"','"+entity.getInstituteID()+"');";
         PreparedStatement ps = getPrepareStatement(Create_Faculty_Statemet);
         try {
             ps.executeUpdate();

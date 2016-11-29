@@ -14,7 +14,16 @@ public class ActionResultPageController extends HttpServlet {
         if(request.getParameterMap().containsKey("redirectTo")){
             if(request.getParameter("redirectTo").equals("institute")){
                 request.getRequestDispatcher("InstitutePageController").forward(request, response);
+            }else if (request.getParameter("redirectTo").equals("faculty")){
+                request.getRequestDispatcher("FacultyPageController").forward(request, response);
+            }else if (request.getParameter("redirectTo").equals("department")){
+                request.getRequestDispatcher("DepartmentPageController").forward(request, response);
+            }else if (request.getParameter("redirectTo").equals("employee")){
+                request.getRequestDispatcher("EmployeePageController").forward(request, response);
+            }else {
+                //error page
             }
+
         }else{
             request.setAttribute("result", request.getAttribute("result"));
             request.setAttribute("menu", request.getAttribute("menu"));

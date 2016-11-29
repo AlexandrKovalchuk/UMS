@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: alex
@@ -22,32 +23,50 @@
     </h5>
 </div>
 <div>
-    <form action="/CreateFacultyPageController" method="post" accept-charset="UTF-8">
-        <table>
-            <input type="hidden"  name="fillForm" value="yes">
-            <tr class = "textInputLabel">
-                <td>Long name:</td>
-                <td>
-                    <input type="text" name="longName" data-hint=" please enter name of faculty">
-                </td>
-            </tr>
-            <tr class = "textInputLabel">
-                <td>Short name:</td>
-                <td>
-                    <input type="text" name="shortName" data-hint=" please ABR">
-                </td>
-            </tr>
-            <tr>
-                <td colspan=2>
-                    <button onclick="submit"  class="controlButton"><h2>Add</h2></button>
-                </td>
-            </tr>
-        </table>
-    </form>
+    <c:if test = "${selected ne 'yes'}">
+        Select Institute where to add faculty:
+        <c:forEach items="${institutesList}" var="institute">
+            <div>
+                <form action="/CreateFacultyPageController" method="post" accept-charset="UTF-8">
+                    <input type="hidden"  name="step" value="step1">
+                    <input type="hidden"  name="instituteID" value="${institute.getID()}">
+                    <button onclick="submit" class="itemButton" ><h2><c:out value="${institute.getLongName()}"/></h2></button>
+                </form>
+            </div>
+        </c:forEach>
+    </c:if>
+    <c:if test = "${selected eq 'yes'}">
+        Please fill form:
+        <div>
+            <form action="/CreateFacultyPageController" method="post" accept-charset="UTF-8">
+                <table>
+                    <input type="hidden"  name="step" value="step2">
+                    <input type="hidden"  name="instituteID" value="${instituteID}">
+                    <tr class = "textInputLabel">
+                        <td>Long name:</td>
+                        <td>
+                            <input type="text" name="longName" required/>
+                        </td>
+                    </tr>
+                    <tr class = "textInputLabel">
+                        <td>Short name:</td>
+                        <td>
+                            <input type="text" name="shortName" required/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan=2>
+                            <button onclick="submit"  class="controlButton"><h2>Create</h2></button>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </c:if>
 </div>
 <div>
     <form action="CreateFacultyPageController" method="post">
-        <input type="hidden"  name="fillForm" value="cancel">
+        <input type="hidden"  name="step" value="cancel">
         <td colspan=2>
             <button onclick="submit"  class="topicButton"><h2>Cancel</h2></button>
         </td>
