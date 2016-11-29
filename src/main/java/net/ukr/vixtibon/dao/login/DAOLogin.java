@@ -38,8 +38,8 @@ public class DAOLogin extends AbstractController<LogInBody,Integer> {
     }
 
     @Override
-    public LogInBody update(LogInBody entity) {
-        return null;
+    public boolean update(LogInBody entity) {
+        return false;
     }
 
     @Override

@@ -16,9 +16,9 @@ public class ActionResultPageController extends HttpServlet {
                 request.getRequestDispatcher("InstitutePageController").forward(request, response);
             }
         }else{
-            request.setAttribute("result", request.getParameter("result"));
-            request.setAttribute("menu", request.getParameter("menu"));
-            request.getRequestDispatcher("LogIn.jsp").forward(request, response);
+            request.setAttribute("result", request.getAttribute("result"));
+            request.setAttribute("menu", request.getAttribute("menu"));
+            request.getRequestDispatcher("Admin/AdminActionResultPage.jsp").forward(request, response);
         }
     }
 }

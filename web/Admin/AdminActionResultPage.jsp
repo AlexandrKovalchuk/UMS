@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: alex
@@ -9,7 +10,7 @@
 <html>
 
 <head>
-    <link rel="stylesheet" type="text/css" href="main_css\styles_for_LogIn_page.css">
+    <link rel="stylesheet" type="text/css" href="Admin/css/admin_styles.css">
     <title>Action Result Page</title>
 </head>
 
@@ -21,7 +22,7 @@
 </div>
 
 <c:if test = "${result eq 'success'}">
-    <div class = "payAttention">
+    <div class = "pageTitleTextGood">
         <h5>
             Operation was not success!
         </h5>
@@ -29,14 +30,14 @@
 </c:if>
 
 <c:if test = "${result eq 'unsuccess'}">
-    <div class = "payAttention">
+    <div class = "pageTitleTextBad">
         <h5>
             Operation was not success!
         </h5>
     </div>
 </c:if>
 
-<form action="LogInServlet" method="post">
+<form action="ActionResultPageController" method="post">
     <input type="hidden"  name="redirectTo" value="${menu}">
     <tr>
         <td >
