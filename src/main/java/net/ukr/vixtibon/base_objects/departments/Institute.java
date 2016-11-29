@@ -23,6 +23,10 @@ public class Institute  extends Structure implements Serializable {
         return facultys;
     }
 
+    public void setFacultys(ArrayList<Faculty> facultiesList ){
+        this.facultys = facultiesList;
+    }
+
     public void addFaculty(Faculty f){
         facultys.add(f);
     }

@@ -101,4 +101,25 @@ public class DAOFaculty  extends AbstractController<Faculty,Integer> {
             closePrepareStatement(ps);
         }
     }
+
+    public ArrayList<Faculty> getAllByInstituteID(int instituteID){
+        String Select_All_Faculties_Statemet = "SELECT * FROM faculty WHERE instituteID="+ instituteID +";";
+        ArrayList<Faculty> facultiesList = new ArrayList<>();
+        PreparedStatement ps = getPrepareStatement(Select_All_Faculties_Statemet);
+        try {
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Faculty faculty = new Faculty();
+                faculty.setID(rs.getInt(1));
+                faculty.setLongName(rs.getString(2));
+                faculty.setShortName(rs.getString(3));
+                facultiesList.add(faculty);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            closePrepareStatement(ps);
+        }
+        return facultiesList;
+    }
 }
