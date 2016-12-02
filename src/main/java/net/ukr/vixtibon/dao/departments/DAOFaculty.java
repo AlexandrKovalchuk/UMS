@@ -52,6 +52,20 @@ public class DAOFaculty  extends AbstractController<Faculty,Integer> {
         }
     }
 
+    public boolean updateFacultyLocation(int instituteID, int facultyID) {
+        String Update_Faculty_Statemet = "UPDATE faculty SET instituteID='" + instituteID + "' WHERE ID=" + facultyID + ";";
+        PreparedStatement ps = getPrepareStatement(Update_Faculty_Statemet);
+        try {
+            ps.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        } finally {
+            closePrepareStatement(ps);
+        }
+    }
+
     @Override
     public Faculty getEntityById(Integer id) {
         String Select_Faculty_Statemet = "SELECT * FROM faculty WHERE ID='" + id + "';";
