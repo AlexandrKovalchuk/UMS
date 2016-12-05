@@ -172,6 +172,16 @@
     </servlet-mapping>
 
     <servlet>
+        <servlet-name>CreateDepartmentPageController</servlet-name>
+        <servlet-class>net.ukr.vixtibon.servlets.controllers.depatments.department.CreateDepartmentPageController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>CreateDepartmentPageController</servlet-name>
+        <url-pattern>/CreateDepartmentPageController</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>EmployeePageController</servlet-name>
         <servlet-class>net.ukr.vixtibon.servlets.controllers.persons.employee.EmployeePageController</servlet-class>
     </servlet>
