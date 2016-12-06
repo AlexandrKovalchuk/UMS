@@ -28,8 +28,16 @@ public class Faculty extends Structure implements Serializable {
         this.instituteID = instituteID;
     }
 
+    public void setDepartments(ArrayList<Department> departments){
+        this.Departments = departments;
+    }
+
+    public ArrayList<Department> getDepartments( ){
+        return Departments;
+    }
+/*
     public void addDepartment(Department c){
         Departments.add(c);
     }
-
+*/
 }

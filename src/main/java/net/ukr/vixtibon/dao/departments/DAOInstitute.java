@@ -60,6 +60,29 @@ public class DAOInstitute  extends AbstractController<Institute,Integer> {
         return institutesList;
     }
 
+    public ArrayList<Institute> getAllWithFacultiesAndDepartments(){
+        String Select_All_Institutes_Statemet = "SELECT * FROM institute;";
+        ArrayList<Institute> institutesList = new ArrayList<>();
+        PreparedStatement ps = getPrepareStatement(Select_All_Institutes_Statemet);
+        try {
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Institute institute = new Institute();
+                institute.setID(rs.getInt(1));
+                institute.setLongName(rs.getString(2));
+                institute.setShortName(rs.getString(3));
+                DAOFaculty daof = new DAOFaculty();
+                institute.setFacultys(daof.getAllByInstituteIDWithDepartments(institute.getID()));
+                institutesList.add(institute);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            closePrepareStatement(ps);
+        }
+        return institutesList;
+    }
+
     @Override
     public boolean update(Institute entity) {
         String Update_Institute_Statemet = "UPDATE institute SET longName='" + entity.getLongName() + "', shortName='"

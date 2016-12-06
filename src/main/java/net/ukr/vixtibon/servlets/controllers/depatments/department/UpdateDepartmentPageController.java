@@ -1,4 +1,4 @@
-package net.ukr.vixtibon.servlets.controllers.depatments.faculty;
+package net.ukr.vixtibon.servlets.controllers.depatments.department;
 
 import net.ukr.vixtibon.base_objects.departments.Department;
 import net.ukr.vixtibon.base_objects.departments.Faculty;
@@ -15,21 +15,25 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 /**
- * Created by alex on 29/11/2016.
+ * Created by alex on 05/12/2016.
  */
-public class DeleteFacultyPageController  extends HttpServlet {
+public class UpdateDepartmentPageController   extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if(request.getParameterMap().containsKey("step")){
             if(request.getParameter("step").equals("step1")){
-                DAOFaculty daoi = new DAOFaculty();
-                Faculty faculty = daoi.getEntityById(Integer.parseInt(request.getParameter("facultyID")));
+                DAODepartment daoi = new DAODepartment();
+                Department department = daoi.getEntityById(Integer.parseInt(request.getParameter("departmentID")));
                 request.setAttribute("selected", "yes");
-                request.setAttribute("faculty", faculty);
-                request.getRequestDispatcher("Admin/Faculty/Operations/DeleteFacultyPage.jsp").forward(request, response);
+                request.setAttribute("department", department);
+                request.getRequestDispatcher("Admin/Department/Operations/UpdateDepartmentPage.jsp").forward(request, response);
             }else if(request.getParameter("step").equals("step2")){
-                DAOFaculty daoi = new DAOFaculty();
+                DAODepartment daoi = new DAODepartment();
                 boolean result = false;
-                result = daoi.delete(Integer.parseInt(request.getParameter("facultyID")));
+                Department department = new Department();
+                department.setID(Integer.parseInt(request.getParameter("departmentID")));
+                department.setLongName(request.getParameter("longName"));
+                department.setShortName(request.getParameter("shortName"));
+                result = daoi.update(department);
                 if(result){
                     request.setAttribute("result", "success");
                     request.setAttribute("menu", "faculty");
@@ -39,20 +43,25 @@ public class DeleteFacultyPageController  extends HttpServlet {
                 }
                 request.getRequestDispatcher("ActionResultPageController").forward(request, response);
             }else if(request.getParameter("step").equals("cancel")){
-                request.getRequestDispatcher("FacultyPageController").forward(request, response);
+                request.getRequestDispatcher("DepartmentPageController").forward(request, response);
             }else{
                 //error page
             }
         }else{
             DAOInstitute daoi = new DAOInstitute();
             DAOFaculty daof = new DAOFaculty();
+            DAODepartment daod = new DAODepartment();
             ArrayList<Institute> i = daoi.getAllWithFacultiesAndDepartments();
             for(Institute institute:i){
                 ArrayList<Faculty> f = daof.getAllByInstituteID(institute.getID());
+                for(Faculty faculty:f){
+                    ArrayList<Department> d = daod.getAllByfacultyID(faculty.getID());
+                    faculty.setDepartments(d);
+                }
                 institute.setFacultys(f);
             }
             request.setAttribute("institutesList", i);
-            request.getRequestDispatcher("Admin/Faculty/Operations/DeleteFacultyPage.jsp").forward(request, response);
+            request.getRequestDispatcher("Admin/Department/Operations/UpdateDepartmentPage.jsp").forward(request, response);
         }
     }
 }

@@ -47,8 +47,12 @@ public class UpdateFacultyPageController  extends HttpServlet {
             }
         }else{
             DAOInstitute daoi = new DAOInstitute();
-            ArrayList<Institute> i = daoi.getAllWithFaculties();
-            System.out.println("i length " + i.size());
+            DAOFaculty daof = new DAOFaculty();
+            ArrayList<Institute> i = daoi.getAllWithFacultiesAndDepartments();
+            for(Institute institute:i){
+                ArrayList<Faculty> f = daof.getAllByInstituteID(institute.getID());
+                institute.setFacultys(f);
+            }
             request.setAttribute("institutesList", i);
             request.getRequestDispatcher("Admin/Faculty/Operations/UpdateFacultyPage.jsp").forward(request, response);
         }
