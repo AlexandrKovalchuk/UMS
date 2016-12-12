@@ -73,6 +73,20 @@ public class DAODepartment extends AbstractController<Department,Integer> {
         }
     }
 
+    public boolean updateDepartmentLocation(int facultyID, int departmentID) {
+        String Update_Faculty_Statemet = "UPDATE department SET facultyID='" + facultyID + "' WHERE ID=" + departmentID + ";";
+        PreparedStatement ps = getPrepareStatement(Update_Faculty_Statemet);
+        try {
+            ps.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        } finally {
+            closePrepareStatement(ps);
+        }
+    }
+
     @Override
     public Department getEntityById(Integer id) {
         return null;

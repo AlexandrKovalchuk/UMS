@@ -1,11 +1,13 @@
-package net.ukr.vixtibon.servlets.controllers.depatments.department;
+package net.ukr.vixtibon.servlets.controllers.persons.employee;
 
 import net.ukr.vixtibon.base_objects.departments.Department;
 import net.ukr.vixtibon.base_objects.departments.Faculty;
 import net.ukr.vixtibon.base_objects.departments.Institute;
+import net.ukr.vixtibon.base_objects.persons.Employee;
 import net.ukr.vixtibon.dao.departments.DAODepartment;
 import net.ukr.vixtibon.dao.departments.DAOFaculty;
 import net.ukr.vixtibon.dao.departments.DAOInstitute;
+import net.ukr.vixtibon.dao.persons.DAOEmployee;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -16,24 +18,32 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
- * Created by alex on 05/12/2016.
+ * Created by alex on 12/12/2016.
  */
-public class CreateDepartmentPageController   extends HttpServlet {
+public class CreateEmployeePageController  extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if(request.getParameterMap().containsKey("step")){
             if(request.getParameter("step").equals("step1")){
                 request.setAttribute("selected", "yes");
-                request.setAttribute("facultyID", request.getParameter("facultyID"));
-                request.getRequestDispatcher("Admin/Department/Operations/CreateDepartmentPage.jsp").forward(request, response);
+                request.setAttribute("departmentID", request.getParameter("departmentID"));
+                request.getRequestDispatcher("Admin/Employee/Operations/CreateEmployeePage.jsp").forward(request, response);
             }else if(request.getParameter("step").equals("step2")){
-                DAODepartment d = new DAODepartment();
-                Department i = new Department();
+                DAOEmployee daoe = new DAOEmployee();
+                Employee em = new Employee();
                 boolean result = false;
-                i.setFacultyID(Integer.parseInt(request.getParameter("facultyID")));
-                i.setLongName(request.getParameter("longName"));
-                i.setShortName(request.getParameter("shortName"));
+                em.setName(request.getParameter("name"));
+                em.setlastName(request.getParameter("lastName"));
+                em.setfathersName(request.getParameter("fathersName"));
+                em.setPersonalID(request.getParameter("personalID"));
+                em.setSex(request.getParameter("sex"));
+                em.setDateOfBorn(Integer.parseInt(request.getParameter("byear")),Integer.parseInt(request.getParameter("bmonth")),Integer.parseInt(request.getParameter("bday")));
+                em.setEmail(request.getParameter("email"));
+                em.setPhoneNumber(request.getParameter("phoneNumber"));
+                em.setAddress(request.getParameter("address"));
+                em.setPasport(request.getParameter("pasport"));
+                em.setOffice(request.getParameter("office"));
                 try {
-                    result = d.create(i);
+                    result = daoe.create(em);
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
@@ -46,7 +56,7 @@ public class CreateDepartmentPageController   extends HttpServlet {
                 }
                 request.getRequestDispatcher("ActionResultPageController").forward(request, response);
             }else if(request.getParameter("step").equals("cancel")){
-                request.getRequestDispatcher("DepartmentPageController").forward(request, response);
+                request.getRequestDispatcher("EmployeePageController").forward(request, response);
             }else{
                 //error page
             }
@@ -57,11 +67,14 @@ public class CreateDepartmentPageController   extends HttpServlet {
             ArrayList<Institute> i = daoi.getAllWithFacultiesAndDepartments();
             for(Institute institute:i){
                 ArrayList<Faculty> f = daof.getAllByInstituteID(institute.getID());
+                for(Faculty faculty:f){
+                    ArrayList<Department> d = daod.getAllByfacultyID(faculty.getID());
+                    faculty.setDepartments(d);
+                }
                 institute.setFacultys(f);
             }
             request.setAttribute("institutesList", i);
-            request.getRequestDispatcher("Admin/Department/Operations/CreateDepartmentPage.jsp").forward(request, response);
+            request.getRequestDispatcher("Admin/Employee/Operations/CreateEmployeePage.jsp").forward(request, response);
         }
     }
-
 }

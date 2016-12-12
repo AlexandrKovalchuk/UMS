@@ -35,18 +35,18 @@ public class MoveDepartmentPageController  extends HttpServlet {
                 request.setAttribute("department", department);
                 request.getRequestDispatcher("Admin/Faculty/Operations/MoveDepartmentPage.jsp").forward(request, response);
             }else if(request.getParameter("step").equals("step2")){
-                DAOInstitute daoi = new DAOInstitute();
                 DAOFaculty daof = new DAOFaculty();
-                Institute institute = daoi.getEntityById(Integer.parseInt(request.getParameter("instituteID")));
+                DAODepartment daod = new DAODepartment();
+                Department department = daod.getEntityById(Integer.parseInt(request.getParameter("departmentID")));
                 Faculty faculty = daof.getEntityById(Integer.parseInt(request.getParameter("facultyID")));
                 request.setAttribute("selected", "yes2");
-                request.setAttribute("institute", institute);
+                request.setAttribute("department", department);
                 request.setAttribute("faculty", faculty);
                 request.getRequestDispatcher("Admin/Faculty/Operations/MoveDepartmentPage.jsp").forward(request, response);
             }else if(request.getParameter("step").equals("step3")){
-                DAOFaculty daoi = new DAOFaculty();
+                DAODepartment daod = new DAODepartment();
                 boolean result = false;
-                result = daoi.updateFacultyLocation(Integer.parseInt(request.getParameter("instituteID")),Integer.parseInt(request.getParameter("facultyID")));
+                result = daod.updateDepartmentLocation(Integer.parseInt(request.getParameter("facultyID")),Integer.parseInt(request.getParameter("departmentID")));
                 if(result){
                     request.setAttribute("result", "success");
                     request.setAttribute("menu", "faculty");

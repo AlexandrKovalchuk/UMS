@@ -22,7 +22,7 @@ public abstract class Person implements Serializable {
     private String sex;// Can contain only M, m, F, f
     private String email;// Need to find standarts for email, should contain "@" and "." in correct order
     private String phoneNumber;//have some questions
-    Calendar dateOfBorn = Calendar.getInstance();
+    private Calendar dateOfBorn = Calendar.getInstance();
     private String address;
     private String pasport;
     private String login = "";
@@ -66,6 +66,10 @@ public abstract class Person implements Serializable {
 
     public Calendar getDateOfBorn() {
         return dateOfBorn;
+    }
+
+    public void  setDateOfBorn(int day, int month, int yaer){
+        this.dateOfBorn.set(yaer,month,day);
     }
 
     public String getLogin() {

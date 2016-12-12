@@ -11,6 +11,22 @@ import java.io.IOException;
  */
 public class EmployeePageController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        if(request.getParameterMap().containsKey("operationType")){
+            if(request.getParameter("operationType").equals("create")){
+                request.getRequestDispatcher("CreateEmployeePageController").forward(request, response);
+            }else if(request.getParameter("operationType").equals("update")){
+                request.getRequestDispatcher("UpdateEmployeePageController").forward(request, response);
+            }else if(request.getParameter("operationType").equals("delete")){
+                request.getRequestDispatcher("DeleteEmployeePageController").forward(request, response);
+            }else if(request.getParameter("operationType").equals("showInfo")){
+                request.getRequestDispatcher("ShowEmployeeInfoPageController").forward(request, response);
+            }else if(request.getParameter("operationType").equals("cancel")){
+                request.getRequestDispatcher("AdminPageController").forward(request, response);
+            }else{
+                //error page
+            }
+        }else{
+            request.getRequestDispatcher("Admin/Employee/EmployeePage.jsp").forward(request, response);
+        }
     }
 }
