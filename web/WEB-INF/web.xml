@@ -182,6 +182,36 @@
     </servlet-mapping>
 
     <servlet>
+        <servlet-name>UpdateDepartmentPageController</servlet-name>
+        <servlet-class>net.ukr.vixtibon.servlets.controllers.depatments.department.UpdateDepartmentPageController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>UpdateDepartmentPageController</servlet-name>
+        <url-pattern>/UpdateDepartmentPageController</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>DeleteDepartmentPageController</servlet-name>
+        <servlet-class>net.ukr.vixtibon.servlets.controllers.depatments.department.DeleteDepartmentPageController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>DeleteDepartmentPageController</servlet-name>
+        <url-pattern>/DeleteDepartmentPageController</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>MoveDepartmentPageController</servlet-name>
+        <servlet-class>net.ukr.vixtibon.servlets.controllers.depatments.department.MoveDepartmentPageController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>MoveDepartmentPageController</servlet-name>
+        <url-pattern>/MoveDepartmentPageController</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>EmployeePageController</servlet-name>
         <servlet-class>net.ukr.vixtibon.servlets.controllers.persons.employee.EmployeePageController</servlet-class>
     </servlet>
