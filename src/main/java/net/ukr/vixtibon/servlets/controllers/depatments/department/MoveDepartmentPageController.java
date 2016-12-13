@@ -33,7 +33,7 @@ public class MoveDepartmentPageController  extends HttpServlet {
                 request.setAttribute("selected", "yes");
                 request.setAttribute("institutesList", i);
                 request.setAttribute("department", department);
-                request.getRequestDispatcher("Admin/Faculty/Operations/MoveDepartmentPage.jsp").forward(request, response);
+                request.getRequestDispatcher("Admin/Department/Operations/MoveDepartmentPage.jsp").forward(request, response);
             }else if(request.getParameter("step").equals("step2")){
                 DAOFaculty daof = new DAOFaculty();
                 DAODepartment daod = new DAODepartment();
@@ -42,16 +42,16 @@ public class MoveDepartmentPageController  extends HttpServlet {
                 request.setAttribute("selected", "yes2");
                 request.setAttribute("department", department);
                 request.setAttribute("faculty", faculty);
-                request.getRequestDispatcher("Admin/Faculty/Operations/MoveDepartmentPage.jsp").forward(request, response);
+                request.getRequestDispatcher("Admin/Department/Operations/MoveDepartmentPage.jsp").forward(request, response);
             }else if(request.getParameter("step").equals("step3")){
                 DAODepartment daod = new DAODepartment();
                 boolean result = false;
                 result = daod.updateDepartmentLocation(Integer.parseInt(request.getParameter("facultyID")),Integer.parseInt(request.getParameter("departmentID")));
                 if(result){
                     request.setAttribute("result", "success");
-                    request.setAttribute("menu", "faculty");
+                    request.setAttribute("menu", "department");
                 }else{
-                    request.setAttribute("menu", "faculty");
+                    request.setAttribute("menu", "department");
                     request.setAttribute("result", "unsuccess");
                 }
                 request.getRequestDispatcher("ActionResultPageController").forward(request, response);
@@ -73,8 +73,9 @@ public class MoveDepartmentPageController  extends HttpServlet {
                 }
                 institute.setFacultys(f);
             }
+            request.setAttribute("institutesList", i);
             request.setAttribute("selected", "no");
-            request.getRequestDispatcher("Admin/Faculty/Operations/MoveDepartmentPage.jsp").forward(request, response);
+            request.getRequestDispatcher("Admin/Department/Operations/MoveDepartmentPage.jsp").forward(request, response);
         }
     }
 }

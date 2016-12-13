@@ -56,11 +56,12 @@ public class MoveFacultyPageController  extends HttpServlet {
         }else{
             DAOInstitute daoi = new DAOInstitute();
             DAOFaculty daof = new DAOFaculty();
-            ArrayList<Institute> i = daoi.getAllWithFacultiesAndDepartments();
+            ArrayList<Institute> i = daoi.getAll();
             for(Institute institute:i){
                 ArrayList<Faculty> f = daof.getAllByInstituteID(institute.getID());
                 institute.setFacultys(f);
             }
+            request.setAttribute("institutesList", i);
             request.setAttribute("selected", "no");
             request.getRequestDispatcher("Admin/Faculty/Operations/MoveFacultyPage.jsp").forward(request, response);
         }

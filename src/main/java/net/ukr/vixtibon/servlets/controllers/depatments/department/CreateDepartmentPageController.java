@@ -60,6 +60,7 @@ public class CreateDepartmentPageController   extends HttpServlet {
                 institute.setFacultys(f);
             }
             request.setAttribute("institutesList", i);
+            request.setAttribute("selected", "no");
             request.getRequestDispatcher("Admin/Department/Operations/CreateDepartmentPage.jsp").forward(request, response);
         }
     }

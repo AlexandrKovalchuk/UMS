@@ -41,10 +41,4 @@ public class Employee extends Person implements Serializable {
         return office;
     }
 
-    public void showInfo(){
-        System. out .println("Date " + dateOfBorn);
-        System. out .println("Name : " + getName() + "  " + getSecondName());
-        System. out .println("Office : " + office);
-
-    }
 }

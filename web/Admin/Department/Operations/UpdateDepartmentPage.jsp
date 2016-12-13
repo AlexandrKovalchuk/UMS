@@ -45,7 +45,7 @@
                         <tr class = "textInputLabel">
                             <td>Long name:</td>
                             <td>
-                                <input type="text" name="longName"  required value=${department.getLongName()}  required/>
+                                <input type="text" name="longName"  required value=${department.getLongName()} >
                             </td>
                         </tr>
                         <tr class = "textInputLabel">

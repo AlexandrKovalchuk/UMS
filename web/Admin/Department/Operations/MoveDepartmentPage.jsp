@@ -25,7 +25,7 @@
                 <h5><c:out value="${institute.getLongName()}"/></h5>
                 <c:forEach items="${institute.getFacultys()}" var="faculty">
                     <h5><c:out value="${faculty.getLongName()}"/></h5>
-                    <c:forEach items="${faculty.getDepartments}" var="department">
+                    <c:forEach items="${faculty.getDepartments()}" var="department">
                         <form action="/MoveDepartmentPageController" method="post" accept-charset="UTF-8">
                             <input type="hidden"  name="step" value="step1">
                             <input type="hidden"  name="departmentID" value="${department.getID()}">

@@ -89,12 +89,40 @@ public class DAODepartment extends AbstractController<Department,Integer> {
 
     @Override
     public Department getEntityById(Integer id) {
-        return null;
+
+        String Select_Faculty_Statemet = "SELECT * FROM department WHERE ID='" + id + "';";
+        Department department = new Department();
+        PreparedStatement ps = getPrepareStatement(Select_Faculty_Statemet);
+        try {
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                department.setID(rs.getInt(1));
+                department.setLongName(rs.getString(2));
+                department.setShortName(rs.getString(3));
+                department.setFacultyID(rs.getInt(4));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            closePrepareStatement(ps);
+        }
+        return department;
     }
 
     @Override
     public boolean delete(Integer id) {
-        return false;
+
+        String Delete_department_Statement = "DELETE FROM department WHERE ID=" + id + ";";
+        PreparedStatement ps = getPrepareStatement(Delete_department_Statement);
+        try {
+            ps.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        } finally {
+            closePrepareStatement(ps);
+        }
     }
 
     @Override

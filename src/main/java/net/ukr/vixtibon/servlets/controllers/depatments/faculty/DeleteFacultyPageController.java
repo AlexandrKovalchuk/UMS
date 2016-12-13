@@ -52,6 +52,7 @@ public class DeleteFacultyPageController  extends HttpServlet {
                 institute.setFacultys(f);
             }
             request.setAttribute("institutesList", i);
+            request.setAttribute("selected", "no");
             request.getRequestDispatcher("Admin/Faculty/Operations/DeleteFacultyPage.jsp").forward(request, response);
         }
     }

@@ -32,9 +32,9 @@ public class DeleteDepartmentPageController   extends HttpServlet {
                 result = daoi.delete(Integer.parseInt(request.getParameter("departmentID")));
                 if(result){
                     request.setAttribute("result", "success");
-                    request.setAttribute("menu", "faculty");
+                    request.setAttribute("menu", "department");
                 }else{
-                    request.setAttribute("menu", "faculty");
+                    request.setAttribute("menu", "department");
                     request.setAttribute("result", "unsuccess");
                 }
                 request.getRequestDispatcher("ActionResultPageController").forward(request, response);
@@ -57,6 +57,7 @@ public class DeleteDepartmentPageController   extends HttpServlet {
                 institute.setFacultys(f);
             }
             request.setAttribute("institutesList", i);
+            request.setAttribute("selected", "no");
             request.getRequestDispatcher("Admin/Department/Operations/DeleteDepartmentPage.jsp").forward(request, response);
         }
     }
