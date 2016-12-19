@@ -42,6 +42,7 @@ public class CreateEmployeePageController  extends HttpServlet {
                 em.setAddress(request.getParameter("address"));
                 em.setPasport(request.getParameter("pasport"));
                 em.setOffice(request.getParameter("office"));
+                em.setLogin(request.getParameter("login"));
                 try {
                     result = daoe.create(em);
                 } catch (SQLException e) {

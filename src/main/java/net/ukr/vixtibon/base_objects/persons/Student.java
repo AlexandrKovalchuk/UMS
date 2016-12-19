@@ -25,44 +25,6 @@ public class Student extends Person implements Serializable {
     public Student() {
     }
 
-    public Student(int ID,String name, String secondName, String surname, String personalID, String sex, String email, String phoneNumber,
-                   Calendar dateOfBorn, String address, String pasport, String faculty, String indexBook, String fullIdentifier,
-                    int index, ArrayList<Discipline> disciplines, int chairID, int groupID) {
-
-        super(ID, name, secondName, surname, personalID, sex, email, phoneNumber, dateOfBorn, address, pasport);
-
-        this.faculty = faculty;
-        qs.add(new QueryBean("Student","faculty",faculty));
-        this.indexBook = indexBook;
-        qs.add(new QueryBean("Student","indexBook",indexBook));
-        this.index = index;
-        String indexPlus = "";
-        qs.add(new QueryBean("Student","stindex",indexPlus + index));
-        int maxSize = 0;
-        for(Discipline d: disciplines){
-            if(maxSize < d.getCountOfLessons()){
-                maxSize = d.getCountOfLessons();
-            }else{
-                continue;
-            }
-        }
-        DisciplinesNames = new String[disciplines.size()];
-
-        Attendance = new String[disciplines.size()][maxSize];
-        Progress = new String[disciplines.size()][maxSize];
-        initializeArrays(disciplines);
-        qs.add(new QueryBean("Student","Attendance",arrayToString(Attendance)));
-        qs.add(new QueryBean("Student","Progress",arrayToString(Progress)));
-        this.fullIdentifier = fullIdentifier;
-        qs.add(new QueryBean("Student","fullIdentifier",fullIdentifier));
-        this.chairID = chairID;
-        qs.add(new QueryBean("Student","chairID",chairID));
-        this.groupID = groupID;
-        qs.add(new QueryBean("Student","groupID",groupID));
-
-
-        //System. out .println("Student constructor complete");
-    }
 
     private void initializeArrays(ArrayList<Discipline> disciplines){
         //System. out .println("nitializeArrays");

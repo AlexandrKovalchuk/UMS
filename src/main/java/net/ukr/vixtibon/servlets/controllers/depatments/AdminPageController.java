@@ -20,6 +20,7 @@ public class AdminPageController extends HttpServlet {
             }else if(request.getParameter("elementType").equals("department")){
                 request.getRequestDispatcher("DepartmentPageController").forward(request, response);
             }else if(request.getParameter("elementType").equals("employee")){
+                System.out.println(" EmployeePageController selected");
                 request.getRequestDispatcher("EmployeePageController").forward(request, response);
             }else if(request.getParameter("elementType").equals("mainInfo")){
                 request.getRequestDispatcher("MainInfoPageController").forward(request, response);

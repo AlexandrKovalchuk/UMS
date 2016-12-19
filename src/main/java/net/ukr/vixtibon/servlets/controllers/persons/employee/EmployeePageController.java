@@ -26,6 +26,7 @@ public class EmployeePageController extends HttpServlet {
                 //error page
             }
         }else{
+            System.out.println(" EmployeePageController entered");
             request.getRequestDispatcher("Admin/Employee/EmployeePage.jsp").forward(request, response);
         }
     }

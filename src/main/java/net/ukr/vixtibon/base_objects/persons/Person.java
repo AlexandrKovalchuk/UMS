@@ -5,8 +5,11 @@ import net.ukr.vixtibon.QueryBean;
 import net.ukr.vixtibon.QuerySet;
 
 import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Random;
 
 /**
@@ -22,7 +25,7 @@ public abstract class Person implements Serializable {
     private String sex;// Can contain only M, m, F, f
     private String email;// Need to find standarts for email, should contain "@" and "." in correct order
     private String phoneNumber;//have some questions
-    private Calendar dateOfBorn = Calendar.getInstance();
+    private Date dateOfBorn ;
     private String address;
     private String pasport;
     private String login = "";
@@ -34,42 +37,19 @@ public abstract class Person implements Serializable {
 
     }
 
-    public Person(int ID,String name, String secondName, String surname, String personalID, String sex, String email, String phoneNumber,
-                  Calendar dateOfBorn, String address, String pasport) {
-        //TAble name
 
-        this.ID = ID;
-        qs.add(new QueryBean(null,"ID",ID));
-        this.name = name;
-        qs.add(new QueryBean(null,"name",name));
-        this.lastName = secondName;
-        qs.add(new QueryBean(null,"lastName",secondName));
-        this.fathersName = surname;
-        qs.add(new QueryBean(null,"fathersName",surname));
-        this.personalID = personalID;
-        qs.add(new QueryBean(null,"personalID",personalID));
-        this.sex = sex;
-        String sexPlus = "";
-        qs.add(new QueryBean(null,"sex",sexPlus + sex));
-        this.email = email;
-        qs.add(new QueryBean(null,"email",email));
-        this.phoneNumber = phoneNumber;
-        qs.add(new QueryBean(null,"phoneNumber",phoneNumber));
-        this.dateOfBorn = dateOfBorn;
-        String dateOfBornPlus = "" + dateOfBorn.get(Calendar.DAY_OF_MONTH) + "#" + dateOfBorn.get(Calendar.MONTH) + "#" + dateOfBorn.get(Calendar.YEAR);
-        qs.add(new QueryBean(null,"dateOfBorn",dateOfBornPlus));
-        this.address = address;
-        qs.add(new QueryBean(null,"address",address));
-        this.pasport = pasport;
-        qs.add(new QueryBean(null,"pasport",pasport));
-    }
-
-    public Calendar getDateOfBorn() {
+    public Date getDateOfBorn() {
         return dateOfBorn;
     }
 
-    public void  setDateOfBorn(int day, int month, int yaer){
-        this.dateOfBorn.set(yaer,month,day);
+    public void  setDateOfBorn(int day, int month, int year){
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/M/yyyy");
+        String dateInString = "" + day + "/" + month + "/" + year +"";
+        try {
+            this.dateOfBorn = sdf.parse(dateInString);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
     }
 
     public String getLogin() {

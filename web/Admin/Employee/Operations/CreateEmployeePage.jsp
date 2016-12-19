@@ -19,7 +19,7 @@
     <h5>
         Create Employee Page!
         <br />
-        Please fill form:
+
     </h5>
 </div>
 <div>
@@ -30,8 +30,8 @@
                 <h5><c:out value="${institute.getLongName()}"/></h5>
                 <c:forEach items="${institute.getFacultys()}" var="faculty">
                     <h5><c:out value="${faculty.getLongName()}"/></h5>
-                    <c:forEach items="${faculty.getDepartments}" var="department">
-                        <form action="/MoveDepartmentPageController" method="post" accept-charset="UTF-8">
+                    <c:forEach items="${faculty.getDepartments()}" var="department">
+                        <form action="/CreateEmployeePageController" method="post" accept-charset="UTF-8">
                             <input type="hidden"  name="step" value="step1">
                             <input type="hidden"  name="departmentID" value="${department.getID()}">
                             <button onclick="submit" class="itemButton" ><h2><c:out value="${department.getLongName()}"/></h2></button>
@@ -89,7 +89,7 @@
                         </td>
                         <td>   Місяць</td>
                         <td>
-                            <input type="text" name="bmonth">
+                            <input type="int" name="bmonth">
                         </td>
                         <td>   Рік</td>
                         <td>
@@ -129,6 +129,14 @@
                             <input type="text" name="office">
                         </td>
                     </tr>
+
+                    <tr class = "textInputLabel">
+                        <td>LogIn:</td>
+                        <td>
+                            <input type="text" name="login">
+                        </td>
+                    </tr>
+
                     <tr>
                         <td colspan=2>
                             <button onclick="submit"  class="controlButton"><h2>Create</h2></button>

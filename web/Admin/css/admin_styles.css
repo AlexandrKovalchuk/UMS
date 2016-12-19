@@ -51,17 +51,17 @@ body{
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
 }
 .pageTitleText{
-    background: rgba(108,108,108,0.5);
+    background: linear-gradient(to bottom right, rgba(19, 19, 19, 0.69), rgba(140, 140, 140, 0.35));
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
     padding: 0px 25px;
 }
 .pageTitleTextGood{
-    background: rgba(0,255,0,0.5);
+    background: rgb(45, 183, 87);
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
     padding: 0px 25px;
 }
 .pageTitleTextBad{
-    background: rgba(255,32,32,0.5);
+    background: rgb(235, 49, 66);
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
     padding: 0px 25px;
 }
@@ -112,11 +112,11 @@ h2{
 }
 .itemsBlockInfo{
     background: rgba(192,192,192,0.5);
-    padding: 0px 25px;
-}
+    padding: 0px 25px;}
+
+
 .itemButton{
-    background-color: #d3d3d3;
-    background: rgba(138,138,138,0.5);
+    background: linear-gradient(to bottom right, rgba(19, 19, 19, 0.69), rgba(140, 140, 140, 0.35));
     border-radius: 12px;
     border: navy;
     color: #ffffff;

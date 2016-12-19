@@ -31,15 +31,6 @@
         <url-pattern>/LogOutServlet</url-pattern>
     </servlet-mapping>
 
-    <servlet>
-        <servlet-name>FormReaderServlet</servlet-name>
-        <servlet-class>servlets.FormReaderServlet</servlet-class>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>FormReaderServlet</servlet-name>
-        <url-pattern>/FormReaderServlet</url-pattern>
-    </servlet-mapping>
 
     <servlet>
         <servlet-name>AdminPageController</servlet-name>
@@ -219,6 +210,16 @@
     <servlet-mapping>
         <servlet-name>EmployeePageController</servlet-name>
         <url-pattern>/EmployeePageController</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>CreateEmployeePageController</servlet-name>
+        <servlet-class>net.ukr.vixtibon.servlets.controllers.persons.employee.CreateEmployeePageController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>CreateEmployeePageController</servlet-name>
+        <url-pattern>/CreateEmployeePageController</url-pattern>
     </servlet-mapping>
 
     <servlet>

@@ -3,6 +3,7 @@ package net.ukr.vixtibon.servlets.controllers.login;
 import net.ukr.vixtibon.DataBaseDriver;
 import net.ukr.vixtibon.base_objects.persons.Employee;
 import net.ukr.vixtibon.dao.login.DAOLogin;
+import net.ukr.vixtibon.dao.persons.DAOEmployee;
 import net.ukr.vixtibon.login_body.LogInBody;
 import servlets.Session;
 import servlets.SessionsList;
@@ -37,7 +38,9 @@ public class LogInServlet extends HttpServlet {
                     session.setAttribute("type","admin");
                     request.getRequestDispatcher("Admin/AdminPage.jsp").forward(request, response);
                 }else if(lib.getAccess().equals("employee")){
+                    DAOEmployee daoe = new DAOEmployee();
                     session.setAttribute("type","employee");
+                    session.setAttribute("departmentID",daoe.getDepartmentIDByUsername(username));
                     request.getRequestDispatcher("Employee/EmployeePage.jsp").forward(request, response);
                 }else if(lib.getAccess().equals("teacher")){
                     session.setAttribute("type","teacher");

@@ -499,21 +499,8 @@ public void setupBase(String[] list) {
         String pasportNumber = generatePasportNumber();
         String indifCode = generatePersonalID();
         emploeeIDCounter++;
+        return null;
 
-        if(male){
-            return new Employee(emploeeIDCounter,randomString(MaleNames),randomString(MaleSurnames),null,indifCode,"M",null,generatePhoneNumber(),
-                    personDate,"Украина "+ city +" "+randomString(Street)+" "+generateHouseNumber()+" "+rn.nextInt(100)+" "+generatePostIndex(),
-                    generatePasportSeria()+" "+pasportNumber+" "+randomString(gumvs)+" "+city+" "+pasportDate,
-                    "HR",chairID);
-
-        }else{
-            return new Employee(emploeeIDCounter,randomString(FemaleNames),randomString(FemaleSurnames),null,indifCode,"F",null,generatePhoneNumber(),
-                    personDate,
-                    "Украина "+ city +" "+randomString(Street)+" "+generateHouseNumber()+" "+rn.nextInt(100)+" "+generatePostIndex(),
-                    generatePasportSeria()+" "+pasportNumber+" "+randomString(gumvs)+" "+city+" "+pasportDate,
-                    "HR",chairID);
-
-        }
 
     }
 
@@ -527,20 +514,7 @@ public void setupBase(String[] list) {
         String city = randomString(City);
         String pasportNumber = generatePasportNumber();
         String indifCode = generatePersonalID();
-
-        if(male){
-            teacherIDCounter++;
-            return new Teacher(teacherIDCounter,randomString(MaleNames),randomString(MaleSurnames),null,indifCode,"M",null,generatePhoneNumber(),
-                    personDate,"Украина "+ city +" "+randomString(Street)+" "+generateHouseNumber()+" "+rn.nextInt(100)+" "+generatePostIndex(),
-                    generatePasportSeria()+" "+pasportNumber+" "+randomString(gumvs)+" "+city+" "+pasportDate,
-                    officeGenerate(),levelGenerate(),chairID);
-        }else{
-            return new Teacher(teacherIDCounter,randomString(FemaleNames),randomString(FemaleSurnames),null,indifCode,"F",null,generatePhoneNumber(),
-                    personDate,
-                    "Украина "+ city +" "+randomString(Street)+" "+generateHouseNumber()+" "+rn.nextInt(100)+" "+generatePostIndex(),
-                    generatePasportSeria()+" "+pasportNumber+" "+randomString(gumvs)+" "+city+" "+pasportDate,
-                    officeGenerate(),levelGenerate(),chairID);
-        }
+return  null;
     }
 
     public Student generateStudent(int course, String faculty, String chairShortName, int wave, int index, int groupIndex, ArrayList<Discipline> disciplines, int chairID, int groupID){
@@ -555,23 +529,7 @@ public void setupBase(String[] list) {
         String pasportNumber = generatePasportNumber();
         String indifCode = generatePersonalID();
         //System. out .println("generateStudent 2");
-        if(male){
-            //System. out .println("generateStudent 3");
-            studentIDCounter++;
-            return new Student(studentIDCounter,randomString(MaleNames),randomString(MaleSurnames),null,indifCode,"M",null,generatePhoneNumber(),personDate,
-                    "Украина "+ city +" "+randomString(Street)+" "+generateHouseNumber()+" "+rn.nextInt(100)+" "+generatePostIndex(),
-                    generatePasportSeria()+" "+pasportNumber+" "+randomString(gumvs)+" "+city+" "+pasportDate,
-                    faculty, chairShortName + wave + (index < 10? index: "0" + index),faculty + chairShortName + "-" + wave + groupIndex + index
-                    , index, disciplines,chairID,groupID);
-
-        }else{
-            //System. out .println("generateStudent 4");
-            return new Student(studentIDCounter,randomString(FemaleNames),randomString(FemaleSurnames),null,indifCode,"F",null,generatePhoneNumber(),personDate,
-                    "Украина "+ city +" "+randomString(Street)+" "+generateHouseNumber()+" "+rn.nextInt(100)+" "+generatePostIndex(),
-                    generatePasportSeria()+" "+pasportNumber+" "+randomString(gumvs)+" "+city+" "+pasportDate,
-                    faculty, chairShortName + wave + (index < 10? index: "0" + index),faculty + chairShortName + "-" + wave + groupIndex + index,
-                    index, disciplines,chairID,groupID);
-        }
+        return  null;
 
     }
 /*

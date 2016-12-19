@@ -27,17 +27,6 @@ public class Teacher extends Person implements Serializable {
     public Teacher() {
     }
 
-    public Teacher(int ID, String name, String secondName, String surname, String personalID, String sex, String email, String phoneNumber,
-                   Calendar dateOfBorn, String address, String pasport, String office, String level,  int chairID) {
-        super(ID,name, secondName, surname, personalID, sex, email, phoneNumber, dateOfBorn, address, pasport);
-        this.office = office;
-        qs.add(new QueryBean("Teacher","office",office));
-        this.level = level;
-        qs.add(new QueryBean("Teacher","level",level));
-        qs.add(new QueryBean("Teacher","DisciplinesList",""));
-        this.chairID = chairID;
-        qs.add(new QueryBean("Teacher","chairID",chairID));
-    }
 
     public int getChairID() {
         return chairID;
