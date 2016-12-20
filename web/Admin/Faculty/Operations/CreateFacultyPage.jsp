@@ -30,7 +30,7 @@
                 <form action="/CreateFacultyPageController" method="post" accept-charset="UTF-8">
                     <input type="hidden"  name="step" value="step1">
                     <input type="hidden"  name="instituteID" value="${institute.getID()}">
-                    <button onclick="submit" class="itemButton" ><h2><c:out value="${institute.getLongName()}"/></h2></button>
+                    <button onclick="submit" class="itemButton" ><c:out value="${institute.getLongName()}"/></button>
                 </form>
             </div>
         </c:forEach>

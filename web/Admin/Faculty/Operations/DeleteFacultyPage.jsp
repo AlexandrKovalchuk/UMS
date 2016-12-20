@@ -21,12 +21,12 @@
             Select Faculty to Delete:
             <c:forEach items="${institutesList}" var="institute">
                 <div>
-                    <h5><c:out value="${institute.getLongName()}"/></h5>
+                    <h2><c:out value="${institute.getLongName()}"/></h2>
                     <c:forEach items="${institute.getFacultys()}" var="faculty">
                         <form action="/DeleteFacultyPageController" method="post" accept-charset="UTF-8">
                             <input type="hidden"  name="step" value="step1">
                             <input type="hidden"  name="facultyID" value="${faculty.getID()}">
-                            <button onclick="submit" class="itemButton" ><h2><c:out value="${faculty.getLongName()}"/></h2></button>
+                            <button onclick="submit" class="itemButton" ><c:out value="${faculty.getLongName()}"/></button>
                         </form>
 
                     </c:forEach>

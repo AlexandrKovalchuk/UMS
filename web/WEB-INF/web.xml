@@ -223,6 +223,46 @@
     </servlet-mapping>
 
     <servlet>
+        <servlet-name>DeleteEmployeePageController</servlet-name>
+        <servlet-class>net.ukr.vixtibon.servlets.controllers.persons.employee.DeleteEmployeePageController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>DeleteEmployeePageController</servlet-name>
+        <url-pattern>/DeleteEmployeePageController</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>UpdateEmployeePageController</servlet-name>
+        <servlet-class>net.ukr.vixtibon.servlets.controllers.persons.employee.UpdateEmployeePageController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>UpdateEmployeePageController</servlet-name>
+        <url-pattern>/UpdateEmployeePageController</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ShowEmployeeInfoPageController</servlet-name>
+        <servlet-class>net.ukr.vixtibon.servlets.controllers.persons.employee.ShowEmployeeInfoPageController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>ShowEmployeeInfoPageController</servlet-name>
+        <url-pattern>/ShowEmployeeInfoPageController</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>MoveEmployeePageController</servlet-name>
+        <servlet-class>net.ukr.vixtibon.servlets.controllers.persons.employee.MoveEmployeePageController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>MoveEmployeePageController</servlet-name>
+        <url-pattern>/MoveEmployeePageController</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>ActionResultPageController</servlet-name>
         <servlet-class>net.ukr.vixtibon.servlets.controllers.ActionResultPageController</servlet-class>
     </servlet>

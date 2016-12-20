@@ -27,14 +27,14 @@
         Select Institute where to add Employee:
         <c:forEach items="${institutesList}" var="institute">
             <div>
-                <h5><c:out value="${institute.getLongName()}"/></h5>
+                <h2><c:out value="${institute.getLongName()}"/></h2>
                 <c:forEach items="${institute.getFacultys()}" var="faculty">
-                    <h5><c:out value="${faculty.getLongName()}"/></h5>
+                    <h2><c:out value="${faculty.getLongName()}"/></h2>
                     <c:forEach items="${faculty.getDepartments()}" var="department">
                         <form action="/CreateEmployeePageController" method="post" accept-charset="UTF-8">
                             <input type="hidden"  name="step" value="step1">
                             <input type="hidden"  name="departmentID" value="${department.getID()}">
-                            <button onclick="submit" class="itemButton" ><h2><c:out value="${department.getLongName()}"/></h2></button>
+                            <button onclick="submit" class="itemButton" ><c:out value="${department.getLongName()}"/></button>
                         </form>
                     </c:forEach>
                 </c:forEach>
@@ -51,25 +51,25 @@
                     <tr class = "textInputLabel">
                         <td>Ім'я:</td>
                         <td>
-                            <input type="text" name="name">
+                            <input type="text" name="name" required/>
                         </td>
                     </tr>
                     <tr class = "textInputLabel">
                         <td>Прізвище:</td>
                         <td>
-                            <input type="text" name="lastName">
+                            <input type="text" name="lastName" required/>
                         </td>
                     </tr>
                     <tr class = "textInputLabel">
                         <td>По Батькові:</td>
                         <td>
-                            <input type="text" name="fathersName">
+                            <input type="text" name="fathersName" required/>
                         </td>
                     </tr>
                     <tr class = "textInputLabel">
                         <td>Ідентифікаційний код:</td>
                         <td>
-                            <input type="text" name="personalID">
+                            <input type="text" name="personalID" required/>
                         </td>
                     </tr>
                     <tr class = "textInputLabel">
@@ -85,27 +85,27 @@
                     <tr class = "textInputLabel">
                         <td>День</td>
                         <td>
-                            <input type="int" name="bday">
+                            <input type="int" name="bday" required/>
                         </td>
                         <td>   Місяць</td>
                         <td>
-                            <input type="int" name="bmonth">
+                            <input type="int" name="bmonth" required/>
                         </td>
                         <td>   Рік</td>
                         <td>
-                            <input type="int" name="byear">
+                            <input type="int" name="byear" required/>
                         </td>
                     </tr>
                     <tr class = "textInputLabel">
                         <td>Пошта:</td>
                         <td>
-                            <input type="text" name="email">
+                            <input type="text" name="email" required/>
                         </td>
                     </tr>
                     <tr class = "textInputLabel">
                         <td>Телефон:</td>
                         <td>
-                            <input type="text" name="phoneNumber">
+                            <input type="text" name="phoneNumber" required/>
                         </td>
                     </tr>
                     <tr class = "textInputLabel">
@@ -113,27 +113,27 @@
                     </tr>
                     <tr class = "textInputLabel">
                         <td>
-                            <input type="text" name="address">
+                            <input type="text" name="address" required/>
                         </td>
                     </tr>
                     <tr class = "textInputLabel">
                         <td>Паспортні данні:</td>
                         <td>
-                            <input type="text" name="pasport">
+                            <input type="text" name="pasport" required/>
                         </td>
                     </tr>
 
                     <tr class = "textInputLabel">
                         <td>Посада:</td>
                         <td>
-                            <input type="text" name="office">
+                            <input type="text" name="office" required/>
                         </td>
                     </tr>
 
                     <tr class = "textInputLabel">
                         <td>LogIn:</td>
                         <td>
-                            <input type="text" name="login">
+                            <input type="text" name="login" required/>
                         </td>
                     </tr>
 

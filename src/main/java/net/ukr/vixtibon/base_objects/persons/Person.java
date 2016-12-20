@@ -25,7 +25,7 @@ public abstract class Person implements Serializable {
     private String sex;// Can contain only M, m, F, f
     private String email;// Need to find standarts for email, should contain "@" and "." in correct order
     private String phoneNumber;//have some questions
-    private Date dateOfBorn ;
+    private Date dateOfBorn = null;
     private String address;
     private String pasport;
     private String login = "";
@@ -43,8 +43,8 @@ public abstract class Person implements Serializable {
     }
 
     public void  setDateOfBorn(int day, int month, int year){
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/M/yyyy");
-        String dateInString = "" + day + "/" + month + "/" + year +"";
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
+        String dateInString = ""+day+"-"+month+"-"+year+" 10:20:56";
         try {
             this.dateOfBorn = sdf.parse(dateInString);
         } catch (ParseException e) {

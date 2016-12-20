@@ -24,7 +24,7 @@
 <c:if test = "${result eq 'success'}">
     <div class = "pageTitleTextGood">
         <h5>
-            Operation was not success!
+            Operation was success!
         </h5>
     </div>
 </c:if>

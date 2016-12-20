@@ -22,14 +22,14 @@
         Select Department to Move:
         <c:forEach items="${institutesList}" var="institute">
             <div>
-                <h5><c:out value="${institute.getLongName()}"/></h5>
+                <h2><c:out value="${institute.getLongName()}"/></h2>
                 <c:forEach items="${institute.getFacultys()}" var="faculty">
-                    <h5><c:out value="${faculty.getLongName()}"/></h5>
+                    <h2><c:out value="${faculty.getLongName()}"/></h2>
                     <c:forEach items="${faculty.getDepartments()}" var="department">
                         <form action="/MoveDepartmentPageController" method="post" accept-charset="UTF-8">
                             <input type="hidden"  name="step" value="step1">
                             <input type="hidden"  name="departmentID" value="${department.getID()}">
-                            <button onclick="submit" class="itemButton" ><h2><c:out value="${department.getLongName()}"/></h2></button>
+                            <button onclick="submit" class="itemButton" ><c:out value="${department.getLongName()}"/></button>
                         </form>
                     </c:forEach>
                 </c:forEach>
@@ -39,14 +39,14 @@
     <c:if test = "${selected eq 'yes'}">
         Select Faculty where to move <c:out value="${department.getLongName()}"/>:
         <c:forEach items="${institutesList}" var="institute">
-            <h5><c:out value="${institute.getLongName()}"/></h5>
+            <h2><c:out value="${institute.getLongName()}"/></h2>
             <c:forEach items="${institute.getFacultys()}" var="faculty">
                 <div>
                     <form action="/MoveDepartmentPageController" method="post" accept-charset="UTF-8">
                         <input type="hidden"  name="step" value="step2">
                         <input type="hidden"  name="departmentID" value="${department.getID()}">
                         <input type="hidden"  name="facultyID" value="${faculty.getID()}">
-                        <button onclick="submit" class="itemButton" ><h2><c:out value="${faculty.getLongName()}"/></h2></button>
+                        <button onclick="submit" class="itemButton" ><c:out value="${faculty.getLongName()}"/></button>
                     </form>
                 </div>
             </c:forEach>

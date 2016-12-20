@@ -36,7 +36,7 @@ public class CreateEmployeePageController  extends HttpServlet {
                 em.setfathersName(request.getParameter("fathersName"));
                 em.setPersonalID(request.getParameter("personalID"));
                 em.setSex(request.getParameter("sex"));
-                em.setDateOfBorn(Integer.parseInt(request.getParameter("byear")),Integer.parseInt(request.getParameter("bmonth")),Integer.parseInt(request.getParameter("bday")));
+                em.setDateOfBorn(Integer.parseInt(request.getParameter("bday")),Integer.parseInt(request.getParameter("bmonth")),Integer.parseInt(request.getParameter("byear")));
                 em.setEmail(request.getParameter("email"));
                 em.setPhoneNumber(request.getParameter("phoneNumber"));
                 em.setAddress(request.getParameter("address"));
