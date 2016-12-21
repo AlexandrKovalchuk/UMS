@@ -1,11 +1,9 @@
 package net.ukr.vixtibon.base_objects.persons;
 
 import net.ukr.vixtibon.base_objects.stady_process.Discipline;
-import net.ukr.vixtibon.QueryBean;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Calendar;
 
 /**
  * Created by akovalchuk on 5/22/2015.

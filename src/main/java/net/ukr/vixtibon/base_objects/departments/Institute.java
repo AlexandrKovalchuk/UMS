@@ -1,7 +1,5 @@
 package net.ukr.vixtibon.base_objects.departments;
 
-import net.ukr.vixtibon.QueryBean;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 

@@ -1,6 +1,3 @@
-<%@ page import="servlets.Session" %>
-<%@ page import="servlets.SessionsList" %>
-<%@ page import="net.ukr.vixtibon.DataBaseDriver" %>
 <%@ page import="net.ukr.vixtibon.base_objects.stady_process.Discipline" %>
 <%@ page import="net.ukr.vixtibon.base_objects.persons.Teacher" %>
 <%@ page import="java.util.ArrayList" %>
@@ -15,21 +12,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <%
-        DataBaseDriver d = new DataBaseDriver();
-        SessionsList sl = new SessionsList();
-        Cookie[] cookies = request.getCookies();
-        String result = sl.sessionControl(cookies,"employee");
-        int areaID = 0;
-        if(!result.equals("success")){
-            response.sendRedirect(result);
-        }
-        Session s = sl.getSession(cookies);
-        s.sessionInfo();
-        areaID = s.getAreaAccessID();
-        int step = 0;
-        step = Integer.parseInt(request.getParameter("step"));
-    %>
     <title><title>Manage Teacher Credentials</title></title>
     <link rel="stylesheet" type="text/css" href="sources\employee_css.css">
 </head>

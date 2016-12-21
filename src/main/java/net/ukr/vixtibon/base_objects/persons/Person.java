@@ -1,13 +1,10 @@
 package net.ukr.vixtibon.base_objects.persons;
 
 import net.ukr.vixtibon.ClassReadyForTest;
-import net.ukr.vixtibon.QueryBean;
-import net.ukr.vixtibon.QuerySet;
 
 import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Random;
@@ -30,8 +27,6 @@ public abstract class Person implements Serializable {
     private String pasport;
     private String login = "";
     private static final long serialVersionUID = 1L;
-
-    public QuerySet qs = new QuerySet();
 
     public Person() {
 
@@ -106,64 +101,42 @@ public abstract class Person implements Serializable {
         return l;
     }
 
-    public void updateQuerySetParameter(String key, String update){
-        QueryBean qb = new QueryBean();
-        if(qs.getSet().containsKey(key)) {
-            qb.setTableName(qs.getSet().get(key).getTableName());
-            qb.setFieldName(qs.getSet().get(key).getFieldName());
-
-        }else{
-            qb.setTableName(null);
-            qb.setFieldName(key);
-        }
-        qb.setFieldData(update);
-        qs.add(qb);
-    }
 
     public void setAddress(String address) {
         this.address = address;
-        updateQuerySetParameter("address",address);
     }
 
     public void setPasport(String pasport) {
         this.pasport = pasport;
-        updateQuerySetParameter("pasport",pasport);
     }
 
     public void setName(String name) {
         this.name = name;
-        updateQuerySetParameter("name",name);
     }
 
     public void setlastName(String secondName) {
         this.lastName = secondName;
-        updateQuerySetParameter("lastName",secondName);
     }
 
     public void setfathersName(String surname) {
         this.fathersName = surname;
-        updateQuerySetParameter("fathersName",surname);
     }
 
     public void setPersonalID(String personalID) {
         this.personalID = personalID;
-        updateQuerySetParameter("personalID",personalID);
     }
 
     public void setSex(String sex) {
         this.sex = sex;
         String set = "" + sex;
-        updateQuerySetParameter("sex",set);
     }
 
     public void setEmail(String email) {
         this.email = email;
-        updateQuerySetParameter("email",email);
     }
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
-        updateQuerySetParameter("phoneNumber",phoneNumber);
     }
 
     public String getAddress() {

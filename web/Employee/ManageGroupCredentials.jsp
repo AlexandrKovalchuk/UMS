@@ -1,9 +1,5 @@
 <%@ page import="servlets.Session" %>
 <%@ page import="servlets.SessionsList" %>
-<%@ page import="net.ukr.vixtibon.Group" %>
-<%@ page import="java.util.ArrayList" %>
-<%@ page import="net.ukr.vixtibon.DataBaseDriver" %>
-<%@ page import="net.ukr.vixtibon.base_objects.persons.Student" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>

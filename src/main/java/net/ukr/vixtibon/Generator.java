@@ -77,12 +77,10 @@ public class Generator {
 
     static final  String USER = "username";
     static final  String PASS = "password";
-    DataBaseDriver d = new DataBaseDriver();
 
 public void setupBase(String[] list) {
     System.out.println("setupBase");
     for (String s : list) {
-        d.tableCreator(s);
     }
 }
 
@@ -202,7 +200,6 @@ public void setupBase(String[] list) {
        // d.stringProcessor(d.insertQuery(KPI.qs));
 
         String str = "SELECT longName, shortName, ID FROM institute";
-        d.selectObject(str);
         System. out .println("Institute opening complete");
 
     }

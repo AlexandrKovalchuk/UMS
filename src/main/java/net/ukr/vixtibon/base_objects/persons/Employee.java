@@ -1,9 +1,6 @@
 package net.ukr.vixtibon.base_objects.persons;
 
-import net.ukr.vixtibon.QueryBean;
-
 import java.io.Serializable;
-import java.util.Calendar;
 
 /**
  * Created by alex on 17/01/2016.

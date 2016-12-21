@@ -1,8 +1,5 @@
 package net.ukr.vixtibon.base_objects.departments;
 
-import net.ukr.vixtibon.QueryBean;
-import net.ukr.vixtibon.QuerySet;
-
 /**
  * Created by akovalchuk on 6/4/2015.
  */

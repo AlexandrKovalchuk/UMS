@@ -1,17 +1,12 @@
 package net.ukr.vixtibon.servlets.controllers.login;
 
-import net.ukr.vixtibon.DataBaseDriver;
-import net.ukr.vixtibon.base_objects.persons.Employee;
 import net.ukr.vixtibon.dao.login.DAOLogin;
 import net.ukr.vixtibon.dao.persons.DAOEmployee;
 import net.ukr.vixtibon.login_body.LogInBody;
-import servlets.Session;
-import servlets.SessionsList;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.*;
 import java.io.*;
-import java.util.ArrayList;
 
 /**
  * Created by alex on 10/30/2015.

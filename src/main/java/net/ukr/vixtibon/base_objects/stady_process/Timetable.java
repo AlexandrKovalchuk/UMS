@@ -1,8 +1,6 @@
 package net.ukr.vixtibon.base_objects.stady_process;
 
 import net.ukr.vixtibon.MyCalendar;
-import net.ukr.vixtibon.QueryBean;
-import net.ukr.vixtibon.QuerySet;
 
 import java.io.Serializable;
 import java.util.Calendar;
@@ -17,22 +15,6 @@ public class Timetable implements Serializable {
     private int countOfWeeks;
     int ID;
     Day[][] Days;
-
-    public QuerySet qs = new QuerySet();
-
-    public void updateQuerySetParameter(String key, String update){
-        QueryBean qb = new QueryBean();
-        if(qs.getSet().containsKey(key)) {
-            qb.setTableName(qs.getSet().get(key).getTableName());
-            qb.setFieldName(qs.getSet().get(key).getFieldName());
-
-        }else{
-            qb.setTableName("Group");
-            qb.setFieldName(key);
-        }
-        qb.setFieldData(update);
-        qs.add(qb);
-    }
 
     public int getID() {
         return ID;

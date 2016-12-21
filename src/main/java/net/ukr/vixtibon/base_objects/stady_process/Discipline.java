@@ -1,8 +1,6 @@
 package net.ukr.vixtibon.base_objects.stady_process;
 
 import net.ukr.vixtibon.ClassReadyForTest;
-import net.ukr.vixtibon.QueryBean;
-import net.ukr.vixtibon.QuerySet;
 import net.ukr.vixtibon.Test;
 import net.ukr.vixtibon.base_objects.persons.Teacher;
 
@@ -24,26 +22,8 @@ public class Discipline  implements Serializable {
     private int ID;
     private int chairID;
 
-    public QuerySet qs = new QuerySet();
-
-    public void updateQuerySetParameter(String key, String update){
-        QueryBean qb = new QueryBean();
-        if(qs.getSet().containsKey(key)) {
-            qb.setTableName(qs.getSet().get(key).getTableName());
-            qb.setFieldName(qs.getSet().get(key).getFieldName());
-
-        }else{
-            qb.setTableName(null);
-            qb.setFieldName(key);
-        }
-        qb.setFieldData(update);
-        qs.add(qb);
-    }
-
     public void setCountOfPraktice(int countOfPraktice) {
         this.countOfPraktice = countOfPraktice;
-        String str = "";
-        updateQuerySetParameter("countOfPraktice",str + countOfPraktice);
     }
 
     public int getCountOfPraktice() {
@@ -54,26 +34,18 @@ public class Discipline  implements Serializable {
     public Discipline(int ID, String nameOfDiscipline, int courseNumber, int semesterNumber, int countOfLessons, boolean exam, int countOfPraktice
             , int chairID) {
         this.ID = ID;
-        qs.add(new QueryBean("discipline","ID",ID));
         this.nameOfDiscipline = nameOfDiscipline;
-        qs.add(new QueryBean("discipline","nameOfDiscipline",nameOfDiscipline));
         this.courseNumber = courseNumber;
         String str = "";
-        qs.add(new QueryBean("discipline","courseNumber", str + courseNumber));
         this.semesterNumber = semesterNumber;
         str = "";
-        qs.add(new QueryBean("discipline","semesterNumber",str + semesterNumber));
         this.countOfLessons = countOfLessons;
         str = "";
-        qs.add(new QueryBean("discipline","countOfLessons",str + countOfLessons));
         this.countOfPraktice = countOfPraktice;
         str = "";
-        qs.add(new QueryBean("discipline","countOfPraktice",str + countOfPraktice));
         this.exam = exam;
         str = "";
-        qs.add(new QueryBean("discipline","exam",str + exam));
         this.chairID = chairID;
-        qs.add(new QueryBean("discipline","chairID",chairID));
     }
     public  Discipline(){}
     public String getFirstLetter(String s){
@@ -104,7 +76,6 @@ public class Discipline  implements Serializable {
         }else{
             this.nameOfDiscipline = nameOfDiscipline;
         }
-        updateQuerySetParameter("nameOfDiscipline",nameOfDiscipline);
 
     }
 
@@ -187,25 +158,19 @@ public class Discipline  implements Serializable {
     public void setCourseNumber(int courseNumber) {
         this.courseNumber = courseNumber;
         String str = "";
-        updateQuerySetParameter("courseNumber",str + courseNumber);
     }
 
     public void setSemesterNumber(int semesterNumber) {
         this.semesterNumber = semesterNumber;
         String str = "";
-        updateQuerySetParameter("semesterNumber",str + semesterNumber);
     }
 
     public void setCountOfLessons(int countOfLessons) {
         this.countOfLessons = countOfLessons;
-        String str = "";
-        updateQuerySetParameter("countOfLessons",str + countOfLessons);
     }
 
     public void setExam(boolean exam) {
         this.exam = exam;
-        String str = "";
-        updateQuerySetParameter("exam",str + exam);
     }
 
     public String getNameOfDiscipline() {
