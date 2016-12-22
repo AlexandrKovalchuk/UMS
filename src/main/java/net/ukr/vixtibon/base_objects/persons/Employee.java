@@ -16,13 +16,12 @@ public class Employee extends Person implements Serializable {
         return departmentID;
     }
 
-    public void setChairID(int departmentID) {
+    public void setDepartmentID(int departmentID) {
         this.departmentID = departmentID;
     }
 
     public void setOffice(String office) {
         this.office = office;
-        updateQuerySetParameter("office",office);
     }
 
     public String getOffice() {

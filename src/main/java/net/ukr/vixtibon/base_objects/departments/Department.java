@@ -45,6 +45,14 @@ public class Department extends Structure implements Serializable {
     public void setFacultyID(int facultyID) {
         this.facultyID = facultyID;
     }
+
+    public void setEmployees(ArrayList<Employee> employees){
+        this.Employees = employees;
+    }
+
+    public ArrayList<Employee> getEmployees( ){
+        return Employees;
+    }
 /*
     public String[][] listOfGroups(){
         int size = Groups1.size() + Groups2.size() + Groups3.size() + Groups4.size() + Groups5.size() + Groups6.size();

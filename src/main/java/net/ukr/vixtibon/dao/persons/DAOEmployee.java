@@ -1,5 +1,6 @@
 package net.ukr.vixtibon.dao.persons;
 
+import net.ukr.vixtibon.base_objects.departments.Department;
 import net.ukr.vixtibon.base_objects.departments.Faculty;
 import net.ukr.vixtibon.base_objects.persons.Employee;
 import net.ukr.vixtibon.dao.AbstractController;
@@ -9,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -19,6 +21,38 @@ public class DAOEmployee extends AbstractController<Employee,Integer> {
     @Override
     public List<Employee> getAll() {
         return null;
+    }
+
+    public ArrayList<Employee> getAllByDepartmentID(int departmentID){
+        String Select_All_Employees_Statemet = "SELECT * FROM employee WHERE departmentID="+ departmentID +";";
+        ArrayList<Employee> employeeList = new ArrayList<>();
+        PreparedStatement ps = getPrepareStatement(Select_All_Employees_Statemet);
+        try {
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Employee employee = new Employee();
+                employee.setName(rs.getString(1));
+                employee.setlastName(rs.getString(2));
+                employee.setfathersName(rs.getString(3));
+                employee.setPersonalID(rs.getString(4));
+                employee.setSex(rs.getString(5));
+                employee.setEmail(rs.getString(6));
+                employee.setPhoneNumber(rs.getString(7));
+                employee.setDateOfBorn();
+                employee.setAddress(rs.getString(9));
+                employee.setPasport(rs.getString(10));
+                employee.setLogin(rs.getString(11));
+                employee.setOffice(rs.getString(12));
+                employee.setID(rs.getInt(13));
+                employee.setDepartmentID(rs.getInt(14));
+                employeeList.add(employee);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            closePrepareStatement(ps);
+        }
+        return employeeList;
     }
 
     @Override
