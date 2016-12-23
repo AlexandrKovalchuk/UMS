@@ -38,7 +38,7 @@ public class DAOEmployee extends AbstractController<Employee,Integer> {
                 employee.setSex(rs.getString(5));
                 employee.setEmail(rs.getString(6));
                 employee.setPhoneNumber(rs.getString(7));
-                employee.setDateOfBorn();
+                employee.setDateOfBorn(rs.getDate(8));
                 employee.setAddress(rs.getString(9));
                 employee.setPasport(rs.getString(10));
                 employee.setLogin(rs.getString(11));

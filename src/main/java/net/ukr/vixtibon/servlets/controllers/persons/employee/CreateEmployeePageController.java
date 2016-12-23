@@ -15,7 +15,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * Created by alex on 12/12/2016.
@@ -36,7 +39,15 @@ public class CreateEmployeePageController  extends HttpServlet {
                 em.setfathersName(request.getParameter("fathersName"));
                 em.setPersonalID(request.getParameter("personalID"));
                 em.setSex(request.getParameter("sex"));
-                em.setDateOfBorn(Integer.parseInt(request.getParameter("bday")),Integer.parseInt(request.getParameter("bmonth")),Integer.parseInt(request.getParameter("byear")));
+                SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
+                String dateInString = ""+request.getParameter("bday")+"-"+request.getParameter("bmonth")+"-"+request.getParameter("byear")+" 10:20:56";
+                Date date = new Date();
+                try {
+                    date = sdf.parse(dateInString);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                em.setDateOfBorn(date);
                 em.setEmail(request.getParameter("email"));
                 em.setPhoneNumber(request.getParameter("phoneNumber"));
                 em.setAddress(request.getParameter("address"));

@@ -37,14 +37,8 @@ public abstract class Person implements Serializable {
         return dateOfBorn;
     }
 
-    public void  setDateOfBorn(int day, int month, int year){
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
-        String dateInString = ""+day+"-"+month+"-"+year+" 10:20:56";
-        try {
-            this.dateOfBorn = sdf.parse(dateInString);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+    public void  setDateOfBorn(Date date){
+            this.dateOfBorn = date ;
     }
 
     public String getLogin() {
