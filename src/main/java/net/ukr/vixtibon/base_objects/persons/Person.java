@@ -37,6 +37,18 @@ public abstract class Person implements Serializable {
         return dateOfBorn;
     }
 
+    public int getYearOfBorn(){
+        return dateOfBorn.getYear();
+    }
+
+    public int getMonthOfBorn(){
+        return dateOfBorn.getMonth();
+    }
+
+    public  int getDayOfBorn(){
+        return dateOfBorn.getDay();
+    }
+
     public void  setDateOfBorn(Date date){
             this.dateOfBorn = date ;
     }

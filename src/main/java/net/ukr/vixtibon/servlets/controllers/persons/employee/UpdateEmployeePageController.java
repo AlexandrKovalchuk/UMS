@@ -14,7 +14,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * Created by alex on 12/12/2016.
@@ -23,19 +26,36 @@ public class UpdateEmployeePageController  extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if(request.getParameterMap().containsKey("step")){
             if(request.getParameter("step").equals("step1")){
-                DAODepartment daoi = new DAODepartment();
-                Department department = daoi.getEntityById(Integer.parseInt(request.getParameter("departmentID")));
+                DAOEmployee daoe = new DAOEmployee();
+                Employee employee = daoe.getEntityById(Integer.parseInt(request.getParameter("employeeID")));
                 request.setAttribute("selected", "yes");
-                request.setAttribute("department", department);
-                request.getRequestDispatcher("Admin/Department/Operations/UpdateDepartmentPage.jsp").forward(request, response);
+                request.setAttribute("employee", employee);
+                request.getRequestDispatcher("Admin/Employee/Operations/UpdateEmployeePage.jsp").forward(request, response);
             }else if(request.getParameter("step").equals("step2")){
-                DAODepartment daoi = new DAODepartment();
+                DAOEmployee daoe = new DAOEmployee();
                 boolean result = false;
-                Department department = new Department();
-                department.setID(Integer.parseInt(request.getParameter("departmentID")));
-                department.setLongName(request.getParameter("longName"));
-                department.setShortName(request.getParameter("shortName"));
-                result = daoi.update(department);
+                Employee em = new Employee();
+                em.setName(request.getParameter("name"));
+                em.setlastName(request.getParameter("lastName"));
+                em.setfathersName(request.getParameter("fathersName"));
+                em.setPersonalID(request.getParameter("personalID"));
+                em.setSex(request.getParameter("sex"));
+                SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
+                String dateInString = ""+request.getParameter("bday")+"-"+request.getParameter("bmonth")+"-"+request.getParameter("byear")+" 10:20:56";
+                Date date = new Date();
+                try {
+                    date = sdf.parse(dateInString);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                em.setDateOfBorn(date);
+                em.setEmail(request.getParameter("email"));
+                em.setPhoneNumber(request.getParameter("phoneNumber"));
+                em.setAddress(request.getParameter("address"));
+                em.setPasport(request.getParameter("pasport"));
+                em.setOffice(request.getParameter("office"));
+                em.setLogin(request.getParameter("login"));
+                result = daoe.update(em);
                 if(result){
                     request.setAttribute("result", "success");
                     request.setAttribute("menu", "department");
@@ -45,7 +65,7 @@ public class UpdateEmployeePageController  extends HttpServlet {
                 }
                 request.getRequestDispatcher("ActionResultPageController").forward(request, response);
             }else if(request.getParameter("step").equals("cancel")){
-                request.getRequestDispatcher("DepartmentPageController").forward(request, response);
+                request.getRequestDispatcher("EmployeePageController").forward(request, response);
             }else{
                 //error page
             }
@@ -69,7 +89,7 @@ public class UpdateEmployeePageController  extends HttpServlet {
             }
             request.setAttribute("institutesList", i);
             request.setAttribute("selected", "no");
-            request.getRequestDispatcher("Admin/Department/Operations/UpdateDepartmentPage.jsp").forward(request, response);
+            request.getRequestDispatcher("Admin/Employee/Operations/UpdateEmployeePage.jsp").forward(request, response);
         }
     }
 }
