@@ -57,7 +57,21 @@ public class DAOEmployee extends AbstractController<Employee,Integer> {
 
     @Override
     public boolean update(Employee entity) {
-        return false;
+        String Update_Department_Statemet = "UPDATE employee SET name='" +entity.getName()+ "',lastName='"+entity.getSecondName()+"'," +
+                "fathersName='"+entity.getSurname()+"',personalID='"+entity.getPersonalID()+"',sex='"+entity.getSex()+"',email='"+entity.getEmail()+"'," +
+                "phoneNumber='"+entity.getPhoneNumber()+"',dateOfBorn='"+entity.getDateOfBorn()+"'," +
+                "address='"+entity.getAddress()+"',pasport='"+entity.getPasport()+"',login='"+entity.getLogin()+"'," +
+                "office='"+entity.getOffice()+"',ID='"+entity.getID()+"',departmentID='"+entity.getDepartmentID()+"' WHERE ID=" + entity.getID() + ";";
+        PreparedStatement ps = getPrepareStatement(Update_Department_Statemet);
+        try {
+            ps.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        } finally {
+            closePrepareStatement(ps);
+        }
     }
 
     @Override
