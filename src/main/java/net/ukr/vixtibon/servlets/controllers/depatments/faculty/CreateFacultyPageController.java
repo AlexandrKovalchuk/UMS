@@ -37,6 +37,7 @@ public class CreateFacultyPageController  extends HttpServlet {
                     request.setAttribute("menu", "faculty");
                     request.setAttribute("result", "unsuccess");
                 }
+                d.closeConnection();
                 request.getRequestDispatcher("ActionResultPageController").forward(request, response);
             }else if(request.getParameter("step").equals("cancel")){
                 request.getRequestDispatcher("FacultyPageController").forward(request, response);
@@ -46,6 +47,7 @@ public class CreateFacultyPageController  extends HttpServlet {
         }else{
             DAOInstitute daoi = new DAOInstitute();
             ArrayList<Institute> i = daoi.getAll();
+            daoi.closeConnection();
             request.setAttribute("institutesList", i);
             request.getRequestDispatcher("Admin/Faculty/Operations/CreateFacultyPage.jsp").forward(request, response);
         }

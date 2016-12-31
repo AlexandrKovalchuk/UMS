@@ -18,18 +18,18 @@ import java.util.ArrayList;
 public class MoveFacultyPageController  extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if(request.getParameterMap().containsKey("step")){
+            DAOInstitute daoi = new DAOInstitute();
+            DAOFaculty daof = new DAOFaculty();
             if(request.getParameter("step").equals("step1")){
-                DAOInstitute daoi = new DAOInstitute();
                 ArrayList<Institute> i = daoi.getAll();
-                DAOFaculty daof = new DAOFaculty();
                 Faculty faculty = daof.getEntityById(Integer.parseInt(request.getParameter("facultyID")));
+                daof.closeConnection();
+                daoi.closeConnection();
                 request.setAttribute("selected", "yes");
                 request.setAttribute("institutesList", i);
                 request.setAttribute("faculty", faculty);
                 request.getRequestDispatcher("Admin/Faculty/Operations/MoveFacultyPage.jsp").forward(request, response);
             }else if(request.getParameter("step").equals("step2")){
-                DAOInstitute daoi = new DAOInstitute();
-                DAOFaculty daof = new DAOFaculty();
                 Institute institute = daoi.getEntityById(Integer.parseInt(request.getParameter("instituteID")));
                 Faculty faculty = daof.getEntityById(Integer.parseInt(request.getParameter("facultyID")));
                 request.setAttribute("selected", "yes2");
@@ -37,9 +37,8 @@ public class MoveFacultyPageController  extends HttpServlet {
                 request.setAttribute("faculty", faculty);
                 request.getRequestDispatcher("Admin/Faculty/Operations/MoveFacultyPage.jsp").forward(request, response);
             }else if(request.getParameter("step").equals("step3")){
-                DAOFaculty daoi = new DAOFaculty();
                 boolean result = false;
-                result = daoi.updateFacultyLocation(Integer.parseInt(request.getParameter("instituteID")),Integer.parseInt(request.getParameter("facultyID")));
+                result = daof.updateFacultyLocation(Integer.parseInt(request.getParameter("instituteID")),Integer.parseInt(request.getParameter("facultyID")));
                 if(result){
                     request.setAttribute("result", "success");
                     request.setAttribute("menu", "faculty");
@@ -47,6 +46,8 @@ public class MoveFacultyPageController  extends HttpServlet {
                     request.setAttribute("menu", "faculty");
                     request.setAttribute("result", "unsuccess");
                 }
+                daof.closeConnection();
+                daoi.closeConnection();
                 request.getRequestDispatcher("ActionResultPageController").forward(request, response);
             }else if(request.getParameter("step").equals("cancel")){
                 request.getRequestDispatcher("FacultyPageController").forward(request, response);
@@ -61,6 +62,8 @@ public class MoveFacultyPageController  extends HttpServlet {
                 ArrayList<Faculty> f = daof.getAllByInstituteID(institute.getID());
                 institute.setFacultys(f);
             }
+            daof.closeConnection();
+            daoi.closeConnection();
             request.setAttribute("institutesList", i);
             request.setAttribute("selected", "no");
             request.getRequestDispatcher("Admin/Faculty/Operations/MoveFacultyPage.jsp").forward(request, response);

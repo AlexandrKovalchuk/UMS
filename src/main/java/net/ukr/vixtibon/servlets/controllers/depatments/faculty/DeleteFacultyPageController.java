@@ -23,6 +23,7 @@ public class DeleteFacultyPageController  extends HttpServlet {
             if(request.getParameter("step").equals("step1")){
                 DAOFaculty daoi = new DAOFaculty();
                 Faculty faculty = daoi.getEntityById(Integer.parseInt(request.getParameter("facultyID")));
+                daoi.closeConnection();
                 request.setAttribute("selected", "yes");
                 request.setAttribute("faculty", faculty);
                 request.getRequestDispatcher("Admin/Faculty/Operations/DeleteFacultyPage.jsp").forward(request, response);
@@ -37,6 +38,7 @@ public class DeleteFacultyPageController  extends HttpServlet {
                     request.setAttribute("menu", "faculty");
                     request.setAttribute("result", "unsuccess");
                 }
+                daoi.closeConnection();
                 request.getRequestDispatcher("ActionResultPageController").forward(request, response);
             }else if(request.getParameter("step").equals("cancel")){
                 request.getRequestDispatcher("FacultyPageController").forward(request, response);
@@ -51,6 +53,8 @@ public class DeleteFacultyPageController  extends HttpServlet {
                 ArrayList<Faculty> f = daof.getAllByInstituteID(institute.getID());
                 institute.setFacultys(f);
             }
+            daof.closeConnection();
+            daoi.closeConnection();
             request.setAttribute("institutesList", i);
             request.setAttribute("selected", "no");
             request.getRequestDispatcher("Admin/Faculty/Operations/DeleteFacultyPage.jsp").forward(request, response);

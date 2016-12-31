@@ -28,6 +28,16 @@ public abstract class AbstractController<E, K> {
         connectionPool.putback(connection);
     }
 
+    public void closeConnection(){
+        if (connection != null) {
+            try {
+                connection.close();
+                System.out.println("Connection closed");
+            } catch (SQLException e) {
+            } // nothing we can do
+        }
+    }
+
     public PreparedStatement getPrepareStatement(String sql) {
         PreparedStatement ps = null;
         try {
@@ -75,6 +85,7 @@ public abstract class AbstractController<E, K> {
         if (ps != null) {
             try {
                 ps.close();
+                System.out.println("PreparedStatement closed");
             } catch (SQLException e) {
                 e.printStackTrace();
             }

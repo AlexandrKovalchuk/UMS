@@ -23,6 +23,7 @@ public class UpdateDepartmentPageController   extends HttpServlet {
             if(request.getParameter("step").equals("step1")){
                 DAODepartment daoi = new DAODepartment();
                 Department department = daoi.getEntityById(Integer.parseInt(request.getParameter("departmentID")));
+                daoi.closeConnection();
                 request.setAttribute("selected", "yes");
                 request.setAttribute("department", department);
                 request.getRequestDispatcher("Admin/Department/Operations/UpdateDepartmentPage.jsp").forward(request, response);
@@ -41,6 +42,7 @@ public class UpdateDepartmentPageController   extends HttpServlet {
                     request.setAttribute("menu", "department");
                     request.setAttribute("result", "unsuccess");
                 }
+                daoi.closeConnection();
                 request.getRequestDispatcher("ActionResultPageController").forward(request, response);
             }else if(request.getParameter("step").equals("cancel")){
                 request.getRequestDispatcher("DepartmentPageController").forward(request, response);
@@ -60,6 +62,9 @@ public class UpdateDepartmentPageController   extends HttpServlet {
                 }
                 institute.setFacultys(f);
             }
+            daod.closeConnection();
+            daof.closeConnection();
+            daoi.closeConnection();
             request.setAttribute("institutesList", i);
             request.setAttribute("selected", "no");
             request.getRequestDispatcher("Admin/Department/Operations/UpdateDepartmentPage.jsp").forward(request, response);

@@ -16,14 +16,13 @@ import java.util.ArrayList;
 public class DeleteInstitutePageController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if(request.getParameterMap().containsKey("step")){
+            DAOInstitute daoi = new DAOInstitute();
             if(request.getParameter("step").equals("step1")){
-                DAOInstitute daoi = new DAOInstitute();
                 Institute institute = daoi.getEntityById(Integer.parseInt(request.getParameter("instituteID")));
                 request.setAttribute("selected", "yes");
                 request.setAttribute("institute", institute);
                 request.getRequestDispatcher("Admin/Institute/Operations/DeleteInstitutePage.jsp").forward(request, response);
             }else if(request.getParameter("step").equals("step2")){
-                DAOInstitute daoi = new DAOInstitute();
                 boolean result = false;
                 result = daoi.delete(Integer.parseInt(request.getParameter("instituteID")));
                 if(result){
@@ -33,6 +32,7 @@ public class DeleteInstitutePageController extends HttpServlet {
                     request.setAttribute("menu", "institute");
                     request.setAttribute("result", "unsuccess");
                 }
+                daoi.closeConnection();
                 request.getRequestDispatcher("ActionResultPageController").forward(request, response);
             }else if(request.getParameter("step").equals("cancel")){
                 request.getRequestDispatcher("InstitutePageController").forward(request, response);
@@ -42,7 +42,7 @@ public class DeleteInstitutePageController extends HttpServlet {
         }else{
             DAOInstitute daoi = new DAOInstitute();
             ArrayList<Institute> i = daoi.getAll();
-            System.out.println("i length " + i.size());
+            daoi.closeConnection();
             request.setAttribute("institutesList", i);
             request.getRequestDispatcher("Admin/Institute/Operations/DeleteInstitutePage.jsp").forward(request, response);
         }

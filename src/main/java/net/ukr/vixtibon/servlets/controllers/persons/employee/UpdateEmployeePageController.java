@@ -25,14 +25,13 @@ import java.util.Date;
 public class UpdateEmployeePageController  extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if(request.getParameterMap().containsKey("step")){
+            DAOEmployee daoe = new DAOEmployee();
             if(request.getParameter("step").equals("step1")){
-                DAOEmployee daoe = new DAOEmployee();
                 Employee employee = daoe.getEntityById(Integer.parseInt(request.getParameter("employeeID")));
                 request.setAttribute("selected", "yes");
                 request.setAttribute("employee", employee);
                 request.getRequestDispatcher("Admin/Employee/Operations/UpdateEmployeePage.jsp").forward(request, response);
             }else if(request.getParameter("step").equals("step2")){
-                DAOEmployee daoe = new DAOEmployee();
                 boolean result = false;
                 Employee em = new Employee();
                 em.setName(request.getParameter("name"));
@@ -63,6 +62,7 @@ public class UpdateEmployeePageController  extends HttpServlet {
                     request.setAttribute("menu", "department");
                     request.setAttribute("result", "unsuccess");
                 }
+                daoe.closeConnection();
                 request.getRequestDispatcher("ActionResultPageController").forward(request, response);
             }else if(request.getParameter("step").equals("cancel")){
                 request.getRequestDispatcher("EmployeePageController").forward(request, response);
@@ -87,6 +87,10 @@ public class UpdateEmployeePageController  extends HttpServlet {
                 }
                 institute.setFacultys(f);
             }
+            daoe.closeConnection();
+            daod.closeConnection();
+            daof.closeConnection();
+            daoi.closeConnection();
             request.setAttribute("institutesList", i);
             request.setAttribute("selected", "no");
             request.getRequestDispatcher("Admin/Employee/Operations/UpdateEmployeePage.jsp").forward(request, response);

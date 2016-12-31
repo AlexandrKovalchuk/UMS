@@ -66,6 +66,7 @@ public class CreateEmployeePageController  extends HttpServlet {
                     request.setAttribute("menu", "department");
                     request.setAttribute("result", "unsuccess");
                 }
+                daoe.closeConnection();
                 request.getRequestDispatcher("ActionResultPageController").forward(request, response);
             }else if(request.getParameter("step").equals("cancel")){
                 request.getRequestDispatcher("EmployeePageController").forward(request, response);
@@ -85,6 +86,9 @@ public class CreateEmployeePageController  extends HttpServlet {
                 }
                 institute.setFacultys(f);
             }
+            daod.closeConnection();
+            daof.closeConnection();
+            daoi.closeConnection();
             request.setAttribute("institutesList", i);
             request.getRequestDispatcher("Admin/Employee/Operations/CreateEmployeePage.jsp").forward(request, response);
         }

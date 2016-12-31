@@ -86,18 +86,15 @@ public class Student extends Person implements Serializable {
 
     public void setFaculty(String faculty) {
         this.faculty = faculty;
-        updateQuerySetParameter("faculty",faculty);
     }
 
     public void setIndexBook(String indexBook) {
         this.indexBook = indexBook;
-        updateQuerySetParameter("indexBook",indexBook);
     }
 
     public void setIndex(int index) {
         this.index = index;
         String str = "";
-        updateQuerySetParameter("stindex",str + index);
     }
 
     public String getFaculty() {
@@ -113,7 +110,6 @@ public class Student extends Person implements Serializable {
     }
     public void setFullIdentifier(){
         fullIdentifier = faculty + indexBook + index;
-        updateQuerySetParameter("fullIdentifier",fullIdentifier);
     }
     public String getFullIdentifier(){
         return fullIdentifier;

@@ -29,6 +29,7 @@ public class CreateInstitutePageController extends HttpServlet {
                     request.setAttribute("menu", "institute");
                     request.setAttribute("result", "unsuccess");
                 }
+                d.closeConnection();
                 request.getRequestDispatcher("ActionResultPageController").forward(request, response);
             }else if(request.getParameter("fillForm").equals("cancel")){
                 request.getRequestDispatcher("InstitutePageController").forward(request, response);

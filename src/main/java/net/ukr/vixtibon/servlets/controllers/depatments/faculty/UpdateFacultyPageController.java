@@ -18,20 +18,19 @@ import java.util.ArrayList;
 public class UpdateFacultyPageController  extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if(request.getParameterMap().containsKey("step")){
+            DAOFaculty daof = new DAOFaculty();
             if(request.getParameter("step").equals("step1")){
-                DAOFaculty daoi = new DAOFaculty();
-                Faculty faculty = daoi.getEntityById(Integer.parseInt(request.getParameter("facultyID")));
+                Faculty faculty = daof.getEntityById(Integer.parseInt(request.getParameter("facultyID")));
                 request.setAttribute("selected", "yes");
                 request.setAttribute("faculty", faculty);
                 request.getRequestDispatcher("Admin/Faculty/Operations/UpdateFacultyPage.jsp").forward(request, response);
             }else if(request.getParameter("step").equals("step2")){
-                DAOFaculty daoi = new DAOFaculty();
                 boolean result = false;
                 Faculty faculty = new Faculty();
                 faculty.setID(Integer.parseInt(request.getParameter("facultyID")));
                 faculty.setLongName(request.getParameter("longName"));
                 faculty.setShortName(request.getParameter("shortName"));
-                result = daoi.update(faculty);
+                result = daof.update(faculty);
                 if(result){
                     request.setAttribute("result", "success");
                     request.setAttribute("menu", "faculty");
@@ -39,6 +38,7 @@ public class UpdateFacultyPageController  extends HttpServlet {
                     request.setAttribute("menu", "faculty");
                     request.setAttribute("result", "unsuccess");
                 }
+                daof.closeConnection();
                 request.getRequestDispatcher("ActionResultPageController").forward(request, response);
             }else if(request.getParameter("step").equals("cancel")){
                 request.getRequestDispatcher("FacultyPageController").forward(request, response);
@@ -53,6 +53,8 @@ public class UpdateFacultyPageController  extends HttpServlet {
                 ArrayList<Faculty> f = daof.getAllByInstituteID(institute.getID());
                 institute.setFacultys(f);
             }
+            daof.closeConnection();
+            daoi.closeConnection();
             request.setAttribute("institutesList", i);
             request.setAttribute("selected", "no");
             request.getRequestDispatcher("Admin/Faculty/Operations/UpdateFacultyPage.jsp").forward(request, response);

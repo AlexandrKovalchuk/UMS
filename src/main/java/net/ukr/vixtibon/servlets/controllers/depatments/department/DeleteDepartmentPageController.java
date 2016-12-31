@@ -37,6 +37,7 @@ public class DeleteDepartmentPageController   extends HttpServlet {
                     request.setAttribute("menu", "department");
                     request.setAttribute("result", "unsuccess");
                 }
+                daoi.closeConnection();
                 request.getRequestDispatcher("ActionResultPageController").forward(request, response);
             }else if(request.getParameter("step").equals("cancel")){
                 request.getRequestDispatcher("DepartmentPageController").forward(request, response);
@@ -56,6 +57,9 @@ public class DeleteDepartmentPageController   extends HttpServlet {
                 }
                 institute.setFacultys(f);
             }
+            daod.closeConnection();
+            daof.closeConnection();
+            daoi.closeConnection();
             request.setAttribute("institutesList", i);
             request.setAttribute("selected", "no");
             request.getRequestDispatcher("Admin/Department/Operations/DeleteDepartmentPage.jsp").forward(request, response);
