@@ -34,20 +34,34 @@
             </c:forEach>
         </c:if>
         <c:if test = "${selected eq 'yes'}">
-            Delete Faculty: <h5><c:out value="${faculty.getLongName()}"/></h5>
-            <div>
-                <form action="/DeleteFacultyPageController" method="post" accept-charset="UTF-8">
-                    <table>
-                        <input type="hidden"  name="step" value="step2">
-                        <input type="hidden"  name="facultyID" value="${faculty.getID()}" >
-                        <tr>
-                            <td colspan=2>
-                                <button onclick="submit"  class="controlButton"><h2>Delete</h2></button>
-                            </td>
-                        </tr>
-                    </table>
-                </form>
-            </div>
+            <c:if test = "${possible_to_remove eq 'yes'}">
+                Please Confirm Delete: <c:out value="${faculty.getLongName()}"/>
+                <div>
+                    <form action="/DeleteFacultyPageController" method="post" accept-charset="UTF-8">
+                        <table>
+                            <input type="hidden"  name="step" value="step2">
+                            <input type="hidden"  name="facultyID" value="${faculty.getID()}">
+                            <tr>
+                                <td colspan=2>
+                                    <button onclick="submit"  class="controlButton"><h2>Delete</h2></button>
+                                </td>
+                            </tr>
+                        </table>
+                    </form>
+                </div>
+            </c:if>
+            <c:if test = "${possible_to_remove eq 'no'}">
+                <div class = "pageTitleTextBad">
+                    Impossible to Delete: <c:out value="${faculty.getLongName()}"/> , there is still some depatments present!
+                </div>
+                <div>
+                    <form action="/DeleteFacultyPageController" method="post" accept-charset="UTF-8">
+                        <table>
+                            <input type="hidden"  name="step" value="step2">
+                        </table>
+                    </form>
+                </div>
+            </c:if>
         </c:if>
     </h5>
 </div>

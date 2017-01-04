@@ -32,7 +32,6 @@ public abstract class AbstractController<E, K> {
         if (connection != null) {
             try {
                 connection.close();
-                System.out.println("Connection closed");
             } catch (SQLException e) {
             } // nothing we can do
         }
@@ -85,7 +84,6 @@ public abstract class AbstractController<E, K> {
         if (ps != null) {
             try {
                 ps.close();
-                System.out.println("PreparedStatement closed");
             } catch (SQLException e) {
                 e.printStackTrace();
             }

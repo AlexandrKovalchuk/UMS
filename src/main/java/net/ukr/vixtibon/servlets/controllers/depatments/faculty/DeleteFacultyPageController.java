@@ -20,11 +20,17 @@ import java.util.ArrayList;
 public class DeleteFacultyPageController  extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if(request.getParameterMap().containsKey("step")){
+            DAOFaculty daof = new DAOFaculty();
+            DAODepartment daod = new DAODepartment();
             if(request.getParameter("step").equals("step1")){
-                DAOFaculty daoi = new DAOFaculty();
-                Faculty faculty = daoi.getEntityById(Integer.parseInt(request.getParameter("facultyID")));
-                daoi.closeConnection();
+                Faculty faculty = daof.getEntityById(Integer.parseInt(request.getParameter("facultyID")));
+                faculty.setDepartments(daod.getAllByfacultyID(faculty.getID()));
                 request.setAttribute("selected", "yes");
+                if(faculty.getDepartments().size()>0){
+                    request.setAttribute("possible_to_remove", "no");
+                }else{
+                    request.setAttribute("possible_to_remove", "yes");
+                }
                 request.setAttribute("faculty", faculty);
                 request.getRequestDispatcher("Admin/Faculty/Operations/DeleteFacultyPage.jsp").forward(request, response);
             }else if(request.getParameter("step").equals("step2")){
@@ -38,7 +44,8 @@ public class DeleteFacultyPageController  extends HttpServlet {
                     request.setAttribute("menu", "faculty");
                     request.setAttribute("result", "unsuccess");
                 }
-                daoi.closeConnection();
+                daod.closeConnection();
+                daof.closeConnection();
                 request.getRequestDispatcher("ActionResultPageController").forward(request, response);
             }else if(request.getParameter("step").equals("cancel")){
                 request.getRequestDispatcher("FacultyPageController").forward(request, response);
