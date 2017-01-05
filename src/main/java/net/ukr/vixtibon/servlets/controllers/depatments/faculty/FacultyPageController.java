@@ -21,7 +21,7 @@ public class FacultyPageController extends HttpServlet {
             }else if(request.getParameter("operationType").equals("move")){
                 request.getRequestDispatcher("MoveFacultyPageController").forward(request, response);
             }else if(request.getParameter("operationType").equals("showInfo")){
-                request.getRequestDispatcher("ShowFacultyInfoPageController").forward(request, response);
+                request.getRequestDispatcher("ShowInfoFacultyPageController").forward(request, response);
             }else if(request.getParameter("operationType").equals("cancel")){
                 request.getRequestDispatcher("AdminPageController").forward(request, response);
             }else{
