@@ -28,18 +28,20 @@ public class UpdateEmployeePageController  extends HttpServlet {
             DAOEmployee daoe = new DAOEmployee();
             if(request.getParameter("step").equals("step1")){
                 Employee employee = daoe.getEntityById(Integer.parseInt(request.getParameter("employeeID")));
+                System.out.println("UpdateEmployeePageController step1: " + employee.getDateOfBorn() + " " + employee.getName());
                 request.setAttribute("selected", "yes");
                 request.setAttribute("employee", employee);
                 request.getRequestDispatcher("Admin/Employee/Operations/UpdateEmployeePage.jsp").forward(request, response);
             }else if(request.getParameter("step").equals("step2")){
                 boolean result = false;
                 Employee em = new Employee();
+                em.setID(Integer.parseInt(request.getParameter("employeeID")));
                 em.setName(request.getParameter("name"));
                 em.setlastName(request.getParameter("lastName"));
                 em.setfathersName(request.getParameter("fathersName"));
                 em.setPersonalID(request.getParameter("personalID"));
                 em.setSex(request.getParameter("sex"));
-                SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
+                SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
                 String dateInString = ""+request.getParameter("bday")+"-"+request.getParameter("bmonth")+"-"+request.getParameter("byear")+" 10:20:56";
                 Date date = new Date();
                 try {
@@ -54,12 +56,13 @@ public class UpdateEmployeePageController  extends HttpServlet {
                 em.setPasport(request.getParameter("pasport"));
                 em.setOffice(request.getParameter("office"));
                 em.setLogin(request.getParameter("login"));
+                em.setDepartmentID(Integer.parseInt(request.getParameter("departmentID")));
                 result = daoe.update(em);
                 if(result){
                     request.setAttribute("result", "success");
-                    request.setAttribute("menu", "department");
+                    request.setAttribute("menu", "employee");
                 }else{
-                    request.setAttribute("menu", "department");
+                    request.setAttribute("menu", "employee");
                     request.setAttribute("result", "unsuccess");
                 }
                 daoe.closeConnection();

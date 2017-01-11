@@ -25,7 +25,6 @@
                     <c:forEach items="${institute.getFacultys()}" var="faculty">
                         <h2><c:out value="${faculty.getLongName()}"/></h2>
                         <c:forEach items="${faculty.getDepartments()}" var="department">
-                            <c:forEach items="${faculty.getDepartments}" var="department">
                             <form action="/UpdateDepartmentPageController" method="post" accept-charset="UTF-8">
                                 <input type="hidden"  name="step" value="step1">
                                 <input type="hidden"  name="departmentID" value="${department.getID()}">

@@ -38,15 +38,28 @@ public abstract class Person implements Serializable {
     }
 
     public int getYearOfBorn(){
-        return dateOfBorn.getYear();
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(dateOfBorn);
+        int year = cal.get(Calendar.YEAR);
+        System.out.println("getYearOfBorn: " + year);
+
+        return year;
     }
 
     public int getMonthOfBorn(){
-        return dateOfBorn.getMonth();
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(dateOfBorn);
+        int month = cal.get(Calendar.MONTH);
+        System.out.println("getMonthOfBorn: " + month);
+        return month;
     }
 
     public  int getDayOfBorn(){
-        return dateOfBorn.getDay();
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(dateOfBorn);
+        int day = cal.get(Calendar.DAY_OF_MONTH);
+        System.out.println("getDayOfBorn: " + day);
+        return day;
     }
 
     public void  setDateOfBorn(Date date){

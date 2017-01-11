@@ -57,11 +57,12 @@ public class DAOEmployee extends AbstractController<Employee,Integer> {
 
     @Override
     public boolean update(Employee entity) {
+        java.sql.Date sqlDate = new java.sql.Date(entity.getDateOfBorn().getTime());
         String Update_Department_Statemet = "UPDATE employee SET name='" +entity.getName()+ "',lastName='"+entity.getSecondName()+"'," +
                 "fathersName='"+entity.getSurname()+"',personalID='"+entity.getPersonalID()+"',sex='"+entity.getSex()+"',email='"+entity.getEmail()+"'," +
-                "phoneNumber='"+entity.getPhoneNumber()+"',dateOfBorn='"+entity.getDateOfBorn()+"'," +
+                "phoneNumber='"+entity.getPhoneNumber()+"',dateOfBorn='"+sqlDate+"'," +
                 "address='"+entity.getAddress()+"',pasport='"+entity.getPasport()+"',login='"+entity.getLogin()+"'," +
-                "office='"+entity.getOffice()+"',ID='"+entity.getID()+"',departmentID='"+entity.getDepartmentID()+"' WHERE ID=" + entity.getID() + ";";
+                "office='"+entity.getOffice()+"',ID='"+entity.getID()+"' WHERE ID=" + entity.getID() + ";";
         PreparedStatement ps = getPrepareStatement(Update_Department_Statemet);
         try {
             ps.executeUpdate();
@@ -76,7 +77,36 @@ public class DAOEmployee extends AbstractController<Employee,Integer> {
 
     @Override
     public Employee getEntityById(Integer id) {
-        return null;
+        System.out.println("Integer id: " + id);
+        String Select_All_Employees_Statemet = "SELECT * FROM employee WHERE ID='"+ id +"';";
+        Employee employee = new Employee();
+        PreparedStatement ps = getPrepareStatement(Select_All_Employees_Statemet);
+        System.out.println("Statemet: " + Select_All_Employees_Statemet);
+        try {
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                employee.setName(rs.getString(1));
+                employee.setlastName(rs.getString(2));
+                employee.setfathersName(rs.getString(3));
+                employee.setPersonalID(rs.getString(4));
+                employee.setSex(rs.getString(5));
+                employee.setEmail(rs.getString(6));
+                employee.setPhoneNumber(rs.getString(7));
+                employee.setDateOfBorn(rs.getDate(8));
+                System.out.println("rs.getDate: " + rs.getDate(8));
+                employee.setAddress(rs.getString(9));
+                employee.setPasport(rs.getString(10));
+                employee.setLogin(rs.getString(11));
+                employee.setOffice(rs.getString(12));
+                employee.setID(rs.getInt(13));
+                employee.setDepartmentID(rs.getInt(14));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            closePrepareStatement(ps);
+        }
+        return employee;
     }
 
     public  int getDepartmentIDByUsername(String username){

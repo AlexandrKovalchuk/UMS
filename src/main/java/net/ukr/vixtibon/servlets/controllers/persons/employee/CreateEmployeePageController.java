@@ -54,6 +54,7 @@ public class CreateEmployeePageController  extends HttpServlet {
                 em.setPasport(request.getParameter("pasport"));
                 em.setOffice(request.getParameter("office"));
                 em.setLogin(request.getParameter("login"));
+                em.setDepartmentID(Integer.parseInt(request.getParameter("departmentID")));
                 try {
                     result = daoe.create(em);
                 } catch (SQLException e) {
@@ -61,9 +62,9 @@ public class CreateEmployeePageController  extends HttpServlet {
                 }
                 if(result){
                     request.setAttribute("result", "success");
-                    request.setAttribute("menu", "department");
+                    request.setAttribute("menu", "employee");
                 }else{
-                    request.setAttribute("menu", "department");
+                    request.setAttribute("menu", "employee");
                     request.setAttribute("result", "unsuccess");
                 }
                 daoe.closeConnection();
