@@ -20,14 +20,13 @@ import java.util.ArrayList;
 public class DeleteDepartmentPageController   extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if(request.getParameterMap().containsKey("step")){
+            DAODepartment daoi = new DAODepartment();
             if(request.getParameter("step").equals("step1")){
-                DAODepartment daoi = new DAODepartment();
                 Department department = daoi.getEntityById(Integer.parseInt(request.getParameter("departmentID")));
                 request.setAttribute("selected", "yes");
                 request.setAttribute("department", department);
                 request.getRequestDispatcher("Admin/Department/Operations/DeleteDepartmentPage.jsp").forward(request, response);
             }else if(request.getParameter("step").equals("step2")){
-                DAODepartment daoi = new DAODepartment();
                 boolean result = false;
                 result = daoi.delete(Integer.parseInt(request.getParameter("departmentID")));
                 if(result){
@@ -48,7 +47,7 @@ public class DeleteDepartmentPageController   extends HttpServlet {
             DAOInstitute daoi = new DAOInstitute();
             DAOFaculty daof = new DAOFaculty();
             DAODepartment daod = new DAODepartment();
-            ArrayList<Institute> i = daoi.getAllWithFacultiesAndDepartments();
+            ArrayList<Institute> i = daoi.getAll();
             for(Institute institute:i){
                 ArrayList<Faculty> f = daof.getAllByInstituteID(institute.getID());
                 for(Faculty faculty:f){

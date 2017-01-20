@@ -70,7 +70,7 @@ public class MoveDepartmentPageController  extends HttpServlet {
             DAOInstitute daoi = new DAOInstitute();
             DAOFaculty daof = new DAOFaculty();
             DAODepartment daod = new DAODepartment();
-            ArrayList<Institute> i = daoi.getAllWithFacultiesAndDepartments();
+            ArrayList<Institute> i = daoi.getAll();
             for(Institute institute:i){
                 ArrayList<Faculty> f = daof.getAllByInstituteID(institute.getID());
                 for(Faculty faculty:f){

@@ -36,7 +36,7 @@ public class ShowInfoFacultyPageController extends HttpServlet {
         }else{
             DAOInstitute daoi = new DAOInstitute();
             DAOFaculty daof = new DAOFaculty();
-            ArrayList<Institute> i = daoi.getAllWithFacultiesAndDepartments();
+            ArrayList<Institute> i = daoi.getAll();
             for(Institute institute:i){
                 ArrayList<Faculty> f = daof.getAllByInstituteID(institute.getID());
                 institute.setFacultys(f);

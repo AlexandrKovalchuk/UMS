@@ -1,17 +1,12 @@
 package net.ukr.vixtibon.dao.persons;
 
-import net.ukr.vixtibon.base_objects.departments.Department;
-import net.ukr.vixtibon.base_objects.departments.Faculty;
 import net.ukr.vixtibon.base_objects.persons.Employee;
 import net.ukr.vixtibon.dao.AbstractController;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -58,12 +53,26 @@ public class DAOEmployee extends AbstractController<Employee,Integer> {
     @Override
     public boolean update(Employee entity) {
         java.sql.Date sqlDate = new java.sql.Date(entity.getDateOfBorn().getTime());
-        String Update_Department_Statemet = "UPDATE employee SET name='" +entity.getName()+ "',lastName='"+entity.getSecondName()+"'," +
+        String Update_Employee_Statemet = "UPDATE employee SET name='" +entity.getName()+ "',lastName='"+entity.getSecondName()+"'," +
                 "fathersName='"+entity.getSurname()+"',personalID='"+entity.getPersonalID()+"',sex='"+entity.getSex()+"',email='"+entity.getEmail()+"'," +
                 "phoneNumber='"+entity.getPhoneNumber()+"',dateOfBorn='"+sqlDate+"'," +
                 "address='"+entity.getAddress()+"',pasport='"+entity.getPasport()+"',login='"+entity.getLogin()+"'," +
                 "office='"+entity.getOffice()+"',ID='"+entity.getID()+"' WHERE ID=" + entity.getID() + ";";
-        PreparedStatement ps = getPrepareStatement(Update_Department_Statemet);
+        PreparedStatement ps = getPrepareStatement(Update_Employee_Statemet);
+        try {
+            ps.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        } finally {
+            closePrepareStatement(ps);
+        }
+    }
+
+    boolean updateEmployeeLocation(int departmentID, int employeeID) {
+        String Update_Employee_Statemet = "UPDATE employee SET facultyID='" + departmentID + "' WHERE ID=" + employeeID + ";";
+        PreparedStatement ps = getPrepareStatement(Update_Employee_Statemet);
         try {
             ps.executeUpdate();
             return true;
@@ -126,7 +135,17 @@ public class DAOEmployee extends AbstractController<Employee,Integer> {
 
     @Override
     public boolean delete(Integer id) {
-        return false;
+        String Delete_Employee_Statement = "DELETE FROM employee WHERE ID=" + id + ";";
+        PreparedStatement ps = getPrepareStatement(Delete_Employee_Statement);
+        try {
+            ps.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        } finally {
+            closePrepareStatement(ps);
+        }
     }
 
     @Override
