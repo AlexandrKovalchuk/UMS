@@ -18,8 +18,9 @@ public class DAOInstitute  extends AbstractController<Institute,Integer> {
         String Select_All_Institutes_Statemet = "SELECT * FROM institute;";
         ArrayList<Institute> institutesList = new ArrayList<>();
         PreparedStatement ps = getPrepareStatement(Select_All_Institutes_Statemet);
+        ResultSet rs = null;
         try {
-            ResultSet rs = ps.executeQuery();
+            rs = ps.executeQuery();
             while (rs.next()) {
                 Institute institute = new Institute();
                 institute.setID(rs.getInt(1));
@@ -30,53 +31,8 @@ public class DAOInstitute  extends AbstractController<Institute,Integer> {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            closePrepareStatement(ps);
-        }
-        return institutesList;
-    }
-
-    public  ArrayList<Institute> getAllWithFaculties(){
-        String Select_All_Institutes_Statemet = "SELECT * FROM institute;";
-        ArrayList<Institute> institutesList = new ArrayList<>();
-        PreparedStatement ps = getPrepareStatement(Select_All_Institutes_Statemet);
-        try {
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                Institute institute = new Institute();
-                institute.setID(rs.getInt(1));
-                institute.setLongName(rs.getString(2));
-                institute.setShortName(rs.getString(3));
-                DAOFaculty daof = new DAOFaculty();
-                institute.setFacultys(daof.getAllByInstituteID(institute.getID()));
-                institutesList.add(institute);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            closePrepareStatement(ps);
-        }
-        return institutesList;
-    }
-
-    public ArrayList<Institute> getAllWithFacultiesAndDepartments(){
-        String Select_All_Institutes_Statemet = "SELECT * FROM institute;";
-        ArrayList<Institute> institutesList = new ArrayList<>();
-        PreparedStatement ps = getPrepareStatement(Select_All_Institutes_Statemet);
-        try {
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                Institute institute = new Institute();
-                institute.setID(rs.getInt(1));
-                institute.setLongName(rs.getString(2));
-                institute.setShortName(rs.getString(3));
-                DAOFaculty daof = new DAOFaculty();
-                institute.setFacultys(daof.getAllByInstituteIDWithDepartments(institute.getID()));
-                institutesList.add(institute);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            closePrepareStatement(ps);
+            if (rs != null) try { rs.close(); } catch (SQLException logOrIgnore) {}
+            if (ps != null) try { ps.close(); } catch (SQLException logOrIgnore) {}
         }
         return institutesList;
     }
@@ -93,7 +49,7 @@ public class DAOInstitute  extends AbstractController<Institute,Integer> {
             e.printStackTrace();
             return false;
         } finally {
-            closePrepareStatement(ps);
+            if (ps != null) try { ps.close(); } catch (SQLException logOrIgnore) {}
         }
     }
 
@@ -104,8 +60,9 @@ public class DAOInstitute  extends AbstractController<Institute,Integer> {
         String Select_Institute_Statemet = "SELECT * FROM institute WHERE ID='" + id + "';";
         Institute institute = new Institute();
         PreparedStatement ps = getPrepareStatement(Select_Institute_Statemet);
+        ResultSet rs = null;
         try {
-            ResultSet rs = ps.executeQuery();
+            rs = ps.executeQuery();
             while (rs.next()) {
                 institute.setID(rs.getInt(1));
                 institute.setLongName(rs.getString(2));
@@ -114,7 +71,8 @@ public class DAOInstitute  extends AbstractController<Institute,Integer> {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            closePrepareStatement(ps);
+            if (rs != null) try { rs.close(); } catch (SQLException logOrIgnore) {}
+            if (ps != null) try { ps.close(); } catch (SQLException logOrIgnore) {}
         }
         return institute;
     }
@@ -130,7 +88,7 @@ public class DAOInstitute  extends AbstractController<Institute,Integer> {
             e.printStackTrace();
             return false;
         } finally {
-            closePrepareStatement(ps);
+            if (ps != null) try { ps.close(); } catch (SQLException logOrIgnore) {}
         }
     }
 
@@ -145,9 +103,23 @@ public class DAOInstitute  extends AbstractController<Institute,Integer> {
             e.printStackTrace();
             return false;
         } finally {
-            closePrepareStatement(ps);
+            if (ps != null) try { ps.close(); } catch (SQLException logOrIgnore) {}
         }
 
+    }
+
+    public  boolean createNONE(){
+        String Create_NONE_Institute_Statemet = "INSERT INTO institute (ID,longName,shortName) VALUES ('0','NONE','NONE');";
+        PreparedStatement ps = getPrepareStatement(Create_NONE_Institute_Statemet);
+        try {
+            ps.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        } finally {
+            if (ps != null) try { ps.close(); } catch (SQLException logOrIgnore) {}
+        }
     }
 
 

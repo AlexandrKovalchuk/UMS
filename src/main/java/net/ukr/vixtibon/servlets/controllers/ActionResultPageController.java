@@ -20,6 +20,8 @@ public class ActionResultPageController extends HttpServlet {
                 request.getRequestDispatcher("DepartmentPageController").forward(request, response);
             }else if (request.getParameter("redirectTo").equals("employee")){
                 request.getRequestDispatcher("EmployeePageController").forward(request, response);
+            }else if (request.getParameter("redirectTo").equals("admin")){
+                request.getRequestDispatcher("AdminPageController").forward(request, response);
             }else {
                 //error page
             }

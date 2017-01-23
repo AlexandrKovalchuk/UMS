@@ -22,8 +22,9 @@ public class DAOEmployee extends AbstractController<Employee,Integer> {
         String Select_All_Employees_Statemet = "SELECT * FROM employee WHERE departmentID="+ departmentID +";";
         ArrayList<Employee> employeeList = new ArrayList<>();
         PreparedStatement ps = getPrepareStatement(Select_All_Employees_Statemet);
+        ResultSet rs = null;
         try {
-            ResultSet rs = ps.executeQuery();
+            rs = ps.executeQuery();
             while (rs.next()) {
                 Employee employee = new Employee();
                 employee.setName(rs.getString(1));
@@ -45,7 +46,8 @@ public class DAOEmployee extends AbstractController<Employee,Integer> {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            closePrepareStatement(ps);
+            if (rs != null) try { rs.close(); } catch (SQLException logOrIgnore) {}
+            if (ps != null) try { ps.close(); } catch (SQLException logOrIgnore) {}
         }
         return employeeList;
     }
@@ -66,7 +68,7 @@ public class DAOEmployee extends AbstractController<Employee,Integer> {
             e.printStackTrace();
             return false;
         } finally {
-            closePrepareStatement(ps);
+            if (ps != null) try { ps.close(); } catch (SQLException logOrIgnore) {}
         }
     }
 
@@ -80,7 +82,7 @@ public class DAOEmployee extends AbstractController<Employee,Integer> {
             e.printStackTrace();
             return false;
         } finally {
-            closePrepareStatement(ps);
+            if (ps != null) try { ps.close(); } catch (SQLException logOrIgnore) {}
         }
     }
 
@@ -91,8 +93,9 @@ public class DAOEmployee extends AbstractController<Employee,Integer> {
         Employee employee = new Employee();
         PreparedStatement ps = getPrepareStatement(Select_All_Employees_Statemet);
         System.out.println("Statemet: " + Select_All_Employees_Statemet);
+        ResultSet rs = null;
         try {
-            ResultSet rs = ps.executeQuery();
+            rs = ps.executeQuery();
             while (rs.next()) {
                 employee.setName(rs.getString(1));
                 employee.setlastName(rs.getString(2));
@@ -113,7 +116,8 @@ public class DAOEmployee extends AbstractController<Employee,Integer> {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            closePrepareStatement(ps);
+            if (rs != null) try { rs.close(); } catch (SQLException logOrIgnore) {}
+            if (ps != null) try { ps.close(); } catch (SQLException logOrIgnore) {}
         }
         return employee;
     }
@@ -122,13 +126,15 @@ public class DAOEmployee extends AbstractController<Employee,Integer> {
         String Select_DepartmentID_By_Username = "SELECT departmentID FROM employee WHERE login='" + username + "';";
         int departmentID = 0;
         PreparedStatement ps = getPrepareStatement(Select_DepartmentID_By_Username);
+        ResultSet rs = null;
         try {
-            ResultSet rs = ps.executeQuery();
+            rs = ps.executeQuery();
             departmentID = rs.getInt(1);
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            closePrepareStatement(ps);
+            if (rs != null) try { rs.close(); } catch (SQLException logOrIgnore) {}
+            if (ps != null) try { ps.close(); } catch (SQLException logOrIgnore) {}
         }
         return departmentID;
     }
@@ -144,7 +150,7 @@ public class DAOEmployee extends AbstractController<Employee,Integer> {
             e.printStackTrace();
             return false;
         } finally {
-            closePrepareStatement(ps);
+            if (ps != null) try { ps.close(); } catch (SQLException logOrIgnore) {}
         }
     }
 
@@ -165,7 +171,7 @@ public class DAOEmployee extends AbstractController<Employee,Integer> {
             e.printStackTrace();
             return false;
         } finally {
-            closePrepareStatement(ps);
+            if (ps != null) try { ps.close(); } catch (SQLException logOrIgnore) {}
         }
     }
 }

@@ -61,8 +61,9 @@ public class DAOLogin extends AbstractController<LogInBody,Integer> {
         String SELECT_LogInBody_BY_LogIn = "SELECT * FROM LogInPass WHERE LogIn='" + logIn +"'";
         LogInBody lib = new LogInBody();
         PreparedStatement ps = getPrepareStatement(SELECT_LogInBody_BY_LogIn);
+        ResultSet rs = null;
         try {
-            ResultSet rs = ps.executeQuery();
+            rs = ps.executeQuery();
             while (rs.next()) {
                 lib.setID(rs.getInt(1));
                 lib.setLogIn(rs.getString(2));
@@ -72,8 +73,24 @@ public class DAOLogin extends AbstractController<LogInBody,Integer> {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            closePrepareStatement(ps);
+                if (rs != null) try { rs.close(); } catch (SQLException logOrIgnore) {}
+                if (ps != null) try { ps.close(); } catch (SQLException logOrIgnore) {}
         }
         return lib;
+    }
+
+    public boolean deleteDate(String tableName){
+        String DELETE_DATE = "DELETE from " + tableName +";";
+        System.out.println("DELETE_DATE :" + DELETE_DATE);
+        PreparedStatement ps = getPrepareStatement(DELETE_DATE);
+        try {
+            ps.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        } finally {
+            if (ps != null) try { ps.close(); } catch (SQLException logOrIgnore) {}
+        }
     }
 }

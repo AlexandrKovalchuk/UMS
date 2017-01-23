@@ -14,7 +14,7 @@ public abstract class AbstractController<E, K> {
     private ConnectionPool connectionPool;
 
     public AbstractController() {
-        connectionPool = new ConnectionPool("jdbc:mysql://localhost/institute?user=javatest&password=testpass","com.mysql.jdbc.Driver",10);
+        connectionPool = new ConnectionPool("jdbc:mysql://localhost/institute?user=javatest&password=testpass","com.mysql.jdbc.Driver",1);
         connection = connectionPool.getConnection();
     }
 
@@ -32,7 +32,7 @@ public abstract class AbstractController<E, K> {
         if (connection != null) {
             try {
                 connection.close();
-            } catch (SQLException e) {
+            } catch (SQLException logOrIgnore) {
             } // nothing we can do
         }
     }

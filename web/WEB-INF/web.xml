@@ -43,6 +43,26 @@
     </servlet-mapping>
 
     <servlet>
+        <servlet-name>GenerateBaseDateController</servlet-name>
+        <servlet-class>net.ukr.vixtibon.servlets.controllers.depatments.special_admin_options.GenerateBaseDateController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>GenerateBaseDateController</servlet-name>
+        <url-pattern>/GenerateBaseDateController</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ClearAllDateController</servlet-name>
+        <servlet-class>net.ukr.vixtibon.servlets.controllers.depatments.special_admin_options.ClearAllDateController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>ClearAllDateController</servlet-name>
+        <url-pattern>/ClearAllDateController</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>InstitutePageController</servlet-name>
         <servlet-class>net.ukr.vixtibon.servlets.controllers.depatments.institute.InstitutePageController</servlet-class>
     </servlet>

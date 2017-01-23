@@ -69,6 +69,24 @@
         </form>
     </div>
     <br />
+    <div>
+        <form action="AdminPageController" method="post">
+            <input type="hidden"  name="elementType" value="generateBaseDate">
+            <td colspan=2>
+                <button onclick="submit"  class="topicButton"><h2>Generate base date</h2></button>
+            </td>
+        </form>
+    </div>
+    <br />
+    <div>
+        <form action="AdminPageController" method="post">
+            <input type="hidden"  name="elementType" value="clearAllDate">
+            <td colspan=2>
+                <button onclick="submit"  class="topicButton"><h2>Clear all date</h2></button>
+            </td>
+        </form>
+    </div>
+    <br />
         <div>
             <form action="LogOutServlet" method="post">
                 <td colspan=2>

@@ -19,8 +19,9 @@ public class DAOFaculty  extends AbstractController<Faculty,Integer> {
         String Select_All_Faculties_Statemet = "SELECT * FROM faculty;";
         ArrayList<Faculty> facultyList = new ArrayList<>();
         PreparedStatement ps = getPrepareStatement(Select_All_Faculties_Statemet);
+        ResultSet rs = null;
         try {
-            ResultSet rs = ps.executeQuery();
+            rs = ps.executeQuery();
             while (rs.next()) {
                 Faculty faculty = new Faculty();
                 faculty.setID(rs.getInt(1));
@@ -31,7 +32,8 @@ public class DAOFaculty  extends AbstractController<Faculty,Integer> {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            closePrepareStatement(ps);
+            if (rs != null) try { rs.close(); } catch (SQLException logOrIgnore) {}
+            if (ps != null) try { ps.close(); } catch (SQLException logOrIgnore) {}
         }
         return facultyList;
     }
@@ -48,7 +50,7 @@ public class DAOFaculty  extends AbstractController<Faculty,Integer> {
             e.printStackTrace();
             return false;
         } finally {
-            closePrepareStatement(ps);
+            if (ps != null) try { ps.close(); } catch (SQLException logOrIgnore) {}
         }
     }
 
@@ -62,7 +64,7 @@ public class DAOFaculty  extends AbstractController<Faculty,Integer> {
             e.printStackTrace();
             return false;
         } finally {
-            closePrepareStatement(ps);
+            if (ps != null) try { ps.close(); } catch (SQLException logOrIgnore) {}
         }
     }
 
@@ -71,8 +73,9 @@ public class DAOFaculty  extends AbstractController<Faculty,Integer> {
         String Select_Faculty_Statemet = "SELECT * FROM faculty WHERE ID='" + id + "';";
         Faculty faculty = new Faculty();
         PreparedStatement ps = getPrepareStatement(Select_Faculty_Statemet);
+        ResultSet rs = null;
         try {
-            ResultSet rs = ps.executeQuery();
+            rs = ps.executeQuery();
             while (rs.next()) {
                 faculty.setID(rs.getInt(1));
                 faculty.setLongName(rs.getString(2));
@@ -81,7 +84,8 @@ public class DAOFaculty  extends AbstractController<Faculty,Integer> {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            closePrepareStatement(ps);
+            if (rs != null) try { rs.close(); } catch (SQLException logOrIgnore) {}
+            if (ps != null) try { ps.close(); } catch (SQLException logOrIgnore) {}
         }
         return faculty;
     }
@@ -97,7 +101,7 @@ public class DAOFaculty  extends AbstractController<Faculty,Integer> {
             e.printStackTrace();
             return false;
         } finally {
-            closePrepareStatement(ps);
+            if (ps != null) try { ps.close(); } catch (SQLException logOrIgnore) {}
         }
     }
 
@@ -112,7 +116,21 @@ public class DAOFaculty  extends AbstractController<Faculty,Integer> {
             e.printStackTrace();
             return false;
         } finally {
-            closePrepareStatement(ps);
+            if (ps != null) try { ps.close(); } catch (SQLException logOrIgnore) {}
+        }
+    }
+
+    public  boolean createNONE(){
+        String Create_NONE_faculty_Statemet = "INSERT INTO faculty (ID,longName,shortName,instituteID) VALUES ('0','NONE','NONE','0');";
+        PreparedStatement ps = getPrepareStatement(Create_NONE_faculty_Statemet);
+        try {
+            ps.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        } finally {
+            if (ps != null) try { ps.close(); } catch (SQLException logOrIgnore) {}
         }
     }
 
@@ -120,8 +138,9 @@ public class DAOFaculty  extends AbstractController<Faculty,Integer> {
         String Select_All_Faculties_Statemet = "SELECT * FROM faculty WHERE instituteID="+ instituteID +";";
         ArrayList<Faculty> facultiesList = new ArrayList<>();
         PreparedStatement ps = getPrepareStatement(Select_All_Faculties_Statemet);
+        ResultSet rs = null;
         try {
-            ResultSet rs = ps.executeQuery();
+            rs = ps.executeQuery();
             while (rs.next()) {
                 Faculty faculty = new Faculty();
                 faculty.setID(rs.getInt(1));
@@ -132,30 +151,8 @@ public class DAOFaculty  extends AbstractController<Faculty,Integer> {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            closePrepareStatement(ps);
-        }
-        return facultiesList;
-    }
-
-    public ArrayList<Faculty> getAllByInstituteIDWithDepartments(int instituteID){
-        String Select_All_Faculties_Statemet = "SELECT * FROM faculty WHERE instituteID="+ instituteID +";";
-        ArrayList<Faculty> facultiesList = new ArrayList<>();
-        PreparedStatement ps = getPrepareStatement(Select_All_Faculties_Statemet);
-        try {
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                Faculty faculty = new Faculty();
-                faculty.setID(rs.getInt(1));
-                faculty.setLongName(rs.getString(2));
-                faculty.setShortName(rs.getString(3));
-                DAODepartment daod = new DAODepartment();
-                faculty.setDepartments(daod.getAllByfacultyID(faculty.getID()));
-                facultiesList.add(faculty);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            closePrepareStatement(ps);
+            if (rs != null) try { rs.close(); } catch (SQLException logOrIgnore) {}
+            if (ps != null) try { ps.close(); } catch (SQLException logOrIgnore) {}
         }
         return facultiesList;
     }

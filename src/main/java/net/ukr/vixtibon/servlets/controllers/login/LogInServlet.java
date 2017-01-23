@@ -53,7 +53,8 @@ public class LogInServlet extends HttpServlet {
             }
 
         }
-        dl.closeConnection();
+        dl.returnConnectionInPool();
+        //dl.closeConnection();
 
     }
 

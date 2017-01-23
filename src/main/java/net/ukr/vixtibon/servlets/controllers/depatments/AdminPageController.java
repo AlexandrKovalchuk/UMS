@@ -24,6 +24,10 @@ public class AdminPageController extends HttpServlet {
                 request.getRequestDispatcher("EmployeePageController").forward(request, response);
             }else if(request.getParameter("elementType").equals("mainInfo")){
                 request.getRequestDispatcher("MainInfoPageController").forward(request, response);
+            }else if(request.getParameter("elementType").equals("generateBaseDate")){
+                request.getRequestDispatcher("GenerateBaseDateController").forward(request, response);
+            }else if(request.getParameter("elementType").equals("clearAllDate")){
+                request.getRequestDispatcher("ClearAllDateController").forward(request, response);
             }else{
                 //error page
             }

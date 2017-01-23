@@ -7,23 +7,30 @@ import net.ukr.vixtibon.base_objects.persons.Employee;
 import net.ukr.vixtibon.base_objects.persons.Student;
 import net.ukr.vixtibon.base_objects.persons.Teacher;
 import net.ukr.vixtibon.base_objects.stady_process.Discipline;
+import net.ukr.vixtibon.dao.departments.DAODepartment;
+import net.ukr.vixtibon.dao.departments.DAOFaculty;
+import net.ukr.vixtibon.dao.departments.DAOInstitute;
+import net.ukr.vixtibon.dao.login.DAOLogin;
 
 import java.io.*;
+import java.sql.SQLException;
 import java.util.*;
 
 /**
  * Created by akovalchuk on 5/21/2015.
  */
 public class Generator {
-    private ArrayList<String> FemaleNames = openStringsArray("FemaleNames.txt");
-    private ArrayList<String> MaleNames = openStringsArray("MaleNames.txt");
-    private ArrayList<String> FemaleSurnames = openStringsArray("FemaleSurnames.txt");
-    private ArrayList<String> MaleSurnames = openStringsArray("MaleSurnames.txt");
+    private ArrayList<String> FemaleNames = openStringsArray("C:\\Users\\alex\\IdeaProjects\\UMS\\UMS\\FemaleNames.txt");
+    private ArrayList<String> MaleNames = openStringsArray("C:\\Users\\alex\\IdeaProjects\\UMS\\UMS\\MaleNames.txt");
+    private ArrayList<String> FemaleSurnames = openStringsArray("C:\\Users\\alex\\IdeaProjects\\UMS\\UMS\\FemaleSurnames.txt");
+    private ArrayList<String> MaleSurnames = openStringsArray("C:\\Users\\alex\\IdeaProjects\\UMS\\UMS\\MaleSurnames.txt");
+    private ArrayList<String> FemaleFathersNames = openStringsArray("C:\\Users\\alex\\IdeaProjects\\UMS\\UMS\\FemaleFathersNames.txt");
+    private ArrayList<String> MaleFathersNames = openStringsArray("C:\\Users\\alex\\IdeaProjects\\UMS\\UMS\\MaleFathersNames.txt");
 
-    private ArrayList<String> City = openStringsArray("City.txt");
-    private ArrayList<String> gumvs = openStringsArray("gumvs.txt");
-    private ArrayList<String> Street = openStringsArray("Street.txt");
-    private ArrayList<String> month = openStringsArray("month.txt");
+    private ArrayList<String> City = openStringsArray("C:\\Users\\alex\\IdeaProjects\\UMS\\UMS\\City.txt");
+    private ArrayList<String> gumvs = openStringsArray("C:\\Users\\alex\\IdeaProjects\\UMS\\UMS\\gumvs.txt");
+    private ArrayList<String> Street = openStringsArray("C:\\Users\\alex\\IdeaProjects\\UMS\\UMS\\Street.txt");
+    private ArrayList<String> month = openStringsArray("C:\\Users\\alex\\IdeaProjects\\UMS\\UMS\\month.txt");
 
     int insrituteIDCounter = 1;
     int facultyIDCounter = 1;
@@ -36,16 +43,7 @@ public class Generator {
 
     int disciplineIDCounter = 1;
     int timeTableIDcounter = 1;
-    /*
-    "C:\\Users\\alex\\IdeaProjects\\UMS\\UMS\\web\\ParametersXLS\\\\DisciplineTableParameters.xml",
-    "C:\\Users\\alex\\IdeaProjects\\UMS\\UMS\\web\\ParametersXLS\\\\EmployeeTableParameters.xml",
-            "C:\\Users\\alex\\IdeaProjects\\UMS\\UMS\\web\\ParametersXLS\\\\FacultyTableParameters.xml",
-            "C:\\Users\\alex\\IdeaProjects\\UMS\\UMS\\web\\ParametersXLS\\\\InstituteTableParameters.xml",
-            "C:\\Users\\alex\\IdeaProjects\\UMS\\UMS\\web\\ParametersXLS\\\\TeacherTableParameters.xml"
-            "C:\\Users\\alex\\IdeaProjects\\UMS\\UMS\\web\\ParametersXLS\\\\TimeTableTableParameters.xml"
-            "C:\\Users\\alex\\IdeaProjects\\UMS\\UMS\\web\\ParametersXLS\\\\ChairTableParameters.xml"
-            "C:\\Users\\alex\\IdeaProjects\\UMS\\UMS\\web\\ParametersXLS\\\\GroupTableParameters.xml",
-     */
+
 
     String[] tapleParametersList = {
             "C:\\Users\\alex\\IdeaProjects\\UMS\\UMS\\web\\ParametersXLS\\\\InstituteTableParameters.xml",
@@ -61,9 +59,6 @@ public class Generator {
     };
 
 
-
-    //Institute KPI = new Institute("Київський Політехнічний Інститут","КПИ",insrituteIDCounter,null);
-
     Random rn = new Random();
     Calendar semesterStart = Calendar.getInstance();
 
@@ -72,17 +67,156 @@ public class Generator {
            // new Date(29,5,2016);//new Date(generateDay(), randomInt(), generateBirthYear(course));
 
 
-    static final  String JDBC_DRIVER = "com.mysql.jdbc.Driver";
-    static final  String DB_URL = "jdbc:mysql://localhost:3306/STUDENTS";
+    public boolean generateDate(){
+        DAOInstitute daoInstitute = new DAOInstitute();
+        DAOFaculty daoFaculty = new DAOFaculty();
+        DAODepartment daoDepartment = new DAODepartment();
+        boolean result = true;
+        daoInstitute.createNONE();
+        daoFaculty.createNONE();
+        daoDepartment.createNONE();
+        daoInstitute.create(generateInstitute("Київський Політехнічний Інститут", "КПИ"));
+        ArrayList<Faculty> faculties = openFacultys("C:\\Users\\alex\\IdeaProjects\\UMS\\UMS\\Facultys.txt",1);
+        for (Faculty f: faculties){
+            daoFaculty.create(f);
+        }
 
-    static final  String USER = "username";
-    static final  String PASS = "password";
+        faculties = daoFaculty.getAll();
+
+        ArrayList<Department> departments = new ArrayList<Department>();
+
+        for (Faculty f: faculties){
+            if(f.getID() == 0){
+                continue;
+            }
+            departments = openDepartments("C:\\Users\\alex\\IdeaProjects\\UMS\\UMS\\" + f.getShortName(),f.getID());
+            System. out .println("f.getShortName() " + f.getShortName() + " ID " + f.getID());
+            for (Department d: departments){
+                try {
+                    daoDepartment.create(d);
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        departments = daoDepartment.getAll();
+
+        for(Department d: departments){
+            d.setEmployees(generateEmployeesList(d.getID()));
+        }
+
+        daoDepartment.closeConnection();
+        daoFaculty.closeConnection();
+        daoInstitute.closeConnection();
+        return result;
+    }
+    public boolean deleteDate(){
+        DAOLogin daoLogin = new DAOLogin();
+        boolean result = true;
+        String[] tables = {"institute","faculty","department","employee"};
+        for(int i=0; i<tables.length; i++){
+            result = daoLogin.deleteDate(tables[i]);
+            if(result == false){
+                break;
+            }
+        }
+        return result;
+    }
 
 public void setupBase(String[] list) {
     System.out.println("setupBase");
     for (String s : list) {
     }
 }
+
+private Institute generateInstitute(String longName, String shortName){
+    Institute institute = new Institute();
+    institute.setLongName(longName);
+    institute.setShortName(shortName);
+    return institute;
+}
+
+    private Faculty ganerateFaculty(String longName, String shortName, int instituteID){
+        Faculty faculty = new Faculty();
+        faculty.setLongName(longName);
+        faculty.setShortName(shortName);
+        faculty.setInstituteID(instituteID);
+        return faculty;
+    }
+
+    private  Department generateDepartment(String longName, String shortName, int facultyID){
+        Department department = new Department();
+        department.setLongName(longName);
+        department.setShortName(shortName);
+        department.setFacultyID(facultyID);
+        return department;
+    }
+
+    private Employee generateEmployee(int departmentID){
+        Employee employee = new Employee();
+        employee.setSex(rn.nextBoolean()?"m":"f");
+        if(employee.getSex().equals("m")){
+            employee.setName(MaleNames.get(rn.nextInt(MaleNames.size()-1)));
+            employee.setlastName(MaleSurnames.get(rn.nextInt(MaleSurnames.size()-1)));
+            employee.setfathersName(MaleFathersNames.get(rn.nextInt(MaleFathersNames.size()-1)));
+        }else{
+            employee.setName(FemaleNames.get(rn.nextInt(FemaleNames.size()-1)));
+            employee.setlastName(FemaleSurnames.get(rn.nextInt(FemaleSurnames.size()-1)));
+            employee.setfathersName(FemaleFathersNames.get(rn.nextInt(FemaleFathersNames.size()-1)));
+        }
+        employee.setPersonalID(generatePersonalID());
+
+
+        return employee;
+    }
+
+    private ArrayList<Employee> generateEmployeesList(int departmentID){
+        ArrayList<Employee> employees = null;
+        int employeesCOUNT = rn.nextInt(4);
+
+        if(employeesCOUNT == 0){
+            ++employeesCOUNT;
+        }
+
+        for(int i = 0; i < employeesCOUNT; i++){
+            employees.add(generateEmployee(departmentID));
+        }
+        return employees;
+    }
+    private ArrayList<Faculty> openFacultys(String name, int instID){
+        ArrayList<Faculty> faculties = new ArrayList<>();
+        try(BufferedReader f =new BufferedReader(new FileReader(name))){
+            String str = "";
+            for(;(str = f.readLine())!=null;) {
+                String[] parts = str.split(" - ");
+                faculties.add(ganerateFaculty(parts[0],parts[1],instID));
+            }
+            return faculties;
+        } catch(IOException e){
+            System. out .println("ERROR openFacultys");
+            return null;
+        }
+    }
+
+    private  ArrayList<Department> openDepartments(String facultyShortName, int facultyID){
+        ArrayList<Department> departments = new ArrayList<>();
+        System. out .println(facultyShortName + ".txt");
+        try(BufferedReader f =new BufferedReader(new FileReader(facultyShortName + ".txt"))){
+
+            String str = "";
+            for(;(str = f.readLine())!=null;) {
+                System. out .println(str);
+                String[] parts = str.split(" - ");
+                //System. out .println("openDepartments : " + parts[0] + " " + parts[1] + " " + instID);
+                departments.add(generateDepartment(parts[0], parts[1], facultyID));
+            }
+            return departments;
+        } catch(IOException e){
+            System. out .println("ERROR openDepartments");
+            return null;
+        }
+    }
 
     public void runGenerator() throws UnsupportedEncodingException {
         //set semecter period
