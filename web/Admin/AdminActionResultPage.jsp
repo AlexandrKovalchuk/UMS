@@ -10,30 +10,26 @@
 <html>
 
 <head>
-    <link rel="stylesheet" type="text/css" href="Admin/css/admin_styles.css">
+    <link rel="stylesheet" type="text/css" href="main_css\main_styles.css">
     <title>Action Result Page</title>
 </head>
 
 <body class = "backgroungImageAdmin">
-<div class = "pageTitleText">
-    <h5>
-        Action Result Page!
-    </h5>
+
+<div class = "pageTitleText pageTitleTextAdmin">
+    Action Result Page!
 </div>
+<br />
 
 <c:if test = "${result eq 'success'}">
-    <div class = "pageTitleTextGood">
-        <h5>
+    <div class = "pageTitleText pageTitleTextGood">
             Operation was success!
-        </h5>
     </div>
 </c:if>
 
 <c:if test = "${result eq 'unsuccess'}">
-    <div class = "pageTitleTextBad">
-        <h5>
+    <div class = "pageTitleText pageTitleTextBad">
             Operation was not success!
-        </h5>
     </div>
 </c:if>
 
@@ -41,10 +37,11 @@
     <input type="hidden"  name="redirectTo" value="${menu}">
     <tr>
         <td >
-            <button onclick="submit"  class="controlButton"><h2>OK</h2></button>
+            <button onclick="submit"  class="controlButton controlButtonAdminPage">OK</button>
             <br>
         </td>
     </tr>
 </form>
+
 </body>
 </html>

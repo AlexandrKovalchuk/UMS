@@ -6,6 +6,7 @@ import net.ukr.vixtibon.base_objects.departments.Institute;
 import net.ukr.vixtibon.dao.departments.DAODepartment;
 import net.ukr.vixtibon.dao.departments.DAOFaculty;
 import net.ukr.vixtibon.dao.departments.DAOInstitute;
+import net.ukr.vixtibon.dao.persons.DAOEmployee;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -21,9 +22,16 @@ public class DeleteDepartmentPageController   extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if(request.getParameterMap().containsKey("step")){
             DAODepartment daoi = new DAODepartment();
+            DAOEmployee daoe = new DAOEmployee();
             if(request.getParameter("step").equals("step1")){
                 Department department = daoi.getEntityById(Integer.parseInt(request.getParameter("departmentID")));
+                department.setEmployees(daoe.getAllByDepartmentID(department.getID()));
                 request.setAttribute("selected", "yes");
+                if(department.getEmployees().size()>0){
+                    request.setAttribute("possible_to_remove", "no");
+                }else{
+                    request.setAttribute("possible_to_remove", "yes");
+                }
                 request.setAttribute("department", department);
                 request.getRequestDispatcher("Admin/Department/Operations/DeleteDepartmentPage.jsp").forward(request, response);
             }else if(request.getParameter("step").equals("step2")){

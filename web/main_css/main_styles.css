@@ -44,6 +44,19 @@
     color: #e5f7fb;
 }
 
+.pageTitleTextGood{
+    background: linear-gradient(to bottom right, rgb(30, 183, 73), rgba(30, 183, 73, 0.56));
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    color: #ffffff;
+    padding: 0px 25px;
+}
+.pageTitleTextBad{
+    background: linear-gradient(to bottom right, rgb(183, 0, 12), rgba(183, 0, 12, 0.56));
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    color: #ffffff;
+    padding: 0px 25px;
+}
+
 /***************************************************************************************/
 /*content*/
 /***************************************************************************************/
@@ -279,17 +292,7 @@ form{
 
 
 
-.pageTitleTextGood{
-    background: linear-gradient(to bottom right, rgb(30, 183, 73), rgba(30, 183, 73, 0.56));
-    background: rgb(45, 183, 87);
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
-    padding: 0px 25px;
-}
-.pageTitleTextBad{
-    background: linear-gradient(to bottom right, rgb(183, 0, 12), rgba(183, 0, 12, 0.56));
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
-    padding: 0px 25px;
-}
+
 .textInputLabel{
     color: #ffffff;
     opacity: 1;
