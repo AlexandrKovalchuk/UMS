@@ -21,7 +21,7 @@ public class DepartmentPageController extends HttpServlet {
             }else if(request.getParameter("operationType").equals("move")){
                 request.getRequestDispatcher("MoveDepartmentPageController").forward(request, response);
             }else if(request.getParameter("operationType").equals("showInfo")){
-                request.getRequestDispatcher("ShowDepartmentInfoPageController").forward(request, response);
+                request.getRequestDispatcher("ShowInfoDepartmentPageController").forward(request, response);
             }else if(request.getParameter("operationType").equals("cancel")){
                 request.getRequestDispatcher("AdminPageController").forward(request, response);
             }else{

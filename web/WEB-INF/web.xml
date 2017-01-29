@@ -223,6 +223,16 @@
     </servlet-mapping>
 
     <servlet>
+        <servlet-name>ShowInfoDepartmentPageController</servlet-name>
+        <servlet-class>net.ukr.vixtibon.servlets.controllers.depatments.department.ShowInfoDepartmentPageController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>ShowInfoDepartmentPageController</servlet-name>
+        <url-pattern>/ShowInfoDepartmentPageController</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>EmployeePageController</servlet-name>
         <servlet-class>net.ukr.vixtibon.servlets.controllers.persons.employee.EmployeePageController</servlet-class>
     </servlet>

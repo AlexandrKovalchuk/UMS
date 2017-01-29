@@ -10,50 +10,54 @@
 <html>
 <head>
     <link rel="stylesheet" type="text/css" href="main_css\main_styles.css">
-    <title>Show Info Institute Page</title>
+    <title>Show Info Department Page</title>
 </head>
 <body class = "backgroungImageAdmin">
 
 <div class = "pageTitleText pageTitleTextAdmin">
-    Show Faculty Info Page!
+    Show Department Info Page!
 </div>
 <br />
 
 <c:if test = "${selected ne 'yes'}">
     <div class = "pageTitleText pageTitleTextAdmin">
-        Select Faculty to View:
+        Select Department to View:
     </div>
 
     <div class = "pageContent pageContentAdminPages pageContentAdminPages500px">
         <c:forEach items="${institutesList}" var="institute">
             <div class = "textLabelParagraph textLabelAdminPage"><c:out value="${institute.getLongName()}"/></div>
-                <c:forEach items="${institute.getFacultys()}" var="faculty">
-                    <div>
-                        <form action="/ShowInfoFacultyPageController" method="post" accept-charset="UTF-8">
-                            <input type="hidden"  name="step" value="step1">
-                            <input type="hidden"  name="facultyID" value="${faculty.getID()}">
-                            <button onclick="submit" class="itemButton itemButtonAdminPages" ><c:out value="${faculty.getLongName()}"/></button>
-                        </form>
-                    </div>
+            <c:forEach items="${institute.getFacultys()}" var="faculty">
+                <div class = "textLabelParagraph textLabelAdminPage"><c:out value="${faculty.getLongName()}"/></div>
+                <c:forEach items="${faculty.getDepartments()}" var="department">
+                <div>
+                    <form action="/ShowInfoDepartmentPageController" method="post" accept-charset="UTF-8">
+                        <input type="hidden"  name="step" value="step1">
+                        <input type="hidden"  name="departmentID" value="${department.getID()}">
+                        <button onclick="submit" class="itemButton itemButtonAdminPages" ><c:out value="${department.getLongName()}"/></button>
+                    </form>
+                </div>
                 </c:forEach>
+            </c:forEach>
         </c:forEach>
     </div>
 </c:if>
 
 <c:if test = "${selected eq 'yes'}">
     <div class = "pageTitleText pageTitleTextAdmin">
-        Faculty Info: <c:out value="${faculty.getLongName()}"/>
+        Department Info: <c:out value="${department.getLongName()}"/>
     </div>
 
     <div class = "pageContent pageContentAdminPages pageContentAdminPages500px">
-        <c:forEach items="${faculty.getDepartments()}" var="department">
-            <div class = "textLabelParagraph textLabelAdminPage">- <c:out value="${department.getLongName()}"/></div>
+        <div class = "textLabelParagraph textLabelAdminPage">Employees:</div>
+        <c:forEach items="${department.getEmployees()}" var="employee">
+            <div class = "textLabelParagraph textLabelAdminPage">- <c:out value="${employee.getSecondName()}"/> <c:out value="${employee.getName()}"/></div>
         </c:forEach>
     </div>
 </c:if>
 
 <div>
-    <form action="/ShowInfoFacultyPageController" method="post">
+    <form action="/ShowInfoDepartmentPageController" method="post">
         <input type="hidden"  name="step" value="cancel">
         <td colspan=2>
             <button onclick="submit"  class="controlButton controlButtonAdminPage">Cancel</button>
