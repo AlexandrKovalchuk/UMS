@@ -119,6 +119,32 @@
     color: white;
 }
 /**/
+/*item buttons*/
+.itemButton{
+    border-radius: 6px;
+    padding: 0px 15px 10px ;
+    width: 1000px;
+    height: 30px;
+    cursor: pointer;
+    text-align: left;
+    font-family: "Helvetica";
+    font-size: 26px;
+    font-weight: bold;
+    display: inline-block;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    margin: 10px 0px 10px 0px;
+}
+.itemButtonAdminPages{
+    background: linear-gradient(to bottom right, rgba(19, 19, 19, 0.69), rgba(140, 140, 140, 0.35));
+    border: navy;
+    color: #ffffff;
+    text-decoration-color: white;
+}
+.itemButtonAdminPages:hover {
+    background: linear-gradient(to bottom right, rgba(19, 19, 19, 0.47), rgba(139, 125, 140, 0.25));
+    color: white;
+}
+/**/
 /***************************************************************************************/
 
 /*main*/
@@ -191,16 +217,26 @@ form{
     font-family: "Helvetica";
     font-size: 21px;
     font-weight: bold;
-    text-align: right;
 }
 
 .textLabelLogInPage{
     color: #e5f7fb;
+    text-align: right;
 }
 
 .textLabelAdminPage{
     color: #ffffff;
+    text-align: left;
 }
+
+.textLabelParagraph{
+    font-family: "Helvetica";
+    font-size: 26px;
+    font-weight: bold;
+    padding-left: 40px;
+    text-align: left;
+}
+
 /**/
 /*page content*/
 .pageContent{
@@ -216,6 +252,10 @@ form{
 }
 .pageContentAdminPagesTwoFieldsSize{
     height: 125px;
+}
+
+.pageContentAdminPages500px{
+    height: 500px;
 }
 /**/
 /***************************************************************************************/
@@ -236,45 +276,8 @@ form{
     padding: 0px 25px;
 }
 
-.itemButton{
-    background: linear-gradient(to bottom right, rgba(19, 19, 19, 0.69), rgba(140, 140, 140, 0.35));
-    border-radius: 6px;
-    border: navy;
-    color: #ffffff;
-    padding: 0px 15px 10px ;
-    width: 1000px;
-    height: 30px;
-    cursor: pointer;
-    text-align: left;
-    text-decoration-color: white;
-    font-family: "Helvetica";
-    font-size: 26px;
-    font-weight: bold;
-    display: inline-block;
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
-    margin: 10px 0px 10px 0px;
-}
-.itemButton:hover {
-    background: linear-gradient(to bottom right, rgba(19, 19, 19, 0.47), rgba(139, 125, 140, 0.25));
-    color: white;
-}
-.topicButton{
-    background: linear-gradient(to bottom right, rgba(19, 19, 19, 0.69), rgba(140, 140, 140, 0.35));
-    border-radius: 6px;
-    border: #000000;
-    color: #ffffff;
-    padding: 0px 15px;
-    width: 500px;
-    height: 50px;
-    cursor: pointer;
-    text-align: left;
-    display: inline-block;
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
-}
-.topicButton:hover {
-    background: linear-gradient(to bottom right, rgba(19, 19, 19, 0.47), rgba(139, 125, 140, 0.25));
-    color: white;
-}
+
+
 
 .pageTitleTextGood{
     background: linear-gradient(to bottom right, rgb(30, 183, 73), rgba(30, 183, 73, 0.56));

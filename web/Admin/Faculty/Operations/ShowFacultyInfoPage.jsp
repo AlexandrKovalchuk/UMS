@@ -9,7 +9,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <link rel="stylesheet" type="text/css" href="Admin/css/admin_styles.css">
+    <link rel="stylesheet" type="text/css" href="main_css\main_styles.css">
     <title>Show Info Institute Page</title>
 </head>
 <body class = "backgroungImageAdmin">

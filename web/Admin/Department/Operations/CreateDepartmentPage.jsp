@@ -12,66 +12,72 @@
 <head lang="en">
     <meta charset="UTF-8">
     <title>Create Department Page</title>
-    <link rel="stylesheet" type="text/css" href="Admin/css/admin_styles.css">
+    <link rel="stylesheet" type="text/css" href="main_css\main_styles.css">
 </head>
 <body class = "backgroungImageAdmin">
-<div class = "pageTitleText">
-    <h5>
+<div class = "pageTitleText pageTitleTextAdmin">
         Create Department Page!
-        <br />
-        Please fill form:
-    </h5>
 </div>
-<div>
+<br />
+
     <c:if test = "${selected eq 'no'}">
-        Select Faculty where to add Department:
+        <div class = "pageTitleText pageTitleTextAdmin">
+            Select Faculty where to add Department:
+        </div>
+
+        <div class = "pageContent pageContentAdminPages pageContentAdminPages500px">
         <c:forEach items="${institutesList}" var="institute">
-            <div>
-                <h2><c:out value="${institute.getLongName()}"/></h2>
-                <c:forEach items="${institute.getFacultys()}" var="faculty">
+            <div class = "textLabelParagraph textLabelAdminPage"><c:out value="${institute.getLongName()}"/>:</div>
+            <c:forEach items="${institute.getFacultys()}" var="faculty">
+                <div>
                     <form action="/CreateDepartmentPageController" method="post" accept-charset="UTF-8">
                         <input type="hidden"  name="step" value="step1">
                         <input type="hidden"  name="facultyID" value="${faculty.getID()}">
-                        <button onclick="submit" class="itemButton" ><c:out value="${faculty.getLongName()}"/></button>
+                        <button onclick="submit" class="itemButton itemButtonAdminPages" ><c:out value="${faculty.getLongName()}"/></button>
                     </form>
-                </c:forEach>
-            </div>
+                 </div>
+             </c:forEach>
         </c:forEach>
+        </div>
     </c:if>
+
     <c:if test = "${selected eq 'yes'}">
-        Please fill form:
-        <div>
+        <div class = "pageTitleText pageTitleTextAdmin">
+            Please fill form:
+        </div>
+
+        <div class = "pageContent pageContentAdminPages pageContentAdminPagesTwoFieldsSize">
             <form action="/CreateDepartmentPageController" method="post" accept-charset="UTF-8">
                 <table>
                     <input type="hidden"  name="step" value="step2">
                     <input type="hidden"  name="facultyID" value="${facultyID}">
-                    <tr class = "textInputLabel">
-                        <td>Long name:</td>
+                    <tr>
+                        <td class = "textLabel textLabelAdminPage">Long name:</td>
                         <td>
-                            <input type="text" name="longName" required/>
+                            <input class = "inputSettings inputAdminPage inputAdminPageLongNames" type="text" name="longName" required/>
                         </td>
                     </tr>
-                    <tr class = "textInputLabel">
-                        <td>Short name:</td>
+                    <tr>
+                        <td class = "textLabel textLabelAdminPage">Short name:</td>
                         <td>
-                            <input type="text" name="shortName" required/>
+                            <input class = "inputSettings inputAdminPage" type="text" name="shortName" required/>
                         </td>
                     </tr>
                     <tr>
                         <td colspan=2>
-                            <button onclick="submit"  class="controlButton"><h2>Create</h2></button>
+                            <button onclick="submit"  class="controlButton controlButtonAdminPage">Create</button>
                         </td>
                     </tr>
                 </table>
             </form>
         </div>
     </c:if>
-</div>
+
 <div>
     <form action="CreateDepartmentPageController" method="post">
         <input type="hidden"  name="step" value="cancel">
         <td colspan=2>
-            <button onclick="submit"  class="topicButton"><h2>Cancel</h2></button>
+            <button onclick="submit"  class="controlButton controlButtonAdminPage">Cancel</button>
         </td>
     </form>
 </div>

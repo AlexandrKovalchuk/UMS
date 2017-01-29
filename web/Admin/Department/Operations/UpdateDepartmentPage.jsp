@@ -9,70 +9,81 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <link rel="stylesheet" type="text/css" href="Admin/css/admin_styles.css">
+    <link rel="stylesheet" type="text/css" href="main_css\main_styles.css">
     <title>Update Faculty Page</title>
 </head>
 <body class = "backgroungImageAdmin">
-<div class = "pageTitleText">
-    <h5>
-        Update Department Page!
-        <br />
-        <c:if test = "${selected ne 'yes'}">
-            Select Department to update:
-            <c:forEach items="${institutesList}" var="institute">
-                <div>
-                    <h2><c:out value="${institute.getLongName()}"/></h2>
-                    <c:forEach items="${institute.getFacultys()}" var="faculty">
-                        <h2><c:out value="${faculty.getLongName()}"/></h2>
-                        <c:forEach items="${faculty.getDepartments()}" var="department">
-                            <form action="/UpdateDepartmentPageController" method="post" accept-charset="UTF-8">
-                                <input type="hidden"  name="step" value="step1">
-                                <input type="hidden"  name="departmentID" value="${department.getID()}">
-                                <button onclick="submit" class="itemButton" ><c:out value="${department.getLongName()}"/></button>
-                            </form>
-                        </c:forEach>
-                    </c:forEach>
-                </div>
-            </c:forEach>
-        </c:if>
-        <c:if test = "${selected eq 'yes'}">
-            Please fill form:
-            <div>
-                <form action="/UpdateDepartmentPageController" method="post" accept-charset="UTF-8">
-                    <table>
-                        <input type="hidden"  name="step" value="step2">
-                        <input type="hidden"  name="departmentID" value="${department.getID()}" >
-                        <tr class = "textInputLabel">
-                            <td>Long name:</td>
-                            <td>
-                                <input type="text" name="longName"  required value=${department.getLongName()} >
-                            </td>
-                        </tr>
-                        <tr class = "textInputLabel">
-                            <td>Short name:</td>
-                            <td>
-                                <input type="text" name="shortName" required value=${department.getShortName()}>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan=2>
-                                <button onclick="submit"  class="controlButton"><h2>Update</h2></button>
-                            </td>
-                        </tr>
-                    </table>
-                </form>
-            </div>
-        </c:if>
-    </h5>
+
+<div class = "pageTitleText pageTitleTextAdmin">
+    Update Department Page!
 </div>
+<br />
+
+
+<c:if test = "${selected ne 'yes'}">
+    <div class = "pageTitleText pageTitleTextAdmin">
+        Select Department to update:
+    </div>
+
+    <div class = "pageContent pageContentAdminPages pageContentAdminPages500px">
+        <c:forEach items="${institutesList}" var="institute">
+            <div class = "textLabelParagraph textLabelAdminPage"><c:out value="${institute.getLongName()}"/></div>
+            <c:forEach items="${institute.getFacultys()}" var="faculty">
+                <div class = "textLabelParagraph textLabelAdminPage"><c:out value="${faculty.getLongName()}"/></div>
+                <c:forEach items="${faculty.getDepartments()}" var="department">
+                    <div>
+                        <form action="/UpdateDepartmentPageController" method="post" accept-charset="UTF-8">
+                            <input type="hidden"  name="step" value="step1">
+                            <input type="hidden"  name="departmentID" value="${department.getID()}">
+                            <button onclick="submit" class="itemButton itemButtonAdminPages" ><c:out value="${department.getLongName()}"/></button>
+                        </form>
+                    </div>
+                </c:forEach>
+            </c:forEach>
+        </c:forEach>
+    </div>
+</c:if>
+
+<c:if test = "${selected eq 'yes'}">
+    <div class = "pageTitleText pageTitleTextAdmin">
+        Please fill form:
+    </div>
+
+    <div class = "pageContent pageContentAdminPages pageContentAdminPagesTwoFieldsSize">
+        <form action="/UpdateDepartmentPageController" method="post" accept-charset="UTF-8">
+            <table>
+                <input type="hidden"  name="step" value="step2">
+                <input type="hidden"  name="departmentID" value="${department.getID()}" >
+                <tr>
+                    <td class = "textLabel textLabelAdminPage">Long name:</td>
+                    <td>
+                        <input class = "inputSettings inputAdminPage inputAdminPageLongNames" type="text" name="longName"  required value="${department.getLongName()}">
+                    </td>
+                </tr>
+                <tr>
+                    <td class = "textLabel textLabelAdminPage">Short name:</td>
+                    <td>
+                        <input class = "inputSettings inputAdminPage" type="text" name="shortName" required value="${department.getShortName()}">
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan=2>
+                        <button onclick="submit"  class="controlButton controlButtonAdminPage">Update</button>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</c:if>
+
 <div>
     <form action="UpdateDepartmentPageController" method="post">
         <input type="hidden"  name="step" value="cancel">
         <td colspan=2>
-            <button onclick="submit"  class="topicButton"><h2>Cancel</h2></button>
+            <button onclick="submit"  class="controlButton controlButtonAdminPage">Cancel</button>
         </td>
     </form>
 </div>
-<br />
+
 </body>
 </html>

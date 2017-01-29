@@ -9,137 +9,144 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-<head lang="en">
-    <meta charset="UTF-8">
     <title>Create Employee Page</title>
-    <link rel="stylesheet" type="text/css" href="Admin/css/admin_styles.css">
+    <link rel="stylesheet" type="text/css" href="main_css\main_styles.css">
 </head>
 <body class = "backgroungImageAdmin">
-<div class = "pageTitleText">
-    <h5>
-        Create Employee Page!
-        <br />
 
-    </h5>
+<div class = "pageTitleText pageTitleTextAdmin">
+        Create Employee Page!
 </div>
-<div>
+<br />
+
     <c:if test = "${selected ne 'yes'}">
-        Select Institute where to add Employee:
-        <c:forEach items="${institutesList}" var="institute">
-            <div>
-                <h2><c:out value="${institute.getLongName()}"/></h2>
+        <div class = "pageTitleText pageTitleTextAdmin">
+            Select Department where to add Employee:
+        </div>
+
+        <div class = "pageContent pageContentAdminPages pageContentAdminPages500px">
+            <c:forEach items="${institutesList}" var="institute">
+                <div class = "textLabelParagraph textLabelAdminPage"><c:out value="${institute.getLongName()}"/></div>
                 <c:forEach items="${institute.getFacultys()}" var="faculty">
-                    <h2><c:out value="${faculty.getLongName()}"/></h2>
+                    <div class = "textLabelParagraph textLabelAdminPage"><c:out value="${faculty.getLongName()}"/></div>
                     <c:forEach items="${faculty.getDepartments()}" var="department">
-                        <form action="/CreateEmployeePageController" method="post" accept-charset="UTF-8">
-                            <input type="hidden"  name="step" value="step1">
-                            <input type="hidden"  name="departmentID" value="${department.getID()}">
-                            <button onclick="submit" class="itemButton" ><c:out value="${department.getLongName()}"/></button>
-                        </form>
+                        <div>
+                            <form action="/CreateEmployeePageController" method="post" accept-charset="UTF-8">
+                                <input type="hidden"  name="step" value="step1">
+                                <input type="hidden"  name="departmentID" value="${department.getID()}">
+                                <button onclick="submit" class="itemButton itemButtonAdminPages" ><c:out value="${department.getLongName()}"/></button>
+                            </form>
+                        </div>
                     </c:forEach>
                 </c:forEach>
-            </div>
-        </c:forEach>
+            </c:forEach>
+        </div>
     </c:if>
+
     <c:if test = "${selected eq 'yes'}">
-        Please fill form:
-        <div>
+        <div class = "pageTitleText pageTitleTextAdmin">
+            Please fill form:
+        </div>
+
+        <div class = "pageContent pageContentAdminPages pageContentAdminPages500px">
             <form action="/CreateEmployeePageController" method="post" accept-charset="UTF-8">
                 <table>
                     <input type="hidden"  name="step" value="step2">
                     <input type="hidden"  name="departmentID" value="${departmentID}">
-                    <tr class = "textInputLabel">
-                        <td>Ім'я:</td>
+                    <tr>
+                        <td class = "textLabel textLabelAdminPage">Ім'я:</td>
                         <td>
-                            <input type="text" name="name" required/>
+                            <input class = "inputSettings inputAdminPage" type="text" name="name" required/>
                         </td>
                     </tr>
-                    <tr class = "textInputLabel">
-                        <td>Прізвище:</td>
+                    <tr>
+                        <td class = "textLabel textLabelAdminPage">Прізвище:</td>
                         <td>
-                            <input type="text" name="lastName" required/>
+                            <input class = "inputSettings inputAdminPage" type="text" name="lastName" required/>
                         </td>
                     </tr>
-                    <tr class = "textInputLabel">
-                        <td>По Батькові:</td>
+                    <tr >
+                        <td class = "textLabel textLabelAdminPage">По Батькові:</td>
                         <td>
-                            <input type="text" name="fathersName" required/>
+                            <input class = "inputSettings inputAdminPage" type="text" name="fathersName" required/>
                         </td>
                     </tr>
-                    <tr class = "textInputLabel">
-                        <td>Ідентифікаційний код:</td>
+                    <tr>
+                        <td class = "textLabel textLabelAdminPage">Ідентифікаційний код:</td>
                         <td>
-                            <input type="text" name="personalID" required/>
+                            <input class = "inputSettings inputAdminPage" type="text" name="personalID" required/>
                         </td>
                     </tr>
-                    <tr class = "textInputLabel">
-                        <td>Стать:</td>
-                        <td>
+                    <tr>
+                        <td class = "textLabel textLabelAdminPage">Стать:</td>
+                        <td class ="textLabel textLabelAdminPage">
                             <input type="radio" name="sex" value="m" checked>Чоловіча<br>
                             <input type="radio" name="sex" value="f">Жіноча
                         </td>
                     </tr>
-                    <tr class = "textInputLabel">
-                        <td>Дата народження:</td>
+                    <tr>
+                        <td class = "textLabel textLabelAdminPage">Дата народження:</td>
                     </tr>
-                    <tr class = "textInputLabel">
-                        <td>День</td>
+                    <tr>
+                        <td class = "textLabel textLabelAdminPage">День</td>
                         <td>
-                            <input type="int" name="bday" required/>
-                        </td>
-                        <td>   Місяць</td>
-                        <td>
-                            <input type="int" name="bmonth" required/>
-                        </td>
-                        <td>   Рік</td>
-                        <td>
-                            <input type="int" name="byear" required/>
+                            <input class = "inputSettings inputAdminPage" type="int" name="bday" required/>
                         </td>
                     </tr>
-                    <tr class = "textInputLabel">
-                        <td>Пошта:</td>
+                    <tr>
+                        <td class = "textLabel textLabelAdminPage">   Місяць</td>
                         <td>
-                            <input type="text" name="email" required/>
+                            <input class = "inputSettings inputAdminPage" type="int" name="bmonth" required/>
                         </td>
                     </tr>
-                    <tr class = "textInputLabel">
-                        <td>Телефон:</td>
+                    <tr>
+                        <td class = "textLabel textLabelAdminPage">   Рік</td>
                         <td>
-                            <input type="text" name="phoneNumber" required/>
+                            <input class = "inputSettings inputAdminPage" type="int" name="byear" required/>
                         </td>
                     </tr>
-                    <tr class = "textInputLabel">
-                        <td>Адресса:</td>
-                    </tr>
-                    <tr class = "textInputLabel">
+                    <tr>
+                        <td class = "textLabel textLabelAdminPage">Пошта:</td>
                         <td>
-                            <input type="text" name="address" required/>
+                            <input class = "inputSettings inputAdminPage inputAdminPageLongNames" type="text" name="email" required/>
                         </td>
                     </tr>
-                    <tr class = "textInputLabel">
-                        <td>Паспортні данні:</td>
+                    <tr>
+                        <td class = "textLabel textLabelAdminPage">Телефон:</td>
                         <td>
-                            <input type="text" name="pasport" required/>
+                            <input class = "inputSettings inputAdminPage" type="text" name="phoneNumber" required/>
                         </td>
                     </tr>
-
-                    <tr class = "textInputLabel">
-                        <td>Посада:</td>
+                    <tr>
+                        <td class = "textLabel textLabelAdminPage">Адресса:</td>
                         <td>
-                            <input type="text" name="office" required/>
+                            <input class = "inputSettings inputAdminPage inputAdminPageLongNames" type="text" name="address" required/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class = "textLabel textLabelAdminPage">Паспортні данні:</td>
+                        <td>
+                            <input class = "inputSettings inputAdminPage inputAdminPageLongNames" type="text" name="pasport" required/>
                         </td>
                     </tr>
 
-                    <tr class = "textInputLabel">
-                        <td>LogIn:</td>
+                    <tr>
+                        <td class = "textLabel textLabelAdminPage">Посада:</td>
                         <td>
-                            <input type="text" name="login" required/>
+                            <input class = "inputSettings inputAdminPage inputAdminPageLongNames" type="text" name="office" required/>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class = "textLabel textLabelAdminPage">LogIn:</td>
+                        <td>
+                            <input class = "inputSettings inputAdminPage inputAdminPageLongNames" type="text" name="login" required/>
                         </td>
                     </tr>
 
                     <tr>
                         <td colspan=2>
-                            <button onclick="submit"  class="controlButton"><h2>Create</h2></button>
+                            <button onclick="submit"  class="controlButton controlButtonAdminPage">Create</button>
                         </td>
                     </tr>
                 </table>
@@ -147,14 +154,14 @@
         </div>
     </c:if>
 </div>
+
 <div>
     <form action="CreateEmployeePageController" method="post">
         <input type="hidden"  name="step" value="cancel">
         <td colspan=2>
-            <button onclick="submit"  class="topicButton"><h2>Cancel</h2></button>
+            <button onclick="submit"  class="controlButton controlButtonAdminPage">Cancel</button>
         </td>
     </form>
 </div>
-<br />
 </body>
 </html>
