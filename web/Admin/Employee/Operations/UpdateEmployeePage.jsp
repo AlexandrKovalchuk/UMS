@@ -9,23 +9,27 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <link rel="stylesheet" type="text/css" href="Admin/css/admin_styles.css">
+    <link rel="stylesheet" type="text/css" href="main_css\main_styles.css">
     <title>Update Employee Page</title>
 </head>
-<body>
-<div class = "pageTitleText">
-    <h5>
+<body class = "backgroungImageAdmin">
+<div class = "pageTitleText pageTitleTextAdmin">
         Update Employee Page!
-        <br />
-        <c:if test = "${selected ne 'yes'}">
-            Select Employee to update:
+</div>
+<br />
+<c:if test = "${selected ne 'yes'}">
+<div class = "pageTitleText">
+        Select Employee to update:
+</div>
+<div class = "pageContent">
+
             <c:forEach items="${institutesList}" var="institute">
                 <div>
-                    <h2><c:out value="${institute.getLongName()}"/></h2>
+                    <c:out value="${institute.getLongName()}"/>:<br />
                     <c:forEach items="${institute.getFacultys()}" var="faculty">
-                        <h2><c:out value="${faculty.getLongName()}"/></h2>
+                        <c:out value="${faculty.getLongName()}"/>:<br />
                         <c:forEach items="${faculty.getDepartments()}" var="department">
-                            <h2><c:out value="${department.getLongName()}"/></h2>
+                            <c:out value="${department.getLongName()}"/>:<br /><br />
                             <c:forEach items="${department.getEmployees()}" var="employee">
                                 <form action="/UpdateEmployeePageController" method="post" accept-charset="UTF-8">
                                     <input type="hidden"  name="step" value="step1">
@@ -37,10 +41,13 @@
                     </c:forEach>
                 </div>
             </c:forEach>
+</div>
         </c:if>
         <c:if test = "${selected eq 'yes'}">
-            Please fill form:
-            <div>
+            <div class = "pageTitleText">
+                    Please fill form:
+            </div>
+            <div class = "pageContent">
                 <form action="/UpdateEmployeePageController" method="post" accept-charset="UTF-8">
                     <table>
                         <input type="hidden"  name="step" value="step2">
@@ -144,8 +151,6 @@
                 </form>
             </div>
         </c:if>
-    </h5>
-</div>
 <div>
     <form action="UpdateEmployeePageController" method="post">
         <input type="hidden"  name="step" value="cancel">

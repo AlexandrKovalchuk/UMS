@@ -11,9 +11,13 @@ import net.ukr.vixtibon.dao.departments.DAODepartment;
 import net.ukr.vixtibon.dao.departments.DAOFaculty;
 import net.ukr.vixtibon.dao.departments.DAOInstitute;
 import net.ukr.vixtibon.dao.login.DAOLogin;
+import net.ukr.vixtibon.dao.persons.DAOEmployee;
+import net.ukr.vixtibon.login_body.LogInBody;
 
 import java.io.*;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
@@ -71,10 +75,13 @@ public class Generator {
         DAOInstitute daoInstitute = new DAOInstitute();
         DAOFaculty daoFaculty = new DAOFaculty();
         DAODepartment daoDepartment = new DAODepartment();
+        DAOEmployee daoEmployee = new DAOEmployee();
+        DAOLogin daoLogin = new DAOLogin();
         boolean result = true;
         daoInstitute.createNONE();
         daoFaculty.createNONE();
         daoDepartment.createNONE();
+        daoLogin.createAdmin();
         daoInstitute.create(generateInstitute("Київський Політехнічний Інститут", "КПИ"));
         ArrayList<Faculty> faculties = openFacultys("C:\\Users\\alex\\IdeaProjects\\UMS\\UMS\\Facultys.txt",1);
         for (Faculty f: faculties){
@@ -103,9 +110,29 @@ public class Generator {
         departments = daoDepartment.getAll();
 
         for(Department d: departments){
-            d.setEmployees(generateEmployeesList(d.getID()));
+            System.out.println("d.getID() :" + d.getID());
+            if(d.getID() == 0){
+                continue;
+            }else {
+                d.setEmployees(generateEmployeesList(d.getID()));
+                System.out.println("d.getEmployees().size() :" + d.getEmployees().size());
+                for (Employee e : d.getEmployees()) {
+                    LogInBody lb = new LogInBody();
+                    lb.setAccess("employee");
+                    lb.setPassword(e.generatePassword());
+                    lb.setLogIn(e.getLogin());
+                    daoLogin.create(lb);
+                    try {
+                        daoEmployee.create(e);
+                    } catch (SQLException e1) {
+                        e1.printStackTrace();
+                    }
+                }
+            }
         }
 
+        daoEmployee.closeConnection();
+        daoDepartment.closeConnection();
         daoDepartment.closeConnection();
         daoFaculty.closeConnection();
         daoInstitute.closeConnection();
@@ -114,9 +141,12 @@ public class Generator {
     public boolean deleteDate(){
         DAOLogin daoLogin = new DAOLogin();
         boolean result = true;
-        String[] tables = {"institute","faculty","department","employee"};
+        String[] tables = {"institute","faculty","department","employee","loginpass"};
         for(int i=0; i<tables.length; i++){
             result = daoLogin.deleteDate(tables[i]);
+            if(tables[i].equals("loginpass")){
+                daoLogin.createAdmin();
+            }
             if(result == false){
                 break;
             }
@@ -165,19 +195,53 @@ private Institute generateInstitute(String longName, String shortName){
             employee.setlastName(FemaleSurnames.get(rn.nextInt(FemaleSurnames.size()-1)));
             employee.setfathersName(FemaleFathersNames.get(rn.nextInt(FemaleFathersNames.size()-1)));
         }
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
+        int day = rn.nextInt(30)+1;
+        int month = rn.nextInt(11)+1;
+        int year = rn.nextInt(39)+1956;
+        if(month == 2){
+            if(day > 28){
+                day = 28;
+            }
+        }
+        String dateInString = ""+day +"-"+month +"-"+year+" 10:20:56";
+        System.out.println("dateInString : " + dateInString);
+        Date date = new Date();
+        try {
+            date = sdf.parse(dateInString);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        employee.setDateOfBorn(date);
         employee.setPersonalID(generatePersonalID());
-
-
+        employee.setEmail(generateEmail(employee.getName(), employee.getSecondName()));
+        employee.setPhoneNumber(generatePhoneNumber());
+        employee.setAddress(generatePostIndex()+ " " + City.get(rn.nextInt(City.size() - 1)) + " " + Street.get(rn.nextInt(Street.size() - 1))
+                + " " + rn.nextInt(100)  + ", " + rn.nextInt(300));
+        employee.setPasport(generatePasportSeria() + generatePasportNumber() + " " + gumvs.get(rn.nextInt(gumvs.size() - 1)));
+        employee.setOffice("HR");
+        employee.setLogin(employee.getEmail());
+        employee.setDepartmentID(departmentID);
         return employee;
     }
 
-    private ArrayList<Employee> generateEmployeesList(int departmentID){
-        ArrayList<Employee> employees = null;
-        int employeesCOUNT = rn.nextInt(4);
+    private String generateEmail(String name, String lastName){
+        String email = "";
+        String[] domens = {"gmx.de", "hotmail.de", "live.de", "online.de", "t-online.de" /* T-Mobile */, "web.de",
+                           "hotmail.fr", "live.fr", "laposte.net", "yahoo.fr", "wanadoo.fr", "orange.fr", "gmx.fr",
+                           "btinternet.com", "virginmedia.com", "blueyonder.co.uk", "freeserve.co.uk", "live.co.uk",
+                           "ntlworld.com", "o2.co.uk", "orange.net", "sky.com", "talktalk.co.uk", "tiscali.co.uk",
+                           "virgin.net", "wanadoo.co.uk", "bt.com"};
+        email = toLatinConverter(name) + toLatinConverter(lastName) + "@" + domens[rn.nextInt(domens.length-1)];
+        return email;
+    }
 
-        if(employeesCOUNT == 0){
-            ++employeesCOUNT;
-        }
+    private ArrayList<Employee> generateEmployeesList(int departmentID){
+        ArrayList<Employee> employees = new ArrayList<Employee>();
+        int employeesCOUNT = rn.nextInt(4) + 1;
+
+        System.out.println("employeesCOUNT" + employeesCOUNT);
+        System.out.println("departmentID" + departmentID);
 
         for(int i = 0; i < employeesCOUNT; i++){
             employees.add(generateEmployee(departmentID));
@@ -226,96 +290,6 @@ private Institute generateInstitute(String longName, String shortName){
         //setup data base
         setupBase(tapleParametersList);
 
-
-
-
-        //create timetables table
-       // String timetablesTable = ();
-
-
-        //openFacultys("Facultys.txt", KPI.getID());
-/*
-        for(Faculty i: KPI.getFacultys()){
-            System.out.println("Short name : " + i.getShortName() + " - " + i.getLongName() );
-            ArrayList<Chair> AC = openChairs(i.getShortName() + ".txt", i.getShortName(), i.getID(), "Chair");
-            for(Chair c : AC){
-                i.addChair(c);
-            }
-            System. out .println("############# Faculty insert query: " + d.insertQuery(i.qs));
-            d.stringProcessor(d.insertQuery(i.qs));
-        }
-*/
-        //info
-/*
-        for(Faculty f: KPI.getFacultys()){
-            System. out .println("############# Faculty : " + f.getLongName());
-
-
-            for(Chair c: f.Chairs){
-                System. out .println("############# Chair : " + c.getLongName() + " - " + c.getShortName());
-                //c.showTeachersList();
-                //c.showDisciplinesList();
-
-                System. out .println("############# Course 1 : ");
-                for(Group g1: c.Groups1){
-
-                    System. out .println("############# Group : " + g1.getFullGroupName());
-                    for(Student s: g1.StudentsList){
-                        //System. out .println("Name : " + s.getName() + " " + s.getSecondName());
-                        //s.fullInfo();
-                    }
-                    System. out .println(" time table ");
-                    //g1.groupTimeTable.showTimeTable();
-                }
-                System. out .println("############# Course 2 : ");
-                for(Group g2: c.Groups2){
-
-                    System. out .println("############# Group : " + g2.getFullGroupName());
-                    for(Student s: g2.StudentsList){
-                        //s.fullInfo();
-                    }
-                    //g2.groupTimeTable.showTimeTable();
-                }
-                System. out .println("############# Course 3 : ");
-                for(Group g3: c.Groups3){
-
-                    System. out .println("############# Group : " + g3.getFullGroupName());
-                    for(Student s: g3.StudentsList){
-                        //s.fullInfo();
-                    }
-                    //g3.groupTimeTable.showTimeTable();
-                }
-                System. out .println("############# Course 4 : ");
-                for(Group g4: c.Groups4){
-
-                    System. out .println("############# Group : " + g4.getFullGroupName());
-                    for(Student s: g4.StudentsList){
-                        //s.fullInfo();
-                    }
-                    //g4.groupTimeTable.showTimeTable();
-                }
-                System. out .println("############# Course 1 : ");
-                for(Group g5: c.Groups5){
-
-                    System. out .println("############# Group : " + g5.getFullGroupName());
-                    for(Student s: g5.StudentsList){
-                        //s.fullInfo();
-                    }
-                    //g5.groupTimeTable.showTimeTable();
-                }
-                System. out .println("############# Course 6 : ");
-                for(Group g6: c.Groups6){
-
-                    System. out .println("############# Group : " + g6.getFullGroupName());
-                    for(Student s: g6.StudentsList){
-                        //s.fullInfo();
-                    }
-                    //g6.groupTimeTable.showTimeTable();
-                }
-            }
-
-        }
-        */
 // PASSWORD CREATOR
         /*
         BufferedWriter w = null;
@@ -802,29 +776,28 @@ return  null;
     }
 
     public String generatePersonalID(){
-        String personalID = null;
-        long step = 1000000000;
+        String personalID = "";
         for(int i = 0; i < 10; i++){
-            int value = rn.nextInt(9);
-            if(value == 0){
-                value = 1;
+            int dig = rn.nextInt(9);
+            if(i==0){
+                if(dig == 0){
+                    dig = dig +1;
+                }
             }
-            personalID = personalID + (step * value);
-            step = step/10;
+            personalID = personalID + dig;
         }
+        System.out.println("personalID :" + personalID);
         return personalID;
     }
 
     public String generatePasportNumber(){
-        String pasportNumber = null;
-        long step = 100000;
-        for(int i = 0; i < 10; i++){
+        String pasportNumber = "";
+        for(int i = 0; i < 6; i++){
             int value = rn.nextInt(9);
             if(value == 0){
                 value = 1;
             }
-            pasportNumber = pasportNumber + (step * value);
-            step = step/10;
+            pasportNumber = pasportNumber + value;
         }
         return pasportNumber;
     }

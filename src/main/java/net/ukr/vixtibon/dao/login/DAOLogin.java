@@ -54,7 +54,17 @@ public class DAOLogin extends AbstractController<LogInBody,Integer> {
 
     @Override
     public boolean create(LogInBody entity) {
-        return false;
+        String Create_Login_loginpass_Statemet = "INSERT INTO loginpass (ID,login,password,access_type) VALUES ('"+findFreeID("loginpass")+"','"+entity.getLogIn()+"','"+entity.getPassword()+"','"+entity.getAccess()+"');";
+        PreparedStatement ps = getPrepareStatement(Create_Login_loginpass_Statemet);
+        try {
+            ps.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        } finally {
+            if (ps != null) try { ps.close(); } catch (SQLException logOrIgnore) {}
+        }
     }
 
     public LogInBody getEntityByLogIn(String logIn) {
@@ -83,6 +93,20 @@ public class DAOLogin extends AbstractController<LogInBody,Integer> {
         String DELETE_DATE = "DELETE from " + tableName +";";
         System.out.println("DELETE_DATE :" + DELETE_DATE);
         PreparedStatement ps = getPrepareStatement(DELETE_DATE);
+        try {
+            ps.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        } finally {
+            if (ps != null) try { ps.close(); } catch (SQLException logOrIgnore) {}
+        }
+    }
+
+    public  boolean createAdmin(){
+        String Create_Login_loginpass_Statemet = "INSERT INTO loginpass (id,login,password,access_type) VALUES ('0','a','a','admin');";
+        PreparedStatement ps = getPrepareStatement(Create_Login_loginpass_Statemet);
         try {
             ps.executeUpdate();
             return true;

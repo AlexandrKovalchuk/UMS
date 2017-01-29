@@ -12,7 +12,7 @@
     <link rel="stylesheet" type="text/css" href="Admin/css/admin_styles.css">
     <title>Move Department Page</title>
 </head>
-<body>
+<body class = "backgroungImageAdmin">
 <div class = "pageTitleText">
     <h5>
         Move Department Page!

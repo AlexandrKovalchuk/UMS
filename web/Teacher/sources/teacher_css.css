@@ -6,7 +6,7 @@ body{
     margin-bottom: 0;
     margin-width: 0;
     margin_height: 0;
-    background-image: url(teacher.jpg);
+    background-image: url(../../main_css/teacher.jpg);
 }
 
 .pageTitleText{

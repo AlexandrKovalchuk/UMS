@@ -14,7 +14,7 @@
     <title>Create Employee Page</title>
     <link rel="stylesheet" type="text/css" href="Admin/css/admin_styles.css">
 </head>
-<body>
+<body class = "backgroungImageAdmin">
 <div class = "pageTitleText">
     <h5>
         Create Employee Page!

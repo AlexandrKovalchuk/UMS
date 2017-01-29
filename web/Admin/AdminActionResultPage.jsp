@@ -14,7 +14,7 @@
     <title>Action Result Page</title>
 </head>
 
-<body>
+<body class = "backgroungImageAdmin">
 <div class = "pageTitleText">
     <h5>
         Action Result Page!

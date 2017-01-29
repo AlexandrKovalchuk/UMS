@@ -6,16 +6,14 @@
 <html>
 
 <head>
-    <link rel="stylesheet" type="text/css" href="main_css\styles_for_LogIn_page.css">
+    <link rel="stylesheet" type="text/css" href="main_css\main_styles.css">
     <title>LOG IN PAGE</title>
 </head>
 
-<body>
+<body class = "backgroungImageLogIn">
 
-    <div class = "pageTitleText">
-        <h5>
+    <div class = "pageTitleText pageTitleTextLogIn">
             Welcome to Log In Page!
-        </h5>
     </div>
     <c:if test = "${!empty wrongPasswordOrLogIn}">
         <div class = "payAttention">
@@ -40,26 +38,26 @@
         <div class = "itemsBlock">
             <table>
                 <tr>
-                    <td><h2>Login Name:</h2></td>
+                    <td class = "textLabel textLabelLogInPage">Login Name:</td>
                     <td>
-                        <input name="username" type="text"  data-hint="insert log in" required/>
+                        <input class = "inputSettings inputLogInPage" name="username" type="text"  data-hint="insert log in" required/>
                     </td>
                 </tr>
                 <tr>
-                    <td><h2>Password:</h2></td>
+                    <td class = "textLabel textLabelLogInPage">Password:</td>
                     <td>
-                        <input name="password" type="text" maxlength="20"
+                        <input class = "inputSettings inputLogInPage" name="password" type="text" maxlength="20"
                                placeholder="" autocomplete="off" data-hint="insert password" required/>
-                    </td>
-                </tr>
-                <tr>
-                    <td >
-                        <button onclick="submit" value="Log In" class="controlButton"><h2>Log In</h2></button>
-                        <br>
                     </td>
                 </tr>
                 <br>
             </table>
+            <tr>
+                <td >
+                    <button onclick="submit" value="Log In" class="controlButton controlButtonWLogInPage">Log In</button>
+                    <br>
+                </td>
+            </tr>
         </div>
     </form>
 </body>
