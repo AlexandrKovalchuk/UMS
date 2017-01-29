@@ -36,26 +36,26 @@ public class MoveEmployeePageController   extends HttpServlet {
                     }
                     institute.setFacultys(f);
                 }
-                Department department = daod.getEntityById(Integer.parseInt(request.getParameter("departmentID")));
+                Employee employee= daoe.getEntityById(Integer.parseInt(request.getParameter("employeeID")));
                 request.setAttribute("selected", "yes");
                 request.setAttribute("institutesList", i);
-                request.setAttribute("department", department);
+                request.setAttribute("employee", employee);
                 request.getRequestDispatcher("Admin/Employee/Operations/MoveEmployeePage.jsp").forward(request, response);
             }else if(request.getParameter("step").equals("step2")){
                 Department department = daod.getEntityById(Integer.parseInt(request.getParameter("departmentID")));
-                Faculty faculty = daof.getEntityById(Integer.parseInt(request.getParameter("facultyID")));
+                Employee employee = daoe.getEntityById(Integer.parseInt(request.getParameter("employeeID")));
                 request.setAttribute("selected", "yes2");
+                request.setAttribute("employee", employee);
                 request.setAttribute("department", department);
-                request.setAttribute("faculty", faculty);
                 request.getRequestDispatcher("Admin/Employee/Operations/MoveEmployeePage.jsp").forward(request, response);
             }else if(request.getParameter("step").equals("step3")){
                 boolean result = false;
-                result = daod.updateDepartmentLocation(Integer.parseInt(request.getParameter("facultyID")),Integer.parseInt(request.getParameter("departmentID")));
+                result = daoe.updateEmployeeLocation(Integer.parseInt(request.getParameter("departmentID")),Integer.parseInt(request.getParameter("employeeID")));
                 if(result){
                     request.setAttribute("result", "success");
-                    request.setAttribute("menu", "department");
+                    request.setAttribute("menu", "employee");
                 }else{
-                    request.setAttribute("menu", "department");
+                    request.setAttribute("menu", "employee");
                     request.setAttribute("result", "unsuccess");
                 }
                 daod.closeConnection();
@@ -74,19 +74,10 @@ public class MoveEmployeePageController   extends HttpServlet {
                     for(Department department: d){
                         ArrayList<Employee> e = daoe.getAllByDepartmentID(department.getID());
                         department.setEmployees(e);
-                        if(department.getEmployees().size() == 0){
-                            d.remove(department);
-                        }
                     }
                     faculty.setDepartments(d);
-                    if(faculty.getDepartments().size() == 0){
-                        f.remove(faculty);
-                    }
                 }
                 institute.setFacultys(f);
-                if(institute.getFacultys().size() == 0){
-                    i.remove(institute);
-                }
             }
             request.setAttribute("institutesList", i);
             request.setAttribute("selected", "no");

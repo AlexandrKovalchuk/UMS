@@ -18,6 +18,8 @@ public class EmployeePageController extends HttpServlet {
                 request.getRequestDispatcher("UpdateEmployeePageController").forward(request, response);
             }else if(request.getParameter("operationType").equals("delete")){
                 request.getRequestDispatcher("DeleteEmployeePageController").forward(request, response);
+            }else if(request.getParameter("operationType").equals("move")){
+                request.getRequestDispatcher("MoveEmployeePageController").forward(request, response);
             }else if(request.getParameter("operationType").equals("showInfo")){
                 request.getRequestDispatcher("ShowEmployeeInfoPageController").forward(request, response);
             }else if(request.getParameter("operationType").equals("cancel")){

@@ -72,8 +72,8 @@ public class DAOEmployee extends AbstractController<Employee,Integer> {
         }
     }
 
-    boolean updateEmployeeLocation(int departmentID, int employeeID) {
-        String Update_Employee_Statemet = "UPDATE employee SET facultyID='" + departmentID + "' WHERE ID=" + employeeID + ";";
+    public boolean updateEmployeeLocation(int departmentID, int employeeID) {
+        String Update_Employee_Statemet = "UPDATE employee SET departmentID='" + departmentID + "' WHERE ID=" + employeeID + ";";
         PreparedStatement ps = getPrepareStatement(Update_Employee_Statemet);
         try {
             ps.executeUpdate();

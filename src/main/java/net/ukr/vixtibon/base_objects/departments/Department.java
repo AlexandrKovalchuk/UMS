@@ -50,7 +50,7 @@ public class Department extends Structure implements Serializable {
         this.Employees = employees;
     }
 
-    public ArrayList<Employee> getEmployees( ){
+    public ArrayList<Employee> getEmployees(){
         return Employees;
     }
 /*
