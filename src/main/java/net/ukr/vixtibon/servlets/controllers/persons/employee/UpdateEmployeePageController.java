@@ -28,7 +28,6 @@ public class UpdateEmployeePageController  extends HttpServlet {
             DAOEmployee daoe = new DAOEmployee();
             if(request.getParameter("step").equals("step1")){
                 Employee employee = daoe.getEntityById(Integer.parseInt(request.getParameter("employeeID")));
-                System.out.println("UpdateEmployeePageController step1: " + employee.getDateOfBorn() + " " + employee.getName());
                 request.setAttribute("selected", "yes");
                 request.setAttribute("employee", employee);
                 request.getRequestDispatcher("Admin/Employee/Operations/UpdateEmployeePage.jsp").forward(request, response);
