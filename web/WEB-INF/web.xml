@@ -323,6 +323,36 @@
     </servlet-mapping>
 
     <servlet>
+        <servlet-name>StudentPageController</servlet-name>
+        <servlet-class>net.ukr.vixtibon.servlets.controllers.persons.student.StudentPageController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>StudentPageController</servlet-name>
+        <url-pattern>/StudentPageController</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>GroupPageController</servlet-name>
+        <servlet-class>net.ukr.vixtibon.servlets.controllers.study_process.group.GroupPageController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>GroupPageController</servlet-name>
+        <url-pattern>/GroupPageController</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>TimetablePageController</servlet-name>
+        <servlet-class>net.ukr.vixtibon.servlets.controllers.study_process.timetable.TimetablePageController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>TimetablePageController</servlet-name>
+        <url-pattern>/TimetablePageController</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>ActionResultPageController</servlet-name>
         <servlet-class>net.ukr.vixtibon.servlets.controllers.ActionResultPageController</servlet-class>
     </servlet>
