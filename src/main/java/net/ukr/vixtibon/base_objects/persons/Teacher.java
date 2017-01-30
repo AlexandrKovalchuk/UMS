@@ -1,6 +1,6 @@
 package net.ukr.vixtibon.base_objects.persons;
 
-import net.ukr.vixtibon.base_objects.stady_process.Discipline;
+import net.ukr.vixtibon.base_objects.study_process.Discipline;
 
 import java.io.Serializable;
 import java.util.ArrayList;

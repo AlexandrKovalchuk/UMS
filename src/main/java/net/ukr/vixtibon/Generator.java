@@ -6,7 +6,7 @@ import net.ukr.vixtibon.base_objects.departments.Institute;
 import net.ukr.vixtibon.base_objects.persons.Employee;
 import net.ukr.vixtibon.base_objects.persons.Student;
 import net.ukr.vixtibon.base_objects.persons.Teacher;
-import net.ukr.vixtibon.base_objects.stady_process.Discipline;
+import net.ukr.vixtibon.base_objects.study_process.Discipline;
 import net.ukr.vixtibon.dao.departments.DAODepartment;
 import net.ukr.vixtibon.dao.departments.DAOFaculty;
 import net.ukr.vixtibon.dao.departments.DAOInstitute;

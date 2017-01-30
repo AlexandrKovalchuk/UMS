@@ -1,4 +1,4 @@
-<%@ page import="net.ukr.vixtibon.base_objects.stady_process.Discipline" %>
+<%@ page import="net.ukr.vixtibon.base_objects.study_process.Discipline" %>
 <%@ page import="net.ukr.vixtibon.base_objects.persons.Teacher" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="java.util.Calendar" %>

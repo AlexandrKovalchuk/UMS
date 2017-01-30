@@ -303,6 +303,26 @@
     </servlet-mapping>
 
     <servlet>
+        <servlet-name>DisciplinePageController</servlet-name>
+        <servlet-class>net.ukr.vixtibon.servlets.controllers.study_process.discipline.DisciplinePageController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>DisciplinePageController</servlet-name>
+        <url-pattern>/DisciplinePageController</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>TeacherPageController</servlet-name>
+        <servlet-class>net.ukr.vixtibon.servlets.controllers.persons.teacher.TeacherPageController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>TeacherPageController</servlet-name>
+        <url-pattern>/TeacherPageController</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>ActionResultPageController</servlet-name>
         <servlet-class>net.ukr.vixtibon.servlets.controllers.ActionResultPageController</servlet-class>
     </servlet>

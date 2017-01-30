@@ -1,6 +1,6 @@
 package net.ukr.vixtibon;
 
-import net.ukr.vixtibon.base_objects.stady_process.Timetable;
+import net.ukr.vixtibon.base_objects.study_process.Timetable;
 
 import java.util.Calendar;
 

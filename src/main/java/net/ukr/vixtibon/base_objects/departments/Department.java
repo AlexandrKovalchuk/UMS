@@ -3,8 +3,7 @@ package net.ukr.vixtibon.base_objects.departments;
 import net.ukr.vixtibon.*;
 import net.ukr.vixtibon.base_objects.persons.Employee;
 import net.ukr.vixtibon.base_objects.persons.Teacher;
-import net.ukr.vixtibon.base_objects.stady_process.Discipline;
-import net.ukr.vixtibon.base_objects.stady_process.Timetable;
+import net.ukr.vixtibon.base_objects.study_process.Discipline;
 
 import java.io.Serializable;
 import java.util.ArrayList;

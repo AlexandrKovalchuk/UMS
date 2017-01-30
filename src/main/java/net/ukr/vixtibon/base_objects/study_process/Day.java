@@ -1,7 +1,4 @@
-package net.ukr.vixtibon.base_objects.stady_process;
-
-import net.ukr.vixtibon.base_objects.stady_process.Discipline;
-import net.ukr.vixtibon.base_objects.stady_process.Lesson;
+package net.ukr.vixtibon.base_objects.study_process;
 
 import java.io.Serializable;
 import java.util.ArrayList;

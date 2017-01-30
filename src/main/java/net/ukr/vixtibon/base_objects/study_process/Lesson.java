@@ -1,7 +1,6 @@
-package net.ukr.vixtibon.base_objects.stady_process;
+package net.ukr.vixtibon.base_objects.study_process;
 
 import net.ukr.vixtibon.base_objects.persons.Teacher;
-import net.ukr.vixtibon.base_objects.stady_process.Discipline;
 
 import java.io.Serializable;
 

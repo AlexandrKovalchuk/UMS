@@ -12,14 +12,14 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Department Page</title>
+    <title>Employee Page</title>
     <link rel="stylesheet" type="text/css" href="main_css\main_styles.css">
 </head>
 
 <body class = "backgroungImageEmployee">
 
 <div class = "pageTitleText pageTitleTextEmployee">
-        Welcome to Department Page!
+        Welcome to Employee Page!
         <br />
         Please choose action:
 </div>
@@ -88,7 +88,7 @@
             </form>
         </div>
         <br />
-        
+
     </div>
 </div>
 
