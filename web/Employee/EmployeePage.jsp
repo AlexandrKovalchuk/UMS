@@ -2,7 +2,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql" %>
-<%@ page import="servlets.SessionsList" %>
 <%--
   Created by IntelliJ IDEA.
   User: alex
@@ -14,18 +13,17 @@
 <html>
 <head>
     <title>Department Page</title>
-    <link rel="stylesheet" type="text/css" href="Employee/sources/employee_css.css">
+    <link rel="stylesheet" type="text/css" href="main_css\main_styles.css">
 </head>
 
-<body>
+<body class = "backgroungImageEmployee">
 
-<div class = "pageTitleText">
-    <h5>
+<div class = "pageTitleText pageTitleTextEmployee">
         Welcome to Department Page!
         <br />
         Please choose action:
-    </h5>
 </div>
+<br />
 
 <c:set var="step" value="${0}" scope="page"/>
 <c:set var="action" value="none" scope="page"/>
@@ -33,75 +31,64 @@
 <div class="itemsBlock">
     <div>
         <div>
-            <form action="ManageDiscipline.jsp" method="post">
-                <input type="hidden"  name="action" value="none">
-                <input type="hidden"  name="step" value="0">
+            <form action="EmployeeMenuPageController" method="post">
+                <input type="hidden"  name="elementType" value="discipline">
                 <td colspan=2>
-                    <button onclick="submit"  class="topicButton"><h2>Manage Discipline Credentials</h2></button>
+                    <button onclick="submit"  class="topicButton topicButtonEmployeePage"><h2>Manage Discipline Credentials</h2></button>
                 </td>
             </form>
         </div>
         <br />
+
         <div>
-            <form action="ManageTeacherCredentials.jsp" method="post">
-                <input type="hidden"  name="action" value="none">
-                <input type="hidden"  name="step" value="0">
+            <form action="EmployeeMenuPageController" method="post">
+                <input type="hidden"  name="elementType" value="group">
                 <td colspan=2>
-                    <button onclick="submit"  class="topicButton"><h2>Manage Teacher Credentials</h2></button>
+                    <button onclick="submit"  class="topicButton topicButtonEmployeePage"><h2>Manage Group Credentials</h2></button>
                 </td>
             </form>
         </div>
         <br />
+
         <div>
-            <tr>
+            <form action="EmployeeMenuPageController" method="post">
+                <input type="hidden"  name="elementType" value="teacher">
                 <td colspan=2>
-                    <button onclick="window.location.href='SelectOperation.jsp?type=chair'" class="topicButton" >
-                        <h1>Manage Tmetable</h1>
-                    </button>
-                </td>
-            </tr>
-        </div>
-        <br />
-        <div>
-            <form action="ManageGroupCredentials.jsp" method="post">
-                <input type="hidden"  name="action" value="none">
-                <input type="hidden"  name="step" value="0">
-                <td colspan=2>
-                    <button onclick="submit"  class="topicButton"><h2>Manage Group Credentials</h2></button>
+                    <button onclick="submit"  class="topicButton topicButtonEmployeePage"><h2>Manage Teacher Credentials</h2></button>
                 </td>
             </form>
         </div>
         <br />
+
         <div>
-            <tr>
+            <form action="EmployeeMenuPageController" method="post">
+                <input type="hidden"  name="elementType" value="student">
                 <td colspan=2>
-                    <button onclick="window.location.href='SelectOperation.jsp?type=emploee'" class="topicButton" >
-                        <h1>Manage Student Credentials</h1>
-                    </button>
+                    <button onclick="submit"  class="topicButton topicButtonEmployeePage"><h2>Manage Student Credentials</h2></button>
                 </td>
-            </tr>
+            </form>
         </div>
         <br />
+
         <div>
-            <tr>
+            <form action="EmployeeMenuPageController" method="post">
+                <input type="hidden"  name="elementType" value="timetable">
                 <td colspan=2>
-                    <button onclick="window.location.href='MainInfo.jsp'" class="controlButton" >
-                        <h1>Main Info</h1>
-                    </button>
+                    <button onclick="submit"  class="topicButton topicButtonEmployeePage"><h2>Manage Timetable Credentials</h2></button>
                 </td>
-            </tr>
+            </form>
         </div>
         <br />
+
         <div>
-            <tr>
+            <form action="LogOutServlet" method="post">
                 <td colspan=2>
-                    <button onclick="document.location.href='/LogOutServlet'" class="controlButton" >
-                        <h1>Log Out</h1>
-                    </button>
+                    <button onclick="submit"  class="controlButton controlButtonEmployeePage">Log Out</button>
                 </td>
-            </tr>
+            </form>
         </div>
         <br />
+        
     </div>
 </div>
 

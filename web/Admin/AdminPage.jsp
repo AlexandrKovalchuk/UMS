@@ -21,6 +21,7 @@
         Please choose action:
 </div>
 <br />
+
 <div class="itemsBlock">
     <div>
         <form action="AdminPageController" method="post">
@@ -85,6 +86,7 @@
         </form>
     </div>
     <br />
+
         <div>
             <form action="LogOutServlet" method="post">
                 <td colspan=2>
@@ -93,6 +95,7 @@
             </form>
         </div>
         <br />
+
     </div>
 </div>
 </body>

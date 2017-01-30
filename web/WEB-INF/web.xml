@@ -293,6 +293,16 @@
     </servlet-mapping>
 
     <servlet>
+        <servlet-name>EmployeeMenuPageController</servlet-name>
+        <servlet-class>net.ukr.vixtibon.servlets.controllers.persons.EmployeeMenuPageController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>EmployeeMenuPageController</servlet-name>
+        <url-pattern>/EmployeeMenuPageController</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>ActionResultPageController</servlet-name>
         <servlet-class>net.ukr.vixtibon.servlets.controllers.ActionResultPageController</servlet-class>
     </servlet>

@@ -17,8 +17,9 @@
 }
 
 .pageTitleTextEmployee{
-    background: linear-gradient(to bottom right, rgba(19, 19, 19, 0.69), rgba(140, 140, 140, 0.35));
+    background: linear-gradient(to bottom right, rgba(40, 0, 0, 0.69), rgba(255, 255, 117, 0.35));
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    color: #fff79c;
 }
 
 .pageTitleTextTeacher{
@@ -87,6 +88,18 @@
     color: #ffffff;
 }
 
+.controlButtonEmployeePage{
+    background: linear-gradient(to bottom right, rgba(40, 0, 0, 0.69), rgba(255, 255, 117, 0.35));
+    border: #45250d;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    color: #fff79c;
+}
+
+.controlButtonEmployeePage:hover {
+    background: linear-gradient(to bottom right, rgba(102, 0, 0, 0.69), rgba(255, 255, 117, 0.35));
+    color: #fff79c;
+}
+
 .controlButtonWelcomePage{
     background: linear-gradient(to bottom right, rgba(2, 2, 4, 0.95), rgba(19, 36, 61, 0.35));
     border: #000040;
@@ -122,6 +135,7 @@
     display: inline-block;
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
 }
+
 .topicButtonAdminPage{
     background: linear-gradient(to bottom right, rgba(19, 19, 19, 0.69), rgba(140, 140, 140, 0.35));
     border: #000000;
@@ -130,6 +144,17 @@
 .topicButtonAdminPage:hover {
     background: linear-gradient(to bottom right, rgba(19, 19, 19, 0.47), rgba(139, 125, 140, 0.25));
     color: white;
+}
+
+.topicButtonEmployeePage{
+    background: linear-gradient(to bottom right, rgba(40, 0, 0, 0.69), rgba(255, 255, 117, 0.35));
+    border: #45250d;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    color: #fff79c;
+}
+.topicButtonEmployeePage:hover {
+    background: linear-gradient(to bottom right, rgba(102, 0, 0, 0.69), rgba(255, 255, 117, 0.35));
+    color: #fff79c;
 }
 /**/
 /*item buttons*/
