@@ -30,6 +30,9 @@
                 <c:if test = "${wrongPasswordOrLogIn eq 'errorInAccess'}">
                     Error in access. Please contact your administrator!
                 </c:if>
+                <c:if test = "${wrongPasswordOrLogIn eq 'notAuthorized'}">
+                    Not authorized!
+                </c:if>
             </h5>
         </div>
     </c:if>

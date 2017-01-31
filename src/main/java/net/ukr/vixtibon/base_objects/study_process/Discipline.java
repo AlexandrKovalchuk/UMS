@@ -16,50 +16,34 @@ public class Discipline  implements Serializable {
     int courseNumber ; // Can contain only 1-6 and no other numbers, no negative numbers
     int semesterNumber; // Can contain only 1 or 2 and no other numbers, no negative numbers
     private int countOfLessons; //Can contain 0,1,2... ,no negative numbers
-    private int countOfPraktice;//Can contain 0,1,2... ,no negative numbers
+    private int countOfPractice;//Can contain 0,1,2... ,no negative numbers
     boolean exam;// Exam in the end of semester or not can be thrue of false
     private Teacher teacher;
     private int ID;
-    private int chairID;
+    private int departmentID;
 
-    public void setCountOfPraktice(int countOfPraktice) {
-        this.countOfPraktice = countOfPraktice;
-    }
-
-    public int getCountOfPraktice() {
-
-        return countOfPraktice;
-    }
-
-    public Discipline(int ID, String nameOfDiscipline, int courseNumber, int semesterNumber, int countOfLessons, boolean exam, int countOfPraktice
-            , int chairID) {
-        this.ID = ID;
-        this.nameOfDiscipline = nameOfDiscipline;
-        this.courseNumber = courseNumber;
-        String str = "";
-        this.semesterNumber = semesterNumber;
-        str = "";
-        this.countOfLessons = countOfLessons;
-        str = "";
-        this.countOfPraktice = countOfPraktice;
-        str = "";
-        this.exam = exam;
-        str = "";
-        this.chairID = chairID;
-    }
     public  Discipline(){}
+
+    public void setCountOfPractice(int countOfPractice) {
+        this.countOfPractice = countOfPractice;
+    }
+
+    public int getCountOfPractice() {
+        return countOfPractice;
+    }
+
     public String getFirstLetter(String s){
         String l = null;
         l = s.substring(0,1);
         return l;
     }
 
-    public int getChairID() {
-        return chairID;
+    public int getDepartmentID() {
+        return departmentID;
     }
 
-    public void setChairID(int chairID) {
-        this.chairID = chairID;
+    public void setDepartmentID(int departmentID) {
+        this.departmentID = departmentID;
     }
 
     public void setID(int ID) {
@@ -200,10 +184,5 @@ public class Discipline  implements Serializable {
 
     public boolean isExam() {
         return exam;
-    }
-    public void showDisciplineInfo(){
-        System. out .println("Discipline : " + getNameOfDiscipline() + "; course : " + getCourseNumber() + "; semester : " +
-                             getSemesterNumber() + "; count of lessons : " + getCountOfLessons() + "; count of practice : "+getCountOfPraktice()+"; examine : " + exam );
-        System. out .println("Teacher : " + teacher.getName() + " " + teacher.getSecondName());
     }
 }

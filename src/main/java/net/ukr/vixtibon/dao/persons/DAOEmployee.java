@@ -157,13 +157,13 @@ public class DAOEmployee extends AbstractController<Employee,Integer> {
     @Override
     public boolean create(Employee entity) throws SQLException {
         java.sql.Date sqlDate = new java.sql.Date(entity.getDateOfBorn().getTime());
-        String Create_Institute_Statemet = "INSERT INTO employee (name,lastName,fathersName,personalID,sex,email,phoneNumber,dateOfBorn," +
+        String Create_Employee_Statemet = "INSERT INTO employee (name,lastName,fathersName,personalID,sex,email,phoneNumber,dateOfBorn," +
                 "address,passport,login,office,ID,departmentID) " +
                 "VALUES ('" + entity.getName() + "','" + entity.getSecondName() + "','" + entity.getSurname() + "','"
                  + entity.getPersonalID() + "','" + entity.getSex() + "','" + entity.getEmail() + "','" +entity.getPhoneNumber()
                 + "','" + sqlDate + "','" + entity.getAddress() + "','" + entity.getPasport() + "','" +
                 entity.getLogin() + "','" + entity.getOffice() + "','" + findFreeID("employee") +"','" + entity.getDepartmentID()+"');";
-        PreparedStatement ps = getPrepareStatement(Create_Institute_Statemet);
+        PreparedStatement ps = getPrepareStatement(Create_Employee_Statemet);
         try {
             ps.executeUpdate();
             return true;

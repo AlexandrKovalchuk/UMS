@@ -29,6 +29,7 @@ public class LogInServlet extends HttpServlet {
             if(password.equals(lib.getPassword())){
                 HttpSession session=request.getSession();
                 session.setAttribute("username",username);
+                session.setMaxInactiveInterval(30*60);
                 if(lib.getAccess().equals("admin")){
                     session.setAttribute("type","admin");
                     request.getRequestDispatcher("Admin/AdminPage.jsp").forward(request, response);
