@@ -35,7 +35,7 @@ public class DAODiscipline  extends AbstractController<Discipline,Integer> {
                 discipline.setSemesterNumber(rs.getInt(4));
                 discipline.setCountOfLessons(rs.getInt(5));
                 discipline.setCountOfPractice(rs.getInt(6));
-                discipline.setExam(rs.getBoolean(7));
+                discipline.setExam(rs.getString(7));
                 discipline.setDepartmentID(rs.getInt(8));
                 disciplineList.add(discipline);
             }
@@ -98,7 +98,7 @@ public class DAODiscipline  extends AbstractController<Discipline,Integer> {
                 discipline.setSemesterNumber(rs.getInt(4));
                 discipline.setCountOfLessons(rs.getInt(5));
                 discipline.setCountOfPractice(rs.getInt(6));
-                discipline.setExam(rs.getBoolean(7));
+                discipline.setExam(rs.getString(7));
                 discipline.setDepartmentID(rs.getInt(8));
             }
         } catch (SQLException e) {

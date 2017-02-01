@@ -37,6 +37,7 @@ public class LogInServlet extends HttpServlet {
                     DAOEmployee daoe = new DAOEmployee();
                     session.setAttribute("type","employee");
                     session.setAttribute("departmentID",daoe.getDepartmentIDByUsername(username));
+                    System.out.println("LogInServlet departmentID " + session.getAttribute("departmentID"));
                     request.getRequestDispatcher("Employee/EmployeePage.jsp").forward(request, response);
                 }else if(lib.getAccess().equals("teacher")){
                     session.setAttribute("type","teacher");

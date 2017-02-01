@@ -107,9 +107,5 @@ public class Group implements Serializable {
         StudentsList.remove(index);
     }
 
-    public void showDisciplinesList(){
-        for (Discipline d: DisciplineList){
-            d.showDisciplineInfo();
-        }
-    }
+
 }

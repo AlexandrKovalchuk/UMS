@@ -153,8 +153,12 @@ public class Discipline  implements Serializable {
         this.countOfLessons = countOfLessons;
     }
 
-    public void setExam(boolean exam) {
-        this.exam = exam;
+    public void setExam(String exam) {
+        if(exam.equals("yes")){
+            this.exam = true;
+        }else if(exam.equals("no")){
+            this.exam = false;
+        }
     }
 
     public String getNameOfDiscipline() {
@@ -182,7 +186,11 @@ public class Discipline  implements Serializable {
     }
 
 
-    public boolean isExam() {
-        return exam;
+    public String isExam() {
+        if(exam){
+            return "yes";
+        }else{
+            return "no";
+        }
     }
 }

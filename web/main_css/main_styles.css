@@ -240,7 +240,8 @@ form{
     background: rgba(108,108,108,0.3);
 }
 .inputEmployee{
-    background: rgba(108,108,108,0.3);
+    background: rgba(69, 37, 13, 0.89);
+    color: #fff79c;
 }
 .inputAdminPage{
     background: rgba(19, 19, 19, 0.69);
@@ -267,6 +268,11 @@ form{
     text-align: left;
 }
 
+.textLabelEmployeePage{
+    color: #fff79c;
+    text-align: left;
+}
+
 .textLabelParagraph{
     font-family: "Helvetica";
     font-size: 26px;
@@ -288,12 +294,23 @@ form{
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
     color: #ffffff;
 }
+
+.pageContentEmployeePages{
+    background: linear-gradient(to bottom right, rgba(40, 0, 0, 0.69), rgba(255, 255, 117, 0.35));
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    color: #fff79c;
+}
+
 .pageContentAdminPagesTwoFieldsSize{
     height: 125px;
 }
 
 .pageContentAdminPages500px{
     height: 500px;
+}
+
+.pageContentEmployeePages260px{
+    height: 260px;
 }
 /**/
 /***************************************************************************************/

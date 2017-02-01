@@ -126,10 +126,13 @@ public class DAOEmployee extends AbstractController<Employee,Integer> {
         String Select_DepartmentID_By_Username = "SELECT departmentID FROM employee WHERE login='" + username + "';";
         int departmentID = 0;
         PreparedStatement ps = getPrepareStatement(Select_DepartmentID_By_Username);
+        System.out.println("Select_DepartmentID_By_Username " + Select_DepartmentID_By_Username);
         ResultSet rs = null;
         try {
             rs = ps.executeQuery();
-            departmentID = rs.getInt(1);
+            if(rs.next() == true){
+                departmentID = rs.getInt(1);
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {

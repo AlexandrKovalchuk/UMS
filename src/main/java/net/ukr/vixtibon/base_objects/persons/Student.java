@@ -23,7 +23,7 @@ public class Student extends Person implements Serializable {
     public Student() {
     }
 
-
+/*
     private void initializeArrays(ArrayList<Discipline> disciplines){
         //System. out .println("nitializeArrays");
         for(int i = 0; i < disciplines.size()-1; i++){
@@ -41,6 +41,7 @@ public class Student extends Person implements Serializable {
             }
         }
     }
+    */
 
     public String arrayToString(String[][] A){
         String data = "";
