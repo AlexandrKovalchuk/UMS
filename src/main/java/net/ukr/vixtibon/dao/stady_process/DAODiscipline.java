@@ -129,7 +129,7 @@ public class DAODiscipline  extends AbstractController<Discipline,Integer> {
     public boolean create(Discipline entity) throws SQLException {
         String Create_Discipline_Statemet = "INSERT INTO discipline (id,nameOfDiscipline,courseNumber,semesterNumber," +
                 "countOfLessons,countOfPractice,exam,departmentID) " +
-                "VALUES ('" + findFreeID("employee") + "','" + entity.getNameOfDiscipline() + "','" + entity.getCourseNumber() + "','"
+                "VALUES ('" + findFreeID("discipline") + "','" + entity.getNameOfDiscipline() + "','" + entity.getCourseNumber() + "','"
                 + entity.getSemesterNumber() + "','" + entity.getCountOfLessons() + "','" + entity.getCountOfPractice() + "','" +entity.isExam()
                 + "','" + entity.getDepartmentID() + "');";
         PreparedStatement ps = getPrepareStatement(Create_Discipline_Statemet);

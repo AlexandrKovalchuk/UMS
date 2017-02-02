@@ -97,7 +97,7 @@
 
 .controlButtonEmployeePage:hover {
     background: linear-gradient(to bottom right, rgba(102, 0, 0, 0.69), rgba(255, 255, 117, 0.35));
-    color: #fff79c;
+    color: #FFFFCE;
 }
 
 .controlButtonWelcomePage{
@@ -154,7 +154,7 @@
 }
 .topicButtonEmployeePage:hover {
     background: linear-gradient(to bottom right, rgba(102, 0, 0, 0.69), rgba(255, 255, 117, 0.35));
-    color: #fff79c;
+    color: #FFFFCE;
 }
 /**/
 /*item buttons*/
@@ -181,6 +181,17 @@
 .itemButtonAdminPages:hover {
     background: linear-gradient(to bottom right, rgba(19, 19, 19, 0.47), rgba(139, 125, 140, 0.25));
     color: white;
+}
+
+.itemButtonEmployeePages{
+    background: linear-gradient(to bottom right, rgba(40, 0, 0, 0.69), rgba(255, 255, 117, 0.35));
+    border: #45250d;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    color: #fff79c;
+}
+.itemButtonEmployeePages:hover {
+    background: linear-gradient(to bottom right, rgba(102, 0, 0, 0.69), rgba(255, 255, 117, 0.35));
+    color: #FFFFCE;
 }
 /**/
 /***************************************************************************************/

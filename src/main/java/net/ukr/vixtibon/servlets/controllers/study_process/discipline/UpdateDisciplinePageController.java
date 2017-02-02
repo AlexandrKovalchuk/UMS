@@ -31,6 +31,7 @@ public class UpdateDisciplinePageController  extends HttpServlet {
             }else if(request.getParameter("step").equals("step2")){
                 Discipline d = new Discipline();
                 boolean result = false;
+                d.setID(Integer.parseInt(request.getParameter("disciplineID")));
                 d.setDepartmentID((int) session.getAttribute("departmentID"));
                 d.setNameOfDiscipline(request.getParameter("nameOfDiscipline"));
                 d.setCourseNumber(Integer.parseInt(request.getParameter("courseNumber")));
