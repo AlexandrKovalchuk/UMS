@@ -3,9 +3,10 @@ package net.ukr.vixtibon.servlets.controllers.study_process.discipline;
 import net.ukr.vixtibon.base_objects.departments.Department;
 import net.ukr.vixtibon.base_objects.departments.Institute;
 import net.ukr.vixtibon.base_objects.study_process.Discipline;
+import net.ukr.vixtibon.base_objects.study_process.DisciplineTeacherDependencyObject;
 import net.ukr.vixtibon.dao.departments.DAODepartment;
-import net.ukr.vixtibon.dao.departments.DAOInstitute;
 import net.ukr.vixtibon.dao.stady_process.DAODiscipline;
+import net.ukr.vixtibon.dao.stady_process.DAODisciplineTeacherDependencyObject;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -13,34 +14,31 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
- * Created by alex on 02/02/2017.
+ * Created by alex on 03/02/2017.
  */
-public class UpdateDisciplinePageController  extends HttpServlet {
+public class DeleteDisciplinePageController  extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session=request.getSession();
         if(request.getParameterMap().containsKey("step")){
             DAODiscipline daodi = new DAODiscipline();
             if(request.getParameter("step").equals("step1")){
                 Discipline discipline = daodi.getEntityById(Integer.parseInt(request.getParameter("disciplineID")));
+                DAODisciplineTeacherDependencyObject ddtdo = new DAODisciplineTeacherDependencyObject();
+                ArrayList<DisciplineTeacherDependencyObject> disciplineTeacherDependencyObjects = ddtdo.getAllByDisciplineID(discipline.getID());
                 request.setAttribute("selected", "yes");
+                if(disciplineTeacherDependencyObjects.size()>0){
+                    request.setAttribute("possible_to_remove", "no");
+                }else{
+                    request.setAttribute("possible_to_remove", "yes");
+                }
                 request.setAttribute("discipline", discipline);
-                request.getRequestDispatcher("Employee/Discipline/Operations/UpdateDisciplinePage.jsp").forward(request, response);
+                request.getRequestDispatcher("Employee/Discipline/Operations/DeleteDisciplinePage.jsp").forward(request, response);
             }else if(request.getParameter("step").equals("step2")){
-                Discipline d = new Discipline();
                 boolean result = false;
-                d.setID(Integer.parseInt(request.getParameter("disciplineID")));
-                d.setDepartmentID((int) session.getAttribute("departmentID"));
-                d.setNameOfDiscipline(request.getParameter("nameOfDiscipline"));
-                d.setCourseNumber(Integer.parseInt(request.getParameter("courseNumber")));
-                d.setSemesterNumber(Integer.parseInt(request.getParameter("semesterNumber")));
-                d.setCountOfLessons(Integer.parseInt(request.getParameter("countOfLessons")));
-                d.setCountOfPractice(Integer.parseInt(request.getParameter("CountOfPractice")));
-                d.setExam(request.getParameter("exam"));
-                    result = daodi.update(d);
+                result = daodi.delete(Integer.parseInt(request.getParameter("disciplineID")));
                 if(result){
                     request.setAttribute("result", "success");
                     request.setAttribute("menu", "discipline");
@@ -68,7 +66,7 @@ public class UpdateDisciplinePageController  extends HttpServlet {
             daodi.closeConnection();
             daod.closeConnection();
             request.setAttribute("departments", departments);
-            request.getRequestDispatcher("Employee/Discipline/Operations/UpdateDisciplinePage.jsp").forward(request, response);
+            request.getRequestDispatcher("Employee/Discipline/Operations/DeleteDisciplinePage.jsp").forward(request, response);
         }
     }
 }

@@ -333,6 +333,16 @@
     </servlet-mapping>
 
     <servlet>
+        <servlet-name>DeleteDisciplinePageController</servlet-name>
+        <servlet-class>net.ukr.vixtibon.servlets.controllers.study_process.discipline.DeleteDisciplinePageController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>DeleteDisciplinePageController</servlet-name>
+        <url-pattern>/DeleteDisciplinePageController</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>ShowInfoDisciplinePageController</servlet-name>
         <servlet-class>net.ukr.vixtibon.servlets.controllers.study_process.discipline.ShowInfoDisciplinePageController</servlet-class>
     </servlet>
