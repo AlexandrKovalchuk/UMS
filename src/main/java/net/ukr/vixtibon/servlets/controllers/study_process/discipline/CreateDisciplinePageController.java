@@ -55,7 +55,7 @@ public class CreateDisciplinePageController  extends HttpServlet {
                 }
                 daodi.closeConnection();
                 request.getRequestDispatcher("ActionResultEmployeeMenuPageController").forward(request, response);
-            }else if(request.getParameter("step").equals("cancel")){
+            }else if(request.getParameter("fillForm").equals("cancel")){
                 request.getRequestDispatcher("DisciplinePageController").forward(request, response);
             }else{
                 //error page

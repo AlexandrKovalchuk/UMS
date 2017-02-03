@@ -53,7 +53,7 @@
         </div>
 
         <div>
-             <form action="/DeleteDepartmentPageController" method="post" accept-charset="UTF-8">
+             <form action="/DeleteEmployeePageController" method="post" accept-charset="UTF-8">
                   <table>
                        <input type="hidden"  name="step" value="step2">
                        <input type="hidden"  name="employeeID" value="${employee.getID()}">
@@ -69,7 +69,7 @@
 </c:if>
 
 <div>
-    <form action="DeleteDepartmentPageController" method="post">
+    <form action="DeleteEmployeePageController" method="post">
         <input type="hidden"  name="step" value="cancel">
         <td colspan=2>
             <button onclick="submit"  class="controlButton controlButtonAdminPage">Cancel</button>
