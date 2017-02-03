@@ -9,7 +9,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head lang="en">
-    <title>Update Institute Page</title>
+    <title>Update Discipline Page</title>
     <link rel="stylesheet" type="text/css" href="main_css\main_styles.css">
 </head>
 
@@ -22,7 +22,7 @@
 
 <c:if test = "${selected ne 'yes'}">
     <div class = "pageTitleText pageTitleTextEmployee">
-        Select Institute to update:
+        Select Discipline to update:
     </div>
 
     <div class = "pageContent pageContentEmployeePages pageContentAdminPages500px">
