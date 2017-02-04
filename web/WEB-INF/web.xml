@@ -413,6 +413,16 @@
     </servlet-mapping>
 
     <servlet>
+        <servlet-name>DeleteGroupPageController</servlet-name>
+        <servlet-class>net.ukr.vixtibon.servlets.controllers.study_process.group.DeleteGroupPageController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>DeleteGroupPageController</servlet-name>
+        <url-pattern>/DeleteGroupPageController</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>TimetablePageController</servlet-name>
         <servlet-class>net.ukr.vixtibon.servlets.controllers.study_process.timetable.TimetablePageController</servlet-class>
     </servlet>
