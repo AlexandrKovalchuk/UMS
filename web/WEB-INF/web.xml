@@ -403,6 +403,16 @@
     </servlet-mapping>
 
     <servlet>
+        <servlet-name>UpdateGroupPageController</servlet-name>
+        <servlet-class>net.ukr.vixtibon.servlets.controllers.study_process.group.UpdateGroupPageController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>UpdateGroupPageController</servlet-name>
+        <url-pattern>/UpdateGroupPageController</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>TimetablePageController</servlet-name>
         <servlet-class>net.ukr.vixtibon.servlets.controllers.study_process.timetable.TimetablePageController</servlet-class>
     </servlet>

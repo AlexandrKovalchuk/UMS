@@ -31,7 +31,7 @@ public class DAOGroup  extends AbstractController<Group,Integer> {
                 group.setID(rs.getInt(1));
                 group.setFullGroupName(rs.getString(2));
                 group.setCourseNumber(rs.getInt(3));
-                group.setDepartmentID(rs.getInt(8));
+                group.setDepartmentID(rs.getInt(4));
                 groupList.add(group);
             }
         } catch (SQLException e) {
@@ -47,7 +47,7 @@ public class DAOGroup  extends AbstractController<Group,Integer> {
     public boolean update(Group entity) {
         String Update_Group_Statemet = "UPDATE gtgroup SET fullGroupName='" +entity.getFullGroupName()+ "" +
                 "',courseNumber='"+entity.getCourseNumber()+"'," +
-                "departmentID='"+entity.getDepartmentID()+"',id='"+entity.getID()+ ";";
+                "departmentID='"+entity.getDepartmentID()+"' WHERE ID=" + entity.getID() + ";";
         PreparedStatement ps = getPrepareStatement(Update_Group_Statemet);
         try {
             ps.executeUpdate();

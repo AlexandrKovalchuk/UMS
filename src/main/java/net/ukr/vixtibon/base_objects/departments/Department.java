@@ -58,7 +58,97 @@ public class Department extends Structure implements Serializable {
     public ArrayList<Discipline> getDisciplines(){
         return Disciplines;
     }
-/*
+
+    public ArrayList<Group> getGroups1() {
+        return Groups1;
+    }
+
+    public ArrayList<Group> getGroups2() {
+        return Groups2;
+    }
+
+    public ArrayList<Group> getGroups3() {
+        return Groups3;
+    }
+
+    public ArrayList<Group> getGroups4() {
+        return Groups4;
+    }
+
+    public ArrayList<Group> getGroups5() {
+        return Groups5;
+    }
+
+    public ArrayList<Group> getGroups6() {
+        return Groups6;
+    }
+
+    public void setGroups1(ArrayList<Group> groups1) {
+        Groups1 = groups1;
+    }
+
+    public void setGroups2(ArrayList<Group> groups2) {
+        Groups2 = groups2;
+    }
+
+    public void setGroups3(ArrayList<Group> groups3) {
+        Groups3 = groups3;
+    }
+
+    public void setGroups4(ArrayList<Group> groups4) {
+        Groups4 = groups4;
+    }
+
+    public void setGroups5(ArrayList<Group> groups5) {
+        Groups5 = groups5;
+    }
+
+    public void setGroups6(ArrayList<Group> groups6) {
+        Groups6 = groups6;
+    }
+
+    public void setAllGroups(ArrayList<Group> allGroups){
+        for(Group group: allGroups){
+            if(group.getCourseNumber() == 1){
+                getGroups1().add(group);
+            }else if(group.getCourseNumber() == 2){
+                getGroups2().add(group);
+            }else if(group.getCourseNumber() == 3){
+                getGroups3().add(group);
+            }else if(group.getCourseNumber() == 4){
+                getGroups4().add(group);
+            }else if(group.getCourseNumber() == 5){
+                getGroups5().add(group);
+            }else if(group.getCourseNumber() == 6){
+                getGroups6().add(group);
+            }
+        }
+    }
+
+    public ArrayList<Group> getAllGroups(){
+        ArrayList<Group> groups = new ArrayList<Group>();
+        for(Group group: Groups1){
+            groups.add(group);
+        }
+        for(Group group: Groups2){
+            groups.add(group);
+        }
+        for(Group group: Groups3){
+            groups.add(group);
+        }
+        for(Group group: Groups4){
+            groups.add(group);
+        }
+        for(Group group: Groups5){
+            groups.add(group);
+        }
+        for(Group group: Groups6){
+            groups.add(group);
+        }
+        return groups;
+    }
+
+    /*
     public String[][] listOfGroups(){
         int size = Groups1.size() + Groups2.size() + Groups3.size() + Groups4.size() + Groups5.size() + Groups6.size();
         String[][] list = new String[size][2];
