@@ -66,8 +66,11 @@ public class Group implements Serializable {
     public void setFullGroupName(String fullGroupName){
         this.fullGroupName = fullGroupName;
     }
-    public void setSetStudents (ArrayList<Student> st){
+    public void setStudents (ArrayList<Student> st){
         StudentsList = st;
+    }
+    public ArrayList<Student> getStudents(){
+        return StudentsList;
     }
 
 

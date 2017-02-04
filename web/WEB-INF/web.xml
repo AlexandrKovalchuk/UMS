@@ -423,6 +423,16 @@
     </servlet-mapping>
 
     <servlet>
+        <servlet-name>ShowInfoGroupPageController</servlet-name>
+        <servlet-class>net.ukr.vixtibon.servlets.controllers.study_process.group.ShowInfoGroupPageController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>ShowInfoGroupPageController</servlet-name>
+        <url-pattern>/ShowInfoGroupPageController</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>TimetablePageController</servlet-name>
         <servlet-class>net.ukr.vixtibon.servlets.controllers.study_process.timetable.TimetablePageController</servlet-class>
     </servlet>
