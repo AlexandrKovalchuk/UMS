@@ -1,7 +1,6 @@
 package net.ukr.vixtibon.servlets.controllers.study_process.discipline;
 
 import net.ukr.vixtibon.base_objects.departments.Department;
-import net.ukr.vixtibon.base_objects.departments.Institute;
 import net.ukr.vixtibon.base_objects.study_process.Discipline;
 import net.ukr.vixtibon.base_objects.study_process.DisciplineTeacherDependencyObject;
 import net.ukr.vixtibon.dao.departments.DAODepartment;

@@ -1,14 +1,8 @@
 package net.ukr.vixtibon.servlets.controllers.study_process.discipline;
 
 import net.ukr.vixtibon.base_objects.departments.Department;
-import net.ukr.vixtibon.base_objects.departments.Faculty;
-import net.ukr.vixtibon.base_objects.departments.Institute;
-import net.ukr.vixtibon.base_objects.persons.Employee;
 import net.ukr.vixtibon.base_objects.study_process.Discipline;
 import net.ukr.vixtibon.dao.departments.DAODepartment;
-import net.ukr.vixtibon.dao.departments.DAOFaculty;
-import net.ukr.vixtibon.dao.departments.DAOInstitute;
-import net.ukr.vixtibon.dao.persons.DAOEmployee;
 import net.ukr.vixtibon.dao.stady_process.DAODiscipline;
 
 import javax.servlet.ServletException;
@@ -18,10 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
 
 /**
  * Created by alex on 01/02/2017.

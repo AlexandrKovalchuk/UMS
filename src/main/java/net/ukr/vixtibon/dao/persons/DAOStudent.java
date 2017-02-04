@@ -1,6 +1,5 @@
 package net.ukr.vixtibon.dao.persons;
 
-import net.ukr.vixtibon.base_objects.persons.Employee;
 import net.ukr.vixtibon.base_objects.persons.Student;
 import net.ukr.vixtibon.dao.AbstractController;
 

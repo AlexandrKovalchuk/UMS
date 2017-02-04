@@ -1,14 +1,12 @@
 package net.ukr.vixtibon.dao.departments;
 
 import net.ukr.vixtibon.base_objects.departments.Department;
-import net.ukr.vixtibon.base_objects.departments.Faculty;
 import net.ukr.vixtibon.dao.AbstractController;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by alex on 05/11/2016.

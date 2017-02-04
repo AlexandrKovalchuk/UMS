@@ -1,11 +1,9 @@
 package net.ukr.vixtibon.servlets.controllers.study_process.group;
 
 import net.ukr.vixtibon.base_objects.departments.Department;
-import net.ukr.vixtibon.base_objects.study_process.Discipline;
 import net.ukr.vixtibon.base_objects.study_process.Group;
 import net.ukr.vixtibon.dao.departments.DAODepartment;
 import net.ukr.vixtibon.dao.persons.DAOStudent;
-import net.ukr.vixtibon.dao.stady_process.DAODiscipline;
 import net.ukr.vixtibon.dao.stady_process.DAOGroup;
 
 import javax.servlet.ServletException;

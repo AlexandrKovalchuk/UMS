@@ -1,7 +1,5 @@
 package net.ukr.vixtibon.dao.stady_process;
 
-import net.ukr.vixtibon.base_objects.departments.Department;
-import net.ukr.vixtibon.base_objects.persons.Employee;
 import net.ukr.vixtibon.base_objects.study_process.Discipline;
 import net.ukr.vixtibon.dao.AbstractController;
 

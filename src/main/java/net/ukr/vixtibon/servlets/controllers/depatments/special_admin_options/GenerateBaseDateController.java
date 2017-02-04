@@ -1,8 +1,6 @@
 package net.ukr.vixtibon.servlets.controllers.depatments.special_admin_options;
 
 import net.ukr.vixtibon.Generator;
-import net.ukr.vixtibon.base_objects.departments.Institute;
-import net.ukr.vixtibon.dao.departments.DAOInstitute;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;

@@ -1,6 +1,5 @@
 package net.ukr.vixtibon.servlets.controllers.depatments.faculty;
 
-import net.ukr.vixtibon.base_objects.departments.Department;
 import net.ukr.vixtibon.base_objects.departments.Faculty;
 import net.ukr.vixtibon.base_objects.departments.Institute;
 import net.ukr.vixtibon.dao.departments.DAODepartment;
