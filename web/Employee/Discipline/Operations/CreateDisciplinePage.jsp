@@ -9,7 +9,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head lang="en">
-    <title>Create Institute Page</title>
+    <title>Create Group Page</title>
     <link rel="stylesheet" type="text/css" href="main_css\main_styles.css">
 </head>
 

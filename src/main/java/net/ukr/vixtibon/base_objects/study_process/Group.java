@@ -1,4 +1,4 @@
-package net.ukr.vixtibon;
+package net.ukr.vixtibon.base_objects.study_process;
 
 import net.ukr.vixtibon.base_objects.persons.Student;
 import net.ukr.vixtibon.base_objects.study_process.Discipline;
@@ -12,30 +12,19 @@ import java.util.ArrayList;
  */
 public class Group implements Serializable {
     private static final long serialVersionUID = 1L;
-    private int wave;
-    private int groupIndex;
-    private String fullGroupName;
+
     private int ID;
-    private int departmentID;
+    private String fullGroupName;
     private int courseNumber;
+    private int departmentID;
+
+
 
     Timetable groupTimeTable = new Timetable();
     ArrayList<Discipline> DisciplineList = new ArrayList<>();
     ArrayList<Student> StudentsList = new ArrayList<Student>();
 
     public Group(){}
-
-    public Group(int ID, String fullGroupName, int courseNumber, int chairID){
-        this.ID = ID;
-        this.fullGroupName = fullGroupName;
-        this.courseNumber = courseNumber;
-        this.chairID = chairID;
-    }
-
-    public Group(int wave,int ID, int chairID) {
-        this.wave = wave;
-        this.chairID = chairID;
-    }
 
     public int getID() {
         return ID;
@@ -49,32 +38,16 @@ public class Group implements Serializable {
         return StudentsList;
     }
 
-    public int getChairID() {
-        return chairID;
+    public int getDepartmentID() {
+        return departmentID;
     }
 
-    public void setChairID(int chairID) {
-        this.chairID = chairID;
+    public void setDepartmentID(int departmentID) {
+        this.departmentID = departmentID;
     }
 
     public void setCourseNumber(int courseNumber) {
         this.courseNumber = courseNumber;
-    }
-
-    public void setWave(int wave) {
-        this.wave = wave;
-    }
-
-    public void setGroupIndex(int groupIndex) {
-        this.groupIndex = groupIndex;
-    }
-
-    public int getWave() {
-        return wave;
-    }
-
-    public int getGroupIndex() {
-        return groupIndex;
     }
 
     public int getStudentsCount(){
@@ -90,21 +63,11 @@ public class Group implements Serializable {
         return fullGroupName;
     }
 
-    public void setFullGroupName(String chairShortName){
-        fullGroupName = chairShortName + "-" + wave + groupIndex;
+    public void setFullGroupName(String fullGroupName){
+        this.fullGroupName = fullGroupName;
     }
     public void setSetStudents (ArrayList<Student> st){
         StudentsList = st;
-    }
-    public void setFGN(String name){
-        this.fullGroupName = name;
-    }
-    public void addStudent(Student student){
-        StudentsList.add(student);
-    }
-
-    public void deleteStudent(int index){
-        StudentsList.remove(index);
     }
 
 

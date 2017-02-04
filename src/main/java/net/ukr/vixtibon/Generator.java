@@ -7,6 +7,7 @@ import net.ukr.vixtibon.base_objects.persons.Employee;
 import net.ukr.vixtibon.base_objects.persons.Student;
 import net.ukr.vixtibon.base_objects.persons.Teacher;
 import net.ukr.vixtibon.base_objects.study_process.Discipline;
+import net.ukr.vixtibon.base_objects.study_process.Group;
 import net.ukr.vixtibon.dao.departments.DAODepartment;
 import net.ukr.vixtibon.dao.departments.DAOFaculty;
 import net.ukr.vixtibon.dao.departments.DAOInstitute;
@@ -529,19 +530,13 @@ private Institute generateInstitute(String longName, String shortName){
         //System. out .println("groupsGenerator 2");
         for (int i = 1; i <= countOfGroups; i++){
             //System. out .println("groupsGenerator 3");
-            Group group = new Group(wave,groupIDCounter,chairID);
             //System. out .println("groupsGenerator 4");
-            group.setCourseNumber(course);
             //System. out .println("groupsGenerator 5");
-            group.setGroupIndex(i);
             //System. out .println("groupsGenerator 6");
-            group.setFullGroupName(chairShortName);
             //System. out .println("groupsGenerator 7");
-            group.StudentsList = generateListOfStudents(course, faculty, chairShortName, wave, i, disciplines,chairID,group.getID());
             //System. out .println("groupsGenerator 8");
             //group.groupTimeTable.timeTableCreator(semesterStart,semesterEnd);
             //System. out .println("groupsGenerator 9");
-            groups.add(group);
             //System. out .println("groupsGenerator 10");
             groupIDCounter++;
         }
