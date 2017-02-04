@@ -343,6 +343,16 @@
     </servlet-mapping>
 
     <servlet>
+        <servlet-name>MoveDisciplinePageController</servlet-name>
+        <servlet-class>net.ukr.vixtibon.servlets.controllers.study_process.discipline.MoveDisciplinePageController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>MoveDisciplinePageController</servlet-name>
+        <url-pattern>/MoveDisciplinePageController</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>ShowInfoDisciplinePageController</servlet-name>
         <servlet-class>net.ukr.vixtibon.servlets.controllers.study_process.discipline.ShowInfoDisciplinePageController</servlet-class>
     </servlet>

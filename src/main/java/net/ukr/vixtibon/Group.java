@@ -16,7 +16,7 @@ public class Group implements Serializable {
     private int groupIndex;
     private String fullGroupName;
     private int ID;
-    private int chairID;
+    private int departmentID;
     private int courseNumber;
 
     Timetable groupTimeTable = new Timetable();
