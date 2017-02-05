@@ -2,8 +2,12 @@ package net.ukr.vixtibon.servlets.controllers.persons.teacher;
 
 import net.ukr.vixtibon.base_objects.departments.Department;
 import net.ukr.vixtibon.base_objects.persons.Teacher;
+import net.ukr.vixtibon.base_objects.study_process.Discipline;
+import net.ukr.vixtibon.base_objects.study_process.DisciplineTeacherDependencyObject;
 import net.ukr.vixtibon.dao.departments.DAODepartment;
 import net.ukr.vixtibon.dao.persons.DAOTeacher;
+import net.ukr.vixtibon.dao.stady_process.DAODiscipline;
+import net.ukr.vixtibon.dao.stady_process.DAODisciplineTeacherDependencyObject;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -16,28 +20,27 @@ import java.util.ArrayList;
 /**
  * Created by alex on 05/02/2017.
  */
-public class DeleteTeacherPageController extends HttpServlet {
+public class ShowInfoTeacherPageController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session=request.getSession();
         if(request.getParameterMap().containsKey("step")){
-            DAOTeacher daodi = new DAOTeacher();
             if(request.getParameter("step").equals("step1")){
-                Teacher teacher = daodi.getEntityById(Integer.parseInt(request.getParameter("teacherID")));
+                DAOTeacher daot = new DAOTeacher();
+                DAODisciplineTeacherDependencyObject daodtdo = new DAODisciplineTeacherDependencyObject();
+                DAODiscipline daod = new DAODiscipline();
+                Teacher teacher = daot.getEntityById(Integer.parseInt(request.getParameter("teacherID")));
+                ArrayList<DisciplineTeacherDependencyObject> dtdos = daodtdo.getAllByTeacherID(teacher.getID());
+
+                for(DisciplineTeacherDependencyObject dtdo: dtdos){
+                    teacher.getDisciplines().add(daod.getEntityById(dtdo.getDisciplineID()));
+                }
+
+                daot.closeConnection();
+                daodtdo.closeConnection();
+                daod.closeConnection();
                 request.setAttribute("selected", "yes");
                 request.setAttribute("teacher", teacher);
-                request.getRequestDispatcher("Employee/Teacher/Operations/DeleteTeacherPage.jsp").forward(request, response);
-            }else if(request.getParameter("step").equals("step2")){
-                boolean result = false;
-                result = daodi.delete(Integer.parseInt(request.getParameter("teacherID")));
-                if(result){
-                    request.setAttribute("result", "success");
-                    request.setAttribute("menu", "teacher");
-                }else{
-                    request.setAttribute("menu", "teacher");
-                    request.setAttribute("result", "unsuccess");
-                }
-                daodi.closeConnection();
-                request.getRequestDispatcher("ActionResultEmployeeMenuPageController").forward(request, response);
+                request.getRequestDispatcher("Employee/Teacher/Operations/ShowTeacherInfoPage.jsp").forward(request, response);
             }else if(request.getParameter("step").equals("cancel")){
                 request.getRequestDispatcher("TeacherPageController").forward(request, response);
             }else{
@@ -56,7 +59,7 @@ public class DeleteTeacherPageController extends HttpServlet {
             daot.closeConnection();
             daod.closeConnection();
             request.setAttribute("departments", departments);
-            request.getRequestDispatcher("Employee/Teacher/Operations/DeleteTeacherPage.jsp").forward(request, response);
+            request.getRequestDispatcher("Employee/Teacher/Operations/ShowTeacherInfoPage.jsp").forward(request, response);
         }
     }
 }

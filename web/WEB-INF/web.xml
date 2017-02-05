@@ -393,6 +393,16 @@
     </servlet-mapping>
 
     <servlet>
+        <servlet-name>ShowInfoTeacherPageController</servlet-name>
+        <servlet-class>net.ukr.vixtibon.servlets.controllers.persons.teacher.ShowInfoTeacherPageController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>ShowInfoTeacherPageController</servlet-name>
+        <url-pattern>/ShowInfoTeacherPageController</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>StudentPageController</servlet-name>
         <servlet-class>net.ukr.vixtibon.servlets.controllers.persons.student.StudentPageController</servlet-class>
     </servlet>
