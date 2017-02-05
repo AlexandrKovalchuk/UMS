@@ -43,7 +43,7 @@ public class DAODisciplineTeacherDependencyObject  extends AbstractController<Di
     }
 
     public ArrayList<DisciplineTeacherDependencyObject> getAllByTeacherID(int teacherID){
-        String Select_All_Teacher_Statemet = "SELECT * FROM disciplineTeacherDependency WHERE disciplineID="+ teacherID +";";
+        String Select_All_Teacher_Statemet = "SELECT * FROM disciplineTeacherDependency WHERE teacherID="+ teacherID +";";
         ArrayList<DisciplineTeacherDependencyObject> dtdos = new ArrayList<DisciplineTeacherDependencyObject>();
         PreparedStatement ps = getPrepareStatement(Select_All_Teacher_Statemet);
         ResultSet rs = null;
@@ -78,8 +78,8 @@ public class DAODisciplineTeacherDependencyObject  extends AbstractController<Di
 
     @Override
     public boolean delete(Integer id) {
-        String Delete_Employee_Statement = "DELETE FROM disciplineTeacherDependency WHERE ID=" + id + ";";
-        PreparedStatement ps = getPrepareStatement(Delete_Employee_Statement);
+        String Delete_disciplineTeacherDependency_Statement = "DELETE FROM disciplineTeacherDependency WHERE ID=" + id + ";";
+        PreparedStatement ps = getPrepareStatement(Delete_disciplineTeacherDependency_Statement);
         try {
             ps.executeUpdate();
             return true;

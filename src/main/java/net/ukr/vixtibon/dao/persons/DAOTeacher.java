@@ -22,6 +22,41 @@ public class DAOTeacher extends AbstractController<Teacher,Integer> {
         return null;
     }
 
+    public ArrayList<Teacher> getAllByDepartmentID(int departmentID){
+        String Select_All_Teachers_Statemet = "SELECT * FROM teacher WHERE departmentID="+ departmentID +";";
+        ArrayList<Teacher> teacherList = new ArrayList<>();
+        PreparedStatement ps = getPrepareStatement(Select_All_Teachers_Statemet);
+        ResultSet rs = null;
+        try {
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Teacher teacher = new Teacher();
+                teacher.setName(rs.getString(1));
+                teacher.setlastName(rs.getString(2));
+                teacher.setfathersName(rs.getString(3));
+                teacher.setPersonalID(rs.getString(4));
+                teacher.setSex(rs.getString(5));
+                teacher.setEmail(rs.getString(6));
+                teacher.setPhoneNumber(rs.getString(7));
+                teacher.setDateOfBorn(rs.getDate(8));
+                teacher.setAddress(rs.getString(9));
+                teacher.setPasport(rs.getString(10));
+                teacher.setLogin(rs.getString(11));
+                teacher.setOffice(rs.getString(12));
+                teacher.setLevel(rs.getString(13));
+                teacher.setID(rs.getInt(14));
+                teacher.setDepartmentID(rs.getInt(15));
+                teacherList.add(teacher);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) try { rs.close(); } catch (SQLException logOrIgnore) {}
+            if (ps != null) try { ps.close(); } catch (SQLException logOrIgnore) {}
+        }
+        return teacherList;
+    }
+
     @Override
     public boolean update(Teacher entity) {
         java.sql.Date sqlDate = new java.sql.Date(entity.getDateOfBorn().getTime());
@@ -96,6 +131,7 @@ public class DAOTeacher extends AbstractController<Teacher,Integer> {
 
         DAODisciplineTeacherDependencyObject ddtdo = new DAODisciplineTeacherDependencyObject();
         ArrayList<DisciplineTeacherDependencyObject> dtdos = ddtdo.getAllByTeacherID(id);
+
         for(DisciplineTeacherDependencyObject dtdo: dtdos){
             ddtdo.delete(dtdo.getId());
         }
