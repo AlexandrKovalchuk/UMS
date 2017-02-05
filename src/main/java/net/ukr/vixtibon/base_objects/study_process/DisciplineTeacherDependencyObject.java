@@ -4,9 +4,9 @@ package net.ukr.vixtibon.base_objects.study_process;
  * Created by alex on 03/02/2017.
  */
 public class DisciplineTeacherDependencyObject {
-    int id;
-    int disciplineID;
-    int teacherID;
+    private int id;
+    private int disciplineID;
+    private int teacherID;
 
     public DisciplineTeacherDependencyObject(){}
 

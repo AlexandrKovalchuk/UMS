@@ -88,11 +88,9 @@ public class DAOEmployee extends AbstractController<Employee,Integer> {
 
     @Override
     public Employee getEntityById(Integer id) {
-        System.out.println("Integer id: " + id);
-        String Select_All_Employees_Statemet = "SELECT * FROM employee WHERE ID='"+ id +"';";
+        String Select_Employee_Statemet = "SELECT * FROM employee WHERE ID='"+ id +"';";
         Employee employee = new Employee();
-        PreparedStatement ps = getPrepareStatement(Select_All_Employees_Statemet);
-        System.out.println("Statemet: " + Select_All_Employees_Statemet);
+        PreparedStatement ps = getPrepareStatement(Select_Employee_Statemet);
         ResultSet rs = null;
         try {
             rs = ps.executeQuery();
@@ -105,7 +103,6 @@ public class DAOEmployee extends AbstractController<Employee,Integer> {
                 employee.setEmail(rs.getString(6));
                 employee.setPhoneNumber(rs.getString(7));
                 employee.setDateOfBorn(rs.getDate(8));
-                System.out.println("rs.getDate: " + rs.getDate(8));
                 employee.setAddress(rs.getString(9));
                 employee.setPasport(rs.getString(10));
                 employee.setLogin(rs.getString(11));

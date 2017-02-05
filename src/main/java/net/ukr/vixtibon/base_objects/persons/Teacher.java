@@ -12,26 +12,18 @@ public class Teacher extends Person implements Serializable {
     private static final long serialVersionUID = 1L;
     private String office;
     private String level;
-    private String faculty;
-    private String chair;
-    private int chairID;
-
-    ArrayList<Discipline> disciplines = new ArrayList<>();
-
-    public ArrayList<Discipline> getDisciplines(){
-        return  disciplines;
-    }
+    private int departmentID;
+    private ArrayList<Discipline> disciplines = new ArrayList<>();
 
     public Teacher() {
     }
 
-
-    public int getChairID() {
-        return chairID;
+    public int getDepartmentID() {
+        return departmentID;
     }
 
-    public void setChairID(int chairID) {
-        this.chairID = chairID;
+    public void setDepartmentID(int departmentID) {
+        this.departmentID = departmentID;
     }
 
     public void setOffice(String office) {
@@ -42,14 +34,6 @@ public class Teacher extends Person implements Serializable {
         this.level = level;
     }
 
-    public void setFaculty(String faculty) {
-        this.faculty = faculty;
-    }
-
-    public void setChair(String chair) {
-        this.chair = chair;
-    }
-
     public String getOffice() {
         return office;
     }
@@ -58,31 +42,10 @@ public class Teacher extends Person implements Serializable {
         return level;
     }
 
-    public String getFaculty() {
-        return faculty;
+    public void setDisciplines(ArrayList<Discipline> discipline){
+        this.disciplines = discipline;
     }
-
-    public String getChair() {
-        return chair;
-    }
-
-    public void addDiscipline(Discipline disciplineName){
-
-        disciplines.add(disciplineName);
-    }
-
-    public void showInfo(){
-        System. out .println("Date " );
-        System. out .println("Name : " + getName() + "  " + getSecondName());
-        System. out .println("Level : " + getLevel());
-        System. out .println("Office : " + getOffice());
-
-        for (Discipline d: disciplines){
-            System. out .println(" discipline : " + d.getNameOfDiscipline());
-        }
-    }
-
-    public void setDisciplines(String info){
-        System. out .println("setDisciplines in progress");
+    public ArrayList<Discipline> getDisciplines(){
+        return  disciplines;
     }
 }

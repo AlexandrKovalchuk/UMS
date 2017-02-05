@@ -18,6 +18,26 @@ public class DAODiscipline  extends AbstractController<Discipline,Integer> {
         return null;
     }
 
+    public int getCountOfDisciplinesByDepartmentID(int departmentID){
+        int count = 0;
+        String Select_CountOfDisciplinesByDepartmentID_Statemet = "SELECT COUNT(*) FROM discipline WHERE departmentID="+ departmentID +";";
+        PreparedStatement ps = getPrepareStatement(Select_CountOfDisciplinesByDepartmentID_Statemet);
+        System.out.println("Statemet: " + Select_CountOfDisciplinesByDepartmentID_Statemet);
+        ResultSet rs = null;
+        try {
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                count = rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) try { rs.close(); } catch (SQLException logOrIgnore) {}
+            if (ps != null) try { ps.close(); } catch (SQLException logOrIgnore) {}
+        }
+        return count;
+    }
+
     public ArrayList<Discipline> getAllByDepartmentID(int departmentID){
         String Select_All_Discipline_Statemet = "SELECT * FROM discipline WHERE departmentID="+ departmentID +";";
         ArrayList<Discipline> disciplineList = new ArrayList<>();

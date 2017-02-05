@@ -12,9 +12,9 @@ import java.util.List;
 /**
  * Created by alex on 03/02/2017.
  */
-public class DAODisciplineTeacherDependencyObject  extends AbstractController<DAODisciplineTeacherDependencyObject,Integer> {
+public class DAODisciplineTeacherDependencyObject  extends AbstractController<DisciplineTeacherDependencyObject,Integer> {
     @Override
-    public List<DAODisciplineTeacherDependencyObject> getAll() {
+    public List<DisciplineTeacherDependencyObject> getAll() {
         return null;
     }
 
@@ -42,23 +42,68 @@ public class DAODisciplineTeacherDependencyObject  extends AbstractController<DA
         return dtdos;
     }
 
+    public ArrayList<DisciplineTeacherDependencyObject> getAllByTeacherID(int teacherID){
+        String Select_All_Teacher_Statemet = "SELECT * FROM disciplineTeacherDependency WHERE disciplineID="+ teacherID +";";
+        ArrayList<DisciplineTeacherDependencyObject> dtdos = new ArrayList<DisciplineTeacherDependencyObject>();
+        PreparedStatement ps = getPrepareStatement(Select_All_Teacher_Statemet);
+        ResultSet rs = null;
+        try {
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                DisciplineTeacherDependencyObject dtdo = new DisciplineTeacherDependencyObject();
+                dtdo.setId(rs.getInt(1));
+                dtdo.setDisciplineID(rs.getInt(2));
+                dtdo.setTeacherID(rs.getInt(3));
+                dtdos.add(dtdo);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) try { rs.close(); } catch (SQLException logOrIgnore) {}
+            if (ps != null) try { ps.close(); } catch (SQLException logOrIgnore) {}
+        }
+
+        return dtdos;
+    }
+
     @Override
-    public boolean update(DAODisciplineTeacherDependencyObject entity) {
+    public boolean update(DisciplineTeacherDependencyObject entity) {
         return false;
     }
 
     @Override
-    public DAODisciplineTeacherDependencyObject getEntityById(Integer id) {
+    public DisciplineTeacherDependencyObject getEntityById(Integer id) {
         return null;
     }
 
     @Override
     public boolean delete(Integer id) {
-        return false;
+        String Delete_Employee_Statement = "DELETE FROM disciplineTeacherDependency WHERE ID=" + id + ";";
+        PreparedStatement ps = getPrepareStatement(Delete_Employee_Statement);
+        try {
+            ps.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        } finally {
+            if (ps != null) try { ps.close(); } catch (SQLException logOrIgnore) {}
+        }
     }
 
     @Override
-    public boolean create(DAODisciplineTeacherDependencyObject entity) throws SQLException {
-        return false;
+    public boolean create(DisciplineTeacherDependencyObject entity) throws SQLException {
+        String Create_Discipline_Teacher_Dependency_Statemet = "INSERT INTO disciplineTeacherDependency (ID,disciplineID,teacherID) " +
+                "VALUES ('"+findFreeID("disciplineTeacherDependency")+"','"+entity.getDisciplineID() + "','" + entity.getTeacherID()+"');";
+        PreparedStatement ps = getPrepareStatement(Create_Discipline_Teacher_Dependency_Statemet);
+        try {
+            ps.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        } finally {
+            if (ps != null) try { ps.close(); } catch (SQLException logOrIgnore) {}
+        }
     }
 }
