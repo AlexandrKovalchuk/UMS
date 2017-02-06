@@ -20,15 +20,15 @@ public class DeleteTeacherPageController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session=request.getSession();
         if(request.getParameterMap().containsKey("step")){
-            DAOTeacher daodi = new DAOTeacher();
+            DAOTeacher daot = new DAOTeacher();
             if(request.getParameter("step").equals("step1")){
-                Teacher teacher = daodi.getEntityById(Integer.parseInt(request.getParameter("teacherID")));
+                Teacher teacher = daot.getEntityById(Integer.parseInt(request.getParameter("teacherID")));
                 request.setAttribute("selected", "yes");
                 request.setAttribute("teacher", teacher);
                 request.getRequestDispatcher("Employee/Teacher/Operations/DeleteTeacherPage.jsp").forward(request, response);
             }else if(request.getParameter("step").equals("step2")){
                 boolean result = false;
-                result = daodi.delete(Integer.parseInt(request.getParameter("teacherID")));
+                result = daot.delete(Integer.parseInt(request.getParameter("teacherID")));
                 if(result){
                     request.setAttribute("result", "success");
                     request.setAttribute("menu", "teacher");
@@ -36,7 +36,7 @@ public class DeleteTeacherPageController extends HttpServlet {
                     request.setAttribute("menu", "teacher");
                     request.setAttribute("result", "unsuccess");
                 }
-                daodi.closeConnection();
+                daot.closeConnection();
                 request.getRequestDispatcher("ActionResultEmployeeMenuPageController").forward(request, response);
             }else if(request.getParameter("step").equals("cancel")){
                 request.getRequestDispatcher("TeacherPageController").forward(request, response);

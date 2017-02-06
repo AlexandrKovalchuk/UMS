@@ -383,6 +383,16 @@
     </servlet-mapping>
 
     <servlet>
+        <servlet-name>UpdateTeacherPageController</servlet-name>
+        <servlet-class>net.ukr.vixtibon.servlets.controllers.persons.teacher.UpdateTeacherPageController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>UpdateTeacherPageController</servlet-name>
+        <url-pattern>/UpdateTeacherPageController</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>DeleteTeacherPageController</servlet-name>
         <servlet-class>net.ukr.vixtibon.servlets.controllers.persons.teacher.DeleteTeacherPageController</servlet-class>
     </servlet>

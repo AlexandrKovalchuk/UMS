@@ -58,13 +58,34 @@ public class DAOTeacher extends AbstractController<Teacher,Integer> {
     }
 
     @Override
-    public boolean update(Teacher entity) {
+    public boolean update(Teacher entity){
         java.sql.Date sqlDate = new java.sql.Date(entity.getDateOfBorn().getTime());
         String Update_Teacher_Statemet = "UPDATE teacher SET name='" +entity.getName()+ "',lastName='"+entity.getSecondName()+"'," +
                 "fathersName='"+entity.getSurname()+"',personalID='"+entity.getPersonalID()+"',sex='"+entity.getSex()+"',email='"+entity.getEmail()+"'," +
                 "phoneNumber='"+entity.getPhoneNumber()+"',dateOfBorn='"+sqlDate+"'," +
-                "address='"+entity.getAddress()+"',pasport='"+entity.getPasport()+"',login='"+entity.getLogin()+"'," +
-                "office='"+entity.getOffice()+"level='"+entity.getLevel()+"',ID='"+entity.getID()+"' WHERE ID=" + entity.getID() + ";";
+                "address='"+entity.getAddress()+"',passport='"+entity.getPasport()+"',login='"+entity.getLogin()+"'," +
+                "office='"+entity.getOffice()+"',level='"+entity.getLevel()+"',ID='"+entity.getID()+"' WHERE ID=" + entity.getID() + ";";
+        System.out.println(Update_Teacher_Statemet);
+
+        DAODisciplineTeacherDependencyObject ddtdo = new DAODisciplineTeacherDependencyObject();
+        ArrayList<DisciplineTeacherDependencyObject> dtdos = ddtdo.getAllByTeacherID(entity.getID());
+
+        for(DisciplineTeacherDependencyObject dtdo: dtdos){
+            ddtdo.delete(dtdo.getId());
+        }
+
+        for(Discipline discipline: entity.getDisciplines()){
+            DisciplineTeacherDependencyObject dtdo = new  DisciplineTeacherDependencyObject();
+            dtdo.setTeacherID(entity.getID());
+            dtdo.setDisciplineID(discipline.getID());
+            try {
+                ddtdo.create(dtdo);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        ddtdo.closeConnection();
+
         PreparedStatement ps = getPrepareStatement(Update_Teacher_Statemet);
         try {
             ps.executeUpdate();
