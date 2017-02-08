@@ -29,7 +29,7 @@ public class CreateDisciplinePageController  extends HttpServlet {
                 d.setCourseNumber(Integer.parseInt(request.getParameter("courseNumber")));
                 d.setSemesterNumber(Integer.parseInt(request.getParameter("semesterNumber")));
                 d.setCountOfLessons(Integer.parseInt(request.getParameter("countOfLessons")));
-                d.setCountOfPractice(Integer.parseInt(request.getParameter("CountOfPractice")));
+                //d.setCountOfPractice(Integer.parseInt(request.getParameter("CountOfPractice")));
                 d.setExam(request.getParameter("exam"));
                 try {
                     result = daodi.create(d);

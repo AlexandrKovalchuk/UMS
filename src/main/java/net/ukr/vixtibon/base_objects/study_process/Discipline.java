@@ -12,18 +12,20 @@ import java.io.Serializable;
 @ClassReadyForTest
 public class Discipline  implements Serializable {
     private static final long serialVersionUID = 1L;
+    private int ID;
     String nameOfDiscipline  = null; // Name of discipline: contain only Space, A-Z, a-z, �-�, �-� and "-" symbol, limit 60 symbols
     int courseNumber ; // Can contain only 1-6 and no other numbers, no negative numbers
     int semesterNumber; // Can contain only 1 or 2 and no other numbers, no negative numbers
     private int countOfLessons; //Can contain 0,1,2... ,no negative numbers
-    private int countOfPractice;//Can contain 0,1,2... ,no negative numbers
+    //private int countOfPractice;//Can contain 0,1,2... ,no negative numbers
     boolean exam;// Exam in the end of semester or not can be thrue of false
-    private Teacher teacher;
-    private int ID;
-    private int departmentID;
+    //private Teacher teacher;
+
+    //private int departmentID;
 
     public  Discipline(){}
 
+    /*
     public void setCountOfPractice(int countOfPractice) {
         this.countOfPractice = countOfPractice;
     }
@@ -45,6 +47,7 @@ public class Discipline  implements Serializable {
     public void setDepartmentID(int departmentID) {
         this.departmentID = departmentID;
     }
+    */
 
     public void setID(int ID) {
         this.ID = ID;
@@ -176,7 +179,7 @@ public class Discipline  implements Serializable {
     public int getCountOfLessons() {
         return countOfLessons;
     }
-
+/*
     public Teacher getTeacher() {
         return teacher;
     }
@@ -184,6 +187,7 @@ public class Discipline  implements Serializable {
     public void setTeacher(Teacher teacher) {
         this.teacher = teacher;
     }
+    */
 
 
     public String isExam() {
