@@ -1,9 +1,15 @@
 package net.ukr.vixtibon.servlets.controllers.study_process.discipline;
 
 import net.ukr.vixtibon.base_objects.departments.Department;
+import net.ukr.vixtibon.base_objects.persons.Teacher;
 import net.ukr.vixtibon.base_objects.study_process.Discipline;
+import net.ukr.vixtibon.base_objects.study_process.DisciplineDepartmentDependencyObject;
+import net.ukr.vixtibon.base_objects.study_process.DisciplineTeacherDependencyObject;
 import net.ukr.vixtibon.dao.departments.DAODepartment;
+import net.ukr.vixtibon.dao.persons.DAOTeacher;
 import net.ukr.vixtibon.dao.stady_process.DAODiscipline;
+import net.ukr.vixtibon.dao.stady_process.DAODisciplineDepartmentDependency;
+import net.ukr.vixtibon.dao.stady_process.DAODisciplineTeacherDependencyObject;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -22,7 +28,31 @@ public class ShowInfoDisciplinePageController  extends HttpServlet {
         if(request.getParameterMap().containsKey("step")){
             if(request.getParameter("step").equals("step1")){
                 DAODiscipline daodi = new DAODiscipline();
+                DAODepartment daod = new DAODepartment();
+                DAOTeacher daot = new DAOTeacher();
+                DAODisciplineDepartmentDependency daoddd = new DAODisciplineDepartmentDependency();
+                DAODisciplineTeacherDependencyObject daodtd = new DAODisciplineTeacherDependencyObject();
+
                 Discipline discipline = daodi.getEntityById(Integer.parseInt(request.getParameter("disciplineID")));
+
+                ArrayList<Teacher> teachersDependency = new ArrayList<>();
+                ArrayList<Department> departmentsDependency = new ArrayList<>();
+
+                for(DisciplineDepartmentDependencyObject dddo : daoddd.getAllByDepartmentID(discipline.getID())){
+                    departmentsDependency.add(daod.getEntityById(dddo.getDepaptmentID()));
+                }
+
+                for(DisciplineTeacherDependencyObject dtdo : daodtd.getAllByDisciplineID(discipline.getID())){
+                    teachersDependency.add(daot.getEntityById(dtdo.getTeacherID()));
+                }
+
+                daod.closeConnection();
+                daot.closeConnection();
+                daoddd.closeConnection();
+                daodtd.closeConnection();
+                daodi.closeConnection();
+                request.setAttribute("departmentsDependency", departmentsDependency);
+                request.setAttribute("teachersDependency", teachersDependency);
                 request.setAttribute("selected", "yes");
                 request.setAttribute("discipline", discipline);
                 request.getRequestDispatcher("Employee/Discipline/Operations/ShowInfoDisciplinePage.jsp").forward(request, response);
@@ -34,16 +64,40 @@ public class ShowInfoDisciplinePageController  extends HttpServlet {
         }else{
             DAODepartment daod = new DAODepartment();
             DAODiscipline daodi = new DAODiscipline();
-            ArrayList<Department> departments = new ArrayList<Department>();
+            DAODisciplineDepartmentDependency daoddd = new DAODisciplineDepartmentDependency();
+
+            ArrayList<DisciplineDepartmentDependencyObject> dddos = new ArrayList<>();
+            dddos = daoddd.getAllByDepartmentID((int) session.getAttribute("departmentID"));
+
+            ArrayList<Discipline> disciplinesConnectedWithDepartment = new ArrayList<>();
+            ArrayList<Discipline> disciplinesNotConnectedWithDepartment = new ArrayList<>();
+
+            for(DisciplineDepartmentDependencyObject dddo: dddos){
+                disciplinesConnectedWithDepartment.add(daodi.getEntityById(dddo.getDisciplineID()));
+            }
+
+            disciplinesNotConnectedWithDepartment = daodi.getAll();
+
+            for(DisciplineDepartmentDependencyObject dddo: dddos){
+                for(Discipline d: disciplinesNotConnectedWithDepartment){
+                    if(dddo.getDisciplineID() == d.getID()){
+                        disciplinesNotConnectedWithDepartment.remove(d);
+                        break;
+                    }else{
+                        continue;
+                    }
+                }
+            }
+
             Department department = daod.getEntityById((int) session.getAttribute("departmentID"));
-            Department departmentNone = daod.getEntityById(0);
-            departmentNone.setDisciplines(daodi.getAllByDepartmentID(0));
-            department.setDisciplines(daodi.getAllByDepartmentID((int) session.getAttribute("departmentID")));
-            departments.add(departmentNone);
-            departments.add(department);
+
+            daoddd.closeConnection();
             daodi.closeConnection();
             daod.closeConnection();
-            request.setAttribute("departments", departments);
+
+            request.setAttribute("department", department);
+            request.setAttribute("disciplinesConnectedWithDepartment", disciplinesConnectedWithDepartment);
+            request.setAttribute(" disciplinesNotConnectedWithDepartment",  disciplinesNotConnectedWithDepartment);
             request.getRequestDispatcher("Employee/Discipline/Operations/ShowInfoDisciplinePage.jsp").forward(request, response);
         }
     }

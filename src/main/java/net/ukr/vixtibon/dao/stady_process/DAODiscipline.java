@@ -14,34 +14,10 @@ import java.util.List;
  */
 public class DAODiscipline  extends AbstractController<Discipline,Integer> {
     @Override
-    public List<Discipline> getAll() {
-        return null;
-    }
-
-    public int getCountOfDisciplinesByDepartmentID(int departmentID){
-        int count = 0;
-        String Select_CountOfDisciplinesByDepartmentID_Statemet = "SELECT COUNT(*) FROM discipline WHERE departmentID="+ departmentID +";";
-        PreparedStatement ps = getPrepareStatement(Select_CountOfDisciplinesByDepartmentID_Statemet);
-        System.out.println("Statemet: " + Select_CountOfDisciplinesByDepartmentID_Statemet);
-        ResultSet rs = null;
-        try {
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                count = rs.getInt(1);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            if (rs != null) try { rs.close(); } catch (SQLException logOrIgnore) {}
-            if (ps != null) try { ps.close(); } catch (SQLException logOrIgnore) {}
-        }
-        return count;
-    }
-
-    public ArrayList<Discipline> getAllByDepartmentID(int departmentID){
-        String Select_All_Discipline_Statemet = "SELECT * FROM discipline WHERE departmentID="+ departmentID +";";
-        ArrayList<Discipline> disciplineList = new ArrayList<>();
-        PreparedStatement ps = getPrepareStatement(Select_All_Discipline_Statemet);
+    public ArrayList<Discipline> getAll() {
+        String Select_Disciplines_Statemet = "SELECT * FROM discipline;";
+        ArrayList<Discipline> disciplines = new ArrayList<>();
+        PreparedStatement ps = getPrepareStatement(Select_Disciplines_Statemet);
         ResultSet rs = null;
         try {
             rs = ps.executeQuery();
@@ -49,13 +25,13 @@ public class DAODiscipline  extends AbstractController<Discipline,Integer> {
                 Discipline discipline = new Discipline();
                 discipline.setID(rs.getInt(1));
                 discipline.setNameOfDiscipline(rs.getString(2));
-                discipline.setCourseNumber(rs.getInt(3));
-                discipline.setSemesterNumber(rs.getInt(4));
-                discipline.setCountOfLessons(rs.getInt(5));
+                //discipline.setCourseNumber(rs.getInt(3));
+                // discipline.setSemesterNumber(rs.getInt(4));
+                discipline.setCountOfLessons(rs.getInt(3));
                 //discipline.setCountOfPractice(rs.getInt(6));
-                discipline.setExam(rs.getString(7));
+                discipline.setExam(rs.getString(4));
                 //discipline.setDepartmentID(rs.getInt(8));
-                disciplineList.add(discipline);
+                disciplines.add(discipline);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -63,15 +39,14 @@ public class DAODiscipline  extends AbstractController<Discipline,Integer> {
             if (rs != null) try { rs.close(); } catch (SQLException logOrIgnore) {}
             if (ps != null) try { ps.close(); } catch (SQLException logOrIgnore) {}
         }
-        return disciplineList;
+        return disciplines;
     }
 
     @Override
     public boolean update(Discipline entity) {
         String Update_Discipline_Statemet = "UPDATE discipline SET nameOfDiscipline='" +entity.getNameOfDiscipline()+ "" +
-                "',courseNumber='"+entity.getCourseNumber()+"'," +
-                "semesterNumber='"+entity.getSemesterNumber()+"',countOfLessons='"+entity.getCountOfLessons()+"" +
-                "',exam='"+entity.isExam()+"',,id='"+entity.getID()+ ";";
+                "',countOfLessons='"+entity.getCountOfLessons()+"" +
+                "',exam='"+entity.isExam()+"'  WHERE ID="+entity.getID()+ ";";
         PreparedStatement ps = getPrepareStatement(Update_Discipline_Statemet);
         try {
             ps.executeUpdate();
@@ -111,11 +86,11 @@ public class DAODiscipline  extends AbstractController<Discipline,Integer> {
             while (rs.next()) {
                 discipline.setID(rs.getInt(1));
                 discipline.setNameOfDiscipline(rs.getString(2));
-                discipline.setCourseNumber(rs.getInt(3));
-                discipline.setSemesterNumber(rs.getInt(4));
-                discipline.setCountOfLessons(rs.getInt(5));
+                //discipline.setCourseNumber(rs.getInt(3));
+               // discipline.setSemesterNumber(rs.getInt(4));
+                discipline.setCountOfLessons(rs.getInt(3));
                 //discipline.setCountOfPractice(rs.getInt(6));
-                discipline.setExam(rs.getString(7));
+                discipline.setExam(rs.getString(4));
                 //discipline.setDepartmentID(rs.getInt(8));
             }
         } catch (SQLException e) {
@@ -144,10 +119,9 @@ public class DAODiscipline  extends AbstractController<Discipline,Integer> {
 
     @Override
     public boolean create(Discipline entity) throws SQLException {
-        String Create_Discipline_Statemet = "INSERT INTO discipline (id,nameOfDiscipline,courseNumber,semesterNumber," +
+        String Create_Discipline_Statemet = "INSERT INTO discipline (id,nameOfDiscipline," +
                 "countOfLessons,exam) " +
-                "VALUES ('" + findFreeID("discipline") + "','" + entity.getNameOfDiscipline() + "','" + entity.getCourseNumber() + "','"
-                + entity.getSemesterNumber() + "','" + entity.getCountOfLessons() + "','" +entity.isExam()
+                "VALUES ('" + findFreeID("discipline") + "','" + entity.getNameOfDiscipline()  + "','" + entity.getCountOfLessons() + "','" +entity.isExam()
                 + "');";
         PreparedStatement ps = getPrepareStatement(Create_Discipline_Statemet);
         try {

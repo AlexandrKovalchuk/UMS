@@ -33,27 +33,9 @@
                 </td>
             </tr>
             <tr>
-                <td class = "textLabel textLabelEmployeePage">Course Number:</td>
-                <td>
-                    <input class = "inputSettings inputEmployee" type="number" name="courseNumber" required/>
-                </td>
-            </tr>
-            <tr>
-                <td class = "textLabel textLabelEmployeePage">Semester Number:</td>
-                <td>
-                    <input class = "inputSettings inputEmployee" type="number" name="semesterNumber" required/>
-                </td>
-            </tr>
-            <tr>
                 <td class = "textLabel textLabelEmployeePage">Count Of Lessons:</td>
                 <td>
                     <input class = "inputSettings inputEmployee" type="number" name="countOfLessons" required/>
-                </td>
-            </tr>
-            <tr>
-                <td class = "textLabel textLabelEmployeePage">Count Of Practice:</td>
-                <td>
-                    <input class = "inputSettings inputEmployee" type="number" name="CountOfPractice" required/>
                 </td>
             </tr>
             <tr>

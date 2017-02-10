@@ -344,7 +344,7 @@
 
     <servlet>
         <servlet-name>MoveDisciplinePageController</servlet-name>
-        <servlet-class>net.ukr.vixtibon.servlets.controllers.study_process.discipline.MoveDisciplinePageController</servlet-class>
+        <servlet-class>net.ukr.vixtibon.servlets.controllers.study_process.discipline.SetDisciplineDepartmentDependencyPageController</servlet-class>
     </servlet>
 
     <servlet-mapping>

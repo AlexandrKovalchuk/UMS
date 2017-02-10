@@ -54,25 +54,33 @@
                 <td class = "textLabel textLabelEmployeePage"><c:out value="${discipline.getNameOfDiscipline()}"/></td>
             </tr>
             <tr>
-                <td class = "textLabel textLabelEmployeePage">Course Number:</td>
-                <td class = "textLabel textLabelEmployeePage"><c:out value="${discipline.getCourseNumber()}"/></td>
-            </tr>
-            <tr>
-                <td class = "textLabel textLabelEmployeePage">Semester Number:</td>
-                <td class = "textLabel textLabelEmployeePage"><c:out value="${discipline.getSemesterNumber()}"/></td>
-            </tr>
-            <tr>
                 <td class = "textLabel textLabelEmployeePage">Count Of Lessons:</td>
                 <td class = "textLabel textLabelEmployeePage"><c:out value="${discipline.getCountOfLessons()}"/></td>
-            </tr>
-            <tr>
-                <td class = "textLabel textLabelEmployeePage">Count Of Practice:</td>
-                <td class = "textLabel textLabelEmployeePage"><c:out value="${discipline.getCountOfPractice()}"/></td>
             </tr>
             <tr>
                 <td class = "textLabel textLabelEmployeePage">Exam:</td>
                 <td class = "textLabel textLabelEmployeePage"><c:out value="${discipline.isExam()}"/></td>
             </tr>
+            <tr>
+                <td class = "textLabel textLabelEmployeePage">Department Dependency:</td>
+            </tr>
+
+            <c:forEach items="${departmentsDependency}" var="department">
+                <tr>
+                    <td class = "textLabel textLabelEmployeePage"><c:out value="${department.getLongName()}"/></td>
+                </tr>
+            </c:forEach>
+
+            <tr>
+                <td class = "textLabel textLabelEmployeePage">Teacher Dependency:</td>
+            </tr>
+
+            <c:forEach items="${teachersDependency}" var="teacher">
+                <tr>
+                    <td class = "textLabel textLabelEmployeePage"><c:out value="${teacher.getSecondName()}"/> <c:out value="${teacher.getName()}"/></td>
+                </tr>
+            </c:forEach>
+
         </table>
     </div>
 </c:if>

@@ -2,9 +2,11 @@ package net.ukr.vixtibon.servlets.controllers.study_process.discipline;
 
 import net.ukr.vixtibon.base_objects.departments.Department;
 import net.ukr.vixtibon.base_objects.study_process.Discipline;
+import net.ukr.vixtibon.base_objects.study_process.DisciplineDepartmentDependencyObject;
 import net.ukr.vixtibon.base_objects.study_process.DisciplineTeacherDependencyObject;
 import net.ukr.vixtibon.dao.departments.DAODepartment;
 import net.ukr.vixtibon.dao.stady_process.DAODiscipline;
+import net.ukr.vixtibon.dao.stady_process.DAODisciplineDepartmentDependency;
 import net.ukr.vixtibon.dao.stady_process.DAODisciplineTeacherDependencyObject;
 
 import javax.servlet.ServletException;
@@ -26,13 +28,21 @@ public class DeleteDisciplinePageController  extends HttpServlet {
             if(request.getParameter("step").equals("step1")){
                 Discipline discipline = daodi.getEntityById(Integer.parseInt(request.getParameter("disciplineID")));
                 DAODisciplineTeacherDependencyObject ddtdo = new DAODisciplineTeacherDependencyObject();
-                ArrayList<DisciplineTeacherDependencyObject> disciplineTeacherDependencyObjects = ddtdo.getAllByDisciplineID(discipline.getID());
+                DAODisciplineDepartmentDependency daoddd = new DAODisciplineDepartmentDependency();
                 request.setAttribute("selected", "yes");
-                if(disciplineTeacherDependencyObjects.size()>0){
+
+                if(ddtdo.getCountOfDependencyByDisciplineID(discipline.getID())>0){
                     request.setAttribute("possible_to_remove", "no");
                 }else{
-                    request.setAttribute("possible_to_remove", "yes");
+                    if(daoddd.getCountOfDependencyByDisciplineID(discipline.getID())>0){
+                        request.setAttribute("possible_to_remove", "no");
+                    }else{
+                        request.setAttribute("possible_to_remove", "yes");
+                    }
                 }
+
+                ddtdo.closeConnection();
+                daoddd.closeConnection();
                 request.setAttribute("discipline", discipline);
                 request.getRequestDispatcher("Employee/Discipline/Operations/DeleteDisciplinePage.jsp").forward(request, response);
             }else if(request.getParameter("step").equals("step2")){
@@ -55,16 +65,40 @@ public class DeleteDisciplinePageController  extends HttpServlet {
         }else{
             DAODepartment daod = new DAODepartment();
             DAODiscipline daodi = new DAODiscipline();
-            ArrayList<Department> departments = new ArrayList<Department>();
+            DAODisciplineDepartmentDependency daoddd = new DAODisciplineDepartmentDependency();
+
+            ArrayList<DisciplineDepartmentDependencyObject> dddos = new ArrayList<>();
+            dddos = daoddd.getAllByDepartmentID((int) session.getAttribute("departmentID"));
+
+            ArrayList<Discipline> disciplinesConnectedWithDepartment = new ArrayList<>();
+            ArrayList<Discipline> disciplinesNotConnectedWithDepartment = new ArrayList<>();
+
+            for(DisciplineDepartmentDependencyObject dddo: dddos){
+                disciplinesConnectedWithDepartment.add(daodi.getEntityById(dddo.getDisciplineID()));
+            }
+
+            disciplinesNotConnectedWithDepartment = daodi.getAll();
+
+            for(DisciplineDepartmentDependencyObject dddo: dddos){
+                for(Discipline d: disciplinesNotConnectedWithDepartment){
+                    if(dddo.getDisciplineID() == d.getID()){
+                        disciplinesNotConnectedWithDepartment.remove(d);
+                        break;
+                    }else{
+                        continue;
+                    }
+                }
+            }
+
             Department department = daod.getEntityById((int) session.getAttribute("departmentID"));
-            Department departmentNone = daod.getEntityById(0);
-            departmentNone.setDisciplines(daodi.getAllByDepartmentID(0));
-            department.setDisciplines(daodi.getAllByDepartmentID((int) session.getAttribute("departmentID")));
-            departments.add(departmentNone);
-            departments.add(department);
+
+            daoddd.closeConnection();
             daodi.closeConnection();
             daod.closeConnection();
-            request.setAttribute("departments", departments);
+
+            request.setAttribute("department", department);
+            request.setAttribute("disciplinesConnectedWithDepartment", disciplinesConnectedWithDepartment);
+            request.setAttribute(" disciplinesNotConnectedWithDepartment",  disciplinesNotConnectedWithDepartment);
             request.getRequestDispatcher("Employee/Discipline/Operations/DeleteDisciplinePage.jsp").forward(request, response);
         }
     }

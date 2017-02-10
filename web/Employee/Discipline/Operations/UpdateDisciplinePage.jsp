@@ -26,17 +26,27 @@
     </div>
 
     <div class = "pageContent pageContentEmployeePages pageContentAdminPages500px">
-        <c:forEach items="${departments}" var="department">
-            <div class = "textLabelParagraph textLabelEmployeePage"><c:out value="${department.getLongName()}"/></div>
-            <c:forEach items="${department.getDisciplines()}" var="discipline">
-                <div>
-                    <form action="/UpdateDisciplinePageController" method="post" accept-charset="UTF-8">
-                        <input type="hidden"  name="step" value="step1">
-                        <input type="hidden"  name="disciplineID" value="${discipline.getID()}">
-                        <button onclick="submit" class="itemButton itemButtonEmployeePages" ><c:out value="${discipline.getNameOfDiscipline()}"/></button>
-                    </form>
-                </div>
-            </c:forEach>
+        <div class = "textLabelParagraph textLabelEmployeePage">Connected with current department</div>
+        <c:forEach items="${disciplinesConnectedWithDepartment}" var="discipline">
+            <div>
+                <form action="/UpdateDisciplinePageController" method="post" accept-charset="UTF-8">
+                    <input type="hidden"  name="step" value="step1">
+                    <input type="hidden"  name="disciplineID" value="${discipline.getID()}">
+                    <button onclick="submit" class="itemButton itemButtonEmployeePages" ><c:out value="${discipline.getNameOfDiscipline()}"/></button>
+                </form>
+            </div>
+        </c:forEach>
+
+        <div class = "textLabelParagraph textLabelEmployeePage">Not connected with current department</div>
+
+        <c:forEach items="${disciplinesNotConnectedWithDepartment}" var="discipline">
+            <div>
+                <form action="/UpdateDisciplinePageController" method="post" accept-charset="UTF-8">
+                    <input type="hidden"  name="step" value="step1">
+                    <input type="hidden"  name="disciplineID" value="${discipline.getID()}">
+                    <button onclick="submit" class="itemButton itemButtonEmployeePages" ><c:out value="${discipline.getNameOfDiscipline()}"/></button>
+                </form>
+            </div>
         </c:forEach>
     </div>
 
@@ -58,28 +68,11 @@
                             <input class = "inputSettings inputEmployee inputAdminPageLongNames" type="text" name="nameOfDiscipline" value="${discipline.getNameOfDiscipline()}" required/>
                         </td>
                     </tr>
-                    <tr>
-                        <td class = "textLabel textLabelEmployeePage">Course Number:</td>
-                        <td>
-                            <input class = "inputSettings inputEmployee" type="number" name="courseNumber" value="${discipline.getCourseNumber()}" required/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class = "textLabel textLabelEmployeePage">Semester Number:</td>
-                        <td>
-                            <input class = "inputSettings inputEmployee" type="number" name="semesterNumber" value="${discipline.getSemesterNumber()}" required/>
-                        </td>
-                    </tr>
+
                     <tr>
                         <td class = "textLabel textLabelEmployeePage">Count Of Lessons:</td>
                         <td>
                             <input class = "inputSettings inputEmployee" type="number" name="countOfLessons" value="${discipline.getCountOfLessons()}" required/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class = "textLabel textLabelEmployeePage">Count Of Practice:</td>
-                        <td>
-                            <input class = "inputSettings inputEmployee" type="number" name="CountOfPractice" value="${discipline.getCountOfPractice()}" required/>
                         </td>
                     </tr>
                     <tr>

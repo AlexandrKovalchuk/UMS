@@ -81,7 +81,7 @@ public class CreateTeacherPageController extends HttpServlet {
             DAODepartment daod = new DAODepartment();
             DAODiscipline daodi = new DAODiscipline();
             Department department = daod.getEntityById((int) session.getAttribute("departmentID"));
-            department.setDisciplines(daodi.getAllByDepartmentID(department.getID()));
+            //department.setDisciplines(daodi.getAllByDepartmentID(department.getID()));
             daod.closeConnection();
             request.setAttribute("department", department);
             request.getRequestDispatcher("Employee/Teacher/Operations/CreateTeacherPage.jsp").forward(request, response);

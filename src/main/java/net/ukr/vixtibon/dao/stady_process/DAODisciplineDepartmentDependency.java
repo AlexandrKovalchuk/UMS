@@ -1,7 +1,6 @@
 package net.ukr.vixtibon.dao.stady_process;
 
 import net.ukr.vixtibon.base_objects.study_process.DisciplineDepartmentDependencyObject;
-import net.ukr.vixtibon.base_objects.study_process.DisciplineTeacherDependencyObject;
 import net.ukr.vixtibon.dao.AbstractController;
 
 import java.sql.PreparedStatement;
@@ -19,19 +18,21 @@ public class DAODisciplineDepartmentDependency extends AbstractController<Discip
         return null;
     }
 
-    public ArrayList<DisciplineTeacherDependencyObject> getAllByDisciplineID(int disciplineID){
-        String Select_All_Discipline_Statemet = "SELECT * FROM disciplineTeacherDependency WHERE disciplineID="+ disciplineID +";";
-        ArrayList<DisciplineTeacherDependencyObject> dtdos = new ArrayList<DisciplineTeacherDependencyObject>();
+    public ArrayList<DisciplineDepartmentDependencyObject> getAllByDisciplineID(int disciplineID){
+        String Select_All_Discipline_Statemet = "SELECT * FROM disciplineDepartmentDependency WHERE disciplineID="+ disciplineID +";";
+        ArrayList<DisciplineDepartmentDependencyObject> dddos = new ArrayList<>();
         PreparedStatement ps = getPrepareStatement(Select_All_Discipline_Statemet);
         ResultSet rs = null;
         try {
             rs = ps.executeQuery();
             while (rs.next()) {
-                DisciplineTeacherDependencyObject dtdo = new DisciplineTeacherDependencyObject();
-                dtdo.setId(rs.getInt(1));
-                dtdo.setDisciplineID(rs.getInt(2));
-                dtdo.setTeacherID(rs.getInt(3));
-                dtdos.add(dtdo);
+                DisciplineDepartmentDependencyObject dddo = new DisciplineDepartmentDependencyObject();
+                dddo.setID(rs.getInt(1));
+                dddo.setDisciplineID(rs.getInt(2));
+                dddo.setDepaptmentID(rs.getInt(3));
+                dddo.setCourseNumber(rs.getInt(4));
+                dddo.setSemesterNumber(rs.getInt(5));
+                dddos.add(dddo);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -40,11 +41,11 @@ public class DAODisciplineDepartmentDependency extends AbstractController<Discip
             if (ps != null) try { ps.close(); } catch (SQLException logOrIgnore) {}
         }
 
-        return dtdos;
+        return dddos;
     }
 
     public ArrayList<DisciplineDepartmentDependencyObject> getAllByDepartmentID(int departmentID){
-        String Select_All_DisciplineDepartmentDependencyObject_Statemet = "SELECT * FROM disciplineDepartmentDependencyObject WHERE departmentID="+ departmentID +";";
+        String Select_All_DisciplineDepartmentDependencyObject_Statemet = "SELECT * FROM disciplineDepartmentDependency WHERE departmentID="+ departmentID +";";
         ArrayList<DisciplineDepartmentDependencyObject> dtdos = new ArrayList<DisciplineDepartmentDependencyObject>();
         PreparedStatement ps = getPrepareStatement(Select_All_DisciplineDepartmentDependencyObject_Statemet);
         ResultSet rs = null;
@@ -69,10 +70,10 @@ public class DAODisciplineDepartmentDependency extends AbstractController<Discip
     }
 
     public ArrayList<DisciplineDepartmentDependencyObject> getAllByDepartmentIDCourseAndSemectesrNumber(int departmentID,int coutseNumber, int semesterNumber){
-        String Select_All_DisciplineDepartmentDependencyObject_Statemet = "SELECT * FROM disciplineDepartmentDependencyObject " +
+        String Select_All_DisciplineDepartmentDependency_Statemet = "SELECT * FROM disciplineDepartmentDependency " +
                 "WHERE (departmentID="+ departmentID +" AND coutseNumber="+ coutseNumber +" AND semesterNumber="+ semesterNumber +";";
         ArrayList<DisciplineDepartmentDependencyObject> dtdos = new ArrayList<DisciplineDepartmentDependencyObject>();
-        PreparedStatement ps = getPrepareStatement(Select_All_DisciplineDepartmentDependencyObject_Statemet);
+        PreparedStatement ps = getPrepareStatement(Select_All_DisciplineDepartmentDependency_Statemet);
         ResultSet rs = null;
         try {
             rs = ps.executeQuery();
@@ -92,6 +93,25 @@ public class DAODisciplineDepartmentDependency extends AbstractController<Discip
             if (ps != null) try { ps.close(); } catch (SQLException logOrIgnore) {}
         }
         return dtdos;
+    }
+
+    public int getCountOfDependencyByDisciplineID(int disciplineID){
+        int count = 0;
+        String Get_CountOfDependencyByDisciplineID_Statement = "SELECT COUNT(*) FROM disciplineDepartmentDependency WHERE ID=" + disciplineID + ";";
+        PreparedStatement ps = getPrepareStatement(Get_CountOfDependencyByDisciplineID_Statement);
+        ResultSet rs = null;
+        try {
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                count = rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) try { rs.close(); } catch (SQLException logOrIgnore) {}
+            if (ps != null) try { ps.close(); } catch (SQLException logOrIgnore) {}
+        }
+        return count;
     }
 
     @Override

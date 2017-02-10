@@ -2,8 +2,10 @@ package net.ukr.vixtibon.servlets.controllers.study_process.discipline;
 
 import net.ukr.vixtibon.base_objects.departments.Department;
 import net.ukr.vixtibon.base_objects.study_process.Discipline;
+import net.ukr.vixtibon.base_objects.study_process.DisciplineDepartmentDependencyObject;
 import net.ukr.vixtibon.dao.departments.DAODepartment;
 import net.ukr.vixtibon.dao.stady_process.DAODiscipline;
+import net.ukr.vixtibon.dao.stady_process.DAODisciplineDepartmentDependency;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -16,7 +18,7 @@ import java.util.ArrayList;
 /**
  * Created by alex on 04/02/2017.
  */
-public class MoveDisciplinePageController  extends HttpServlet {
+public class SetDisciplineDepartmentDependencyPageController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session=request.getSession();
         if(request.getParameterMap().containsKey("step")){
@@ -27,7 +29,7 @@ public class MoveDisciplinePageController  extends HttpServlet {
                 Discipline discipline = daodi.getEntityById(Integer.parseInt(request.getParameter("disciplineID")));
                 Department departmentFrom = new Department();
                 Department departmentTo = new Department();
-
+/*
                 if(discipline.getDepartmentID() == 0){
                     departmentFrom = daod.getEntityById(0);
                     departmentTo = daod.getEntityById((int) session.getAttribute("departmentID"));
@@ -35,6 +37,7 @@ public class MoveDisciplinePageController  extends HttpServlet {
                     departmentFrom = daod.getEntityById(discipline.getDepartmentID());
                     departmentTo = daod.getEntityById(0);
                 }
+                */
 
                 request.setAttribute("departmentFrom", departmentFrom);
                 request.setAttribute("departmentTo", departmentTo);
@@ -61,17 +64,40 @@ public class MoveDisciplinePageController  extends HttpServlet {
         }else{
             DAODepartment daod = new DAODepartment();
             DAODiscipline daodi = new DAODiscipline();
-            ArrayList<Department> departments = new ArrayList<Department>();
+            DAODisciplineDepartmentDependency daoddd = new DAODisciplineDepartmentDependency();
+
+            ArrayList<DisciplineDepartmentDependencyObject> dddos = new ArrayList<>();
+            dddos = daoddd.getAllByDepartmentID((int) session.getAttribute("departmentID"));
+
+            ArrayList<Discipline> disciplinesConnectedWithDepartment = new ArrayList<>();
+            ArrayList<Discipline> disciplinesNotConnectedWithDepartment = new ArrayList<>();
+
+            for(DisciplineDepartmentDependencyObject dddo: dddos){
+                disciplinesConnectedWithDepartment.add(daodi.getEntityById(dddo.getDisciplineID()));
+            }
+
+            disciplinesNotConnectedWithDepartment = daodi.getAll();
+
+            for(DisciplineDepartmentDependencyObject dddo: dddos){
+                for(Discipline d: disciplinesNotConnectedWithDepartment){
+                    if(dddo.getDisciplineID() == d.getID()){
+                        disciplinesNotConnectedWithDepartment.remove(d);
+                        break;
+                    }else{
+                        continue;
+                    }
+                }
+            }
+
             Department department = daod.getEntityById((int) session.getAttribute("departmentID"));
-            Department departmentNone = daod.getEntityById(0);
-            departmentNone.setDisciplines(daodi.getAllByDepartmentID(0));
-            department.setDisciplines(daodi.getAllByDepartmentID((int) session.getAttribute("departmentID")));
-            departments.add(departmentNone);
-            departments.add(department);
+
+            daoddd.closeConnection();
             daodi.closeConnection();
             daod.closeConnection();
-            request.setAttribute("selected", "no");
-            request.setAttribute("departments", departments);
+
+            request.setAttribute("department", department);
+            request.setAttribute("disciplinesConnectedWithDepartment", disciplinesConnectedWithDepartment);
+            request.setAttribute(" disciplinesNotConnectedWithDepartment",  disciplinesNotConnectedWithDepartment);
             request.getRequestDispatcher("Employee/Discipline/Operations/MoveDisciplinePage.jsp").forward(request, response);
         }
     }

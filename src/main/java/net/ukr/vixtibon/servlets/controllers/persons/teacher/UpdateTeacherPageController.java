@@ -40,7 +40,7 @@ public class UpdateTeacherPageController extends HttpServlet {
                 }
 
                 ArrayList<Discipline> disciplines = new ArrayList<Discipline>();
-                disciplines = daodi.getAllByDepartmentID((int) session.getAttribute("departmentID"));
+                //disciplines = daodi.getAllByDepartmentID((int) session.getAttribute("departmentID"));
 
                 for(Discipline d: teacher.getDisciplines()){
                     for(Discipline dd: disciplines)
