@@ -18,8 +18,32 @@ public class DAODisciplineDepartmentDependency extends AbstractController<Discip
         return null;
     }
 
-    public ArrayList<DisciplineDepartmentDependencyObject> getAllByDisciplineID(int disciplineID){
-        String Select_All_Discipline_Statemet = "SELECT * FROM disciplineDepartmentDependency WHERE disciplineID="+ disciplineID +";";
+    public DisciplineDepartmentDependencyObject getByDisciplineIDDepartmentID(int disciplineID, int departmentID){
+        String Select_All_Discipline_Statemet = "SELECT * FROM disciplineDepartmentDependency WHERE disciplineID="+ disciplineID +" and departmentID="+ departmentID +";";
+
+        PreparedStatement ps = getPrepareStatement(Select_All_Discipline_Statemet);
+        DisciplineDepartmentDependencyObject dddo = new DisciplineDepartmentDependencyObject();
+        ResultSet rs = null;
+        try {
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                dddo.setID(rs.getInt(1));
+                dddo.setDisciplineID(rs.getInt(2));
+                dddo.setDepartmentID(rs.getInt(3));
+                dddo.setCourseNumber(rs.getInt(4));
+                dddo.setSemesterNumber(rs.getInt(5));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) try { rs.close(); } catch (SQLException logOrIgnore) {}
+            if (ps != null) try { ps.close(); } catch (SQLException logOrIgnore) {}
+        }
+        return dddo;
+    }
+
+    public ArrayList<DisciplineDepartmentDependencyObject> getAllByDisciplineIDDepartmentID(int disciplineID, int departmentID){
+        String Select_All_Discipline_Statemet = "SELECT * FROM disciplineDepartmentDependency WHERE disciplineID="+ disciplineID +" and departmentID="+ departmentID +";";
         ArrayList<DisciplineDepartmentDependencyObject> dddos = new ArrayList<>();
         PreparedStatement ps = getPrepareStatement(Select_All_Discipline_Statemet);
         ResultSet rs = null;
@@ -29,7 +53,7 @@ public class DAODisciplineDepartmentDependency extends AbstractController<Discip
                 DisciplineDepartmentDependencyObject dddo = new DisciplineDepartmentDependencyObject();
                 dddo.setID(rs.getInt(1));
                 dddo.setDisciplineID(rs.getInt(2));
-                dddo.setDepaptmentID(rs.getInt(3));
+                dddo.setDepartmentID(rs.getInt(3));
                 dddo.setCourseNumber(rs.getInt(4));
                 dddo.setSemesterNumber(rs.getInt(5));
                 dddos.add(dddo);
@@ -55,7 +79,7 @@ public class DAODisciplineDepartmentDependency extends AbstractController<Discip
                 DisciplineDepartmentDependencyObject dtdo = new DisciplineDepartmentDependencyObject();
                 dtdo.setID(rs.getInt(1));
                 dtdo.setDisciplineID(rs.getInt(2));
-                dtdo.setDepaptmentID(rs.getInt(3));
+                dtdo.setDepartmentID(rs.getInt(3));
                 dtdo.setCourseNumber(rs.getInt(4));
                 dtdo.setSemesterNumber(rs.getInt(5));
                 dtdos.add(dtdo);
@@ -81,7 +105,7 @@ public class DAODisciplineDepartmentDependency extends AbstractController<Discip
                 DisciplineDepartmentDependencyObject dtdo = new DisciplineDepartmentDependencyObject();
                 dtdo.setID(rs.getInt(1));
                 dtdo.setDisciplineID(rs.getInt(2));
-                dtdo.setDepaptmentID(rs.getInt(3));
+                dtdo.setDepartmentID(rs.getInt(3));
                 dtdo.setCourseNumber(rs.getInt(4));
                 dtdo.setSemesterNumber(rs.getInt(5));
                 dtdos.add(dtdo);
@@ -116,7 +140,18 @@ public class DAODisciplineDepartmentDependency extends AbstractController<Discip
 
     @Override
     public boolean update(DisciplineDepartmentDependencyObject entity) {
-        return false;
+        String Update_DisciplineDepartmentDependency_Statemet = "UPDATE disciplineDepartmentDependency SET courseNumber='" +entity.getCourseNumber()+ "" +
+                "',semesterNumber='"+entity.getSemesterNumber()+"'  WHERE ID="+entity.getID()+ ";";
+        PreparedStatement ps = getPrepareStatement(Update_DisciplineDepartmentDependency_Statemet);
+        try {
+            ps.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        } finally {
+            if (ps != null) try { ps.close(); } catch (SQLException logOrIgnore) {}
+        }
     }
 
     @Override
@@ -142,9 +177,9 @@ public class DAODisciplineDepartmentDependency extends AbstractController<Discip
     @Override
     public boolean create(DisciplineDepartmentDependencyObject entity) throws SQLException {
         String Create_DisciplineDepartmentDependency_Statemet = "INSERT INTO disciplineDepartmentDependency " +
-                "(ID,disciplineID,depaptmentID,courseNumber,semesterNumber) " +
-                "VALUES ('"+findFreeID("disciplineDepartmentDependency")+"','"+entity.getDisciplineID() + "','" + entity.getDepaptmentID()+"','" +
-                 + entity.getDepaptmentID()+"','" + entity.getDepaptmentID()+"');";
+                "(ID,disciplineID,departmentID,courseNumber,semesterNumber) " +
+                "VALUES ('"+findFreeID("disciplineDepartmentDependency")+"','"+entity.getDisciplineID() + "','" + entity.getDepartmentID()+"','" +
+                 + entity.getCourseNumber()+"','" + entity.getSemesterNumber()+"');";
         PreparedStatement ps = getPrepareStatement(Create_DisciplineDepartmentDependency_Statemet);
         try {
             ps.executeUpdate();

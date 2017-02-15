@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
@@ -24,28 +25,41 @@ public class SetDisciplineDepartmentDependencyPageController extends HttpServlet
         if(request.getParameterMap().containsKey("step")){
             DAODiscipline daodi = new DAODiscipline();
             DAODepartment daod = new DAODepartment();
+            DAODisciplineDepartmentDependency daoddd = new DAODisciplineDepartmentDependency();
             if(request.getParameter("step").equals("step1")){
                 request.setAttribute("selected", "yes");
                 Discipline discipline = daodi.getEntityById(Integer.parseInt(request.getParameter("disciplineID")));
-                Department departmentFrom = new Department();
-                Department departmentTo = new Department();
-/*
-                if(discipline.getDepartmentID() == 0){
-                    departmentFrom = daod.getEntityById(0);
-                    departmentTo = daod.getEntityById((int) session.getAttribute("departmentID"));
-                }else{
-                    departmentFrom = daod.getEntityById(discipline.getDepartmentID());
-                    departmentTo = daod.getEntityById(0);
-                }
-                */
-
-                request.setAttribute("departmentFrom", departmentFrom);
-                request.setAttribute("departmentTo", departmentTo);
+                DisciplineDepartmentDependencyObject dddo = new DisciplineDepartmentDependencyObject();
+                dddo = daoddd.getByDisciplineIDDepartmentID(Integer.parseInt(request.getParameter("disciplineID")),(int) session.getAttribute("departmentID"));
                 request.setAttribute("discipline", discipline);
-                request.getRequestDispatcher("Employee/Discipline/Operations/MoveDisciplinePage.jsp").forward(request, response);
+                request.setAttribute("dependencyObject", dddo);
+                request.setAttribute("state", request.getParameter("state"));
+                request.getRequestDispatcher("Employee/Discipline/Operations/SetDisciplineDepartmentDependencyPage.jsp").forward(request, response);
             }else if(request.getParameter("step").equals("step2")){
                 boolean result = false;
-                result = daodi.updateDisciplineLocation(Integer.parseInt(request.getParameter("departmentID")),Integer.parseInt(request.getParameter("disciplineID")));
+                DisciplineDepartmentDependencyObject dddo = new DisciplineDepartmentDependencyObject();
+                if(request.getParameter("action").equals("new")){
+                    dddo.setDisciplineID(Integer.parseInt(request.getParameter("disciplineID")));
+                    dddo.setDepartmentID((int) session.getAttribute("departmentID"));
+                    dddo.setCourseNumber(Integer.parseInt(request.getParameter("courseNumber")));
+                    dddo.setSemesterNumber(Integer.parseInt(request.getParameter("semesterNumber")));
+
+                    try {
+                        result = daoddd.create(dddo);
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                }else if(request.getParameter("action").equals("update")){
+                    dddo = daoddd.getByDisciplineIDDepartmentID(Integer.parseInt(request.getParameter("disciplineID")),(int) session.getAttribute("departmentID"));
+                    dddo.setCourseNumber(Integer.parseInt(request.getParameter("courseNumber")));
+                    dddo.setSemesterNumber(Integer.parseInt(request.getParameter("semesterNumber")));
+                    result = daoddd.update(dddo);
+                }else if(request.getParameter("action").equals("remove")){
+                    dddo = daoddd.getByDisciplineIDDepartmentID(Integer.parseInt(request.getParameter("disciplineID")),(int) session.getAttribute("departmentID"));
+                    result = daoddd.delete(dddo.getID());
+                }
+                daoddd.closeConnection();
+
                 if(result){
                     request.setAttribute("result", "success");
                     request.setAttribute("menu", "discipline");
@@ -78,6 +92,9 @@ public class SetDisciplineDepartmentDependencyPageController extends HttpServlet
 
             disciplinesNotConnectedWithDepartment = daodi.getAll();
 
+            System.out.println("disciplinesConnectedWithDepartment " + disciplinesConnectedWithDepartment.size());
+            System.out.println("disciplinesNotConnectedWithDepartment " + disciplinesNotConnectedWithDepartment.size());
+
             for(DisciplineDepartmentDependencyObject dddo: dddos){
                 for(Discipline d: disciplinesNotConnectedWithDepartment){
                     if(dddo.getDisciplineID() == d.getID()){
@@ -88,6 +105,8 @@ public class SetDisciplineDepartmentDependencyPageController extends HttpServlet
                     }
                 }
             }
+            System.out.println("disciplinesNotConnectedWithDepartment " + disciplinesNotConnectedWithDepartment.size());
+            System.out.println("disciplinesNotConnectedWithDepartment " + disciplinesNotConnectedWithDepartment.get(0).getNameOfDiscipline());
 
             Department department = daod.getEntityById((int) session.getAttribute("departmentID"));
 
@@ -97,8 +116,8 @@ public class SetDisciplineDepartmentDependencyPageController extends HttpServlet
 
             request.setAttribute("department", department);
             request.setAttribute("disciplinesConnectedWithDepartment", disciplinesConnectedWithDepartment);
-            request.setAttribute(" disciplinesNotConnectedWithDepartment",  disciplinesNotConnectedWithDepartment);
-            request.getRequestDispatcher("Employee/Discipline/Operations/MoveDisciplinePage.jsp").forward(request, response);
+            request.setAttribute("disciplinesNotConnectedWithDepartment",  disciplinesNotConnectedWithDepartment);
+            request.getRequestDispatcher("Employee/Discipline/Operations/SetDisciplineDepartmentDependencyPage.jsp").forward(request, response);
         }
     }
 }

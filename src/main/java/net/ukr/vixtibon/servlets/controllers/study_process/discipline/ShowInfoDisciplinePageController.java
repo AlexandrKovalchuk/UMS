@@ -39,7 +39,7 @@ public class ShowInfoDisciplinePageController  extends HttpServlet {
                 ArrayList<Department> departmentsDependency = new ArrayList<>();
 
                 for(DisciplineDepartmentDependencyObject dddo : daoddd.getAllByDepartmentID(discipline.getID())){
-                    departmentsDependency.add(daod.getEntityById(dddo.getDepaptmentID()));
+                    departmentsDependency.add(daod.getEntityById(dddo.getDepartmentID()));
                 }
 
                 for(DisciplineTeacherDependencyObject dtdo : daodtd.getAllByDisciplineID(discipline.getID())){

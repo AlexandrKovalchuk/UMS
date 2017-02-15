@@ -6,7 +6,7 @@ package net.ukr.vixtibon.base_objects.study_process;
 public class DisciplineDepartmentDependencyObject {
     private int ID;
     private int disciplineID;
-    private int depaptmentID;
+    private int departmentID;
     private int courseNumber;
     private int semesterNumber;
 
@@ -18,8 +18,8 @@ public class DisciplineDepartmentDependencyObject {
         this.disciplineID = disciplineID;
     }
 
-    public void setDepaptmentID(int depaptmentID) {
-        this.depaptmentID = depaptmentID;
+    public void setDepartmentID(int departmentID) {
+        this.departmentID = departmentID;
     }
 
     public void setCourseNumber(int courseNumber) {
@@ -38,8 +38,8 @@ public class DisciplineDepartmentDependencyObject {
         return disciplineID;
     }
 
-    public int getDepaptmentID() {
-        return depaptmentID;
+    public int getDepartmentID() {
+        return departmentID;
     }
 
     public int getCourseNumber() {

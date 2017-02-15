@@ -3,10 +3,12 @@ package net.ukr.vixtibon.servlets.controllers.persons.teacher;
 import net.ukr.vixtibon.base_objects.departments.Department;
 import net.ukr.vixtibon.base_objects.persons.Teacher;
 import net.ukr.vixtibon.base_objects.study_process.Discipline;
+import net.ukr.vixtibon.base_objects.study_process.DisciplineDepartmentDependencyObject;
 import net.ukr.vixtibon.base_objects.study_process.DisciplineTeacherDependencyObject;
 import net.ukr.vixtibon.dao.departments.DAODepartment;
 import net.ukr.vixtibon.dao.persons.DAOTeacher;
 import net.ukr.vixtibon.dao.stady_process.DAODiscipline;
+import net.ukr.vixtibon.dao.stady_process.DAODisciplineDepartmentDependency;
 import net.ukr.vixtibon.dao.stady_process.DAODisciplineTeacherDependencyObject;
 
 import javax.servlet.ServletException;
@@ -15,7 +17,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -39,8 +40,28 @@ public class UpdateTeacherPageController extends HttpServlet {
                     teacher.getDisciplines().add(daodi.getEntityById(dtdo.getDisciplineID()));
                 }
 
-                ArrayList<Discipline> disciplines = new ArrayList<Discipline>();
-                //disciplines = daodi.getAllByDepartmentID((int) session.getAttribute("departmentID"));
+                ArrayList<Discipline> disciplines = new ArrayList<>();
+                ArrayList<Discipline> disciplinesNotConnected = new ArrayList<>();
+                disciplinesNotConnected = daodi.getAll();
+
+                DAODisciplineDepartmentDependency daoddd = new DAODisciplineDepartmentDependency();
+
+                ArrayList<DisciplineDepartmentDependencyObject> dddos  = daoddd.getAllByDepartmentID((int) session.getAttribute("departmentID"));
+
+                for(DisciplineDepartmentDependencyObject dddo: dddos){
+                    disciplines.add(daodi.getEntityById(dddo.getDisciplineID()));
+                }
+
+                for(DisciplineTeacherDependencyObject dtdo: dtdos){
+                    for(Discipline d: disciplines){
+                        if(dtdo.getDisciplineID() == d.getID()){
+                            disciplines.remove(d);
+                            break;
+                        }else{
+                            continue;
+                        }
+                    }
+                }
 
                 for(Discipline d: teacher.getDisciplines()){
                     for(Discipline dd: disciplines)
@@ -52,11 +73,11 @@ public class UpdateTeacherPageController extends HttpServlet {
                         }
                 }
 
-
-
+                daoddd.closeConnection();
                 request.setAttribute("selected", "yes");
                 request.setAttribute("teacher", teacher);
                 request.setAttribute("disciplines", disciplines);
+                request.setAttribute("disciplinesNotConnected", disciplinesNotConnected);
                 request.getRequestDispatcher("Employee/Teacher/Operations/UpdateTeacherPage.jsp").forward(request, response);
             }else if(request.getParameter("step").equals("step2")){
                 Teacher teacher = new Teacher();
@@ -113,6 +134,7 @@ public class UpdateTeacherPageController extends HttpServlet {
         }else{
             DAODepartment daod = new DAODepartment();
             DAOTeacher daot = new DAOTeacher();
+
             ArrayList<Department> departments = new ArrayList<Department>();
             Department department = daod.getEntityById((int) session.getAttribute("departmentID"));
             Department departmentNone = daod.getEntityById(0);
@@ -120,8 +142,10 @@ public class UpdateTeacherPageController extends HttpServlet {
             department.setTeachers(daot.getAllByDepartmentID((int) session.getAttribute("departmentID")));
             departments.add(departmentNone);
             departments.add(department);
+
             daot.closeConnection();
             daod.closeConnection();
+
             request.setAttribute("departments", departments);
             request.getRequestDispatcher("Employee/Teacher/Operations/UpdateTeacherPage.jsp").forward(request, response);
         }

@@ -18,8 +18,8 @@ public class DisciplinePageController extends HttpServlet {
                 request.getRequestDispatcher("UpdateDisciplinePageController").forward(request, response);
             }else if(request.getParameter("operationType").equals("delete")){
                 request.getRequestDispatcher("DeleteDisciplinePageController").forward(request, response);
-            }else if(request.getParameter("operationType").equals("move")){
-                request.getRequestDispatcher("MoveDisciplinePageController").forward(request, response);
+            }else if(request.getParameter("operationType").equals("setDependency")){
+                request.getRequestDispatcher("SetDisciplineDepartmentDependencyPageController").forward(request, response);
             }else if(request.getParameter("operationType").equals("showInfo")){
                 request.getRequestDispatcher("ShowInfoDisciplinePageController").forward(request, response);
             }else if(request.getParameter("operationType").equals("cancel")){

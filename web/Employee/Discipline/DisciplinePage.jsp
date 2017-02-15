@@ -58,9 +58,9 @@
 
         <div>
             <form action="DisciplinePageController" method="post">
-                <input type="hidden"  name="operationType" value="move">
+                <input type="hidden"  name="operationType" value="setDependency">
                 <td colspan=2>
-                    <button onclick="submit"  class="topicButton topicButtonEmployeePage"><h2>Move Discipline</h2></button>
+                    <button onclick="submit"  class="topicButton topicButtonEmployeePage"><h2>Set Discipline Dependency</h2></button>
                 </td>
             </form>
         </div>

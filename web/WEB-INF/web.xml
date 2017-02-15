@@ -343,13 +343,13 @@
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>MoveDisciplinePageController</servlet-name>
+        <servlet-name>SetDisciplineDepartmentDependencyPageController</servlet-name>
         <servlet-class>net.ukr.vixtibon.servlets.controllers.study_process.discipline.SetDisciplineDepartmentDependencyPageController</servlet-class>
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>MoveDisciplinePageController</servlet-name>
-        <url-pattern>/MoveDisciplinePageController</url-pattern>
+        <servlet-name>SetDisciplineDepartmentDependencyPageController</servlet-name>
+        <url-pattern>/SetDisciplineDepartmentDependencyPageController</url-pattern>
     </servlet-mapping>
 
     <servlet>

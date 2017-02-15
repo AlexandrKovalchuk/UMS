@@ -2,9 +2,12 @@ package net.ukr.vixtibon.servlets.controllers.persons.teacher;
 
 import net.ukr.vixtibon.base_objects.departments.Department;
 import net.ukr.vixtibon.base_objects.persons.Teacher;
+import net.ukr.vixtibon.base_objects.study_process.Discipline;
+import net.ukr.vixtibon.base_objects.study_process.DisciplineDepartmentDependencyObject;
 import net.ukr.vixtibon.dao.departments.DAODepartment;
 import net.ukr.vixtibon.dao.persons.DAOTeacher;
 import net.ukr.vixtibon.dao.stady_process.DAODiscipline;
+import net.ukr.vixtibon.dao.stady_process.DAODisciplineDepartmentDependency;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -15,6 +18,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -80,10 +84,45 @@ public class CreateTeacherPageController extends HttpServlet {
         }else{
             DAODepartment daod = new DAODepartment();
             DAODiscipline daodi = new DAODiscipline();
+            DAODisciplineDepartmentDependency daoddd = new DAODisciplineDepartmentDependency();
+
+            ArrayList<DisciplineDepartmentDependencyObject> dddos = new ArrayList<>();
+            dddos = daoddd.getAllByDepartmentID((int) session.getAttribute("departmentID"));
+
+            ArrayList<Discipline> disciplinesConnectedWithDepartment = new ArrayList<>();
+            ArrayList<Discipline> disciplinesNotConnectedWithDepartment = new ArrayList<>();
+
+            for(DisciplineDepartmentDependencyObject dddo: dddos){
+                disciplinesConnectedWithDepartment.add(daodi.getEntityById(dddo.getDisciplineID()));
+            }
+
+            disciplinesNotConnectedWithDepartment = daodi.getAll();
+
+            System.out.println("disciplinesConnectedWithDepartment " + disciplinesConnectedWithDepartment.size());
+            System.out.println("disciplinesNotConnectedWithDepartment " + disciplinesNotConnectedWithDepartment.size());
+
+            for(DisciplineDepartmentDependencyObject dddo: dddos){
+                for(Discipline d: disciplinesNotConnectedWithDepartment){
+                    if(dddo.getDisciplineID() == d.getID()){
+                        disciplinesNotConnectedWithDepartment.remove(d);
+                        break;
+                    }else{
+                        continue;
+                    }
+                }
+            }
+            System.out.println("disciplinesNotConnectedWithDepartment " + disciplinesNotConnectedWithDepartment.size());
+            System.out.println("disciplinesNotConnectedWithDepartment " + disciplinesNotConnectedWithDepartment.get(0).getNameOfDiscipline());
+
             Department department = daod.getEntityById((int) session.getAttribute("departmentID"));
-            //department.setDisciplines(daodi.getAllByDepartmentID(department.getID()));
+
+            daoddd.closeConnection();
+            daodi.closeConnection();
             daod.closeConnection();
+
             request.setAttribute("department", department);
+            request.setAttribute("disciplinesConnectedWithDepartment", disciplinesConnectedWithDepartment);
+            request.setAttribute("disciplinesNotConnectedWithDepartment",  disciplinesNotConnectedWithDepartment);
             request.getRequestDispatcher("Employee/Teacher/Operations/CreateTeacherPage.jsp").forward(request, response);
         }
     }
