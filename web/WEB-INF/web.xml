@@ -403,6 +403,16 @@
     </servlet-mapping>
 
     <servlet>
+        <servlet-name>MoveTeacherPageController</servlet-name>
+        <servlet-class>net.ukr.vixtibon.servlets.controllers.persons.teacher.MoveTeacherPageController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>MoveTeacherPageController</servlet-name>
+        <url-pattern>/MoveTeacherPageController</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>ShowInfoTeacherPageController</servlet-name>
         <servlet-class>net.ukr.vixtibon.servlets.controllers.persons.teacher.ShowInfoTeacherPageController</servlet-class>
     </servlet>
