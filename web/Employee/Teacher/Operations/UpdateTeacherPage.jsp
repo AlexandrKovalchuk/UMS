@@ -147,7 +147,9 @@
                         <input class = "inputSettings inputEmployee inputAdminPageLongNames" type="text" name="login" required value="${teacher.getLogin()}">
                     </td>
                 </tr>
+            </table>
 
+            <table>
                 <tr>
                     <td class = "textLabel textLabelEmployeePage">Disciplines:</td>
                 </tr>
@@ -161,8 +163,24 @@
                 </tr>
 
                 <tr>
+                    <td class = "textLabel textLabelEmployeePage">Current department:</td>
+                </tr>
+
+                <tr>
                     <td  class = "textLabel textLabelEmployeePage">
                         <c:forEach items="${disciplines}" var="discipline">
+                            <input type="checkbox" name="discipline" value="<c:out value="${discipline.getID()}"/>" > <c:out value="${discipline.getNameOfDiscipline()}"/><br>
+                        </c:forEach>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class = "textLabel textLabelEmployeePage">Not current department:</td>
+                </tr>
+
+                <tr>
+                    <td  class = "textLabel textLabelEmployeePage">
+                        <c:forEach items="${disciplinesNotConnected}" var="discipline">
                             <input type="checkbox" name="discipline" value="<c:out value="${discipline.getID()}"/>" > <c:out value="${discipline.getNameOfDiscipline()}"/><br>
                         </c:forEach>
                     </td>

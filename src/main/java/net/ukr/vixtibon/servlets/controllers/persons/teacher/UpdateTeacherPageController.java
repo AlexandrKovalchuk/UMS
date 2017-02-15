@@ -41,8 +41,7 @@ public class UpdateTeacherPageController extends HttpServlet {
                 }
 
                 ArrayList<Discipline> disciplines = new ArrayList<>();
-                ArrayList<Discipline> disciplinesNotConnected = new ArrayList<>();
-                disciplinesNotConnected = daodi.getAll();
+                ArrayList<Discipline> disciplinesNotConnected = daodi.getAll();
 
                 DAODisciplineDepartmentDependency daoddd = new DAODisciplineDepartmentDependency();
 
@@ -64,9 +63,19 @@ public class UpdateTeacherPageController extends HttpServlet {
                 }
 
                 for(Discipline d: teacher.getDisciplines()){
-                    for(Discipline dd: disciplines)
+                    for(Discipline dd: disciplinesNotConnected)
                         if(d.getID() == dd.getID()){
-                            disciplines.remove(dd);
+                            disciplinesNotConnected.remove(dd);
+                            break;
+                        }else{
+                            continue;
+                        }
+                }
+
+                for(Discipline d: disciplines){
+                    for(Discipline dd: disciplinesNotConnected)
+                        if(d.getID() == dd.getID()){
+                            disciplinesNotConnected.remove(dd);
                             break;
                         }else{
                             continue;
@@ -127,7 +136,7 @@ public class UpdateTeacherPageController extends HttpServlet {
                 daot.closeConnection();
                 request.getRequestDispatcher("ActionResultEmployeeMenuPageController").forward(request, response);
             }else if(request.getParameter("step").equals("cancel")){
-                request.getRequestDispatcher("DisciplinePageController").forward(request, response);
+                request.getRequestDispatcher("TeacherPageController").forward(request, response);
             }else{
                 //error page
             }
