@@ -42,6 +42,30 @@ public class DAOGroup  extends AbstractController<Group,Integer> {
         return groupList;
     }
 
+    public ArrayList<Group> getAllByDepartmentID(int departmentID, int courseNumber){
+        String Select_All_Group_Statemet = "SELECT * FROM gtgroup WHERE departmentID="+ departmentID +" and courseNumber ="+courseNumber+";";
+        ArrayList<Group> groupList = new ArrayList<>();
+        PreparedStatement ps = getPrepareStatement(Select_All_Group_Statemet);
+        ResultSet rs = null;
+        try {
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Group group = new Group();
+                group.setID(rs.getInt(1));
+                group.setFullGroupName(rs.getString(2));
+                group.setCourseNumber(rs.getInt(3));
+                group.setDepartmentID(rs.getInt(4));
+                groupList.add(group);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) try { rs.close(); } catch (SQLException logOrIgnore) {}
+            if (ps != null) try { ps.close(); } catch (SQLException logOrIgnore) {}
+        }
+        return groupList;
+    }
+
     @Override
     public boolean update(Group entity) {
         String Update_Group_Statemet = "UPDATE gtgroup SET fullGroupName='" +entity.getFullGroupName()+ "" +

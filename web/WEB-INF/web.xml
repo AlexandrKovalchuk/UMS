@@ -433,6 +433,16 @@
     </servlet-mapping>
 
     <servlet>
+        <servlet-name>CreateStudentPageController</servlet-name>
+        <servlet-class>net.ukr.vixtibon.servlets.controllers.persons.student.CreateStudentPageController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>CreateStudentPageController</servlet-name>
+        <url-pattern>/CreateStudentPageController</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>GroupPageController</servlet-name>
         <servlet-class>net.ukr.vixtibon.servlets.controllers.study_process.group.GroupPageController</servlet-class>
     </servlet>

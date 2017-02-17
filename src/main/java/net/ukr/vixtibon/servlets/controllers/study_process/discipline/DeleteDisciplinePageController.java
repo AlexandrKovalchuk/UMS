@@ -67,8 +67,7 @@ public class DeleteDisciplinePageController  extends HttpServlet {
             DAODiscipline daodi = new DAODiscipline();
             DAODisciplineDepartmentDependency daoddd = new DAODisciplineDepartmentDependency();
 
-            ArrayList<DisciplineDepartmentDependencyObject> dddos = new ArrayList<>();
-            dddos = daoddd.getAllByDepartmentID((int) session.getAttribute("departmentID"));
+            ArrayList<DisciplineDepartmentDependencyObject> dddos =  daoddd.getAllByDepartmentID((int) session.getAttribute("departmentID"));
 
             ArrayList<Discipline> disciplinesConnectedWithDepartment = new ArrayList<>();
             ArrayList<Discipline> disciplinesNotConnectedWithDepartment = new ArrayList<>();
