@@ -3,9 +3,11 @@ package net.ukr.vixtibon.servlets.controllers.persons.student;
 import net.ukr.vixtibon.base_objects.departments.Department;
 import net.ukr.vixtibon.base_objects.persons.Student;
 import net.ukr.vixtibon.base_objects.study_process.Discipline;
+import net.ukr.vixtibon.base_objects.study_process.DisciplineDepartmentDependencyObject;
 import net.ukr.vixtibon.base_objects.study_process.Group;
 import net.ukr.vixtibon.dao.departments.DAODepartment;
 import net.ukr.vixtibon.dao.persons.DAOStudent;
+import net.ukr.vixtibon.dao.stady_process.DAODiscipline;
 import net.ukr.vixtibon.dao.stady_process.DAODisciplineDepartmentDependency;
 import net.ukr.vixtibon.dao.stady_process.DAODisciplineTeacherDependencyObject;
 import net.ukr.vixtibon.dao.stady_process.DAOGroup;
@@ -19,7 +21,9 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 
 /**
  * Created by alex on 16/02/2017.
@@ -57,6 +61,21 @@ public class CreateStudentPageController extends HttpServlet {
                 student.setIndexBook(request.getParameter("indexBook"));
                 student.setLogin(request.getParameter("login"));
                 student.setGroupID(Integer.parseInt(request.getParameter("groupID")));
+
+                ArrayList<DisciplineDepartmentDependencyObject> dddos = new ArrayList<>();
+                DAODisciplineDepartmentDependency daodddo = new DAODisciplineDepartmentDependency();
+                dddos = daodddo.getAllByDepartmentID((int) session.getAttribute("departmentID"));
+
+                HashMap<Integer, Discipline> disciplines = new HashMap<>();
+                DAODiscipline daodi = new DAODiscipline();
+
+                for(DisciplineDepartmentDependencyObject dddo: dddos){
+                    Discipline discipline = new Discipline();
+                    discipline = daodi.getEntityById(dddo.getDisciplineID());
+                    disciplines.put(discipline.getID(),discipline);
+                }
+
+                student.setDisciplines(disciplines);
 
                 try {
                     result = daos.create(student);

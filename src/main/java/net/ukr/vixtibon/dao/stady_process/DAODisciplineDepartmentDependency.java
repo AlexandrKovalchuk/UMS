@@ -121,7 +121,7 @@ public class DAODisciplineDepartmentDependency extends AbstractController<Discip
 
     public int getCountOfDependencyByDisciplineID(int disciplineID){
         int count = 0;
-        String Get_CountOfDependencyByDisciplineID_Statement = "SELECT COUNT(*) FROM disciplineDepartmentDependency WHERE ID=" + disciplineID + ";";
+        String Get_CountOfDependencyByDisciplineID_Statement = "SELECT COUNT(*) FROM disciplineDepartmentDependency WHERE disciplineID=" + disciplineID + ";";
         PreparedStatement ps = getPrepareStatement(Get_CountOfDependencyByDisciplineID_Statement);
         ResultSet rs = null;
         try {

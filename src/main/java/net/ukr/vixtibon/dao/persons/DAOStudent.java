@@ -1,13 +1,20 @@
 package net.ukr.vixtibon.dao.persons;
 
 import net.ukr.vixtibon.base_objects.persons.Student;
+import net.ukr.vixtibon.base_objects.study_process.Discipline;
+import net.ukr.vixtibon.base_objects.study_process.StudentAttendanceObject;
+import net.ukr.vixtibon.base_objects.study_process.StudentProgressObject;
 import net.ukr.vixtibon.dao.AbstractController;
+import net.ukr.vixtibon.dao.stady_process.DAOStudentAttendance;
+import net.ukr.vixtibon.dao.stady_process.DAOStudentProgress;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by alex on 05/11/2016.
@@ -137,13 +144,32 @@ public class DAOStudent extends AbstractController<Student,Integer> {
     @Override
     public boolean create(Student entity) throws SQLException {
         java.sql.Date sqlDate = new java.sql.Date(entity.getDateOfBorn().getTime());
+        int id = findFreeID("student");
         String Create_Student_Statemet = "INSERT INTO student (name,lastName,fathersName,personalID,sex,email,phoneNumber,dateOfBorn," +
                 "address,passport,login,indexBook,ID,groupID) " +
                 "VALUES ('" + entity.getName() + "','" + entity.getSecondName() + "','" + entity.getSurname() + "','"
                 + entity.getPersonalID() + "','" + entity.getSex() + "','" + entity.getEmail() + "','" +entity.getPhoneNumber()
                 + "','" + sqlDate + "','" + entity.getAddress() + "','" + entity.getPasport() + "','" +
-                entity.getLogin() + "','" + entity.getIndexBook() + "','" + findFreeID("student") +"','" + entity.getGroupID()+"');";
+                entity.getLogin() + "','" + entity.getIndexBook() + "','" + id +"','" + entity.getGroupID()+"');";
         PreparedStatement ps = getPrepareStatement(Create_Student_Statemet);
+
+        DAOStudentAttendance daosa = new DAOStudentAttendance();
+        DAOStudentProgress daosp = new DAOStudentProgress();
+        for(Map.Entry<Integer, Discipline> h: entity.getDisciplines().entrySet()){
+            StudentAttendanceObject sao = new StudentAttendanceObject();
+            StudentProgressObject spo = new StudentProgressObject();
+
+            sao.setDisciplineID(h.getValue().getID());
+            sao.setStudentID(id);
+            daosa.create(sao);
+
+            spo.setStudentID(id);
+            spo.setDisciplineID(h.getValue().getID());
+            daosp.create(spo);
+
+        }
+        daosa.closeConnection();
+        daosp.closeConnection();
         try {
             ps.executeUpdate();
             return true;

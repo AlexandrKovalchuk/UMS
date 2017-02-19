@@ -26,17 +26,27 @@
     </div>
 
     <div class = "pageContent pageContentEmployeePages pageContentAdminPages500px">
-        <c:forEach items="${departments}" var="department">
-            <div class = "textLabelParagraph textLabelEmployeePage"><c:out value="${department.getLongName()}"/></div>
-            <c:forEach items="${department.getDisciplines()}" var="discipline">
-                <div>
-                    <form action="/DeleteDisciplinePageController" method="post" accept-charset="UTF-8">
-                        <input type="hidden"  name="step" value="step1">
-                        <input type="hidden"  name="disciplineID" value="${discipline.getID()}">
-                        <button onclick="submit" class="itemButton itemButtonEmployeePages" ><c:out value="${discipline.getNameOfDiscipline()}"/></button>
-                    </form>
-                </div>
-            </c:forEach>
+        <div class = "textLabelParagraph textLabelEmployeePage">Connected with current department</div>
+        <c:forEach items="${disciplinesConnectedWithDepartment}" var="discipline">
+            <div>
+                <form action="/DeleteDisciplinePageController" method="post" accept-charset="UTF-8">
+                    <input type="hidden"  name="step" value="step1">
+                    <input type="hidden"  name="disciplineID" value="${discipline.getID()}">
+                    <button onclick="submit" class="itemButton itemButtonEmployeePages" ><c:out value="${discipline.getNameOfDiscipline()}"/></button>
+                </form>
+            </div>
+        </c:forEach>
+
+        <div class = "textLabelParagraph textLabelEmployeePage">Not connected with current department</div>
+
+        <c:forEach items="${disciplinesNotConnectedWithDepartment}" var="discipline">
+            <div>
+                <form action="/DeleteDisciplinePageController" method="post" accept-charset="UTF-8">
+                    <input type="hidden"  name="step" value="step1">
+                    <input type="hidden"  name="disciplineID" value="${discipline.getID()}">
+                    <button onclick="submit" class="itemButton itemButtonEmployeePages" ><c:out value="${discipline.getNameOfDiscipline()}"/></button>
+                </form>
+            </div>
         </c:forEach>
     </div>
 
@@ -66,7 +76,7 @@
 
         <c:if test = "${possible_to_remove eq 'no'}">
             <div class = "pageTitleText  pageTitleTextBad">
-                Impossible to Delete: <c:out value="${institute.getLongName()}"/> , there is still some Teachers depended!
+                Impossible to Delete: <c:out value="${institute.getLongName()}"/> , there is still some dependency present!
             </div>
         </c:if>
     </div>
