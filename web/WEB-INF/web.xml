@@ -443,6 +443,16 @@
     </servlet-mapping>
 
     <servlet>
+        <servlet-name>DeleteStudentPageController</servlet-name>
+        <servlet-class>net.ukr.vixtibon.servlets.controllers.persons.student.DeleteStudentPageController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>DeleteStudentPageController</servlet-name>
+        <url-pattern>/DeleteStudentPageController</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>GroupPageController</servlet-name>
         <servlet-class>net.ukr.vixtibon.servlets.controllers.study_process.group.GroupPageController</servlet-class>
     </servlet>

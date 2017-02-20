@@ -29,7 +29,17 @@ public class DAOStudentProgress  extends AbstractController<StudentProgressObjec
 
     @Override
     public boolean delete(Integer id) {
-        return false;
+        String Delete_StudentProgress_Statement = "DELETE FROM progress WHERE studentID=" + id + ";";
+        PreparedStatement ps = getPrepareStatement(Delete_StudentProgress_Statement);
+        try {
+            ps.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        } finally {
+            if (ps != null) try { ps.close(); } catch (SQLException logOrIgnore) {}
+        }
     }
 
     public int getCountByDisciplineID(int disciplineID){

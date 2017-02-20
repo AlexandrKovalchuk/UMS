@@ -4,12 +4,10 @@ import net.ukr.vixtibon.base_objects.departments.Department;
 import net.ukr.vixtibon.base_objects.persons.Student;
 import net.ukr.vixtibon.base_objects.study_process.Discipline;
 import net.ukr.vixtibon.base_objects.study_process.DisciplineDepartmentDependencyObject;
-import net.ukr.vixtibon.base_objects.study_process.Group;
 import net.ukr.vixtibon.dao.departments.DAODepartment;
 import net.ukr.vixtibon.dao.persons.DAOStudent;
 import net.ukr.vixtibon.dao.stady_process.DAODiscipline;
 import net.ukr.vixtibon.dao.stady_process.DAODisciplineDepartmentDependency;
-import net.ukr.vixtibon.dao.stady_process.DAODisciplineTeacherDependencyObject;
 import net.ukr.vixtibon.dao.stady_process.DAOGroup;
 
 import javax.servlet.ServletException;
@@ -26,62 +24,35 @@ import java.util.Date;
 import java.util.HashMap;
 
 /**
- * Created by alex on 16/02/2017.
+ * Created by alex on 20/02/2017.
  */
-public class CreateStudentPageController extends HttpServlet {
+public class DeleteStudentPageController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session=request.getSession();
         if(request.getParameterMap().containsKey("step")){
             if(request.getParameter("step").equals("step1")){
                 request.setAttribute("groupID", request.getParameter("groupID"));
+                DAOStudent daos = new DAOStudent();
+                ArrayList<Student> students = new ArrayList<>();
+                students = daos.getAllByGroupID(Integer.parseInt(request.getParameter("groupID")));
+                request.setAttribute("students", students);
                 request.setAttribute("selected", "yes");
-                request.getRequestDispatcher("Employee/Student/Operations/CreateStudentPage.jsp").forward(request, response);
+                request.getRequestDispatcher("Employee/Student/Operations/DeleteStudentPage.jsp").forward(request, response);
             }else if(request.getParameter("step").equals("step2")) {
                 DAOStudent daos = new DAOStudent();
                 Student student = new Student();
+
+                student = daos.getEntityById(Integer.parseInt(request.getParameter("studentID")));
+
+                daos.closeConnection();
+                request.setAttribute("student", student);
+                request.setAttribute("selected", "studentyes");
+                request.getRequestDispatcher("Employee/Student/Operations/DeleteStudentPage.jsp").forward(request, response);
+            }else if(request.getParameter("step").equals("step3")){
+                DAOStudent daos = new DAOStudent();
                 boolean result = false;
-                student.setName(request.getParameter("name"));
-                student.setlastName(request.getParameter("lastName"));
-                student.setfathersName(request.getParameter("fathersName"));
-                student.setPersonalID(request.getParameter("personalID"));
-                student.setSex(request.getParameter("sex"));
-                SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
-                String dateInString = ""+request.getParameter("bday")+"-"+request.getParameter("bmonth")+"-"+request.getParameter("byear")+" 10:20:56";
-                Date date = new Date();
-                try {
-                    date = sdf.parse(dateInString);
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
-                student.setDateOfBorn(date);
-                student.setEmail(request.getParameter("email"));
-                student.setPhoneNumber(request.getParameter("phoneNumber"));
-                student.setAddress(request.getParameter("address"));
-                student.setPasport(request.getParameter("pasport"));
-                student.setIndexBook(request.getParameter("indexBook"));
-                student.setLogin(request.getParameter("login"));
-                student.setGroupID(Integer.parseInt(request.getParameter("groupID")));
 
-                ArrayList<DisciplineDepartmentDependencyObject> dddos = new ArrayList<>();
-                DAODisciplineDepartmentDependency daodddo = new DAODisciplineDepartmentDependency();
-                dddos = daodddo.getAllByDepartmentID((int) session.getAttribute("departmentID"));
-
-                HashMap<Integer, Discipline> disciplines = new HashMap<>();
-                DAODiscipline daodi = new DAODiscipline();
-
-                for(DisciplineDepartmentDependencyObject dddo: dddos){
-                    Discipline discipline = new Discipline();
-                    discipline = daodi.getEntityById(dddo.getDisciplineID());
-                    disciplines.put(discipline.getID(),discipline);
-                }
-
-                student.setDisciplines(disciplines);
-
-                try {
-                    result = daos.create(student);
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
+                result = daos.delete(Integer.parseInt(request.getParameter("studentID")));
                 if (result) {
                     request.setAttribute("result", "success");
                     request.setAttribute("menu", "student");
@@ -112,7 +83,8 @@ public class CreateStudentPageController extends HttpServlet {
             daoGroup.closeConnection();
             daod.closeConnection();
             request.setAttribute("department", department);
-            request.getRequestDispatcher("Employee/Student/Operations/CreateStudentPage.jsp").forward(request, response);
+            request.setAttribute("selected", "no");
+            request.getRequestDispatcher("Employee/Student/Operations/DeleteStudentPage.jsp").forward(request, response);
         }
     }
 }

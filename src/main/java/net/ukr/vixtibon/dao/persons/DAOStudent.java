@@ -26,7 +26,7 @@ public class DAOStudent extends AbstractController<Student,Integer> {
     }
 
     public ArrayList<Student> getAllByGroupID(int groupID){
-        String Select_All_Students_Statemet = "SELECT * FROM student WHERE departmentID="+ groupID +";";
+        String Select_All_Students_Statemet = "SELECT * FROM student WHERE groupID="+ groupID +";";
         ArrayList<Student> studentList = new ArrayList<>();
         PreparedStatement ps = getPrepareStatement(Select_All_Students_Statemet);
         ResultSet rs = null;
@@ -128,8 +128,12 @@ public class DAOStudent extends AbstractController<Student,Integer> {
 
     @Override
     public boolean delete(Integer id) {
+        DAOStudentProgress daop = new DAOStudentProgress();
+        DAOStudentAttendance daoa = new DAOStudentAttendance();
         String Delete_Student_Statement = "DELETE FROM student WHERE ID=" + id + ";";
         PreparedStatement ps = getPrepareStatement(Delete_Student_Statement);
+        daoa.delete(id);
+        daop.delete(id);
         try {
             ps.executeUpdate();
             return true;
