@@ -79,7 +79,7 @@ public class DAOStudent extends AbstractController<Student,Integer> {
     }
 
     public boolean updateStudentLocation(int groupID, int studentID) {
-        String Update_Student_Statemet = "UPDATE student SET departmentID='" + groupID + "' WHERE ID=" + studentID + ";";
+        String Update_Student_Statemet = "UPDATE student SET groupID='" + groupID + "' WHERE ID=" + studentID + ";";
         PreparedStatement ps = getPrepareStatement(Update_Student_Statemet);
         try {
             ps.executeUpdate();

@@ -223,7 +223,7 @@
 
 <div>
     <form action="UpdateStudentPageController" method="post">
-        <input type="hidden"  name="fillForm" value="cancel">
+        <input type="hidden"  name="step" value="cancel">
         <td colspan=2>
             <button onclick="submit"  class="controlButton controlButtonEmployeePage">Cancel</button>
         </td>

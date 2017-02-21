@@ -79,8 +79,8 @@ public class UpdateStudentPageController extends HttpServlet {
                 }
                 daos.closeConnection();
                 request.getRequestDispatcher("ActionResultEmployeeMenuPageController").forward(request, response);
-            }else if(request.getParameter("fillForm").equals("cancel")){
-                request.getRequestDispatcher("CreateStudentPageController").forward(request, response);
+            }else if(request.getParameter("step").equals("cancel")){
+                request.getRequestDispatcher("StudentPageController").forward(request, response);
             }else{
                 //error page
             }
