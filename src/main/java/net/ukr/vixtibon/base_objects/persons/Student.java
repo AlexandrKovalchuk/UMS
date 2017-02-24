@@ -2,6 +2,7 @@ package net.ukr.vixtibon.base_objects.persons;
 
 import net.ukr.vixtibon.base_objects.study_process.Discipline;
 import net.ukr.vixtibon.base_objects.study_process.StudentAttendanceObject;
+import net.ukr.vixtibon.base_objects.study_process.StudentProgressObject;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -15,9 +16,9 @@ public class Student extends Person implements Serializable {
     private String indexBook;
     private int index;
     private int groupID;
-    private HashMap<Integer, Discipline> Disciplines;
+    private HashMap<Integer, Discipline> Disciplines = new HashMap<>();
     private HashMap<Integer, StudentAttendanceObject> Attendance;
-    private HashMap<Integer, StudentAttendanceObject> Progress;
+    private HashMap<Integer, StudentProgressObject> Progress;
 
     public Student() {
     }
@@ -30,7 +31,7 @@ public class Student extends Person implements Serializable {
         Attendance = attendance;
     }
 
-    public void setProgress(HashMap<Integer, StudentAttendanceObject> progress) {
+    public void setProgress(HashMap<Integer, StudentProgressObject> progress) {
         Progress = progress;
     }
 
@@ -42,7 +43,7 @@ public class Student extends Person implements Serializable {
         return Attendance;
     }
 
-    public HashMap<Integer, StudentAttendanceObject> getProgress() {
+    public HashMap<Integer, StudentProgressObject> getProgress() {
         return Progress;
     }
 
