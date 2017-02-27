@@ -81,6 +81,16 @@
         <br />
 
         <div>
+            <form action="EmployeeMenuPageController" method="post">
+                <input type="hidden"  name="elementType" value="dayRequirements">
+                <td colspan=2>
+                    <button onclick="submit"  class="topicButton topicButtonEmployeePage"><h2>Set Day Requirements</h2></button>
+                </td>
+            </form>
+        </div>
+        <br />
+
+        <div>
             <form action="LogOutServlet" method="post">
                 <td colspan=2>
                     <button onclick="submit"  class="controlButton controlButtonEmployeePage">Log Out</button>

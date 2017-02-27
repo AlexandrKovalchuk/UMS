@@ -74,23 +74,17 @@ public class DAODiscipline  extends AbstractController<Discipline,Integer> {
 
     @Override
     public Discipline getEntityById(Integer id) {
-        System.out.println("Integer id: " + id);
         String Select_Discipline_Statemet = "SELECT * FROM discipline WHERE ID='"+ id +"';";
         Discipline discipline = new Discipline();
         PreparedStatement ps = getPrepareStatement(Select_Discipline_Statemet);
-        System.out.println("Statemet: " + Select_Discipline_Statemet);
         ResultSet rs = null;
         try {
             rs = ps.executeQuery();
             while (rs.next()) {
                 discipline.setID(rs.getInt(1));
                 discipline.setNameOfDiscipline(rs.getString(2));
-                //discipline.setCourseNumber(rs.getInt(3));
-               // discipline.setSemesterNumber(rs.getInt(4));
                 discipline.setCountOfLessons(rs.getInt(3));
-                //discipline.setCountOfPractice(rs.getInt(6));
                 discipline.setExam(rs.getString(4));
-                //discipline.setDepartmentID(rs.getInt(8));
             }
         } catch (SQLException e) {
             e.printStackTrace();

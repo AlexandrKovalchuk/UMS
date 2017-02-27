@@ -22,6 +22,8 @@ public class EmployeeMenuPageController extends HttpServlet {
                 request.getRequestDispatcher("StudentPageController").forward(request, response);
             } else if (request.getParameter("elementType").equals("timetable")) {
                 request.getRequestDispatcher("TimetablePageController").forward(request, response);
+            } else if (request.getParameter("elementType").equals("dayRequirements")) {
+                request.getRequestDispatcher("DayRequirementsPageController").forward(request, response);
             } else {
                 //error page
             }

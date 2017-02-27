@@ -13,13 +13,11 @@ public class TimetablePageController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if(request.getParameterMap().containsKey("operationType")){
             if(request.getParameter("operationType").equals("create")){
-                request.getRequestDispatcher("CreateTimetablePageController").forward(request, response);
+                request.getRequestDispatcher("SetTimetablePageController").forward(request, response);
             }else if(request.getParameter("operationType").equals("update")){
                 request.getRequestDispatcher("UpdateTimetablePageController").forward(request, response);
             }else if(request.getParameter("operationType").equals("delete")){
                 request.getRequestDispatcher("DeleteTimetablePageController").forward(request, response);
-            }else if(request.getParameter("operationType").equals("move")){
-                request.getRequestDispatcher("MoveTimetablePageController").forward(request, response);
             }else if(request.getParameter("operationType").equals("showInfo")){
                 request.getRequestDispatcher("ShowInfoTimetablePageController").forward(request, response);
             }else if(request.getParameter("operationType").equals("cancel")){

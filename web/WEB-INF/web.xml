@@ -543,6 +543,26 @@
     </servlet-mapping>
 
     <servlet>
+        <servlet-name>SetTimetablePageController</servlet-name>
+        <servlet-class>net.ukr.vixtibon.servlets.controllers.study_process.timetable.SetTimetablePageController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>SetTimetablePageController</servlet-name>
+        <url-pattern>/SetTimetablePageController</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>DayRequirementsPageController</servlet-name>
+        <servlet-class>net.ukr.vixtibon.servlets.controllers.study_process.dayRequirements.DayRequirementsPageController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>DayRequirementsPageController</servlet-name>
+        <url-pattern>/DayRequirementsPageController</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>ActionResultPageController</servlet-name>
         <servlet-class>net.ukr.vixtibon.servlets.controllers.ActionResultPageController</servlet-class>
     </servlet>
