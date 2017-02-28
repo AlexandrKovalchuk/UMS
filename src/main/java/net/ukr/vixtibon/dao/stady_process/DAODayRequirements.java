@@ -1,7 +1,6 @@
 package net.ukr.vixtibon.dao.stady_process;
 
 import net.ukr.vixtibon.base_objects.study_process.DayRequirementsObject;
-import net.ukr.vixtibon.base_objects.study_process.Discipline;
 import net.ukr.vixtibon.dao.AbstractController;
 
 import java.sql.PreparedStatement;
@@ -124,10 +123,10 @@ public class DAODayRequirements  extends AbstractController<DayRequirementsObjec
 
     @Override
     public boolean create(DayRequirementsObject entity) throws SQLException {
-        String Create_Discipline_Statemet = "INSERT INTO dayRequirements (id,departmentID,countOfDaysInWeek,countOfLessonsInADay) " +
+        String Create_DayRequirements_Statemet = "INSERT INTO dayRequirements (id,departmentID,countOfDaysInWeek,countOfLessonsInADay) " +
                 "VALUES ('" + findFreeID("dayRequirements") + "','" + entity.getDepartmentID()  + "','" + entity.getCountOfDaysInWeek() +
                 "','" +entity.getCountOfLessonsInADay()+ "');";
-        PreparedStatement ps = getPrepareStatement(Create_Discipline_Statemet);
+        PreparedStatement ps = getPrepareStatement(Create_DayRequirements_Statemet);
         try {
             ps.executeUpdate();
             return true;

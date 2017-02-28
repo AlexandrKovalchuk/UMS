@@ -22,7 +22,7 @@ public class ActionResultEmployeeMenuPageController extends HttpServlet {
                 request.getRequestDispatcher("StudentPageController").forward(request, response);
             }else if (request.getParameter("redirectTo").equals("timetable")){
                 request.getRequestDispatcher("TimetablePageController").forward(request, response);
-            }else if (request.getParameter("redirectTo").equals("dayRequirements")){
+            }else if (request.getParameter("redirectTo").equals("dayRequirements")) {
                 request.getRequestDispatcher("EmployeeMenuPageController").forward(request, response);
             }else {
                 //error page

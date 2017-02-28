@@ -24,7 +24,7 @@ public class Day implements Serializable {
         this.dayNumber = dayNumber;
         this.date = date;
         this.maxCountOfLessons = maxCountOfLessons;
-        fillDay();
+        //fillDay();
 
     }
 
@@ -75,12 +75,15 @@ public class Day implements Serializable {
     public int getEveningLessons() {
         return eveningLessons;
     }
+    /*
     public void fillDay(){
         for(int i = 0; i < maxCountOfLessons ; i++){
             int index = i + 1;
             Lessons.add(new Lesson(index));
         }
     }
+
+
 
     public boolean lessonTimeIsFree(int number){
         if(Lessons.get(number-1).getDiscipline() == null){
@@ -114,6 +117,7 @@ public class Day implements Serializable {
             }
         }
     }
+
     public ArrayList<Lesson> getFreeLessons(){
         ArrayList<Lesson> FreeLessons = new ArrayList<Lesson>();
         for(int i = 0; i < Lessons.size() ; i++){
@@ -123,6 +127,7 @@ public class Day implements Serializable {
         }
         return FreeLessons;
     }
+    */
 
     public void showDay(){
         System. out .println(" showDay ");
@@ -145,7 +150,7 @@ public class Day implements Serializable {
             System. out .println(" субота ");
         }
             for(Lesson l: Lessons){
-            l.showLesson();
+            //l.showLesson();
         }
 
     }
