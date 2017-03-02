@@ -44,7 +44,7 @@ public class DAODisciplineDepartmentDependency extends AbstractController<Discip
 
     public ArrayList<DisciplineDepartmentDependencyObject> getAllByDisciplineIDDepartmentID(int disciplineID, int departmentID){
         String Select_All_Discipline_Statemet = "SELECT * FROM disciplineDepartmentDependency WHERE disciplineID="+ disciplineID +" and departmentID="+ departmentID +";";
-        ArrayList<DisciplineDepartmentDependencyObject> dddos = new ArrayList<>();
+        ArrayList<DisciplineDepartmentDependencyObject> dddos = new ArrayList<DisciplineDepartmentDependencyObject>();
         PreparedStatement ps = getPrepareStatement(Select_All_Discipline_Statemet);
         ResultSet rs = null;
         try {

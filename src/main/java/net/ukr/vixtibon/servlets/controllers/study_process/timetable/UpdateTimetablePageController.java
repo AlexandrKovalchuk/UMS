@@ -19,9 +19,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
- * Created by alex on 24/02/2017.
+ * Created by alex on 28/02/2017.
  */
-public class SetTimetablePageController  extends HttpServlet {
+public class UpdateTimetablePageController  extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session=request.getSession();
         if(request.getParameterMap().containsKey("step")){
@@ -146,13 +146,67 @@ public class SetTimetablePageController  extends HttpServlet {
             DAOLesson daoLesson = new DAOLesson();
 
             if(daoLesson.getCountByDepartmentID((int) session.getAttribute("departmentID"))>0){
+                DAODayRequirements daoDayRequirements = new DAODayRequirements();
+                DAOGroup daoGroup = new DAOGroup();
+
+                DayRequirementsObject dayRequirementsObject = new DayRequirementsObject();
+
+                dayRequirementsObject = daoDayRequirements.getEntityByDepartmentID((int) session.getAttribute("departmentID"));
+
+                ArrayList<ArrayList<ArrayList<Lesson>>> week = new ArrayList<>();
+                ArrayList<String> dayNames = new ArrayList<>();
+                ArrayList<String> lessonsTime = new ArrayList<>();
+                ArrayList<ArrayList<Group>> groupNamesByCourse = new ArrayList<>();
+                ArrayList<String> courseNumbers = new ArrayList<>();
+
+                for(int i = 0; i < dayRequirementsObject.getCountOfDaysInWeek(); i++){
+                    ArrayList<ArrayList<Lesson>> day = new ArrayList<>();
+                    for(int j = 0; j < dayRequirementsObject.getCountOfLessonsInADay(); j++){
+                        ArrayList<Lesson> lessons = new ArrayList<>();
+                        lessons = daoLesson.getAllByDepartmentDayNumber((int) session.getAttribute("departmentID"),i,j);
+                        day.add(lessons);
+                    }
+                    week.add(day);
+                }
+
+                // initialize courseNumbers array
+                for(int i = 1; i < 7 ; i++){
+                    courseNumbers.add("Course #" + i);
+                }
+
+                // initialize dayNames array
+                dayNames.add("Monday");
+                dayNames.add("Tuesday");
+                dayNames.add("Wednesday");
+                dayNames.add("Thursday");
+                dayNames.add("Friday");
+                dayNames.add("Saturday");
+                dayNames.add("Sunday");
+
+                // initialize lessonsTime array
+                lessonsTime = dayRequirementsObject.getLessonsTime();
+
+                // initialize groupNamesByCourse array
+
+                for(int i = 1; i < 7; i++){
+                    ArrayList<Group> groups = daoGroup.getAllByDepartmentID((int) session.getAttribute("departmentID"),i);
+                    groupNamesByCourse.add(groups);
+                }
+
+                daoGroup.closeConnection();
+                daoDayRequirements.closeConnection();
+                System.out.println("week.size()" + week.size());
+                request.setAttribute("week", week);
+                request.setAttribute("dayNames", dayNames);
+                request.setAttribute("lessonsTime",lessonsTime);
+                request.setAttribute("groupNamesByCourse",groupNamesByCourse);
                 request.setAttribute("timetablePresent", "yes");
             }else{
                 request.setAttribute("timetablePresent", "no");
             }
             request.setAttribute("step", "step0");
             daoLesson.closeConnection();
-            request.getRequestDispatcher("Employee/Timetable/Operations/SetTimetablePage.jsp").forward(request, response);
+            request.getRequestDispatcher("Employee/Timetable/Operations/ViewTimetablePage.jsp").forward(request, response);
         }
     }
 }

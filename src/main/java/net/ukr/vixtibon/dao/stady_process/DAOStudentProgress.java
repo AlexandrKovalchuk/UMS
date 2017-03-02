@@ -23,7 +23,7 @@ public class DAOStudentProgress  extends AbstractController<StudentProgressObjec
     public HashMap<Integer, StudentProgressObject> getAllByStudentID(int studentID){
         System.out.println("DAOStudentProgress getAllByStudentID");
         String Select_getAllByStudentID_Statemet = "SELECT * FROM progress WHERE studentID="+ studentID +";";
-        HashMap<Integer, StudentProgressObject> spoList = new HashMap<>();
+        HashMap<Integer, StudentProgressObject> spoList = new HashMap<Integer, StudentProgressObject>();
         PreparedStatement ps = getPrepareStatement(Select_getAllByStudentID_Statemet);
         ResultSet rs = null;
         try {

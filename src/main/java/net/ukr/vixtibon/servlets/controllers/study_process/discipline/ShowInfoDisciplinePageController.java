@@ -35,8 +35,8 @@ public class ShowInfoDisciplinePageController  extends HttpServlet {
 
                 Discipline discipline = daodi.getEntityById(Integer.parseInt(request.getParameter("disciplineID")));
 
-                ArrayList<Teacher> teachersDependency = new ArrayList<>();
-                ArrayList<Department> departmentsDependency = new ArrayList<>();
+                ArrayList<Teacher> teachersDependency = new ArrayList<Teacher>();
+                ArrayList<Department> departmentsDependency = new ArrayList<Department>();
 
                 for(DisciplineDepartmentDependencyObject dddo : daoddd.getAllByDepartmentID(discipline.getID())){
                     departmentsDependency.add(daod.getEntityById(dddo.getDepartmentID()));
@@ -66,11 +66,11 @@ public class ShowInfoDisciplinePageController  extends HttpServlet {
             DAODiscipline daodi = new DAODiscipline();
             DAODisciplineDepartmentDependency daoddd = new DAODisciplineDepartmentDependency();
 
-            ArrayList<DisciplineDepartmentDependencyObject> dddos = new ArrayList<>();
+            ArrayList<DisciplineDepartmentDependencyObject> dddos = new ArrayList<DisciplineDepartmentDependencyObject>();
             dddos = daoddd.getAllByDepartmentID((int) session.getAttribute("departmentID"));
 
-            ArrayList<Discipline> disciplinesConnectedWithDepartment = new ArrayList<>();
-            ArrayList<Discipline> disciplinesNotConnectedWithDepartment = new ArrayList<>();
+            ArrayList<Discipline> disciplinesConnectedWithDepartment = new ArrayList<Discipline>();
+            ArrayList<Discipline> disciplinesNotConnectedWithDepartment = new ArrayList<Discipline>();
 
             for(DisciplineDepartmentDependencyObject dddo: dddos){
                 disciplinesConnectedWithDepartment.add(daodi.getEntityById(dddo.getDisciplineID()));

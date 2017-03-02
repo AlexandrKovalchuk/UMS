@@ -40,7 +40,7 @@ public class UpdateTeacherPageController extends HttpServlet {
                     teacher.getDisciplines().add(daodi.getEntityById(dtdo.getDisciplineID()));
                 }
 
-                ArrayList<Discipline> disciplines = new ArrayList<>();
+                ArrayList<Discipline> disciplines = new ArrayList<Discipline>();
                 ArrayList<Discipline> disciplinesNotConnected = daodi.getAll();
 
                 DAODisciplineDepartmentDependency daoddd = new DAODisciplineDepartmentDependency();

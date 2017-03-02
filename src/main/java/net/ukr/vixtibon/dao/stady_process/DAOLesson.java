@@ -1,11 +1,14 @@
 package net.ukr.vixtibon.dao.stady_process;
 
+import net.ukr.vixtibon.base_objects.study_process.Discipline;
 import net.ukr.vixtibon.base_objects.study_process.Lesson;
 import net.ukr.vixtibon.dao.AbstractController;
+import net.ukr.vixtibon.dao.persons.DAOTeacher;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -25,6 +28,37 @@ public class DAOLesson extends AbstractController<Lesson,Integer> {
     @Override
     public Lesson getEntityById(Integer id) {
         return null;
+    }
+
+    public ArrayList<Lesson> getAllByDepartmentDayNumber(int departmentID, int dayNumber, int lessonNumber){
+        String Select_getAllByDepartmentDayNumber_Statemet = "SELECT * FROM timetable;";
+        ArrayList<Lesson> lessons = new ArrayList<Lesson>();
+        PreparedStatement ps = getPrepareStatement(Select_getAllByDepartmentDayNumber_Statemet);
+        ResultSet rs = null;
+        DAODiscipline daoDiscipline = new DAODiscipline();
+        DAOTeacher daoTeacher = new DAOTeacher();
+        try {
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Lesson lesson = new Lesson();
+                lesson.setID(rs.getInt(1));
+                lesson.setDayNumber(rs.getInt(2));
+                lesson.setLessonNumberInDay(rs.getInt(3));
+                lesson.setGroupID(rs.getInt(4));
+                lesson.setDiscipline(daoDiscipline.getEntityById(rs.getInt(5)));
+                lesson.setDepartmentID(rs.getInt(6));
+                lesson.setTeacher(daoTeacher.getEntityById(rs.getInt(7)));
+                lessons.add(lesson);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) try { rs.close(); } catch (SQLException logOrIgnore) {}
+            if (ps != null) try { ps.close(); } catch (SQLException logOrIgnore) {}
+        }
+        daoDiscipline.closeConnection();
+        daoTeacher.closeConnection();
+        return lessons;
     }
     public int getCountByDepartmentID(int departmentID){
         int count = 0;

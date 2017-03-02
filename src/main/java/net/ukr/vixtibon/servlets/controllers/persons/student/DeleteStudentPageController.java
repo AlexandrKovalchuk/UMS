@@ -24,7 +24,7 @@ public class DeleteStudentPageController extends HttpServlet {
             if(request.getParameter("step").equals("step1")){
                 request.setAttribute("groupID", request.getParameter("groupID"));
                 DAOStudent daos = new DAOStudent();
-                ArrayList<Student> students = new ArrayList<>();
+                ArrayList<Student> students = new ArrayList<Student>();
                 students = daos.getAllByGroupID(Integer.parseInt(request.getParameter("groupID")));
                 request.setAttribute("students", students);
                 request.setAttribute("selected", "yes");

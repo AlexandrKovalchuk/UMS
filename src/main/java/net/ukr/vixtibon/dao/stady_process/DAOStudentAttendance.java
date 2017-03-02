@@ -25,7 +25,7 @@ public class DAOStudentAttendance  extends AbstractController<StudentAttendanceO
     public HashMap<Integer, StudentAttendanceObject> getAllByStudentID(int studentID){
         System.out.println("DAOStudentAttendance getAllByStudentID");
         String Select_getAllByStudentID_Statemet = "SELECT * FROM attendance WHERE studentID="+ studentID +";";
-        HashMap<Integer, StudentAttendanceObject> saoList = new HashMap<>();
+        HashMap<Integer, StudentAttendanceObject> saoList = new HashMap<Integer, StudentAttendanceObject>();
         PreparedStatement ps = getPrepareStatement(Select_getAllByStudentID_Statemet);
         ResultSet rs = null;
         try {

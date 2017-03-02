@@ -1,4 +1,3 @@
-<%@ page import="servlets.SessionsList" %>
 <%--
   Created by IntelliJ IDEA.
   User: alex

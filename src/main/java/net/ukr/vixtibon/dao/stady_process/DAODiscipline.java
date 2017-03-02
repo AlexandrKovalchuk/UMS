@@ -15,7 +15,7 @@ public class DAODiscipline  extends AbstractController<Discipline,Integer> {
     @Override
     public ArrayList<Discipline> getAll() {
         String Select_Disciplines_Statemet = "SELECT * FROM discipline;";
-        ArrayList<Discipline> disciplines = new ArrayList<>();
+        ArrayList<Discipline> disciplines = new ArrayList<Discipline>();
         PreparedStatement ps = getPrepareStatement(Select_Disciplines_Statemet);
         ResultSet rs = null;
         try {
@@ -24,12 +24,8 @@ public class DAODiscipline  extends AbstractController<Discipline,Integer> {
                 Discipline discipline = new Discipline();
                 discipline.setID(rs.getInt(1));
                 discipline.setNameOfDiscipline(rs.getString(2));
-                //discipline.setCourseNumber(rs.getInt(3));
-                // discipline.setSemesterNumber(rs.getInt(4));
                 discipline.setCountOfLessons(rs.getInt(3));
-                //discipline.setCountOfPractice(rs.getInt(6));
                 discipline.setExam(rs.getString(4));
-                //discipline.setDepartmentID(rs.getInt(8));
                 disciplines.add(discipline);
             }
         } catch (SQLException e) {
