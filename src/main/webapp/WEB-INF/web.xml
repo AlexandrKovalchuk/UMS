@@ -43,6 +43,16 @@
     </servlet-mapping>
 
     <servlet>
+        <servlet-name>MainInfoPageController</servlet-name>
+        <servlet-class>net.ukr.vixtibon.servlets.controllers.depatments.special_admin_options.MainInfoPageController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>MainInfoPageController</servlet-name>
+        <url-pattern>/MainInfoPageController</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>GenerateBaseDateController</servlet-name>
         <servlet-class>net.ukr.vixtibon.servlets.controllers.depatments.special_admin_options.GenerateBaseDateController</servlet-class>
     </servlet>
