@@ -1,5 +1,6 @@
 package net.ukr.vixtibon.dao.stady_process;
 
+import net.ukr.vixtibon.QueryStack;
 import net.ukr.vixtibon.base_objects.study_process.Group;
 import net.ukr.vixtibon.dao.AbstractController;
 
@@ -99,11 +100,11 @@ public class DAOGroup  extends AbstractController<Group,Integer> {
 
     @Override
     public Group getEntityById(Integer id) {
-        System.out.println("Integer id: " + id);
+        //System.out.println("Integer id: " + id);
         String Select_Group_Statemet = "SELECT * FROM gtgroup WHERE ID='"+ id +"';";
         Group group = new Group();
         PreparedStatement ps = getPrepareStatement(Select_Group_Statemet);
-        System.out.println("Statemet: " + Select_Group_Statemet);
+        //System.out.println("Statemet: " + Select_Group_Statemet);
         ResultSet rs = null;
         try {
             rs = ps.executeQuery();
@@ -142,6 +143,8 @@ public class DAOGroup  extends AbstractController<Group,Integer> {
         String Create_Group_Statemet = "INSERT INTO gtgroup (id,fullGroupName,courseNumber,departmentID) " +
                 "VALUES ('" + findFreeID("gtgroup") + "','" + entity.getFullGroupName() + "','" + entity.getCourseNumber() + "','"
                  + entity.getDepartmentID() + "');";
+        QueryStack qs = new QueryStack();
+        qs.queries.add(Create_Group_Statemet);
         PreparedStatement ps = getPrepareStatement(Create_Group_Statemet);
         try {
             ps.executeUpdate();

@@ -1,5 +1,6 @@
 package net.ukr.vixtibon.dao.departments;
 
+import net.ukr.vixtibon.QueryStack;
 import net.ukr.vixtibon.base_objects.departments.Institute;
 import net.ukr.vixtibon.dao.AbstractController;
 
@@ -95,6 +96,8 @@ public class DAOInstitute  extends AbstractController<Institute,Integer> {
     @Override
     public boolean create(Institute entity) {
         String Create_Institute_Statemet = "INSERT INTO institute (ID,longName,shortName) VALUES ('"+findFreeID("institute")+"','"+entity.getLongName() + "','" + entity.getShortName()+"');";
+        //QueryStack qs = new QueryStack();
+        //qs.queries.add(Create_Institute_Statemet);
         PreparedStatement ps = getPrepareStatement(Create_Institute_Statemet);
         try {
             ps.executeUpdate();

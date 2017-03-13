@@ -49,7 +49,7 @@
                 <tr>
                     <td class = "textLabel textLabelLogInPage">Password:</td>
                     <td>
-                        <input class = "inputSettings inputLogInPage" name="password" type="text" maxlength="20"
+                        <input class = "inputSettings inputLogInPage" name="password" type="password" maxlength="20"
                                placeholder="" autocomplete="off" data-hint="insert password" required/>
                     </td>
                 </tr>

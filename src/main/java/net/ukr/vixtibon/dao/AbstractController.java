@@ -3,18 +3,22 @@ package net.ukr.vixtibon.dao;
 /**
  * Created by alex on 15/11/2016.
  */
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Properties;
 
 public abstract class AbstractController<E, K> {
     private Connection connection;
     private ConnectionPool connectionPool;
 
     public AbstractController() {
-        connectionPool = new ConnectionPool("jdbc:mysql://localhost/institute?user=javatest&password=testpass","com.mysql.jdbc.Driver",1);
+        connectionPool = new ConnectionPool(setConnectionParameters(),"com.mysql.jdbc.Driver",1);
         connection = connectionPool.getConnection();
     }
 
@@ -26,6 +30,36 @@ public abstract class AbstractController<E, K> {
 
     public void returnConnectionInPool() {
         connectionPool.putback(connection);
+    }
+
+    private String setConnectionParameters(){
+        String connectionParameters = "";
+        String baseLocation = "";
+        String user = "";
+        String password = "";
+        Properties properties = new Properties();
+        ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+        InputStream input = null;
+        try{
+            input = classLoader.getResourceAsStream("config.properties");
+            input.toString();
+            properties.load(input);
+            baseLocation = properties.getProperty("baseLocation");
+            user = properties.getProperty("user");
+            password = properties.getProperty("password");
+        }catch (IOException ex){
+            ex.printStackTrace();
+        }finally {
+            if(input != null){
+                try{
+                    input.close();
+                }catch (IOException e){
+                    e.printStackTrace();
+                }
+            }
+        }
+        connectionParameters = connectionParameters + baseLocation + "?user=" + user + "&password=" + password;
+        return connectionParameters;
     }
 
     public void closeConnection(){
@@ -49,29 +83,16 @@ public abstract class AbstractController<E, K> {
     }
 
     public int findFreeID(String tableName){
-        int ID = 1;
-        int previous = 0;
-        boolean flag = false;
-        String FIND_FREE_ID_IN_TABLE_Statemet = "SELECT  ID FROM "+tableName +";";
+        int ID = 0;
+        String FIND_FREE_ID_IN_TABLE_Statemet = "SELECT t1.id+1 AS Missing FROM "+tableName +" AS t1 LEFT JOIN "+tableName +" AS t2 ON t1.id+1 = t2.id WHERE t2.id IS NULL ORDER BY t1.id LIMIT 1;";
         PreparedStatement ps = getPrepareStatement(FIND_FREE_ID_IN_TABLE_Statemet);
         try {
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
-                if((rs.getInt("ID")-previous)>1){
-                    ID = previous + 1;
-                    flag = true;
-                    break;
-                }else{
-                    previous = rs.getInt("ID");
-                    flag = false;
-                    continue;
-                }
-            }
-            if(!flag) {
-                ID = previous + 1;
+                ID = rs.getInt(1);
             }
             rs.close();
-            System.out.println("findFreeID ID : " + ID);
+            //System.out.println("findFreeID ID : " + ID);
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {

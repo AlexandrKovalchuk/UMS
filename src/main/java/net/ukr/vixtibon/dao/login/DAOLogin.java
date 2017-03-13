@@ -1,5 +1,6 @@
 package net.ukr.vixtibon.dao.login;
 
+import net.ukr.vixtibon.QueryStack;
 import net.ukr.vixtibon.dao.AbstractController;
 import net.ukr.vixtibon.login_body.LogInBody;
 
@@ -55,6 +56,8 @@ public class DAOLogin extends AbstractController<LogInBody,Integer> {
     @Override
     public boolean create(LogInBody entity) {
         String Create_Login_loginpass_Statemet = "INSERT INTO loginpass (ID,login,password,access_type) VALUES ('"+findFreeID("loginpass")+"','"+entity.getLogIn()+"','"+entity.getPassword()+"','"+entity.getAccess()+"');";
+        QueryStack qs = new QueryStack();
+        qs.queries.add(Create_Login_loginpass_Statemet);
         PreparedStatement ps = getPrepareStatement(Create_Login_loginpass_Statemet);
         try {
             ps.executeUpdate();
@@ -106,6 +109,8 @@ public class DAOLogin extends AbstractController<LogInBody,Integer> {
 
     public  boolean createAdmin(){
         String Create_Login_loginpass_Statemet = "INSERT INTO loginpass (id,login,password,access_type) VALUES ('0','a','a','admin');";
+        QueryStack qs = new QueryStack();
+        qs.queries.add(Create_Login_loginpass_Statemet);
         PreparedStatement ps = getPrepareStatement(Create_Login_loginpass_Statemet);
         try {
             ps.executeUpdate();

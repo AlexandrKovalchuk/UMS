@@ -1,5 +1,6 @@
 package net.ukr.vixtibon.dao.stady_process;
 
+import net.ukr.vixtibon.QueryStack;
 import net.ukr.vixtibon.base_objects.study_process.DisciplineTeacherDependencyObject;
 import net.ukr.vixtibon.dao.AbstractController;
 
@@ -114,6 +115,8 @@ public class DAODisciplineTeacherDependencyObject  extends AbstractController<Di
     public boolean create(DisciplineTeacherDependencyObject entity) throws SQLException {
         String Create_Discipline_Teacher_Dependency_Statemet = "INSERT INTO disciplineTeacherDependency (ID,disciplineID,teacherID) " +
                 "VALUES ('"+findFreeID("disciplineTeacherDependency")+"','"+entity.getDisciplineID() + "','" + entity.getTeacherID()+"');";
+        QueryStack qs = new QueryStack();
+        qs.queries.add(Create_Discipline_Teacher_Dependency_Statemet);
         PreparedStatement ps = getPrepareStatement(Create_Discipline_Teacher_Dependency_Statemet);
         try {
             ps.executeUpdate();

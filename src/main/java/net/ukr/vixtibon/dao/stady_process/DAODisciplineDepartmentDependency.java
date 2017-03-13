@@ -1,5 +1,6 @@
 package net.ukr.vixtibon.dao.stady_process;
 
+import net.ukr.vixtibon.QueryStack;
 import net.ukr.vixtibon.base_objects.study_process.DisciplineDepartmentDependencyObject;
 import net.ukr.vixtibon.dao.AbstractController;
 
@@ -180,6 +181,8 @@ public class DAODisciplineDepartmentDependency extends AbstractController<Discip
                 "(ID,disciplineID,departmentID,courseNumber,semesterNumber) " +
                 "VALUES ('"+findFreeID("disciplineDepartmentDependency")+"','"+entity.getDisciplineID() + "','" + entity.getDepartmentID()+"','" +
                  + entity.getCourseNumber()+"','" + entity.getSemesterNumber()+"');";
+        QueryStack qs = new QueryStack();
+        qs.queries.add(Create_DisciplineDepartmentDependency_Statemet);
         PreparedStatement ps = getPrepareStatement(Create_DisciplineDepartmentDependency_Statemet);
         try {
             ps.executeUpdate();

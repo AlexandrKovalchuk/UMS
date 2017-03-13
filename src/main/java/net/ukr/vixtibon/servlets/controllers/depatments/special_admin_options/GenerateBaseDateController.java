@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.SQLException;
 
 /**
  * Created by alex on 20/01/2017.
@@ -15,8 +16,12 @@ public class GenerateBaseDateController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Generator generator = new Generator();
                 boolean result = false;
-                result = generator.generateDate();
-                if(result){
+        try {
+            result = generator.generateDate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        if(result){
                     request.setAttribute("result", "success");
                     request.setAttribute("menu", "admin");
                 }else{

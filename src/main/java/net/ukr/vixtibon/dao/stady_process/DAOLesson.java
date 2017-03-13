@@ -1,5 +1,6 @@
 package net.ukr.vixtibon.dao.stady_process;
 
+import net.ukr.vixtibon.QueryStack;
 import net.ukr.vixtibon.base_objects.study_process.Discipline;
 import net.ukr.vixtibon.base_objects.study_process.Lesson;
 import net.ukr.vixtibon.dao.AbstractController;
@@ -45,9 +46,9 @@ public class DAOLesson extends AbstractController<Lesson,Integer> {
                 lesson.setDayNumber(rs.getInt(2));
                 lesson.setLessonNumberInDay(rs.getInt(3));
                 lesson.setGroupID(rs.getInt(4));
-                lesson.setDiscipline(daoDiscipline.getEntityById(rs.getInt(5)));
+                lesson.setDiscipline(daoDiscipline.getEntityByIdNameOnly(rs.getInt(5)));
                 lesson.setDepartmentID(rs.getInt(6));
-                lesson.setTeacher(daoTeacher.getEntityById(rs.getInt(7)));
+                lesson.setTeacher(daoTeacher.getEntityByIdNameAndSurnameOnly(rs.getInt(7)));
                 lessons.add(lesson);
             }
         } catch (SQLException e) {
@@ -103,6 +104,8 @@ public class DAOLesson extends AbstractController<Lesson,Integer> {
         String Create_Lesson_Statemet = "INSERT INTO timetable (id,dayNumber,lessonNumberInDay,departmentID, groupID) " +
                 "VALUES ('" + findFreeID("timetable") + "','" + entity.getDayNumber()  + "','" + entity.getLessonNumberInDay() +
                 "','" +entity.getDepartmentID()+ "','" + entity.getGroupID() +"');";
+        QueryStack qs = new QueryStack();
+        qs.queries.add(Create_Lesson_Statemet);
         PreparedStatement ps = getPrepareStatement(Create_Lesson_Statemet);
         try {
             ps.executeUpdate();

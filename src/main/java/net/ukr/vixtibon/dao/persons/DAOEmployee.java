@@ -1,5 +1,6 @@
 package net.ukr.vixtibon.dao.persons;
 
+import net.ukr.vixtibon.QueryStack;
 import net.ukr.vixtibon.base_objects.persons.Employee;
 import net.ukr.vixtibon.dao.AbstractController;
 
@@ -123,7 +124,7 @@ public class DAOEmployee extends AbstractController<Employee,Integer> {
         String Select_DepartmentID_By_Username = "SELECT departmentID FROM employee WHERE login='" + username + "';";
         int departmentID = 0;
         PreparedStatement ps = getPrepareStatement(Select_DepartmentID_By_Username);
-        System.out.println("Select_DepartmentID_By_Username " + Select_DepartmentID_By_Username);
+        //System.out.println("Select_DepartmentID_By_Username " + Select_DepartmentID_By_Username);
         ResultSet rs = null;
         try {
             rs = ps.executeQuery();
@@ -163,6 +164,8 @@ public class DAOEmployee extends AbstractController<Employee,Integer> {
                  + entity.getPersonalID() + "','" + entity.getSex() + "','" + entity.getEmail() + "','" +entity.getPhoneNumber()
                 + "','" + sqlDate + "','" + entity.getAddress() + "','" + entity.getPasport() + "','" +
                 entity.getLogin() + "','" + entity.getOffice() + "','" + findFreeID("employee") +"','" + entity.getDepartmentID()+"');";
+        QueryStack qs = new QueryStack();
+        qs.queries.add(Create_Employee_Statemet);
         PreparedStatement ps = getPrepareStatement(Create_Employee_Statemet);
         try {
             ps.executeUpdate();

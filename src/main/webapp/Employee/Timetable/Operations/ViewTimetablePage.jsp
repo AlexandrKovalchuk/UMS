@@ -13,7 +13,7 @@
     <link rel="stylesheet" type="text/css" href="main_css\main_styles.css">
 </head>
 
-<body class = "backgroungImageEmployee">
+<body style="background-color:#45250d;">
 
 <div class = "pageTitleText pageTitleTextEmployee">
     View Timetable Page!

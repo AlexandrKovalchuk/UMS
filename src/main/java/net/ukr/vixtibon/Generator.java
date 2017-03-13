@@ -6,13 +6,15 @@ import net.ukr.vixtibon.base_objects.departments.Institute;
 import net.ukr.vixtibon.base_objects.persons.Employee;
 import net.ukr.vixtibon.base_objects.persons.Student;
 import net.ukr.vixtibon.base_objects.persons.Teacher;
-import net.ukr.vixtibon.base_objects.study_process.Discipline;
-import net.ukr.vixtibon.base_objects.study_process.Group;
+import net.ukr.vixtibon.base_objects.study_process.*;
 import net.ukr.vixtibon.dao.departments.DAODepartment;
 import net.ukr.vixtibon.dao.departments.DAOFaculty;
 import net.ukr.vixtibon.dao.departments.DAOInstitute;
 import net.ukr.vixtibon.dao.login.DAOLogin;
 import net.ukr.vixtibon.dao.persons.DAOEmployee;
+import net.ukr.vixtibon.dao.persons.DAOStudent;
+import net.ukr.vixtibon.dao.persons.DAOTeacher;
+import net.ukr.vixtibon.dao.stady_process.*;
 import net.ukr.vixtibon.login_body.LogInBody;
 
 import java.io.*;
@@ -72,12 +74,21 @@ public class Generator {
            // new Date(29,5,2016);//new Date(generateDay(), randomInt(), generateBirthYear(course));
 
 
-    public boolean generateDate(){
+    public boolean generateDate() throws IOException, SQLException {
         DAOInstitute daoInstitute = new DAOInstitute();
         DAOFaculty daoFaculty = new DAOFaculty();
         DAODepartment daoDepartment = new DAODepartment();
         DAOEmployee daoEmployee = new DAOEmployee();
         DAOLogin daoLogin = new DAOLogin();
+        DAOGroup daoGroup = new DAOGroup();
+        DAODayRequirements daoDayRequirements = new DAODayRequirements();
+        DAODiscipline daoDiscipline = new DAODiscipline();
+        DAODisciplineDepartmentDependency daoDisciplineDepartmentDependency = new DAODisciplineDepartmentDependency();
+        DAOTeacher daoTeacher = new DAOTeacher();
+        DAOStudent daoStudent = new DAOStudent();
+        DAOLesson daoLesson = new DAOLesson();
+        DAODisciplineTeacherDependencyObject daoDisciplineTeacherDependencyObject = new DAODisciplineTeacherDependencyObject();
+
         boolean result = true;
         daoInstitute.createNONE();
         daoFaculty.createNONE();
@@ -115,8 +126,85 @@ public class Generator {
             if(d.getID() == 0){
                 continue;
             }else {
+                DayRequirementsObject dayRequirementsObject = new DayRequirementsObject();
+                dayRequirementsObject.setDepartmentID(d.getID());
+                dayRequirementsObject.setCountOfDaysInWeek(6);
+                dayRequirementsObject.setCountOfLessonsInADay(5);
+
+                int dayRequirementID = daoDayRequirements.findFreeID("dayRequirements");
+
+                daoDayRequirements.create(dayRequirementsObject);
+
+                dayRequirementsObject = daoDayRequirements.getEntityByDepartmentID(d.getID());
+
+                dayRequirementsObject.getLessonsTime().set(0,"8:30");
+                dayRequirementsObject.getLessonsTime().set(1,"10:25");
+                dayRequirementsObject.getLessonsTime().set(2,"12:20");
+                dayRequirementsObject.getLessonsTime().set(3,"14:15");
+                dayRequirementsObject.getLessonsTime().set(4,"16:10");
+
+                daoDayRequirements.updateLessonArray(dayRequirementsObject);
+
+                int countOfDisciplines = 30 + rn.nextInt(10);
+                d.setDisciplines(generateDisciplinesList(countOfDisciplines,d));
+                ArrayList<Integer> disciplinesID = new ArrayList<>();
+
+                for(Discipline discipline: d.getDisciplines()){
+                    disciplinesID.add(daoDiscipline.findFreeID("discipline"));
+                    daoDiscipline.create(discipline);
+                }
+
+                ArrayList<Discipline> disciplinesFromBase = new ArrayList<>();
+
+                for(Integer id: disciplinesID){
+                    disciplinesFromBase.add(daoDiscipline.getEntityById(id));
+                }
+                d.setDisciplines(disciplinesFromBase);
+
+                HashMap<Integer, Discipline> disciplinesMap = new HashMap<>();
+
+                for(Discipline discipline:d.getDisciplines()){
+                    disciplinesMap.put(discipline.getID(),discipline);
+                }
+
+                int courseCounter = 1;
+                int semecterCounter = 1;
+
+                for(Discipline discipline:d.getDisciplines()){
+                    DisciplineDepartmentDependencyObject disciplineDepartmentDependencyObject = new DisciplineDepartmentDependencyObject();
+                    disciplineDepartmentDependencyObject.setDisciplineID(discipline.getID());
+                    disciplineDepartmentDependencyObject.setDepartmentID(d.getID());
+                    disciplineDepartmentDependencyObject.setCourseNumber(courseCounter);
+                    disciplineDepartmentDependencyObject.setSemesterNumber(semecterCounter);
+                    daoDisciplineDepartmentDependency.create(disciplineDepartmentDependencyObject);
+                    if(courseCounter == 6){
+                        courseCounter = 0;
+                    }
+                    if(semecterCounter == 2){
+                        semecterCounter = 0;
+                    }
+                    courseCounter++;
+                    semecterCounter++;
+                }
+
+                for(Discipline discipline: d.getDisciplines()){
+                    Teacher teacher = new Teacher();
+                    teacher = generateTeacher(d.getID());
+                    int teacherID = daoTeacher.findFreeID("teacher");
+                    teacher.setID(teacherID);
+                    teacher.getDisciplines().add(discipline);
+                    daoTeacher.create(teacher);
+                    LogInBody lb = new LogInBody();
+                    lb.setAccess("teacher");
+                    lb.setPassword(teacher.generatePassword());
+                    lb.setLogIn(teacher.getLogin());
+                    daoLogin.create(lb);
+
+
+                }
+
                 d.setEmployees(generateEmployeesList(d.getID()));
-                System.out.println("d.getEmployees().size() :" + d.getEmployees().size());
+                //System.out.println("d.getEmployees().size() :" + d.getEmployees().size());
                 for (Employee e : d.getEmployees()) {
                     LogInBody lb = new LogInBody();
                     lb.setAccess("employee");
@@ -129,20 +217,221 @@ public class Generator {
                         e1.printStackTrace();
                     }
                 }
+
+                int groupsCount = 2;
+
+                d.setGroups1(generateGroupsList(d, 1,groupsCount));
+                d.setGroups2(generateGroupsList(d, 2,groupsCount));
+                d.setGroups3(generateGroupsList(d, 3,groupsCount));
+                d.setGroups4(generateGroupsList(d, 4,groupsCount));
+                d.setGroups5(generateGroupsList(d, 5,groupsCount));
+                d.setGroups6(generateGroupsList(d, 6,groupsCount));
+
+                for(Group g: d.getGroups1()){daoGroup.create(g);}
+                for(Group g: d.getGroups2()){daoGroup.create(g);}
+                for(Group g: d.getGroups3()){daoGroup.create(g);}
+                for(Group g: d.getGroups4()){daoGroup.create(g);}
+                for(Group g: d.getGroups5()){daoGroup.create(g);}
+                for(Group g: d.getGroups6()){daoGroup.create(g);}
+
+                d.setGroups1(daoGroup.getAllByDepartmentID(d.getID(),1));
+                d.setGroups2(daoGroup.getAllByDepartmentID(d.getID(),2));
+                d.setGroups3(daoGroup.getAllByDepartmentID(d.getID(),3));
+                d.setGroups4(daoGroup.getAllByDepartmentID(d.getID(),4));
+                d.setGroups5(daoGroup.getAllByDepartmentID(d.getID(),5));
+                d.setGroups6(daoGroup.getAllByDepartmentID(d.getID(),6));
+
+                for(Group group: d.getGroups1()){
+                    group.setStudents(generateStudentList(group));
+                    for(Student student: group.getStudents()){
+                        student.setDisciplines(disciplinesMap);
+                        daoStudent.create(student);
+                        LogInBody lb = new LogInBody();
+                        lb.setAccess("student");
+                        lb.setPassword(student.generatePassword());
+                        lb.setLogIn(student.getLogin());
+                        daoLogin.create(lb);
+                    }
+                }
+                for(Group group: d.getGroups2()){
+                    group.setStudents(generateStudentList(group));
+                    for(Student student: group.getStudents()) {
+                        student.setDisciplines(disciplinesMap);
+                        daoStudent.create(student);
+                        LogInBody lb = new LogInBody();
+                        lb.setAccess("student");
+                        lb.setPassword(student.generatePassword());
+                        lb.setLogIn(student.getLogin());
+                        daoLogin.create(lb);
+                    }
+                }
+                for(Group group: d.getGroups3()){
+                    group.setStudents(generateStudentList(group));
+                    for(Student student: group.getStudents()) {
+                        student.setDisciplines(disciplinesMap);
+                        daoStudent.create(student);
+                        LogInBody lb = new LogInBody();
+                        lb.setAccess("student");
+                        lb.setPassword(student.generatePassword());
+                        lb.setLogIn(student.getLogin());
+                        daoLogin.create(lb);
+                    }
+                }
+                for(Group group: d.getGroups4()){
+                    group.setStudents(generateStudentList(group));
+                    for(Student student: group.getStudents()) {
+                        student.setDisciplines(disciplinesMap);
+                        daoStudent.create(student);
+                        LogInBody lb = new LogInBody();
+                        lb.setAccess("student");
+                        lb.setPassword(student.generatePassword());
+                        lb.setLogIn(student.getLogin());
+                        daoLogin.create(lb);
+                    }
+                }
+                for(Group group: d.getGroups5()){
+                    group.setStudents(generateStudentList(group));
+                    for(Student student: group.getStudents()) {
+                        student.setDisciplines(disciplinesMap);
+                        daoStudent.create(student);
+                        LogInBody lb = new LogInBody();
+                        lb.setAccess("student");
+                        lb.setPassword(student.generatePassword());
+                        lb.setLogIn(student.getLogin());
+                        daoLogin.create(lb);
+                    }
+                }
+                for(Group group: d.getGroups6()){
+                    group.setStudents(generateStudentList(group));
+                    for(Student student: group.getStudents()) {
+                        student.setDisciplines(disciplinesMap);
+                        daoStudent.create(student);
+                        LogInBody lb = new LogInBody();
+                        lb.setAccess("student");
+                        lb.setPassword(student.generatePassword());
+                        lb.setLogIn(student.getLogin());
+                        daoLogin.create(lb);
+                    }
+                }
+
+                for(int i = 1; i < dayRequirementsObject.getCountOfDaysInWeek() + 1; i++){
+                    for(int j = 1; j < dayRequirementsObject.getCountOfLessonsInADay() + 1; j++){
+                        for(Group g: d.getGroups1()){
+                            Lesson lesson = new Lesson();
+                            lesson.setDepartmentID(d.getID());
+                            lesson.setDayNumber(i);
+                            lesson.setLessonNumberInDay(j);
+                            lesson.setGroupID(g.getID());
+                            try {
+                                daoLesson.create(lesson);
+                            } catch (SQLException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                        for(Group g: d.getGroups2()){
+                            Lesson lesson = new Lesson();
+                            lesson.setDepartmentID(d.getID());
+                            lesson.setDayNumber(i);
+                            lesson.setLessonNumberInDay(j);
+                            lesson.setGroupID(g.getID());
+                            try {
+                                daoLesson.create(lesson);
+                            } catch (SQLException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                        for(Group g: d.getGroups3()){
+                            Lesson lesson = new Lesson();
+                            lesson.setDepartmentID(d.getID());
+                            lesson.setDayNumber(i);
+                            lesson.setLessonNumberInDay(j);
+                            lesson.setGroupID(g.getID());
+                            try {
+                                daoLesson.create(lesson);
+                            } catch (SQLException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                        for(Group g: d.getGroups4()){
+                            Lesson lesson = new Lesson();
+                            lesson.setDepartmentID(d.getID());
+                            lesson.setDayNumber(i);
+                            lesson.setLessonNumberInDay(j);
+                            lesson.setGroupID(g.getID());
+                            try {
+                                daoLesson.create(lesson);
+                            } catch (SQLException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                        for(Group g: d.getGroups5()){
+                            Lesson lesson = new Lesson();
+                            lesson.setDepartmentID(d.getID());
+                            lesson.setDayNumber(i);
+                            lesson.setLessonNumberInDay(j);
+                            lesson.setGroupID(g.getID());
+                            try {
+                                daoLesson.create(lesson);
+                            } catch (SQLException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                        for(Group g: d.getGroups6()){
+                            Lesson lesson = new Lesson();
+                            lesson.setDepartmentID(d.getID());
+                            lesson.setDayNumber(i);
+                            lesson.setLessonNumberInDay(j);
+                            lesson.setGroupID(g.getID());
+                            try {
+                                daoLesson.create(lesson);
+                            } catch (SQLException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+                }
+
             }
         }
 
+        daoDisciplineTeacherDependencyObject.closeConnection();
+        daoLesson.closeConnection();
+        daoStudent.closeConnection();
+        daoTeacher.closeConnection();
+        daoDisciplineDepartmentDependency.closeConnection();
+        daoDiscipline.closeConnection();
+        daoDayRequirements.closeConnection();
+        daoGroup.closeConnection();
         daoEmployee.closeConnection();
         daoDepartment.closeConnection();
         daoDepartment.closeConnection();
         daoFaculty.closeConnection();
         daoInstitute.closeConnection();
+
+        File fout = new File("C:\\Users\\alex\\IdeaProjects\\UMS\\UMS\\insert_lines.txt");
+        FileOutputStream fos = new FileOutputStream(fout);
+
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(fos));
+
+        QueryStack qs = new QueryStack();
+        //System.out.println("qs size " + qs.queries.size());
+
+        for (String s: qs.queries) {
+            //System.out.println("s = " + s);
+            bw.write(s);
+            bw.newLine();
+        }
+
+        bw.close();
+
         return result;
     }
+
     public boolean deleteDate(){
         DAOLogin daoLogin = new DAOLogin();
         boolean result = true;
-        String[] tables = {"institute","faculty","department","employee","loginpass"};
+        String[] tables = {"institute","faculty","department","employee","loginpass","gtgroup","discipline","disciplineTeacherDependency"
+        ,"student","teacher","disciplineDepartmentDependency","attendance","progress","dayRequirements","timetable"};
         for(int i=0; i<tables.length; i++){
             result = daoLogin.deleteDate(tables[i]);
             if(tables[i].equals("loginpass")){
@@ -184,6 +473,144 @@ private Institute generateInstitute(String longName, String shortName){
         return department;
     }
 
+    private  ArrayList<Discipline> generateDisciplinesList(int countOfDisciplines,Department department){
+        ArrayList<Discipline> disciplines = new ArrayList<>();
+        for(int i = 0; i < countOfDisciplines; i++){
+            Discipline discipline = new Discipline();
+            discipline.setNameOfDiscipline("Discipline " + department.getShortName() + "-" + i);
+            int flag = rn.nextInt(2);
+            if(flag > 1){
+                discipline.setCountOfLessons(10);
+            }else{
+                discipline.setCountOfLessons(15);
+            }
+            if(flag > 1){
+                discipline.setExam("yes");
+            }else{
+                discipline.setExam("no");
+            }
+            disciplines.add(discipline);
+        }
+        return disciplines;
+    }
+
+    private ArrayList<Group> generateGroupsList(Department department, int course, int groupsCount){
+        ArrayList groups = new ArrayList();
+        for (int i = 0; i < groupsCount; i++){
+            Group group = new Group();
+            group.setFullGroupName(department.getShortName() + "-" + course + "" + i);
+            group.setCourseNumber(course);
+            group.setDepartmentID(department.getID());
+            groups.add(group);
+        }
+        return groups;
+    }
+
+    private ArrayList<Student> generateStudentList(Group group){
+        ArrayList<Student> students = new ArrayList<>();
+        int studentsCount = 6 + rn.nextInt(3);
+
+        for(int i = 0; i < studentsCount; i++){
+            Student student = new Student();
+
+            student.setSex(rn.nextBoolean()?"m":"f");
+            if(student.getSex().equals("m")){
+                student.setName(MaleNames.get(rn.nextInt(MaleNames.size()-1)));
+                student.setlastName(MaleSurnames.get(rn.nextInt(MaleSurnames.size()-1)));
+                student.setfathersName(MaleFathersNames.get(rn.nextInt(MaleFathersNames.size()-1)));
+            }else{
+                student.setName(FemaleNames.get(rn.nextInt(FemaleNames.size()-1)));
+                student.setlastName(FemaleSurnames.get(rn.nextInt(FemaleSurnames.size()-1)));
+                student.setfathersName(FemaleFathersNames.get(rn.nextInt(FemaleFathersNames.size()-1)));
+            }
+            SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
+            int day = rn.nextInt(30)+1;
+            int month = rn.nextInt(11)+1;
+            int year = rn.nextInt(2)+2000 + group.getCourseNumber();
+            if(month == 2){
+                if(day > 28){
+                    day = 28;
+                }
+            }
+            String dateInString = ""+day +"-"+month +"-"+year+" 10:20:56";
+            //System.out.println("dateInString : " + dateInString);
+            Date date = new Date();
+            try {
+                date = sdf.parse(dateInString);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            student.setDateOfBorn(date);
+            student.setPersonalID(generatePersonalID());
+            student.setEmail(generateEmail(student.getName(), student.getSecondName()));
+            student.setPhoneNumber(generatePhoneNumber());
+            student.setAddress(generatePostIndex()+ " " + City.get(rn.nextInt(City.size() - 1)) + " " + Street.get(rn.nextInt(Street.size() - 1))
+                    + " " + rn.nextInt(100)  + ", " + rn.nextInt(300));
+            student.setPasport(generatePasportSeria() + generatePasportNumber() + " " + gumvs.get(rn.nextInt(gumvs.size() - 1)));
+            student.setLogin(student.getEmail());
+            student.setGroupID(group.getID());
+            student.setIndexBook("" + group.getFullGroupName() + "" + (i + 1));
+
+            students.add(student);
+        }
+        return students;
+    }
+
+    private Teacher generateTeacher(int departmentID){
+        String[] level = {"Викладач","Старший викладач"};
+        int levelIndex = rn.nextInt(5);
+        Teacher teacher = new Teacher();
+        teacher.setSex(rn.nextBoolean()?"m":"f");
+        if(teacher.getSex().equals("m")){
+            teacher.setName(MaleNames.get(rn.nextInt(MaleNames.size()-1)));
+            teacher.setlastName(MaleSurnames.get(rn.nextInt(MaleSurnames.size()-1)));
+            teacher.setfathersName(MaleFathersNames.get(rn.nextInt(MaleFathersNames.size()-1)));
+        }else{
+            teacher.setName(FemaleNames.get(rn.nextInt(FemaleNames.size()-1)));
+            teacher.setlastName(FemaleSurnames.get(rn.nextInt(FemaleSurnames.size()-1)));
+            teacher.setfathersName(FemaleFathersNames.get(rn.nextInt(FemaleFathersNames.size()-1)));
+        }
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
+        int day = rn.nextInt(30)+1;
+        int month = rn.nextInt(11)+1;
+        int year = rn.nextInt(39)+1946;
+        if(month == 2){
+            if(day > 28){
+                day = 28;
+            }
+        }
+        String dateInString = ""+day +"-"+month +"-"+year+" 10:20:56";
+        //System.out.println("dateInString : " + dateInString);
+        Date date = new Date();
+        try {
+            date = sdf.parse(dateInString);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        teacher.setDateOfBorn(date);
+        teacher.setPersonalID(generatePersonalID());
+        teacher.setEmail(generateEmail(teacher.getName(), teacher.getSecondName()));
+        teacher.setPhoneNumber(generatePhoneNumber());
+        teacher.setAddress(generatePostIndex()+ " " + City.get(rn.nextInt(City.size() - 1)) + " " + Street.get(rn.nextInt(Street.size() - 1))
+                + " " + rn.nextInt(100)  + ", " + rn.nextInt(300));
+        teacher.setPasport(generatePasportSeria() + generatePasportNumber() + " " + gumvs.get(rn.nextInt(gumvs.size() - 1)));
+        if(levelIndex < 5){
+            teacher.setOffice(level[0]);
+        }else{
+            teacher.setOffice(level[1]);
+        }
+        if((year <= 1985) & (year >= 1975) ){
+            teacher.setLevel("Аспірант");
+        }else if((year < 1975) & (year >= 1967) ){
+            teacher.setLevel("Доцент");
+        }else if((year < 1967) & (year >= 1946) ){
+            teacher.setLevel("Професор");
+        }
+        teacher.setLogin(teacher.getEmail());
+        teacher.setDepartmentID(departmentID);
+        return teacher;
+    }
+
     private Employee generateEmployee(int departmentID){
         Employee employee = new Employee();
         employee.setSex(rn.nextBoolean()?"m":"f");
@@ -206,7 +633,7 @@ private Institute generateInstitute(String longName, String shortName){
             }
         }
         String dateInString = ""+day +"-"+month +"-"+year+" 10:20:56";
-        System.out.println("dateInString : " + dateInString);
+        //System.out.println("dateInString : " + dateInString);
         Date date = new Date();
         try {
             date = sdf.parse(dateInString);
@@ -241,8 +668,8 @@ private Institute generateInstitute(String longName, String shortName){
         ArrayList<Employee> employees = new ArrayList<Employee>();
         int employeesCOUNT = rn.nextInt(4) + 1;
 
-        System.out.println("employeesCOUNT" + employeesCOUNT);
-        System.out.println("departmentID" + departmentID);
+        //System.out.println("employeesCOUNT" + employeesCOUNT);
+        //System.out.println("departmentID" + departmentID);
 
         for(int i = 0; i < employeesCOUNT; i++){
             employees.add(generateEmployee(departmentID));
@@ -266,12 +693,12 @@ private Institute generateInstitute(String longName, String shortName){
 
     private  ArrayList<Department> openDepartments(String facultyShortName, int facultyID){
         ArrayList<Department> departments = new ArrayList<>();
-        System. out .println(facultyShortName + ".txt");
+        //System. out .println(facultyShortName + ".txt");
         try(BufferedReader f =new BufferedReader(new FileReader(facultyShortName + ".txt"))){
 
             String str = "";
             for(;(str = f.readLine())!=null;) {
-                System. out .println(str);
+                //System. out .println(str);
                 String[] parts = str.split(" - ");
                 //System. out .println("openDepartments : " + parts[0] + " " + parts[1] + " " + instID);
                 departments.add(generateDepartment(parts[0], parts[1], facultyID));
@@ -359,7 +786,7 @@ private Institute generateInstitute(String longName, String shortName){
             }
             break;
             default:
-                System.out.println("Error in opening group count");
+                //System.out.println("Error in opening group count");
         }
         return count;
     }
@@ -781,7 +1208,7 @@ return  null;
             }
             personalID = personalID + dig;
         }
-        System.out.println("personalID :" + personalID);
+        //System.out.println("personalID :" + personalID);
         return personalID;
     }
 
@@ -913,7 +1340,7 @@ return  null;
                 }
                 break;
                 default:
-                    System.out.println("Error max value overflow");
+                    //System.out.println("Error max value overflow");
             }
         return  str;
         }

@@ -18,8 +18,6 @@ public class Group implements Serializable {
     private int courseNumber;
     private int departmentID;
 
-
-
     Timetable groupTimeTable = new Timetable();
     ArrayList<Discipline> DisciplineList = new ArrayList<>();
     ArrayList<Student> StudentsList = new ArrayList<Student>();

@@ -1,5 +1,6 @@
 package net.ukr.vixtibon.dao.stady_process;
 
+import net.ukr.vixtibon.QueryStack;
 import net.ukr.vixtibon.base_objects.study_process.DayRequirementsObject;
 import net.ukr.vixtibon.dao.AbstractController;
 
@@ -51,10 +52,12 @@ public class DAODayRequirements  extends AbstractController<DayRequirementsObjec
             }
             count++;
         }
-        System.out.println(array);
+        //System.out.println(array);
         String Update_LessonArray_Statemet = "UPDATE dayRequirements " + array +
                 " WHERE departmentID=" + entity.getDepartmentID() + ";";
-        System.out.println(Update_LessonArray_Statemet);
+        //System.out.println(Update_LessonArray_Statemet);
+        QueryStack qs = new QueryStack();
+        qs.queries.add(Update_LessonArray_Statemet);
         PreparedStatement ps = getPrepareStatement(Update_LessonArray_Statemet);
         try {
             ps.executeUpdate();
@@ -126,6 +129,8 @@ public class DAODayRequirements  extends AbstractController<DayRequirementsObjec
         String Create_DayRequirements_Statemet = "INSERT INTO dayRequirements (id,departmentID,countOfDaysInWeek,countOfLessonsInADay) " +
                 "VALUES ('" + findFreeID("dayRequirements") + "','" + entity.getDepartmentID()  + "','" + entity.getCountOfDaysInWeek() +
                 "','" +entity.getCountOfLessonsInADay()+ "');";
+        QueryStack qs = new QueryStack();
+        qs.queries.add(Create_DayRequirements_Statemet);
         PreparedStatement ps = getPrepareStatement(Create_DayRequirements_Statemet);
         try {
             ps.executeUpdate();

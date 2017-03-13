@@ -1,5 +1,6 @@
 package net.ukr.vixtibon.dao.stady_process;
 
+import net.ukr.vixtibon.QueryStack;
 import net.ukr.vixtibon.base_objects.study_process.Discipline;
 import net.ukr.vixtibon.base_objects.study_process.StudentAttendanceObject;
 import net.ukr.vixtibon.base_objects.study_process.StudentProgressObject;
@@ -100,6 +101,8 @@ public class DAOStudentProgress  extends AbstractController<StudentProgressObjec
     public boolean create(StudentProgressObject entity) throws SQLException {
         String Create_StudentProgressObject_Statemet = "INSERT INTO progress (id,disciplineID, studentID) " +
                 "VALUES ('" + findFreeID("progress") + "','" + entity.getDisciplineID()  + "','" + entity.getStudentID() + "');";
+        QueryStack qs = new QueryStack();
+        qs.queries.add(Create_StudentProgressObject_Statemet);
         PreparedStatement ps = getPrepareStatement(Create_StudentProgressObject_Statemet);
         try {
             ps.executeUpdate();

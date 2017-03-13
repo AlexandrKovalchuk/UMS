@@ -1,5 +1,6 @@
 package net.ukr.vixtibon.dao.persons;
 
+import net.ukr.vixtibon.QueryStack;
 import net.ukr.vixtibon.base_objects.persons.Employee;
 import net.ukr.vixtibon.base_objects.persons.Teacher;
 import net.ukr.vixtibon.base_objects.study_process.Discipline;
@@ -146,6 +147,28 @@ public class DAOTeacher extends AbstractController<Teacher,Integer> {
         return teacher;
     }
 
+    public Teacher getEntityByIdNameAndSurnameOnly(Integer id) {
+        String Select_Teacher_Statemet = "SELECT ID, name, lastName, fathersName FROM teacher WHERE ID='"+ id +"';";
+        Teacher teacher = new Teacher();
+        PreparedStatement ps = getPrepareStatement(Select_Teacher_Statemet);
+        ResultSet rs = null;
+        try {
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                teacher.setID(rs.getInt(1));
+                teacher.setName(rs.getString(2));
+                teacher.setlastName(rs.getString(3));
+                teacher.setfathersName(rs.getString(4));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) try { rs.close(); } catch (SQLException logOrIgnore) {}
+            if (ps != null) try { ps.close(); } catch (SQLException logOrIgnore) {}
+        }
+        return teacher;
+    }
+
     @Override
     public boolean delete(Integer id) {
         String Delete_Teacher_Statement = "DELETE FROM teacher WHERE ID=" + id + ";";
@@ -182,6 +205,8 @@ public class DAOTeacher extends AbstractController<Teacher,Integer> {
                 entity.getLogin() + "','" + entity.getOffice() + "','" + entity.getLevel() + "','" + entityID +"','" + entity.getDepartmentID()+"');";
 
 
+        QueryStack qs = new QueryStack();
+        qs.queries.add(Create_Teacher_Statemet);
         DAODisciplineTeacherDependencyObject ddtdo = new DAODisciplineTeacherDependencyObject();
         for (Discipline d: entity.getDisciplines()){
             DisciplineTeacherDependencyObject dtdo = new DisciplineTeacherDependencyObject();

@@ -1,5 +1,6 @@
 package net.ukr.vixtibon.dao.persons;
 
+import net.ukr.vixtibon.QueryStack;
 import net.ukr.vixtibon.base_objects.persons.Student;
 import net.ukr.vixtibon.base_objects.study_process.Discipline;
 import net.ukr.vixtibon.base_objects.study_process.StudentAttendanceObject;
@@ -154,6 +155,8 @@ public class DAOStudent extends AbstractController<Student,Integer> {
                 + entity.getPersonalID() + "','" + entity.getSex() + "','" + entity.getEmail() + "','" +entity.getPhoneNumber()
                 + "','" + sqlDate + "','" + entity.getAddress() + "','" + entity.getPasport() + "','" +
                 entity.getLogin() + "','" + entity.getIndexBook() + "','" + id +"','" + entity.getGroupID()+"');";
+        QueryStack qs = new QueryStack();
+        qs.queries.add(Create_Student_Statemet);
         PreparedStatement ps = getPrepareStatement(Create_Student_Statemet);
 
         DAOStudentAttendance daosa = new DAOStudentAttendance();

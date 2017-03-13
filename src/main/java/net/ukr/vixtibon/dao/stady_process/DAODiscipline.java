@@ -1,5 +1,6 @@
 package net.ukr.vixtibon.dao.stady_process;
 
+import net.ukr.vixtibon.QueryStack;
 import net.ukr.vixtibon.base_objects.study_process.Discipline;
 import net.ukr.vixtibon.dao.AbstractController;
 
@@ -91,6 +92,26 @@ public class DAODiscipline  extends AbstractController<Discipline,Integer> {
         return discipline;
     }
 
+    public Discipline getEntityByIdNameOnly(Integer id) {
+        String Select_Discipline_Statemet = "SELECT ID, nameOfDiscipline FROM discipline WHERE ID='"+ id +"';";
+        Discipline discipline = new Discipline();
+        PreparedStatement ps = getPrepareStatement(Select_Discipline_Statemet);
+        ResultSet rs = null;
+        try {
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                discipline.setID(rs.getInt(1));
+                discipline.setNameOfDiscipline(rs.getString(2));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) try { rs.close(); } catch (SQLException logOrIgnore) {}
+            if (ps != null) try { ps.close(); } catch (SQLException logOrIgnore) {}
+        }
+        return discipline;
+    }
+
     @Override
     public boolean delete(Integer id) {
         String Delete_Discipline_Statement = "DELETE FROM discipline WHERE ID=" + id + ";";
@@ -112,6 +133,8 @@ public class DAODiscipline  extends AbstractController<Discipline,Integer> {
                 "countOfLessons,exam) " +
                 "VALUES ('" + findFreeID("discipline") + "','" + entity.getNameOfDiscipline()  + "','" + entity.getCountOfLessons() + "','" +entity.isExam()
                 + "');";
+        QueryStack qs = new QueryStack();
+        qs.queries.add(Create_Discipline_Statemet);
         PreparedStatement ps = getPrepareStatement(Create_Discipline_Statemet);
         try {
             ps.executeUpdate();

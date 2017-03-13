@@ -71,7 +71,14 @@
         <form action="AdminPageController" method="post">
             <input type="hidden"  name="elementType" value="generateBaseDate">
             <td colspan=2>
-                <button onclick="submit"  class="topicButton topicButtonAdminPage"><h2>Generate base date</h2></button>
+                    <tr>
+                        <button onclick="submit"  class="topicButton topicButtonAdminPage"><h2>Generate base date</h2></button>
+                    </tr>
+                    <tr>
+                        <div class = "pageTitleTextBad">
+                            Option disabled!
+                        </div>
+                    </tr>
             </td>
         </form>
     </div>
@@ -80,7 +87,14 @@
         <form action="AdminPageController" method="post">
             <input type="hidden"  name="elementType" value="clearAllDate">
             <td colspan=2>
-                <button onclick="submit"  class="topicButton topicButtonAdminPage"><h2>Clear all date</h2></button>
+                <tr>
+                    <button onclick="submit"  class="topicButton topicButtonAdminPage"><h2>Clear all date</h2></button>
+                </tr>
+                <tr>
+                    <div class = "pageTitleTextBad">
+                        Option disabled!
+                    </div>
+                </tr>
             </td>
         </form>
     </div>

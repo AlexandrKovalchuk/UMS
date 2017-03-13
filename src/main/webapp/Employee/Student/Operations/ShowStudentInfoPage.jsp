@@ -115,7 +115,7 @@
         Student Info:
     </div>
 
-    <div class = "pageContent pageContentEmployeePages pageContentEmployeePages300px">
+    <div class = "pageContent pageContentEmployeePages pageContentAdminPages500px">
         <table>
             <tr>
                 <td class = "textLabel textLabelEmployeePage">Ім'я:</td>
@@ -139,7 +139,7 @@
             </tr>
             <tr>
                 <td class = "textLabel textLabelEmployeePage">Дата народження:</td>
-                <td class = "textLabel textLabelEmployeePage"><c:out value="${student.getDayOfBorn()}"/> - <c:out value="${teacher.getMonthOfBorn()}"/> - <c:out value="${teacher.getYearOfBorn()}"/></td>
+                <td class = "textLabel textLabelEmployeePage"><c:out value="${student.getDayOfBorn()}"/> - <c:out value="${student.getMonthOfBorn()}"/> - <c:out value="${student.getYearOfBorn()}"/></td>
             </tr>
             <tr>
                 <td class = "textLabel textLabelEmployeePage">Пошта:</td>

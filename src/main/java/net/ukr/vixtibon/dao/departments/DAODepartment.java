@@ -1,5 +1,6 @@
 package net.ukr.vixtibon.dao.departments;
 
+import net.ukr.vixtibon.QueryStack;
 import net.ukr.vixtibon.base_objects.departments.Department;
 import net.ukr.vixtibon.dao.AbstractController;
 
@@ -131,6 +132,8 @@ public class DAODepartment extends AbstractController<Department,Integer> {
     @Override
     public boolean create(Department entity) throws SQLException {
         String Create_Department_Statemet = "INSERT INTO department (ID,longName,shortName, facultyID) VALUES ('"+findFreeID("department")+"','"+entity.getLongName() + "','" + entity.getShortName()+"','"+entity.getFacultyID()+"');";
+        QueryStack qs = new QueryStack();
+        qs.queries.add(Create_Department_Statemet);
         PreparedStatement ps = getPrepareStatement(Create_Department_Statemet);
         try {
             ps.executeUpdate();
