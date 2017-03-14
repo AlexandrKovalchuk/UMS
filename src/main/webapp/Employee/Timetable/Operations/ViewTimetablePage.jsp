@@ -32,6 +32,9 @@
         </div>
         <c:set var="count" value="0" scope="page" />
         <table class = "studentTable">
+            <tr class = "studentTable">
+                <td class = "textLabel textLabelEmployeePage studentTable"></td>
+            </tr>
             <c:forEach items="${week}"  var="dayItem">
                 <tr class = "studentTable">
                     <td class = "textLabel textLabelEmployeePage studentTable"><c:out value="${dayNames.get(count)}"/></td>
