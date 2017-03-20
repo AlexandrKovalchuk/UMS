@@ -30,7 +30,7 @@
             <form action="DisciplinePageController" method="post">
                 <input type="hidden"  name="operationType" value="create">
                 <td colspan=2>
-                    <button onclick="submit"  class="topicButton topicButtonEmployeePage"><h2>Create Discipline</h2></button>
+                    <button onclick="submit"  class="topicButton topicButtonEmployeePage">Create Discipline</button>
                 </td>
             </form>
         </div>
@@ -40,7 +40,7 @@
             <form action="DisciplinePageController" method="post">
                 <input type="hidden"  name="operationType" value="update">
                 <td colspan=2>
-                    <button onclick="submit"  class="topicButton topicButtonEmployeePage"><h2>Update  Discipline</h2></button>
+                    <button onclick="submit"  class="topicButton topicButtonEmployeePage">Update  Discipline</button>
                 </td>
             </form>
         </div>
@@ -50,7 +50,7 @@
             <form action="DisciplinePageController" method="post">
                 <input type="hidden"  name="operationType" value="delete">
                 <td colspan=2>
-                    <button onclick="submit"  class="topicButton topicButtonEmployeePage"><h2>Delete  Discipline</h2></button>
+                    <button onclick="submit"  class="topicButton topicButtonEmployeePage">Delete  Discipline</button>
                 </td>
             </form>
         </div>
@@ -60,7 +60,7 @@
             <form action="DisciplinePageController" method="post">
                 <input type="hidden"  name="operationType" value="setDependency">
                 <td colspan=2>
-                    <button onclick="submit"  class="topicButton topicButtonEmployeePage"><h2>Set Discipline Dependency</h2></button>
+                    <button onclick="submit"  class="topicButton topicButtonEmployeePage">Set Discipline Dependency</button>
                 </td>
             </form>
         </div>
@@ -70,7 +70,7 @@
             <form action="DisciplinePageController" method="post">
                 <input type="hidden"  name="operationType" value="showInfo">
                 <td colspan=2>
-                    <button onclick="submit"  class="topicButton topicButtonEmployeePage"><h2>Show Discipline Info</h2></button>
+                    <button onclick="submit"  class="topicButton topicButtonEmployeePage">Show Discipline Info</button>
                 </td>
             </form>
         </div>

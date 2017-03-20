@@ -26,7 +26,7 @@
         <form action="AdminPageController" method="post">
             <input type="hidden"  name="elementType" value="institute">
             <td colspan=2>
-                <button onclick="submit"  class="topicButton topicButtonAdminPage"><h2>Manage University Credentials</h2></button>
+                <button onclick="submit"  class="topicButton topicButtonAdminPage">Manage University Credentials</button>
             </td>
         </form>
     </div>
@@ -35,7 +35,7 @@
         <form action="AdminPageController" method="post">
             <input type="hidden"  name="elementType" value="faculty">
             <td colspan=2>
-                <button onclick="submit"  class="topicButton topicButtonAdminPage"><h2>Manage Faculty Credentials</h2></button>
+                <button onclick="submit"  class="topicButton topicButtonAdminPage">Manage Faculty Credentials</button>
             </td>
         </form>
     </div>
@@ -44,7 +44,7 @@
     <form action="AdminPageController" method="post">
         <input type="hidden"  name="elementType" value="department">
         <td colspan=2>
-            <button onclick="submit"  class="topicButton topicButtonAdminPage"><h2>Manage Department Credentials</h2></button>
+            <button onclick="submit"  class="topicButton topicButtonAdminPage">Manage Department Credentials</button>
         </td>
     </form>
     </div>
@@ -53,7 +53,7 @@
         <form action="AdminPageController" method="post">
             <input type="hidden"  name="elementType" value="employee">
             <td colspan=2>
-                <button onclick="submit"  class="topicButton topicButtonAdminPage"><h2>Manage Employee Credentials</h2></button>
+                <button onclick="submit"  class="topicButton topicButtonAdminPage">Manage Employee Credentials</button>
             </td>
         </form>
     </div>
@@ -62,7 +62,7 @@
         <form action="AdminPageController" method="post">
             <input type="hidden"  name="elementType" value="mainInfo">
             <td colspan=2>
-                <button onclick="submit"  class="topicButton topicButtonAdminPage"><h2>Main Info</h2></button>
+                <button onclick="submit"  class="topicButton topicButtonAdminPage">Main Info</button>
             </td>
         </form>
     </div>
@@ -72,7 +72,7 @@
             <input type="hidden"  name="elementType" value="generateBaseDate">
             <td colspan=2>
                     <tr>
-                        <button onclick="submit"  class="topicButton topicButtonAdminPage"><h2>Generate base date</h2></button>
+                        <button onclick="submit" disabled class="topicButton topicButtonAdminPage">Generate base date</button>
                     </tr>
                     <tr>
                         <div class = "pageTitleTextBad">
@@ -88,7 +88,7 @@
             <input type="hidden"  name="elementType" value="clearAllDate">
             <td colspan=2>
                 <tr>
-                    <button onclick="submit"  class="topicButton topicButtonAdminPage"><h2>Clear all date</h2></button>
+                    <button onclick="submit" disabled class="topicButton topicButtonAdminPage">Clear all date</button>
                 </tr>
                 <tr>
                     <div class = "pageTitleTextBad">

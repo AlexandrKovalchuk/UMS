@@ -30,7 +30,7 @@
             <form action="GroupPageController" method="post">
                 <input type="hidden"  name="operationType" value="create">
                 <td colspan=2>
-                    <button onclick="submit"  class="topicButton topicButtonEmployeePage"><h2>Create Group</h2></button>
+                    <button onclick="submit"  class="topicButton topicButtonEmployeePage">Create Group</button>
                 </td>
             </form>
         </div>
@@ -40,7 +40,7 @@
             <form action="GroupPageController" method="post">
                 <input type="hidden"  name="operationType" value="update">
                 <td colspan=2>
-                    <button onclick="submit"  class="topicButton topicButtonEmployeePage"><h2>Update  Group</h2></button>
+                    <button onclick="submit"  class="topicButton topicButtonEmployeePage">Update  Group</button>
                 </td>
             </form>
         </div>
@@ -50,7 +50,7 @@
             <form action="GroupPageController" method="post">
                 <input type="hidden"  name="operationType" value="delete">
                 <td colspan=2>
-                    <button onclick="submit"  class="topicButton topicButtonEmployeePage"><h2>Delete  Group</h2></button>
+                    <button onclick="submit"  class="topicButton topicButtonEmployeePage">Delete  Group</button>
                 </td>
             </form>
         </div>
@@ -60,7 +60,7 @@
             <form action="GroupPageController" method="post">
                 <input type="hidden"  name="operationType" value="move">
                 <td colspan=2>
-                    <button onclick="submit"  class="topicButton topicButtonEmployeePage"><h2>Move Group</h2></button>
+                    <button onclick="submit"  class="topicButton topicButtonEmployeePage">Move Group</button>
                 </td>
             </form>
         </div>
@@ -70,7 +70,7 @@
             <form action="GroupPageController" method="post">
                 <input type="hidden"  name="operationType" value="showInfo">
                 <td colspan=2>
-                    <button onclick="submit"  class="topicButton topicButtonEmployeePage"><h2>Show Group Info</h2></button>
+                    <button onclick="submit"  class="topicButton topicButtonEmployeePage">Show Group Info</button>
                 </td>
             </form>
         </div>

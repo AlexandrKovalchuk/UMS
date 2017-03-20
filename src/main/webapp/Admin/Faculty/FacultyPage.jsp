@@ -24,7 +24,7 @@
         <form action="FacultyPageController" method="post">
             <input type="hidden"  name="operationType" value="create">
             <td colspan=2>
-                <button onclick="submit"  class="topicButton topicButtonAdminPage"><h2>Create New Faculty</h2></button>
+                <button onclick="submit"  class="topicButton topicButtonAdminPage">Create New Faculty</button>
             </td>
         </form>
     </div>
@@ -33,7 +33,7 @@
         <form action="FacultyPageController" method="post">
             <input type="hidden"  name="operationType" value="update">
             <td colspan=2>
-                <button onclick="submit"  class="topicButton topicButtonAdminPage"><h2>Update Faculty</h2></button>
+                <button onclick="submit"  class="topicButton topicButtonAdminPage">Update Faculty</button>
             </td>
         </form>
     </div>
@@ -42,7 +42,7 @@
         <form action="FacultyPageController" method="post">
             <input type="hidden"  name="operationType" value="move">
             <td colspan=2>
-                <button onclick="submit"  class="topicButton topicButtonAdminPage"><h2>Move Faculty</h2></button>
+                <button onclick="submit"  class="topicButton topicButtonAdminPage">Move Faculty</button>
             </td>
         </form>
     </div>
@@ -51,7 +51,7 @@
         <form action="FacultyPageController" method="post">
             <input type="hidden"  name="operationType" value="delete">
             <td colspan=2>
-                <button onclick="submit"  class="topicButton topicButtonAdminPage"><h2>Delete Faculty</h2></button>
+                <button onclick="submit"  class="topicButton topicButtonAdminPage">Delete Faculty</button>
             </td>
         </form>
     </div>
@@ -60,7 +60,7 @@
         <form action="FacultyPageController" method="post">
             <input type="hidden"  name="operationType" value="showInfo">
             <td colspan=2>
-                <button onclick="submit"  class="topicButton topicButtonAdminPage"><h2>Show Info about Faculty</h2></button>
+                <button onclick="submit"  class="topicButton topicButtonAdminPage">Show Info about Faculty</button>
             </td>
         </form>
     </div>

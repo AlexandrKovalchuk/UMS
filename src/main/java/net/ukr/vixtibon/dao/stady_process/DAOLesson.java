@@ -32,7 +32,8 @@ public class DAOLesson extends AbstractController<Lesson,Integer> {
     }
 
     public ArrayList<Lesson> getAllByDepartmentDayNumber(int departmentID, int dayNumber, int lessonNumber){
-        String Select_getAllByDepartmentDayNumber_Statemet = "SELECT * FROM timetable;";
+        String Select_getAllByDepartmentDayNumber_Statemet = "SELECT * FROM timetable WHERE departmentID=" +departmentID+ "and dayNumber=" + dayNumber +
+                "and lessonNumberInDay=" + lessonNumber + ";";
         ArrayList<Lesson> lessons = new ArrayList<Lesson>();
         PreparedStatement ps = getPrepareStatement(Select_getAllByDepartmentDayNumber_Statemet);
         ResultSet rs = null;

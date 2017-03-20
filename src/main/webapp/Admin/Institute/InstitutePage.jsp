@@ -24,7 +24,7 @@
         <form action="InstitutePageController" method="post">
             <input type="hidden"  name="operationType" value="create">
             <td colspan=2>
-                <button onclick="submit"  class="topicButton topicButtonAdminPage"><h2>Create New Institute</h2></button>
+                <button onclick="submit"  class="topicButton topicButtonAdminPage">Create New Institute</button>
             </td>
         </form>
     </div>
@@ -33,7 +33,7 @@
         <form action="InstitutePageController" method="post">
             <input type="hidden"  name="operationType" value="update">
             <td colspan=2>
-                <button onclick="submit"  class="topicButton topicButtonAdminPage"><h2>Update Institute</h2></button>
+                <button onclick="submit"  class="topicButton topicButtonAdminPage">Update Institute</button>
             </td>
         </form>
     </div>
@@ -42,7 +42,7 @@
         <form action="InstitutePageController" method="post">
             <input type="hidden"  name="operationType" value="delete">
             <td colspan=2>
-                <button onclick="submit"  class="topicButton topicButtonAdminPage"><h2>Delete Institute</h2></button>
+                <button onclick="submit"  class="topicButton topicButtonAdminPage">Delete Institute</button>
             </td>
         </form>
     </div>
@@ -51,7 +51,7 @@
         <form action="InstitutePageController" method="post">
             <input type="hidden"  name="operationType" value="showInfo">
             <td colspan=2>
-                <button onclick="submit"  class="topicButton topicButtonAdminPage"><h2>Show Info about Institute</h2></button>
+                <button onclick="submit"  class="topicButton topicButtonAdminPage">Show Info about Institute</button>
             </td>
         </form>
     </div>

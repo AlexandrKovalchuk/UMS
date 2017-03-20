@@ -34,7 +34,7 @@
             <form action="EmployeeMenuPageController" method="post">
                 <input type="hidden"  name="elementType" value="discipline">
                 <td colspan=2>
-                    <button onclick="submit"  class="topicButton topicButtonEmployeePage"><h2>Manage Discipline Credentials</h2></button>
+                    <button onclick="submit"  class="topicButton topicButtonEmployeePage">Manage Discipline Credentials</button>
                 </td>
             </form>
         </div>
@@ -44,7 +44,7 @@
             <form action="EmployeeMenuPageController" method="post">
                 <input type="hidden"  name="elementType" value="group">
                 <td colspan=2>
-                    <button onclick="submit"  class="topicButton topicButtonEmployeePage"><h2>Manage Group Credentials</h2></button>
+                    <button onclick="submit"  class="topicButton topicButtonEmployeePage">Manage Group Credentials</button>
                 </td>
             </form>
         </div>
@@ -54,7 +54,7 @@
             <form action="EmployeeMenuPageController" method="post">
                 <input type="hidden"  name="elementType" value="teacher">
                 <td colspan=2>
-                    <button onclick="submit"  class="topicButton topicButtonEmployeePage"><h2>Manage Teacher Credentials</h2></button>
+                    <button onclick="submit"  class="topicButton topicButtonEmployeePage">Manage Teacher Credentials</button>
                 </td>
             </form>
         </div>
@@ -64,7 +64,7 @@
             <form action="EmployeeMenuPageController" method="post">
                 <input type="hidden"  name="elementType" value="student">
                 <td colspan=2>
-                    <button onclick="submit"  class="topicButton topicButtonEmployeePage"><h2>Manage Student Credentials</h2></button>
+                    <button onclick="submit"  class="topicButton topicButtonEmployeePage">Manage Student Credentials</button>
                 </td>
             </form>
         </div>
@@ -74,7 +74,7 @@
             <form action="EmployeeMenuPageController" method="post">
                 <input type="hidden"  name="elementType" value="timetable">
                 <td colspan=2>
-                    <button onclick="submit"  class="topicButton topicButtonEmployeePage"><h2>Manage Timetable Credentials</h2></button>
+                    <button onclick="submit"  class="topicButton topicButtonEmployeePage">Manage Timetable Credentials</button>
                 </td>
             </form>
         </div>
@@ -84,7 +84,7 @@
             <form action="EmployeeMenuPageController" method="post">
                 <input type="hidden"  name="elementType" value="dayRequirements">
                 <td colspan=2>
-                    <button onclick="submit"  class="topicButton topicButtonEmployeePage"><h2>Set Day Requirements</h2></button>
+                    <button onclick="submit"  class="topicButton topicButtonEmployeePage">Set Day Requirements</button>
                 </td>
             </form>
         </div>

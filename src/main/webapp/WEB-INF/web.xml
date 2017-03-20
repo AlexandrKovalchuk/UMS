@@ -602,6 +602,12 @@
         <url-pattern>/ActionResultEmployeeMenuPageController</url-pattern>
     </servlet-mapping>
 
+    <context-param>
+        <param-name>config</param-name>
+        <!--  Name of the chat properties file. It contains the name and description                   of rooms.-->
+        <param-value>config.properties</param-value>
+    </context-param>
+
 
     <filter>
         <filter-name>AuthenticationFilter</filter-name>

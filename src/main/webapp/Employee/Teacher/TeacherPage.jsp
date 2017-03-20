@@ -30,7 +30,7 @@
             <form action="TeacherPageController" method="post">
                 <input type="hidden"  name="operationType" value="create">
                 <td colspan=2>
-                    <button onclick="submit"  class="topicButton topicButtonEmployeePage"><h2>Create Teacher</h2></button>
+                    <button onclick="submit"  class="topicButton topicButtonEmployeePage">Create Teacher</button>
                 </td>
             </form>
         </div>
@@ -40,7 +40,7 @@
             <form action="TeacherPageController" method="post">
                 <input type="hidden"  name="operationType" value="update">
                 <td colspan=2>
-                    <button onclick="submit"  class="topicButton topicButtonEmployeePage"><h2>Update  Teacher</h2></button>
+                    <button onclick="submit"  class="topicButton topicButtonEmployeePage">Update  Teacher</button>
                 </td>
             </form>
         </div>
@@ -50,7 +50,7 @@
             <form action="TeacherPageController" method="post">
                 <input type="hidden"  name="operationType" value="delete">
                 <td colspan=2>
-                    <button onclick="submit"  class="topicButton topicButtonEmployeePage"><h2>Delete  Teacher</h2></button>
+                    <button onclick="submit"  class="topicButton topicButtonEmployeePage">Delete  Teacher</button>
                 </td>
             </form>
         </div>
@@ -60,7 +60,7 @@
             <form action="TeacherPageController" method="post">
                 <input type="hidden"  name="operationType" value="move">
                 <td colspan=2>
-                    <button onclick="submit"  class="topicButton topicButtonEmployeePage"><h2>Move Teacher</h2></button>
+                    <button onclick="submit"  class="topicButton topicButtonEmployeePage">Move Teacher</button>
                 </td>
             </form>
         </div>
@@ -70,7 +70,7 @@
             <form action="TeacherPageController" method="post">
                 <input type="hidden"  name="operationType" value="showInfo">
                 <td colspan=2>
-                    <button onclick="submit"  class="topicButton topicButtonEmployeePage"><h2>Show Teacher Info</h2></button>
+                    <button onclick="submit"  class="topicButton topicButtonEmployeePage">Show Teacher Info</button>
                 </td>
             </form>
         </div>

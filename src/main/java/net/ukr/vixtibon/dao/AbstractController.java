@@ -6,10 +6,12 @@ package net.ukr.vixtibon.dao;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Enumeration;
 import java.util.List;
 import java.util.Properties;
 
@@ -38,26 +40,27 @@ public abstract class AbstractController<E, K> {
         String user = "";
         String password = "";
         Properties properties = new Properties();
-        ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-        InputStream input = null;
-        try{
-            input = classLoader.getResourceAsStream("config.properties");
-            input.toString();
-            properties.load(input);
+
+        //try{
+            //FileInputStream input = new FileInputStream("F:\\apache-tomcat-8.0.24-windows-x64\\apache-tomcat-8.0.24_TESTER\\webapps\\UMS\\WEB-INF\\config.properties");
+            //FileInputStream input = new FileInputStream("");
+            //input.toString();
+            try {
+                URL url  = this.getClass().getClassLoader().getResource("config.properties");
+                System.out.println("WAY " + url.getPath());
+                FileInputStream input = new FileInputStream(url.getPath());
+                properties.load(input);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            //properties.load(input);
             baseLocation = properties.getProperty("baseLocation");
             user = properties.getProperty("user");
             password = properties.getProperty("password");
-        }catch (IOException ex){
-            ex.printStackTrace();
-        }finally {
-            if(input != null){
-                try{
-                    input.close();
-                }catch (IOException e){
-                    e.printStackTrace();
-                }
-            }
-        }
+        //}catch (IOException ex){
+           // ex.printStackTrace();
+       // }
+
         connectionParameters = connectionParameters + baseLocation + "?user=" + user + "&password=" + password;
         return connectionParameters;
     }

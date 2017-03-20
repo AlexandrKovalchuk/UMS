@@ -24,7 +24,7 @@
         <form action="DepartmentPageController" method="post">
             <input type="hidden"  name="operationType" value="create">
             <td colspan=2>
-                <button onclick="submit"  class="topicButton topicButtonAdminPage"><h2>Create New Department</h2></button>
+                <button onclick="submit"  class="topicButton topicButtonAdminPage">Create New Department</button>
             </td>
         </form>
     </div>
@@ -33,7 +33,7 @@
         <form action="DepartmentPageController" method="post">
             <input type="hidden"  name="operationType" value="update">
             <td colspan=2>
-                <button onclick="submit"  class="topicButton topicButtonAdminPage"><h2>Update Department</h2></button>
+                <button onclick="submit"  class="topicButton topicButtonAdminPage">Update Department</button>
             </td>
         </form>
     </div>
@@ -42,7 +42,7 @@
         <form action="DepartmentPageController" method="post">
             <input type="hidden"  name="operationType" value="move">
             <td colspan=2>
-                <button onclick="submit"  class="topicButton topicButtonAdminPage"><h2>Move Department</h2></button>
+                <button onclick="submit"  class="topicButton topicButtonAdminPage">Move Department</button>
             </td>
         </form>
     </div>
@@ -51,7 +51,7 @@
         <form action="DepartmentPageController" method="post">
             <input type="hidden"  name="operationType" value="delete">
             <td colspan=2>
-                <button onclick="submit"  class="topicButton topicButtonAdminPage"><h2>Delete Department</h2></button>
+                <button onclick="submit"  class="topicButton topicButtonAdminPage">Delete Department</button>
             </td>
         </form>
     </div>
@@ -60,7 +60,7 @@
         <form action="DepartmentPageController" method="post">
             <input type="hidden"  name="operationType" value="showInfo">
             <td colspan=2>
-                <button onclick="submit"  class="topicButton topicButtonAdminPage"><h2>Show Info about Department</h2></button>
+                <button onclick="submit"  class="topicButton topicButtonAdminPage">Show Info about Department</button>
             </td>
         </form>
     </div>

@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="servlets.SessionsList" %>
 <%--
   Created by IntelliJ IDEA.
@@ -9,54 +10,56 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-<head>
     <title>Teacher Page</title>
-    <link rel="stylesheet" type="text/css" href="Teacher/sources/teacher_css.css">
+    <link rel="stylesheet" type="text/css" href="main_css\main_styles.css">
 </head>
-</head>
-<body>
 
-<div class = "pageTitleText">
-    <h5>
-        Welcome to Teachers Page!
+<body class = "backgroungImageTeacher">
+
+<div class = "pageTitleText pageTitleTextTeacher">
+    Welcome to Teacher Page!
+    <br />
+    Please choose action:
+</div>
+<br />
+
+<c:set var="step" value="${0}" scope="page"/>
+<c:set var="action" value="none" scope="page"/>
+
+<div class="itemsBlock">
+    <div>
+        <div>
+            <form action="TeacherMenuPageController" method="post">
+                <input type="hidden"  name="elementType" value="attendance">
+                <td colspan=2>
+                    <button onclick="submit"  class="topicButton topicButtonTeacherPage">Update Attendance</button>
+                </td>
+            </form>
+        </div>
         <br />
-        Please choose action:
-    </h5>
+
+        <div>
+            <form action="TeacherMenuPageController" method="post">
+                <input type="hidden"  name="elementType" value="progress">
+                <td colspan=2>
+                    <button onclick="submit"  class="topicButton topicButtonTeacherPage">Update Progress</button>
+                </td>
+            </form>
+        </div>
+        <br />
+
+        <div>
+            <form action="LogOutServlet" method="post">
+                <td colspan=2>
+                    <button onclick="submit"  class="controlButton controlButtonTeacherPage">Log Out</button>
+                </td>
+            </form>
+        </div>
+        <br />
+
+    </div>
 </div>
-<div>
-    <form action="TeachersMail.jsp" method="post">
-        <td colspan=2>
-            <button onclick="submit"  class="topicButton"><h2>Mail</h2></button>
-        </td>
-    </form>
-</div>
-<br />
-<div>
-    <form action="ManageStudentsProgress.jsp" method="post">
-        <td colspan=2>
-            <button onclick="submit"  class="topicButton"><h2>Manage students progress</h2></button>
-        </td>
-    </form>
-</div>
-<br />
-<div>
-    <form action="ManageTopic.jsp" method="post">
-        <td colspan=2>
-            <button onclick="submit"  class="topicButton"><h2>Manage Topic</h2></button>
-        </td>
-    </form>
-</div>
-<br />
-<div>
-    <tr>
-        <td colspan=2>
-            <button onclick="document.location.href='/LogOutServlet'" class="controlButton" >
-                <h2>Log Out</h2>
-            </button>
-        </td>
-    </tr>
-</div>
-<br />
+
 </body>
 
 </html>

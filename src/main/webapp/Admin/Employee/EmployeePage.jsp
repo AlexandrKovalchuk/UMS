@@ -24,7 +24,7 @@
         <form action="EmployeePageController" method="post">
             <input type="hidden"  name="operationType" value="create">
             <td colspan=2>
-                <button onclick="submit"  class="topicButton topicButtonAdminPage"><h2>Create New Employee</h2></button>
+                <button onclick="submit"  class="topicButton topicButtonAdminPage">Create New Employee</button>
             </td>
         </form>
     </div>
@@ -33,7 +33,7 @@
         <form action="EmployeePageController" method="post">
             <input type="hidden"  name="operationType" value="update">
             <td colspan=2>
-                <button onclick="submit"  class="topicButton topicButtonAdminPage"><h2>Update Employee</h2></button>
+                <button onclick="submit"  class="topicButton topicButtonAdminPage">Update Employee</button>
             </td>
         </form>
     </div>
@@ -42,7 +42,7 @@
         <form action="EmployeePageController" method="post">
             <input type="hidden"  name="operationType" value="move">
             <td colspan=2>
-                <button onclick="submit"  class="topicButton topicButtonAdminPage"><h2>Move Employee</h2></button>
+                <button onclick="submit"  class="topicButton topicButtonAdminPage">Move Employee</button>
             </td>
         </form>
     </div>
@@ -51,7 +51,7 @@
         <form action="EmployeePageController" method="post">
             <input type="hidden"  name="operationType" value="delete">
             <td colspan=2>
-                <button onclick="submit"  class="topicButton topicButtonAdminPage"><h2>Delete Employee</h2></button>
+                <button onclick="submit"  class="topicButton topicButtonAdminPage">Delete Employee</button>
             </td>
         </form>
     </div>
@@ -60,7 +60,7 @@
         <form action="EmployeePageController" method="post">
             <input type="hidden"  name="operationType" value="showInfo">
             <td colspan=2>
-                <button onclick="submit"  class="topicButton topicButtonAdminPage"><h2>Show Info about Employee</h2></button>
+                <button onclick="submit"  class="topicButton topicButtonAdminPage">Show Info about Employee</button>
             </td>
         </form>
     </div>

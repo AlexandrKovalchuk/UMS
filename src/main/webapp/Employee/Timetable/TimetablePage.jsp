@@ -30,7 +30,7 @@
             <form action="TimetablePageController" method="post">
                 <input type="hidden"  name="operationType" value="create">
                 <td colspan=2>
-                    <button onclick="submit"  class="topicButton topicButtonEmployeePage"><h2>Create Timetable</h2></button>
+                    <button onclick="submit"  class="topicButton topicButtonEmployeePage">Create Timetable</button>
                 </td>
             </form>
         </div>
@@ -40,7 +40,7 @@
             <form action="TimetablePageController" method="post">
                 <input type="hidden"  name="operationType" value="update">
                 <td colspan=2>
-                    <button onclick="submit"  class="topicButton topicButtonEmployeePage"><h2>Update  Timetable</h2></button>
+                    <button onclick="submit"  class="topicButton topicButtonEmployeePage">Update  Timetable</button>
                 </td>
             </form>
         </div>
@@ -50,7 +50,7 @@
             <form action="TimetablePageController" method="post">
                 <input type="hidden"  name="operationType" value="delete">
                 <td colspan=2>
-                    <button onclick="submit"  class="topicButton topicButtonEmployeePage"><h2>Delete  Timetable</h2></button>
+                    <button onclick="submit"  class="topicButton topicButtonEmployeePage">Delete  Timetable</button>
                 </td>
             </form>
         </div>
@@ -60,7 +60,7 @@
             <form action="TimetablePageController" method="post">
                 <input type="hidden"  name="operationType" value="move">
                 <td colspan=2>
-                    <button onclick="submit"  class="topicButton topicButtonEmployeePage"><h2>Move Timetable</h2></button>
+                    <button onclick="submit"  class="topicButton topicButtonEmployeePage">Move Timetable</button>
                 </td>
             </form>
         </div>
@@ -70,7 +70,7 @@
             <form action="TimetablePageController" method="post">
                 <input type="hidden"  name="operationType" value="showInfo">
                 <td colspan=2>
-                    <button onclick="submit"  class="topicButton topicButtonEmployeePage"><h2>Show Timetable Info</h2></button>
+                    <button onclick="submit"  class="topicButton topicButtonEmployeePage">Show Timetable Info</button>
                 </td>
             </form>
         </div>
