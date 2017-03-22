@@ -70,7 +70,7 @@
                     </tr>
 
                     <tr>
-                        <td class = "textLabel textLabelEmployeePage">Count Of Lessons:</td>
+                        <td class = "textLabel textLabelEmployeePage">Number Of Lessons:</td>
                         <td>
                             <input class = "inputSettings inputEmployee" type="number" name="countOfLessons" value="${discipline.getCountOfLessons()}" required/>
                         </td>
