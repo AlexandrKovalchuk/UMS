@@ -14,7 +14,7 @@
 </head>
 <body class = "backgroungImageAdmin">
 <div class = "pageTitleText pageTitleTextAdmin">
-        Welcome to Department Menu Page!
+        Welcome to Department Menu Page
         <br />
         Please choose action:
 </div>

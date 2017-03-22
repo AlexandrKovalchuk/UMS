@@ -143,12 +143,12 @@
     background: linear-gradient(to bottom right, rgba(12, 24, 12, 0.89), rgba(69, 151, 15, 0.35));
     border: #000040;
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
-    color: #e5f7fb;
+    color: #c1fba5;
 }
 
 .controlButtonWLogInPage:hover {
     background: linear-gradient(to bottom right, rgba(30, 139, 18, 0.69), rgba(73, 221, 15, 0.35));
-    color: #e5f7fb;
+    color: #c1fba5;
 }
 /**/
 /*time table buttons*/
@@ -350,7 +350,8 @@ form{
 }
 
 .textLabelLogInPage{
-    color: #e5f7fb;
+    color: #c1fba5;
+    text-decoration-color: rgba(117, 255, 18, 0.40);
     text-align: right;
 }
 

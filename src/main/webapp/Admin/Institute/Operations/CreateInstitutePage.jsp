@@ -13,7 +13,7 @@
 </head>
 <body class = "backgroungImageAdmin">
 <div class = "pageTitleText pageTitleTextAdmin">
-    Create Institute Page!
+    Create Institute Page
     <br />
     Please fill form:
 </div>

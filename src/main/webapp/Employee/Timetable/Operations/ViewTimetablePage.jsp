@@ -16,7 +16,7 @@
 <body style="background-color:#45250d;">
 
 <div class = "pageTitleText pageTitleTextEmployee">
-    View Timetable Page!
+    View Timetable Page
 </div>
 <br />
 

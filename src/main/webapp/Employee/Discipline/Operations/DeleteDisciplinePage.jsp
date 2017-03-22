@@ -16,7 +16,7 @@
 <body class = "backgroungImageEmployee">
 
 <div class = "pageTitleText pageTitleTextEmployee">
-    Delete Discipline Page! (<c:out value="${department.getLongName()}"/>)
+    Delete Discipline Page (<c:out value="${department.getLongName()}"/>)
 </div>
 <br />
 

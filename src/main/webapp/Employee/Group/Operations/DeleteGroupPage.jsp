@@ -16,7 +16,7 @@
 <body class = "backgroungImageEmployee">
 
 <div class = "pageTitleText pageTitleTextEmployee">
-    Delete Group Page! (<c:out value="${department.getLongName()}"/>)
+    Delete Group Page (<c:out value="${department.getLongName()}"/>)
 </div>
 <br />
 

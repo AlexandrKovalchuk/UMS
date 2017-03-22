@@ -13,16 +13,15 @@
 <body class = "backgroungImageLogIn">
 
     <div class = "pageTitleText pageTitleTextLogIn">
-            Welcome to Log In Page!
+            Welcome to Log In Page
     </div>
     <c:if test = "${!empty wrongPasswordOrLogIn}">
-        <div class = "payAttention">
-            <h5>
+        <div class = "pageTitleText pageTitleTextBad">
                 <c:if test = "${wrongPasswordOrLogIn eq 'absentInBase'}">
-                    Incorrect LogIn of Password!
+                    Incorrect LogIn or Password!
                 </c:if>
                 <c:if test = "${wrongPasswordOrLogIn eq 'wrongPassword'}">
-                    Incorrect LogIn of Password!
+                    Incorrect LogIn or Password!
                 </c:if>
                 <c:if test = "${wrongPasswordOrLogIn eq 'absentConnectionToDataBase'}">
                     Absent Data Base connection!
@@ -33,7 +32,6 @@
                 <c:if test = "${wrongPasswordOrLogIn eq 'notAuthorized'}">
                     Not authorized!
                 </c:if>
-            </h5>
         </div>
     </c:if>
 

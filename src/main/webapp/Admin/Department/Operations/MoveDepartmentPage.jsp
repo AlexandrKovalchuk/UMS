@@ -15,7 +15,7 @@
 <body class = "backgroungImageAdmin">
 
 <div class = "pageTitleText pageTitleTextAdmin">
-    Move Department Page!
+    Move Department Page
 </div>
 <br />
 

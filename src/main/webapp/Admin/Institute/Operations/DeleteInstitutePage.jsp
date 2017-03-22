@@ -15,7 +15,7 @@
 <body class = "backgroungImageAdmin">
 
 <div class = "pageTitleText pageTitleTextAdmin">
-    Delete Institute Page!
+    Delete Institute Page
 </div>
 <br />
 

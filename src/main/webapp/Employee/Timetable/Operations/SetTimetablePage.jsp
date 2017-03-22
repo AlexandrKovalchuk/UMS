@@ -16,7 +16,7 @@
 <body class = "backgroungImageEmployee">
 
 <div class = "pageTitleText pageTitleTextEmployee">
-    Set Timetable Page!
+    Set Timetable Page
 </div>
 <br />
 

@@ -17,7 +17,7 @@
 <body class = "backgroungImageEmployee">
 
 <div class = "pageTitleText pageTitleTextEmployee">
-    Action Result Page!
+    Action Result Page
 </div>
 <br />
 

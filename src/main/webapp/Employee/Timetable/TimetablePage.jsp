@@ -15,7 +15,7 @@
 <body class = "backgroungImageEmployee">
 
 <div class = "pageTitleText pageTitleTextEmployee">
-    Welcome to Timetable Page!
+    Welcome to Timetable Page
     <br />
     Please choose action:
 </div>

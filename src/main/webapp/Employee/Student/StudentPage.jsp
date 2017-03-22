@@ -15,7 +15,7 @@
 <body class = "backgroungImageEmployee">
 
 <div class = "pageTitleText pageTitleTextEmployee">
-    Welcome to Student Page!
+    Welcome to Student Page
     <br />
     Please choose action:
 </div>

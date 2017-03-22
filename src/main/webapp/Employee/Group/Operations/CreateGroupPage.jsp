@@ -15,7 +15,7 @@
 <body class = "backgroungImageEmployee">
 
 <div class = "pageTitleText pageTitleTextEmployee">
-    Create Group Page! (<c:out value="${department.getLongName()}"/>)
+    Create Group Page (<c:out value="${department.getLongName()}"/>)
     <br />
     Please fill form:
 </div>

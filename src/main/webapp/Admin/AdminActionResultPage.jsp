@@ -17,7 +17,7 @@
 <body class = "backgroungImageAdmin">
 
 <div class = "pageTitleText pageTitleTextAdmin">
-    Action Result Page!
+    Action Result Page
 </div>
 <br />
 

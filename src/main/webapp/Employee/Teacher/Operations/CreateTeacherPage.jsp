@@ -15,7 +15,7 @@
 <body class = "backgroungImageEmployee">
 
 <div class = "pageTitleText pageTitleTextEmployee">
-    Create Teacher Page!
+    Create Teacher Page
     <br />
     Please fill form:
 </div>

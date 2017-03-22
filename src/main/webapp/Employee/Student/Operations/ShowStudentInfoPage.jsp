@@ -15,7 +15,7 @@
 <body class = "backgroungImageEmployee">
 
 <div class = "pageTitleText pageTitleTextEmployee">
-    Show Student Info Page!
+    Show Student Info Page
 </div>
 <br />
 

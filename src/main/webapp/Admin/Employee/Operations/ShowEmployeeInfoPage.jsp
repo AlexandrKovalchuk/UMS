@@ -15,7 +15,7 @@
 <body class = "backgroungImageAdmin">
 
 <div class = "pageTitleText pageTitleTextAdmin">
-    Show Employee Info Page!
+    Show Employee Info Page
 </div>
 <br />
 

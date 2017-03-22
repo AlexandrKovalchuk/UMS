@@ -16,7 +16,7 @@
 <body class = "backgroungImageEmployee">
 
 <div class = "pageTitleText pageTitleTextEmployee">
-    Update Group Page! (<c:out value="${department.getLongName()}"/>)
+    Update Group Page (<c:out value="${department.getLongName()}"/>)
 </div>
 <br />
 

@@ -15,7 +15,7 @@
 <body class = "backgroungImageTeacher">
 
 <div class = "pageTitleText pageTitleTextTeacher">
-    Welcome Time Table Page!
+    Welcome Time Table Page
 </div>
 <br />
 

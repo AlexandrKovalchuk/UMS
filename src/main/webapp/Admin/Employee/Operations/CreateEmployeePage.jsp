@@ -15,7 +15,7 @@
 <body class = "backgroungImageAdmin">
 
 <div class = "pageTitleText pageTitleTextAdmin">
-        Create Employee Page!
+        Create Employee Page
 </div>
 <br />
 

@@ -16,7 +16,7 @@
 <body class = "backgroungImageEmployee">
 
 <div class = "pageTitleText pageTitleTextEmployee">
-    Create Discipline Page! (<c:out value="${department.getLongName()}"/>)
+    Create Discipline Page (<c:out value="${department.getLongName()}"/>)
     <br />
     Please fill form:
 </div>

@@ -15,7 +15,7 @@
 <body class = "backgroungImageEmployee">
 
 <div class = "pageTitleText pageTitleTextEmployee">
-    Create Student Page! (<c:out value="${department.getLongName()}"/>)
+    Create Student Page (<c:out value="${department.getLongName()}"/>)
 </div>
 <br />
 

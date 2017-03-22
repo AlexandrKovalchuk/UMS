@@ -15,7 +15,7 @@
 <body class = "backgroungImageEmployee">
 
 <div class = "pageTitleText pageTitleTextEmployee">
-    Delete Student Page!
+    Delete Student Page
 </div>
 <br />
 

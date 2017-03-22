@@ -16,7 +16,7 @@
 </head>
 <body class = "backgroungImageAdmin">
 <div class = "pageTitleText pageTitleTextAdmin">
-        Create Faculty Page!
+        Create Faculty Page
 </div>
 <br />
 

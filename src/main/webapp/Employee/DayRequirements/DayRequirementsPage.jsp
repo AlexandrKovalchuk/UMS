@@ -16,7 +16,7 @@
 <body class = "backgroungImageEmployee">
 
 <div class = "pageTitleText pageTitleTextEmployee">
-    Day Requirements Page!
+    Day Requirements Page
 </div>
 <br />
 

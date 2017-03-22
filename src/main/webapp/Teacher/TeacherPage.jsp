@@ -16,7 +16,7 @@
 <body class = "backgroungImageTeacher">
 
 <div class = "pageTitleText pageTitleTextTeacher">
-    Welcome to Teacher Page!
+    Welcome to Teacher Page
     <br />
     Please choose action:
 </div>

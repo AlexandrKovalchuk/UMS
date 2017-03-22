@@ -17,7 +17,7 @@
 
 
 <div class = "pageTitleText pageTitleTextAdmin">
-    Show Institute Info Page!
+    Show Institute Info Page
 </div>
 <br />
 

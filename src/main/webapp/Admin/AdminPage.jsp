@@ -15,7 +15,7 @@
 <body class = "backgroungImageAdmin">
 
 <div class = "pageTitleText pageTitleTextAdmin">
-        Welcome to Administrator Page!
+        Welcome to Administrator Page
         <br />
         Please choose action:
 </div>

@@ -16,7 +16,7 @@
 <body class = "backgroungImageEmployee">
 
 <div class = "pageTitleText pageTitleTextEmployee">
-    Set Discipline Department Dependency Page! (<c:out value="${department.getLongName()}"/>)
+    Set Discipline Department Dependency Page (<c:out value="${department.getLongName()}"/>)
 </div>
 <br />
 
