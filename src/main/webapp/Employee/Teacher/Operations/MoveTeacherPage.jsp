@@ -30,7 +30,7 @@
             <div class = "textLabelParagraph textLabelEmployeePage"><c:out value="${department.getLongName()}"/></div>
             <c:forEach items="${department.getTeachers()}" var="teacher">
                 <div>
-                    <form action="/MoveTeacherPageController" method="post" accept-charset="UTF-8">
+                    <form action="MoveTeacherPageController" method="post" accept-charset="UTF-8">
                         <input type="hidden"  name="step" value="step1">
                         <input type="hidden"  name="teacherID" value="${teacher.getID()}">
                         <button onclick="submit" class="itemButton itemButtonEmployeePages" ><c:out value="${teacher.getSecondName()}"/> <c:out value="${teacher.getName()}"/></button>
@@ -50,7 +50,7 @@
         </div>
 
         <div>
-            <form action="/MoveTeacherPageController" method="post" accept-charset="UTF-8">
+            <form action="MoveTeacherPageController" method="post" accept-charset="UTF-8">
                 <table>
                     <input type="hidden"  name="step" value="step2">
                     <input type="hidden"  name="departmentID" value="${moveToDepartment.getID()}">

@@ -30,7 +30,7 @@
             <div class = "textLabelParagraph textLabelAdminPage"><c:out value="${institute.getLongName()}"/>:</div>
             <c:forEach items="${institute.getFacultys()}" var="faculty">
                 <div>
-                    <form action="/CreateDepartmentPageController" method="post" accept-charset="UTF-8">
+                    <form action="CreateDepartmentPageController" method="post" accept-charset="UTF-8">
                         <input type="hidden"  name="step" value="step1">
                         <input type="hidden"  name="facultyID" value="${faculty.getID()}">
                         <button onclick="submit" class="itemButton itemButtonAdminPages" ><c:out value="${faculty.getLongName()}"/></button>
@@ -47,7 +47,7 @@
         </div>
 
         <div class = "pageContent pageContentAdminPages pageContentAdminPagesTwoFieldsSize">
-            <form action="/CreateDepartmentPageController" method="post" accept-charset="UTF-8">
+            <form action="CreateDepartmentPageController" method="post" accept-charset="UTF-8">
                 <table>
                     <input type="hidden"  name="step" value="step2">
                     <input type="hidden"  name="facultyID" value="${facultyID}">

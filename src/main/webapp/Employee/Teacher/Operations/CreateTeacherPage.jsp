@@ -22,7 +22,7 @@
 <br />
 
     <div class = "pageContent pageContentEmployeePages pageContentAdminPages500px">
-        <form action="/CreateTeacherPageController" method="post" accept-charset="UTF-8">
+        <form action="CreateTeacherPageController" method="post" accept-charset="UTF-8">
             <table>
                 <input type="hidden"  name="fillForm" value="yes">
                 <input type="hidden"  name="departmentID" value="${departmentID}">

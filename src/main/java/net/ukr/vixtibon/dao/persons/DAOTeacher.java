@@ -147,6 +147,46 @@ public class DAOTeacher extends AbstractController<Teacher,Integer> {
         return teacher;
     }
 
+    public  int getDepartmentIDByUsername(String username){
+        String Select_DepartmentID_By_Username = "SELECT departmentID FROM teacher WHERE login='" + username + "';";
+        int departmentID = 0;
+        PreparedStatement ps = getPrepareStatement(Select_DepartmentID_By_Username);
+        //System.out.println("Select_DepartmentID_By_Username " + Select_DepartmentID_By_Username);
+        ResultSet rs = null;
+        try {
+            rs = ps.executeQuery();
+            if(rs.next() == true){
+                departmentID = rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) try { rs.close(); } catch (SQLException logOrIgnore) {}
+            if (ps != null) try { ps.close(); } catch (SQLException logOrIgnore) {}
+        }
+        return departmentID;
+    }
+
+    public  int getIDbyUserName(String username){
+        String Select_DepartmentID_By_Username = "SELECT ID FROM teacher WHERE login='" + username + "';";
+        int departmentID = 0;
+        PreparedStatement ps = getPrepareStatement(Select_DepartmentID_By_Username);
+        //System.out.println("Select_DepartmentID_By_Username " + Select_DepartmentID_By_Username);
+        ResultSet rs = null;
+        try {
+            rs = ps.executeQuery();
+            if(rs.next() == true){
+                departmentID = rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) try { rs.close(); } catch (SQLException logOrIgnore) {}
+            if (ps != null) try { ps.close(); } catch (SQLException logOrIgnore) {}
+        }
+        return departmentID;
+    }
+
     public Teacher getEntityByIdNameAndSurnameOnly(Integer id) {
         String Select_Teacher_Statemet = "SELECT ID, name, lastName, fathersName FROM teacher WHERE ID='"+ id +"';";
         Teacher teacher = new Teacher();

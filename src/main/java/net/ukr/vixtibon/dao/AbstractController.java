@@ -20,10 +20,10 @@ public abstract class AbstractController<E, K> {
     private ConnectionPool connectionPool;
 
     public AbstractController() {
-        connectionPool = new ConnectionPool(setConnectionParameters(),"com.mysql.jdbc.Driver",1);
+        connectionPool = new ConnectionPool("jdbc:mysql://localhost/institute?user=javatest&password=testpass","com.mysql.jdbc.Driver",1);
         connection = connectionPool.getConnection();
     }
-
+//  "jdbc:mysql://localhost/institute?user=javatest&password=testpass"
     public abstract List<E> getAll();
     public abstract boolean update(E entity);
     public abstract E getEntityById(K id);

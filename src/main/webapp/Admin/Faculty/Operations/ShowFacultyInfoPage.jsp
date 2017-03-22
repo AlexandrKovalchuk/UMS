@@ -29,7 +29,7 @@
             <div class = "textLabelParagraph textLabelAdminPage"><c:out value="${institute.getLongName()}"/></div>
                 <c:forEach items="${institute.getFacultys()}" var="faculty">
                     <div>
-                        <form action="/ShowInfoFacultyPageController" method="post" accept-charset="UTF-8">
+                        <form action="ShowInfoFacultyPageController" method="post" accept-charset="UTF-8">
                             <input type="hidden"  name="step" value="step1">
                             <input type="hidden"  name="facultyID" value="${faculty.getID()}">
                             <button onclick="submit" class="itemButton itemButtonAdminPages" ><c:out value="${faculty.getLongName()}"/></button>
@@ -53,7 +53,7 @@
 </c:if>
 
 <div>
-    <form action="/ShowInfoFacultyPageController" method="post">
+    <form action="ShowInfoFacultyPageController" method="post">
         <input type="hidden"  name="step" value="cancel">
         <td colspan=2>
             <button onclick="submit"  class="controlButton controlButtonAdminPage">Cancel</button>

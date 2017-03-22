@@ -30,7 +30,7 @@
             <div class = "textLabelParagraph textLabelEmployeePage">Course 1:</div>
             <c:forEach items="${department.getGroups1()}" var="group">
                 <div>
-                    <form action="/CreateStudentPageController" method="post" accept-charset="UTF-8">
+                    <form action="CreateStudentPageController" method="post" accept-charset="UTF-8">
                         <input type="hidden"  name="step" value="step1">
                         <input type="hidden"  name="groupID" value="${group.getID()}">
                         <button onclick="submit" class="itemButton itemButtonEmployeePages" ><c:out value="${group.getFullGroupName()}"/></button>
@@ -40,7 +40,7 @@
         <div class = "textLabelParagraph textLabelEmployeePage">Course 2:</div>
         <c:forEach items="${department.getGroups2()}" var="group">
             <div>
-                <form action="/CreateStudentPageController" method="post" accept-charset="UTF-8">
+                <form action="CreateStudentPageController" method="post" accept-charset="UTF-8">
                     <input type="hidden"  name="step" value="step1">
                     <input type="hidden"  name="groupID" value="${group.getID()}">
                     <button onclick="submit" class="itemButton itemButtonEmployeePages" ><c:out value="${group.getFullGroupName()}"/></button>
@@ -50,7 +50,7 @@
         <div class = "textLabelParagraph textLabelEmployeePage">Course 3:</div>
         <c:forEach items="${department.getGroups3()}" var="group">
             <div>
-                <form action="/CreateStudentPageController" method="post" accept-charset="UTF-8">
+                <form action="CreateStudentPageController" method="post" accept-charset="UTF-8">
                     <input type="hidden"  name="step" value="step1">
                     <input type="hidden"  name="groupID" value="${group.getID()}">
                     <button onclick="submit" class="itemButton itemButtonEmployeePages" ><c:out value="${group.getFullGroupName()}"/></button>
@@ -60,7 +60,7 @@
         <div class = "textLabelParagraph textLabelEmployeePage">Course 4:</div>
         <c:forEach items="${department.getGroups4()}" var="group">
             <div>
-                <form action="/CreateStudentPageController" method="post" accept-charset="UTF-8">
+                <form action="CreateStudentPageController" method="post" accept-charset="UTF-8">
                     <input type="hidden"  name="step" value="step1">
                     <input type="hidden"  name="groupID" value="${group.getID()}">
                     <button onclick="submit" class="itemButton itemButtonEmployeePages" ><c:out value="${group.getFullGroupName()}"/></button>
@@ -70,7 +70,7 @@
         <div class = "textLabelParagraph textLabelEmployeePage">Course 5:</div>
         <c:forEach items="${department.getGroups5()}" var="group">
             <div>
-                <form action="/CreateStudentPageController" method="post" accept-charset="UTF-8">
+                <form action="CreateStudentPageController" method="post" accept-charset="UTF-8">
                     <input type="hidden"  name="step" value="step1">
                     <input type="hidden"  name="groupID" value="${group.getID()}">
                     <button onclick="submit" class="itemButton itemButtonEmployeePages" ><c:out value="${group.getFullGroupName()}"/></button>
@@ -80,7 +80,7 @@
         <div class = "textLabelParagraph textLabelEmployeePage">Course 6:</div>
         <c:forEach items="${department.getGroups6()}" var="group">
             <div>
-                <form action="/CreateStudentPageController" method="post" accept-charset="UTF-8">
+                <form action="CreateStudentPageController" method="post" accept-charset="UTF-8">
                     <input type="hidden"  name="step" value="step1">
                     <input type="hidden"  name="groupID" value="${group.getID()}">
                     <button onclick="submit" class="itemButton itemButtonEmployeePages" ><c:out value="${group.getFullGroupName()}"/></button>
@@ -98,7 +98,7 @@
         </div>
 
         <div>
-            <form action="/CreateStudentPageController" method="post" accept-charset="UTF-8">
+            <form action="CreateStudentPageController" method="post" accept-charset="UTF-8">
                 <table>
                     <input type="hidden"  name="step" value="step2">
                     <input type="hidden"  name="groupID" value="${groupID}">

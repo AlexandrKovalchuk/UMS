@@ -29,7 +29,7 @@
             <div class = "textLabelParagraph textLabelAdminPage"><c:out value="${institute.getLongName()}"/></div>
             <c:forEach items="${institute.getFacultys()}" var="faculty">
                 <div>
-                    <form action="/MoveFacultyPageController" method="post" accept-charset="UTF-8">
+                    <form action="MoveFacultyPageController" method="post" accept-charset="UTF-8">
                         <input type="hidden"  name="step" value="step1">
                         <input type="hidden"  name="facultyID" value="${faculty.getID()}">
                         <button onclick="submit" class="itemButton itemButtonAdminPages" ><c:out value="${faculty.getLongName()}"/></button>
@@ -48,7 +48,7 @@
     <div class = "pageContent pageContentAdminPages pageContentAdminPages500px">
         <c:forEach items="${institutesList}" var="institute">
             <div>
-                <form action="/MoveFacultyPageController" method="post" accept-charset="UTF-8">
+                <form action="MoveFacultyPageController" method="post" accept-charset="UTF-8">
                     <input type="hidden"  name="step" value="step2">
                     <input type="hidden"  name="instituteID" value="${institute.getID()}">
                     <input type="hidden"  name="facultyID" value="${faculty.getID()}">
@@ -64,7 +64,7 @@
         <div class = "pageTitleText pageTitleTextAdmin">
             Confirm moving <c:out value="${faculty.getLongName()}"/> to <c:out value="${institute.getLongName()}"/>
         </div>
-        <form action="/MoveFacultyPageController" method="post" accept-charset="UTF-8">
+        <form action="MoveFacultyPageController" method="post" accept-charset="UTF-8">
             <table>
                 <input type="hidden"  name="step" value="step3">
                 <input type="hidden"  name="instituteID" value="${institute.getID()}">

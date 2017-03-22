@@ -30,7 +30,7 @@
             <div class = "textLabelParagraph textLabelEmployeePage"><c:out value="${department.getLongName()}"/></div>
             <c:forEach items="${department.getDisciplines()}" var="discipline">
                 <div>
-                    <form action="/ShowInfoDisciplinePageController" method="post" accept-charset="UTF-8">
+                    <form action="ShowInfoDisciplinePageController" method="post" accept-charset="UTF-8">
                         <input type="hidden"  name="step" value="step1">
                         <input type="hidden"  name="disciplineID" value="${discipline.getID()}">
                         <button onclick="submit" class="itemButton itemButtonEmployeePages" ><c:out value="${discipline.getNameOfDiscipline()}"/></button>

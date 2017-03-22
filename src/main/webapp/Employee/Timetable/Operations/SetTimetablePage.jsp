@@ -25,7 +25,7 @@
         <div class = "pageTitleText pageTitleTextEmployee">
             Set timetable:
         </div>
-            <form action="/SetTimetablePageController" method="post" accept-charset="UTF-8">
+            <form action="SetTimetablePageController" method="post" accept-charset="UTF-8">
                 <table>
                     <input type="hidden"  name="step" value="step1">
                     <input type="hidden"  name="timetablePresent" value="no">
@@ -42,7 +42,7 @@
         <div class = "pageTitleText pageTitleTextEmployee">
             Reset timetable:
         </div>
-            <form action="/SetTimetablePageController" method="post" accept-charset="UTF-8">
+            <form action="SetTimetablePageController" method="post" accept-charset="UTF-8">
                 <table>
                     <input type="hidden"  name="step" value="step1">
                     <input type="hidden"  name="timetablePresent" value="yes">

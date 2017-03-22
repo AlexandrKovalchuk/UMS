@@ -29,7 +29,7 @@
         <div class = "textLabelParagraph textLabelEmployeePage">Connected with current department</div>
         <c:forEach items="${disciplinesConnectedWithDepartment}" var="discipline">
             <div>
-                <form action="/DeleteDisciplinePageController" method="post" accept-charset="UTF-8">
+                <form action="DeleteDisciplinePageController" method="post" accept-charset="UTF-8">
                     <input type="hidden"  name="step" value="step1">
                     <input type="hidden"  name="disciplineID" value="${discipline.getID()}">
                     <button onclick="submit" class="itemButton itemButtonEmployeePages" ><c:out value="${discipline.getNameOfDiscipline()}"/></button>
@@ -41,7 +41,7 @@
 
         <c:forEach items="${disciplinesNotConnectedWithDepartment}" var="discipline">
             <div>
-                <form action="/DeleteDisciplinePageController" method="post" accept-charset="UTF-8">
+                <form action="DeleteDisciplinePageController" method="post" accept-charset="UTF-8">
                     <input type="hidden"  name="step" value="step1">
                     <input type="hidden"  name="disciplineID" value="${discipline.getID()}">
                     <button onclick="submit" class="itemButton itemButtonEmployeePages" ><c:out value="${discipline.getNameOfDiscipline()}"/></button>
@@ -60,7 +60,7 @@
             </div>
 
             <div>
-                <form action="/DeleteDisciplinePageController" method="post" accept-charset="UTF-8">
+                <form action="DeleteDisciplinePageController" method="post" accept-charset="UTF-8">
                     <table>
                         <input type="hidden"  name="step" value="step2">
                         <input type="hidden"  name="disciplineID" value="${discipline.getID()}">

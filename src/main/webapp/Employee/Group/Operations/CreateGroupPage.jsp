@@ -22,7 +22,7 @@
 <br />
 
 <div class = "pageContent pageContentEmployeePages pageContentEmployeePages300px">
-    <form action="/CreateGroupPageController" method="post" accept-charset="UTF-8">
+    <form action="CreateGroupPageController" method="post" accept-charset="UTF-8">
         <table>
             <input type="hidden"  name="fillForm" value="yes">
             <tr>

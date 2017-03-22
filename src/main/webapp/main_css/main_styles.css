@@ -69,6 +69,12 @@
     border-collapse: collapse;
     color: #fff79c;
 }
+
+.attendanceProgress{
+    border: 1px solid;
+    border-collapse: collapse;
+    color: #a0ffac;
+}
 /***************************************************************************************/
 /*buttons*/
 /*control buttons*/
@@ -249,6 +255,18 @@
     background: linear-gradient(to bottom right, rgba(102, 0, 0, 0.69), rgba(255, 255, 117, 0.35));
     color: #FFFFCE;
 }
+
+.itemButtonTeacherPages{
+    background: linear-gradient(to bottom right, rgba(19, 19, 19, 0.69), rgba(140, 140, 140, 0.35));
+    border: #2a452e;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    color: #a0ffac;
+}
+.itemButtonTeacherPages:hover {
+    background: linear-gradient(to bottom right, rgba(80, 102, 73, 0.69), rgba(109, 255, 142, 0.35));
+    color: #a0ffac;
+}
+
 /**/
 /***************************************************************************************/
 
@@ -298,6 +316,14 @@ form{
     background: rgba(21, 116, 21, 0.83);
     color: #e5f7fb;
 }
+.inputAttendanceProgress{
+    background: linear-gradient(to bottom right, rgba(19, 19, 19, 0.69), rgba(140, 140, 140, 0.35));
+    font-size: 18px;
+    font-weight: bold;
+    width: 20px;
+    height: 20px;
+    color: #a0ffac;
+}
 .inputStudent{
     background: rgba(108,108,108,0.3);
 }
@@ -337,6 +363,10 @@ form{
     color: #fff79c;
     text-align: left;
 }
+.textLabelTeacherPage{
+    color: #a0ffac;
+    text-align: left;
+}
 
 .textLabelParagraph{
     font-family: "Helvetica";
@@ -364,6 +394,12 @@ form{
     background: linear-gradient(to bottom right, rgba(40, 0, 0, 0.69), rgba(255, 255, 117, 0.35));
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
     color: #fff79c;
+}
+
+.pageContentTeacherPages{
+    background: linear-gradient(to bottom right, rgba(19, 19, 19, 0.69), rgba(140, 140, 140, 0.35));
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    color: #a0ffac;
 }
 
 .pageContentAdminPagesTwoFieldsSize{

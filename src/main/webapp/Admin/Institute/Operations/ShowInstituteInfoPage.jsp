@@ -29,7 +29,7 @@
     <div class = "pageContent pageContentAdminPages pageContentAdminPages500px">
         <c:forEach items="${institutesList}" var="institute">
             <div>
-                <form action="/ShowInstituteInfoPageController" method="post" accept-charset="UTF-8">
+                <form action="ShowInstituteInfoPageController" method="post" accept-charset="UTF-8">
                     <input type="hidden"  name="step" value="step1">
                     <input type="hidden"  name="instituteID" value="${institute.getID()}">
                     <button onclick="submit" class="itemButton itemButtonAdminPages" ><c:out value="${institute.getLongName()}"/></button>
@@ -55,7 +55,7 @@
 </c:if>
 
 <div>
-    <form action="/ShowInstituteInfoPageController" method="post">
+    <form action="ShowInstituteInfoPageController" method="post">
         <input type="hidden"  name="step" value="cancel">
         <td colspan=2>
             <button onclick="submit"  class="controlButton controlButtonAdminPage">Cancel</button>

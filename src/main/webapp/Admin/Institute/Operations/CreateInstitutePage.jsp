@@ -19,7 +19,7 @@
 </div>
 <br />
 <div class = "pageContent pageContentAdminPages pageContentAdminPagesTwoFieldsSize">
-    <form action="/CreateInstitutePageController" method="post" accept-charset="UTF-8">
+    <form action="CreateInstitutePageController" method="post" accept-charset="UTF-8">
         <table>
             <input type="hidden"  name="fillForm" value="yes">
             <tr>

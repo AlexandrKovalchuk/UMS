@@ -26,7 +26,7 @@
         Set day parameters:
     </div>
     <div class = "pageContent pageContentEmployeePages pageContentEmployeePages300px">
-        <form action="/DayRequirementsPageController" method="post" accept-charset="UTF-8">
+        <form action="DayRequirementsPageController" method="post" accept-charset="UTF-8">
             <table>
                 <input type="hidden"  name="step" value="step1">
                 <input type="hidden"  name="requirementsPresent" value="no">
@@ -57,7 +57,7 @@
         Update day parameters:
     </div>
     <div class = "pageContent pageContentEmployeePages pageContentEmployeePages300px">
-        <form action="/DayRequirementsPageController" method="post" accept-charset="UTF-8">
+        <form action="DayRequirementsPageController" method="post" accept-charset="UTF-8">
             <table>
                 <input type="hidden"  name="step" value="step1">
                 <input type="hidden"  name="requirementsPresent" value="yes">
@@ -90,7 +90,7 @@
             Set day parameters:
         </div>
         <div class = "pageContent pageContentEmployeePages pageContentEmployeePages300px">
-            <form action="/DayRequirementsPageController" method="post" accept-charset="UTF-8">
+            <form action="DayRequirementsPageController" method="post" accept-charset="UTF-8">
                 <table>
                     <input type="hidden"  name="step" value="step2">
                     <input type="hidden"  name="requirementsPresent" value="no">
@@ -118,7 +118,7 @@
             Update day parameters:
         </div>
         <div class = "pageContent pageContentEmployeePages pageContentEmployeePages300px">
-            <form action="/DayRequirementsPageController" method="post" accept-charset="UTF-8">
+            <form action="DayRequirementsPageController" method="post" accept-charset="UTF-8">
                 <table>
                     <input type="hidden"  name="step" value="step2">
                     <input type="hidden"  name="requirementsPresent" value="yes">

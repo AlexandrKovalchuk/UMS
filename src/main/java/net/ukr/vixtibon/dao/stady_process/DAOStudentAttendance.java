@@ -54,6 +54,37 @@ public class DAOStudentAttendance  extends AbstractController<StudentAttendanceO
         return saoList;
     }
 
+    public HashMap<Integer, StudentAttendanceObject> getByStudentIDDisciplineID(int studentID, int disciplineID){
+        System.out.println("DAOStudentAttendance getAllByStudentID");
+        String Select_getAllByStudentID_Statemet = "SELECT * FROM attendance WHERE studentID="+ studentID +" and disciplineID=" + disciplineID+ ";";
+        HashMap<Integer, StudentAttendanceObject> saoList = new HashMap<Integer, StudentAttendanceObject>();
+        PreparedStatement ps = getPrepareStatement(Select_getAllByStudentID_Statemet);
+        ResultSet rs = null;
+        try {
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                StudentAttendanceObject sao = new StudentAttendanceObject();
+                sao.setId(rs.getInt(1));
+                sao.setDisciplineID(rs.getInt(2));
+                sao.setStudentID(rs.getInt(3));
+                DAODiscipline daodi = new DAODiscipline();
+                Discipline discipline = new Discipline();
+                discipline = daodi.getEntityById(sao.getDisciplineID());
+                for(int i = 1; i <= discipline.getCountOfLessons(); i++){
+                    sao.getAttendance().add(rs.getString(4 + i));
+                }
+                daodi.closeConnection();
+                saoList.put(sao.getId(),sao);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) try { rs.close(); } catch (SQLException logOrIgnore) {}
+            if (ps != null) try { ps.close(); } catch (SQLException logOrIgnore) {}
+        }
+        return saoList;
+    }
+
     @Override
     public boolean update(StudentAttendanceObject entity) {
         return false;

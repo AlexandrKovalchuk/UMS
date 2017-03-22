@@ -1,5 +1,4 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page import="servlets.SessionsList" %>
 <%--
   Created by IntelliJ IDEA.
   User: alex
@@ -30,7 +29,7 @@
     <div>
         <div>
             <form action="TeacherMenuPageController" method="post">
-                <input type="hidden"  name="elementType" value="attendance">
+                <input type="hidden"  name="operationType" value="attendance">
                 <td colspan=2>
                     <button onclick="submit"  class="topicButton topicButtonTeacherPage">Update Attendance</button>
                 </td>
@@ -40,9 +39,19 @@
 
         <div>
             <form action="TeacherMenuPageController" method="post">
-                <input type="hidden"  name="elementType" value="progress">
+                <input type="hidden"  name="operationType" value="progress">
                 <td colspan=2>
                     <button onclick="submit"  class="topicButton topicButtonTeacherPage">Update Progress</button>
+                </td>
+            </form>
+        </div>
+        <br />
+
+        <div>
+            <form action="TeacherMenuPageController" method="post">
+                <input type="hidden"  name="operationType" value="timeTable">
+                <td colspan=2>
+                    <button onclick="submit"  class="topicButton topicButtonTeacherPage">Time Table</button>
                 </td>
             </form>
         </div>

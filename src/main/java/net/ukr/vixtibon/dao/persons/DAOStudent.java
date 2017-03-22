@@ -126,6 +126,26 @@ public class DAOStudent extends AbstractController<Student,Integer> {
         return student;
     }
 
+    public  int getDepartmentIDByUsername(String username){
+        String Select_DepartmentID_By_Username = "SELECT departmentID FROM student WHERE login='" + username + "';";
+        int departmentID = 0;
+        PreparedStatement ps = getPrepareStatement(Select_DepartmentID_By_Username);
+        //System.out.println("Select_DepartmentID_By_Username " + Select_DepartmentID_By_Username);
+        ResultSet rs = null;
+        try {
+            rs = ps.executeQuery();
+            if(rs.next() == true){
+                departmentID = rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) try { rs.close(); } catch (SQLException logOrIgnore) {}
+            if (ps != null) try { ps.close(); } catch (SQLException logOrIgnore) {}
+        }
+        return departmentID;
+    }
+
     @Override
     public boolean delete(Integer id) {
         DAOStudentProgress daop = new DAOStudentProgress();

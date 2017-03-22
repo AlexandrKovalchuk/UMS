@@ -4,7 +4,6 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1">
 
-
     <welcome-file-list>
 
         <welcome-file>/index.html</welcome-file>
@@ -430,6 +429,56 @@
     <servlet-mapping>
         <servlet-name>ShowInfoTeacherPageController</servlet-name>
         <url-pattern>/ShowInfoTeacherPageController</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>TeacherMenuPageController</servlet-name>
+        <servlet-class>net.ukr.vixtibon.servlets.controllers.study_process.teachers.TeacherMenuPageController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>TeacherMenuPageController</servlet-name>
+        <url-pattern>/TeacherMenuPageController</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>SetAttendancePageController</servlet-name>
+        <servlet-class>net.ukr.vixtibon.servlets.controllers.study_process.teachers.SetAttendancePageController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>SetAttendancePageController</servlet-name>
+        <url-pattern>/SetAttendancePageController</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>SetProgressPageController</servlet-name>
+        <servlet-class>net.ukr.vixtibon.servlets.controllers.study_process.teachers.SetProgressPageController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>SetProgressPageController</servlet-name>
+        <url-pattern>/SetProgressPageController</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ShowTimetablePageController</servlet-name>
+        <servlet-class>net.ukr.vixtibon.servlets.controllers.study_process.teachers.ShowTimetablePageController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>ShowTimetablePageController</servlet-name>
+        <url-pattern>/ShowTimetablePageController</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ActionResultTeacherMenuPageController</servlet-name>
+        <servlet-class>net.ukr.vixtibon.servlets.controllers.ActionResultTeacherMenuPageController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>ActionResultTeacherMenuPageController</servlet-name>
+        <url-pattern>/ActionResultTeacherMenuPageController</url-pattern>
     </servlet-mapping>
 
     <servlet>

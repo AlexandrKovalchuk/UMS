@@ -27,7 +27,7 @@
     <div class = "pageContent pageContentAdminPages pageContentAdminPages500px">
         <c:forEach items="${institutesList}" var="institute">
             <div>
-                <form action="/DeleteInstitutePageController" method="post" accept-charset="UTF-8">
+                <form action="DeleteInstitutePageController" method="post" accept-charset="UTF-8">
                     <input type="hidden"  name="step" value="step1">
                     <input type="hidden"  name="instituteID" value="${institute.getID()}">
                     <button onclick="submit" class="itemButton itemButtonAdminPages" ><c:out value="${institute.getLongName()}"/></button>
@@ -45,7 +45,7 @@
             </div>
 
             <div>
-                <form action="/DeleteInstitutePageController" method="post" accept-charset="UTF-8">
+                <form action="DeleteInstitutePageController" method="post" accept-charset="UTF-8">
                     <table>
                         <input type="hidden"  name="step" value="step2">
                         <input type="hidden"  name="instituteID" value="${institute.getID()}">

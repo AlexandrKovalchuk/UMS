@@ -2,6 +2,8 @@ package net.ukr.vixtibon.servlets.controllers.login;
 
 import net.ukr.vixtibon.dao.login.DAOLogin;
 import net.ukr.vixtibon.dao.persons.DAOEmployee;
+import net.ukr.vixtibon.dao.persons.DAOStudent;
+import net.ukr.vixtibon.dao.persons.DAOTeacher;
 import net.ukr.vixtibon.login_body.LogInBody;
 
 import javax.servlet.ServletException;
@@ -34,16 +36,20 @@ public class LogInServlet extends HttpServlet {
                     session.setAttribute("type","admin");
                     request.getRequestDispatcher("Admin/AdminPage.jsp").forward(request, response);
                 }else if(lib.getAccess().equals("employee")){
-                    DAOEmployee daoe = new DAOEmployee();
+                    DAOEmployee daoEmployee = new DAOEmployee();
                     session.setAttribute("type","employee");
-                    session.setAttribute("departmentID",daoe.getDepartmentIDByUsername(username));
-                    System.out.println("LogInServlet departmentID " + session.getAttribute("departmentID"));
+                    session.setAttribute("departmentID", daoEmployee.getDepartmentIDByUsername(username));
                     request.getRequestDispatcher("Employee/EmployeePage.jsp").forward(request, response);
                 }else if(lib.getAccess().equals("teacher")){
+                    DAOTeacher daoTeacher = new DAOTeacher();
                     session.setAttribute("type","teacher");
+                    session.setAttribute("departmentID", daoTeacher.getDepartmentIDByUsername(username));
+                    session.setAttribute("teacherID",daoTeacher.getIDbyUserName(username));
                     request.getRequestDispatcher("Teacher/TeacherPage.jsp").forward(request, response);
                 }else if(lib.getAccess().equals("student")){
+                    DAOStudent daoStudent = new DAOStudent();
                     session.setAttribute("type","student");
+                    session.setAttribute("departmentID", daoStudent.getDepartmentIDByUsername(username));
                     request.getRequestDispatcher("Student/StudentPage.jsp").forward(request, response);
                 }else{
                     request.setAttribute("wrongPasswordOrLogIn", "errorInAccess");
@@ -56,7 +62,7 @@ public class LogInServlet extends HttpServlet {
 
         }
         dl.returnConnectionInPool();
-        //dl.closeConnection();
+        dl.closeConnection();
 
     }
 

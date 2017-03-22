@@ -29,7 +29,7 @@
         <div class = "textLabelParagraph textLabelEmployeePage">Connected with current department</div>
         <c:forEach items="${disciplinesConnectedWithDepartment}" var="discipline">
             <div>
-                <form action="/SetDisciplineDepartmentDependencyPageController" method="post" accept-charset="UTF-8">
+                <form action="SetDisciplineDepartmentDependencyPageController" method="post" accept-charset="UTF-8">
                     <input type="hidden"  name="step" value="step1">
                     <input type="hidden"  name="state" value="connected">
                     <input type="hidden"  name="disciplineID" value="${discipline.getID()}">
@@ -42,7 +42,7 @@
 
         <c:forEach items="${disciplinesNotConnectedWithDepartment}" var="discipline">
             <div>
-                <form action="/SetDisciplineDepartmentDependencyPageController" method="post" accept-charset="UTF-8">
+                <form action="SetDisciplineDepartmentDependencyPageController" method="post" accept-charset="UTF-8">
                     <input type="hidden"  name="step" value="step1">
                     <input type="hidden"  name="state" value="notConnected">
                     <input type="hidden"  name="disciplineID" value="${discipline.getID()}">
@@ -61,7 +61,7 @@
 
     <div class = "pageContent pageContentEmployeePages pageContentEmployeePages300px">
     <c:if test = "${state eq 'connected'}">
-        <form action="/SetDisciplineDepartmentDependencyPageController" method="post" accept-charset="UTF-8">
+        <form action="SetDisciplineDepartmentDependencyPageController" method="post" accept-charset="UTF-8">
             <table>
                 <input type="hidden"  name="step" value="step2">
                 <input type="hidden"  name="action" value="update">
@@ -86,7 +86,7 @@
                 </tr>
             </table>
         </form>
-        <form action="/SetDisciplineDepartmentDependencyPageController" method="post" accept-charset="UTF-8">
+        <form action="SetDisciplineDepartmentDependencyPageController" method="post" accept-charset="UTF-8">
             <table>
                 <input type="hidden"  name="step" value="step2">
                 <input type="hidden"  name="action" value="remove">
@@ -100,7 +100,7 @@
         </form>
     </c:if>
     <c:if test = "${state eq 'notConnected'}">
-        <form action="/SetDisciplineDepartmentDependencyPageController" method="post" accept-charset="UTF-8">
+        <form action="SetDisciplineDepartmentDependencyPageController" method="post" accept-charset="UTF-8">
             <table>
                 <input type="hidden"  name="step" value="step2">
                 <input type="hidden"  name="action" value="new">
