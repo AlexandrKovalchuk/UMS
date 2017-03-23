@@ -70,13 +70,13 @@
                 <tr>
                     <td class = "textLabel textLabelEmployeePage">Course Number:</td>
                     <td>
-                        <input class = "inputSettings inputEmployee" type="number" name="courseNumber"  value="${dependencyObject.getCourseNumber()}" required/>
+                        <input class = "inputSettings inputEmployee" type="number" name="courseNumber"  maxlength="1" value="${dependencyObject.getCourseNumber()}" required/>
                     </td>
                 </tr>
                 <tr>
                     <td class = "textLabel textLabelEmployeePage">Semester Number:</td>
                     <td>
-                        <input class = "inputSettings inputEmployee" type="number" name="semesterNumber"  value="${dependencyObject.getSemesterNumber()}" required/>
+                        <input class = "inputSettings inputEmployee" type="number" name="semesterNumber"  maxlength="1" value="${dependencyObject.getSemesterNumber()}" required/>
                     </td>
                 </tr>
                 <tr>
@@ -109,13 +109,13 @@
                 <tr>
                     <td class = "textLabel textLabelEmployeePage">Course Number:</td>
                     <td>
-                        <input class = "inputSettings inputEmployee" type="number" name="courseNumber"  required/>
+                        <input class = "inputSettings inputEmployee" type="number" name="courseNumber"  maxlength="1" required/>
                     </td>
                 </tr>
                 <tr>
                     <td class = "textLabel textLabelEmployeePage">Semester Number:</td>
                     <td>
-                        <input class = "inputSettings inputEmployee" type="number" name="semesterNumber"  required/>
+                        <input class = "inputSettings inputEmployee" type="number" name="semesterNumber"  maxlength="1" required/>
                     </td>
                 </tr>
                 <tr>

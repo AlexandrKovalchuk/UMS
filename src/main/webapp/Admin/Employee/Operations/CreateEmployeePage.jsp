@@ -56,25 +56,25 @@
                     <tr>
                         <td class = "textLabel textLabelAdminPage">Ім'я:</td>
                         <td>
-                            <input class = "inputSettings inputAdminPage" type="text" name="name" required/>
+                            <input class = "inputSettings inputAdminPage" type="text" name="name" maxlength="40" required/>
                         </td>
                     </tr>
                     <tr>
                         <td class = "textLabel textLabelAdminPage">Прізвище:</td>
                         <td>
-                            <input class = "inputSettings inputAdminPage" type="text" name="lastName" required/>
+                            <input class = "inputSettings inputAdminPage" type="text" name="lastName" maxlength="50" required/>
                         </td>
                     </tr>
                     <tr >
                         <td class = "textLabel textLabelAdminPage">По Батькові:</td>
                         <td>
-                            <input class = "inputSettings inputAdminPage" type="text" name="fathersName" required/>
+                            <input class = "inputSettings inputAdminPage" type="text" name="fathersName" maxlength="40" required/>
                         </td>
                     </tr>
                     <tr>
                         <td class = "textLabel textLabelAdminPage">Ідентифікаційний код:</td>
                         <td>
-                            <input class = "inputSettings inputAdminPage" type="text" name="personalID" required/>
+                            <input class = "inputSettings inputAdminPage" type="text" name="personalID" maxlength="10" required/>
                         </td>
                     </tr>
                     <tr>
@@ -90,57 +90,57 @@
                     <tr>
                         <td class = "textLabel textLabelAdminPage">День</td>
                         <td>
-                            <input class = "inputSettings inputAdminPage" type="int" name="bday" required/>
+                            <input class = "inputSettings inputAdminPage" type="int" name="bday" maxlength="2" required/>
                         </td>
                     </tr>
                     <tr>
                         <td class = "textLabel textLabelAdminPage">   Місяць</td>
                         <td>
-                            <input class = "inputSettings inputAdminPage" type="int" name="bmonth" required/>
+                            <input class = "inputSettings inputAdminPage" type="int" name="bmonth" maxlength="2" required/>
                         </td>
                     </tr>
                     <tr>
                         <td class = "textLabel textLabelAdminPage">   Рік</td>
                         <td>
-                            <input class = "inputSettings inputAdminPage" type="int" name="byear" required/>
+                            <input class = "inputSettings inputAdminPage" type="int" name="byear" maxlength="4" required/>
                         </td>
                     </tr>
                     <tr>
                         <td class = "textLabel textLabelAdminPage">Пошта:</td>
                         <td>
-                            <input class = "inputSettings inputAdminPage inputAdminPageLongNames" type="text" name="email" required/>
+                            <input class = "inputSettings inputAdminPage inputAdminPageLongNames" type="text" name="email" maxlength="100" required/>
                         </td>
                     </tr>
                     <tr>
                         <td class = "textLabel textLabelAdminPage">Телефон:</td>
                         <td>
-                            <input class = "inputSettings inputAdminPage" type="text" name="phoneNumber" required/>
+                            <input class = "inputSettings inputAdminPage" type="text" name="phoneNumber" maxlength="20" required/>
                         </td>
                     </tr>
                     <tr>
                         <td class = "textLabel textLabelAdminPage">Адресса:</td>
                         <td>
-                            <input class = "inputSettings inputAdminPage inputAdminPageLongNames" type="text" name="address" required/>
+                            <input class = "inputSettings inputAdminPage inputAdminPageLongNames" type="text" name="address" maxlength="200" required/>
                         </td>
                     </tr>
                     <tr>
                         <td class = "textLabel textLabelAdminPage">Паспортні данні:</td>
                         <td>
-                            <input class = "inputSettings inputAdminPage inputAdminPageLongNames" type="text" name="pasport" required/>
+                            <input class = "inputSettings inputAdminPage inputAdminPageLongNames" type="text" name="pasport" maxlength="200" required/>
                         </td>
                     </tr>
 
                     <tr>
                         <td class = "textLabel textLabelAdminPage">Посада:</td>
                         <td>
-                            <input class = "inputSettings inputAdminPage inputAdminPageLongNames" type="text" name="office" required/>
+                            <input class = "inputSettings inputAdminPage inputAdminPageLongNames" type="text" name="office" maxlength="100" required/>
                         </td>
                     </tr>
 
                     <tr>
                         <td class = "textLabel textLabelAdminPage">LogIn:</td>
                         <td>
-                            <input class = "inputSettings inputAdminPage inputAdminPageLongNames" type="text" name="login" required/>
+                            <input class = "inputSettings inputAdminPage inputAdminPageLongNames" type="text" name="login" maxlength="70" required/>
                         </td>
                     </tr>
 

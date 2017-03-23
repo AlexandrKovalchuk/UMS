@@ -51,13 +51,13 @@
                     <tr>
                         <td class = "textLabel textLabelAdminPage">Long name:</td>
                         <td>
-                            <input class = "inputSettings inputAdminPage inputAdminPageLongNames" type="text" name="longName" required/>
+                            <input class = "inputSettings inputAdminPage inputAdminPageLongNames" type="text" name="longName" maxlength="70" required/>
                         </td>
                     </tr>
                     <tr>
                         <td class = "textLabel textLabelAdminPage">Short name:</td>
                         <td>
-                            <input class = "inputSettings inputAdminPage" type="text" name="shortName" required/>
+                            <input class = "inputSettings inputAdminPage" type="text" name="shortName" maxlength="10" required/>
                         </td>
                     </tr>
                     <tr>

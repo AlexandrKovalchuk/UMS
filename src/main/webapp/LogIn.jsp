@@ -41,13 +41,13 @@
                 <tr>
                     <td class = "textLabel textLabelLogInPage">Login Name:</td>
                     <td>
-                        <input class = "inputSettings inputLogInPage" name="username" type="text"  data-hint="insert log in" required/>
+                        <input class = "inputSettings inputLogInPage" name="username" type="text" maxlength="70" data-hint="insert log in" required/>
                     </td>
                 </tr>
                 <tr>
                     <td class = "textLabel textLabelLogInPage">Password:</td>
                     <td>
-                        <input class = "inputSettings inputLogInPage" name="password" type="password" maxlength="20"
+                        <input class = "inputSettings inputLogInPage" name="password" type="password" maxlength="70"
                                placeholder="" autocomplete="off" data-hint="insert password" required/>
                     </td>
                 </tr>

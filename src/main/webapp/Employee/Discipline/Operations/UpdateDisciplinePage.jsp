@@ -65,14 +65,14 @@
                     <tr>
                         <td class = "textLabel textLabelEmployeePage">Discipline name:</td>
                         <td>
-                            <input class = "inputSettings inputEmployee inputAdminPageLongNames" type="text" name="nameOfDiscipline" value="${discipline.getNameOfDiscipline()}" required/>
+                            <input class = "inputSettings inputEmployee inputAdminPageLongNames" type="text" maxlength="200"name="nameOfDiscipline" value="${discipline.getNameOfDiscipline()}" required/>
                         </td>
                     </tr>
 
                     <tr>
                         <td class = "textLabel textLabelEmployeePage">Number Of Lessons:</td>
                         <td>
-                            <input class = "inputSettings inputEmployee" type="number" name="countOfLessons" value="${discipline.getCountOfLessons()}" required/>
+                            <input class = "inputSettings inputEmployee" type="number" maxlength="2" name="countOfLessons" value="${discipline.getCountOfLessons()}" required/>
                         </td>
                     </tr>
                     <tr>

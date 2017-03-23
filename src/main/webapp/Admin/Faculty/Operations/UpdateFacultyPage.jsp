@@ -55,13 +55,13 @@
                  <tr class = "textInputLabel">
                       <td class = "textLabel textLabelAdminPage">Long name:</td>
                       <td>
-                          <input class = "inputSettings inputAdminPage inputAdminPageLongNames" type="text" name="longName"  required value="${faculty.getLongName()}">
+                          <input class = "inputSettings inputAdminPage inputAdminPageLongNames" type="text" name="longName" maxlength="70" required value="${faculty.getLongName()}">
                       </td>
                  </tr>
                  <tr class = "textInputLabel">
                       <td class = "textLabel textLabelAdminPage">Short name:</td>
                       <td>
-                          <input class = "inputSettings inputAdminPage" type="text" name="shortName" required value="${faculty.getShortName()}">
+                          <input class = "inputSettings inputAdminPage" type="text" name="shortName" maxlength="10" required value="${faculty.getShortName()}">
                       </td>
                  </tr>
                  <tr>

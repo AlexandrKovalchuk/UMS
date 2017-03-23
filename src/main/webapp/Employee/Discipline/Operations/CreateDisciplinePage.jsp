@@ -29,13 +29,13 @@
             <tr>
                 <td class = "textLabel textLabelEmployeePage">Discipline name:</td>
                 <td>
-                    <input class = "inputSettings inputEmployee inputAdminPageLongNames" type="text" name="nameOfDiscipline" required/>
+                    <input class = "inputSettings inputEmployee inputAdminPageLongNames" type="text" name="nameOfDiscipline" maxlength="200" required/>
                 </td>
             </tr>
             <tr>
                 <td class = "textLabel textLabelEmployeePage">Number Of Lessons:</td>
                 <td>
-                    <input class = "inputSettings inputEmployee" type="number" name="countOfLessons" required/>
+                    <input class = "inputSettings inputEmployee" type="number" name="countOfLessons" maxlength="2" required/>
                 </td>
             </tr>
             <tr>

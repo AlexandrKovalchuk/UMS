@@ -106,13 +106,13 @@
                 <tr>
                     <td class = "textLabel textLabelEmployeePage">Group name:</td>
                     <td>
-                        <input class = "inputSettings inputEmployee inputAdminPageLongNames" type="text" name="fullGroupName" value="${group.getFullGroupName()}" required/>
+                        <input class = "inputSettings inputEmployee inputAdminPageLongNames" type="text" name="fullGroupName" maxlength="30" value="${group.getFullGroupName()}" required/>
                     </td>
                 </tr>
                 <tr>
                     <td class = "textLabel textLabelEmployeePage">Course Number:</td>
                     <td>
-                        <input class = "inputSettings inputEmployee" type="number" name="courseNumber" value="${group.getCourseNumber()}" required/>
+                        <input class = "inputSettings inputEmployee" type="number" name="courseNumber" maxlength="1" value="${group.getCourseNumber()}" required/>
                     </td>
                 </tr>
                 <tr>

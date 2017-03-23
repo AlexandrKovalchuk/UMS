@@ -123,25 +123,25 @@
                 <tr>
                     <td class = "textLabel textLabelEmployeePage">Ім'я:</td>
                     <td>
-                        <input class = "inputSettings inputEmployee" type="text" name="name" required value="${student.getName()}">
+                        <input class = "inputSettings inputEmployee" type="text" name="name" maxlength="40" required value="${student.getName()}">
                     </td>
                 </tr>
                 <tr>
                     <td class = "textLabel textLabelEmployeePage">Прізвище:</td>
                     <td>
-                        <input class = "inputSettings inputEmployee" type="text" name="lastName" required value="${student.getSecondName()}">
+                        <input class = "inputSettings inputEmployee" type="text" name="lastName" maxlength="50" required value="${student.getSecondName()}">
                     </td>
                 </tr>
                 <tr>
                     <td class = "textLabel textLabelEmployeePage">По Батькові:</td>
                     <td>
-                        <input class = "inputSettings inputEmployee" type="text" name="fathersName" required value="${student.getSurname()}">
+                        <input class = "inputSettings inputEmployee" type="text" name="fathersName" maxlength="40" required value="${student.getSurname()}">
                     </td>
                 </tr>
                 <tr>
                     <td class = "textLabel textLabelEmployeePage">Ідентифікаційний код:</td>
                     <td>
-                        <input class = "inputSettings inputEmployee" type="text" name="personalID" required value="${student.getPersonalID()}">
+                        <input class = "inputSettings inputEmployee" type="text" name="personalID" maxlength="10" required value="${student.getPersonalID()}">
                     </td>
                 </tr>
                 <tr>
@@ -157,57 +157,57 @@
                 <tr>
                     <td class = "textLabel textLabelEmployeePage">День</td>
                     <td>
-                        <input class = "inputSettings inputEmployee" type="int" name="bday" required value="${student.getDayOfBorn()}">
+                        <input class = "inputSettings inputEmployee" type="int" name="bday" maxlength="2" required value="${student.getDayOfBorn()}">
                     </td>
                 </tr>
                 <tr>
                     <td class = "textLabel textLabelEmployeePage">Місяць</td>
                     <td>
-                        <input class = "inputSettings inputEmployee" type="int" name="bmonth" required value="${student.getMonthOfBorn()}">
+                        <input class = "inputSettings inputEmployee" type="int" name="bmonth" maxlength="2" required value="${student.getMonthOfBorn()}">
                     </td>
                 </tr>
                 <tr>
                     <td class = "textLabel textLabelEmployeePage">Рік</td>
                     <td>
-                        <input class = "inputSettings inputEmployee" type="int" name="byear" required value="${student.getYearOfBorn()}">
+                        <input class = "inputSettings inputEmployee" type="int" name="byear" maxlength="4" required value="${student.getYearOfBorn()}">
                     </td>
                 </tr>
                 <tr>
                     <td class = "textLabel textLabelEmployeePage">Пошта:</td>
                     <td>
-                        <input class = "inputSettings inputEmployee inputAdminPageLongNames" type="text" name="email" required value="${student.getEmail()}">
+                        <input class = "inputSettings inputEmployee inputAdminPageLongNames" type="text" name="email" maxlength="100" required value="${student.getEmail()}">
                     </td>
                 </tr>
                 <tr>
                     <td class = "textLabel textLabelEmployeePage">Телефон:</td>
                     <td>
-                        <input class = "inputSettings inputEmployee" type="text" name="phoneNumber" required value="${student.getPhoneNumber()}">
+                        <input class = "inputSettings inputEmployee" type="text" name="phoneNumber" maxlength="20" required value="${student.getPhoneNumber()}">
                     </td>
                 </tr>
                 <tr>
                     <td class = "textLabel textLabelEmployeePage">Адресса:</td>
                     <td>
-                        <input class = "inputSettings inputEmployee inputAdminPageLongNames" type="text" name="address" required value="${student.getAddress()}">
+                        <input class = "inputSettings inputEmployee inputAdminPageLongNames" type="text" name="address" maxlength="200" required value="${student.getAddress()}">
                     </td>
                 </tr>
                 <tr>
                     <td class = "textLabel textLabelEmployeePage">Паспортні данні:</td>
                     <td>
-                        <input class = "inputSettings inputEmployee inputAdminPageLongNames" type="text" name="pasport" required value="${student.getPasport()}">
+                        <input class = "inputSettings inputEmployee inputAdminPageLongNames" type="text" name="pasport" maxlength="200" required value="${student.getPasport()}">
                     </td>
                 </tr>
 
                 <tr>
                     <td class = "textLabel textLabelEmployeePage">Students book:</td>
                     <td>
-                        <input class = "inputSettings inputEmployee" type="text" name="indexBook" required value="${student.getIndexBook()}">
+                        <input class = "inputSettings inputEmployee" type="text" name="indexBook" maxlength="100" required value="${student.getIndexBook()}">
                     </td>
                 </tr>
 
                 <tr>
                     <td class = "textLabel textLabelEmployeePage">LogIn:</td>
                     <td>
-                        <input class = "inputSettings inputEmployee inputAdminPageLongNames" type="text" name="login" required value="${student.getLogin()}">
+                        <input class = "inputSettings inputEmployee inputAdminPageLongNames" type="text" name="login" maxlength="70" required value="${student.getLogin()}">
                     </td>
                 </tr>
 
