@@ -69,6 +69,7 @@ public class DAOGroup  extends AbstractController<Group,Integer> {
 
     @Override
     public boolean update(Group entity) {
+        changeIncorrectSymbols(entity);
         String Update_Group_Statemet = "UPDATE gtgroup SET fullGroupName='" +entity.getFullGroupName()+ "" +
                 "',courseNumber='"+entity.getCourseNumber()+"'," +
                 "departmentID='"+entity.getDepartmentID()+"' WHERE ID=" + entity.getID() + ";";
@@ -140,6 +141,7 @@ public class DAOGroup  extends AbstractController<Group,Integer> {
 
     @Override
     public boolean create(Group entity) throws SQLException {
+        changeIncorrectSymbols(entity);
         String Create_Group_Statemet = "INSERT INTO gtgroup (id,fullGroupName,courseNumber,departmentID) " +
                 "VALUES ('" + findFreeID("gtgroup") + "','" + entity.getFullGroupName() + "','" + entity.getCourseNumber() + "','"
                  + entity.getDepartmentID() + "');";
@@ -154,6 +156,13 @@ public class DAOGroup  extends AbstractController<Group,Integer> {
             return false;
         } finally {
             if (ps != null) try { ps.close(); } catch (SQLException logOrIgnore) {}
+        }
+    }
+
+    private void changeIncorrectSymbols(Group entity){
+        String[] incorrectSymbols = {"'"};
+        for(String str: incorrectSymbols){
+            entity.setFullGroupName(entity.getFullGroupName().replaceAll(str,"'" + str));
         }
     }
 }

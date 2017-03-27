@@ -1,6 +1,7 @@
 package net.ukr.vixtibon.dao.stady_process;
 
 import net.ukr.vixtibon.QueryStack;
+import net.ukr.vixtibon.base_objects.persons.Employee;
 import net.ukr.vixtibon.base_objects.study_process.Discipline;
 import net.ukr.vixtibon.dao.AbstractController;
 
@@ -40,6 +41,7 @@ public class DAODiscipline  extends AbstractController<Discipline,Integer> {
 
     @Override
     public boolean update(Discipline entity) {
+        changeIncorrectSymbols(entity);
         String Update_Discipline_Statemet = "UPDATE discipline SET nameOfDiscipline='" +entity.getNameOfDiscipline()+ "" +
                 "',countOfLessons='"+entity.getCountOfLessons()+"" +
                 "',exam='"+entity.isExam()+"'  WHERE ID="+entity.getID()+ ";";
@@ -129,6 +131,7 @@ public class DAODiscipline  extends AbstractController<Discipline,Integer> {
 
     @Override
     public boolean create(Discipline entity) throws SQLException {
+        changeIncorrectSymbols(entity);
         String Create_Discipline_Statemet = "INSERT INTO discipline (id,nameOfDiscipline," +
                 "countOfLessons,exam) " +
                 "VALUES ('" + findFreeID("discipline") + "','" + entity.getNameOfDiscipline()  + "','" + entity.getCountOfLessons() + "','" +entity.isExam()
@@ -144,6 +147,13 @@ public class DAODiscipline  extends AbstractController<Discipline,Integer> {
             return false;
         } finally {
             if (ps != null) try { ps.close(); } catch (SQLException logOrIgnore) {}
+        }
+    }
+
+    private void changeIncorrectSymbols(Discipline entity){
+        String[] incorrectSymbols = {"'"};
+        for(String str: incorrectSymbols){
+            entity.setNameOfDiscipline(entity.getNameOfDiscipline().replaceAll(str,"'" + str));
         }
     }
 }

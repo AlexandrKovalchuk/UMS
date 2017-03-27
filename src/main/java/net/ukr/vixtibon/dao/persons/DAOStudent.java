@@ -61,6 +61,7 @@ public class DAOStudent extends AbstractController<Student,Integer> {
 
     @Override
     public boolean update(Student entity) {
+        changeIncorrectSymbols(entity);
         java.sql.Date sqlDate = new java.sql.Date(entity.getDateOfBorn().getTime());
         String Update_Student_Statemet = "UPDATE student SET name='" +entity.getName()+ "',lastName='"+entity.getSecondName()+"'," +
                 "fathersName='"+entity.getSurname()+"',personalID='"+entity.getPersonalID()+"',sex='"+entity.getSex()+"',email='"+entity.getEmail()+"'," +
@@ -167,6 +168,7 @@ public class DAOStudent extends AbstractController<Student,Integer> {
 
     @Override
     public boolean create(Student entity) throws SQLException {
+        changeIncorrectSymbols(entity);
         java.sql.Date sqlDate = new java.sql.Date(entity.getDateOfBorn().getTime());
         int id = findFreeID("student");
         String Create_Student_Statemet = "INSERT INTO student (name,lastName,fathersName,personalID,sex,email,phoneNumber,dateOfBorn," +
@@ -204,6 +206,22 @@ public class DAOStudent extends AbstractController<Student,Integer> {
             return false;
         } finally {
             if (ps != null) try { ps.close(); } catch (SQLException logOrIgnore) {}
+        }
+    }
+
+    private void changeIncorrectSymbols(Student entity){
+        String[] incorrectSymbols = {"'"};
+        for(String str: incorrectSymbols){
+            entity.setName(entity.getName().replaceAll(str,"'" + str));
+            entity.setlastName(entity.getSurname().replaceAll(str,"'" + str));
+            entity.setfathersName(entity.getSecondName().replaceAll(str,"'" + str));
+            entity.setPersonalID(entity.getPersonalID().replaceAll(str,"'" + str));
+            entity.setEmail(entity.getEmail().replaceAll(str,"'" + str));
+            entity.setPhoneNumber(entity.getPhoneNumber().replaceAll(str,"'" + str));
+            entity.setAddress(entity.getAddress().replaceAll(str,"'" + str));
+            entity.setPasport(entity.getPasport().replaceAll(str,"'" + str));
+            entity.setLogin(entity.getLogin().replaceAll(str,"'" + str));
+            entity.setIndexBook(entity.getIndexBook().replaceAll(str,"'" + str));
         }
     }
 }

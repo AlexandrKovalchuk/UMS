@@ -40,6 +40,7 @@ public class DAOInstitute  extends AbstractController<Institute,Integer> {
 
     @Override
     public boolean update(Institute entity) {
+        changeIncorrectSymbols(entity);
         String Update_Institute_Statemet = "UPDATE institute SET longName='" + entity.getLongName() + "', shortName='"
                 + entity.getShortName() + "' WHERE ID=" + entity.getID() + ";";
         PreparedStatement ps = getPrepareStatement(Update_Institute_Statemet);
@@ -95,6 +96,7 @@ public class DAOInstitute  extends AbstractController<Institute,Integer> {
 
     @Override
     public boolean create(Institute entity) {
+        changeIncorrectSymbols(entity);
         String Create_Institute_Statemet = "INSERT INTO institute (ID,longName,shortName) VALUES ('"+findFreeID("institute")+"','"+entity.getLongName() + "','" + entity.getShortName()+"');";
         //QueryStack qs = new QueryStack();
         //qs.queries.add(Create_Institute_Statemet);
@@ -125,5 +127,11 @@ public class DAOInstitute  extends AbstractController<Institute,Integer> {
         }
     }
 
-
+    private void changeIncorrectSymbols(Institute entity){
+        String[] incorrectSymbols = {"'"};
+        for(String str: incorrectSymbols){
+            entity.setLongName(entity.getLongName().replaceAll(str,"'" + str));
+            entity.setShortName(entity.getShortName().replaceAll(str,"'" + str));
+        }
+    }
 }

@@ -62,6 +62,7 @@ public class DAODepartment extends AbstractController<Department,Integer> {
 
     @Override
     public boolean update(Department entity) {
+        changeIncorrectSymbols(entity);
         String Update_Department_Statemet = "UPDATE department SET longName='" + entity.getLongName() + "', shortName='"
                 + entity.getShortName() + "' WHERE ID=" + entity.getID() + ";";
         PreparedStatement ps = getPrepareStatement(Update_Department_Statemet);
@@ -131,6 +132,7 @@ public class DAODepartment extends AbstractController<Department,Integer> {
 
     @Override
     public boolean create(Department entity) throws SQLException {
+        changeIncorrectSymbols(entity);
         String Create_Department_Statemet = "INSERT INTO department (ID,longName,shortName, facultyID) VALUES ('"+findFreeID("department")+"','"+entity.getLongName() + "','" + entity.getShortName()+"','"+entity.getFacultyID()+"');";
         QueryStack qs = new QueryStack();
         qs.queries.add(Create_Department_Statemet);
@@ -157,6 +159,14 @@ public class DAODepartment extends AbstractController<Department,Integer> {
             return false;
         } finally {
             if (ps != null) try { ps.close(); } catch (SQLException logOrIgnore) {}
+        }
+    }
+
+    private void changeIncorrectSymbols(Department entity){
+        String[] incorrectSymbols = {"'"};
+        for(String str: incorrectSymbols){
+            entity.setLongName(entity.getLongName().replaceAll(str,"'" + str));
+            entity.setShortName(entity.getShortName().replaceAll(str,"'" + str));
         }
     }
 }

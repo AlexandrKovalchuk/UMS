@@ -55,6 +55,7 @@ public class DAOLogin extends AbstractController<LogInBody,Integer> {
 
     @Override
     public boolean create(LogInBody entity) {
+        changeIncorrectSymbols(entity);
         String Create_Login_loginpass_Statemet = "INSERT INTO loginpass (ID,login,password,access_type) VALUES ('"+findFreeID("loginpass")+"','"+entity.getLogIn()+"','"+entity.getPassword()+"','"+entity.getAccess()+"');";
         QueryStack qs = new QueryStack();
         qs.queries.add(Create_Login_loginpass_Statemet);
@@ -120,6 +121,14 @@ public class DAOLogin extends AbstractController<LogInBody,Integer> {
             return false;
         } finally {
             if (ps != null) try { ps.close(); } catch (SQLException logOrIgnore) {}
+        }
+    }
+
+    private void changeIncorrectSymbols(LogInBody entity){
+        String[] incorrectSymbols = {"'"};
+        for(String str: incorrectSymbols){
+            entity.setLogIn(entity.getLogIn().replaceAll(str,"'" + str));
+            entity.setPassword(entity.getPassword().replaceAll(str,"'" + str));
         }
     }
 }
