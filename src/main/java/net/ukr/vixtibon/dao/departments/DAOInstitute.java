@@ -98,6 +98,7 @@ public class DAOInstitute  extends AbstractController<Institute,Integer> {
     public boolean create(Institute entity) {
         changeIncorrectSymbols(entity);
         String Create_Institute_Statemet = "INSERT INTO institute (ID,longName,shortName) VALUES ('"+findFreeID("institute")+"','"+entity.getLongName() + "','" + entity.getShortName()+"');";
+        //System.out.println(Create_Institute_Statemet);
         //QueryStack qs = new QueryStack();
         //qs.queries.add(Create_Institute_Statemet);
         PreparedStatement ps = getPrepareStatement(Create_Institute_Statemet);

@@ -27,6 +27,7 @@ public class DAOLogin extends AbstractController<LogInBody,Integer> {
                 lib.setLogIn(rs.getString(2));
                 lib.setPassword(rs.getString(3));
                 lib.setAccess(rs.getString(4));
+                lib.setAccessID(rs.getInt(5));
                 lst.add(lib);
             }
         } catch (SQLException e) {
@@ -56,7 +57,9 @@ public class DAOLogin extends AbstractController<LogInBody,Integer> {
     @Override
     public boolean create(LogInBody entity) {
         changeIncorrectSymbols(entity);
-        String Create_Login_loginpass_Statemet = "INSERT INTO loginpass (ID,login,password,access_type) VALUES ('"+findFreeID("loginpass")+"','"+entity.getLogIn()+"','"+entity.getPassword()+"','"+entity.getAccess()+"');";
+        String Create_Login_loginpass_Statemet = "INSERT INTO loginpass (ID,login,password,access_type, accessID) VALUES " +
+                "('"+findFreeID("loginpass")+"','"+entity.getLogIn()+"','"+entity.getPassword()+"','"+entity.getAccess()+"','" + entity.getAccessID() + "');";
+        //System.out.println(Create_Login_loginpass_Statemet);
         QueryStack qs = new QueryStack();
         qs.queries.add(Create_Login_loginpass_Statemet);
         PreparedStatement ps = getPrepareStatement(Create_Login_loginpass_Statemet);

@@ -109,6 +109,7 @@ public class DAOFaculty  extends AbstractController<Faculty,Integer> {
     public boolean create(Faculty entity){
         changeIncorrectSymbols(entity);
         String Create_Faculty_Statemet = "INSERT INTO faculty (ID,longName,shortName, instituteID) VALUES ('"+findFreeID("faculty")+"','"+entity.getLongName() + "','" + entity.getShortName()+"','"+entity.getInstituteID()+"');";
+        //System.out.println(Create_Faculty_Statemet);
         QueryStack qs = new QueryStack();
         qs.queries.add(Create_Faculty_Statemet);
         PreparedStatement ps = getPrepareStatement(Create_Faculty_Statemet);

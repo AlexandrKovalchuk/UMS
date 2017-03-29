@@ -115,6 +115,7 @@ public class DAODisciplineTeacherDependencyObject  extends AbstractController<Di
     public boolean create(DisciplineTeacherDependencyObject entity) throws SQLException {
         String Create_Discipline_Teacher_Dependency_Statemet = "INSERT INTO disciplineTeacherDependency (ID,disciplineID,teacherID) " +
                 "VALUES ('"+findFreeID("disciplineTeacherDependency")+"','"+entity.getDisciplineID() + "','" + entity.getTeacherID()+"');";
+        //System.out.println(Create_Discipline_Teacher_Dependency_Statemet);
         QueryStack qs = new QueryStack();
         qs.queries.add(Create_Discipline_Teacher_Dependency_Statemet);
         PreparedStatement ps = getPrepareStatement(Create_Discipline_Teacher_Dependency_Statemet);

@@ -136,6 +136,7 @@ public class DAODiscipline  extends AbstractController<Discipline,Integer> {
                 "countOfLessons,exam) " +
                 "VALUES ('" + findFreeID("discipline") + "','" + entity.getNameOfDiscipline()  + "','" + entity.getCountOfLessons() + "','" +entity.isExam()
                 + "');";
+        //System.out.println(Create_Discipline_Statemet);
         QueryStack qs = new QueryStack();
         qs.queries.add(Create_Discipline_Statemet);
         PreparedStatement ps = getPrepareStatement(Create_Discipline_Statemet);

@@ -105,6 +105,7 @@ public class DAOLesson extends AbstractController<Lesson,Integer> {
         String Create_Lesson_Statemet = "INSERT INTO timetable (id,dayNumber,lessonNumberInDay,departmentID, groupID) " +
                 "VALUES ('" + findFreeID("timetable") + "','" + entity.getDayNumber()  + "','" + entity.getLessonNumberInDay() +
                 "','" +entity.getDepartmentID()+ "','" + entity.getGroupID() +"');";
+        //System.out.println(Create_Lesson_Statemet);
         QueryStack qs = new QueryStack();
         qs.queries.add(Create_Lesson_Statemet);
         PreparedStatement ps = getPrepareStatement(Create_Lesson_Statemet);

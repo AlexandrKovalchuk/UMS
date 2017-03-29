@@ -145,6 +145,7 @@ public class DAOGroup  extends AbstractController<Group,Integer> {
         String Create_Group_Statemet = "INSERT INTO gtgroup (id,fullGroupName,courseNumber,departmentID) " +
                 "VALUES ('" + findFreeID("gtgroup") + "','" + entity.getFullGroupName() + "','" + entity.getCourseNumber() + "','"
                  + entity.getDepartmentID() + "');";
+        //System.out.println(Create_Group_Statemet);
         QueryStack qs = new QueryStack();
         qs.queries.add(Create_Group_Statemet);
         PreparedStatement ps = getPrepareStatement(Create_Group_Statemet);

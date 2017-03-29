@@ -38,18 +38,18 @@ public class LogInServlet extends HttpServlet {
                 }else if(lib.getAccess().equals("employee")){
                     DAOEmployee daoEmployee = new DAOEmployee();
                     session.setAttribute("type","employee");
-                    session.setAttribute("departmentID", daoEmployee.getDepartmentIDByUsername(username));
+                    session.setAttribute("departmentID", daoEmployee.getDepartmentIDByUserID(lib.getAccessID()));
                     request.getRequestDispatcher("Employee/EmployeePage.jsp").forward(request, response);
                 }else if(lib.getAccess().equals("teacher")){
                     DAOTeacher daoTeacher = new DAOTeacher();
                     session.setAttribute("type","teacher");
-                    session.setAttribute("departmentID", daoTeacher.getDepartmentIDByUsername(username));
+                    session.setAttribute("departmentID", daoTeacher.getDepartmentIDByUserID(lib.getAccessID()));
                     session.setAttribute("teacherID",daoTeacher.getIDbyUserName(username));
                     request.getRequestDispatcher("Teacher/TeacherPage.jsp").forward(request, response);
                 }else if(lib.getAccess().equals("student")){
                     DAOStudent daoStudent = new DAOStudent();
                     session.setAttribute("type","student");
-                    session.setAttribute("departmentID", daoStudent.getDepartmentIDByUsername(username));
+                    session.setAttribute("departmentID", daoStudent.getDepartmentIDByUserID(lib.getAccessID()));
                     request.getRequestDispatcher("Student/StudentPage.jsp").forward(request, response);
                 }else{
                     request.setAttribute("wrongPasswordOrLogIn", "errorInAccess");

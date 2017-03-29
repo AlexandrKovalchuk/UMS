@@ -121,8 +121,8 @@ public class DAOEmployee extends AbstractController<Employee,Integer> {
         return employee;
     }
 
-    public  int getDepartmentIDByUsername(String username){
-        String Select_DepartmentID_By_Username = "SELECT departmentID FROM employee WHERE login='" + username + "';";
+    public  int getDepartmentIDByUserID(int userID){
+        String Select_DepartmentID_By_Username = "SELECT departmentID FROM employee WHERE ID=" + userID + ";";
         int departmentID = 0;
         PreparedStatement ps = getPrepareStatement(Select_DepartmentID_By_Username);
         //System.out.println("Select_DepartmentID_By_Username " + Select_DepartmentID_By_Username);
@@ -166,6 +166,7 @@ public class DAOEmployee extends AbstractController<Employee,Integer> {
                  + entity.getPersonalID() + "','" + entity.getSex() + "','" + entity.getEmail() + "','" +entity.getPhoneNumber()
                 + "','" + sqlDate + "','" + entity.getAddress() + "','" + entity.getPasport() + "','" +
                 entity.getLogin() + "','" + entity.getOffice() + "','" + findFreeID("employee") +"','" + entity.getDepartmentID()+"');";
+        //System.out.println(Create_Employee_Statemet);
         QueryStack qs = new QueryStack();
         qs.queries.add(Create_Employee_Statemet);
         PreparedStatement ps = getPrepareStatement(Create_Employee_Statemet);

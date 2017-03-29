@@ -181,6 +181,7 @@ public class DAODisciplineDepartmentDependency extends AbstractController<Discip
                 "(ID,disciplineID,departmentID,courseNumber,semesterNumber) " +
                 "VALUES ('"+findFreeID("disciplineDepartmentDependency")+"','"+entity.getDisciplineID() + "','" + entity.getDepartmentID()+"','" +
                  + entity.getCourseNumber()+"','" + entity.getSemesterNumber()+"');";
+        //System.out.println(Create_DisciplineDepartmentDependency_Statemet);
         QueryStack qs = new QueryStack();
         qs.queries.add(Create_DisciplineDepartmentDependency_Statemet);
         PreparedStatement ps = getPrepareStatement(Create_DisciplineDepartmentDependency_Statemet);

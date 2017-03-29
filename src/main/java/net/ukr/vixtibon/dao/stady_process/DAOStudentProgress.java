@@ -133,6 +133,7 @@ public class DAOStudentProgress  extends AbstractController<StudentProgressObjec
     public boolean create(StudentProgressObject entity) throws SQLException {
         String Create_StudentProgressObject_Statemet = "INSERT INTO progress (id,disciplineID, studentID) " +
                 "VALUES ('" + findFreeID("progress") + "','" + entity.getDisciplineID()  + "','" + entity.getStudentID() + "');";
+        //System.out.println(Create_StudentProgressObject_Statemet);
         QueryStack qs = new QueryStack();
         qs.queries.add(Create_StudentProgressObject_Statemet);
         PreparedStatement ps = getPrepareStatement(Create_StudentProgressObject_Statemet);

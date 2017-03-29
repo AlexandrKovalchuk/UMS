@@ -129,6 +129,7 @@ public class DAODayRequirements  extends AbstractController<DayRequirementsObjec
         String Create_DayRequirements_Statemet = "INSERT INTO dayRequirements (id,departmentID,countOfDaysInWeek,countOfLessonsInADay) " +
                 "VALUES ('" + findFreeID("dayRequirements") + "','" + entity.getDepartmentID()  + "','" + entity.getCountOfDaysInWeek() +
                 "','" +entity.getCountOfLessonsInADay()+ "');";
+        //System.out.println(Create_DayRequirements_Statemet);
         QueryStack qs = new QueryStack();
         qs.queries.add(Create_DayRequirements_Statemet);
         PreparedStatement ps = getPrepareStatement(Create_DayRequirements_Statemet);

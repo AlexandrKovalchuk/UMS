@@ -127,8 +127,8 @@ public class DAOStudent extends AbstractController<Student,Integer> {
         return student;
     }
 
-    public  int getDepartmentIDByUsername(String username){
-        String Select_DepartmentID_By_Username = "SELECT departmentID FROM student WHERE login='" + username + "';";
+    public  int getDepartmentIDByUserID(int userID){
+        String Select_DepartmentID_By_Username = "SELECT departmentID FROM student WHERE ID=" + userID + ";";
         int departmentID = 0;
         PreparedStatement ps = getPrepareStatement(Select_DepartmentID_By_Username);
         //System.out.println("Select_DepartmentID_By_Username " + Select_DepartmentID_By_Username);
@@ -177,6 +177,7 @@ public class DAOStudent extends AbstractController<Student,Integer> {
                 + entity.getPersonalID() + "','" + entity.getSex() + "','" + entity.getEmail() + "','" +entity.getPhoneNumber()
                 + "','" + sqlDate + "','" + entity.getAddress() + "','" + entity.getPasport() + "','" +
                 entity.getLogin() + "','" + entity.getIndexBook() + "','" + id +"','" + entity.getGroupID()+"');";
+        //System.out.println(Create_Student_Statemet);
         QueryStack qs = new QueryStack();
         qs.queries.add(Create_Student_Statemet);
         PreparedStatement ps = getPrepareStatement(Create_Student_Statemet);

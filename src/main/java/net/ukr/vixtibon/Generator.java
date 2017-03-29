@@ -198,6 +198,7 @@ public class Generator {
                     lb.setAccess("teacher");
                     lb.setPassword(teacher.generatePassword());
                     lb.setLogIn(teacher.getLogin());
+                    lb.setAccessID(teacherID);
                     daoLogin.create(lb);
 
 
@@ -206,16 +207,19 @@ public class Generator {
                 d.setEmployees(generateEmployeesList(d.getID()));
                 //System.out.println("d.getEmployees().size() :" + d.getEmployees().size());
                 for (Employee e : d.getEmployees()) {
-                    LogInBody lb = new LogInBody();
-                    lb.setAccess("employee");
-                    lb.setPassword(e.generatePassword());
-                    lb.setLogIn(e.getLogin());
-                    daoLogin.create(lb);
+                    int employeeID = daoEmployee.findFreeID("employee");
+                    e.setID(employeeID);
                     try {
                         daoEmployee.create(e);
                     } catch (SQLException e1) {
                         e1.printStackTrace();
                     }
+                    LogInBody lb = new LogInBody();
+                    lb.setAccess("employee");
+                    lb.setPassword(e.generatePassword());
+                    lb.setLogIn(e.getLogin());
+                    lb.setAccessID(e.getID());
+                    daoLogin.create(lb);
                 }
 
                 int groupsCount = 2;
@@ -245,11 +249,14 @@ public class Generator {
                     group.setStudents(generateStudentList(group));
                     for(Student student: group.getStudents()){
                         student.setDisciplines(disciplinesMap);
+                        int studentID = daoStudent.findFreeID("student");
+                        student.setID(studentID);
                         daoStudent.create(student);
                         LogInBody lb = new LogInBody();
                         lb.setAccess("student");
                         lb.setPassword(student.generatePassword());
                         lb.setLogIn(student.getLogin());
+                        lb.setAccessID(student.getID());
                         daoLogin.create(lb);
                     }
                 }
@@ -257,11 +264,14 @@ public class Generator {
                     group.setStudents(generateStudentList(group));
                     for(Student student: group.getStudents()) {
                         student.setDisciplines(disciplinesMap);
+                        int studentID = daoStudent.findFreeID("student");
+                        student.setID(studentID);
                         daoStudent.create(student);
                         LogInBody lb = new LogInBody();
                         lb.setAccess("student");
                         lb.setPassword(student.generatePassword());
                         lb.setLogIn(student.getLogin());
+                        lb.setAccessID(student.getID());
                         daoLogin.create(lb);
                     }
                 }
@@ -269,11 +279,14 @@ public class Generator {
                     group.setStudents(generateStudentList(group));
                     for(Student student: group.getStudents()) {
                         student.setDisciplines(disciplinesMap);
+                        int studentID = daoStudent.findFreeID("student");
+                        student.setID(studentID);
                         daoStudent.create(student);
                         LogInBody lb = new LogInBody();
                         lb.setAccess("student");
                         lb.setPassword(student.generatePassword());
                         lb.setLogIn(student.getLogin());
+                        lb.setAccessID(student.getID());
                         daoLogin.create(lb);
                     }
                 }
@@ -281,11 +294,14 @@ public class Generator {
                     group.setStudents(generateStudentList(group));
                     for(Student student: group.getStudents()) {
                         student.setDisciplines(disciplinesMap);
+                        int studentID = daoStudent.findFreeID("student");
+                        student.setID(studentID);
                         daoStudent.create(student);
                         LogInBody lb = new LogInBody();
                         lb.setAccess("student");
                         lb.setPassword(student.generatePassword());
                         lb.setLogIn(student.getLogin());
+                        lb.setAccessID(student.getID());
                         daoLogin.create(lb);
                     }
                 }
@@ -293,11 +309,14 @@ public class Generator {
                     group.setStudents(generateStudentList(group));
                     for(Student student: group.getStudents()) {
                         student.setDisciplines(disciplinesMap);
+                        int studentID = daoStudent.findFreeID("student");
+                        student.setID(studentID);
                         daoStudent.create(student);
                         LogInBody lb = new LogInBody();
                         lb.setAccess("student");
                         lb.setPassword(student.generatePassword());
                         lb.setLogIn(student.getLogin());
+                        lb.setAccessID(student.getID());
                         daoLogin.create(lb);
                     }
                 }
@@ -305,11 +324,14 @@ public class Generator {
                     group.setStudents(generateStudentList(group));
                     for(Student student: group.getStudents()) {
                         student.setDisciplines(disciplinesMap);
+                        int studentID = daoStudent.findFreeID("student");
+                        student.setID(studentID);
                         daoStudent.create(student);
                         LogInBody lb = new LogInBody();
                         lb.setAccess("student");
                         lb.setPassword(student.generatePassword());
                         lb.setLogIn(student.getLogin());
+                        lb.setAccessID(student.getID());
                         daoLogin.create(lb);
                     }
                 }
@@ -479,12 +501,12 @@ private Institute generateInstitute(String longName, String shortName){
             Discipline discipline = new Discipline();
             discipline.setNameOfDiscipline("Discipline " + department.getShortName() + "-" + i);
             int flag = rn.nextInt(2);
-            if(flag > 1){
+            if(flag > 0){
                 discipline.setCountOfLessons(10);
             }else{
                 discipline.setCountOfLessons(15);
             }
-            if(flag > 1){
+            if(flag > 0){
                 discipline.setExam("yes");
             }else{
                 discipline.setExam("no");
@@ -676,6 +698,7 @@ private Institute generateInstitute(String longName, String shortName){
         }
         return employees;
     }
+
     private ArrayList<Faculty> openFacultys(String name, int instID){
         ArrayList<Faculty> faculties = new ArrayList<>();
         try(BufferedReader f =new BufferedReader(new FileReader(name))){

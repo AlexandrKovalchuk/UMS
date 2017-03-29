@@ -8,6 +8,7 @@ public class LogInBody {
     private String logIn;
     private String password;
     private String access;
+    private int accessID;
 
     public void setID(int ID) {
         this.ID = ID;
@@ -25,6 +26,10 @@ public class LogInBody {
         this.access = access;
     }
 
+    public void setAccessID(int accessID) {
+        this.accessID = accessID;
+    }
+
     public int getID() {
         return ID;
     }
@@ -39,5 +44,9 @@ public class LogInBody {
 
     public String getAccess() {
         return access;
+    }
+
+    public int getAccessID() {
+        return accessID;
     }
 }

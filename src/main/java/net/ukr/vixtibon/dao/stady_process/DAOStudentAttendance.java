@@ -133,6 +133,7 @@ public class DAOStudentAttendance  extends AbstractController<StudentAttendanceO
     public boolean create(StudentAttendanceObject entity) throws SQLException {
         String Create_StudentAttendanceObject_Statemet = "INSERT INTO attendance (id,disciplineID, studentID) " +
                 "VALUES ('" + findFreeID("attendance") + "','" + entity.getDisciplineID()  + "','" + entity.getStudentID() + "');";
+        //System.out.println(Create_StudentAttendanceObject_Statemet);
         QueryStack qs = new QueryStack();
         qs.queries.add(Create_StudentAttendanceObject_Statemet);
         PreparedStatement ps = getPrepareStatement(Create_StudentAttendanceObject_Statemet);
