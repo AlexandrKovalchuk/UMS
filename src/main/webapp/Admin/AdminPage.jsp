@@ -72,7 +72,7 @@
             <input type="hidden"  name="elementType" value="generateBaseDate">
             <td colspan=2>
                     <tr>
-                        <button onclick="submit"  class="topicButton topicButtonAdminPage">Generate base date</button>
+                        <button onclick="submit" disabled class="topicButton topicButtonAdminPage">Generate base date</button>
                     </tr>
                     <tr>
                         <div class = "pageTitleTextBad">
@@ -88,7 +88,7 @@
             <input type="hidden"  name="elementType" value="clearAllDate">
             <td colspan=2>
                 <tr>
-                    <button onclick="submit"  class="topicButton topicButtonAdminPage">Clear all date</button>
+                    <button onclick="submit" disabled class="topicButton topicButtonAdminPage">Clear all date</button>
                 </tr>
                 <tr>
                     <div class = "pageTitleTextBad">

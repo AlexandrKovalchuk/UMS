@@ -123,7 +123,7 @@
                     <tr>
                         <td class = "textLabel textLabelEmployeePage">Ідентифікаційний код:</td>
                         <td>
-                            <input class = "inputSettings inputEmployee" type="text" name="personalID" maxlength="10" required/>
+                            <input class = "inputSettings inputEmployee" type="number" name="personalID" maxlength="10" required/>
                         </td>
                     </tr>
                     <tr>
@@ -139,19 +139,19 @@
                     <tr>
                         <td class = "textLabel textLabelEmployeePage">День</td>
                         <td>
-                            <input class = "inputSettings inputEmployee" type="int" name="bday" maxlength="2" required/>
+                            <input class = "inputSettings inputEmployee" type="number" name="bday" maxlength="2" required/>
                         </td>
                     </tr>
                     <tr>
                         <td class = "textLabel textLabelEmployeePage">   Місяць</td>
                         <td>
-                            <input class = "inputSettings inputEmployee" type="int" name="bmonth" maxlength="2" required/>
+                            <input class = "inputSettings inputEmployee" type="number" name="bmonth" maxlength="2" required/>
                         </td>
                     </tr>
                     <tr>
                         <td class = "textLabel textLabelEmployeePage">   Рік</td>
                         <td>
-                            <input class = "inputSettings inputEmployee" type="int" name="byear" maxlength="4" required/>
+                            <input class = "inputSettings inputEmployee" type="number" name="byear" maxlength="4" required/>
                         </td>
                     </tr>
                     <tr>

@@ -141,7 +141,7 @@
                 <tr>
                     <td class = "textLabel textLabelEmployeePage">Ідентифікаційний код:</td>
                     <td>
-                        <input class = "inputSettings inputEmployee" type="text" name="personalID" maxlength="10" required value="${student.getPersonalID()}">
+                        <input class = "inputSettings inputEmployee" type="number" name="personalID" maxlength="10" required value="${student.getPersonalID()}">
                     </td>
                 </tr>
                 <tr>
@@ -157,19 +157,19 @@
                 <tr>
                     <td class = "textLabel textLabelEmployeePage">День</td>
                     <td>
-                        <input class = "inputSettings inputEmployee" type="int" name="bday" maxlength="2" required value="${student.getDayOfBorn()}">
+                        <input class = "inputSettings inputEmployee" type="number" name="bday" maxlength="2" required value="${student.getDayOfBorn()}">
                     </td>
                 </tr>
                 <tr>
                     <td class = "textLabel textLabelEmployeePage">Місяць</td>
                     <td>
-                        <input class = "inputSettings inputEmployee" type="int" name="bmonth" maxlength="2" required value="${student.getMonthOfBorn()}">
+                        <input class = "inputSettings inputEmployee" type="number" name="bmonth" maxlength="2" required value="${student.getMonthOfBorn()}">
                     </td>
                 </tr>
                 <tr>
                     <td class = "textLabel textLabelEmployeePage">Рік</td>
                     <td>
-                        <input class = "inputSettings inputEmployee" type="int" name="byear" maxlength="4" required value="${student.getYearOfBorn()}">
+                        <input class = "inputSettings inputEmployee" type="number" name="byear" maxlength="4" required value="${student.getYearOfBorn()}">
                     </td>
                 </tr>
                 <tr>

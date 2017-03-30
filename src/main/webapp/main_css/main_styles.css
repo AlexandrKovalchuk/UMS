@@ -31,6 +31,7 @@
 .pageTitleTextStudent{
     background: linear-gradient(to bottom right, rgba(19, 19, 19, 0.69), rgba(140, 140, 140, 0.35));
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    color: #ffffff;
 }
 
 .pageTitleTextLogIn{
@@ -127,6 +128,18 @@
     color: #a0ffac;
 }
 
+.controlButtonStudentPage{
+    background: linear-gradient(to bottom right, rgba(19, 19, 19, 0.69), rgba(140, 140, 140, 0.35));
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    border: #2a452e;
+    color: #ffffff;
+}
+
+.controlButtonStudentPage:hover {
+    background: linear-gradient(to bottom right, rgba(80, 102, 73, 0.69), rgba(109, 255, 142, 0.35));
+    color: #ffffff;
+}
+
 .controlButtonWelcomePage{
     background: linear-gradient(to bottom right, rgba(2, 2, 4, 0.95), rgba(19, 36, 61, 0.35));
     border: #000040;
@@ -218,6 +231,17 @@
     background: linear-gradient(to bottom right, rgba(80, 102, 73, 0.69), rgba(109, 255, 142, 0.35));
     color: #a0ffac;
 }
+
+.topicButtonStudentPage{
+    background: linear-gradient(to bottom right, rgba(19, 19, 19, 0.69), rgba(140, 140, 140, 0.35));
+    border: #2a452e;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    color: #ffffff;
+}
+.topicButtonStudentPage:hover {
+    background: linear-gradient(to bottom right, rgba(80, 102, 73, 0.69), rgba(109, 255, 142, 0.35));
+    color: #ffffff;
+}
 /**/
 /*item buttons*/
 .itemButton{
@@ -274,8 +298,7 @@
 
 body{
     color:#000000;
-    background-size:cover;
-    background-position:center center;
+    background-position:center;
     background-repeat:no-repeat;
     background-attachment:fixed;
 }

@@ -532,13 +532,23 @@
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>ShowInfoStudentPageController</servlet-name>
-        <servlet-class>net.ukr.vixtibon.servlets.controllers.persons.student.ShowInfoStudentPageController</servlet-class>
-    </servlet>
+    <servlet-name>ShowInfoStudentPageController</servlet-name>
+    <servlet-class>net.ukr.vixtibon.servlets.controllers.persons.student.ShowInfoStudentPageController</servlet-class>
+</servlet>
 
     <servlet-mapping>
         <servlet-name>ShowInfoStudentPageController</servlet-name>
         <url-pattern>/ShowInfoStudentPageController</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>StudentMenuPageController</servlet-name>
+        <servlet-class>net.ukr.vixtibon.servlets.controllers.study_process.students.StudentMenuPageController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>StudentMenuPageController</servlet-name>
+        <url-pattern>/StudentMenuPageController</url-pattern>
     </servlet-mapping>
 
     <servlet>
