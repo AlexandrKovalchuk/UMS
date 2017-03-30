@@ -112,7 +112,7 @@
                 <tr>
                     <td class = "textLabel textLabelEmployeePage">Course Number:</td>
                     <td>
-                        <input class = "inputSettings inputEmployee" type="number" name="courseNumber" maxlength="1" value="${group.getCourseNumber()}" required/>
+                        <input class = "inputSettings inputEmployee numericInput2" type="number" name="courseNumber" maxlength="1" value="${group.getCourseNumber()}" required/>
                     </td>
                 </tr>
                 <tr>

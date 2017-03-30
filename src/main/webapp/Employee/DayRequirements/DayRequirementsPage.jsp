@@ -33,13 +33,13 @@
                 <tr>
                     <td class = "textLabel textLabelEmployeePage">Count Of Days In Week:</td>
                     <td>
-                        <input class = "inputSettings inputEmployee " type="number" name="countOfDaysInWeek" maxlength="1" required/>
+                        <input class = "inputSettings inputEmployee  numericInput2" type="number" name="countOfDaysInWeek" maxlength="1" required/>
                     </td>
                 </tr>
                 <tr>
                     <td class = "textLabel textLabelEmployeePage">Count Of Lessons In A Day:</td>
                     <td>
-                        <input class = "inputSettings inputEmployee " type="number" name="countOfLessonsInADay" maxlength="2" required/>
+                        <input class = "inputSettings inputEmployee  numericInput2" type="number" name="countOfLessonsInADay" maxlength="2" required/>
                     </td>
                 </tr>
                 <tr>
@@ -64,13 +64,13 @@
                 <tr>
                     <td class = "textLabel textLabelEmployeePage">Count Of Days In Week:</td>
                     <td>
-                        <input class = "inputSettings inputEmployee " type="number" name="countOfDaysInWeek" maxlength="1" value="${dayRequirementsObject.getCountOfDaysInWeek()}" required/>
+                        <input class = "inputSettings inputEmployee  numericInput2" type="number" name="countOfDaysInWeek" maxlength="1" value="${dayRequirementsObject.getCountOfDaysInWeek()}" required/>
                     </td>
                 </tr>
                 <tr>
                     <td class = "textLabel textLabelEmployeePage">Count Of Lessons In A Day:</td>
                     <td>
-                        <input class = "inputSettings inputEmployee " type="number" name="countOfLessonsInADay" maxlength="2" value="${dayRequirementsObject.getCountOfLessonsInADay()}" required/>
+                        <input class = "inputSettings inputEmployee numericInput2 " type="number" name="countOfLessonsInADay" maxlength="2" value="${dayRequirementsObject.getCountOfLessonsInADay()}" required/>
                     </td>
                 </tr>
                 <tr>

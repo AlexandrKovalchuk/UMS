@@ -157,19 +157,19 @@
                 <tr>
                     <td class = "textLabel textLabelEmployeePage">День</td>
                     <td>
-                        <input class = "inputSettings inputEmployee" type="number" name="bday" maxlength="2" required value="${student.getDayOfBorn()}">
+                        <input class = "inputSettings inputEmployee numericInput2" type="number" name="bday" maxlength="2" required value="${student.getDayOfBorn()}">
                     </td>
                 </tr>
                 <tr>
                     <td class = "textLabel textLabelEmployeePage">Місяць</td>
                     <td>
-                        <input class = "inputSettings inputEmployee" type="number" name="bmonth" maxlength="2" required value="${student.getMonthOfBorn()}">
+                        <input class = "inputSettings inputEmployee numericInput2" type="number" name="bmonth" maxlength="2" required value="${student.getMonthOfBorn()}">
                     </td>
                 </tr>
                 <tr>
                     <td class = "textLabel textLabelEmployeePage">Рік</td>
                     <td>
-                        <input class = "inputSettings inputEmployee" type="number" name="byear" maxlength="4" required value="${student.getYearOfBorn()}">
+                        <input class = "inputSettings inputEmployee numericInput4" type="number" name="byear" maxlength="4" required value="${student.getYearOfBorn()}">
                     </td>
                 </tr>
                 <tr>

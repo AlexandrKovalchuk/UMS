@@ -94,19 +94,19 @@
                 <tr>
                     <td class = "textLabel textLabelAdminPage">День</td>
                     <td>
-                        <input class = "inputSettings inputAdminPage" type="number" name="bday" maxlength="2" required value="${employee.getDayOfBorn()}">
+                        <input class = "inputSettings inputAdminPage numericInput2" type="number" name="bday" maxlength="2" required value="${employee.getDayOfBorn()}">
                     </td>
                 </tr>
                 <tr>
                     <td class = "textLabel textLabelAdminPage">Місяць</td>
                     <td>
-                        <input class = "inputSettings inputAdminPage" type="number" name="bmonth" maxlength="2" required value="${employee.getMonthOfBorn()}">
+                        <input class = "inputSettings inputAdminPage numericInput2" type="number" name="bmonth" maxlength="2" required value="${employee.getMonthOfBorn()}">
                     </td>
                 </tr>
                 <tr>
                     <td class = "textLabel textLabelAdminPage">Рік</td>
                     <td>
-                        <input class = "inputSettings inputAdminPage" type="number" name="byear" maxlength="4" required value="${employee.getYearOfBorn()}">
+                        <input class = "inputSettings inputAdminPage numericInput4" type="number" name="byear" maxlength="4" required value="${employee.getYearOfBorn()}">
                     </td>
                 </tr>
                 <tr>

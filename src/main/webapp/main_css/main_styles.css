@@ -335,6 +335,12 @@ form{
     font-family: "Helvetica";
     font-weight: bold;
 }
+.numericInput2{
+    width: 50px;
+}
+.numericInput4{
+    width: 75px;
+}
 .inputLogInPage{
     background: rgba(21, 116, 21, 0.83);
     color: #e5f7fb;

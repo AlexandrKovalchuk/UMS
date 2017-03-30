@@ -35,7 +35,7 @@
             <tr>
                 <td class = "textLabel textLabelEmployeePage">Number Of Lessons:</td>
                 <td>
-                    <input class = "inputSettings inputEmployee" type="number" name="countOfLessons" maxlength="2" required/>
+                    <input class = "inputSettings inputEmployee numericInput2" type="number" name="countOfLessons" maxlength="2" required/>
                 </td>
             </tr>
             <tr>
