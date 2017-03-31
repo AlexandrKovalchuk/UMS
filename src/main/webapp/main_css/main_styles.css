@@ -297,9 +297,11 @@
 /*main*/
 
 body{
-    color:#000000;
-    background-position:center;
+    height: 100%;
+    width: 100%;
+    background-size:cover;
     background-repeat:no-repeat;
+    background-position:center;
     background-attachment:fixed;
 }
 
@@ -316,7 +318,7 @@ body{
 }
 
 .backgroungImageStudent{
-    background-image: url(kaboompics.com_Black+glasses,+silver+pencil,+opened+notepad+and+cup+of+cofee.jpg);
+    background-image: url(cofee.jpg);
 }
 
 .backgroungImageLogIn{
