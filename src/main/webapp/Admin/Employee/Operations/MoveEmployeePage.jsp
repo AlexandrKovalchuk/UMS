@@ -19,59 +19,136 @@
 </div>
 <br />
 
-<c:if test = "${selected eq 'no'}">
+<c:if test = "${step eq 'step0'}">
     <div class = "pageTitleText pageTitleTextAdmin">
-        Select Employee to Move:
+        Select Institute from Where to Move Employee:
     </div>
 
     <div class = "pageContent pageContentAdminPages pageContentAdminPages500px">
         <c:forEach items="${institutesList}" var="institute">
-            <div class = "textLabelParagraph textLabelAdminPage"><c:out value="${institute.getLongName()}"/></div>
-            <c:forEach items="${institute.getFacultys()}" var="faculty">
-                <div class = "textLabelParagraph textLabelAdminPage"><c:out value="${faculty.getLongName()}"/></div>
-                <c:forEach items="${faculty.getDepartments()}" var="department">
-                    <div class = "textLabelParagraph textLabelAdminPage"><c:out value="${department.getLongName()}"/></div>
-                    <c:forEach items ="${department.getEmployees()}" var="employee">
-                        <div>
-                            <form action="MoveEmployeePageController" method="post" accept-charset="UTF-8">
-                                <input type="hidden"  name="step" value="step1">
-                                <input type="hidden"  name="employeeID" value="${employee.getID()}">
-                                <button onclick="submit" class="itemButton itemButtonAdminPages" ><c:out value="${employee.getSecondName()}"/> <c:out value="${employee.getName()}"/></button>
-                            </form>
-                        </div>
-                    </c:forEach>
-                </c:forEach>
-            </c:forEach>
+            <div>
+                <form action="MoveEmployeePageController" method="post" accept-charset="UTF-8">
+                    <input type="hidden"  name="step" value="step1">
+                    <input type="hidden"  name="instituteID" value="${institute.getID()}">
+                    <button onclick="submit" class="itemButton itemButtonAdminPages" ><c:out value="${institute.getLongName()}"/></button>
+                </form>
+            </div>
         </c:forEach>
     </div>
 </c:if>
 
-<c:if test = "${selected eq 'yes'}">
+<c:if test = "${step eq 'step1'}">
     <div class = "pageTitleText pageTitleTextAdmin">
-        Select Employee where to move <c:out value="${employee.getSecondName()}"/> <c:out value="${employee.getName()}"/>:
+        Select Faculty from Where to Move Employee:
+    </div>
+
+    <div class = "pageContent pageContentAdminPages pageContentAdminPages500px">
+        <c:forEach items="${facultiesList}" var="faculty">
+            <div>
+                <form action="MoveEmployeePageController" method="post" accept-charset="UTF-8">
+                    <input type="hidden"  name="step" value="step2">
+                    <input type="hidden"  name="facultyID" value="${faculty.getID()}">
+                    <button onclick="submit" class="itemButton itemButtonAdminPages" ><c:out value="${faculty.getLongName()}"/></button>
+                </form>
+            </div>
+        </c:forEach>
+    </div>
+</c:if>
+
+<c:if test = "${step eq 'step2'}">
+    <div class = "pageTitleText pageTitleTextAdmin">
+        Select Department from Where to Move Employee:
+    </div>
+
+    <div class = "pageContent pageContentAdminPages pageContentAdminPages500px">
+        <c:forEach items="${departmentsList}" var="department">
+            <div>
+                <form action="MoveEmployeePageController" method="post" accept-charset="UTF-8">
+                    <input type="hidden"  name="step" value="step3">
+                    <input type="hidden"  name="departmentID" value="${department.getID()}">
+                    <button onclick="submit" class="itemButton itemButtonAdminPages" ><c:out value="${department.getLongName()}"/></button>
+                </form>
+            </div>
+        </c:forEach>
+    </div>
+</c:if>
+
+<c:if test = "${step eq 'step3'}">
+    <div class = "pageTitleText pageTitleTextAdmin">
+        Select Employee to Update:
+    </div>
+
+    <div class = "pageContent pageContentAdminPages pageContentAdminPages500px">
+        <c:forEach items="${employeesList}" var="employee">
+            <div>
+                <form action="MoveEmployeePageController" method="post" accept-charset="UTF-8">
+                    <input type="hidden"  name="step" value="step4">
+                    <input type="hidden"  name="employeeID" value="${employee.getID()}">
+                    <button onclick="submit" class="itemButton itemButtonAdminPages" ><c:out value="${employee.getSecondName()}"/> <c:out value="${employee.getName()}"/></button>
+                </form>
+            </div>
+        </c:forEach>
+    </div>
+</c:if>
+
+<c:if test = "${step eq 'step4'}">
+    <div class = "pageTitleText pageTitleTextAdmin">
+        Select Institute Where to Move Employee:
     </div>
 
     <div class = "pageContent pageContentAdminPages pageContentAdminPages500px">
         <c:forEach items="${institutesList}" var="institute">
-            <div class = "textLabelParagraph textLabelAdminPage"><c:out value="${institute.getLongName()}"/></div>
-            <c:forEach items="${institute.getFacultys()}" var="faculty">
-                <div class = "textLabelParagraph textLabelAdminPage"><c:out value="${faculty.getLongName()}"/></div>
-                <c:forEach items="${faculty.getDepartments()}" var="department">
-                    <div>
-                        <form action="MoveEmployeePageController" method="post" accept-charset="UTF-8">
-                            <input type="hidden"  name="step" value="step2">
-                            <input type="hidden"  name="employeeID" value="${employee.getID()}">
-                            <input type="hidden"  name="departmentID" value="${department.getID()}">
-                            <button onclick="submit" class="itemButton itemButtonAdminPages" ><c:out value="${department.getLongName()}"/></button>
-                        </form>
-                    </div>
-                </c:forEach>
-            </c:forEach>
+            <div>
+                <form action="MoveEmployeePageController" method="post" accept-charset="UTF-8">
+                    <input type="hidden"  name="step" value="step5">
+                    <input type="hidden"  name="employeeID" value="${employeeID}">
+                    <input type="hidden"  name="instituteID" value="${institute.getID()}">
+                    <button onclick="submit" class="itemButton itemButtonAdminPages" ><c:out value="${institute.getLongName()}"/></button>
+                </form>
+            </div>
         </c:forEach>
     </div>
 </c:if>
 
-<c:if test = "${selected eq 'yes2'}">
+<c:if test = "${step eq 'step5'}">
+    <div class = "pageTitleText pageTitleTextAdmin">
+        Select Faculty Where to Move Employee:
+    </div>
+
+    <div class = "pageContent pageContentAdminPages pageContentAdminPages500px">
+        <c:forEach items="${facultiesList}" var="faculty">
+            <div>
+                <form action="MoveEmployeePageController" method="post" accept-charset="UTF-8">
+                    <input type="hidden"  name="step" value="step6">
+                    <input type="hidden"  name="employeeID" value="${employeeID}">
+                    <input type="hidden"  name="facultyID" value="${faculty.getID()}">
+                    <button onclick="submit" class="itemButton itemButtonAdminPages" ><c:out value="${faculty.getLongName()}"/></button>
+                </form>
+            </div>
+        </c:forEach>
+    </div>
+</c:if>
+
+<c:if test = "${step eq 'step6'}">
+    <div class = "pageTitleText pageTitleTextAdmin">
+        Select Department Where to Move Employee:
+    </div>
+
+    <div class = "pageContent pageContentAdminPages pageContentAdminPages500px">
+        <c:forEach items="${departmentsList}" var="department">
+            <div>
+                <form action="MoveEmployeePageController" method="post" accept-charset="UTF-8">
+                    <input type="hidden"  name="step" value="step7">
+                    <input type="hidden"  name="employeeID" value="${employeeID}">
+                    <input type="hidden"  name="departmentID" value="${department.getID()}">
+                    <button onclick="submit" class="itemButton itemButtonAdminPages" ><c:out value="${department.getLongName()}"/></button>
+                </form>
+            </div>
+        </c:forEach>
+    </div>
+</c:if>
+
+<c:if test = "${step eq 'step7'}">
     <div class = "pageContent pageContentAdminPages pageContentAdminPagesTwoFieldsSize">
         <div class = "pageTitleText pageTitleTextAdmin">
             Confirm moving  <c:out value="${employee.getSecondName()}"/> <c:out value="${employee.getName()}"/> to <c:out value="${department.getLongName()}"/>
@@ -80,7 +157,7 @@
         <div>
             <form action="MoveEmployeePageController" method="post" accept-charset="UTF-8">
                 <table>
-                    <input type="hidden"  name="step" value="step3">
+                    <input type="hidden"  name="step" value="step8">
                     <input type="hidden"  name="employeeID" value="${employee.getID()}">
                     <input type="hidden"  name="departmentID" value="${department.getID()}" >
                     <tr>

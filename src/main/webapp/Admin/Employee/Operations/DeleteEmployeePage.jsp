@@ -19,34 +19,79 @@
 </div>
 <br />
 
-<c:if test = "${selected ne 'yes'}">
+<c:if test = "${step eq 'step0'}">
     <div class = "pageTitleText pageTitleTextAdmin">
-        Select Employee to delete:
+        Select Institute where to Delete Employee:
     </div>
 
     <div class = "pageContent pageContentAdminPages pageContentAdminPages500px">
         <c:forEach items="${institutesList}" var="institute">
-            <div class = "textLabelParagraph textLabelAdminPage"><c:out value="${institute.getLongName()}"/></div>
-            <c:forEach items="${institute.getFacultys()}" var="faculty">
-                <div class = "textLabelParagraph textLabelAdminPage"><c:out value="${faculty.getLongName()}"/></div>
-                <c:forEach items="${faculty.getDepartments()}" var="department">
-                    <div class = "textLabelParagraph textLabelAdminPage"><c:out value="${department.getLongName()}"/></div>
-                    <c:forEach items="${department.getEmployees()}" var="employee">
-                        <div>
-                            <form action="DeleteEmployeePageController" method="post" accept-charset="UTF-8">
-                                <input type="hidden"  name="step" value="step1">
-                                <input type="hidden"  name="employeeID" value="${employee.getID()}">
-                                <button onclick="submit" class="itemButton itemButtonAdminPages" ><c:out value="${employee.getSecondName()}"/> <c:out value="${employee.getName()}"/></button>
-                            </form>
-                        </div>
-                    </c:forEach>
-                </c:forEach>
-            </c:forEach>
+            <div>
+                <form action="DeleteEmployeePageController" method="post" accept-charset="UTF-8">
+                    <input type="hidden"  name="step" value="step1">
+                    <input type="hidden"  name="instituteID" value="${institute.getID()}">
+                    <button onclick="submit" class="itemButton itemButtonAdminPages" ><c:out value="${institute.getLongName()}"/></button>
+                </form>
+            </div>
         </c:forEach>
     </div>
 </c:if>
 
-<c:if test = "${selected eq 'yes'}">
+<c:if test = "${step eq 'step1'}">
+    <div class = "pageTitleText pageTitleTextAdmin">
+        Select Faculty where to Delete Employee:
+    </div>
+
+    <div class = "pageContent pageContentAdminPages pageContentAdminPages500px">
+        <c:forEach items="${facultiesList}" var="faculty">
+            <div>
+                <form action="DeleteEmployeePageController" method="post" accept-charset="UTF-8">
+                    <input type="hidden"  name="step" value="step2">
+                    <input type="hidden"  name="facultyID" value="${faculty.getID()}">
+                    <button onclick="submit" class="itemButton itemButtonAdminPages" ><c:out value="${faculty.getLongName()}"/></button>
+                </form>
+            </div>
+        </c:forEach>
+    </div>
+</c:if>
+
+<c:if test = "${step eq 'step2'}">
+    <div class = "pageTitleText pageTitleTextAdmin">
+        Select Department where to Delete Employee:
+    </div>
+
+    <div class = "pageContent pageContentAdminPages pageContentAdminPages500px">
+        <c:forEach items="${departmentsList}" var="department">
+            <div>
+                <form action="DeleteEmployeePageController" method="post" accept-charset="UTF-8">
+                    <input type="hidden"  name="step" value="step3">
+                    <input type="hidden"  name="departmentID" value="${department.getID()}">
+                    <button onclick="submit" class="itemButton itemButtonAdminPages" ><c:out value="${department.getLongName()}"/></button>
+                </form>
+            </div>
+        </c:forEach>
+    </div>
+</c:if>
+
+<c:if test = "${step eq 'step3'}">
+    <div class = "pageTitleText pageTitleTextAdmin">
+        Select Employee to Delete:
+    </div>
+
+    <div class = "pageContent pageContentAdminPages pageContentAdminPages500px">
+        <c:forEach items="${employeesList}" var="employee">
+            <div>
+                <form action="DeleteEmployeePageController" method="post" accept-charset="UTF-8">
+                    <input type="hidden"  name="step" value="step4">
+                    <input type="hidden"  name="employeeID" value="${employee.getID()}">
+                    <button onclick="submit" class="itemButton itemButtonAdminPages" ><c:out value="${employee.getSecondName()}"/> <c:out value="${employee.getName()}"/></button>
+                </form>
+            </div>
+        </c:forEach>
+    </div>
+</c:if>
+
+<c:if test = "${step eq 'step4'}">
     <div class = "pageContent pageContentAdminPages pageContentAdminPagesTwoFieldsSize">
         <div class = "textLabelParagraph textLabelAdminPage">
             Please Confirm Delete: <c:out value="${employee.getSecondName()}"/> <c:out value="${employee.getName()}"/>
@@ -55,7 +100,7 @@
         <div>
              <form action="DeleteEmployeePageController" method="post" accept-charset="UTF-8">
                   <table>
-                       <input type="hidden"  name="step" value="step2">
+                       <input type="hidden"  name="step" value="step5">
                        <input type="hidden"  name="employeeID" value="${employee.getID()}">
                        <tr>
                            <td colspan=2>

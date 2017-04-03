@@ -27,28 +27,46 @@ public class MoveEmployeePageController   extends HttpServlet {
         DAOEmployee daoe = new DAOEmployee();
         if(request.getParameterMap().containsKey("step")){
             if(request.getParameter("step").equals("step1")){
-                ArrayList<Institute> i = daoi.getAll();
-                for(Institute institute:i){
-                    ArrayList<Faculty> f = daof.getAllByInstituteID(institute.getID());
-                    for(Faculty faculty: f){
-                        ArrayList<Department> d = daod.getAllByfacultyID(faculty.getID());
-                        faculty.setDepartments(d);
-                    }
-                    institute.setFacultys(f);
-                }
-                Employee employee= daoe.getEntityById(Integer.parseInt(request.getParameter("employeeID")));
-                request.setAttribute("selected", "yes");
-                request.setAttribute("institutesList", i);
-                request.setAttribute("employee", employee);
+                ArrayList<Faculty> f = daof.getAllByInstituteID(Integer.parseInt(request.getParameter("instituteID")));
+                request.setAttribute("facultiesList", f);
+                request.setAttribute("step", "step1");
                 request.getRequestDispatcher("Admin/Employee/Operations/MoveEmployeePage.jsp").forward(request, response);
             }else if(request.getParameter("step").equals("step2")){
-                Department department = daod.getEntityById(Integer.parseInt(request.getParameter("departmentID")));
-                Employee employee = daoe.getEntityById(Integer.parseInt(request.getParameter("employeeID")));
-                request.setAttribute("selected", "yes2");
-                request.setAttribute("employee", employee);
-                request.setAttribute("department", department);
+                ArrayList<Department> departments = daod.getAllByfacultyID(Integer.parseInt(request.getParameter("facultyID")));
+                request.setAttribute("step", "step2");
+                request.setAttribute("departmentsList", departments);
                 request.getRequestDispatcher("Admin/Employee/Operations/MoveEmployeePage.jsp").forward(request, response);
             }else if(request.getParameter("step").equals("step3")){
+                ArrayList<Employee> employees = daoe.getAllByDepartmentID(Integer.parseInt(request.getParameter("departmentID")));
+                request.setAttribute("step", "step3");
+                request.setAttribute("employeesList", employees);
+                request.getRequestDispatcher("Admin/Employee/Operations/MoveEmployeePage.jsp").forward(request, response);
+            }else if(request.getParameter("step").equals("step4")){
+                ArrayList<Institute> i = daoi.getAll();
+                request.setAttribute("institutesList", i);
+                request.setAttribute("employeeID", Integer.parseInt(request.getParameter("employeeID")));
+                request.setAttribute("step", "step4");
+                request.getRequestDispatcher("Admin/Employee/Operations/MoveEmployeePage.jsp").forward(request, response);
+            }else if(request.getParameter("step").equals("step5")){
+                ArrayList<Faculty> faculties = daof.getAllByInstituteID(Integer.parseInt(request.getParameter("instituteID")));
+                request.setAttribute("facultiesList", faculties);
+                request.setAttribute("employeeID", Integer.parseInt(request.getParameter("employeeID")));
+                request.setAttribute("step", "step5");
+                request.getRequestDispatcher("Admin/Employee/Operations/MoveEmployeePage.jsp").forward(request, response);
+            }else if(request.getParameter("step").equals("step6")){
+                ArrayList<Department> departments = daod.getAllByfacultyID(Integer.parseInt(request.getParameter("facultyID")));
+                request.setAttribute("departmentsList", departments);
+                request.setAttribute("employeeID", Integer.parseInt(request.getParameter("employeeID")));
+                request.setAttribute("step", "step6");
+                request.getRequestDispatcher("Admin/Employee/Operations/MoveEmployeePage.jsp").forward(request, response);
+            }else if(request.getParameter("step").equals("step7")){
+                Department department = daod.getEntityById(Integer.parseInt(request.getParameter("departmentID")));
+                Employee employee = daoe.getEntityById(Integer.parseInt(request.getParameter("employeeID")));
+                request.setAttribute("department", department);
+                request.setAttribute("employee", employee);
+                request.setAttribute("step", "step7");
+                request.getRequestDispatcher("Admin/Employee/Operations/MoveEmployeePage.jsp").forward(request, response);
+            }else if(request.getParameter("step").equals("step8")){
                 boolean result = false;
                 result = daoe.updateEmployeeLocation(Integer.parseInt(request.getParameter("departmentID")),Integer.parseInt(request.getParameter("employeeID")));
                 if(result){
@@ -67,20 +85,8 @@ public class MoveEmployeePageController   extends HttpServlet {
             }
         }else{
             ArrayList<Institute> i = daoi.getAll();
-            for(Institute institute:i){
-                ArrayList<Faculty> f = daof.getAllByInstituteID(institute.getID());
-                for(Faculty faculty:f){
-                    ArrayList<Department> d = daod.getAllByfacultyID(faculty.getID());
-                    for(Department department: d){
-                        ArrayList<Employee> e = daoe.getAllByDepartmentID(department.getID());
-                        department.setEmployees(e);
-                    }
-                    faculty.setDepartments(d);
-                }
-                institute.setFacultys(f);
-            }
             request.setAttribute("institutesList", i);
-            request.setAttribute("selected", "no");
+            request.setAttribute("step", "step0");
             request.getRequestDispatcher("Admin/Employee/Operations/MoveEmployeePage.jsp").forward(request, response);
         }
         daoe.closeConnection();

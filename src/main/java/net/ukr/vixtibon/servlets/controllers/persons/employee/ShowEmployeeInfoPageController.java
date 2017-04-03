@@ -22,11 +22,28 @@ import java.util.ArrayList;
 public class ShowEmployeeInfoPageController  extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if(request.getParameterMap().containsKey("step")){
+            DAOFaculty daof = new DAOFaculty();
+            DAODepartment daod = new DAODepartment();
             DAOEmployee daoe = new DAOEmployee();
             if(request.getParameter("step").equals("step1")){
+                ArrayList<Faculty> f = daof.getAllByInstituteID(Integer.parseInt(request.getParameter("instituteID")));
+                request.setAttribute("facultiesList", f);
+                request.setAttribute("step", "step1");
+                request.getRequestDispatcher("Admin/Employee/Operations/ShowEmployeeInfoPage.jsp").forward(request, response);
+            }else if(request.getParameter("step").equals("step2")){
+                ArrayList<Department> departments = daod.getAllByfacultyID(Integer.parseInt(request.getParameter("facultyID")));
+                request.setAttribute("step", "step2");
+                request.setAttribute("departmentsList", departments);
+                request.getRequestDispatcher("Admin/Employee/Operations/ShowEmployeeInfoPage.jsp").forward(request, response);
+            }else if(request.getParameter("step").equals("step3")){
+                ArrayList<Employee> employees = daoe.getAllByDepartmentID(Integer.parseInt(request.getParameter("departmentID")));
+                request.setAttribute("step", "step3");
+                request.setAttribute("employeesList", employees);
+                request.getRequestDispatcher("Admin/Employee/Operations/ShowEmployeeInfoPage.jsp").forward(request, response);
+            }else if(request.getParameter("step").equals("step4")){
                 Employee employee = daoe.getEntityById(Integer.parseInt(request.getParameter("employeeID")));
                 daoe.closeConnection();
-                request.setAttribute("selected", "yes");
+                request.setAttribute("step", "step4");
                 request.setAttribute("employee", employee);
                 request.getRequestDispatcher("Admin/Employee/Operations/ShowEmployeeInfoPage.jsp").forward(request, response);
             }else if(request.getParameter("step").equals("cancel")){
@@ -34,30 +51,15 @@ public class ShowEmployeeInfoPageController  extends HttpServlet {
             }else{
                 //error page
             }
-        }else{
-            DAOInstitute daoi = new DAOInstitute();
-            DAOFaculty daof = new DAOFaculty();
-            DAODepartment daod = new DAODepartment();
-            DAOEmployee daoe = new DAOEmployee();
-            ArrayList<Institute> i = daoi.getAll();
-            for(Institute institute:i){
-                ArrayList<Faculty> f = daof.getAllByInstituteID(institute.getID());
-                for(Faculty faculty:f){
-                    ArrayList<Department> d = daod.getAllByfacultyID(faculty.getID());
-                    for(Department department: d){
-                        ArrayList<Employee> e = daoe.getAllByDepartmentID(department.getID());
-                        department.setEmployees(e);
-                    }
-                    faculty.setDepartments(d);
-                }
-                institute.setFacultys(f);
-            }
-            daoe.closeConnection();
             daod.closeConnection();
             daof.closeConnection();
+            daoe.closeConnection();
+        }else{
+            DAOInstitute daoi = new DAOInstitute();
+            ArrayList<Institute> i = daoi.getAll();
             daoi.closeConnection();
             request.setAttribute("institutesList", i);
-            request.setAttribute("selected", "no");
+            request.setAttribute("step", "step0");
             request.getRequestDispatcher("Admin/Employee/Operations/ShowEmployeeInfoPage.jsp").forward(request, response);
         }
     }

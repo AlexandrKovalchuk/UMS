@@ -26,11 +26,24 @@ import java.util.Date;
 public class CreateEmployeePageController  extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if(request.getParameterMap().containsKey("step")){
+            DAOFaculty daof = new DAOFaculty();
+            DAODepartment daod = new DAODepartment();
             if(request.getParameter("step").equals("step1")){
-                request.setAttribute("selected", "yes");
-                request.setAttribute("departmentID", request.getParameter("departmentID"));
+                ArrayList<Faculty> f = daof.getAllByInstituteID(Integer.parseInt(request.getParameter("instituteID")));
+                request.setAttribute("facultiesList", f);
+                request.setAttribute("step", "step1");
                 request.getRequestDispatcher("Admin/Employee/Operations/CreateEmployeePage.jsp").forward(request, response);
             }else if(request.getParameter("step").equals("step2")){
+                ArrayList<Department> departments = daod.getAllByfacultyID(Integer.parseInt(request.getParameter("facultyID")));
+                request.setAttribute("step", "step2");
+                request.setAttribute("departmentsList", departments);
+                request.getRequestDispatcher("Admin/Employee/Operations/CreateEmployeePage.jsp").forward(request, response);
+            }else if(request.getParameter("step").equals("step3")){
+                Department department = daod.getEntityById(Integer.parseInt(request.getParameter("departmentID")));
+                request.setAttribute("step", "step3");
+                request.setAttribute("departmentID", department.getID());
+                request.getRequestDispatcher("Admin/Employee/Operations/CreateEmployeePage.jsp").forward(request, response);
+            }else if(request.getParameter("step").equals("step4")){
                 DAOEmployee daoe = new DAOEmployee();
                 Employee em = new Employee();
                 boolean result = false;
@@ -74,23 +87,14 @@ public class CreateEmployeePageController  extends HttpServlet {
             }else{
                 //error page
             }
-        }else{
-            DAOInstitute daoi = new DAOInstitute();
-            DAOFaculty daof = new DAOFaculty();
-            DAODepartment daod = new DAODepartment();
-            ArrayList<Institute> i = daoi.getAll();
-            for(Institute institute:i){
-                ArrayList<Faculty> f = daof.getAllByInstituteID(institute.getID());
-                for(Faculty faculty:f){
-                    ArrayList<Department> d = daod.getAllByfacultyID(faculty.getID());
-                    faculty.setDepartments(d);
-                }
-                institute.setFacultys(f);
-            }
             daod.closeConnection();
             daof.closeConnection();
+        }else{
+            DAOInstitute daoi = new DAOInstitute();
+            ArrayList<Institute> i = daoi.getAll();
             daoi.closeConnection();
             request.setAttribute("institutesList", i);
+            request.setAttribute("step", "step0");
             request.getRequestDispatcher("Admin/Employee/Operations/CreateEmployeePage.jsp").forward(request, response);
         }
     }
