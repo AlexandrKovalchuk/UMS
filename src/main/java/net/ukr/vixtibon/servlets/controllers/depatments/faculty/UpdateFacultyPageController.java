@@ -20,11 +20,16 @@ public class UpdateFacultyPageController  extends HttpServlet {
         if(request.getParameterMap().containsKey("step")){
             DAOFaculty daof = new DAOFaculty();
             if(request.getParameter("step").equals("step1")){
-                Faculty faculty = daof.getEntityById(Integer.parseInt(request.getParameter("facultyID")));
-                request.setAttribute("selected", "yes");
-                request.setAttribute("faculty", faculty);
+                ArrayList<Faculty> f = daof.getAllByInstituteID(Integer.parseInt(request.getParameter("instituteID")));
+                request.setAttribute("facultiesList", f);
+                request.setAttribute("step", "step1");
                 request.getRequestDispatcher("Admin/Faculty/Operations/UpdateFacultyPage.jsp").forward(request, response);
             }else if(request.getParameter("step").equals("step2")){
+                Faculty faculty = daof.getEntityById(Integer.parseInt(request.getParameter("facultyID")));
+                request.setAttribute("step", "step2");
+                request.setAttribute("faculty", faculty);
+                request.getRequestDispatcher("Admin/Faculty/Operations/UpdateFacultyPage.jsp").forward(request, response);
+            }else if(request.getParameter("step").equals("step3")){
                 boolean result = false;
                 Faculty faculty = new Faculty();
                 faculty.setID(Integer.parseInt(request.getParameter("facultyID")));
@@ -47,16 +52,10 @@ public class UpdateFacultyPageController  extends HttpServlet {
             }
         }else{
             DAOInstitute daoi = new DAOInstitute();
-            DAOFaculty daof = new DAOFaculty();
             ArrayList<Institute> i = daoi.getAll();
-            for(Institute institute:i){
-                ArrayList<Faculty> f = daof.getAllByInstituteID(institute.getID());
-                institute.setFacultys(f);
-            }
-            daof.closeConnection();
             daoi.closeConnection();
             request.setAttribute("institutesList", i);
-            request.setAttribute("selected", "no");
+            request.setAttribute("step", "step0");
             request.getRequestDispatcher("Admin/Faculty/Operations/UpdateFacultyPage.jsp").forward(request, response);
         }
     }

@@ -22,17 +22,23 @@ public class DeleteFacultyPageController  extends HttpServlet {
             DAOFaculty daof = new DAOFaculty();
             DAODepartment daod = new DAODepartment();
             if(request.getParameter("step").equals("step1")){
+                ArrayList<Faculty> f = daof.getAllByInstituteID(Integer.parseInt(request.getParameter("instituteID")));
+                request.setAttribute("facultiesList", f);
+                request.setAttribute("step", "step1");
+                request.getRequestDispatcher("Admin/Faculty/Operations/DeleteFacultyPage.jsp").forward(request, response);
+
+            }else if(request.getParameter("step").equals("step2")){
                 Faculty faculty = daof.getEntityById(Integer.parseInt(request.getParameter("facultyID")));
                 faculty.setDepartments(daod.getAllByfacultyID(faculty.getID()));
-                request.setAttribute("selected", "yes");
                 if(faculty.getDepartments().size()>0){
                     request.setAttribute("possible_to_remove", "no");
                 }else{
                     request.setAttribute("possible_to_remove", "yes");
                 }
+                request.setAttribute("step", "step2");
                 request.setAttribute("faculty", faculty);
                 request.getRequestDispatcher("Admin/Faculty/Operations/DeleteFacultyPage.jsp").forward(request, response);
-            }else if(request.getParameter("step").equals("step2")){
+            }else if(request.getParameter("step").equals("step3")){
                 DAOFaculty daoi = new DAOFaculty();
                 boolean result = false;
                 result = daoi.delete(Integer.parseInt(request.getParameter("facultyID")));
@@ -53,16 +59,10 @@ public class DeleteFacultyPageController  extends HttpServlet {
             }
         }else{
             DAOInstitute daoi = new DAOInstitute();
-            DAOFaculty daof = new DAOFaculty();
             ArrayList<Institute> i = daoi.getAll();
-            for(Institute institute:i){
-                ArrayList<Faculty> f = daof.getAllByInstituteID(institute.getID());
-                institute.setFacultys(f);
-            }
-            daof.closeConnection();
             daoi.closeConnection();
             request.setAttribute("institutesList", i);
-            request.setAttribute("selected", "no");
+            request.setAttribute("step", "step0");
             request.getRequestDispatcher("Admin/Faculty/Operations/DeleteFacultyPage.jsp").forward(request, response);
         }
     }
