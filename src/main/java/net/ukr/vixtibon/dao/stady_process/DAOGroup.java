@@ -124,6 +124,25 @@ public class DAOGroup  extends AbstractController<Group,Integer> {
         return group;
     }
 
+    public int getCountOfGroupsByDepartmentID(int departmentID){
+        int count = 0;
+        String Get_CountOfDependencyByDisciplineID_Statement = "SELECT COUNT(*) FROM gtgroup WHERE departmentID=" + departmentID + ";";
+        PreparedStatement ps = getPrepareStatement(Get_CountOfDependencyByDisciplineID_Statement);
+        ResultSet rs = null;
+        try {
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                count = rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) try { rs.close(); } catch (SQLException logOrIgnore) {}
+            if (ps != null) try { ps.close(); } catch (SQLException logOrIgnore) {}
+        }
+        return count;
+    }
+
     @Override
     public boolean delete(Integer id) {
         String Delete_Group_Statement = "DELETE FROM gtgroup WHERE ID=" + id + ";";

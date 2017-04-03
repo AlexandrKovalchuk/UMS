@@ -7,6 +7,11 @@ import net.ukr.vixtibon.dao.departments.DAODepartment;
 import net.ukr.vixtibon.dao.departments.DAOFaculty;
 import net.ukr.vixtibon.dao.departments.DAOInstitute;
 import net.ukr.vixtibon.dao.persons.DAOEmployee;
+import net.ukr.vixtibon.dao.persons.DAOTeacher;
+import net.ukr.vixtibon.dao.stady_process.DAODayRequirements;
+import net.ukr.vixtibon.dao.stady_process.DAODisciplineDepartmentDependency;
+import net.ukr.vixtibon.dao.stady_process.DAOGroup;
+import net.ukr.vixtibon.dao.stady_process.DAOLesson;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -21,22 +26,62 @@ import java.util.ArrayList;
 public class DeleteDepartmentPageController   extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if(request.getParameterMap().containsKey("step")){
-            DAODepartment daoi = new DAODepartment();
+            DAOFaculty daof = new DAOFaculty();
+            DAODepartment daod = new DAODepartment();
             DAOEmployee daoe = new DAOEmployee();
             if(request.getParameter("step").equals("step1")){
-                Department department = daoi.getEntityById(Integer.parseInt(request.getParameter("departmentID")));
-                department.setEmployees(daoe.getAllByDepartmentID(department.getID()));
-                request.setAttribute("selected", "yes");
-                if(department.getEmployees().size()>0){
-                    request.setAttribute("possible_to_remove", "no");
-                }else{
-                    request.setAttribute("possible_to_remove", "yes");
-                }
-                request.setAttribute("department", department);
+                ArrayList<Faculty> f = daof.getAllByInstituteID(Integer.parseInt(request.getParameter("instituteID")));
+                request.setAttribute("facultiesList", f);
+                request.setAttribute("step", "step1");
                 request.getRequestDispatcher("Admin/Department/Operations/DeleteDepartmentPage.jsp").forward(request, response);
             }else if(request.getParameter("step").equals("step2")){
+                ArrayList<Department> departments = daod.getAllByfacultyID(Integer.parseInt(request.getParameter("facultyID")));
+                request.setAttribute("step", "step2");
+                request.setAttribute("departmentsList", departments);
+                request.getRequestDispatcher("Admin/Department/Operations/DeleteDepartmentPage.jsp").forward(request, response);
+            }else if(request.getParameter("step").equals("step3")){
+                DAODisciplineDepartmentDependency daoDisciplineDepartmentDependency = new DAODisciplineDepartmentDependency();
+                DAOTeacher daoTeacher = new DAOTeacher();
+                DAODayRequirements daoDayRequirements = new DAODayRequirements();
+                DAOLesson daoLesson = new DAOLesson();
+                DAOGroup daoGroup = new DAOGroup();
+                Department department = daod.getEntityById(Integer.parseInt(request.getParameter("departmentID")));
+                if(daoe.getCountOfEmployeesByDepartmentID(department.getID()) == 0){
+                    if(daoDisciplineDepartmentDependency.getCountOfDependencyByDepartmentID(department.getID()) == 0){
+                        if(daoTeacher.getCountOfTeachersByDepartmentID(department.getID()) == 0){
+                            if(daoDayRequirements.getCountOfDayRequirements(department.getID()) == 0){
+                                if(daoLesson.getCountByDepartmentID(department.getID()) == 0){
+                                    if(daoGroup.getCountOfGroupsByDepartmentID(department.getID()) == 0){
+                                        request.setAttribute("possible_to_remove", "yes");
+                                    }else{
+                                        request.setAttribute("possible_to_remove", "no");
+                                    }
+                                }else{
+                                    request.setAttribute("possible_to_remove", "no");
+                                }
+                            }else{
+                                request.setAttribute("possible_to_remove", "no");
+                            }
+                        }else{
+                            request.setAttribute("possible_to_remove", "no");
+                        }
+                    }else{
+                        request.setAttribute("possible_to_remove", "no");
+                    }
+                }else {
+                    request.setAttribute("possible_to_remove", "no");
+                }
+                daoe.closeConnection();
+                daoGroup.closeConnection();
+                daoLesson.closeConnection();
+                daoTeacher.closeConnection();
+                daoDisciplineDepartmentDependency.closeConnection();
+                request.setAttribute("step", "step3");
+                request.setAttribute("department", department);
+                request.getRequestDispatcher("Admin/Department/Operations/DeleteDepartmentPage.jsp").forward(request, response);
+            }else if(request.getParameter("step").equals("step4")){
                 boolean result = false;
-                result = daoi.delete(Integer.parseInt(request.getParameter("departmentID")));
+                result = daod.delete(Integer.parseInt(request.getParameter("departmentID")));
                 if(result){
                     request.setAttribute("result", "success");
                     request.setAttribute("menu", "department");
@@ -44,7 +89,7 @@ public class DeleteDepartmentPageController   extends HttpServlet {
                     request.setAttribute("menu", "department");
                     request.setAttribute("result", "unsuccess");
                 }
-                daoi.closeConnection();
+                daod.closeConnection();
                 request.getRequestDispatcher("ActionResultPageController").forward(request, response);
             }else if(request.getParameter("step").equals("cancel")){
                 request.getRequestDispatcher("DepartmentPageController").forward(request, response);
@@ -53,22 +98,10 @@ public class DeleteDepartmentPageController   extends HttpServlet {
             }
         }else{
             DAOInstitute daoi = new DAOInstitute();
-            DAOFaculty daof = new DAOFaculty();
-            DAODepartment daod = new DAODepartment();
             ArrayList<Institute> i = daoi.getAll();
-            for(Institute institute:i){
-                ArrayList<Faculty> f = daof.getAllByInstituteID(institute.getID());
-                for(Faculty faculty:f){
-                    ArrayList<Department> d = daod.getAllByfacultyID(faculty.getID());
-                    faculty.setDepartments(d);
-                }
-                institute.setFacultys(f);
-            }
-            daod.closeConnection();
-            daof.closeConnection();
             daoi.closeConnection();
             request.setAttribute("institutesList", i);
-            request.setAttribute("selected", "no");
+            request.setAttribute("step", "step0");
             request.getRequestDispatcher("Admin/Department/Operations/DeleteDepartmentPage.jsp").forward(request, response);
         }
     }

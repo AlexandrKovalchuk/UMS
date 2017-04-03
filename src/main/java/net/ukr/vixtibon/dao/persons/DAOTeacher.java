@@ -188,6 +188,25 @@ public class DAOTeacher extends AbstractController<Teacher,Integer> {
         return departmentID;
     }
 
+    public int getCountOfTeachersByDepartmentID(int departmentID){
+        int count = 0;
+        String Get_CountOfDependencyByDisciplineID_Statement = "SELECT COUNT(*) FROM teacher WHERE departmentID=" + departmentID + ";";
+        PreparedStatement ps = getPrepareStatement(Get_CountOfDependencyByDisciplineID_Statement);
+        ResultSet rs = null;
+        try {
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                count = rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) try { rs.close(); } catch (SQLException logOrIgnore) {}
+            if (ps != null) try { ps.close(); } catch (SQLException logOrIgnore) {}
+        }
+        return count;
+    }
+
     public Teacher getEntityByIdNameAndSurnameOnly(Integer id) {
         String Select_Teacher_Statemet = "SELECT ID, name, lastName, fathersName FROM teacher WHERE ID='"+ id +"';";
         Teacher teacher = new Teacher();

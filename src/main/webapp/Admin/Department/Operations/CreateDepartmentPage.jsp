@@ -20,28 +20,44 @@
 </div>
 <br />
 
-    <c:if test = "${selected eq 'no'}">
-        <div class = "pageTitleText pageTitleTextAdmin">
-            Select Faculty where to add Department:
-        </div>
+<c:if test = "${step eq 'step0'}">
+    <div class = "pageTitleText pageTitleTextAdmin">
+        Select Institute where to Create Department:
+    </div>
 
-        <div class = "pageContent pageContentAdminPages pageContentAdminPages500px">
+    <div class = "pageContent pageContentAdminPages pageContentAdminPages500px">
         <c:forEach items="${institutesList}" var="institute">
-            <div class = "textLabelParagraph textLabelAdminPage"><c:out value="${institute.getLongName()}"/>:</div>
-            <c:forEach items="${institute.getFacultys()}" var="faculty">
-                <div>
-                    <form action="CreateDepartmentPageController" method="post" accept-charset="UTF-8">
-                        <input type="hidden"  name="step" value="step1">
-                        <input type="hidden"  name="facultyID" value="${faculty.getID()}">
-                        <button onclick="submit" class="itemButton itemButtonAdminPages" ><c:out value="${faculty.getLongName()}"/></button>
-                    </form>
-                 </div>
-             </c:forEach>
+            <div>
+                <form action="CreateDepartmentPageController" method="post" accept-charset="UTF-8">
+                    <input type="hidden"  name="step" value="step1">
+                    <input type="hidden"  name="instituteID" value="${institute.getID()}">
+                    <button onclick="submit" class="itemButton itemButtonAdminPages" ><c:out value="${institute.getLongName()}"/></button>
+                </form>
+            </div>
         </c:forEach>
-        </div>
-    </c:if>
+    </div>
+</c:if>
 
-    <c:if test = "${selected eq 'yes'}">
+<c:if test = "${step eq 'step1'}">
+    <div class = "pageTitleText pageTitleTextAdmin">
+        Select Faculty where to Create Department:
+    </div>
+
+    <div class = "pageContent pageContentAdminPages pageContentAdminPages500px">
+        <c:forEach items="${facultiesList}" var="faculty">
+            <div>
+                <form action="CreateDepartmentPageController" method="post" accept-charset="UTF-8">
+                    <input type="hidden"  name="step" value="step2">
+                    <input type="hidden"  name="facultyID" value="${faculty.getID()}">
+                    <button onclick="submit" class="itemButton itemButtonAdminPages" ><c:out value="${faculty.getLongName()}"/></button>
+                </form>
+            </div>
+        </c:forEach>
+    </div>
+</c:if>
+
+
+<c:if test = "${step eq 'step2'}">
         <div class = "pageTitleText pageTitleTextAdmin">
             Please fill form:
         </div>
@@ -49,8 +65,8 @@
         <div class = "pageContent pageContentAdminPages pageContentAdminPagesTwoFieldsSize">
             <form action="CreateDepartmentPageController" method="post" accept-charset="UTF-8">
                 <table>
-                    <input type="hidden"  name="step" value="step2">
-                    <input type="hidden"  name="facultyID" value="${facultyID}">
+                    <input type="hidden"  name="step" value="step3">
+                    <input type="hidden"  name="facultyID" value="${faculty.getID()}">
                     <tr>
                         <td class = "textLabel textLabelAdminPage">Long name:</td>
                         <td>

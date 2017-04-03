@@ -19,6 +19,25 @@ public class DAOEmployee extends AbstractController<Employee,Integer> {
         return null;
     }
 
+    public int getCountOfEmployeesByDepartmentID(int departmentID){
+        int count = 0;
+        String Get_CountOfDependencyByDisciplineID_Statement = "SELECT COUNT(*) FROM employee WHERE departmentID=" + departmentID + ";";
+        PreparedStatement ps = getPrepareStatement(Get_CountOfDependencyByDisciplineID_Statement);
+        ResultSet rs = null;
+        try {
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                count = rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) try { rs.close(); } catch (SQLException logOrIgnore) {}
+            if (ps != null) try { ps.close(); } catch (SQLException logOrIgnore) {}
+        }
+        return count;
+    }
+
     public ArrayList<Employee> getAllByDepartmentID(int departmentID){
         String Select_All_Employees_Statemet = "SELECT * FROM employee WHERE departmentID="+ departmentID +";";
         ArrayList<Employee> employeeList = new ArrayList<>();

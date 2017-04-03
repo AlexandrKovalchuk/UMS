@@ -20,36 +20,40 @@ import java.util.ArrayList;
 public class MoveDepartmentPageController  extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if(request.getParameterMap().containsKey("step")){
+            DAOFaculty daof = new DAOFaculty();
+            DAODepartment daod = new DAODepartment();
             if(request.getParameter("step").equals("step1")){
-                DAOInstitute daoi = new DAOInstitute();
-                ArrayList<Institute> i = daoi.getAll();
-                DAOFaculty daof = new DAOFaculty();
-                for(Institute institute:i){
-                    ArrayList<Faculty> f = daof.getAllByInstituteID(institute.getID());
-                    institute.setFacultys(f);
-                }
-                DAODepartment daod = new DAODepartment();
-                Department department = daod.getEntityById(Integer.parseInt(request.getParameter("departmentID")));
-                daod.closeConnection();
-                daof.closeConnection();
-                daoi.closeConnection();
-                request.setAttribute("selected", "yes");
-                request.setAttribute("institutesList", i);
-                request.setAttribute("department", department);
+                ArrayList<Faculty> f = daof.getAllByInstituteID(Integer.parseInt(request.getParameter("instituteID")));
+                request.setAttribute("facultiesList", f);
+                request.setAttribute("step", "step1");
                 request.getRequestDispatcher("Admin/Department/Operations/MoveDepartmentPage.jsp").forward(request, response);
             }else if(request.getParameter("step").equals("step2")){
-                DAOFaculty daof = new DAOFaculty();
-                DAODepartment daod = new DAODepartment();
-                Department department = daod.getEntityById(Integer.parseInt(request.getParameter("departmentID")));
-                Faculty faculty = daof.getEntityById(Integer.parseInt(request.getParameter("facultyID")));
-                daod.closeConnection();
-                daof.closeConnection();
-                request.setAttribute("selected", "yes2");
-                request.setAttribute("department", department);
-                request.setAttribute("faculty", faculty);
+                ArrayList<Department> departments = daod.getAllByfacultyID(Integer.parseInt(request.getParameter("facultyID")));
+                request.setAttribute("step", "step2");
+                request.setAttribute("departmentsList", departments);
                 request.getRequestDispatcher("Admin/Department/Operations/MoveDepartmentPage.jsp").forward(request, response);
             }else if(request.getParameter("step").equals("step3")){
-                DAODepartment daod = new DAODepartment();
+                DAOInstitute daoi = new DAOInstitute();
+                ArrayList<Institute> i = daoi.getAll();
+                daoi.closeConnection();
+                request.setAttribute("departmentID", Integer.parseInt(request.getParameter("departmentID")));
+                request.setAttribute("institutesList", i);
+                request.setAttribute("step", "step3");
+                request.getRequestDispatcher("Admin/Department/Operations/MoveDepartmentPage.jsp").forward(request, response);
+            }else if(request.getParameter("step").equals("step4")){
+                ArrayList<Faculty> f = daof.getAllByInstituteID(Integer.parseInt(request.getParameter("instituteID")));
+                request.setAttribute("departmentID", Integer.parseInt(request.getParameter("departmentID")));
+                request.setAttribute("facultiesList", f);
+                request.setAttribute("step", "step4");
+                request.getRequestDispatcher("Admin/Department/Operations/MoveDepartmentPage.jsp").forward(request, response);
+            }else if(request.getParameter("step").equals("step5")){
+                Faculty faculty = daof.getEntityById(Integer.parseInt(request.getParameter("facultyID")));
+                Department department = daod.getEntityById(Integer.parseInt(request.getParameter("departmentID")));
+                request.setAttribute("faculty", faculty);
+                request.setAttribute("department", department);
+                request.setAttribute("step", "step5");
+                request.getRequestDispatcher("Admin/Department/Operations/MoveDepartmentPage.jsp").forward(request, response);
+            }else if(request.getParameter("step").equals("step6")){
                 boolean result = false;
                 result = daod.updateDepartmentLocation(Integer.parseInt(request.getParameter("facultyID")),Integer.parseInt(request.getParameter("departmentID")));
                 if(result){
@@ -59,31 +63,20 @@ public class MoveDepartmentPageController  extends HttpServlet {
                     request.setAttribute("menu", "department");
                     request.setAttribute("result", "unsuccess");
                 }
-                daod.closeConnection();
                 request.getRequestDispatcher("ActionResultPageController").forward(request, response);
             }else if(request.getParameter("step").equals("cancel")){
                 request.getRequestDispatcher("DepartmentPageController").forward(request, response);
             }else{
                 //error page
             }
-        }else{
-            DAOInstitute daoi = new DAOInstitute();
-            DAOFaculty daof = new DAOFaculty();
-            DAODepartment daod = new DAODepartment();
-            ArrayList<Institute> i = daoi.getAll();
-            for(Institute institute:i){
-                ArrayList<Faculty> f = daof.getAllByInstituteID(institute.getID());
-                for(Faculty faculty:f){
-                    ArrayList<Department> d = daod.getAllByfacultyID(faculty.getID());
-                    faculty.setDepartments(d);
-                }
-                institute.setFacultys(f);
-            }
             daod.closeConnection();
             daof.closeConnection();
+        }else{
+            DAOInstitute daoi = new DAOInstitute();
+            ArrayList<Institute> i = daoi.getAll();
             daoi.closeConnection();
             request.setAttribute("institutesList", i);
-            request.setAttribute("selected", "no");
+            request.setAttribute("step", "step0");
             request.getRequestDispatcher("Admin/Department/Operations/MoveDepartmentPage.jsp").forward(request, response);
         }
     }
