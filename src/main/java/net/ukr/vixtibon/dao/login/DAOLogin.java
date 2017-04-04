@@ -86,6 +86,7 @@ public class DAOLogin extends AbstractController<LogInBody,Integer> {
                 lib.setLogIn(rs.getString(2));
                 lib.setPassword(rs.getString(3));
                 lib.setAccess(rs.getString(4));
+                lib.setAccessID(rs.getInt(5));
             }
         } catch (SQLException e) {
             e.printStackTrace();

@@ -70,6 +70,9 @@
     border-collapse: collapse;
     color: #fff79c;
 }
+.studentTableWidth{
+    width: 27px;
+}
 
 .attendanceProgress{
     border: 1px solid;

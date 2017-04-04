@@ -21,7 +21,6 @@ public class DAODisciplineDepartmentDependency extends AbstractController<Discip
 
     public DisciplineDepartmentDependencyObject getByDisciplineIDDepartmentID(int disciplineID, int departmentID){
         String Select_All_Discipline_Statemet = "SELECT * FROM disciplineDepartmentDependency WHERE disciplineID="+ disciplineID +" and departmentID="+ departmentID +";";
-
         PreparedStatement ps = getPrepareStatement(Select_All_Discipline_Statemet);
         DisciplineDepartmentDependencyObject dddo = new DisciplineDepartmentDependencyObject();
         ResultSet rs = null;

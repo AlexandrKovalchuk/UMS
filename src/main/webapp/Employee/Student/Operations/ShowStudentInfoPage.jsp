@@ -93,7 +93,7 @@
 
 <c:if test = "${selected eq 'yes'}">
     <div class = "pageTitleText pageTitleTextEmployee">
-        Select Student to delete:
+        Select Student to Show:
     </div>
 
     <div class = "pageContent pageContentEmployeePages pageContentAdminPages500px">
@@ -171,31 +171,49 @@
         <div class = "pageTitleText pageTitleTextEmployee">
             Attendance:
         </div>
-        <table  class = "studentTable">
-            <c:forEach var="saoItem" items="${student.getAttendance()}">
-                <tr  class = "studentTable">
-                <td class = "textLabel textLabelEmployeePage studentTable"><c:out value="${student.getDisciplines().get(saoItem.value.getDisciplineID()).getNameOfDiscipline()}"/></td>
-                    <c:forEach var="attendance" items="${saoItem.value.getAttendance()}">
-                        <td class = "textLabel textLabelEmployeePage studentTable"><c:out value="${attendance}"/></td>
-                    </c:forEach>
-                </tr>
-            </c:forEach>
+        <c:set var="count" value="1" scope="page" />
+        <c:forEach begin="1" end="6" varStatus="loop">
+            <div class = "pageTitleText pageTitleTextEmployee">
+                Course #<c:out value="${count}"/>
+            </div>
+            <table  class = "studentTable">
+                <c:forEach var="saoItem" items="${student.getAttendance()}">
+                    <c:if test = "${student.getDisciplines().get(saoItem.value.getDisciplineID()).getCourseNumber() == count}">
+                        <tr  class = "studentTable">
+                        <td class = "textLabel textLabelEmployeePage studentTable"><c:out value="${student.getDisciplines().get(saoItem.value.getDisciplineID()).getNameOfDiscipline()}"/></td>
+                            <c:forEach var="attendance" items="${saoItem.value.getAttendance()}">
+                                <td class = "textLabel textLabelEmployeePage studentTable studentTableWidth"><c:out value="${attendance}"/></td>
+                            </c:forEach>
+                        </tr>
+                    </c:if>
+                </c:forEach>
 
-        </table>
+            </table>
+            <c:set var="count" value="${count + 1}" scope="page"/>
+        </c:forEach>
 
         <div class = "pageTitleText pageTitleTextEmployee">
             Progress:
         </div>
-        <table class = "studentTable">
-            <c:forEach var="saoItem" items="${student.getProgress()}">
-                <tr class = "studentTable">
-                    <td class = "textLabel textLabelEmployeePage studentTable"><c:out value="${student.getDisciplines().get(saoItem.value.getDisciplineID()).getNameOfDiscipline()}"/></td>
-                    <c:forEach var="progress" items="${saoItem.value.getProgress()}">
-                        <td class = "textLabel textLabelEmployeePage studentTable"><c:out value="${progress}"/></td>
-                    </c:forEach>
-                </tr>
-            </c:forEach>
-        </table>
+        <c:set var="count" value="1" scope="page" />
+        <c:forEach begin="1" end="6" varStatus="loop">
+            <div class = "pageTitleText pageTitleTextEmployee">
+                Course #<c:out value="${count}"/>
+            </div>
+            <table class = "studentTable">
+                <c:forEach var="saoItem" items="${student.getProgress()}">
+                    <c:if test = "${student.getDisciplines().get(saoItem.value.getDisciplineID()).getCourseNumber() == count}">
+                        <tr class = "studentTable">
+                            <td class = "textLabel textLabelEmployeePage studentTable"><c:out value="${student.getDisciplines().get(saoItem.value.getDisciplineID()).getNameOfDiscipline()}"/></td>
+                            <c:forEach var="progress" items="${saoItem.value.getProgress()}">
+                                <td class = "textLabel textLabelEmployeePage studentTable studentTableWidth"><c:out value="${progress}"/></td>
+                            </c:forEach>
+                        </tr>
+                    </c:if>
+                </c:forEach>
+            </table>
+            <c:set var="count" value="${count + 1}" scope="page"/>
+        </c:forEach>
     </div>
 </c:if>
 

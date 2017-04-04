@@ -3,14 +3,12 @@ package net.ukr.vixtibon.servlets.controllers.persons.student;
 import net.ukr.vixtibon.base_objects.departments.Department;
 import net.ukr.vixtibon.base_objects.persons.Student;
 import net.ukr.vixtibon.base_objects.study_process.Discipline;
+import net.ukr.vixtibon.base_objects.study_process.DisciplineDepartmentDependencyObject;
 import net.ukr.vixtibon.base_objects.study_process.StudentAttendanceObject;
 import net.ukr.vixtibon.base_objects.study_process.StudentProgressObject;
 import net.ukr.vixtibon.dao.departments.DAODepartment;
 import net.ukr.vixtibon.dao.persons.DAOStudent;
-import net.ukr.vixtibon.dao.stady_process.DAODiscipline;
-import net.ukr.vixtibon.dao.stady_process.DAOGroup;
-import net.ukr.vixtibon.dao.stady_process.DAOStudentAttendance;
-import net.ukr.vixtibon.dao.stady_process.DAOStudentProgress;
+import net.ukr.vixtibon.dao.stady_process.*;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -48,12 +46,17 @@ public class ShowInfoStudentPageController extends HttpServlet {
                 student.setAttendance(daoStudentAttendance.getAllByStudentID(student.getID()));
                 student.setProgress(daoStudentProgress.getAllByStudentID(student.getID()));
 
+                DAODisciplineDepartmentDependency daoDisciplineDepartmentDependency = new DAODisciplineDepartmentDependency();
                 for(Map.Entry<Integer, StudentAttendanceObject> a: student.getAttendance().entrySet()){
                     Discipline discipline = new Discipline();
                     discipline = daoDiscipline.getEntityById(a.getValue().getDisciplineID());
-                    System.out.println("discipline id : " + discipline.getID());
+                    DisciplineDepartmentDependencyObject disciplineDepartmentDependencyObject = new DisciplineDepartmentDependencyObject();
+                    disciplineDepartmentDependencyObject = daoDisciplineDepartmentDependency.getByDisciplineIDDepartmentID(discipline.getID(),(int)session.getAttribute("departmentID"));
+                    discipline.setCourseNumber(disciplineDepartmentDependencyObject.getCourseNumber());
+                    System.out.println("discipline id : " + discipline.getID() + " " + discipline.getCourseNumber());
                     student.getDisciplines().put(discipline.getID(), discipline);
                 }
+                daoDisciplineDepartmentDependency.closeConnection();
 
                 daoStudentProgress.closeConnection();
                 daoStudentAttendance.closeConnection();
