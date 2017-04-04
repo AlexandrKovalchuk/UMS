@@ -143,6 +143,26 @@ public class DAOGroup  extends AbstractController<Group,Integer> {
         return count;
     }
 
+    public  int getDepartmentIDByGroupID(int groupID){
+        String Select_DepartmentID_By_Username = "SELECT departmentID FROM gtgroup WHERE ID=" + groupID + ";";
+        int departmentID = 0;
+        PreparedStatement ps = getPrepareStatement(Select_DepartmentID_By_Username);
+        //System.out.println("Select_DepartmentID_By_Username " + Select_DepartmentID_By_Username);
+        ResultSet rs = null;
+        try {
+            rs = ps.executeQuery();
+            if(rs.next() == true){
+                departmentID = rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) try { rs.close(); } catch (SQLException logOrIgnore) {}
+            if (ps != null) try { ps.close(); } catch (SQLException logOrIgnore) {}
+        }
+        return departmentID;
+    }
+
     @Override
     public boolean delete(Integer id) {
         String Delete_Group_Statement = "DELETE FROM gtgroup WHERE ID=" + id + ";";

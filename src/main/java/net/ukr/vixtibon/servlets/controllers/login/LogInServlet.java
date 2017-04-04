@@ -44,14 +44,13 @@ public class LogInServlet extends HttpServlet {
                     DAOTeacher daoTeacher = new DAOTeacher();
                     session.setAttribute("type","teacher");
                     session.setAttribute("departmentID", daoTeacher.getDepartmentIDByUserID(lib.getAccessID()));
-                    System.out.println("AccessID" + lib.getAccessID());
-                    System.out.println("departmentID" + session.getAttribute("departmentID"));
                     session.setAttribute("teacherID",daoTeacher.getIDbyUserName(username));
                     request.getRequestDispatcher("Teacher/TeacherPage.jsp").forward(request, response);
                 }else if(lib.getAccess().equals("student")){
                     DAOStudent daoStudent = new DAOStudent();
                     session.setAttribute("type","student");
                     session.setAttribute("departmentID", daoStudent.getDepartmentIDByUserID(lib.getAccessID()));
+                    session.setAttribute("studentID",lib.getAccessID());
                     request.getRequestDispatcher("Student/StudentPage.jsp").forward(request, response);
                 }else{
                     request.setAttribute("wrongPasswordOrLogIn", "errorInAccess");

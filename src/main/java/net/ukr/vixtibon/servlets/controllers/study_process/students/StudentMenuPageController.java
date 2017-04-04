@@ -12,7 +12,6 @@ import java.io.IOException;
 public class StudentMenuPageController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if(request.getParameterMap().containsKey("operationType")){
-            System.out.println(request.getParameter("operationType"));
             if(request.getParameter("operationType").equals("attendance")){
                 request.getRequestDispatcher("ShowAttendancePageController").forward(request, response);
             }else if(request.getParameter("operationType").equals("progress")){

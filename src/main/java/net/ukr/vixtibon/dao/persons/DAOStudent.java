@@ -6,6 +6,7 @@ import net.ukr.vixtibon.base_objects.study_process.Discipline;
 import net.ukr.vixtibon.base_objects.study_process.StudentAttendanceObject;
 import net.ukr.vixtibon.base_objects.study_process.StudentProgressObject;
 import net.ukr.vixtibon.dao.AbstractController;
+import net.ukr.vixtibon.dao.stady_process.DAOGroup;
 import net.ukr.vixtibon.dao.stady_process.DAOStudentAttendance;
 import net.ukr.vixtibon.dao.stady_process.DAOStudentProgress;
 
@@ -128,15 +129,16 @@ public class DAOStudent extends AbstractController<Student,Integer> {
     }
 
     public  int getDepartmentIDByUserID(int userID){
-        String Select_DepartmentID_By_Username = "SELECT departmentID FROM student WHERE ID=" + userID + ";";
+        String Select_DepartmentID_By_Username = "SELECT groupID FROM student WHERE ID=" + userID + ";";
         int departmentID = 0;
         PreparedStatement ps = getPrepareStatement(Select_DepartmentID_By_Username);
         //System.out.println("Select_DepartmentID_By_Username " + Select_DepartmentID_By_Username);
+        DAOGroup daoGroup = new DAOGroup();
         ResultSet rs = null;
         try {
             rs = ps.executeQuery();
             if(rs.next() == true){
-                departmentID = rs.getInt(1);
+                departmentID = daoGroup.getDepartmentIDByGroupID(rs.getInt(1));
             }
         } catch (SQLException e) {
             e.printStackTrace();

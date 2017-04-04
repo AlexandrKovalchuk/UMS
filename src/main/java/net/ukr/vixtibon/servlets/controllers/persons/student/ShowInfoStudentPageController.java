@@ -53,7 +53,6 @@ public class ShowInfoStudentPageController extends HttpServlet {
                     DisciplineDepartmentDependencyObject disciplineDepartmentDependencyObject = new DisciplineDepartmentDependencyObject();
                     disciplineDepartmentDependencyObject = daoDisciplineDepartmentDependency.getByDisciplineIDDepartmentID(discipline.getID(),(int)session.getAttribute("departmentID"));
                     discipline.setCourseNumber(disciplineDepartmentDependencyObject.getCourseNumber());
-                    System.out.println("discipline id : " + discipline.getID() + " " + discipline.getCourseNumber());
                     student.getDisciplines().put(discipline.getID(), discipline);
                 }
                 daoDisciplineDepartmentDependency.closeConnection();

@@ -552,6 +552,26 @@
     </servlet-mapping>
 
     <servlet>
+        <servlet-name>ShowAttendancePageController</servlet-name>
+        <servlet-class>net.ukr.vixtibon.servlets.controllers.study_process.students.ShowAttendancePageController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>ShowAttendancePageController</servlet-name>
+        <url-pattern>/ShowAttendancePageController</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ShowProgressPageController</servlet-name>
+        <servlet-class>net.ukr.vixtibon.servlets.controllers.study_process.students.ShowProgressPageController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>ShowProgressPageController</servlet-name>
+        <url-pattern>/ShowProgressPageController</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>GroupPageController</servlet-name>
         <servlet-class>net.ukr.vixtibon.servlets.controllers.study_process.group.GroupPageController</servlet-class>
     </servlet>
