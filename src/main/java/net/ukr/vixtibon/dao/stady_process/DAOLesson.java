@@ -1,6 +1,7 @@
 package net.ukr.vixtibon.dao.stady_process;
 
 import net.ukr.vixtibon.QueryStack;
+import net.ukr.vixtibon.base_objects.persons.Teacher;
 import net.ukr.vixtibon.base_objects.study_process.Discipline;
 import net.ukr.vixtibon.base_objects.study_process.Lesson;
 import net.ukr.vixtibon.dao.AbstractController;
@@ -23,17 +24,88 @@ public class DAOLesson extends AbstractController<Lesson,Integer> {
 
     @Override
     public boolean update(Lesson entity) {
-        return false;
+        String disciplineID = "";
+        String teacherID = "";
+
+            disciplineID = disciplineID + entity.getDiscipline().getID();
+            teacherID = teacherID + entity.getTeacher().getID();
+
+        String Update_Group_Statemet = "UPDATE timetable SET disciplineID=" +disciplineID+ "" +
+                ",teacherID="+teacherID+" WHERE ID=" + entity.getID() + ";";
+        PreparedStatement ps = getPrepareStatement(Update_Group_Statemet);
+        try {
+            ps.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        } finally {
+            if (ps != null) try { ps.close(); } catch (SQLException logOrIgnore) {}
+        }
+    }
+
+    public boolean update(Lesson entity, boolean empty) {
+        String disciplineID = "";
+        String teacherID = "";
+        if(empty){
+            disciplineID = "NULL";
+            teacherID = "NULL";
+        }else{
+            disciplineID = disciplineID + entity.getDiscipline().getID();
+            teacherID = teacherID + entity.getTeacher().getID();
+        }
+        String Update_Group_Statemet = "UPDATE timetable SET disciplineID=" +disciplineID+ "" +
+                ",teacherID="+teacherID+" WHERE ID=" + entity.getID() + ";";
+        PreparedStatement ps = getPrepareStatement(Update_Group_Statemet);
+        try {
+            ps.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        } finally {
+            if (ps != null) try { ps.close(); } catch (SQLException logOrIgnore) {}
+        }
     }
 
     @Override
     public Lesson getEntityById(Integer id) {
-        return null;
+
+        String Select_getEntityById_Statemet = "SELECT * FROM timetable WHERE ID=" +id+ ";";
+        PreparedStatement ps = getPrepareStatement(Select_getEntityById_Statemet);
+        ResultSet rs = null;
+        DAODiscipline daoDiscipline = new DAODiscipline();
+        DAOTeacher daoTeacher = new DAOTeacher();
+        Lesson lesson = new Lesson();
+        try {
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                lesson.setID(rs.getInt(1));
+                lesson.setDayNumber(rs.getInt(2));
+                lesson.setLessonNumberInDay(rs.getInt(3));
+                lesson.setDepartmentID(rs.getInt(4));
+                lesson.setGroupID(rs.getInt(5));
+                if(checkIfFieldNULL(id,"disciplineID") == false) {
+                    lesson.setDiscipline(daoDiscipline.getEntityByIdNameOnly(rs.getInt(6)));
+                }
+                if(checkIfFieldNULL(id,"teacherID") == false) {
+                    lesson.setTeacher(daoTeacher.getEntityByIdNameAndSurnameOnly(rs.getInt(7)));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) try { rs.close(); } catch (SQLException logOrIgnore) {}
+            if (ps != null) try { ps.close(); } catch (SQLException logOrIgnore) {}
+        }
+        daoDiscipline.closeConnection();
+        daoTeacher.closeConnection();
+        return lesson;
     }
 
     public ArrayList<Lesson> getAllByDepartmentDayNumber(int departmentID, int dayNumber, int lessonNumber){
-        String Select_getAllByDepartmentDayNumber_Statemet = "SELECT * FROM timetable WHERE departmentID=" +departmentID+ "and dayNumber=" + dayNumber +
-                "and lessonNumberInDay=" + lessonNumber + ";";
+        String Select_getAllByDepartmentDayNumber_Statemet = "SELECT * FROM timetable WHERE departmentID=" +departmentID+ " and dayNumber=" + dayNumber +
+                " and lessonNumberInDay=" + lessonNumber + ";";
         ArrayList<Lesson> lessons = new ArrayList<Lesson>();
         PreparedStatement ps = getPrepareStatement(Select_getAllByDepartmentDayNumber_Statemet);
         ResultSet rs = null;
@@ -46,10 +118,14 @@ public class DAOLesson extends AbstractController<Lesson,Integer> {
                 lesson.setID(rs.getInt(1));
                 lesson.setDayNumber(rs.getInt(2));
                 lesson.setLessonNumberInDay(rs.getInt(3));
-                lesson.setGroupID(rs.getInt(4));
-                lesson.setDiscipline(daoDiscipline.getEntityByIdNameOnly(rs.getInt(5)));
-                lesson.setDepartmentID(rs.getInt(6));
-                lesson.setTeacher(daoTeacher.getEntityByIdNameAndSurnameOnly(rs.getInt(7)));
+                lesson.setDepartmentID(rs.getInt(4));
+                lesson.setGroupID(rs.getInt(5));
+                if(checkIfFieldNULL(lesson.getID(),"disciplineID") == false) {
+                    lesson.setDiscipline(daoDiscipline.getEntityByIdNameOnly(rs.getInt(6)));
+                }
+                if(checkIfFieldNULL(lesson.getID(),"teacherID") == false) {
+                    lesson.setTeacher(daoTeacher.getEntityByIdNameAndSurnameOnly(rs.getInt(7)));
+                }
                 lessons.add(lesson);
             }
         } catch (SQLException e) {
@@ -62,6 +138,42 @@ public class DAOLesson extends AbstractController<Lesson,Integer> {
         daoTeacher.closeConnection();
         return lessons;
     }
+
+    public ArrayList<Lesson> getAllByDepartmentID(int departmentID){
+        String Select_getAllByDepartmentDayNumber_Statemet = "SELECT * FROM timetable WHERE departmentID=" +departmentID+ ";";
+        ArrayList<Lesson> lessons = new ArrayList<Lesson>();
+        PreparedStatement ps = getPrepareStatement(Select_getAllByDepartmentDayNumber_Statemet);
+        ResultSet rs = null;
+        DAODiscipline daoDiscipline = new DAODiscipline();
+        DAOTeacher daoTeacher = new DAOTeacher();
+        try {
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Lesson lesson = new Lesson();
+                lesson.setID(rs.getInt(1));
+                lesson.setDayNumber(rs.getInt(2));
+                lesson.setLessonNumberInDay(rs.getInt(3));
+                lesson.setDepartmentID(rs.getInt(4));
+                lesson.setGroupID(rs.getInt(5));
+                if(checkIfFieldNULL(lesson.getID(),"disciplineID") == false) {
+                    lesson.setDiscipline(daoDiscipline.getEntityByIdNameOnly(rs.getInt(6)));
+                }
+                if(checkIfFieldNULL(lesson.getID(),"teacherID") == false) {
+                    lesson.setTeacher(daoTeacher.getEntityByIdNameAndSurnameOnly(rs.getInt(7)));
+                }
+                lessons.add(lesson);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) try { rs.close(); } catch (SQLException logOrIgnore) {}
+            if (ps != null) try { ps.close(); } catch (SQLException logOrIgnore) {}
+        }
+        daoDiscipline.closeConnection();
+        daoTeacher.closeConnection();
+        return lessons;
+    }
+
     public int getCountByDepartmentID(int departmentID){
         int count = 0;
         String Get_getCountByDepartmentID_Statement = "SELECT COUNT(*) FROM timetable WHERE departmentID=" + departmentID + ";";
@@ -118,5 +230,25 @@ public class DAOLesson extends AbstractController<Lesson,Integer> {
         } finally {
             if (ps != null) try { ps.close(); } catch (SQLException logOrIgnore) {}
         }
+
+    }
+
+    public  boolean checkIfFieldNULL(int id,String fieldName){
+        String Select_checkIfFielNULL_statement = "SELECT " +fieldName+ " FROM timetable WHERE id=" + id + " and " +fieldName+ " IS NULL;";
+        boolean result = false;
+        PreparedStatement ps = getPrepareStatement(Select_checkIfFielNULL_statement);
+        ResultSet rs = null;
+        try {
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                result = true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) try { rs.close(); } catch (SQLException logOrIgnore) {}
+            if (ps != null) try { ps.close(); } catch (SQLException logOrIgnore) {}
+        }
+        return result;
     }
 }

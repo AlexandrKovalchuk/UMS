@@ -4,6 +4,7 @@ import net.ukr.vixtibon.base_objects.departments.Department;
 import net.ukr.vixtibon.base_objects.study_process.DayRequirementsObject;
 import net.ukr.vixtibon.base_objects.study_process.Group;
 import net.ukr.vixtibon.base_objects.study_process.Lesson;
+import net.ukr.vixtibon.base_objects.study_process.LessonsArray;
 import net.ukr.vixtibon.dao.departments.DAODepartment;
 import net.ukr.vixtibon.dao.stady_process.DAODayRequirements;
 import net.ukr.vixtibon.dao.stady_process.DAOGroup;
@@ -26,117 +27,10 @@ public class UpdateTimetablePageController  extends HttpServlet {
         HttpSession session=request.getSession();
         if(request.getParameterMap().containsKey("step")){
             if(request.getParameter("step").equals("step1")){
-                boolean result = false;
-                DAOLesson daoLesson = new DAOLesson();
-                DAODepartment daoDepartment = new DAODepartment();
-                DAOGroup daoGroup = new DAOGroup();
-                DAODayRequirements daoDayRequirements = new DAODayRequirements();
 
-                if(request.getParameter("timetablePresent").equals("yes")){
-                    daoLesson.deleteByDepartmentID((int) session.getAttribute("departmentID"));
-
-                }
-
-                Department department = new Department();
-                DayRequirementsObject dayRequirementsObject = new DayRequirementsObject();
-                dayRequirementsObject = daoDayRequirements.getEntityByDepartmentID((int) session.getAttribute("departmentID"));
-
-                department.setGroups1(daoGroup.getAllByDepartmentID((int) session.getAttribute("departmentID"),1));
-                department.setGroups2(daoGroup.getAllByDepartmentID((int) session.getAttribute("departmentID"), 2));
-                department.setGroups3(daoGroup.getAllByDepartmentID((int) session.getAttribute("departmentID"), 3));
-                department.setGroups4(daoGroup.getAllByDepartmentID((int) session.getAttribute("departmentID"), 4));
-                department.setGroups5(daoGroup.getAllByDepartmentID((int) session.getAttribute("departmentID"), 5));
-                department.setGroups6(daoGroup.getAllByDepartmentID((int) session.getAttribute("departmentID"), 6));
-
-                for(int i = 1; i < dayRequirementsObject.getCountOfDaysInWeek() + 1; i++){
-                    for(int j = 1; j < dayRequirementsObject.getCountOfLessonsInADay() + 1; j++){
-                        for(Group g: department.getGroups1()){
-                            Lesson lesson = new Lesson();
-                            lesson.setDepartmentID((int) session.getAttribute("departmentID"));
-                            lesson.setDayNumber(i);
-                            lesson.setLessonNumberInDay(j);
-                            lesson.setGroupID(g.getID());
-                            try {
-                                daoLesson.create(lesson);
-                            } catch (SQLException e) {
-                                e.printStackTrace();
-                            }
-                        }
-                        for(Group g: department.getGroups2()){
-                            Lesson lesson = new Lesson();
-                            lesson.setDepartmentID((int) session.getAttribute("departmentID"));
-                            lesson.setDayNumber(i);
-                            lesson.setLessonNumberInDay(j);
-                            lesson.setGroupID(g.getID());
-                            try {
-                                daoLesson.create(lesson);
-                            } catch (SQLException e) {
-                                e.printStackTrace();
-                            }
-                        }
-                        for(Group g: department.getGroups3()){
-                            Lesson lesson = new Lesson();
-                            lesson.setDepartmentID((int) session.getAttribute("departmentID"));
-                            lesson.setDayNumber(i);
-                            lesson.setLessonNumberInDay(j);
-                            lesson.setGroupID(g.getID());
-                            try {
-                                daoLesson.create(lesson);
-                            } catch (SQLException e) {
-                                e.printStackTrace();
-                            }
-                        }
-                        for(Group g: department.getGroups4()){
-                            Lesson lesson = new Lesson();
-                            lesson.setDepartmentID((int) session.getAttribute("departmentID"));
-                            lesson.setDayNumber(i);
-                            lesson.setLessonNumberInDay(j);
-                            lesson.setGroupID(g.getID());
-                            try {
-                                daoLesson.create(lesson);
-                            } catch (SQLException e) {
-                                e.printStackTrace();
-                            }
-                        }
-                        for(Group g: department.getGroups5()){
-                            Lesson lesson = new Lesson();
-                            lesson.setDepartmentID((int) session.getAttribute("departmentID"));
-                            lesson.setDayNumber(i);
-                            lesson.setLessonNumberInDay(j);
-                            lesson.setGroupID(g.getID());
-                            try {
-                                daoLesson.create(lesson);
-                            } catch (SQLException e) {
-                                e.printStackTrace();
-                            }
-                        }
-                        for(Group g: department.getGroups6()){
-                            Lesson lesson = new Lesson();
-                            lesson.setDepartmentID((int) session.getAttribute("departmentID"));
-                            lesson.setDayNumber(i);
-                            lesson.setLessonNumberInDay(j);
-                            lesson.setGroupID(g.getID());
-                            try {
-                                daoLesson.create(lesson);
-                            } catch (SQLException e) {
-                                e.printStackTrace();
-                            }
-                        }
-                    }
-                }
-
-                if(result){
-                    request.setAttribute("result", "success");
-                }else{
-                    request.setAttribute("result", "unsuccess");
-                }
-
-                daoDayRequirements.closeConnection();
-                daoGroup.closeConnection();
-                daoDepartment.closeConnection();
-                daoLesson.closeConnection();
-                request.setAttribute("menu", "timetable");
-                request.getRequestDispatcher("ActionResultEmployeeMenuPageController").forward(request, response);
+                request.removeAttribute("step");
+                request.setAttribute("lessonID ",request.getParameter("lessonID"));
+                request.getRequestDispatcher("UpdateLessonPageController").forward(request, response);
             }else if(request.getParameter("step").equals("cancel")){
                 request.getRequestDispatcher("TimetablePageController").forward(request, response);
             }else{
@@ -168,6 +62,8 @@ public class UpdateTimetablePageController  extends HttpServlet {
                     }
                     week.add(day);
                 }
+                LessonsArray lessons = new LessonsArray();
+                lessons.setLessons(daoLesson.getAllByDepartmentID((int) session.getAttribute("departmentID")));
 
                 // initialize courseNumbers array
                 for(int i = 1; i < 7 ; i++){
@@ -195,11 +91,11 @@ public class UpdateTimetablePageController  extends HttpServlet {
 
                 daoGroup.closeConnection();
                 daoDayRequirements.closeConnection();
-                System.out.println("week.size()" + week.size());
                 request.setAttribute("week", week);
                 request.setAttribute("dayNames", dayNames);
                 request.setAttribute("lessonsTime",lessonsTime);
                 request.setAttribute("groupNamesByCourse",groupNamesByCourse);
+                request.setAttribute("lessons",lessons);
                 request.setAttribute("timetablePresent", "yes");
             }else{
                 request.setAttribute("timetablePresent", "no");

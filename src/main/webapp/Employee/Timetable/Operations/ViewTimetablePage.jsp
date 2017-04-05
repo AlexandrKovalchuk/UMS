@@ -85,20 +85,26 @@
                     <c:forEach items="${groupNamesByCourse}"  var="groupsItem">
                         <td class = "studentTable">
                             <table>
+                                <c:set var="countlessonsTime" value="1" scope="page" />
                                 <c:forEach items="${lessonsTime}"  var="lessonTime">
                                     <tr>
                                         <c:forEach items="${groupsItem}"  var="group">
+
+                                            <c:set var="lesson" value="${lessons.getLesson(group.getID(),count,countlessonsTime)}"/>
                                             <td>
                                                 <form action="UpdateTimetablePageController" method="post">
-                                                    <input type="hidden"  name="step" value="cancel">
-                                                    <input type="hidden"  name="ID" value="cancel">
+                                                    <input type="hidden"  name="step" value="step1">
+                                                    <input type="hidden"  name="lessonID" value="${lesson.getID()}">
                                                     <td colspan=2>
-                                                        <button onclick="submit"  class="timeTableButton timeTableButtonEmployeePage"></button>
+                                                        <button onclick="submit"  class="timeTableButton timeTableButtonEmployeePage"><c:out value="${lesson.getDiscipline().getNameOfDiscipline()}"/><br>
+                                                            <c:out value="${lesson.getTeacher().getSecondName()}"/>
+                                                        </button>
                                                     </td>
                                                 </form>
                                             </td>
                                         </c:forEach>
                                     </tr>
+                                    <c:set var="countlessonsTime" value="${countlessonsTime + 1}" scope="page"/>
                                 </c:forEach>
 
                             </table>

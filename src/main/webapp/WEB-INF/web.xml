@@ -652,6 +652,16 @@
     </servlet-mapping>
 
     <servlet>
+        <servlet-name>UpdateLessonPageController</servlet-name>
+        <servlet-class>net.ukr.vixtibon.servlets.controllers.study_process.timetable.UpdateLessonPageController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>UpdateLessonPageController</servlet-name>
+        <url-pattern>/UpdateLessonPageController</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>DayRequirementsPageController</servlet-name>
         <servlet-class>net.ukr.vixtibon.servlets.controllers.study_process.dayRequirements.DayRequirementsPageController</servlet-class>
     </servlet>

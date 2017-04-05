@@ -12,9 +12,9 @@ public class Lesson implements Serializable {
     private int dayNumber;
     private int lessonNumberInDay;
     private int groupID;
-    private Discipline discipline;
+    private Discipline discipline = new Discipline();
     private int departmentID;
-    private Teacher teacher;
+    private Teacher teacher = new Teacher();
 
     public void setDepartmentID(int departmentID) {
         this.departmentID = departmentID;
@@ -41,11 +41,15 @@ public class Lesson implements Serializable {
     }
 
     public void setDiscipline(Discipline discipline) {
-        this.discipline = discipline;
+        if(discipline != null) {
+            this.discipline = discipline;
+        }
     }
 
     public void setTeacher(Teacher teacher) {
-        this.teacher = teacher;
+        if(teacher != null) {
+            this.teacher = teacher;
+        }
     }
 
     public int getID() {
