@@ -62,6 +62,9 @@
         Set Attendance :
     </div>
     <div class = "pageContent pageContentTeacherPages pageContentAdminPages500px">
+        <form action="SetAttendancePageController" method="post">
+            <input type="hidden"  name="step" value="step3">
+            <input type="hidden"  name="groupID" value="${groupID}">
         <table class="attendanceProgress">
             <tr>
                 <td class = "textLabel textLabelTeacherPage attendanceProgress">
@@ -77,15 +80,23 @@
                 <tr>
                     <td class = "textLabel textLabelTeacherPage attendanceProgress"><c:out value="${student.getSecondName()}"/> <c:out value="${student.getName()}"/></td>
                     <c:forEach var="saoItem" items="${student.getAttendance()}">
+                        <c:set var="count" value="0" scope="page" />
                         <c:forEach var="attendance" items="${saoItem.value.getAttendance()}">
                             <td class = "textLabel textLabelTeacherPage attendanceProgress">
-                                <input class = "inputAttendanceProgress" type="text" name="name" required value="${attendance}">
+                                <input class = "inputAttendanceProgress" type="text" name="${student.getID()}#${saoItem.value.getDisciplineID()}#${count}"  value="${attendance}">
                             </td>
+                            <c:set var="count" value="${count + 1}" scope="page"/>
                         </c:forEach>
                     </c:forEach>
                 </tr>
             </c:forEach>
         </table>
+            <div>
+                    <td colspan=2>
+                        <button onclick="submit"  class="controlButton controlButtonTeacherPage">Done</button>
+                    </td>
+            </div>
+        </form>
     </div>
 
 </c:if>

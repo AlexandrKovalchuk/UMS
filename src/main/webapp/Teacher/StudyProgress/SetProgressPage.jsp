@@ -62,36 +62,53 @@
         Set Progress :
     </div>
     <div class = "pageContent pageContentTeacherPages pageContentAdminPages500px">
-        <table class="ProgressProgress">
-            <tr>
-                <td class = "textLabel textLabelTeacherPage attendanceProgress">
-                    <c:out value="Lesson #"/>
-                </td>
-                <c:forEach var="i" begin="1" end="${discipline.getCountOfLessons()}">
-                    <td class = "textLabel textLabelTeacherPage attendanceProgress">
-                        <c:out value="${i}"/>
-                    </td>
-                </c:forEach>
-            </tr>
-            <c:forEach items="${students}" var="student">
+        <form action="SetProgressPageController" method="post">
+            <input type="hidden"  name="step" value="step3">
+            <input type="hidden"  name="groupID" value="${groupID}">
+            <table class="attendanceProgress">
                 <tr>
-                    <td class = "textLabel textLabelTeacherPage attendanceProgress"><c:out value="${student.getSecondName()}"/> <c:out value="${student.getName()}"/></td>
-                    <c:forEach var="saoItem" items="${student.getProgress()}">
-                        <c:forEach var="progress" items="${saoItem.value.getProgress()}">
+                    <td class = "textLabel textLabelTeacherPage attendanceProgress">
+                        <c:out value="Lesson #"/>
+                    </td>
+                    <c:forEach var="i" begin="1" end="${discipline.getCountOfLessons()}">
+                        <td class = "textLabel textLabelTeacherPage attendanceProgress">
+                            <c:out value="${i}"/>
+                        </td>
+                    </c:forEach>
+                    <td class = "textLabel textLabelTeacherPage attendanceProgress">
+                        <c:out value="Exam"/>
+                    </td>
+                </tr>
+                <c:forEach items="${students}" var="student">
+                    <tr>
+                        <td class = "textLabel textLabelTeacherPage attendanceProgress"><c:out value="${student.getSecondName()}"/> <c:out value="${student.getName()}"/></td>
+                        <c:forEach var="saoItem" items="${student.getProgress()}">
+                            <c:set var="count" value="0" scope="page" />
+                            <c:forEach var="progress" items="${saoItem.value.getProgress()}">
+                                <td class = "textLabel textLabelTeacherPage attendanceProgress">
+                                    <input class = "inputAttendanceProgress" type="text" name="${student.getID()}#${saoItem.value.getDisciplineID()}#${count}"  value="${progress}">
+                                </td>
+                                <c:set var="count" value="${count + 1}" scope="page"/>
+                            </c:forEach>
                             <td class = "textLabel textLabelTeacherPage attendanceProgress">
-                                <input class = "inputAttendanceProgress" type="text" name="name" required value="${progress}">
+                                <input class = "inputAttendanceProgressExam" type="text" name="${student.getID()}#${saoItem.value.getDisciplineID()}#exam"  value="${saoItem.value.getExamResult()}">
                             </td>
                         </c:forEach>
-                    </c:forEach>
-                </tr>
-            </c:forEach>
-        </table>
+                    </tr>
+                </c:forEach>
+            </table>
+            <div>
+                <td colspan=2>
+                    <button onclick="submit"  class="controlButton controlButtonTeacherPage">Done</button>
+                </td>
+            </div>
+        </form>
     </div>
 
 </c:if>
 
 <div>
-    <form action="SetAttendancePageController" method="post">
+    <form action="SetProgressPageController" method="post">
         <input type="hidden"  name="step" value="cancel">
         <td colspan=2>
             <button onclick="submit"  class="controlButton controlButtonTeacherPage">Cancel</button>
@@ -99,7 +116,6 @@
     </form>
 </div>
 <br />
-
 
 </body>
 </html>

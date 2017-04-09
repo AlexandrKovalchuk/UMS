@@ -34,8 +34,9 @@ public class SetProgressPageController extends HttpServlet {
             if(request.getParameter("step").equals("step1")){
                 session.setAttribute("disciplineID", Integer.parseInt(request.getParameter("disciplineID")));
                 DisciplineDepartmentDependencyObject disciplineDepartmentDependency = daoDisciplineDepartmentDependency.getByDisciplineIDDepartmentID((int) session.getAttribute("disciplineID"), (int) session.getAttribute("departmentID"));
+                //System.out.println("disciplineDepartmentDependency" + disciplineDepartmentDependency.getDisciplineID() + " " + disciplineDepartmentDependency.getDepartmentID());
                 ArrayList<Group> groups = daoGroup.getAllByDepartmentID((int) session.getAttribute("departmentID"), disciplineDepartmentDependency.getCourseNumber());
-                System.out.println("groups" + groups.size());
+                //System.out.println("groups" + groups.size());
                 request.setAttribute("select", "select1");
                 request.setAttribute("groups", groups);
                 request.getRequestDispatcher("Teacher/StudyProgress/SetProgressPage.jsp").forward(request, response);
@@ -44,21 +45,36 @@ public class SetProgressPageController extends HttpServlet {
                 ArrayList<Student> students = daoStudent.getAllByGroupID(Integer.parseInt(request.getParameter("groupID")));
                 for(Student student: students){
                     student.setProgress(daoStudentProgress.getByStudentIDDisciplineID(student.getID(),(int) session.getAttribute("disciplineID")));
+
                 }
                 request.setAttribute("discipline", discipline);
                 request.setAttribute("students", students);
+                request.setAttribute("groupID", request.getParameter("groupID"));
                 request.setAttribute("select", "select2");
                 request.getRequestDispatcher("Teacher/StudyProgress/SetProgressPage.jsp").forward(request, response);
-            }else if(request.getParameter("step").equals("step2")){
+            }else if(request.getParameter("step").equals("step3")){
+                ArrayList<Student> students = daoStudent.getAllByGroupID(Integer.parseInt(request.getParameter("groupID")));
                 boolean result = false;
+                for(Student student: students){
+                    student.setProgress(daoStudentProgress.getByStudentIDDisciplineID(student.getID(),(int) session.getAttribute("disciplineID")));
+                    ArrayList<String> progress = new ArrayList<>();
+                    for(int i = 0; i < student.getProgress().entrySet().iterator().next().getValue().getProgress().size(); i++){
+                        String value = request.getParameter("" + student.getID() + "#" + student.getProgress().entrySet().iterator().next().getValue().getDisciplineID() + "#" + i);
+                        progress.add(value);
+                    }
+                    student.getProgress().entrySet().iterator().next().getValue().setProgress(progress);
+                    student.getProgress().entrySet().iterator().next().getValue().setExamResult(request.getParameter("" + student.getID() + "#" + student.getProgress().entrySet().iterator().next().getValue().getDisciplineID() + "#exam"));
+                    result = daoStudentProgress.update(student.getProgress().entrySet().iterator().next().getValue());
+                }
+
                 if(result){
                     request.setAttribute("result", "success");
-                    request.setAttribute("menu", "group");
+                    request.setAttribute("menu", "progress");
                 }else{
-                    request.setAttribute("menu", "group");
+                    request.setAttribute("menu", "progress");
                     request.setAttribute("result", "unsuccess");
                 }
-                request.getRequestDispatcher("ActionResultEmployeeMenuPageController").forward(request, response);
+                request.getRequestDispatcher("ActionResultTeacherMenuPageController").forward(request, response);
             }else if(request.getParameter("step").equals("cancel")){
                 session.removeAttribute("disciplineID");
                 request.getRequestDispatcher("TeacherMenuPageController").forward(request, response);

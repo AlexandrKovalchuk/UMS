@@ -37,6 +37,7 @@
                         <c:forEach var="progress" items="${saoItem.value.getProgress()}">
                             <td class = "textLabel textLabelStudentPage studentTable studentTableWidth"><c:out value="${progress}"/></td>
                         </c:forEach>
+                        <td class = "textLabel textLabelStudentPage studentTable studentTableWidth"><c:out value="${saoItem.value.getExamResult()}"/></td>
                     </tr>
                 </c:if>
             </c:forEach>

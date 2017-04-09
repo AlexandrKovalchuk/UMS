@@ -12,11 +12,11 @@ import java.io.IOException;
 public class ActionResultTeacherMenuPageController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if(request.getParameterMap().containsKey("redirectTo")){
-            if(request.getParameter("redirectTo").equals("institute")){
+            if(request.getParameter("redirectTo").equals("attendance")){
                 request.getRequestDispatcher("TeacherMenuPageController").forward(request, response);
-            }else if (request.getParameter("redirectTo").equals("faculty")){
+            }else if (request.getParameter("redirectTo").equals("progress")){
                 request.getRequestDispatcher("TeacherMenuPageController").forward(request, response);
-            }else if (request.getParameter("redirectTo").equals("admin")){
+            }else if (request.getParameter("redirectTo").equals("timetable")){
                 request.getRequestDispatcher("TeacherMenuPageController").forward(request, response);
             }else {
                 //error page

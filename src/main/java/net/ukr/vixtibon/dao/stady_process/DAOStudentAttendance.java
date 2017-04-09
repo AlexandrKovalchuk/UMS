@@ -40,7 +40,7 @@ public class DAOStudentAttendance  extends AbstractController<StudentAttendanceO
                 Discipline discipline = new Discipline();
                 discipline = daodi.getEntityById(sao.getDisciplineID());
                 for(int i = 1; i <= discipline.getCountOfLessons(); i++){
-                    sao.getAttendance().add(rs.getString(4 + i));
+                    sao.getAttendance().add(rs.getString(3 + i));
                 }
                 daodi.closeConnection();
                 saoList.put(sao.getId(),sao);
@@ -57,6 +57,7 @@ public class DAOStudentAttendance  extends AbstractController<StudentAttendanceO
     public HashMap<Integer, StudentAttendanceObject> getByStudentIDDisciplineID(int studentID, int disciplineID){
         System.out.println("DAOStudentAttendance getAllByStudentID");
         String Select_getAllByStudentID_Statemet = "SELECT * FROM attendance WHERE studentID="+ studentID +" and disciplineID=" + disciplineID+ ";";
+        System.out.println("Select_getAllByStudentID_Statemet" + Select_getAllByStudentID_Statemet);
         HashMap<Integer, StudentAttendanceObject> saoList = new HashMap<Integer, StudentAttendanceObject>();
         PreparedStatement ps = getPrepareStatement(Select_getAllByStudentID_Statemet);
         ResultSet rs = null;
@@ -71,7 +72,7 @@ public class DAOStudentAttendance  extends AbstractController<StudentAttendanceO
                 Discipline discipline = new Discipline();
                 discipline = daodi.getEntityById(sao.getDisciplineID());
                 for(int i = 1; i <= discipline.getCountOfLessons(); i++){
-                    sao.getAttendance().add(rs.getString(4 + i));
+                    sao.getAttendance().add(rs.getString(3 + i));
                 }
                 daodi.closeConnection();
                 saoList.put(sao.getId(),sao);
@@ -87,7 +88,27 @@ public class DAOStudentAttendance  extends AbstractController<StudentAttendanceO
 
     @Override
     public boolean update(StudentAttendanceObject entity) {
-        return false;
+        String list = "";
+        int counter = 1;
+        for(String s: entity.getAttendance()){
+            list = list + "lesson" + counter + "='"+ s +"'";
+            if(entity.getAttendance().size() > counter){
+                list = list + ",";
+            }
+            counter++;
+        }
+        String Update_StudentAttendanceObject_Statemet = "UPDATE attendance SET " + list + " WHERE ID=" + entity.getId() + ";";
+        System.out.println("Update_StudentAttendanceObject_Statemet " + Update_StudentAttendanceObject_Statemet);
+        PreparedStatement ps = getPrepareStatement(Update_StudentAttendanceObject_Statemet);
+        try {
+            ps.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        } finally {
+            if (ps != null) try { ps.close(); } catch (SQLException logOrIgnore) {}
+        }
     }
 
     @Override

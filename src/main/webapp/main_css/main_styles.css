@@ -358,6 +358,15 @@ form{
     height: 20px;
     color: #a0ffac;
 }
+
+.inputAttendanceProgressExam{
+    background: linear-gradient(to bottom right, rgba(19, 19, 19, 0.69), rgba(140, 140, 140, 0.35));
+    font-size: 18px;
+    font-weight: bold;
+    width: 80px;
+    height: 20px;
+    color: #a0ffac;
+}
 .inputStudent{
     background: rgba(108,108,108,0.3);
 }

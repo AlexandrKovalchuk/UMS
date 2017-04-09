@@ -39,7 +39,7 @@ public class DAOStudentProgress  extends AbstractController<StudentProgressObjec
                 Discipline discipline = new Discipline();
                 discipline = daodi.getEntityById(spo.getDisciplineID());
                 for(int i = 1; i <= discipline.getCountOfLessons(); i++){
-                    spo.getProgress().add(rs.getString(5 + i));
+                    spo.getProgress().add(rs.getString(4 + i));
                 }
                 daodi.closeConnection();
                 spoList.put(spo.getId(),spo);
@@ -71,7 +71,7 @@ public class DAOStudentProgress  extends AbstractController<StudentProgressObjec
                 Discipline discipline = new Discipline();
                 discipline = daodi.getEntityById(spo.getDisciplineID());
                 for(int i = 1; i <= discipline.getCountOfLessons(); i++){
-                    spo.getProgress().add(rs.getString(5 + i));
+                    spo.getProgress().add(rs.getString(4 + i));
                 }
                 daodi.closeConnection();
                 spoList.put(spo.getId(),spo);
@@ -87,7 +87,27 @@ public class DAOStudentProgress  extends AbstractController<StudentProgressObjec
 
     @Override
     public boolean update(StudentProgressObject entity) {
-        return false;
+        String list = "";
+        int counter = 1;
+        for(String s: entity.getProgress()){
+            list = list + "lesson" + counter + "='"+ s +"'";
+            if(entity.getProgress().size() > counter){
+                list = list + ",";
+            }
+            counter++;
+        }
+        String Update_StudentAttendanceObject_Statemet = "UPDATE progress SET examResult='" + entity.getExamResult() + "', " + list + " WHERE ID=" + entity.getId() + ";";
+        System.out.println("Update_StudentAttendanceObject_Statemet " + Update_StudentAttendanceObject_Statemet);
+        PreparedStatement ps = getPrepareStatement(Update_StudentAttendanceObject_Statemet);
+        try {
+            ps.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        } finally {
+            if (ps != null) try { ps.close(); } catch (SQLException logOrIgnore) {}
+        }
     }
 
     @Override

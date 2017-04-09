@@ -651,6 +651,7 @@
         <url-pattern>/UpdateTimetablePageController</url-pattern>
     </servlet-mapping>
 
+
     <servlet>
         <servlet-name>UpdateLessonPageController</servlet-name>
         <servlet-class>net.ukr.vixtibon.servlets.controllers.study_process.timetable.UpdateLessonPageController</servlet-class>

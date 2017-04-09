@@ -48,29 +48,9 @@
 
         <div>
             <form action="TimetablePageController" method="post">
-                <input type="hidden"  name="operationType" value="delete">
+                <input type="hidden"  name="operationType" value="generateHTML">
                 <td colspan=2>
-                    <button onclick="submit"  class="topicButton topicButtonEmployeePage">Delete  Timetable</button>
-                </td>
-            </form>
-        </div>
-        <br />
-
-        <div>
-            <form action="TimetablePageController" method="post">
-                <input type="hidden"  name="operationType" value="move">
-                <td colspan=2>
-                    <button onclick="submit"  class="topicButton topicButtonEmployeePage">Move Timetable</button>
-                </td>
-            </form>
-        </div>
-        <br />
-
-        <div>
-            <form action="TimetablePageController" method="post">
-                <input type="hidden"  name="operationType" value="showInfo">
-                <td colspan=2>
-                    <button onclick="submit"  class="topicButton topicButtonEmployeePage">Show Timetable Info</button>
+                    <button onclick="submit"  class="topicButton topicButtonEmployeePage">Generate Timetable in HTML</button>
                 </td>
             </form>
         </div>

@@ -16,10 +16,8 @@ public class TimetablePageController extends HttpServlet {
                 request.getRequestDispatcher("SetTimetablePageController").forward(request, response);
             }else if(request.getParameter("operationType").equals("update")){
                 request.getRequestDispatcher("UpdateTimetablePageController").forward(request, response);
-            }else if(request.getParameter("operationType").equals("delete")){
-                request.getRequestDispatcher("DeleteTimetablePageController").forward(request, response);
-            }else if(request.getParameter("operationType").equals("showInfo")){
-                request.getRequestDispatcher("ShowInfoTimetablePageController").forward(request, response);
+            }else if(request.getParameter("operationType").equals("generateHTML")){
+                request.getRequestDispatcher("GenerateTimeTableInHTMLPageController").forward(request, response);
             }else if(request.getParameter("operationType").equals("cancel")){
                 request.getRequestDispatcher("EmployeeMenuPageController").forward(request, response);
             }else{
