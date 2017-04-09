@@ -21,9 +21,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 
-/**
- * Created by alex on 29/01/2017.
- */
 public class ShowInfoDepartmentPageController   extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if(request.getParameterMap().containsKey("step")){
@@ -75,7 +72,9 @@ public class ShowInfoDepartmentPageController   extends HttpServlet {
             }else if(request.getParameter("step").equals("cancel")){
                 request.getRequestDispatcher("DepartmentPageController").forward(request, response);
             }else{
-                //error page
+                request.setAttribute("menu", "department");
+                request.setAttribute("error", "incorrectValue");
+                request.getRequestDispatcher("ActionResultPageController").forward(request, response);
             }
             daof.closeConnection();
             daod.closeConnection();

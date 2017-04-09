@@ -5,7 +5,6 @@ import net.ukr.vixtibon.base_objects.persons.Student;
 import net.ukr.vixtibon.base_objects.study_process.Discipline;
 import net.ukr.vixtibon.base_objects.study_process.DisciplineDepartmentDependencyObject;
 import net.ukr.vixtibon.base_objects.study_process.StudentAttendanceObject;
-import net.ukr.vixtibon.base_objects.study_process.StudentProgressObject;
 import net.ukr.vixtibon.dao.departments.DAODepartment;
 import net.ukr.vixtibon.dao.persons.DAOStudent;
 import net.ukr.vixtibon.dao.stady_process.*;
@@ -19,9 +18,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Map;
 
-/**
- * Created by alex on 21/02/2017.
- */
 public class ShowInfoStudentPageController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session=request.getSession();
@@ -29,8 +25,7 @@ public class ShowInfoStudentPageController extends HttpServlet {
             if(request.getParameter("step").equals("step1")){
                 request.setAttribute("groupID", request.getParameter("groupID"));
                 DAOStudent daos = new DAOStudent();
-                ArrayList<Student> students = new ArrayList<Student>();
-                students = daos.getAllByGroupID(Integer.parseInt(request.getParameter("groupID")));
+                ArrayList<Student> students = daos.getAllByGroupID(Integer.parseInt(request.getParameter("groupID")));
                 request.setAttribute("students", students);
                 request.setAttribute("selected", "yes");
                 request.getRequestDispatcher("Employee/Student/Operations/ShowStudentInfoPage.jsp").forward(request, response);
@@ -40,18 +35,15 @@ public class ShowInfoStudentPageController extends HttpServlet {
                 DAOStudentAttendance daoStudentAttendance = new DAOStudentAttendance();
                 DAOStudentProgress daoStudentProgress = new DAOStudentProgress();
 
-                Student student = new Student();
-                student = daoStudent.getEntityById(Integer.parseInt(request.getParameter("studentID")));
+                Student student = daoStudent.getEntityById(Integer.parseInt(request.getParameter("studentID")));
 
                 student.setAttendance(daoStudentAttendance.getAllByStudentID(student.getID()));
                 student.setProgress(daoStudentProgress.getAllByStudentID(student.getID()));
 
                 DAODisciplineDepartmentDependency daoDisciplineDepartmentDependency = new DAODisciplineDepartmentDependency();
                 for(Map.Entry<Integer, StudentAttendanceObject> a: student.getAttendance().entrySet()){
-                    Discipline discipline = new Discipline();
-                    discipline = daoDiscipline.getEntityById(a.getValue().getDisciplineID());
-                    DisciplineDepartmentDependencyObject disciplineDepartmentDependencyObject = new DisciplineDepartmentDependencyObject();
-                    disciplineDepartmentDependencyObject = daoDisciplineDepartmentDependency.getByDisciplineIDDepartmentID(discipline.getID(),(int)session.getAttribute("departmentID"));
+                    Discipline discipline = daoDiscipline.getEntityById(a.getValue().getDisciplineID());
+                    DisciplineDepartmentDependencyObject disciplineDepartmentDependencyObject = daoDisciplineDepartmentDependency.getByDisciplineIDDepartmentID(discipline.getID(),(int)session.getAttribute("departmentID"));
                     discipline.setCourseNumber(disciplineDepartmentDependencyObject.getCourseNumber());
                     student.getDisciplines().put(discipline.getID(), discipline);
                 }
@@ -68,7 +60,9 @@ public class ShowInfoStudentPageController extends HttpServlet {
             }else if(request.getParameter("step").equals("cancel")){
                 request.getRequestDispatcher("StudentPageController").forward(request, response);
             }else{
-                //error page
+                request.setAttribute("menu", "student");
+                request.setAttribute("error", "incorrectValue");
+                request.getRequestDispatcher("ActionResultEmployeeMenuPageController").forward(request, response);
             }
         }else{
             DAODepartment daod = new DAODepartment();

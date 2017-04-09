@@ -14,9 +14,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 
-/**
- * Created by alex on 23/11/2016.
- */
 public class ShowInstituteInfoPageController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if(request.getParameterMap().containsKey("step")){
@@ -37,7 +34,9 @@ public class ShowInstituteInfoPageController extends HttpServlet {
             }else if(request.getParameter("step").equals("cancel")){
                 request.getRequestDispatcher("InstitutePageController").forward(request, response);
             }else{
-                //error page
+                request.setAttribute("menu", "institute");
+                request.setAttribute("error", "incorrectValue");
+                request.getRequestDispatcher("ActionResultPageController").forward(request, response);
             }
         }else{
             DAOInstitute daoi = new DAOInstitute();

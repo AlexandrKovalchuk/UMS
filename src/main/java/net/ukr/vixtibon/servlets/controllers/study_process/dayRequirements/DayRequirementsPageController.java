@@ -1,11 +1,7 @@
 package net.ukr.vixtibon.servlets.controllers.study_process.dayRequirements;
 
-import net.ukr.vixtibon.base_objects.departments.Department;
 import net.ukr.vixtibon.base_objects.study_process.DayRequirementsObject;
-import net.ukr.vixtibon.base_objects.study_process.Discipline;
-import net.ukr.vixtibon.dao.departments.DAODepartment;
 import net.ukr.vixtibon.dao.stady_process.DAODayRequirements;
-import net.ukr.vixtibon.dao.stady_process.DAODiscipline;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -15,9 +11,6 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
 
-/**
- * Created by alex on 24/02/2017.
- */
 public class DayRequirementsPageController  extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session=request.getSession();
@@ -59,9 +52,8 @@ public class DayRequirementsPageController  extends HttpServlet {
             }else if(request.getParameter("step").equals("step2")){
 
                 DAODayRequirements daoDayRequirements = new DAODayRequirements();
-                DayRequirementsObject dro = new DayRequirementsObject();
-                dro = daoDayRequirements.getEntityByDepartmentID((int) session.getAttribute("departmentID"));
-                boolean result = false;
+                DayRequirementsObject dro = daoDayRequirements.getEntityByDepartmentID((int) session.getAttribute("departmentID"));
+                boolean result;
 
                 for(int i = 1; i < dro.getCountOfLessonsInADay() + 1; i++){
                     String fieldName = "timeForLesson" + i;
@@ -84,7 +76,9 @@ public class DayRequirementsPageController  extends HttpServlet {
             }else if(request.getParameter("step").equals("cancel")){
                 request.getRequestDispatcher("EmployeeMenuPageController").forward(request, response);
             }else{
-                //error page
+                request.setAttribute("menu", "dayRequirements");
+                request.setAttribute("error", "incorrectValue");
+                request.getRequestDispatcher("ActionResultEmployeeMenuPageController").forward(request, response);
             }
         }else{
             DAODayRequirements daodr = new DAODayRequirements();

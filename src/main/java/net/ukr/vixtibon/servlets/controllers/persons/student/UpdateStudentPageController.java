@@ -17,9 +17,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-/**
- * Created by alex on 20/02/2017.
- */
 public class UpdateStudentPageController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session=request.getSession();
@@ -27,16 +24,13 @@ public class UpdateStudentPageController extends HttpServlet {
             if(request.getParameter("step").equals("step1")){
                 request.setAttribute("groupID", request.getParameter("groupID"));
                 DAOStudent daos = new DAOStudent();
-                ArrayList<Student> students = new ArrayList<Student>();
-                students = daos.getAllByGroupID(Integer.parseInt(request.getParameter("groupID")));
+                ArrayList<Student> students = daos.getAllByGroupID(Integer.parseInt(request.getParameter("groupID")));
                 request.setAttribute("students", students);
                 request.setAttribute("selected", "yes");
                 request.getRequestDispatcher("Employee/Student/Operations/UpdateStudentPage.jsp").forward(request, response);
             }else if(request.getParameter("step").equals("step2")) {
                 DAOStudent daos = new DAOStudent();
-                Student student = new Student();
-
-                student = daos.getEntityById(Integer.parseInt(request.getParameter("studentID")));
+                Student student = daos.getEntityById(Integer.parseInt(request.getParameter("studentID")));
 
                 daos.closeConnection();
                 request.setAttribute("student", student);
@@ -45,7 +39,6 @@ public class UpdateStudentPageController extends HttpServlet {
             }else if(request.getParameter("step").equals("step3")){
                 DAOStudent daos = new DAOStudent();
                 Student student = new Student();
-                boolean result = false;
                 student.setName(request.getParameter("name"));
                 student.setlastName(request.getParameter("lastName"));
                 student.setfathersName(request.getParameter("fathersName"));
@@ -68,7 +61,7 @@ public class UpdateStudentPageController extends HttpServlet {
                 student.setLogin(request.getParameter("login"));
                 student.setID(Integer.parseInt(request.getParameter("studentID")));
 
-                result = daos.update(student);
+                boolean result = daos.update(student);
 
                 if (result) {
                     request.setAttribute("result", "success");
@@ -82,7 +75,9 @@ public class UpdateStudentPageController extends HttpServlet {
             }else if(request.getParameter("step").equals("cancel")){
                 request.getRequestDispatcher("StudentPageController").forward(request, response);
             }else{
-                //error page
+                request.setAttribute("menu", "student");
+                request.setAttribute("error", "incorrectValue");
+                request.getRequestDispatcher("ActionResultEmployeeMenuPageController").forward(request, response);
             }
         }else{
             DAODepartment daod = new DAODepartment();

@@ -14,9 +14,6 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.ArrayList;
 
-/**
- * Created by alex on 04/02/2017.
- */
 public class ShowInfoGroupPageController  extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session=request.getSession();
@@ -34,12 +31,14 @@ public class ShowInfoGroupPageController  extends HttpServlet {
             }else if(request.getParameter("step").equals("cancel")){
                 request.getRequestDispatcher("GroupPageController").forward(request, response);
             }else{
-                //error page
+                request.setAttribute("menu", "group");
+                request.setAttribute("error", "incorrectValue");
+                request.getRequestDispatcher("ActionResultEmployeeMenuPageController").forward(request, response);
             }
         }else{
             DAODepartment daod = new DAODepartment();
             DAOGroup daog = new DAOGroup();
-            ArrayList<Department> departments = new ArrayList<Department>();
+            ArrayList<Department> departments = new ArrayList<>();
             Department department = daod.getEntityById((int) session.getAttribute("departmentID"));
             Department departmentNone = daod.getEntityById(0);
             departmentNone.setAllGroups(daog.getAllByDepartmentID(0));

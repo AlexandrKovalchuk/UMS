@@ -2,10 +2,8 @@ package net.ukr.vixtibon.servlets.controllers.study_process.discipline;
 
 import net.ukr.vixtibon.base_objects.departments.Department;
 import net.ukr.vixtibon.base_objects.study_process.Discipline;
-import net.ukr.vixtibon.base_objects.study_process.DisciplineDepartmentDependencyObject;
 import net.ukr.vixtibon.dao.departments.DAODepartment;
 import net.ukr.vixtibon.dao.stady_process.DAODiscipline;
-import net.ukr.vixtibon.dao.stady_process.DAODisciplineDepartmentDependency;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -15,9 +13,6 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
 
-/**
- * Created by alex on 01/02/2017.
- */
 public class CreateDisciplinePageController  extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session=request.getSession();
@@ -46,7 +41,9 @@ public class CreateDisciplinePageController  extends HttpServlet {
             }else if(request.getParameter("fillForm").equals("cancel")){
                 request.getRequestDispatcher("DisciplinePageController").forward(request, response);
             }else{
-                //error page
+                request.setAttribute("menu", "discipline");
+                request.setAttribute("error", "incorrectValue");
+                request.getRequestDispatcher("ActionResultEmployeeMenuPageController").forward(request, response);
             }
         }else{
             DAODepartment daod = new DAODepartment();

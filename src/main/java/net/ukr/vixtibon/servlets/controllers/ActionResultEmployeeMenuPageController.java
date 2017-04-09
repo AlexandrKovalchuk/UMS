@@ -6,9 +6,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-/**
- * Created by alex on 02/02/2017.
- */
 public class ActionResultEmployeeMenuPageController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if(request.getParameterMap().containsKey("redirectTo")){
@@ -24,8 +21,10 @@ public class ActionResultEmployeeMenuPageController extends HttpServlet {
                 request.getRequestDispatcher("TimetablePageController").forward(request, response);
             }else if (request.getParameter("redirectTo").equals("dayRequirements")) {
                 request.getRequestDispatcher("EmployeeMenuPageController").forward(request, response);
+            }else if (request.getParameter("redirectTo").equals("employee")) {
+                request.getRequestDispatcher("EmployeeMenuPageController").forward(request, response);
             }else {
-                //error page
+                request.getRequestDispatcher("EmployeeMenuPageController").forward(request, response);
             }
 
         }else{

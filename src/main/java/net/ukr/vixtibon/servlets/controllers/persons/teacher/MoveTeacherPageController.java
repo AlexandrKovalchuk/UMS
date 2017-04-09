@@ -13,9 +13,6 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.ArrayList;
 
-/**
- * Created by alex on 15/02/2017.
- */
 public class MoveTeacherPageController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session=request.getSession();
@@ -38,8 +35,7 @@ public class MoveTeacherPageController extends HttpServlet {
                 request.setAttribute("teacher", teacher);
                 request.getRequestDispatcher("Employee/Teacher/Operations/MoveTeacherPage.jsp").forward(request, response);
             }else if(request.getParameter("step").equals("step2")){
-                boolean result = false;
-                result = daot.updateTeacherLocation(Integer.parseInt(request.getParameter("departmentID")),Integer.parseInt(request.getParameter("teacherID")));
+                boolean result = daot.updateTeacherLocation(Integer.parseInt(request.getParameter("departmentID")),Integer.parseInt(request.getParameter("teacherID")));
                 if(result){
                     request.setAttribute("result", "success");
                     request.setAttribute("menu", "teacher");
@@ -53,7 +49,9 @@ public class MoveTeacherPageController extends HttpServlet {
             }else if(request.getParameter("step").equals("cancel")){
                 request.getRequestDispatcher("TeacherPageController").forward(request, response);
             }else{
-                //error page
+                request.setAttribute("menu", "teacher");
+                request.setAttribute("error", "incorrectValue");
+                request.getRequestDispatcher("ActionResultEmployeeMenuPageController").forward(request, response);
             }
         }else{
             DAODepartment daod = new DAODepartment();

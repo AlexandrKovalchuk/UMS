@@ -6,9 +6,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-/**
- * Created by alex on 23/11/2016.
- */
 public class InstitutePageController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if(request.getParameterMap().containsKey("operationType")){
@@ -23,7 +20,9 @@ public class InstitutePageController extends HttpServlet {
             }else if(request.getParameter("operationType").equals("cancel")){
                 request.getRequestDispatcher("AdminPageController").forward(request, response);
             }else{
-                //error page
+                request.setAttribute("menu", "admin");
+                request.setAttribute("error", "incorrectValue");
+                request.getRequestDispatcher("ActionResultPageController").forward(request, response);
             }
         }else{
             request.getRequestDispatcher("Admin/Institute/InstitutePage.jsp").forward(request, response);

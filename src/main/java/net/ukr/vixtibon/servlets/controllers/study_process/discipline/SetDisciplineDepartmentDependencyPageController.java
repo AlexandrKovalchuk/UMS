@@ -16,9 +16,6 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-/**
- * Created by alex on 04/02/2017.
- */
 public class SetDisciplineDepartmentDependencyPageController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session=request.getSession();
@@ -29,8 +26,7 @@ public class SetDisciplineDepartmentDependencyPageController extends HttpServlet
             if(request.getParameter("step").equals("step1")){
                 request.setAttribute("selected", "yes");
                 Discipline discipline = daodi.getEntityById(Integer.parseInt(request.getParameter("disciplineID")));
-                DisciplineDepartmentDependencyObject dddo = new DisciplineDepartmentDependencyObject();
-                dddo = daoddd.getByDisciplineIDDepartmentID(Integer.parseInt(request.getParameter("disciplineID")),(int) session.getAttribute("departmentID"));
+                DisciplineDepartmentDependencyObject dddo = daoddd.getByDisciplineIDDepartmentID(Integer.parseInt(request.getParameter("disciplineID")),(int) session.getAttribute("departmentID"));
                 request.setAttribute("discipline", discipline);
                 request.setAttribute("dependencyObject", dddo);
                 request.setAttribute("state", request.getParameter("state"));
@@ -73,18 +69,19 @@ public class SetDisciplineDepartmentDependencyPageController extends HttpServlet
             }else if(request.getParameter("step").equals("cancel")){
                 request.getRequestDispatcher("DisciplinePageController").forward(request, response);
             }else{
-                //error page
+                request.setAttribute("menu", "discipline");
+                request.setAttribute("error", "incorrectValue");
+                request.getRequestDispatcher("ActionResultEmployeeMenuPageController").forward(request, response);
             }
         }else{
             DAODepartment daod = new DAODepartment();
             DAODiscipline daodi = new DAODiscipline();
             DAODisciplineDepartmentDependency daoddd = new DAODisciplineDepartmentDependency();
 
-            ArrayList<DisciplineDepartmentDependencyObject> dddos = new ArrayList<DisciplineDepartmentDependencyObject>();
-            dddos = daoddd.getAllByDepartmentID((int) session.getAttribute("departmentID"));
+            ArrayList<DisciplineDepartmentDependencyObject> dddos = daoddd.getAllByDepartmentID((int) session.getAttribute("departmentID"));
 
-            ArrayList<Discipline> disciplinesConnectedWithDepartment = new ArrayList<Discipline>();
-            ArrayList<Discipline> disciplinesNotConnectedWithDepartment = new ArrayList<Discipline>();
+            ArrayList<Discipline> disciplinesConnectedWithDepartment = new ArrayList<>();
+            ArrayList<Discipline> disciplinesNotConnectedWithDepartment;
 
             for(DisciplineDepartmentDependencyObject dddo: dddos){
                 disciplinesConnectedWithDepartment.add(daodi.getEntityById(dddo.getDisciplineID()));
@@ -100,8 +97,6 @@ public class SetDisciplineDepartmentDependencyPageController extends HttpServlet
                     if(dddo.getDisciplineID() == d.getID()){
                         disciplinesNotConnectedWithDepartment.remove(d);
                         break;
-                    }else{
-                        continue;
                     }
                 }
             }

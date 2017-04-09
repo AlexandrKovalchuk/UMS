@@ -14,9 +14,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 
-/**
- * Created by alex on 12/12/2016.
- */
 public class MoveDepartmentPageController  extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if(request.getParameterMap().containsKey("step")){
@@ -54,8 +51,7 @@ public class MoveDepartmentPageController  extends HttpServlet {
                 request.setAttribute("step", "step5");
                 request.getRequestDispatcher("Admin/Department/Operations/MoveDepartmentPage.jsp").forward(request, response);
             }else if(request.getParameter("step").equals("step6")){
-                boolean result = false;
-                result = daod.updateDepartmentLocation(Integer.parseInt(request.getParameter("facultyID")),Integer.parseInt(request.getParameter("departmentID")));
+                boolean result = daod.updateDepartmentLocation(Integer.parseInt(request.getParameter("facultyID")),Integer.parseInt(request.getParameter("departmentID")));
                 if(result){
                     request.setAttribute("result", "success");
                     request.setAttribute("menu", "department");
@@ -67,7 +63,9 @@ public class MoveDepartmentPageController  extends HttpServlet {
             }else if(request.getParameter("step").equals("cancel")){
                 request.getRequestDispatcher("DepartmentPageController").forward(request, response);
             }else{
-                //error page
+                request.setAttribute("menu", "department");
+                request.setAttribute("error", "incorrectValue");
+                request.getRequestDispatcher("ActionResultPageController").forward(request, response);
             }
             daod.closeConnection();
             daof.closeConnection();

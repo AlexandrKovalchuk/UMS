@@ -19,9 +19,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-/**
- * Created by alex on 12/12/2016.
- */
 public class UpdateEmployeePageController  extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if(request.getParameterMap().containsKey("step")){
@@ -49,7 +46,6 @@ public class UpdateEmployeePageController  extends HttpServlet {
                 request.setAttribute("employee", employee);
                 request.getRequestDispatcher("Admin/Employee/Operations/UpdateEmployeePage.jsp").forward(request, response);
             }else if(request.getParameter("step").equals("step5")){
-                boolean result = false;
                 Employee em = new Employee();
                 em.setID(Integer.parseInt(request.getParameter("employeeID")));
                 em.setName(request.getParameter("name"));
@@ -73,7 +69,7 @@ public class UpdateEmployeePageController  extends HttpServlet {
                 em.setOffice(request.getParameter("office"));
                 em.setLogin(request.getParameter("login"));
                 em.setDepartmentID(Integer.parseInt(request.getParameter("departmentID")));
-                result = daoe.update(em);
+                boolean result = daoe.update(em);
                 if(result){
                     request.setAttribute("result", "success");
                     request.setAttribute("menu", "employee");
@@ -88,7 +84,9 @@ public class UpdateEmployeePageController  extends HttpServlet {
             }else if(request.getParameter("step").equals("cancel")){
                 request.getRequestDispatcher("EmployeePageController").forward(request, response);
             }else{
-                //error page
+                request.setAttribute("menu", "employee");
+                request.setAttribute("error", "incorrectValue");
+                request.getRequestDispatcher("ActionResultPageController").forward(request, response);
             }
         }else{
             DAOInstitute daoi = new DAOInstitute();

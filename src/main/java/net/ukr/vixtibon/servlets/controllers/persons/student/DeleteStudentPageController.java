@@ -14,9 +14,6 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.ArrayList;
 
-/**
- * Created by alex on 20/02/2017.
- */
 public class DeleteStudentPageController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session=request.getSession();
@@ -24,16 +21,13 @@ public class DeleteStudentPageController extends HttpServlet {
             if(request.getParameter("step").equals("step1")){
                 request.setAttribute("groupID", request.getParameter("groupID"));
                 DAOStudent daos = new DAOStudent();
-                ArrayList<Student> students = new ArrayList<Student>();
-                students = daos.getAllByGroupID(Integer.parseInt(request.getParameter("groupID")));
+                ArrayList<Student> students = daos.getAllByGroupID(Integer.parseInt(request.getParameter("groupID")));
                 request.setAttribute("students", students);
                 request.setAttribute("selected", "yes");
                 request.getRequestDispatcher("Employee/Student/Operations/DeleteStudentPage.jsp").forward(request, response);
             }else if(request.getParameter("step").equals("step2")) {
                 DAOStudent daos = new DAOStudent();
-                Student student = new Student();
-
-                student = daos.getEntityById(Integer.parseInt(request.getParameter("studentID")));
+                Student student = daos.getEntityById(Integer.parseInt(request.getParameter("studentID")));
 
                 daos.closeConnection();
                 request.setAttribute("student", student);
@@ -41,9 +35,7 @@ public class DeleteStudentPageController extends HttpServlet {
                 request.getRequestDispatcher("Employee/Student/Operations/DeleteStudentPage.jsp").forward(request, response);
             }else if(request.getParameter("step").equals("step3")){
                 DAOStudent daos = new DAOStudent();
-                boolean result = false;
-
-                result = daos.delete(Integer.parseInt(request.getParameter("studentID")));
+                boolean result = daos.delete(Integer.parseInt(request.getParameter("studentID")));
                 if (result) {
                     request.setAttribute("result", "success");
                     request.setAttribute("menu", "student");
@@ -56,7 +48,9 @@ public class DeleteStudentPageController extends HttpServlet {
             }else if(request.getParameter("step").equals("cancel")){
                 request.getRequestDispatcher("StudentPageController").forward(request, response);
             }else{
-                //error page
+                request.setAttribute("menu", "student");
+                request.setAttribute("error", "incorrectValue");
+                request.getRequestDispatcher("ActionResultEmployeeMenuPageController").forward(request, response);
             }
         }else{
             DAODepartment daod = new DAODepartment();

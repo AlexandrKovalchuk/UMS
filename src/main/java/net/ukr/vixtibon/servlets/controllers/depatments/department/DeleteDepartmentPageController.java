@@ -20,9 +20,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 
-/**
- * Created by alex on 06/12/2016.
- */
 public class DeleteDepartmentPageController   extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if(request.getParameterMap().containsKey("step")){
@@ -80,8 +77,7 @@ public class DeleteDepartmentPageController   extends HttpServlet {
                 request.setAttribute("department", department);
                 request.getRequestDispatcher("Admin/Department/Operations/DeleteDepartmentPage.jsp").forward(request, response);
             }else if(request.getParameter("step").equals("step4")){
-                boolean result = false;
-                result = daod.delete(Integer.parseInt(request.getParameter("departmentID")));
+                boolean result = daod.delete(Integer.parseInt(request.getParameter("departmentID")));
                 if(result){
                     request.setAttribute("result", "success");
                     request.setAttribute("menu", "department");
@@ -94,7 +90,9 @@ public class DeleteDepartmentPageController   extends HttpServlet {
             }else if(request.getParameter("step").equals("cancel")){
                 request.getRequestDispatcher("DepartmentPageController").forward(request, response);
             }else{
-                //error page
+                request.setAttribute("menu", "department");
+                request.setAttribute("error", "incorrectValue");
+                request.getRequestDispatcher("ActionResultPageController").forward(request, response);
             }
         }else{
             DAOInstitute daoi = new DAOInstitute();

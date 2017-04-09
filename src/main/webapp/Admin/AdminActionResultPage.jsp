@@ -33,14 +33,20 @@
     </div>
 </c:if>
 
+<c:if test = "${error eq 'incorrectValue'}">
+    <div class = "pageTitleText pageTitleTextBad">
+        Incorrect parameter on page. Please contact your Admin!
+    </div>
+</c:if>
+
 <form action="ActionResultPageController" method="post">
     <input type="hidden"  name="redirectTo" value="${menu}">
-    <tr>
+
         <td >
             <button onclick="submit"  class="controlButton controlButtonAdminPage">OK</button>
             <br>
         </td>
-    </tr>
+
 </form>
 
 </body>

@@ -6,9 +6,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-/**
- * Created by alex on 25/11/2016.
- */
 public class ActionResultPageController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if(request.getParameterMap().containsKey("redirectTo")){
@@ -23,9 +20,8 @@ public class ActionResultPageController extends HttpServlet {
             }else if (request.getParameter("redirectTo").equals("admin")){
                 request.getRequestDispatcher("AdminPageController").forward(request, response);
             }else {
-                //error page
+                request.getRequestDispatcher("AdminPageController").forward(request, response);
             }
-
         }else{
             request.setAttribute("result", request.getAttribute("result"));
             request.setAttribute("menu", request.getAttribute("menu"));

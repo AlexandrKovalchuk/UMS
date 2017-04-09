@@ -19,9 +19,6 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.ArrayList;
 
-/**
- * Created by alex on 03/02/2017.
- */
 public class ShowInfoDisciplinePageController  extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session=request.getSession();
@@ -35,8 +32,8 @@ public class ShowInfoDisciplinePageController  extends HttpServlet {
 
                 Discipline discipline = daodi.getEntityById(Integer.parseInt(request.getParameter("disciplineID")));
 
-                ArrayList<Teacher> teachersDependency = new ArrayList<Teacher>();
-                ArrayList<Department> departmentsDependency = new ArrayList<Department>();
+                ArrayList<Teacher> teachersDependency = new ArrayList<>();
+                ArrayList<Department> departmentsDependency = new ArrayList<>();
 
                 for(DisciplineDepartmentDependencyObject dddo : daoddd.getAllByDepartmentID(discipline.getID())){
                     departmentsDependency.add(daod.getEntityById(dddo.getDepartmentID()));
@@ -59,18 +56,19 @@ public class ShowInfoDisciplinePageController  extends HttpServlet {
             }else if(request.getParameter("step").equals("cancel")){
                 request.getRequestDispatcher("DisciplinePageController").forward(request, response);
             }else{
-                //error page
+                request.setAttribute("menu", "discipline");
+                request.setAttribute("error", "incorrectValue");
+                request.getRequestDispatcher("ActionResultEmployeeMenuPageController").forward(request, response);
             }
         }else{
             DAODepartment daod = new DAODepartment();
             DAODiscipline daodi = new DAODiscipline();
             DAODisciplineDepartmentDependency daoddd = new DAODisciplineDepartmentDependency();
 
-            ArrayList<DisciplineDepartmentDependencyObject> dddos = new ArrayList<DisciplineDepartmentDependencyObject>();
-            dddos = daoddd.getAllByDepartmentID((int) session.getAttribute("departmentID"));
+            ArrayList<DisciplineDepartmentDependencyObject> dddos = daoddd.getAllByDepartmentID((int) session.getAttribute("departmentID"));
 
-            ArrayList<Discipline> disciplinesConnectedWithDepartment = new ArrayList<Discipline>();
-            ArrayList<Discipline> disciplinesNotConnectedWithDepartment = new ArrayList<Discipline>();
+            ArrayList<Discipline> disciplinesConnectedWithDepartment = new ArrayList<>();
+            ArrayList<Discipline> disciplinesNotConnectedWithDepartment;
 
             for(DisciplineDepartmentDependencyObject dddo: dddos){
                 disciplinesConnectedWithDepartment.add(daodi.getEntityById(dddo.getDisciplineID()));
@@ -83,8 +81,6 @@ public class ShowInfoDisciplinePageController  extends HttpServlet {
                     if(dddo.getDisciplineID() == d.getID()){
                         disciplinesNotConnectedWithDepartment.remove(d);
                         break;
-                    }else{
-                        continue;
                     }
                 }
             }

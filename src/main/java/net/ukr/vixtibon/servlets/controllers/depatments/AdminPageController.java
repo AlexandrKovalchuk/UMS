@@ -6,9 +6,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-/**
- * Created by alex on 08/11/2016.
- */
 public class AdminPageController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if(request.getParameterMap().containsKey("elementType")){
@@ -27,7 +24,9 @@ public class AdminPageController extends HttpServlet {
             }else if(request.getParameter("elementType").equals("clearAllDate")){
                 request.getRequestDispatcher("ClearAllDateController").forward(request, response);
             }else{
-                //error page
+                request.setAttribute("menu", "admin");
+                request.setAttribute("error", "incorrectValue");
+                request.getRequestDispatcher("ActionResultPageController").forward(request, response);
             }
         }else{
             request.getRequestDispatcher("Admin/AdminPage.jsp").forward(request, response);

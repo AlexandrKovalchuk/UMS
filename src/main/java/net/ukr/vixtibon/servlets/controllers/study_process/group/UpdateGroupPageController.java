@@ -13,9 +13,6 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.ArrayList;
 
-/**
- * Created by alex on 04/02/2017.
- */
 public class UpdateGroupPageController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session=request.getSession();
@@ -28,12 +25,11 @@ public class UpdateGroupPageController extends HttpServlet {
                 request.getRequestDispatcher("Employee/Group/Operations/UpdateGroupPage.jsp").forward(request, response);
             }else if(request.getParameter("step").equals("step2")){
                 Group group = new Group();
-                boolean result = false;
                 group.setID(Integer.parseInt(request.getParameter("groupID")));
                 group.setDepartmentID((int) session.getAttribute("departmentID"));
                 group.setFullGroupName(request.getParameter("fullGroupName"));
                 group.setCourseNumber(Integer.parseInt(request.getParameter("courseNumber")));
-                result = daog.update(group);
+                boolean result = daog.update(group);
                 if(result){
                     request.setAttribute("result", "success");
                     request.setAttribute("menu", "group");
@@ -46,12 +42,14 @@ public class UpdateGroupPageController extends HttpServlet {
             }else if(request.getParameter("step").equals("cancel")){
                 request.getRequestDispatcher("GroupPageController").forward(request, response);
             }else{
-                //error page
+                request.setAttribute("menu", "group");
+                request.setAttribute("error", "incorrectValue");
+                request.getRequestDispatcher("ActionResultEmployeeMenuPageController").forward(request, response);
             }
         }else{
             DAODepartment daod = new DAODepartment();
             DAOGroup daog = new DAOGroup();
-            ArrayList<Department> departments = new ArrayList<Department>();
+            ArrayList<Department> departments = new ArrayList<>();
             Department department = daod.getEntityById((int) session.getAttribute("departmentID"));
             Department departmentNone = daod.getEntityById(0);
             departmentNone.setAllGroups(daog.getAllByDepartmentID(0));

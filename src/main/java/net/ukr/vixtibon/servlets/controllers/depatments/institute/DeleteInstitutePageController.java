@@ -11,9 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 
-/**
- * Created by alex on 23/11/2016.
- */
 public class DeleteInstitutePageController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if(request.getParameterMap().containsKey("step")){
@@ -31,8 +28,7 @@ public class DeleteInstitutePageController extends HttpServlet {
                 request.setAttribute("institute", institute);
                 request.getRequestDispatcher("Admin/Institute/Operations/DeleteInstitutePage.jsp").forward(request, response);
             }else if(request.getParameter("step").equals("step2")){
-                boolean result = false;
-                result = daoi.delete(Integer.parseInt(request.getParameter("instituteID")));
+                boolean result = daoi.delete(Integer.parseInt(request.getParameter("instituteID")));
                 if(result){
                     request.setAttribute("result", "success");
                     request.setAttribute("menu", "institute");
@@ -46,7 +42,9 @@ public class DeleteInstitutePageController extends HttpServlet {
             }else if(request.getParameter("step").equals("cancel")){
                 request.getRequestDispatcher("InstitutePageController").forward(request, response);
             }else{
-                //error page
+                request.setAttribute("menu", "institute");
+                request.setAttribute("error", "incorrectValue");
+                request.getRequestDispatcher("ActionResultPageController").forward(request, response);
             }
         }else{
             DAOInstitute daoi = new DAOInstitute();

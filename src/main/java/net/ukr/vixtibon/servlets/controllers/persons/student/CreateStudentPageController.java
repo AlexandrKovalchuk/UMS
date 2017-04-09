@@ -23,9 +23,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 
-/**
- * Created by alex on 16/02/2017.
- */
 public class CreateStudentPageController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session=request.getSession();
@@ -60,16 +57,14 @@ public class CreateStudentPageController extends HttpServlet {
                 student.setLogin(request.getParameter("login"));
                 student.setGroupID(Integer.parseInt(request.getParameter("groupID")));
 
-                ArrayList<DisciplineDepartmentDependencyObject> dddos = new ArrayList<>();
                 DAODisciplineDepartmentDependency daodddo = new DAODisciplineDepartmentDependency();
-                dddos = daodddo.getAllByDepartmentID((int) session.getAttribute("departmentID"));
+                ArrayList<DisciplineDepartmentDependencyObject> dddos = daodddo.getAllByDepartmentID((int) session.getAttribute("departmentID"));
 
                 HashMap<Integer, Discipline> disciplines = new HashMap<>();
                 DAODiscipline daodi = new DAODiscipline();
 
                 for(DisciplineDepartmentDependencyObject dddo: dddos){
-                    Discipline discipline = new Discipline();
-                    discipline = daodi.getEntityById(dddo.getDisciplineID());
+                    Discipline discipline = daodi.getEntityById(dddo.getDisciplineID());
                     disciplines.put(discipline.getID(),discipline);
                 }
 
@@ -92,7 +87,9 @@ public class CreateStudentPageController extends HttpServlet {
             }else if(request.getParameter("step").equals("cancel")){
                 request.getRequestDispatcher("StudentPageController").forward(request, response);
             }else{
-                //error page
+                request.setAttribute("menu", "student");
+                request.setAttribute("error", "incorrectValue");
+                request.getRequestDispatcher("ActionResultEmployeeMenuPageController").forward(request, response);
             }
         }else{
             DAODepartment daod = new DAODepartment();

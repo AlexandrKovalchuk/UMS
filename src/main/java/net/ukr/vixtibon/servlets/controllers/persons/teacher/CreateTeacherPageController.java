@@ -21,9 +21,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-/**
- * Created by alex on 04/02/2017.
- */
 public class CreateTeacherPageController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session=request.getSession();
@@ -79,18 +76,19 @@ public class CreateTeacherPageController extends HttpServlet {
             }else if(request.getParameter("fillForm").equals("cancel")){
                 request.getRequestDispatcher("TeacherPageController").forward(request, response);
             }else{
-                //error page
+                request.setAttribute("menu", "teacher");
+                request.setAttribute("error", "incorrectValue");
+                request.getRequestDispatcher("ActionResultEmployeeMenuPageController").forward(request, response);
             }
         }else{
             DAODepartment daod = new DAODepartment();
             DAODiscipline daodi = new DAODiscipline();
             DAODisciplineDepartmentDependency daoddd = new DAODisciplineDepartmentDependency();
 
-            ArrayList<DisciplineDepartmentDependencyObject> dddos = new ArrayList<>();
-            dddos = daoddd.getAllByDepartmentID((int) session.getAttribute("departmentID"));
+            ArrayList<DisciplineDepartmentDependencyObject> dddos = daoddd.getAllByDepartmentID((int) session.getAttribute("departmentID"));
 
             ArrayList<Discipline> disciplinesConnectedWithDepartment = new ArrayList<>();
-            ArrayList<Discipline> disciplinesNotConnectedWithDepartment = new ArrayList<>();
+            ArrayList<Discipline> disciplinesNotConnectedWithDepartment;
 
             for(DisciplineDepartmentDependencyObject dddo: dddos){
                 disciplinesConnectedWithDepartment.add(daodi.getEntityById(dddo.getDisciplineID()));
@@ -106,8 +104,6 @@ public class CreateTeacherPageController extends HttpServlet {
                     if(dddo.getDisciplineID() == d.getID()){
                         disciplinesNotConnectedWithDepartment.remove(d);
                         break;
-                    }else{
-                        continue;
                     }
                 }
             }

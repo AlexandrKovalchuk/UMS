@@ -16,9 +16,6 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.ArrayList;
 
-/**
- * Created by alex on 05/02/2017.
- */
 public class ShowInfoTeacherPageController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session=request.getSession();
@@ -43,12 +40,14 @@ public class ShowInfoTeacherPageController extends HttpServlet {
             }else if(request.getParameter("step").equals("cancel")){
                 request.getRequestDispatcher("TeacherPageController").forward(request, response);
             }else{
-                //error page
+                request.setAttribute("menu", "teacher");
+                request.setAttribute("error", "incorrectValue");
+                request.getRequestDispatcher("ActionResultEmployeeMenuPageController").forward(request, response);
             }
         }else{
             DAODepartment daod = new DAODepartment();
             DAOTeacher daot = new DAOTeacher();
-            ArrayList<Department> departments = new ArrayList<Department>();
+            ArrayList<Department> departments = new ArrayList<>();
             Department department = daod.getEntityById((int) session.getAttribute("departmentID"));
             Department departmentNone = daod.getEntityById(0);
             departmentNone.setTeachers(daot.getAllByDepartmentID(0));

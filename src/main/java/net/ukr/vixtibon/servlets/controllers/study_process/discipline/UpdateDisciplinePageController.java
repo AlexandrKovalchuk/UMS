@@ -15,9 +15,6 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.ArrayList;
 
-/**
- * Created by alex on 02/02/2017.
- */
 public class UpdateDisciplinePageController  extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session=request.getSession();
@@ -30,12 +27,11 @@ public class UpdateDisciplinePageController  extends HttpServlet {
                 request.getRequestDispatcher("Employee/Discipline/Operations/UpdateDisciplinePage.jsp").forward(request, response);
             }else if(request.getParameter("step").equals("step2")){
                 Discipline d = new Discipline();
-                boolean result = false;
                 d.setID(Integer.parseInt(request.getParameter("disciplineID")));
                 d.setNameOfDiscipline(request.getParameter("nameOfDiscipline"));
                 d.setCountOfLessons(Integer.parseInt(request.getParameter("countOfLessons")));
                 d.setExam(request.getParameter("exam"));
-                    result = daodi.update(d);
+                boolean result = daodi.update(d);
                 if(result){
                     request.setAttribute("result", "success");
                     request.setAttribute("menu", "discipline");
@@ -48,18 +44,19 @@ public class UpdateDisciplinePageController  extends HttpServlet {
             }else if(request.getParameter("step").equals("cancel")){
                 request.getRequestDispatcher("DisciplinePageController").forward(request, response);
             }else{
-                //error page
+                request.setAttribute("menu", "discipline");
+                request.setAttribute("error", "incorrectValue");
+                request.getRequestDispatcher("ActionResultEmployeeMenuPageController").forward(request, response);
             }
         }else{
             DAODepartment daod = new DAODepartment();
             DAODiscipline daodi = new DAODiscipline();
             DAODisciplineDepartmentDependency daoddd = new DAODisciplineDepartmentDependency();
 
-            ArrayList<DisciplineDepartmentDependencyObject> dddos = new ArrayList<>();
-            dddos = daoddd.getAllByDepartmentID((int) session.getAttribute("departmentID"));
+            ArrayList<DisciplineDepartmentDependencyObject> dddos = daoddd.getAllByDepartmentID((int) session.getAttribute("departmentID"));
 
             ArrayList<Discipline> disciplinesConnectedWithDepartment = new ArrayList<>();
-            ArrayList<Discipline> disciplinesNotConnectedWithDepartment = new ArrayList<>();
+            ArrayList<Discipline> disciplinesNotConnectedWithDepartment;
 
             for(DisciplineDepartmentDependencyObject dddo: dddos){
                 disciplinesConnectedWithDepartment.add(daodi.getEntityById(dddo.getDisciplineID()));
@@ -72,8 +69,6 @@ public class UpdateDisciplinePageController  extends HttpServlet {
                     if(dddo.getDisciplineID() == d.getID()){
                         disciplinesNotConnectedWithDepartment.remove(d);
                         break;
-                    }else{
-                        continue;
                     }
                 }
             }

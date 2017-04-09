@@ -6,9 +6,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-/**
- * Created by alex on 30/01/2017.
- */
 public class EmployeeMenuPageController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if (request.getParameterMap().containsKey("elementType")) {
@@ -25,7 +22,9 @@ public class EmployeeMenuPageController extends HttpServlet {
             } else if (request.getParameter("elementType").equals("dayRequirements")) {
                 request.getRequestDispatcher("DayRequirementsPageController").forward(request, response);
             } else {
-                //error page
+                request.setAttribute("menu", "employee");
+                request.setAttribute("error", "incorrectValue");
+                request.getRequestDispatcher("ActionResultEmployeeMenuPageController").forward(request, response);
             }
         } else {
             request.getRequestDispatcher("Employee/EmployeePage.jsp").forward(request, response);

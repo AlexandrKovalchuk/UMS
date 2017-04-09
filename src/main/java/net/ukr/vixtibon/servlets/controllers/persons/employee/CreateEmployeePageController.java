@@ -20,9 +20,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-/**
- * Created by alex on 12/12/2016.
- */
 public class CreateEmployeePageController  extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if(request.getParameterMap().containsKey("step")){
@@ -85,7 +82,9 @@ public class CreateEmployeePageController  extends HttpServlet {
             }else if(request.getParameter("step").equals("cancel")){
                 request.getRequestDispatcher("EmployeePageController").forward(request, response);
             }else{
-                //error page
+                request.setAttribute("menu", "employee");
+                request.setAttribute("error", "incorrectValue");
+                request.getRequestDispatcher("ActionResultPageController").forward(request, response);
             }
             daod.closeConnection();
             daof.closeConnection();

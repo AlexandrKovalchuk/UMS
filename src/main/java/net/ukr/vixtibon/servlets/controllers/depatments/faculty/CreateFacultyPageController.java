@@ -12,9 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 
-/**
- * Created by alex on 29/11/2016.
- */
 public class CreateFacultyPageController  extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if(request.getParameterMap().containsKey("step")){
@@ -25,11 +22,10 @@ public class CreateFacultyPageController  extends HttpServlet {
             }else if(request.getParameter("step").equals("step2")){
                 DAOFaculty d = new DAOFaculty();
                 Faculty i = new Faculty();
-                boolean result = false;
                 i.setInstituteID(Integer.parseInt(request.getParameter("instituteID")));
                 i.setLongName(request.getParameter("longName"));
                 i.setShortName(request.getParameter("shortName"));
-                result = d.create(i);
+                boolean result = d.create(i);
                 if(result){
                     request.setAttribute("result", "success");
                     request.setAttribute("menu", "faculty");
@@ -42,7 +38,9 @@ public class CreateFacultyPageController  extends HttpServlet {
             }else if(request.getParameter("step").equals("cancel")){
                 request.getRequestDispatcher("FacultyPageController").forward(request, response);
             }else{
-                //error page
+                request.setAttribute("menu", "faculty");
+                request.setAttribute("error", "incorrectValue");
+                request.getRequestDispatcher("ActionResultPageController").forward(request, response);
             }
         }else{
             DAOInstitute daoi = new DAOInstitute();

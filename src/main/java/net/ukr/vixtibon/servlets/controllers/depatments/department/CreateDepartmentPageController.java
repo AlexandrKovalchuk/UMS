@@ -15,9 +15,6 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-/**
- * Created by alex on 05/12/2016.
- */
 public class CreateDepartmentPageController   extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if(request.getParameterMap().containsKey("step")){
@@ -57,7 +54,9 @@ public class CreateDepartmentPageController   extends HttpServlet {
             }else if(request.getParameter("step").equals("cancel")){
                 request.getRequestDispatcher("DepartmentPageController").forward(request, response);
             }else{
-                //error page
+                request.setAttribute("menu", "department");
+                request.setAttribute("error", "incorrectValue");
+                request.getRequestDispatcher("ActionResultPageController").forward(request, response);
             }
             daod.closeConnection();
             daof.closeConnection();

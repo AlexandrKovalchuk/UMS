@@ -14,9 +14,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 
-/**
- * Created by alex on 05/12/2016.
- */
 public class UpdateDepartmentPageController   extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if(request.getParameterMap().containsKey("step")){
@@ -39,12 +36,11 @@ public class UpdateDepartmentPageController   extends HttpServlet {
                 request.getRequestDispatcher("Admin/Department/Operations/UpdateDepartmentPage.jsp").forward(request, response);
             }else if(request.getParameter("step").equals("step4")){
                 DAODepartment daoi = new DAODepartment();
-                boolean result = false;
                 Department department = new Department();
                 department.setID(Integer.parseInt(request.getParameter("departmentID")));
                 department.setLongName(request.getParameter("longName"));
                 department.setShortName(request.getParameter("shortName"));
-                result = daoi.update(department);
+                boolean result = daoi.update(department);
                 if(result){
                     request.setAttribute("result", "success");
                     request.setAttribute("menu", "department");
@@ -57,7 +53,9 @@ public class UpdateDepartmentPageController   extends HttpServlet {
             }else if(request.getParameter("step").equals("cancel")){
                 request.getRequestDispatcher("DepartmentPageController").forward(request, response);
             }else{
-                //error page
+                request.setAttribute("menu", "department");
+                request.setAttribute("error", "incorrectValue");
+                request.getRequestDispatcher("ActionResultPageController").forward(request, response);
             }
             daod.closeConnection();
             daof.closeConnection();

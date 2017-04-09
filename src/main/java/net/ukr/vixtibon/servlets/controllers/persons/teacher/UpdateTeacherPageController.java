@@ -22,9 +22,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-/**
- * Created by alex on 05/02/2017.
- */
 public class UpdateTeacherPageController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session=request.getSession();
@@ -40,7 +37,7 @@ public class UpdateTeacherPageController extends HttpServlet {
                     teacher.getDisciplines().add(daodi.getEntityById(dtdo.getDisciplineID()));
                 }
 
-                ArrayList<Discipline> disciplines = new ArrayList<Discipline>();
+                ArrayList<Discipline> disciplines = new ArrayList<>();
                 ArrayList<Discipline> disciplinesNotConnected = daodi.getAll();
 
                 DAODisciplineDepartmentDependency daoddd = new DAODisciplineDepartmentDependency();
@@ -56,8 +53,6 @@ public class UpdateTeacherPageController extends HttpServlet {
                         if(dtdo.getDisciplineID() == d.getID()){
                             disciplines.remove(d);
                             break;
-                        }else{
-                            continue;
                         }
                     }
                 }
@@ -67,8 +62,6 @@ public class UpdateTeacherPageController extends HttpServlet {
                         if(d.getID() == dd.getID()){
                             disciplinesNotConnected.remove(dd);
                             break;
-                        }else{
-                            continue;
                         }
                 }
 
@@ -77,8 +70,6 @@ public class UpdateTeacherPageController extends HttpServlet {
                         if(d.getID() == dd.getID()){
                             disciplinesNotConnected.remove(dd);
                             break;
-                        }else{
-                            continue;
                         }
                 }
 
@@ -90,7 +81,6 @@ public class UpdateTeacherPageController extends HttpServlet {
                 request.getRequestDispatcher("Employee/Teacher/Operations/UpdateTeacherPage.jsp").forward(request, response);
             }else if(request.getParameter("step").equals("step2")){
                 Teacher teacher = new Teacher();
-                boolean result = false;
                 teacher.setName(request.getParameter("name"));
                 teacher.setlastName(request.getParameter("lastName"));
                 teacher.setfathersName(request.getParameter("fathersName"));
@@ -122,7 +112,7 @@ public class UpdateTeacherPageController extends HttpServlet {
                     }
                 }
 
-                result = daot.update(teacher);
+                boolean result = daot.update(teacher);
 
                 if(result){
                     request.setAttribute("result", "success");
@@ -138,13 +128,15 @@ public class UpdateTeacherPageController extends HttpServlet {
             }else if(request.getParameter("step").equals("cancel")){
                 request.getRequestDispatcher("TeacherPageController").forward(request, response);
             }else{
-                //error page
+                request.setAttribute("menu", "teacher");
+                request.setAttribute("error", "incorrectValue");
+                request.getRequestDispatcher("ActionResultEmployeeMenuPageController").forward(request, response);
             }
         }else{
             DAODepartment daod = new DAODepartment();
             DAOTeacher daot = new DAOTeacher();
 
-            ArrayList<Department> departments = new ArrayList<Department>();
+            ArrayList<Department> departments = new ArrayList<>();
             Department department = daod.getEntityById((int) session.getAttribute("departmentID"));
             Department departmentNone = daod.getEntityById(0);
             departmentNone.setTeachers(daot.getAllByDepartmentID(0));
