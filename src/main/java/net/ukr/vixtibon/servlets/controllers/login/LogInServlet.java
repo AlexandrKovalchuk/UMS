@@ -34,7 +34,7 @@ public class LogInServlet extends HttpServlet {
                 session.setMaxInactiveInterval(30*60);
                 if(lib.getAccess().equals("admin")){
                     session.setAttribute("type","admin");
-                    request.getRequestDispatcher("Admin/AdminPage.jsp").forward(request, response);
+                    request.getRequestDispatcher("AdminPageController").forward(request, response);
                 }else if(lib.getAccess().equals("employee")){
                     DAOEmployee daoEmployee = new DAOEmployee();
                     session.setAttribute("type","employee");
@@ -62,7 +62,6 @@ public class LogInServlet extends HttpServlet {
             }
 
         }
-        dl.returnConnectionInPool();
         dl.closeConnection();
 
     }

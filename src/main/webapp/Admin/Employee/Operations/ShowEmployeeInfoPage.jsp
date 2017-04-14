@@ -100,47 +100,47 @@
     <div class = "pageContent pageContentAdminPages pageContentAdminPages500px">
         <table>
             <tr>
-                <td class = "textLabel textLabelAdminPage">Ім'я:</td>
+                <td class = "textLabel textLabelAdminPage">Name:</td>
                 <td class = "textLabel textLabelAdminPage"><c:out value="${employee.getName()}"/></td>
             </tr>
             <tr>
-                <td class = "textLabel textLabelAdminPage">Прізвище:</td>
+                <td class = "textLabel textLabelAdminPage">Surname:</td>
                 <td class = "textLabel textLabelAdminPage"><c:out value="${employee.getSecondName()}"/></td>
             </tr>
             <tr>
-                <td class = "textLabel textLabelAdminPage">По Батькові:</td>
+                <td class = "textLabel textLabelAdminPage">Middle Name:</td>
                 <td class = "textLabel textLabelAdminPage"><c:out value="${employee.getSurname()}"/></td>
             </tr>
             <tr>
-                <td class = "textLabel textLabelAdminPage">Ідентифікаційний код:</td>
+                <td class = "textLabel textLabelAdminPage">Identification code:</td>
                 <td class = "textLabel textLabelAdminPage"><c:out value="${employee.getPersonalID()}"/></td>
             </tr>
             <tr>
-                <td class = "textLabel textLabelAdminPage">Стать:</td>
-                <td class = "textLabel textLabelAdminPage"><c:if test = "${employee.getSex() eq 'm'}">Чоловіча</c:if><c:if test = "${employee.getSex() eq 'f'}">Жіноча</c:if></td>
+                <td class = "textLabel textLabelAdminPage">Sex:</td>
+                <td class = "textLabel textLabelAdminPage"><c:if test = "${employee.getSex() eq 'm'}">Male</c:if><c:if test = "${employee.getSex() eq 'f'}">Female</c:if></td>
             </tr>
             <tr>
-                <td class = "textLabel textLabelAdminPage">Дата народження:</td>
+                <td class = "textLabel textLabelAdminPage">Date of birth:</td>
                 <td class = "textLabel textLabelAdminPage"><c:out value="${employee.getDayOfBorn()}"/> - <c:out value="${employee.getMonthOfBorn()}"/> - <c:out value="${employee.getYearOfBorn()}"/></td>
             </tr>
             <tr>
-                <td class = "textLabel textLabelAdminPage">Пошта:</td>
+                <td class = "textLabel textLabelAdminPage">Email:</td>
                 <td class = "textLabel textLabelAdminPage"><c:out value="${employee.getEmail()}"/></td>
             </tr>
             <tr>
-                <td class = "textLabel textLabelAdminPage">Телефон:</td>
+                <td class = "textLabel textLabelAdminPage">Phone Number:</td>
                 <td class = "textLabel textLabelAdminPage"><c:out value="${employee.getPhoneNumber()}"/></td>
             </tr>
             <tr>
-                <td class = "textLabel textLabelAdminPage">Адресса:</td>
+                <td class = "textLabel textLabelAdminPage">Address:</td>
                 <td class = "textLabel textLabelAdminPage"><c:out value="${employee.getAddress()}"/></td>
             </tr>
             <tr>
-                <td class = "textLabel textLabelAdminPage">Паспортні данні:</td>
+                <td class = "textLabel textLabelAdminPage">Passport data:</td>
                 <td class = "textLabel textLabelAdminPage"><c:out value="${employee.getPasport()}"/></td>
             </tr>
             <tr>
-                <td class = "textLabel textLabelAdminPage">Посада:</td>
+                <td class = "textLabel textLabelAdminPage">Position:</td>
                 <td class = "textLabel textLabelAdminPage"><c:out value="${employee.getOffice()}"/></td>
             </tr>
             <tr>

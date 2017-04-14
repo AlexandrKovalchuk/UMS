@@ -103,77 +103,77 @@
                     <input type="hidden"  name="step" value="step2">
                     <input type="hidden"  name="groupID" value="${groupID}">
                     <tr>
-                        <td class = "textLabel textLabelEmployeePage">Ім'я:</td>
+                        <td class = "textLabel textLabelEmployeePage">Name:</td>
                         <td>
                             <input class = "inputSettings inputEmployee" type="text" name="name" maxlength="40" required/>
                         </td>
                     </tr>
                     <tr>
-                        <td class = "textLabel textLabelEmployeePage">Прізвище:</td>
+                        <td class = "textLabel textLabelEmployeePage">Surname:</td>
                         <td>
                             <input class = "inputSettings inputEmployee" type="text" name="lastName" maxlength="50" required/>
                         </td>
                     </tr>
                     <tr >
-                        <td class = "textLabel textLabelEmployeePage">По Батькові:</td>
+                        <td class = "textLabel textLabelEmployeePage">Middle Name:</td>
                         <td>
                             <input class = "inputSettings inputEmployee" type="text" name="fathersName" maxlength="40" required/>
                         </td>
                     </tr>
                     <tr>
-                        <td class = "textLabel textLabelEmployeePage">Ідентифікаційний код:</td>
+                        <td class = "textLabel textLabelEmployeePage">Identification code:</td>
                         <td>
                             <input class = "inputSettings inputEmployee" type="number" name="personalID" maxlength="10" required/>
                         </td>
                     </tr>
                     <tr>
-                        <td class = "textLabel textLabelEmployeePage">Стать:</td>
+                        <td class = "textLabel textLabelEmployeePage">Sex:</td>
                         <td class ="textLabel textLabelEmployeePage">
-                            <input type="radio" name="sex" value="m" checked>Чоловіча<br>
-                            <input type="radio" name="sex" value="f">Жіноча
+                            <input type="radio" name="sex" value="m" checked>Male<br>
+                            <input type="radio" name="sex" value="f">Female
                         </td>
                     </tr>
                     <tr>
-                        <td class = "textLabel textLabelEmployeePage">Дата народження:</td>
+                        <td class = "textLabel textLabelEmployeePage">Date of birth:</td>
                     </tr>
                     <tr>
-                        <td class = "textLabel textLabelEmployeePage">День</td>
+                        <td class = "textLabel textLabelEmployeePage">Day</td>
                         <td>
                             <input class = "inputSettings inputEmployee numericInput2" type="number" name="bday" maxlength="2" required/>
                         </td>
                     </tr>
                     <tr>
-                        <td class = "textLabel textLabelEmployeePage">   Місяць</td>
+                        <td class = "textLabel textLabelEmployeePage">   Month</td>
                         <td>
                             <input class = "inputSettings inputEmployee numericInput2" type="number" name="bmonth" maxlength="2" required/>
                         </td>
                     </tr>
                     <tr>
-                        <td class = "textLabel textLabelEmployeePage">   Рік</td>
+                        <td class = "textLabel textLabelEmployeePage">   Year</td>
                         <td>
                             <input class = "inputSettings inputEmployee numericInput4" type="number" name="byear" maxlength="4" required/>
                         </td>
                     </tr>
                     <tr>
-                        <td class = "textLabel textLabelEmployeePage">Пошта:</td>
+                        <td class = "textLabel textLabelEmployeePage">Email:</td>
                         <td>
                             <input class = "inputSettings inputEmployee inputAdminPageLongNames" type="text" name="email" maxlength="100" required/>
                         </td>
                     </tr>
                     <tr>
-                        <td class = "textLabel textLabelEmployeePage">Телефон:</td>
+                        <td class = "textLabel textLabelEmployeePage">Phone Number:</td>
                         <td>
                             <input class = "inputSettings inputEmployee" type="text" name="phoneNumber" maxlength="20" required/>
                         </td>
                     </tr>
                     <tr>
-                        <td class = "textLabel textLabelEmployeePage">Адресса:</td>
+                        <td class = "textLabel textLabelEmployeePage">Address:</td>
                         <td>
                             <input class = "inputSettings inputEmployee inputAdminPageLongNames" type="text" name="address" maxlength="200" required/>
                         </td>
                     </tr>
                     <tr>
-                        <td class = "textLabel textLabelEmployeePage">Паспортні данні:</td>
+                        <td class = "textLabel textLabelEmployeePage">Passport data:</td>
                         <td>
                             <input class = "inputSettings inputEmployee inputAdminPageLongNames" type="text" name="pasport" maxlength="200" required/>
                         </td>
