@@ -10,45 +10,45 @@
 <html>
 <head lang="en">
     <title>Set Timetable Page</title>
-    <link rel="stylesheet" type="text/css" href="main_css\main_styles.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}\main_css\main_styles.css">
 </head>
 
-<body class = "backgroungImageEmployee">
+<body class = "backgroundImageEmployee">
 
 <div class = "pageTitleText pageTitleTextEmployee">
     Set Timetable Page
 </div>
 <br />
 
-<c:if test = "${step eq 'step0'}">
-    <c:if test = "${timetablePresent eq 'no'}">
+<c:if test = "${requestScope.step eq 'step0'}">
+    <c:if test = "${requestScope.timetablePresent eq 'no'}">
         <div class = "pageTitleText pageTitleTextEmployee">
             Set timetable:
         </div>
-            <form action="SetTimetablePageController" method="post" accept-charset="UTF-8">
+            <form action="${pageContext.request.contextPath}/Employee/SetTimetablePageController" method="post" accept-charset="UTF-8">
+                <input type="hidden"  name="step" value="step1">
+                <input type="hidden"  name="timetablePresent" value="no">
                 <table>
-                    <input type="hidden"  name="step" value="step1">
-                    <input type="hidden"  name="timetablePresent" value="no">
                     <tr>
                         <td colspan=2>
-                            <button onclick="submit"  class="controlButton controlButtonEmployeePage">Set</button>
+                            <button class="controlButton controlButtonEmployeePage">Set</button>
                         </td>
                     </tr>
                 </table>
             </form>
     </c:if>
 
-    <c:if test = "${timetablePresent eq 'yes'}">
+    <c:if test = "${requestScope.timetablePresent eq 'yes'}">
         <div class = "pageTitleText pageTitleTextEmployee">
             Reset timetable:
         </div>
-            <form action="SetTimetablePageController" method="post" accept-charset="UTF-8">
+            <form action="${pageContext.request.contextPath}/Employee/SetTimetablePageController" method="post" accept-charset="UTF-8">
+                <input type="hidden"  name="step" value="step1">
+                <input type="hidden"  name="timetablePresent" value="yes">
                 <table>
-                    <input type="hidden"  name="step" value="step1">
-                    <input type="hidden"  name="timetablePresent" value="yes">
                     <tr>
                         <td colspan=2>
-                            <button onclick="submit"  class="controlButton controlButtonEmployeePage">Reset</button>
+                            <button class="controlButton controlButtonEmployeePage">Reset</button>
                         </td>
                     </tr>
                 </table>
@@ -57,11 +57,9 @@
 </c:if>
 
 <div>
-    <form action="SetTimetablePageController" method="post">
+    <form action="${pageContext.request.contextPath}/Employee/SetTimetablePageController" method="post">
         <input type="hidden"  name="step" value="cancel">
-        <td colspan=2>
-            <button onclick="submit"  class="controlButton controlButtonEmployeePage">Cancel</button>
-        </td>
+        <button class="controlButton controlButtonEmployeePage">Cancel</button>
     </form>
 </div>
 

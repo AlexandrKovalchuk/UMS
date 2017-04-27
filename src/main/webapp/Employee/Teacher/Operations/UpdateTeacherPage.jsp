@@ -10,30 +10,31 @@
 <html>
 <head lang="en">
     <title>Update Teacher Page</title>
-    <link rel="stylesheet" type="text/css" href="main_css\main_styles.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}\main_css\main_styles.css">
 </head>
 
-<body class = "backgroungImageEmployee">
+<body class = "backgroundImageEmployee">
 
 <div class = "pageTitleText pageTitleTextEmployee">
-    Update Teacher Page (<c:out value="${department.getLongName()}"/>)
+    Update Teacher Page (<c:out value="${requestScope.department.getLongName()}"/>)
 </div>
 <br />
 
-<c:if test = "${selected ne 'yes'}">
+<c:if test = "${requestScope.selected ne 'yes'}">
     <div class = "pageTitleText pageTitleTextEmployee">
         Select Teacher to Update:
     </div>
 
     <div class = "pageContent pageContentEmployeePages pageContentAdminPages500px">
+        <jsp:useBean id="departments" scope="request" type="java.util.List"/>
         <c:forEach items="${departments}" var="department">
             <div class = "textLabelParagraph textLabelEmployeePage"><c:out value="${department.getLongName()}"/></div>
             <c:forEach items="${department.getTeachers()}" var="teacher">
                 <div>
-                    <form action="UpdateTeacherPageController" method="post" accept-charset="UTF-8">
+                    <form action="${pageContext.request.contextPath}/Employee/UpdateTeacherPageController" method="post" accept-charset="UTF-8">
                         <input type="hidden"  name="step" value="step1">
                         <input type="hidden"  name="teacherID" value="${teacher.getID()}">
-                        <button onclick="submit" class="itemButton itemButtonEmployeePages" ><c:out value="${teacher.getSecondName()}"/> <c:out value="${teacher.getName()}"/></button>
+                        <button class="itemButton itemButtonEmployeePages" ><c:out value="${teacher.getSecondName()}"/> <c:out value="${teacher.getName()}"/></button>
                     </form>
                 </div>
             </c:forEach>
@@ -42,46 +43,64 @@
 
 </c:if>
 
-<c:if test = "${selected eq 'yes'}">
+<c:if test = "${requestScope.selected eq 'yes'}">
     <div class = "pageTitleText pageTitleTextEmployee">
         Please fill form:
     </div>
 
     <div class = "pageContent pageContentEmployeePages pageContentAdminPages500px">
-        <form action="UpdateTeacherPageController" method="post" accept-charset="UTF-8">
+        <form action="${pageContext.request.contextPath}/Employee/UpdateTeacherPageController" method="post" accept-charset="UTF-8">
+            <input type="hidden"  name="step" value="step2">
+            <input type="hidden"  name="teacherID" value="${requestScope.teacher.getID()}">
+            <input type="hidden"  name="departmentID" value="${requestScope.teacher.getDepartmentID()}">
             <table>
-                <input type="hidden"  name="step" value="step2">
-                <input type="hidden"  name="teacherID" value="${teacher.getID()}">
-                <input type="hidden"  name="departmentID" value="${teacher.getDepartmentID()}">
                 <tr>
                     <td class = "textLabel textLabelEmployeePage">Name:</td>
                     <td>
-                        <input class = "inputSettings inputEmployee" type="text" name="name" maxlength="40" required value="${teacher.getName()}">
+                        <label>
+                            <input class="inputSettings inputEmployee" type="text" name="name" maxlength="40" required
+                                   value="${requestScope.teacher.getName()}">
+                        </label>
                     </td>
                 </tr>
                 <tr>
                     <td class = "textLabel textLabelEmployeePage">Surname:</td>
                     <td>
-                        <input class = "inputSettings inputEmployee" type="text" name="lastName" maxlength="50" required value="${teacher.getSecondName()}">
+                        <label>
+                            <input class="inputSettings inputEmployee" type="text" name="lastName" maxlength="50"
+                                   required value="${requestScope.teacher.getSecondName()}">
+                        </label>
                     </td>
                 </tr>
                 <tr>
                     <td class = "textLabel textLabelEmployeePage">Middle Name:</td>
                     <td>
-                        <input class = "inputSettings inputEmployee" type="text" name="fathersName" maxlength="40" required value="${teacher.getSurname()}">
+                        <label>
+                            <input class="inputSettings inputEmployee" type="text" name="fathersName" maxlength="40"
+                                   required value="${requestScope.teacher.getSurname()}">
+                        </label>
                     </td>
                 </tr>
                 <tr>
                     <td class = "textLabel textLabelEmployeePage">Identification code:</td>
                     <td>
-                        <input class = "inputSettings inputEmployee" type="number" name="personalID" maxlength="10" required value="${teacher.getPersonalID()}">
+                        <label>
+                            <input class="inputSettings inputEmployee" type="number" name="personalID" maxlength="10"
+                                   required value="${requestScope.teacher.getPersonalID()}">
+                        </label>
                     </td>
                 </tr>
                 <tr>
                     <td class ="textLabel textLabelEmployeePage" >Sex:</td>
                     <td class ="textLabel textLabelEmployeePage">
-                        <input type="radio" name="sex" value="m" <c:if test = "${teacher.getSex() eq 'm'}">checked</c:if>>Male<br>
-                        <input type="radio" name="sex" value="f" <c:if test = "${teacher.getSex() eq 'f'}">checked</c:if>>Female<br>
+                        <label>
+                            <input type="radio" name="sex" value="m" <c:if
+                                test="${requestScope.teacher.getSex() eq 'm'}">checked</c:if>>
+                        </label>Male<br>
+                        <label>
+                            <input type="radio" name="sex" value="f" <c:if
+                                test="${requestScope.teacher.getSex() eq 'f'}">checked</c:if>>
+                        </label>Female<br>
                     </td>
                 </tr>
                 <tr>
@@ -90,61 +109,91 @@
                 <tr>
                     <td class = "textLabel textLabelEmployeePage">Day</td>
                     <td>
-                        <input class = "inputSettings inputEmployee numericInput2" type="number" name="bday" maxlength="2" required value="${teacher.getDayOfBorn()}">
+                        <label>
+                            <input class="inputSettings inputEmployee numericInput2" type="number" name="bday"
+                                   maxlength="2" required value="${requestScope.teacher.getDayOfBorn()}">
+                        </label>
                     </td>
                 </tr>
                 <tr>
                     <td class = "textLabel textLabelEmployeePage">Month</td>
                     <td>
-                        <input class = "inputSettings inputEmployee numericInput2" type="number" name="bmonth" maxlength="2" required value="${teacher.getMonthOfBorn()}">
+                        <label>
+                            <input class="inputSettings inputEmployee numericInput2" type="number" name="bmonth"
+                                   maxlength="2" required value="${requestScope.teacher.getMonthOfBorn()}">
+                        </label>
                     </td>
                 </tr>
                 <tr>
                     <td class = "textLabel textLabelEmployeePage">Year</td>
                     <td>
-                        <input class = "inputSettings inputEmployee numericInput4" type="number" name="byear" maxlength="4" required value="${teacher.getYearOfBorn()}">
+                        <label>
+                            <input class="inputSettings inputEmployee numericInput4" type="number" name="byear"
+                                   maxlength="4" required value="${requestScope.teacher.getYearOfBorn()}">
+                        </label>
                     </td>
                 </tr>
                 <tr>
                     <td class = "textLabel textLabelEmployeePage">Email:</td>
                     <td>
-                        <input class = "inputSettings inputEmployee inputAdminPageLongNames" type="text" name="email" maxlength="100" required value="${teacher.getEmail()}">
+                        <label>
+                            <input class="inputSettings inputEmployee inputAdminPageLongNames" type="text" name="email"
+                                   maxlength="100" required value="${requestScope.teacher.getEmail()}">
+                        </label>
                     </td>
                 </tr>
                 <tr>
                     <td class = "textLabel textLabelEmployeePage">Phone Number:</td>
                     <td>
-                        <input class = "inputSettings inputEmployee" type="text" name="phoneNumber" maxlength="20" required value="${teacher.getPhoneNumber()}">
+                        <label>
+                            <input class="inputSettings inputEmployee" type="text" name="phoneNumber" maxlength="20"
+                                   required value="${requestScope.teacher.getPhoneNumber()}">
+                        </label>
                     </td>
                 </tr>
                 <tr>
                     <td class = "textLabel textLabelEmployeePage">Address:</td>
                     <td>
-                        <input class = "inputSettings inputEmployee inputAdminPageLongNames" type="text" name="address" maxlength="200" required value="${teacher.getAddress()}">
+                        <label>
+                            <input class="inputSettings inputEmployee inputAdminPageLongNames" type="text"
+                                   name="address" maxlength="200" required value="${requestScope.teacher.getAddress()}">
+                        </label>
                     </td>
                 </tr>
                 <tr>
                     <td class = "textLabel textLabelEmployeePage">Passport data:</td>
                     <td>
-                        <input class = "inputSettings inputEmployee inputAdminPageLongNames" type="text" name="pasport" maxlength="200" required value="${teacher.getPasport()}">
+                        <label>
+                            <input class="inputSettings inputEmployee inputAdminPageLongNames" type="text"
+                                   name="pasport" maxlength="200" required value="${requestScope.teacher.getPasport()}">
+                        </label>
                     </td>
                 </tr>
                 <tr>
                     <td class = "textLabel textLabelEmployeePage">Position:</td>
                     <td>
-                        <input class = "inputSettings inputEmployee inputAdminPageLongNames" type="text" name="office" maxlength="100" required value="${teacher.getOffice()}">
+                        <label>
+                            <input class="inputSettings inputEmployee inputAdminPageLongNames" type="text" name="office"
+                                   maxlength="100" required value="${requestScope.teacher.getOffice()}">
+                        </label>
                     </td>
                 </tr>
                 <tr>
                     <td class = "textLabel textLabelEmployeePage">Academic Title:</td>
                     <td>
-                        <input class = "inputSettings inputEmployee inputAdminPageLongNames" type="text" name="level" maxlength="100" required value="${teacher.getLevel()}">
+                        <label>
+                            <input class="inputSettings inputEmployee inputAdminPageLongNames" type="text" name="level"
+                                   maxlength="100" required value="${requestScope.teacher.getLevel()}">
+                        </label>
                     </td>
                 </tr>
                 <tr>
                     <td class = "textLabel textLabelEmployeePage">LogIn:</td>
                     <td>
-                        <input class = "inputSettings inputEmployee inputAdminPageLongNames" type="text" name="login" maxlength="70" required value="${teacher.getLogin()}">
+                        <label>
+                            <input class="inputSettings inputEmployee inputAdminPageLongNames" type="text" name="login"
+                                   maxlength="70" required value="${requestScope.teacher.getLogin()}">
+                        </label>
                     </td>
                 </tr>
             </table>
@@ -156,8 +205,11 @@
 
                 <tr>
                     <td  class = "textLabel textLabelEmployeePage">
-                        <c:forEach items="${teacher.getDisciplines()}" var="discipline">
-                            <input type="checkbox" name="discipline" value="<c:out value="${discipline.getID()}"/>" checked> <c:out value="${discipline.getNameOfDiscipline()}"/><br>
+                        <c:forEach items="${requestScope.teacher.getDisciplines()}" var="discipline">
+                            <label>
+                                <input type="checkbox" name="discipline" value="<c:out value="${discipline.getID()}"/>"
+                                checked>
+                            </label> <c:out value="${discipline.getNameOfDiscipline()}"/><br>
                         </c:forEach>
                     </td>
                 </tr>
@@ -168,8 +220,12 @@
 
                 <tr>
                     <td  class = "textLabel textLabelEmployeePage">
+                        <jsp:useBean id="disciplines" scope="request" type="java.util.List"/>
                         <c:forEach items="${disciplines}" var="discipline">
-                            <input type="checkbox" name="discipline" value="<c:out value="${discipline.getID()}"/>" > <c:out value="${discipline.getNameOfDiscipline()}"/><br>
+                            <label>
+                                <input type="checkbox" name="discipline" value="<c:out value="${discipline.getID()}"/>"
+                                >
+                            </label> <c:out value="${discipline.getNameOfDiscipline()}"/><br>
                         </c:forEach>
                     </td>
                 </tr>
@@ -180,15 +236,18 @@
 
                 <tr>
                     <td  class = "textLabel textLabelEmployeePage">
-                        <c:forEach items="${disciplinesNotConnected}" var="discipline">
-                            <input type="checkbox" name="discipline" value="<c:out value="${discipline.getID()}"/>" > <c:out value="${discipline.getNameOfDiscipline()}"/><br>
+                        <c:forEach items="${requestScope.disciplinesNotConnected}" var="discipline">
+                            <label>
+                                <input type="checkbox" name="discipline" value="<c:out value="${discipline.getID()}"/>"
+                                >
+                            </label> <c:out value="${discipline.getNameOfDiscipline()}"/><br>
                         </c:forEach>
                     </td>
                 </tr>
 
                 <tr>
                     <td colspan=2>
-                        <button onclick="submit"  class="controlButton controlButtonEmployeePage">Update</button>
+                        <button class="controlButton controlButtonEmployeePage">Update</button>
                     </td>
                 </tr>
             </table>
@@ -197,11 +256,9 @@
 </c:if>
 
 <div>
-    <form action="UpdateTeacherPageController" method="post">
+    <form action="${pageContext.request.contextPath}/Employee/UpdateTeacherPageController" method="post">
         <input type="hidden"  name="step" value="cancel">
-        <td colspan=2>
-            <button onclick="submit"  class="controlButton controlButtonEmployeePage">Cancel</button>
-        </td>
+        <button class="controlButton controlButtonEmployeePage">Cancel</button>
     </form>
 </div>
 

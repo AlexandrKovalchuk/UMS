@@ -37,20 +37,20 @@ public class CreateGroupPageController extends HttpServlet {
                     request.setAttribute("result", "unsuccess");
                 }
                 daog.closeConnection();
-                request.getRequestDispatcher("ActionResultEmployeeMenuPageController").forward(request, response);
+                request.getRequestDispatcher("/Employee/ActionResultEmployeeMenuPageController").forward(request, response);
             }else if(request.getParameter("fillForm").equals("cancel")){
-                request.getRequestDispatcher("GroupPageController").forward(request, response);
+                request.getRequestDispatcher("/Employee/GroupPageController").forward(request, response);
             }else{
                 request.setAttribute("menu", "group");
                 request.setAttribute("error", "incorrectValue");
-                request.getRequestDispatcher("ActionResultEmployeeMenuPageController").forward(request, response);
+                request.getRequestDispatcher("/Employee/ActionResultEmployeeMenuPageController").forward(request, response);
             }
         }else{
             DAODepartment daod = new DAODepartment();
             Department department = daod.getEntityById((int) session.getAttribute("departmentID"));
             daod.closeConnection();
             request.setAttribute("department", department);
-            request.getRequestDispatcher("Employee/Group/Operations/CreateGroupPage.jsp").forward(request, response);
+            request.getRequestDispatcher("Group/Operations/CreateGroupPage.jsp").forward(request, response);
         }
     }
 }

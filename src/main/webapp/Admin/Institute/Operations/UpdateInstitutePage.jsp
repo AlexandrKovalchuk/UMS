@@ -9,28 +9,29 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <link rel="stylesheet" type="text/css" href="main_css\main_styles.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}\main_css\main_styles.css">
     <title>Update Institute Page</title>
 </head>
-<body class = "backgroungImageAdmin">
+<body class = "backgroundImageAdmin">
 
 <div class = "pageTitleText pageTitleTextAdmin">
     Update Institute Page
 </div>
 <br />
 
-<c:if test = "${selected ne 'yes'}">
+<c:if test = "${requestScope.selected ne 'yes'}">
     <div class = "pageTitleText pageTitleTextAdmin">
         Select Institute to update:
     </div>
 
     <div class = "pageContent pageContentAdminPages pageContentAdminPages500px">
+        <jsp:useBean id="institutesList" scope="request" type="java.util.List"/>
         <c:forEach items="${institutesList}" var="institute">
             <div>
-                <form action="UpdateInstitutePageController" method="post" accept-charset="UTF-8">
+                <form action="${pageContext.request.contextPath}/Admin/UpdateInstitutePageController" method="post" accept-charset="UTF-8">
                     <input type="hidden"  name="step" value="step1">
                     <input type="hidden"  name="instituteID" value="${institute.getID()}">
-                    <button onclick="submit" class="itemButton itemButtonAdminPages" ><c:out value="${institute.getLongName()}"/></button>
+                    <button class="itemButton itemButtonAdminPages" ><c:out value="${institute.getLongName()}"/></button>
                 </form>
             </div>
         </c:forEach>
@@ -38,31 +39,37 @@
 
 </c:if>
 
-<c:if test = "${selected eq 'yes'}">
+<c:if test = "${requestScope.selected eq 'yes'}">
     <div class = "pageTitleText pageTitleTextAdmin">
         Please fill form:
     </div>
 
     <div class = "pageContent pageContentAdminPages pageContentAdminPagesTwoFieldsSize">
-        <form action="UpdateInstitutePageController" method="post" accept-charset="UTF-8">
+        <form action="${pageContext.request.contextPath}/Admin/UpdateInstitutePageController" method="post" accept-charset="UTF-8">
+            <input type="hidden"  name="step" value="step2">
+            <input type="hidden"  name="instituteID" value="${requestScope.institute.getID()}" >
             <table>
-                <input type="hidden"  name="step" value="step2">
-                <input type="hidden"  name="instituteID" value="${institute.getID()}" >
                 <tr>
                     <td class = "textLabel textLabelAdminPage">Long name:</td>
                     <td>
-                        <input class = "inputSettings inputAdminPage inputAdminPageLongNames" type="text" name="longName"  maxlength="70" required value="${institute.getLongName()}"  required/>
+                        <label>
+                            <input class="inputSettings inputAdminPage inputAdminPageLongNames" type="text"
+                                   name="longName" maxlength="70" value="${requestScope.institute.getLongName()}" required/>
+                        </label>
                     </td>
                 </tr>
                 <tr>
                     <td class = "textLabel textLabelAdminPage">Short name:</td>
                     <td>
-                        <input class = "inputSettings inputAdminPage" type="text" name="shortName" maxlength="10" required value="${institute.getShortName()}">
+                        <label>
+                            <input class="inputSettings inputAdminPage" type="text" name="shortName" maxlength="10"
+                                   required value="${requestScope.institute.getShortName()}">
+                        </label>
                     </td>
                 </tr>
                 <tr>
                     <td colspan=2>
-                        <button onclick="submit"  class="controlButton controlButtonAdminPage">Update</button>
+                        <button class="controlButton controlButtonAdminPage">Update</button>
                     </td>
                 </tr>
             </table>
@@ -71,12 +78,9 @@
 </c:if>
 
 <div>
-    <form action="UpdateInstitutePageController" method="post">
+    <form action="${pageContext.request.contextPath}/Admin/UpdateInstitutePageController" method="post">
         <input type="hidden"  name="step" value="cancel">
-        <td colspan=2>
-            <button onclick="submit"  class="controlButton controlButtonAdminPage">Cancel</button>
-
-        </td>
+        <button class="controlButton controlButtonAdminPage">Cancel</button>
     </form>
 </div>
 

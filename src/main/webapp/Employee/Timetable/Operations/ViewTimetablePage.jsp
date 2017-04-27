@@ -10,7 +10,7 @@
 <html>
 <head lang="en">
     <title>View Timetable Page</title>
-    <link rel="stylesheet" type="text/css" href="main_css\main_styles.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}\main_css\main_styles.css">
 </head>
 
 <body style="background-color:#45250d;">
@@ -20,13 +20,13 @@
 </div>
 <br />
 
-<c:if test = "${step eq 'step0'}">
-    <c:if test = "${timetablePresent eq 'no'}">
+<c:if test = "${requestScope.step eq 'step0'}">
+    <c:if test = "${requestScope.timetablePresent eq 'no'}">
         <div class = "pageTitleText pageTitleTextEmployee">
             Time Table does not exist!
         </div>
     </c:if>
-    <c:if test = "${timetablePresent eq 'yes'}">
+    <c:if test = "${requestScope.timetablePresent eq 'yes'}">
         <div class = "pageTitleText pageTitleTextEmployee">
             Time Table:
         </div>
@@ -36,6 +36,7 @@
                 <td class = "studentTable">
                 </td>
                 <c:set var="countCourse" value="1" scope="page" />
+                <jsp:useBean id="groupNamesByCourse" scope="request" type="java.util.List"/>
                 <c:forEach items="${groupNamesByCourse}"  var="groupsItem">
                     <td class = "studentTable">
                         <table class = "studentTable">
@@ -57,19 +58,19 @@
                 </c:forEach>
             </tr>
             <c:set var="countCourse" value="1" scope="page" />
-            <c:forEach items="${week}"  var="dayItem">
+            <c:forEach items="${requestScope.week}"  var="dayItem">
                 <tr class = "studentTable">
                     <td class = "studentTable">
                         <table class = "studentTable">
                             <tr class = "studentTable">
                                 <td class = "studentTable" width="120">
                                     <div class ="textLabel textLabelEmployeePage">
-                                        <c:out value="${dayNames.get(count)}"/>
+                                        <c:out value="${requestScope.dayNames.get(count)}"/>
                                     </div>
                                 </td>
                                 <td class = "studentTable">
                                     <table class = "studentTable">
-                                        <c:forEach items="${lessonsTime}"  var="lessonTime">
+                                        <c:forEach items="${requestScope.lessonsTime}"  var="lessonTime">
                                             <tr class = "studentTable">
                                                 <td class = "textLabel textLabelEmployeePage studentTable" height="123">
                                                     <c:out value="${lessonTime}"/>
@@ -86,20 +87,19 @@
                         <td class = "studentTable">
                             <table>
                                 <c:set var="countlessonsTime" value="1" scope="page" />
+                                <jsp:useBean id="lessonsTime" scope="request" type="java.util.List"/>
                                 <c:forEach items="${lessonsTime}"  var="lessonTime">
                                     <tr>
                                         <c:forEach items="${groupsItem}"  var="group">
 
-                                            <c:set var="lesson" value="${lessons.getLesson(group.getID(),count,countlessonsTime)}"/>
+                                            <c:set var="lesson" value="${requestScope.lessons.getLesson(group.getID(),count,countlessonsTime)}"/>
                                             <td>
-                                                <form action="UpdateTimetablePageController" method="post">
+                                                <form action="${pageContext.request.contextPath}/Employee/UpdateTimetablePageController" method="post">
                                                     <input type="hidden"  name="step" value="step1">
                                                     <input type="hidden"  name="lessonID" value="${lesson.getID()}">
-                                                    <td colspan=2>
-                                                        <button onclick="submit"  class="timeTableButton timeTableButtonEmployeePage"><c:out value="${lesson.getDiscipline().getNameOfDiscipline()}"/><br>
+                                                    <button class="timeTableButton timeTableButtonEmployeePage"><c:out value="${lesson.getDiscipline().getNameOfDiscipline()}"/><br>
                                                             <c:out value="${lesson.getTeacher().getSecondName()}"/>
                                                         </button>
-                                                    </td>
                                                 </form>
                                             </td>
                                         </c:forEach>
@@ -118,11 +118,9 @@
 </c:if>
 
 <div>
-    <form action="UpdateTimetablePageController" method="post">
+    <form action="${pageContext.request.contextPath}/Employee/UpdateTimetablePageController" method="post">
         <input type="hidden"  name="step" value="cancel">
-        <td colspan=2>
-            <button onclick="submit"  class="controlButton controlButtonEmployeePage">Done</button>
-        </td>
+        <button class="controlButton controlButtonEmployeePage">Done</button>
     </form>
 </div>
 

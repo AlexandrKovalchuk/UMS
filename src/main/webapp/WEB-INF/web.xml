@@ -38,7 +38,7 @@
 
     <servlet-mapping>
         <servlet-name>AdminPageController</servlet-name>
-        <url-pattern>/AdminPageController</url-pattern>
+        <url-pattern>/Admin/AdminPageController</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -48,7 +48,7 @@
 
     <servlet-mapping>
         <servlet-name>MainInfoPageController</servlet-name>
-        <url-pattern>/MainInfoPageController</url-pattern>
+        <url-pattern>/Admin/MainInfoPageController</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -58,7 +58,7 @@
 
     <servlet-mapping>
         <servlet-name>GenerateBaseDateController</servlet-name>
-        <url-pattern>/GenerateBaseDateController</url-pattern>
+        <url-pattern>/Admin/GenerateBaseDateController</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -68,7 +68,7 @@
 
     <servlet-mapping>
         <servlet-name>ClearAllDateController</servlet-name>
-        <url-pattern>/ClearAllDateController</url-pattern>
+        <url-pattern>/Admin/ClearAllDateController</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -78,7 +78,7 @@
 
     <servlet-mapping>
         <servlet-name>InstitutePageController</servlet-name>
-        <url-pattern>/InstitutePageController</url-pattern>
+        <url-pattern>/Admin/InstitutePageController</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -88,7 +88,7 @@
 
     <servlet-mapping>
         <servlet-name>CreateInstitutePageController</servlet-name>
-        <url-pattern>/CreateInstitutePageController</url-pattern>
+        <url-pattern>/Admin/CreateInstitutePageController</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -98,7 +98,7 @@
 
     <servlet-mapping>
         <servlet-name>UpdateInstitutePageController</servlet-name>
-        <url-pattern>/UpdateInstitutePageController</url-pattern>
+        <url-pattern>/Admin/UpdateInstitutePageController</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -108,7 +108,7 @@
 
     <servlet-mapping>
         <servlet-name>DeleteInstitutePageController</servlet-name>
-        <url-pattern>/DeleteInstitutePageController</url-pattern>
+        <url-pattern>/Admin/DeleteInstitutePageController</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -118,7 +118,7 @@
 
     <servlet-mapping>
         <servlet-name>ShowInstituteInfoPageController</servlet-name>
-        <url-pattern>/ShowInstituteInfoPageController</url-pattern>
+        <url-pattern>/Admin/ShowInstituteInfoPageController</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -128,7 +128,7 @@
 
     <servlet-mapping>
         <servlet-name>FacultyPageController</servlet-name>
-        <url-pattern>/FacultyPageController</url-pattern>
+        <url-pattern>/Admin/FacultyPageController</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -138,7 +138,7 @@
 
     <servlet-mapping>
         <servlet-name>CreateFacultyPageController</servlet-name>
-        <url-pattern>/CreateFacultyPageController</url-pattern>
+        <url-pattern>/Admin/CreateFacultyPageController</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -148,7 +148,7 @@
 
     <servlet-mapping>
         <servlet-name>UpdateFacultyPageController</servlet-name>
-        <url-pattern>/UpdateFacultyPageController</url-pattern>
+        <url-pattern>/Admin/UpdateFacultyPageController</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -158,7 +158,7 @@
 
     <servlet-mapping>
         <servlet-name>MoveFacultyPageController</servlet-name>
-        <url-pattern>/MoveFacultyPageController</url-pattern>
+        <url-pattern>/Admin/MoveFacultyPageController</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -168,7 +168,7 @@
 
     <servlet-mapping>
         <servlet-name>DeleteFacultyPageController</servlet-name>
-        <url-pattern>/DeleteFacultyPageController</url-pattern>
+        <url-pattern>/Admin/DeleteFacultyPageController</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -178,7 +178,7 @@
 
     <servlet-mapping>
         <servlet-name>ShowInfoFacultyPageController</servlet-name>
-        <url-pattern>/ShowInfoFacultyPageController</url-pattern>
+        <url-pattern>/Admin/ShowInfoFacultyPageController</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -188,7 +188,7 @@
 
     <servlet-mapping>
         <servlet-name>DepartmentPageController</servlet-name>
-        <url-pattern>/DepartmentPageController</url-pattern>
+        <url-pattern>/Admin/DepartmentPageController</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -198,7 +198,7 @@
 
     <servlet-mapping>
         <servlet-name>CreateDepartmentPageController</servlet-name>
-        <url-pattern>/CreateDepartmentPageController</url-pattern>
+        <url-pattern>/Admin/CreateDepartmentPageController</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -208,7 +208,7 @@
 
     <servlet-mapping>
         <servlet-name>UpdateDepartmentPageController</servlet-name>
-        <url-pattern>/UpdateDepartmentPageController</url-pattern>
+        <url-pattern>/Admin/UpdateDepartmentPageController</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -218,7 +218,7 @@
 
     <servlet-mapping>
         <servlet-name>DeleteDepartmentPageController</servlet-name>
-        <url-pattern>/DeleteDepartmentPageController</url-pattern>
+        <url-pattern>/Admin/DeleteDepartmentPageController</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -228,7 +228,7 @@
 
     <servlet-mapping>
         <servlet-name>MoveDepartmentPageController</servlet-name>
-        <url-pattern>/MoveDepartmentPageController</url-pattern>
+        <url-pattern>/Admin/MoveDepartmentPageController</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -238,7 +238,7 @@
 
     <servlet-mapping>
         <servlet-name>ShowInfoDepartmentPageController</servlet-name>
-        <url-pattern>/ShowInfoDepartmentPageController</url-pattern>
+        <url-pattern>/Admin/ShowInfoDepartmentPageController</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -248,7 +248,7 @@
 
     <servlet-mapping>
         <servlet-name>EmployeePageController</servlet-name>
-        <url-pattern>/EmployeePageController</url-pattern>
+        <url-pattern>/Admin/EmployeePageController</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -258,7 +258,7 @@
 
     <servlet-mapping>
         <servlet-name>CreateEmployeePageController</servlet-name>
-        <url-pattern>/CreateEmployeePageController</url-pattern>
+        <url-pattern>/Admin/CreateEmployeePageController</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -268,7 +268,7 @@
 
     <servlet-mapping>
         <servlet-name>DeleteEmployeePageController</servlet-name>
-        <url-pattern>/DeleteEmployeePageController</url-pattern>
+        <url-pattern>/Admin/DeleteEmployeePageController</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -278,7 +278,7 @@
 
     <servlet-mapping>
         <servlet-name>UpdateEmployeePageController</servlet-name>
-        <url-pattern>/UpdateEmployeePageController</url-pattern>
+        <url-pattern>/Admin/UpdateEmployeePageController</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -288,7 +288,7 @@
 
     <servlet-mapping>
         <servlet-name>ShowEmployeeInfoPageController</servlet-name>
-        <url-pattern>/ShowEmployeeInfoPageController</url-pattern>
+        <url-pattern>/Admin/ShowEmployeeInfoPageController</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -298,7 +298,7 @@
 
     <servlet-mapping>
         <servlet-name>MoveEmployeePageController</servlet-name>
-        <url-pattern>/MoveEmployeePageController</url-pattern>
+        <url-pattern>/Admin/MoveEmployeePageController</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -308,7 +308,7 @@
 
     <servlet-mapping>
         <servlet-name>EmployeeMenuPageController</servlet-name>
-        <url-pattern>/EmployeeMenuPageController</url-pattern>
+        <url-pattern>/Employee/EmployeeMenuPageController</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -318,7 +318,7 @@
 
     <servlet-mapping>
         <servlet-name>DisciplinePageController</servlet-name>
-        <url-pattern>/DisciplinePageController</url-pattern>
+        <url-pattern>/Employee/DisciplinePageController</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -328,7 +328,7 @@
 
     <servlet-mapping>
         <servlet-name>CreateDisciplinePageController</servlet-name>
-        <url-pattern>/CreateDisciplinePageController</url-pattern>
+        <url-pattern>/Employee/CreateDisciplinePageController</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -338,7 +338,7 @@
 
     <servlet-mapping>
         <servlet-name>UpdateDisciplinePageController</servlet-name>
-        <url-pattern>/UpdateDisciplinePageController</url-pattern>
+        <url-pattern>/Employee/UpdateDisciplinePageController</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -348,7 +348,7 @@
 
     <servlet-mapping>
         <servlet-name>DeleteDisciplinePageController</servlet-name>
-        <url-pattern>/DeleteDisciplinePageController</url-pattern>
+        <url-pattern>/Employee/DeleteDisciplinePageController</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -358,7 +358,7 @@
 
     <servlet-mapping>
         <servlet-name>SetDisciplineDepartmentDependencyPageController</servlet-name>
-        <url-pattern>/SetDisciplineDepartmentDependencyPageController</url-pattern>
+        <url-pattern>/Employee/SetDisciplineDepartmentDependencyPageController</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -368,7 +368,7 @@
 
     <servlet-mapping>
         <servlet-name>ShowInfoDisciplinePageController</servlet-name>
-        <url-pattern>/ShowInfoDisciplinePageController</url-pattern>
+        <url-pattern>/Employee/ShowInfoDisciplinePageController</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -378,7 +378,7 @@
 
     <servlet-mapping>
         <servlet-name>TeacherPageController</servlet-name>
-        <url-pattern>/TeacherPageController</url-pattern>
+        <url-pattern>/Employee/TeacherPageController</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -388,7 +388,7 @@
 
     <servlet-mapping>
         <servlet-name>CreateTeacherPageController</servlet-name>
-        <url-pattern>/CreateTeacherPageController</url-pattern>
+        <url-pattern>/Employee/CreateTeacherPageController</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -398,7 +398,7 @@
 
     <servlet-mapping>
         <servlet-name>UpdateTeacherPageController</servlet-name>
-        <url-pattern>/UpdateTeacherPageController</url-pattern>
+        <url-pattern>/Employee/UpdateTeacherPageController</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -408,7 +408,7 @@
 
     <servlet-mapping>
         <servlet-name>DeleteTeacherPageController</servlet-name>
-        <url-pattern>/DeleteTeacherPageController</url-pattern>
+        <url-pattern>/Employee/DeleteTeacherPageController</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -418,7 +418,7 @@
 
     <servlet-mapping>
         <servlet-name>MoveTeacherPageController</servlet-name>
-        <url-pattern>/MoveTeacherPageController</url-pattern>
+        <url-pattern>/Employee/MoveTeacherPageController</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -428,7 +428,7 @@
 
     <servlet-mapping>
         <servlet-name>ShowInfoTeacherPageController</servlet-name>
-        <url-pattern>/ShowInfoTeacherPageController</url-pattern>
+        <url-pattern>/Employee/ShowInfoTeacherPageController</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -438,7 +438,7 @@
 
     <servlet-mapping>
         <servlet-name>TeacherMenuPageController</servlet-name>
-        <url-pattern>/TeacherMenuPageController</url-pattern>
+        <url-pattern>/Teacher/TeacherMenuPageController</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -448,7 +448,7 @@
 
     <servlet-mapping>
         <servlet-name>SetAttendancePageController</servlet-name>
-        <url-pattern>/SetAttendancePageController</url-pattern>
+        <url-pattern>/Teacher/SetAttendancePageController</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -458,7 +458,7 @@
 
     <servlet-mapping>
         <servlet-name>SetProgressPageController</servlet-name>
-        <url-pattern>/SetProgressPageController</url-pattern>
+        <url-pattern>/Teacher/SetProgressPageController</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -468,7 +468,7 @@
 
     <servlet-mapping>
         <servlet-name>ShowTimetablePageController</servlet-name>
-        <url-pattern>/ShowTimetablePageController</url-pattern>
+        <url-pattern>/Teacher/ShowTimetablePageController</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -478,7 +478,7 @@
 
     <servlet-mapping>
         <servlet-name>ActionResultTeacherMenuPageController</servlet-name>
-        <url-pattern>/ActionResultTeacherMenuPageController</url-pattern>
+        <url-pattern>/Teacher/ActionResultTeacherMenuPageController</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -488,7 +488,7 @@
 
     <servlet-mapping>
         <servlet-name>StudentPageController</servlet-name>
-        <url-pattern>/StudentPageController</url-pattern>
+        <url-pattern>/Employee/StudentPageController</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -498,7 +498,7 @@
 
     <servlet-mapping>
         <servlet-name>CreateStudentPageController</servlet-name>
-        <url-pattern>/CreateStudentPageController</url-pattern>
+        <url-pattern>/Employee/CreateStudentPageController</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -508,7 +508,7 @@
 
     <servlet-mapping>
         <servlet-name>UpdateStudentPageController</servlet-name>
-        <url-pattern>/UpdateStudentPageController</url-pattern>
+        <url-pattern>/Employee/UpdateStudentPageController</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -518,7 +518,7 @@
 
     <servlet-mapping>
         <servlet-name>DeleteStudentPageController</servlet-name>
-        <url-pattern>/DeleteStudentPageController</url-pattern>
+        <url-pattern>/Employee/DeleteStudentPageController</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -528,7 +528,7 @@
 
     <servlet-mapping>
         <servlet-name>MoveStudentPageController</servlet-name>
-        <url-pattern>/MoveStudentPageController</url-pattern>
+        <url-pattern>/Employee/MoveStudentPageController</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -538,7 +538,7 @@
 
     <servlet-mapping>
         <servlet-name>ShowInfoStudentPageController</servlet-name>
-        <url-pattern>/ShowInfoStudentPageController</url-pattern>
+        <url-pattern>/Employee/ShowInfoStudentPageController</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -548,7 +548,7 @@
 
     <servlet-mapping>
         <servlet-name>StudentMenuPageController</servlet-name>
-        <url-pattern>/StudentMenuPageController</url-pattern>
+        <url-pattern>/Student/StudentMenuPageController</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -558,7 +558,7 @@
 
     <servlet-mapping>
         <servlet-name>ShowAttendancePageController</servlet-name>
-        <url-pattern>/ShowAttendancePageController</url-pattern>
+        <url-pattern>/Student/ShowAttendancePageController</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -568,7 +568,27 @@
 
     <servlet-mapping>
         <servlet-name>ShowProgressPageController</servlet-name>
-        <url-pattern>/ShowProgressPageController</url-pattern>
+        <url-pattern>/Student/ShowProgressPageController</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ShowTimetableStudentPageController</servlet-name>
+        <servlet-class>net.ukr.vixtibon.servlets.controllers.study_process.students.ShowTimetableStudentPageController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>ShowTimetableStudentPageController</servlet-name>
+        <url-pattern>/Student/ShowTimetableStudentPageController</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ActionResultStudentMenuPageController</servlet-name>
+        <servlet-class>net.ukr.vixtibon.servlets.controllers.ActionResultStudentMenuPageController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>ActionResultStudentMenuPageController</servlet-name>
+        <url-pattern>/Student/ActionResultStudentMenuPageController</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -578,7 +598,7 @@
 
     <servlet-mapping>
         <servlet-name>GroupPageController</servlet-name>
-        <url-pattern>/GroupPageController</url-pattern>
+        <url-pattern>/Employee/GroupPageController</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -588,7 +608,7 @@
 
     <servlet-mapping>
         <servlet-name>CreateGroupPageController</servlet-name>
-        <url-pattern>/CreateGroupPageController</url-pattern>
+        <url-pattern>/Employee/CreateGroupPageController</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -598,7 +618,7 @@
 
     <servlet-mapping>
         <servlet-name>UpdateGroupPageController</servlet-name>
-        <url-pattern>/UpdateGroupPageController</url-pattern>
+        <url-pattern>/Employee/UpdateGroupPageController</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -608,7 +628,7 @@
 
     <servlet-mapping>
         <servlet-name>DeleteGroupPageController</servlet-name>
-        <url-pattern>/DeleteGroupPageController</url-pattern>
+        <url-pattern>/Employee/DeleteGroupPageController</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -618,7 +638,7 @@
 
     <servlet-mapping>
         <servlet-name>ShowInfoGroupPageController</servlet-name>
-        <url-pattern>/ShowInfoGroupPageController</url-pattern>
+        <url-pattern>/Employee/ShowInfoGroupPageController</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -628,7 +648,7 @@
 
     <servlet-mapping>
         <servlet-name>TimetablePageController</servlet-name>
-        <url-pattern>/TimetablePageController</url-pattern>
+        <url-pattern>/Employee/TimetablePageController</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -638,7 +658,7 @@
 
     <servlet-mapping>
         <servlet-name>SetTimetablePageController</servlet-name>
-        <url-pattern>/SetTimetablePageController</url-pattern>
+        <url-pattern>/Employee/SetTimetablePageController</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -648,7 +668,7 @@
 
     <servlet-mapping>
         <servlet-name>UpdateTimetablePageController</servlet-name>
-        <url-pattern>/UpdateTimetablePageController</url-pattern>
+        <url-pattern>/Employee/UpdateTimetablePageController</url-pattern>
     </servlet-mapping>
 
 
@@ -659,7 +679,7 @@
 
     <servlet-mapping>
         <servlet-name>UpdateLessonPageController</servlet-name>
-        <url-pattern>/UpdateLessonPageController</url-pattern>
+        <url-pattern>/Employee/UpdateLessonPageController</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -669,7 +689,7 @@
 
     <servlet-mapping>
         <servlet-name>DayRequirementsPageController</servlet-name>
-        <url-pattern>/DayRequirementsPageController</url-pattern>
+        <url-pattern>/Employee/DayRequirementsPageController</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -679,7 +699,7 @@
 
     <servlet-mapping>
         <servlet-name>ActionResultPageController</servlet-name>
-        <url-pattern>/ActionResultPageController</url-pattern>
+        <url-pattern>/Admin/ActionResultPageController</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -689,7 +709,7 @@
 
     <servlet-mapping>
         <servlet-name>ActionResultEmployeeMenuPageController</servlet-name>
-        <url-pattern>/ActionResultEmployeeMenuPageController</url-pattern>
+        <url-pattern>/Employee/ActionResultEmployeeMenuPageController</url-pattern>
     </servlet-mapping>
 
     <context-param>
@@ -706,6 +726,16 @@
 
     <filter-mapping>
         <filter-name>AuthenticationFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <filter>
+        <filter-name>AreaAccessFilter</filter-name>
+        <filter-class>net.ukr.vixtibon.filters.AreaAccessFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>AreaAccessFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
 

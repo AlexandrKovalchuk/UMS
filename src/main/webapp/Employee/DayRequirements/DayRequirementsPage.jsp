@@ -10,41 +10,47 @@
 <html>
 <head lang="en">
     <title>Day Requirements Page</title>
-    <link rel="stylesheet" type="text/css" href="main_css\main_styles.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}\main_css\main_styles.css">
 </head>
 
-<body class = "backgroungImageEmployee">
+<body class = "backgroundImageEmployee">
 
 <div class = "pageTitleText pageTitleTextEmployee">
     Day Requirements Page
 </div>
 <br />
 
-<c:if test = "${step eq 'step0'}">
-<c:if test = "${requirementsPresent eq 'no'}">
+<c:if test = "${requestScope.step eq 'step0'}">
+<c:if test = "${requestScope.requirementsPresent eq 'no'}">
     <div class = "pageTitleText pageTitleTextEmployee">
         Set day parameters:
     </div>
     <div class = "pageContent pageContentEmployeePages pageContentEmployeePages300px">
-        <form action="DayRequirementsPageController" method="post" accept-charset="UTF-8">
+        <form action="${pageContext.request.contextPath}/Employee/DayRequirementsPageController" method="post" accept-charset="UTF-8">
+            <input type="hidden"  name="step" value="step1">
+            <input type="hidden"  name="requirementsPresent" value="no">
             <table>
-                <input type="hidden"  name="step" value="step1">
-                <input type="hidden"  name="requirementsPresent" value="no">
                 <tr>
                     <td class = "textLabel textLabelEmployeePage">Count Of Days In Week:</td>
                     <td>
-                        <input class = "inputSettings inputEmployee  numericInput2" type="number" name="countOfDaysInWeek" maxlength="1" required/>
+                        <label>
+                            <input class="inputSettings inputEmployee  numericInput2" type="number"
+                                   name="countOfDaysInWeek" maxlength="1" required/>
+                        </label>
                     </td>
                 </tr>
                 <tr>
                     <td class = "textLabel textLabelEmployeePage">Count Of Lessons In A Day:</td>
                     <td>
-                        <input class = "inputSettings inputEmployee  numericInput2" type="number" name="countOfLessonsInADay" maxlength="2" required/>
+                        <label>
+                            <input class="inputSettings inputEmployee  numericInput2" type="number"
+                                   name="countOfLessonsInADay" maxlength="2" required/>
+                        </label>
                     </td>
                 </tr>
                 <tr>
                     <td colspan=2>
-                        <button onclick="submit"  class="controlButton controlButtonEmployeePage">Create</button>
+                        <button class="controlButton controlButtonEmployeePage">Create</button>
                     </td>
                 </tr>
             </table>
@@ -52,30 +58,38 @@
     </div>
 </c:if>
 
-<c:if test = "${requirementsPresent eq 'yes'}">
+<c:if test = "${requestScope.requirementsPresent eq 'yes'}">
     <div class = "pageTitleText pageTitleTextEmployee">
         Update day parameters:
     </div>
     <div class = "pageContent pageContentEmployeePages pageContentEmployeePages300px">
-        <form action="DayRequirementsPageController" method="post" accept-charset="UTF-8">
+        <form action="${pageContext.request.contextPath}/Employee/DayRequirementsPageController" method="post" accept-charset="UTF-8">
+            <input type="hidden"  name="step" value="step1">
+            <input type="hidden"  name="requirementsPresent" value="yes">
             <table>
-                <input type="hidden"  name="step" value="step1">
-                <input type="hidden"  name="requirementsPresent" value="yes">
                 <tr>
                     <td class = "textLabel textLabelEmployeePage">Count Of Days In Week:</td>
                     <td>
-                        <input class = "inputSettings inputEmployee  numericInput2" type="number" name="countOfDaysInWeek" maxlength="1" value="${dayRequirementsObject.getCountOfDaysInWeek()}" required/>
+                        <label>
+                            <input class="inputSettings inputEmployee  numericInput2" type="number"
+                                   name="countOfDaysInWeek" maxlength="1"
+                                   value="${requestScope.dayRequirementsObject.getCountOfDaysInWeek()}" required/>
+                        </label>
                     </td>
                 </tr>
                 <tr>
                     <td class = "textLabel textLabelEmployeePage">Count Of Lessons In A Day:</td>
                     <td>
-                        <input class = "inputSettings inputEmployee numericInput2 " type="number" name="countOfLessonsInADay" maxlength="2" value="${dayRequirementsObject.getCountOfLessonsInADay()}" required/>
+                        <label>
+                            <input class="inputSettings inputEmployee numericInput2 " type="number"
+                                   name="countOfLessonsInADay" maxlength="2"
+                                   value="${requestScope.dayRequirementsObject.getCountOfLessonsInADay()}" required/>
+                        </label>
                     </td>
                 </tr>
                 <tr>
                     <td colspan=2>
-                        <button onclick="submit"  class="controlButton controlButtonEmployeePage">Update</button>
+                        <button  class="controlButton controlButtonEmployeePage">Update</button>
                     </td>
                 </tr>
             </table>
@@ -84,28 +98,31 @@
 </c:if>
 </c:if>
 
-<c:if test = "${step eq 'step1'}">
-    <c:if test = "${requirementsPresent eq 'no'}">
+<c:if test = "${requestScope.step eq 'step1'}">
+    <c:if test = "${requestScope.requirementsPresent eq 'no'}">
         <div class = "pageTitleText pageTitleTextEmployee">
             Set day parameters:
         </div>
         <div class = "pageContent pageContentEmployeePages pageContentEmployeePages300px">
-            <form action="DayRequirementsPageController" method="post" accept-charset="UTF-8">
+            <form action="${pageContext.request.contextPath}/Employee/DayRequirementsPageController" method="post" accept-charset="UTF-8">
+                <input type="hidden"  name="step" value="step2">
+                <input type="hidden"  name="requirementsPresent" value="no">
                 <table>
-                    <input type="hidden"  name="step" value="step2">
-                    <input type="hidden"  name="requirementsPresent" value="no">
-                    <c:forEach var="i" begin="0" end="${dayRequirementsObject.getCountOfLessonsInADay()-1}">
+                    <c:forEach var="i" begin="0" end="${requestScope.dayRequirementsObject.getCountOfLessonsInADay()-1}">
                         <tr>
                             <td class = "textLabel textLabelEmployeePage">Time for Lesson #<c:out value="${i+1}"/>:</td>
                             <td>
-                                <input class = "inputSettings inputEmployee" type="text" maxlength="5" name="timeForLesson<c:out value="${i+1}"/>" required/>
+                                <label>
+                                    <input class="inputSettings inputEmployee" type="text" maxlength="5"
+                                           name="timeForLesson<c:out value="${i+1}"/>" required/>
+                                </label>
                             </td>
                         </tr>
                     </c:forEach>
 
                     <tr>
                         <td colspan=2>
-                            <button onclick="submit"  class="controlButton controlButtonEmployeePage">Set</button>
+                            <button class="controlButton controlButtonEmployeePage">Set</button>
                         </td>
                     </tr>
                 </table>
@@ -113,28 +130,31 @@
         </div>
     </c:if>
 
-    <c:if test = "${requirementsPresent eq 'yes'}">
+    <c:if test = "${requestScope.requirementsPresent eq 'yes'}">
         <div class = "pageTitleText pageTitleTextEmployee">
             Update day parameters:
         </div>
         <div class = "pageContent pageContentEmployeePages pageContentEmployeePages300px">
-            <form action="DayRequirementsPageController" method="post" accept-charset="UTF-8">
+            <form action="${pageContext.request.contextPath}/Employee/DayRequirementsPageController" method="post" accept-charset="UTF-8">
+                <input type="hidden"  name="step" value="step2">
+                <input type="hidden"  name="requirementsPresent" value="yes">
                 <table>
-                    <input type="hidden"  name="step" value="step2">
-                    <input type="hidden"  name="requirementsPresent" value="yes">
-
-                    <c:forEach var="i" begin="0" end="${dayRequirementsObject.getCountOfLessonsInADay()-1}">
+                    <c:forEach var="i" begin="0" end="${requestScope.dayRequirementsObject.getCountOfLessonsInADay()-1}">
                         <tr>
                             <td class = "textLabel textLabelEmployeePage">Time for Lesson #<c:out value="${i+1}"/>:</td>
                             <td>
-                                <input class = "inputSettings inputEmployee" type="text" maxlength="5" name="timeForLesson<c:out value="${i+1}"/>" value="${dayRequirementsObject.getLessonsTime().get(i)}" required/>
+                                <label>
+                                    <input class="inputSettings inputEmployee" type="text" maxlength="5"
+                                           name="timeForLesson<c:out value="${i+1}"/>"
+                                    value="${requestScope.dayRequirementsObject.getLessonsTime().get(i)}" required/>
+                                </label>
                             </td>
                         </tr>
                     </c:forEach>
 
                     <tr>
                         <td colspan=2>
-                            <button onclick="submit"  class="controlButton controlButtonEmployeePage">Update</button>
+                            <button class="controlButton controlButtonEmployeePage">Update</button>
                         </td>
                     </tr>
                 </table>
@@ -144,11 +164,9 @@
 </c:if>
 
 <div>
-    <form action="DayRequirementsPageController" method="post">
+    <form action="${pageContext.request.contextPath}/Employee/DayRequirementsPageController" method="post">
         <input type="hidden"  name="step" value="cancel">
-        <td colspan=2>
-            <button onclick="submit"  class="controlButton controlButtonEmployeePage">Cancel</button>
-        </td>
+        <button class="controlButton controlButtonEmployeePage">Cancel</button>
     </form>
 </div>
 

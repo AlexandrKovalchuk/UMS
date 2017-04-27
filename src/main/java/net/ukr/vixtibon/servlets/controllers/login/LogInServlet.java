@@ -10,9 +10,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.*;
 import java.io.*;
 
-/**
- * Created by alex on 10/30/2015.
- */
 public class LogInServlet extends HttpServlet {
     String username = null;
     String password = null;
@@ -34,7 +31,7 @@ public class LogInServlet extends HttpServlet {
                 session.setMaxInactiveInterval(30*60);
                 if(lib.getAccess().equals("admin")){
                     session.setAttribute("type","admin");
-                    request.getRequestDispatcher("AdminPageController").forward(request, response);
+                    request.getRequestDispatcher("/Admin/AdminPageController").forward(request, response);
                 }else if(lib.getAccess().equals("employee")){
                     DAOEmployee daoEmployee = new DAOEmployee();
                     session.setAttribute("type","employee");

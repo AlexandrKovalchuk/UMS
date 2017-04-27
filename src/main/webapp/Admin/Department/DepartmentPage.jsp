@@ -10,9 +10,9 @@
 <head lang="en">
     <meta charset="UTF-8">
     <title>Department Menu Page</title>
-    <link rel="stylesheet" type="text/css" href="main_css\main_styles.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}\main_css\main_styles.css">
 </head>
-<body class = "backgroungImageAdmin">
+<body class = "backgroundImageAdmin">
 <div class = "pageTitleText pageTitleTextAdmin">
         Welcome to Department Menu Page
         <br />
@@ -21,56 +21,44 @@
 <br />
 <div class="itemsBlock">
     <div>
-        <form action="DepartmentPageController" method="post">
+        <form action="${pageContext.request.contextPath}/Admin/DepartmentPageController" method="post">
             <input type="hidden"  name="operationType" value="create">
-            <td colspan=2>
-                <button onclick="submit"  class="topicButton topicButtonAdminPage">Create New Department</button>
-            </td>
+            <button class="topicButton topicButtonAdminPage">Create New Department</button>
         </form>
     </div>
     <br />
     <div>
-        <form action="DepartmentPageController" method="post">
+        <form action="${pageContext.request.contextPath}/Admin/DepartmentPageController" method="post">
             <input type="hidden"  name="operationType" value="update">
-            <td colspan=2>
-                <button onclick="submit"  class="topicButton topicButtonAdminPage">Update Department</button>
-            </td>
+            <button class="topicButton topicButtonAdminPage">Update Department</button>
         </form>
     </div>
     <br />
     <div>
-        <form action="DepartmentPageController" method="post">
+        <form action="${pageContext.request.contextPath}/Admin/DepartmentPageController" method="post">
             <input type="hidden"  name="operationType" value="move">
-            <td colspan=2>
-                <button onclick="submit"  class="topicButton topicButtonAdminPage">Move Department</button>
-            </td>
+            <button class="topicButton topicButtonAdminPage">Move Department</button>
         </form>
     </div>
     <br />
     <div>
-        <form action="DepartmentPageController" method="post">
+        <form action="${pageContext.request.contextPath}/Admin/DepartmentPageController" method="post">
             <input type="hidden"  name="operationType" value="delete">
-            <td colspan=2>
-                <button onclick="submit"  class="topicButton topicButtonAdminPage">Delete Department</button>
-            </td>
+            <button class="topicButton topicButtonAdminPage">Delete Department</button>
         </form>
     </div>
     <br />
     <div>
-        <form action="DepartmentPageController" method="post">
+        <form action="${pageContext.request.contextPath}/Admin/DepartmentPageController" method="post">
             <input type="hidden"  name="operationType" value="showInfo">
-            <td colspan=2>
-                <button onclick="submit"  class="topicButton topicButtonAdminPage">Show Info about Department</button>
-            </td>
+            <button class="topicButton topicButtonAdminPage">Show Info about Department</button>
         </form>
     </div>
     <br />
     <div>
-        <form action="DepartmentPageController" method="post">
+        <form action="${pageContext.request.contextPath}/Admin/DepartmentPageController" method="post">
             <input type="hidden"  name="operationType" value="cancel">
-            <td colspan=2>
-                <button onclick="submit"  class="controlButton controlButtonAdminPage">Cancel</button>
-            </td>
+            <button class="controlButton controlButtonAdminPage">Cancel</button>
         </form>
     </div>
     <br />

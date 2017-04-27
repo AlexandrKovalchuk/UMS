@@ -1,10 +1,10 @@
 /*headers*/
 
 .pageTitleText{
-    font-family: "Helvetica";
+    font-family: "Helvetica", Georgia, Serif;
     font-size: 30px;
     font-weight: bold;
-    margin: 5px 0px 5px 0px;
+    margin: 5px  5px ;
     padding-left: 10px;
     text-align: left;
     text-decoration-color: white;
@@ -51,13 +51,13 @@
     background: linear-gradient(to bottom right, rgb(30, 183, 73), rgba(30, 183, 73, 0.56));
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
     color: #ffffff;
-    padding: 0px 25px;
+    padding: 0 25px;
 }
 .pageTitleTextBad{
     background: linear-gradient(to bottom right, rgb(183, 0, 12), rgba(183, 0, 12, 0.56));
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
     color: #ffffff;
-    padding: 0px 25px;
+    padding: 0 25px;
 }
 
 /***************************************************************************************/
@@ -72,6 +72,20 @@
 }
 .studentTableWidth{
     width: 27px;
+}
+
+.timetable{
+    border: 1px solid;
+    border-collapse: collapse;
+    color: #FFFFFF;
+}
+
+.timetablelessonPlate{
+    border: 1px solid;
+    border-collapse: collapse;
+    width: 120px;
+    height: 120px;
+    color: #FFFFFF;
 }
 
 .attendanceProgress{
@@ -90,7 +104,7 @@
     font-weight: bold;
     height: 50px;
     margin: 5px 5px 5px 5px;
-    padding: 0px 15px;
+    padding: 0 15px;
     text-align: center;
     width: 150px;
 }
@@ -170,7 +184,7 @@
 /*time table buttons*/
 .timeTableButton{
     border-radius: 6px;
-    padding: 0px 15px;
+    padding: 0 15px;
     width: 120px;
     height: 120px;
     cursor: pointer;
@@ -192,7 +206,7 @@
 /*menu buttons*/
 .topicButton{
     border-radius: 6px;
-    padding: 0px 15px;
+    padding: 0 15px;
     font-size: 21px;
     font-weight: bold;
     width: 500px;
@@ -249,17 +263,17 @@
 /*item buttons*/
 .itemButton{
     border-radius: 6px;
-    padding: 0px 15px 10px ;
+    padding: 0 15px 10px ;
     width: 1000px;
     height: 30px;
     cursor: pointer;
     text-align: left;
-    font-family: "Helvetica";
+    font-family: "Helvetica", Georgia, Serif;
     font-size: 26px;
     font-weight: bold;
     display: inline-block;
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
-    margin: 10px 0px 10px 0px;
+    margin: 10px 0 10px 0;
 }
 .itemButtonAdminPages{
     background: linear-gradient(to bottom right, rgba(19, 19, 19, 0.69), rgba(140, 140, 140, 0.35));
@@ -308,36 +322,36 @@ body{
     background-attachment:fixed;
 }
 
-.backgroungImageAdmin{
+.backgroundImageAdmin{
     background-image: url(engineering-blueprint.jpg);
 }
 
-.backgroungImageEmployee{
+.backgroundImageEmployee{
      background-image: url(pnbbeoezqniyeexkjicw.jpg);
  }
 
-.backgroungImageTeacher{
+.backgroundImageTeacher{
     background-image: url(teacher.jpg);
 }
 
-.backgroungImageStudent{
+.backgroundImageStudent{
     background-image: url(cofee.jpg);
 }
 
-.backgroungImageLogIn{
+.backgroundImageLogIn{
     background-image: url(ws_Green_portal_2560x1920.jpg);
 }
 
-.backgroungImageMainWelcome{
+.backgroundImageMainWelcome{
     background-image: url(data-science.jpg);
 }
 form{
-    margin: 0px 0px 0px 0px;
+    margin: 0 0 0 0;
 }
 
 /*input fields*/
 .inputSettings{
-    font-family: "Helvetica";
+    font-family: "Helvetica", Georgia, Serif;
     font-weight: bold;
 }
 .numericInput2{
@@ -387,7 +401,7 @@ form{
 /**/
 /*text labels*/
 .textLabel{
-    font-family: "Helvetica";
+    font-family: "Helvetica", Georgia, Serif;
     font-size: 21px;
     font-weight: bold;
 }
@@ -412,13 +426,18 @@ form{
     text-align: left;
 }
 
+.textLabelTimeTablePage{
+    color: #FFFFFF;
+    text-align: left;
+}
+
 .textLabelStudentPage{
     color: #ffffff;
     text-align: left;
 }
 
 .textLabelParagraph{
-    font-family: "Helvetica";
+    font-family: "Helvetica", Georgia, Serif;
     font-size: 26px;
     font-weight: bold;
     padding-left: 40px;
@@ -428,7 +447,7 @@ form{
 /**/
 /*page content*/
 .pageContent{
-    margin: 5px 0px 5px 0px;
+    margin: 5px 0 5px 0;
     overflow: auto;
     padding: 5px 5px 5px 5px;
 }
@@ -473,13 +492,17 @@ form{
 
 .yelowInfo{
     background: rgba(255,255,0,0.5);
-    padding: 0px 25px;
+    padding: 0 25px;
 }
 .greenInfo{
     background: rgba(0,255,0,0.5);
-    padding: 0px 25px;
+    padding: 0 25px;
 }
 
+a:link {color: #FFFFFF}
+a:visited {
+    color: green;
+}
 
 
 
@@ -487,46 +510,46 @@ form{
 .textInputLabel{
     color: #ffffff;
     opacity: 1;
-    font-family: "Helvetica";
+    font-family: "Helvetica", Georgia, Serif;
     font-size: 15px;
 }
 h5{
     color: #ffffff;
-    font-family: "Helvetica";
+    font-family: "Helvetica", Georgia, Serif;
     font-size: 30px;
 }
 h4{
     color: brown;
-    font-family: "Helvetica";
+    font-family: "Helvetica", Georgia, Serif;
     font-size: 30px;
 }
 h3{
     color: red;
-    font-family: "Helvetica";
+    font-family: "Helvetica", Georgia, Serif;
     font-size: 30px;
 }
 h1{
     color: #ffffff;
-    font-family: "Helvetica";
+    font-family: "Helvetica", Georgia, Serif;
 }
 h2{
     color: #ffffff;
-    font-family: "Helvetica";
+    font-family: "Helvetica", Georgia, Serif;
 }
 .payAttention{
     color: #ffffff;
-    font-family: "Helvetica";
+    font-family: "Helvetica", Georgia, Serif;
     font-size: 30px;
 }
 .googNews{
     color: #ffffff;
-    font-family: "Helvetica";
+    font-family: "Helvetica", Georgia, Serif;
     font-size: 30px;
 }
 .itemsBlock{
-    padding: 0px 10px;
+    padding: 0 10px;
 }
 .itemsBlockInfo{
     background: rgba(192,192,192,0.5);
-    padding: 0px 25px;}
+    padding: 0 25px;}
 

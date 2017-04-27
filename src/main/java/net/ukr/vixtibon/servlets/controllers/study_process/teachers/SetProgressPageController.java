@@ -1,13 +1,11 @@
 package net.ukr.vixtibon.servlets.controllers.study_process.teachers;
 
-import net.ukr.vixtibon.base_objects.departments.Department;
 import net.ukr.vixtibon.base_objects.persons.Student;
 import net.ukr.vixtibon.base_objects.persons.Teacher;
 import net.ukr.vixtibon.base_objects.study_process.Discipline;
 import net.ukr.vixtibon.base_objects.study_process.DisciplineDepartmentDependencyObject;
 import net.ukr.vixtibon.base_objects.study_process.DisciplineTeacherDependencyObject;
 import net.ukr.vixtibon.base_objects.study_process.Group;
-import net.ukr.vixtibon.dao.departments.DAODepartment;
 import net.ukr.vixtibon.dao.persons.DAOStudent;
 import net.ukr.vixtibon.dao.stady_process.*;
 
@@ -19,9 +17,6 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.ArrayList;
 
-/**
- * Created by alex on 21/03/2017.
- */
 public class SetProgressPageController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session=request.getSession();
@@ -39,7 +34,7 @@ public class SetProgressPageController extends HttpServlet {
                 //System.out.println("groups" + groups.size());
                 request.setAttribute("select", "select1");
                 request.setAttribute("groups", groups);
-                request.getRequestDispatcher("Teacher/StudyProgress/SetProgressPage.jsp").forward(request, response);
+                request.getRequestDispatcher("StudyProgress/SetProgressPage.jsp").forward(request, response);
             }else if(request.getParameter("step").equals("step2")){
                 Discipline discipline = daoDiscipline.getEntityById((int) session.getAttribute("disciplineID"));
                 ArrayList<Student> students = daoStudent.getAllByGroupID(Integer.parseInt(request.getParameter("groupID")));
@@ -51,7 +46,7 @@ public class SetProgressPageController extends HttpServlet {
                 request.setAttribute("students", students);
                 request.setAttribute("groupID", request.getParameter("groupID"));
                 request.setAttribute("select", "select2");
-                request.getRequestDispatcher("Teacher/StudyProgress/SetProgressPage.jsp").forward(request, response);
+                request.getRequestDispatcher("StudyProgress/SetProgressPage.jsp").forward(request, response);
             }else if(request.getParameter("step").equals("step3")){
                 ArrayList<Student> students = daoStudent.getAllByGroupID(Integer.parseInt(request.getParameter("groupID")));
                 boolean result = false;
@@ -74,13 +69,13 @@ public class SetProgressPageController extends HttpServlet {
                     request.setAttribute("menu", "progress");
                     request.setAttribute("result", "unsuccess");
                 }
-                request.getRequestDispatcher("ActionResultTeacherMenuPageController").forward(request, response);
+                request.getRequestDispatcher("/Teacher/ActionResultTeacherMenuPageController").forward(request, response);
             }else if(request.getParameter("step").equals("cancel")){
                 session.removeAttribute("disciplineID");
-                request.getRequestDispatcher("TeacherMenuPageController").forward(request, response);
+                request.getRequestDispatcher("/Teacher/TeacherMenuPageController").forward(request, response);
             }else{
                 request.setAttribute("result", "wrongParameter");
-                request.getRequestDispatcher("ActionResultTeacherMenuPageController").forward(request, response);
+                request.getRequestDispatcher("/Teacher/ActionResultTeacherMenuPageController").forward(request, response);
             }
             daoDiscipline.closeConnection();
             daoDisciplineDepartmentDependency.closeConnection();
@@ -102,7 +97,7 @@ public class SetProgressPageController extends HttpServlet {
 
             request.setAttribute("teacher", teacher);
             request.setAttribute("select", "select0");
-            request.getRequestDispatcher("Teacher/StudyProgress/SetProgressPage.jsp").forward(request, response);
+            request.getRequestDispatcher("StudyProgress/SetProgressPage.jsp").forward(request, response);
         }
     }
 }

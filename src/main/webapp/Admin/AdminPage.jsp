@@ -10,9 +10,9 @@
 <head lang="en">
     <meta charset="UTF-8">
     <title>Administrator Page</title>
-    <link rel="stylesheet" type="text/css" href="main_css\main_styles.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}\main_css\main_styles.css">
 </head>
-<body class = "backgroungImageAdmin">
+<body class = "backgroundImageAdmin">
 
 <div class = "pageTitleText pageTitleTextAdmin">
         Welcome to Administrator Page
@@ -23,93 +23,72 @@
 
 <div class="itemsBlock">
     <div>
-        <form action="AdminPageController" method="post">
+        <form action="${pageContext.request.contextPath}/Admin/AdminPageController" method="post">
             <input type="hidden"  name="elementType" value="institute">
-            <td colspan=2>
-                <button onclick="submit"  class="topicButton topicButtonAdminPage">Manage University Credentials</button>
-            </td>
+            <button class="topicButton topicButtonAdminPage">Manage University Credentials</button>
         </form>
     </div>
     <br />
     <div>
-        <form action="AdminPageController" method="post">
+        <form action="${pageContext.request.contextPath}/Admin/AdminPageController" method="post">
             <input type="hidden"  name="elementType" value="faculty">
-            <td colspan=2>
-                <button onclick="submit"  class="topicButton topicButtonAdminPage">Manage Faculty Credentials</button>
-            </td>
+            <button class="topicButton topicButtonAdminPage">Manage Faculty Credentials</button>
         </form>
     </div>
     <br />
     <div>
-    <form action="AdminPageController" method="post">
+        <form action="${pageContext.request.contextPath}/Admin/AdminPageController" method="post">
         <input type="hidden"  name="elementType" value="department">
-        <td colspan=2>
-            <button onclick="submit"  class="topicButton topicButtonAdminPage">Manage Department Credentials</button>
-        </td>
+        <button class="topicButton topicButtonAdminPage">Manage Department Credentials</button>
     </form>
     </div>
     <br />
     <div>
-        <form action="AdminPageController" method="post">
+        <form action="${pageContext.request.contextPath}/Admin/AdminPageController" method="post">
             <input type="hidden"  name="elementType" value="employee">
-            <td colspan=2>
-                <button onclick="submit"  class="topicButton topicButtonAdminPage">Manage Employee Credentials</button>
-            </td>
+            <button class="topicButton topicButtonAdminPage">Manage Employee Credentials</button>
         </form>
     </div>
     <br />
     <div>
-        <form action="AdminPageController" method="post">
+        <form action="${pageContext.request.contextPath}/Admin/AdminPageController" method="post">
             <input type="hidden"  name="elementType" value="mainInfo">
-            <td colspan=2>
-                <button onclick="submit"  class="topicButton topicButtonAdminPage">Main Info</button>
-            </td>
+            <button class="topicButton topicButtonAdminPage">Main Info</button>
         </form>
     </div>
     <br />
     <div>
-        <form action="AdminPageController" method="post">
+        <form action="${pageContext.request.contextPath}/Admin/AdminPageController" method="post">
             <input type="hidden"  name="elementType" value="generateBaseDate">
-            <td colspan=2>
-                    <tr>
-                        <button onclick="submit" disabled class="topicButton topicButtonAdminPage">Generate base date</button>
-                    </tr>
-                    <tr>
-                        <div class = "pageTitleTextBad">
-                            Option disabled!
-                        </div>
-                    </tr>
-            </td>
+            <button disabled class="topicButton topicButtonAdminPage">Generate base date</button>
+
+            <div class = "pageTitleTextBad">
+                Option disabled!
+            </div>
+
         </form>
     </div>
     <br />
     <div>
-        <form action="AdminPageController" method="post">
+        <form action="${pageContext.request.contextPath}/Admin/AdminPageController" method="post">
             <input type="hidden"  name="elementType" value="clearAllDate">
-            <td colspan=2>
-                <tr>
-                    <button onclick="submit" disabled class="topicButton topicButtonAdminPage">Clear all date</button>
-                </tr>
-                <tr>
-                    <div class = "pageTitleTextBad">
-                        Option disabled!
-                    </div>
-                </tr>
-            </td>
+            <button disabled class="topicButton topicButtonAdminPage">Clear all date</button>
+
+            <div class = "pageTitleTextBad">
+                Option disabled!
+            </div>
+
         </form>
     </div>
     <br />
 
         <div>
-            <form action="LogOutServlet" method="post">
-                <td colspan=2>
-                    <button onclick="submit"  class="controlButton controlButtonAdminPage">Log Out</button>
-                </td>
+            <form action="${pageContext.request.contextPath}\LogOutServlet" method="post">
+                <button class="controlButton controlButtonAdminPage">Log Out</button>
             </form>
         </div>
         <br />
 
     </div>
-</div>
 </body>
 </html>

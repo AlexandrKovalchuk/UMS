@@ -9,88 +9,82 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <link rel="stylesheet" type="text/css" href="main_css\main_styles.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}\main_css\main_styles.css">
     <title>Delete Faculty Page</title>
 </head>
 
-<body class = "backgroungImageAdmin">
+<body class = "backgroundImageAdmin">
 
 <div class = "pageTitleText pageTitleTextAdmin">
     Delete Faculty Page
 </div>
 <br />
 
-<c:if test = "${step eq 'step0'}">
+<c:if test = "${requestScope.step eq 'step0'}">
     <div class = "pageTitleText pageTitleTextAdmin">
         Select Institute where to Delete Faculty:
     </div>
 
     <div class = "pageContent pageContentAdminPages pageContentAdminPages500px">
+        <jsp:useBean id="institutesList" scope="request" type="java.util.List"/>
         <c:forEach items="${institutesList}" var="institute">
                 <div>
-                    <form action="DeleteFacultyPageController" method="post" accept-charset="UTF-8">
+                    <form action="${pageContext.request.contextPath}/Admin/DeleteFacultyPageController" method="post" accept-charset="UTF-8">
                         <input type="hidden"  name="step" value="step1">
                         <input type="hidden"  name="instituteID" value="${institute.getID()}">
-                        <button onclick="submit" class="itemButton itemButtonAdminPages" ><c:out value="${institute.getLongName()}"/></button>
+                        <button class="itemButton itemButtonAdminPages" ><c:out value="${institute.getLongName()}"/></button>
                     </form>
                 </div>
         </c:forEach>
     </div>
 </c:if>
 
-<c:if test = "${step eq 'step1'}">
+<c:if test = "${requestScope.step eq 'step1'}">
     <div class = "pageTitleText pageTitleTextAdmin">
         Select Faculty to Delete:
     </div>
 
     <div class = "pageContent pageContentAdminPages pageContentAdminPages500px">
+        <jsp:useBean id="facultiesList" scope="request" type="java.util.List"/>
         <c:forEach items="${facultiesList}" var="faculty">
             <div>
-                <form action="DeleteFacultyPageController" method="post" accept-charset="UTF-8">
+                <form action="${pageContext.request.contextPath}/Admin/DeleteFacultyPageController" method="post" accept-charset="UTF-8">
                     <input type="hidden"  name="step" value="step2">
                     <input type="hidden"  name="facultyID" value="${faculty.getID()}">
-                    <button onclick="submit" class="itemButton itemButtonAdminPages" ><c:out value="${faculty.getLongName()}"/></button>
+                    <button class="itemButton itemButtonAdminPages" ><c:out value="${faculty.getLongName()}"/></button>
                 </form>
             </div>
         </c:forEach>
     </div>
 </c:if>
 
-<c:if test = "${step eq 'step2'}">
+<c:if test = "${requestScope.step eq 'step2'}">
     <div class = "pageContent pageContentAdminPages pageContentAdminPagesTwoFieldsSize">
-        <c:if test = "${possible_to_remove eq 'yes'}">
+        <c:if test = "${requestScope.possible_to_remove eq 'yes'}">
             <div class = "textLabelParagraph textLabelAdminPage">
-                Please Confirm Delete: <c:out value="${faculty.getLongName()}"/>
+                Please Confirm Delete: <c:out value="${requestScope.faculty.getLongName()}"/>
             </div>
 
             <div>
-                <form action="DeleteFacultyPageController" method="post" accept-charset="UTF-8">
-                    <table>
-                        <input type="hidden"  name="step" value="step3">
-                        <input type="hidden"  name="facultyID" value="${faculty.getID()}">
-                        <tr>
-                            <td colspan=2>
-                                <button onclick="submit"  class="controlButton controlButtonAdminPage">Delete</button>
-                            </td>
-                        </tr>
-                    </table>
+                <form action="${pageContext.request.contextPath}/Admin/DeleteFacultyPageController" method="post" accept-charset="UTF-8">
+                    <input type="hidden"  name="step" value="step3">
+                    <input type="hidden"  name="facultyID" value="${requestScope.faculty.getID()}">
+                    <button class="controlButton controlButtonAdminPage">Delete</button>
                 </form>
             </div>
         </c:if>
-        <c:if test = "${possible_to_remove eq 'no'}">
+        <c:if test = "${requestScope.possible_to_remove eq 'no'}">
             <div class = "pageTitleText  pageTitleTextBad">
-                Impossible to Delete: <c:out value="${faculty.getLongName()}"/> , there is still some depatments present!
+                Impossible to Delete: <c:out value="${requestScope.faculty.getLongName()}"/> , there is still some depatments present!
             </div>
          </c:if>
     </div>
 </c:if>
 
 <div>
-    <form action="DeleteFacultyPageController" method="post">
+    <form action="${pageContext.request.contextPath}/Admin/DeleteFacultyPageController" method="post">
         <input type="hidden"  name="step" value="cancel">
-        <td colspan=2>
-            <button onclick="submit"  class="controlButton controlButtonAdminPage">Cancel</button>
-        </td>
+        <button class="controlButton controlButtonAdminPage">Cancel</button>
     </form>
 </div>
 

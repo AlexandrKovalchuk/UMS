@@ -23,17 +23,17 @@ public class UpdateDepartmentPageController   extends HttpServlet {
                 ArrayList<Faculty> f = daof.getAllByInstituteID(Integer.parseInt(request.getParameter("instituteID")));
                 request.setAttribute("facultiesList", f);
                 request.setAttribute("step", "step1");
-                request.getRequestDispatcher("Admin/Department/Operations/UpdateDepartmentPage.jsp").forward(request, response);
+                request.getRequestDispatcher("Department/Operations/UpdateDepartmentPage.jsp").forward(request, response);
             }else if(request.getParameter("step").equals("step2")){
                 ArrayList<Department> departments = daod.getAllByfacultyID(Integer.parseInt(request.getParameter("facultyID")));
                 request.setAttribute("step", "step2");
                 request.setAttribute("departmentsList", departments);
-                request.getRequestDispatcher("Admin/Department/Operations/UpdateDepartmentPage.jsp").forward(request, response);
+                request.getRequestDispatcher("Department/Operations/UpdateDepartmentPage.jsp").forward(request, response);
             }else if(request.getParameter("step").equals("step3")){
                 Department department = daod.getEntityById(Integer.parseInt(request.getParameter("departmentID")));
                 request.setAttribute("step", "step3");
                 request.setAttribute("department", department);
-                request.getRequestDispatcher("Admin/Department/Operations/UpdateDepartmentPage.jsp").forward(request, response);
+                request.getRequestDispatcher("Department/Operations/UpdateDepartmentPage.jsp").forward(request, response);
             }else if(request.getParameter("step").equals("step4")){
                 DAODepartment daoi = new DAODepartment();
                 Department department = new Department();
@@ -49,13 +49,13 @@ public class UpdateDepartmentPageController   extends HttpServlet {
                     request.setAttribute("result", "unsuccess");
                 }
                 daoi.closeConnection();
-                request.getRequestDispatcher("ActionResultPageController").forward(request, response);
+                request.getRequestDispatcher("/Admin/ActionResultPageController").forward(request, response);
             }else if(request.getParameter("step").equals("cancel")){
-                request.getRequestDispatcher("DepartmentPageController").forward(request, response);
+                request.getRequestDispatcher("/Admin/DepartmentPageController").forward(request, response);
             }else{
                 request.setAttribute("menu", "department");
                 request.setAttribute("error", "incorrectValue");
-                request.getRequestDispatcher("ActionResultPageController").forward(request, response);
+                request.getRequestDispatcher("/Admin/ActionResultPageController").forward(request, response);
             }
             daod.closeConnection();
             daof.closeConnection();
@@ -65,7 +65,7 @@ public class UpdateDepartmentPageController   extends HttpServlet {
             daoi.closeConnection();
             request.setAttribute("institutesList", i);
             request.setAttribute("step", "step0");
-            request.getRequestDispatcher("Admin/Department/Operations/UpdateDepartmentPage.jsp").forward(request, response);
+            request.getRequestDispatcher("Department/Operations/UpdateDepartmentPage.jsp").forward(request, response);
         }
     }
 }

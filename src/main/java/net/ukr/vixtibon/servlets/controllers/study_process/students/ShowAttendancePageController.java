@@ -17,17 +17,15 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Map;
 
-/**
- * Created by alex on 04/04/2017.
- */
 public class ShowAttendancePageController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session=request.getSession();
         if(request.getParameterMap().containsKey("step")){
             if(request.getParameter("step").equals("ok")){
-                request.getRequestDispatcher("StudentMenuPageController").forward(request, response);
+                request.getRequestDispatcher("/Student/StudentMenuPageController").forward(request, response);
             }else{
-                //wrong parameter error
+                request.setAttribute("result", "wrongParameter");
+                request.getRequestDispatcher("ActionResultStudentMenuPageController").forward(request, response);
             }
         }else{
             DAOStudent daoStudent = new DAOStudent();
@@ -35,16 +33,13 @@ public class ShowAttendancePageController extends HttpServlet {
             DAOStudentAttendance daoStudentAttendance = new DAOStudentAttendance();
             DAODisciplineDepartmentDependency daoDisciplineDepartmentDependency = new DAODisciplineDepartmentDependency();
 
-            Student student = new Student();
-            student = daoStudent.getEntityById((int) session.getAttribute("studentID"));
+            Student student = daoStudent.getEntityById((int) session.getAttribute("studentID"));
             student.setAttendance(daoStudentAttendance.getAllByStudentID(student.getID()));
             System.out.println("Attendance size" + student.getAttendance().size());
 
             for(Map.Entry<Integer, StudentAttendanceObject> a: student.getAttendance().entrySet()){
-                Discipline discipline = new Discipline();
-                discipline = daoDiscipline.getEntityById(a.getValue().getDisciplineID());
-                DisciplineDepartmentDependencyObject disciplineDepartmentDependencyObject = new DisciplineDepartmentDependencyObject();
-                disciplineDepartmentDependencyObject = daoDisciplineDepartmentDependency.getByDisciplineIDDepartmentID(discipline.getID(),(int)session.getAttribute("departmentID"));
+                Discipline discipline = daoDiscipline.getEntityById(a.getValue().getDisciplineID());
+                DisciplineDepartmentDependencyObject disciplineDepartmentDependencyObject  = daoDisciplineDepartmentDependency.getByDisciplineIDDepartmentID(discipline.getID(),(int)session.getAttribute("departmentID"));
                 discipline.setCourseNumber(disciplineDepartmentDependencyObject.getCourseNumber());
                 student.getDisciplines().put(discipline.getID(), discipline);
             }
@@ -54,7 +49,7 @@ public class ShowAttendancePageController extends HttpServlet {
             daoStudent.closeConnection();
             daoStudentAttendance.closeConnection();
             request.setAttribute("student", student);
-            request.getRequestDispatcher("Student/StudyProgress/StudentAttendance.jsp").forward(request, response);
+            request.getRequestDispatcher("StudyProgress/StudentAttendance.jsp").forward(request, response);
         }
     }
 }

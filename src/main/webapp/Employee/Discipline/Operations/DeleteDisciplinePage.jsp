@@ -10,41 +10,41 @@
 <html>
 <head lang="en">
     <title>Delete Discipline Page</title>
-    <link rel="stylesheet" type="text/css" href="main_css\main_styles.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}\main_css\main_styles.css">
 </head>
 
-<body class = "backgroungImageEmployee">
+<body class = "backgroundImageEmployee">
 
 <div class = "pageTitleText pageTitleTextEmployee">
-    Delete Discipline Page (<c:out value="${department.getLongName()}"/>)
+    Delete Discipline Page (<c:out value="${requestScope.department.getLongName()}"/>)
 </div>
 <br />
 
-<c:if test = "${selected ne 'yes'}">
+<c:if test = "${requestScope.selected ne 'yes'}">
     <div class = "pageTitleText pageTitleTextEmployee">
         Select Discipline to Delete:
     </div>
 
     <div class = "pageContent pageContentEmployeePages pageContentAdminPages500px">
         <div class = "textLabelParagraph textLabelEmployeePage">Connected with current department</div>
-        <c:forEach items="${disciplinesConnectedWithDepartment}" var="discipline">
+        <c:forEach items="${requestScope.disciplinesConnectedWithDepartment}" var="discipline">
             <div>
-                <form action="DeleteDisciplinePageController" method="post" accept-charset="UTF-8">
+                <form action="${pageContext.request.contextPath}/Employee/DeleteDisciplinePageController" method="post" accept-charset="UTF-8">
                     <input type="hidden"  name="step" value="step1">
                     <input type="hidden"  name="disciplineID" value="${discipline.getID()}">
-                    <button onclick="submit" class="itemButton itemButtonEmployeePages" ><c:out value="${discipline.getNameOfDiscipline()}"/></button>
+                    <button class="itemButton itemButtonEmployeePages" ><c:out value="${discipline.getNameOfDiscipline()}"/></button>
                 </form>
             </div>
         </c:forEach>
 
         <div class = "textLabelParagraph textLabelEmployeePage">Not connected with current department</div>
 
-        <c:forEach items="${disciplinesNotConnectedWithDepartment}" var="discipline">
+        <c:forEach items="${requestScope.disciplinesNotConnectedWithDepartment}" var="discipline">
             <div>
-                <form action="DeleteDisciplinePageController" method="post" accept-charset="UTF-8">
+                <form action="${pageContext.request.contextPath}/Employee/DeleteDisciplinePageController" method="post" accept-charset="UTF-8">
                     <input type="hidden"  name="step" value="step1">
                     <input type="hidden"  name="disciplineID" value="${discipline.getID()}">
-                    <button onclick="submit" class="itemButton itemButtonEmployeePages" ><c:out value="${discipline.getNameOfDiscipline()}"/></button>
+                    <button class="itemButton itemButtonEmployeePages" ><c:out value="${discipline.getNameOfDiscipline()}"/></button>
                 </form>
             </div>
         </c:forEach>
@@ -52,21 +52,21 @@
 
 </c:if>
 
-<c:if test = "${selected eq 'yes'}">
+<c:if test = "${requestScope.selected eq 'yes'}">
     <div class = "pageContent pageContentEmployeePages pageContentAdminPagesTwoFieldsSize">
-        <c:if test = "${possible_to_remove eq 'yes'}">
+        <c:if test = "${requestScope.possible_to_remove eq 'yes'}">
             <div class = "textLabelParagraph textLabelEmployeePage">
-                Please Confirm Delete: <c:out value="${discipline.getNameOfDiscipline()}"/>
+                Please Confirm Delete: <c:out value="${requestScope.discipline.getNameOfDiscipline()}"/>
             </div>
 
             <div>
-                <form action="DeleteDisciplinePageController" method="post" accept-charset="UTF-8">
+                <form action="${pageContext.request.contextPath}/Employee/DeleteDisciplinePageController" method="post" accept-charset="UTF-8">
+                    <input type="hidden"  name="step" value="step2">
+                    <input type="hidden"  name="disciplineID" value="${requestScope.discipline.getID()}">
                     <table>
-                        <input type="hidden"  name="step" value="step2">
-                        <input type="hidden"  name="disciplineID" value="${discipline.getID()}">
                         <tr>
                             <td colspan=2>
-                                <button onclick="submit"  class="controlButton controlButtonEmployeePage">Delete</button>
+                                <button class="controlButton controlButtonEmployeePage">Delete</button>
                             </td>
                         </tr>
                     </table>
@@ -74,20 +74,18 @@
             </div>
         </c:if>
 
-        <c:if test = "${possible_to_remove eq 'no'}">
+        <c:if test = "${requestScope.possible_to_remove eq 'no'}">
             <div class = "pageTitleText  pageTitleTextBad">
-                Impossible to Delete: <c:out value="${institute.getLongName()}"/> , there is still some dependency present!
+                Impossible to Delete: <c:out value="${requestScope.institute.getLongName()}"/> , there is still some dependency present!
             </div>
         </c:if>
     </div>
 </c:if>
 
 <div>
-    <form action="DeleteDisciplinePageController" method="post">
+    <form action="${pageContext.request.contextPath}/Employee/DeleteDisciplinePageController" method="post">
         <input type="hidden"  name="step" value="cancel">
-        <td colspan=2>
-            <button onclick="submit"  class="controlButton controlButtonEmployeePage">Cancel</button>
-        </td>
+        <button class="controlButton controlButtonEmployeePage">Cancel</button>
     </form>
 </div>
 

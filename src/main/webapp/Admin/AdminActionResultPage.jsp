@@ -10,43 +10,44 @@
 <html>
 
 <head>
-    <link rel="stylesheet" type="text/css" href="main_css\main_styles.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}\main_css\main_styles.css">
     <title>Action Result Page</title>
 </head>
 
-<body class = "backgroungImageAdmin">
+<body class = "backgroundImageAdmin">
 
 <div class = "pageTitleText pageTitleTextAdmin">
     Action Result Page
 </div>
 <br />
 
-<c:if test = "${result eq 'success'}">
+<c:if test = "${requestScope.result eq 'success'}">
     <div class = "pageTitleText pageTitleTextGood">
             Operation was success!
     </div>
 </c:if>
 
-<c:if test = "${result eq 'unsuccess'}">
+<c:if test = "${requestScope.result eq 'unsuccess'}">
     <div class = "pageTitleText pageTitleTextBad">
             Operation was not success!
     </div>
 </c:if>
 
-<c:if test = "${error eq 'incorrectValue'}">
+<c:if test = "${requestScope.result eq 'noAccessToArea'}">
+    <div class = "pageTitleText pageTitleTextBad">
+        No access to area!
+    </div>
+</c:if>
+
+<c:if test = "${requestScope.error eq 'incorrectValue'}">
     <div class = "pageTitleText pageTitleTextBad">
         Incorrect parameter on page. Please contact your Admin!
     </div>
 </c:if>
 
-<form action="ActionResultPageController" method="post">
-    <input type="hidden"  name="redirectTo" value="${menu}">
-
-        <td >
-            <button onclick="submit"  class="controlButton controlButtonAdminPage">OK</button>
-            <br>
-        </td>
-
+<form action="${pageContext.request.contextPath}/Admin/ActionResultPageController" method="post">
+    <input type="hidden"  name="redirectTo" value="${requestScope.menu}">
+    <button class="controlButton controlButtonAdminPage">OK</button>
 </form>
 
 </body>

@@ -6,18 +6,22 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-/**
- * Created by alex on 20/03/2017.
- */
 public class ActionResultTeacherMenuPageController extends HttpServlet {
+
+    protected void doGet(HttpServletRequest request,HttpServletResponse response) throws IOException,ServletException{
+        this.doPost(request,response);
+    }
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if(request.getParameterMap().containsKey("redirectTo")){
             if(request.getParameter("redirectTo").equals("attendance")){
-                request.getRequestDispatcher("TeacherMenuPageController").forward(request, response);
+                request.getRequestDispatcher("/Teacher/TeacherMenuPageController").forward(request, response);
             }else if (request.getParameter("redirectTo").equals("progress")){
-                request.getRequestDispatcher("TeacherMenuPageController").forward(request, response);
+                request.getRequestDispatcher("/Teacher/TeacherMenuPageController").forward(request, response);
             }else if (request.getParameter("redirectTo").equals("timetable")){
-                request.getRequestDispatcher("TeacherMenuPageController").forward(request, response);
+                request.getRequestDispatcher("/Teacher/TeacherMenuPageController").forward(request, response);
+            }else if (request.getParameter("redirectTo").equals("")){
+                request.getRequestDispatcher("/Teacher/TeacherMenuPageController").forward(request, response);
             }else {
                 //error page
             }
@@ -25,7 +29,7 @@ public class ActionResultTeacherMenuPageController extends HttpServlet {
         }else{
             request.setAttribute("result", request.getAttribute("result"));
             request.setAttribute("menu", request.getAttribute("menu"));
-            request.getRequestDispatcher("Teacher/TeacherActionResultPage.jsp").forward(request, response);
+            request.getRequestDispatcher("TeacherActionResultPage.jsp").forward(request, response);
         }
     }
 }

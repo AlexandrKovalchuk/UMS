@@ -10,26 +10,26 @@ public class AdminPageController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if(request.getParameterMap().containsKey("elementType")){
             if(request.getParameter("elementType").equals("institute")){
-                request.getRequestDispatcher("InstitutePageController").forward(request, response);
+                request.getRequestDispatcher("/Admin/InstitutePageController").forward(request, response);
             }else if(request.getParameter("elementType").equals("faculty")){
-                request.getRequestDispatcher("FacultyPageController").forward(request, response);
+                request.getRequestDispatcher("/Admin/FacultyPageController").forward(request, response);
             }else if(request.getParameter("elementType").equals("department")){
-                request.getRequestDispatcher("DepartmentPageController").forward(request, response);
+                request.getRequestDispatcher("/Admin/DepartmentPageController").forward(request, response);
             }else if(request.getParameter("elementType").equals("employee")){
-                request.getRequestDispatcher("EmployeePageController").forward(request, response);
+                request.getRequestDispatcher("/Admin/EmployeePageController").forward(request, response);
             }else if(request.getParameter("elementType").equals("mainInfo")){
-                request.getRequestDispatcher("MainInfoPageController").forward(request, response);
+                request.getRequestDispatcher("/Admin/MainInfoPageController").forward(request, response);
             }else if(request.getParameter("elementType").equals("generateBaseDate")){
-                request.getRequestDispatcher("GenerateBaseDateController").forward(request, response);
+                request.getRequestDispatcher("/Admin/GenerateBaseDateController").forward(request, response);
             }else if(request.getParameter("elementType").equals("clearAllDate")){
-                request.getRequestDispatcher("ClearAllDateController").forward(request, response);
+                request.getRequestDispatcher("/Admin/ClearAllDateController").forward(request, response);
             }else{
                 request.setAttribute("menu", "admin");
                 request.setAttribute("error", "incorrectValue");
-                request.getRequestDispatcher("ActionResultPageController").forward(request, response);
+                request.getRequestDispatcher("/Admin/ActionResultPageController").forward(request, response);
             }
         }else{
-            request.getRequestDispatcher("Admin/AdminPage.jsp").forward(request, response);
+            request.getRequestDispatcher("AdminPage.jsp").forward(request, response);
         }
     }
 }

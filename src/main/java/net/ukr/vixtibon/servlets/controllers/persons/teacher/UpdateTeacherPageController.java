@@ -78,7 +78,7 @@ public class UpdateTeacherPageController extends HttpServlet {
                 request.setAttribute("teacher", teacher);
                 request.setAttribute("disciplines", disciplines);
                 request.setAttribute("disciplinesNotConnected", disciplinesNotConnected);
-                request.getRequestDispatcher("Employee/Teacher/Operations/UpdateTeacherPage.jsp").forward(request, response);
+                request.getRequestDispatcher("Teacher/Operations/UpdateTeacherPage.jsp").forward(request, response);
             }else if(request.getParameter("step").equals("step2")){
                 Teacher teacher = new Teacher();
                 teacher.setName(request.getParameter("name"));
@@ -124,13 +124,13 @@ public class UpdateTeacherPageController extends HttpServlet {
                 daodtdo.closeConnection();
                 daodi.closeConnection();
                 daot.closeConnection();
-                request.getRequestDispatcher("ActionResultEmployeeMenuPageController").forward(request, response);
+                request.getRequestDispatcher("/Employee/ActionResultEmployeeMenuPageController").forward(request, response);
             }else if(request.getParameter("step").equals("cancel")){
-                request.getRequestDispatcher("TeacherPageController").forward(request, response);
+                request.getRequestDispatcher("/Employee/TeacherPageController").forward(request, response);
             }else{
                 request.setAttribute("menu", "teacher");
                 request.setAttribute("error", "incorrectValue");
-                request.getRequestDispatcher("ActionResultEmployeeMenuPageController").forward(request, response);
+                request.getRequestDispatcher("/Employee/ActionResultEmployeeMenuPageController").forward(request, response);
             }
         }else{
             DAODepartment daod = new DAODepartment();
@@ -148,7 +148,7 @@ public class UpdateTeacherPageController extends HttpServlet {
             daod.closeConnection();
 
             request.setAttribute("departments", departments);
-            request.getRequestDispatcher("Employee/Teacher/Operations/UpdateTeacherPage.jsp").forward(request, response);
+            request.getRequestDispatcher("Teacher/Operations/UpdateTeacherPage.jsp").forward(request, response);
         }
     }
 }

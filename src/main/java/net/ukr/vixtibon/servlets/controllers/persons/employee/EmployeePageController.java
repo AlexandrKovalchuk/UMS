@@ -10,24 +10,24 @@ public class EmployeePageController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if(request.getParameterMap().containsKey("operationType")){
             if(request.getParameter("operationType").equals("create")){
-                request.getRequestDispatcher("CreateEmployeePageController").forward(request, response);
+                request.getRequestDispatcher("/Admin/CreateEmployeePageController").forward(request, response);
             }else if(request.getParameter("operationType").equals("update")){
-                request.getRequestDispatcher("UpdateEmployeePageController").forward(request, response);
+                request.getRequestDispatcher("/Admin/UpdateEmployeePageController").forward(request, response);
             }else if(request.getParameter("operationType").equals("delete")){
-                request.getRequestDispatcher("DeleteEmployeePageController").forward(request, response);
+                request.getRequestDispatcher("/Admin/DeleteEmployeePageController").forward(request, response);
             }else if(request.getParameter("operationType").equals("move")){
-                request.getRequestDispatcher("MoveEmployeePageController").forward(request, response);
+                request.getRequestDispatcher("/Admin/MoveEmployeePageController").forward(request, response);
             }else if(request.getParameter("operationType").equals("showInfo")){
-                request.getRequestDispatcher("ShowEmployeeInfoPageController").forward(request, response);
+                request.getRequestDispatcher("/Admin/ShowEmployeeInfoPageController").forward(request, response);
             }else if(request.getParameter("operationType").equals("cancel")){
-                request.getRequestDispatcher("AdminPageController").forward(request, response);
+                request.getRequestDispatcher("/Admin/AdminPageController").forward(request, response);
             }else{
                 request.setAttribute("menu", "admin");
                 request.setAttribute("error", "incorrectValue");
-                request.getRequestDispatcher("ActionResultPageController").forward(request, response);
+                request.getRequestDispatcher("/Admin/ActionResultPageController").forward(request, response);
             }
         }else{
-            request.getRequestDispatcher("Admin/Employee/EmployeePage.jsp").forward(request, response);
+            request.getRequestDispatcher("Employee/EmployeePage.jsp").forward(request, response);
         }
     }
 }

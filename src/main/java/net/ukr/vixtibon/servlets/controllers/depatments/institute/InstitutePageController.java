@@ -10,22 +10,22 @@ public class InstitutePageController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if(request.getParameterMap().containsKey("operationType")){
             if(request.getParameter("operationType").equals("create")){
-                request.getRequestDispatcher("CreateInstitutePageController").forward(request, response);
+                request.getRequestDispatcher("/Admin/CreateInstitutePageController").forward(request, response);
             }else if(request.getParameter("operationType").equals("update")){
-                request.getRequestDispatcher("UpdateInstitutePageController").forward(request, response);
+                request.getRequestDispatcher("/Admin/UpdateInstitutePageController").forward(request, response);
             }else if(request.getParameter("operationType").equals("delete")){
-                request.getRequestDispatcher("DeleteInstitutePageController").forward(request, response);
+                request.getRequestDispatcher("/Admin/DeleteInstitutePageController").forward(request, response);
             }else if(request.getParameter("operationType").equals("showInfo")){
-                request.getRequestDispatcher("ShowInstituteInfoPageController").forward(request, response);
+                request.getRequestDispatcher("/Admin/ShowInstituteInfoPageController").forward(request, response);
             }else if(request.getParameter("operationType").equals("cancel")){
-                request.getRequestDispatcher("AdminPageController").forward(request, response);
+                request.getRequestDispatcher("/Admin/AdminPageController").forward(request, response);
             }else{
                 request.setAttribute("menu", "admin");
                 request.setAttribute("error", "incorrectValue");
-                request.getRequestDispatcher("ActionResultPageController").forward(request, response);
+                request.getRequestDispatcher("/Admin/ActionResultPageController").forward(request, response);
             }
         }else{
-            request.getRequestDispatcher("Admin/Institute/InstitutePage.jsp").forward(request, response);
+            request.getRequestDispatcher("Institute/InstitutePage.jsp").forward(request, response);
         }
     }
 }

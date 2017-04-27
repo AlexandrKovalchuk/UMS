@@ -8,10 +8,9 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
-<html>
 <head lang="en">
     <title>Update Lesson Page</title>
-    <link rel="stylesheet" type="text/css" href="main_css\main_styles.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}\main_css\main_styles.css">
 </head>
 
 <body style="background-color:#45250d;">
@@ -21,28 +20,29 @@
 </div>
 <br />
 
-<c:if test = "${operation eq 'step1'}">
+<c:if test = "${requestScope.operation eq 'step1'}">
     <div class = "pageTitleText pageTitleTextEmployee">
         Select Discipline:
     </div>
 
     <div class = "pageContent pageContentEmployeePages pageContentAdminPages500px">
         <div>
-            <form action="UpdateLessonPageController" method="post" accept-charset="UTF-8">
+            <form action="${pageContext.request.contextPath}/Employee/UpdateLessonPageController" method="post" accept-charset="UTF-8">
                 <input type="hidden"  name="operation" value="step2">
-                <input type="hidden"  name="lessonID" value="${lessonID}">
+                <input type="hidden"  name="lessonID" value="${requestScope.lessonID}">
                 <input type="hidden"  name="disciplineID" value="NULL">
-                <button onclick="submit" class="itemButton itemButtonEmployeePages" >NONE</button>
+                <button class="itemButton itemButtonEmployeePages" >NONE</button>
             </form>
         </div>
 
+        <jsp:useBean id="disciplines" scope="request" type="java.util.List"/>
         <c:forEach items="${disciplines}" var="discipline">
             <div>
-                <form action="UpdateLessonPageController" method="post" accept-charset="UTF-8">
+                <form action="${pageContext.request.contextPath}/Employee/UpdateLessonPageController" method="post" accept-charset="UTF-8">
                     <input type="hidden"  name="operation" value="step1">
-                    <input type="hidden"  name="lessonID" value="${lessonID}">
+                    <input type="hidden"  name="lessonID" value="${requestScope.lessonID}">
                     <input type="hidden"  name="disciplineID" value="${discipline.getID()}">
-                    <button onclick="submit" class="itemButton itemButtonEmployeePages" ><c:out value="${discipline.getNameOfDiscipline()}"/></button>
+                    <button  class="itemButton itemButtonEmployeePages" ><c:out value="${discipline.getNameOfDiscipline()}"/></button>
                 </form>
             </div>
         </c:forEach>
@@ -50,21 +50,22 @@
     </div>
 
 </c:if>
-<c:if test = "${operation eq 'step2'}">
+<c:if test = "${requestScope.operation eq 'step2'}">
     <div class = "pageTitleText pageTitleTextEmployee">
         Select Discipline:
     </div>
 
     <div class = "pageContent pageContentEmployeePages pageContentAdminPages500px">
 
+        <jsp:useBean id="teachers" scope="request" type="java.util.List"/>
         <c:forEach items="${teachers}" var="teacher">
             <div>
-                <form action="UpdateLessonPageController" method="post" accept-charset="UTF-8">
+                <form action="${pageContext.request.contextPath}/Employee/UpdateLessonPageController" method="post" accept-charset="UTF-8">
                     <input type="hidden"  name="operation" value="step2">
-                    <input type="hidden"  name="lessonID" value="${lessonID}">
-                    <input type="hidden"  name="disciplineID" value="${disciplineID}">
+                    <input type="hidden"  name="lessonID" value="${requestScope.lessonID}">
+                    <input type="hidden"  name="disciplineID" value="${requestScope.disciplineID}">
                     <input type="hidden"  name="teacherID" value="${teacher.getID()}">
-                    <button onclick="submit" class="itemButton itemButtonEmployeePages" ><c:out value="${teacher.getSecondName()}"/> <c:out value="${teacher.getName()}"/></button>
+                    <button class="itemButton itemButtonEmployeePages" ><c:out value="${teacher.getSecondName()}"/> <c:out value="${teacher.getName()}"/></button>
                 </form>
             </div>
         </c:forEach>
@@ -74,14 +75,11 @@
 </c:if>
 
 <div>
-    <form action="UpdateLessonPageController" method="post">
+    <form action="${pageContext.request.contextPath}/Employee/UpdateLessonPageController" method="post">
         <input type="hidden"  name="operation" value="cancel">
-        <td colspan=2>
-            <button onclick="submit"  class="controlButton controlButtonEmployeePage">Cancel</button>
-        </td>
+        <button class="controlButton controlButtonEmployeePage">Cancel</button>
     </form>
 </div>
-
 
 </body>
 </html>

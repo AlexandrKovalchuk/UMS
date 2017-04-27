@@ -30,7 +30,7 @@ public class SetDisciplineDepartmentDependencyPageController extends HttpServlet
                 request.setAttribute("discipline", discipline);
                 request.setAttribute("dependencyObject", dddo);
                 request.setAttribute("state", request.getParameter("state"));
-                request.getRequestDispatcher("Employee/Discipline/Operations/SetDisciplineDepartmentDependencyPage.jsp").forward(request, response);
+                request.getRequestDispatcher("Discipline/Operations/SetDisciplineDepartmentDependencyPage.jsp").forward(request, response);
             }else if(request.getParameter("step").equals("step2")){
                 boolean result = false;
                 DisciplineDepartmentDependencyObject dddo = new DisciplineDepartmentDependencyObject();
@@ -65,13 +65,13 @@ public class SetDisciplineDepartmentDependencyPageController extends HttpServlet
                 }
                 daod.closeConnection();
                 daodi.closeConnection();
-                request.getRequestDispatcher("ActionResultEmployeeMenuPageController").forward(request, response);
+                request.getRequestDispatcher("/Employee/ActionResultEmployeeMenuPageController").forward(request, response);
             }else if(request.getParameter("step").equals("cancel")){
-                request.getRequestDispatcher("DisciplinePageController").forward(request, response);
+                request.getRequestDispatcher("/Employee/DisciplinePageController").forward(request, response);
             }else{
                 request.setAttribute("menu", "discipline");
                 request.setAttribute("error", "incorrectValue");
-                request.getRequestDispatcher("ActionResultEmployeeMenuPageController").forward(request, response);
+                request.getRequestDispatcher("/Employee/ActionResultEmployeeMenuPageController").forward(request, response);
             }
         }else{
             DAODepartment daod = new DAODepartment();
@@ -112,7 +112,7 @@ public class SetDisciplineDepartmentDependencyPageController extends HttpServlet
             request.setAttribute("department", department);
             request.setAttribute("disciplinesConnectedWithDepartment", disciplinesConnectedWithDepartment);
             request.setAttribute("disciplinesNotConnectedWithDepartment",  disciplinesNotConnectedWithDepartment);
-            request.getRequestDispatcher("Employee/Discipline/Operations/SetDisciplineDepartmentDependencyPage.jsp").forward(request, response);
+            request.getRequestDispatcher("Discipline/Operations/SetDisciplineDepartmentDependencyPage.jsp").forward(request, response);
         }
     }
 }

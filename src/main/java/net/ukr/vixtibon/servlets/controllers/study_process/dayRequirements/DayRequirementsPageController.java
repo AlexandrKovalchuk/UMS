@@ -31,9 +31,7 @@ public class DayRequirementsPageController  extends HttpServlet {
                     request.setAttribute("dayRequirementsObject", dro);
                     request.setAttribute("step", "step1");
                     request.setAttribute("requirementsPresent", "no");
-                    request.getRequestDispatcher("Employee/DayRequirements/DayRequirementsPage.jsp").forward(request, response);
-
-
+                    request.getRequestDispatcher("DayRequirements/DayRequirementsPage.jsp").forward(request, response);
                 }else if(request.getParameter("requirementsPresent").equals("yes")){
                     DayRequirementsObject dro = new DayRequirementsObject();
                     dro.setDepartmentID((int) session.getAttribute("departmentID"));
@@ -44,8 +42,7 @@ public class DayRequirementsPageController  extends HttpServlet {
                     request.setAttribute("dayRequirementsObject", dro);
                     request.setAttribute("step", "step1");
                     request.setAttribute("requirementsPresent", "yes");
-                    request.getRequestDispatcher("Employee/DayRequirements/DayRequirementsPage.jsp").forward(request, response);
-
+                    request.getRequestDispatcher("DayRequirements/DayRequirementsPage.jsp").forward(request, response);
                 }
                 daoDayRequirements.closeConnection();
 
@@ -72,13 +69,13 @@ public class DayRequirementsPageController  extends HttpServlet {
                     request.setAttribute("result", "unsuccess");
                 }
                 daoDayRequirements.closeConnection();
-                request.getRequestDispatcher("ActionResultEmployeeMenuPageController").forward(request, response);
+                request.getRequestDispatcher("/Employee/ActionResultEmployeeMenuPageController").forward(request, response);
             }else if(request.getParameter("step").equals("cancel")){
-                request.getRequestDispatcher("EmployeeMenuPageController").forward(request, response);
+                request.getRequestDispatcher("/Employee/EmployeeMenuPageController").forward(request, response);
             }else{
                 request.setAttribute("menu", "dayRequirements");
                 request.setAttribute("error", "incorrectValue");
-                request.getRequestDispatcher("ActionResultEmployeeMenuPageController").forward(request, response);
+                request.getRequestDispatcher("/Employee/ActionResultEmployeeMenuPageController").forward(request, response);
             }
         }else{
             DAODayRequirements daodr = new DAODayRequirements();
@@ -94,7 +91,7 @@ public class DayRequirementsPageController  extends HttpServlet {
                 System.out.println("absent");
             }
             daodr.closeConnection();
-            request.getRequestDispatcher("Employee/DayRequirements/DayRequirementsPage.jsp").forward(request, response);
+            request.getRequestDispatcher("DayRequirements/DayRequirementsPage.jsp").forward(request, response);
         }
     }
 }

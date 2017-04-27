@@ -18,7 +18,7 @@ public class CreateFacultyPageController  extends HttpServlet {
             if(request.getParameter("step").equals("step1")){
                 request.setAttribute("selected", "yes");
                 request.setAttribute("instituteID", request.getParameter("instituteID"));
-                request.getRequestDispatcher("Admin/Faculty/Operations/CreateFacultyPage.jsp").forward(request, response);
+                request.getRequestDispatcher("Faculty/Operations/CreateFacultyPage.jsp").forward(request, response);
             }else if(request.getParameter("step").equals("step2")){
                 DAOFaculty d = new DAOFaculty();
                 Faculty i = new Faculty();
@@ -34,20 +34,20 @@ public class CreateFacultyPageController  extends HttpServlet {
                     request.setAttribute("result", "unsuccess");
                 }
                 d.closeConnection();
-                request.getRequestDispatcher("ActionResultPageController").forward(request, response);
+                request.getRequestDispatcher("/Admin/ActionResultPageController").forward(request, response);
             }else if(request.getParameter("step").equals("cancel")){
-                request.getRequestDispatcher("FacultyPageController").forward(request, response);
+                request.getRequestDispatcher("/Admin/FacultyPageController").forward(request, response);
             }else{
                 request.setAttribute("menu", "faculty");
                 request.setAttribute("error", "incorrectValue");
-                request.getRequestDispatcher("ActionResultPageController").forward(request, response);
+                request.getRequestDispatcher("/Admin/ActionResultPageController").forward(request, response);
             }
         }else{
             DAOInstitute daoi = new DAOInstitute();
             ArrayList<Institute> i = daoi.getAll();
             daoi.closeConnection();
             request.setAttribute("institutesList", i);
-            request.getRequestDispatcher("Admin/Faculty/Operations/CreateFacultyPage.jsp").forward(request, response);
+            request.getRequestDispatcher("Faculty/Operations/CreateFacultyPage.jsp").forward(request, response);
         }
     }
 }

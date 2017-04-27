@@ -6,24 +6,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-/**
- * Created by alex on 29/03/2017.
- */
 public class StudentMenuPageController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if(request.getParameterMap().containsKey("operationType")){
             if(request.getParameter("operationType").equals("attendance")){
-                request.getRequestDispatcher("ShowAttendancePageController").forward(request, response);
+                request.getRequestDispatcher("/Student/ShowAttendancePageController").forward(request, response);
             }else if(request.getParameter("operationType").equals("progress")){
-                request.getRequestDispatcher("ShowProgressPageController").forward(request, response);
+                request.getRequestDispatcher("/Student/ShowProgressPageController").forward(request, response);
             }else if(request.getParameter("operationType").equals("timeTable")){
-                request.getRequestDispatcher("ShowTimetablePageController").forward(request, response);
+                request.getRequestDispatcher("/Student/ShowTimetableStudentPageController").forward(request, response);
             }else{
                 request.setAttribute("result", "wrongParameter");
-                request.getRequestDispatcher("ActionResultStudentMenuPageController").forward(request, response);
+                request.getRequestDispatcher("/Student/ActionResultStudentMenuPageController").forward(request, response);
             }
         }else{
-            request.getRequestDispatcher("Student/StudentPage.jsp").forward(request, response);
+            request.getRequestDispatcher("StudentPage.jsp").forward(request, response);
         }
     }
 }

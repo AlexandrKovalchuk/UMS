@@ -3,30 +3,30 @@
 <html>
 
 <head>
-    <link rel="stylesheet" type="text/css" href="main_css\main_styles.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}\main_css\main_styles.css">
     <title>LOG IN PAGE</title>
 </head>
 
-<body class = "backgroungImageLogIn">
+<body class = "backgroundImageLogIn">
 
     <div class = "pageTitleText pageTitleTextLogIn">
             Welcome to Log In Page
     </div>
-    <c:if test = "${!empty wrongPasswordOrLogIn}">
+    <c:if test = "${!empty requestScope.wrongPasswordOrLogIn}">
         <div class = "pageTitleText pageTitleTextBad">
-                <c:if test = "${wrongPasswordOrLogIn eq 'absentInBase'}">
+                <c:if test = "${requestScope.wrongPasswordOrLogIn eq 'absentInBase'}">
                     Incorrect LogIn or Password!
                 </c:if>
-                <c:if test = "${wrongPasswordOrLogIn eq 'wrongPassword'}">
+                <c:if test = "${requestScope.wrongPasswordOrLogIn eq 'wrongPassword'}">
                     Incorrect LogIn or Password!
                 </c:if>
-                <c:if test = "${wrongPasswordOrLogIn eq 'absentConnectionToDataBase'}">
+                <c:if test = "${requestScope.wrongPasswordOrLogIn eq 'absentConnectionToDataBase'}">
                     Absent Data Base connection!
                 </c:if>
-                <c:if test = "${wrongPasswordOrLogIn eq 'errorInAccess'}">
+                <c:if test = "${requestScope.wrongPasswordOrLogIn eq 'errorInAccess'}">
                     Error in access. Please contact your administrator!
                 </c:if>
-                <c:if test = "${wrongPasswordOrLogIn eq 'notAuthorized'}">
+                <c:if test = "${requestScope.wrongPasswordOrLogIn eq 'notAuthorized'}">
                     Not authorized!
                 </c:if>
         </div>
@@ -38,7 +38,10 @@
                 <tr>
                     <td class = "textLabel textLabelLogInPage">Login Name:</td>
                     <td>
-                        <input class = "inputSettings inputLogInPage" name="username" type="text" maxlength="70" data-hint="insert log in" required/>
+                        <label>
+                            <input class="inputSettings inputLogInPage" name="username" type="text" maxlength="70"
+                                   data-hint="insert log in" required/>
+                        </label>
                     </td>
                 </tr>
                 <tr>
@@ -48,14 +51,9 @@
                                placeholder="" autocomplete="off" data-hint="insert password" required/>
                     </td>
                 </tr>
-                <br>
             </table>
-            <tr>
-                <td >
-                    <button onclick="submit" value="Log In" class="controlButton controlButtonWLogInPage">Log In</button>
-                    <br>
-                </td>
-            </tr>
+            <br>
+                    <button  value="Log In" class="controlButton controlButtonWLogInPage">Log In</button>
         </div>
     </form>
 </body>

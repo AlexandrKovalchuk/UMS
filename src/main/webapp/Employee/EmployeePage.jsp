@@ -13,10 +13,10 @@
 <html>
 <head>
     <title>Employee Page</title>
-    <link rel="stylesheet" type="text/css" href="main_css\main_styles.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}\main_css\main_styles.css">
 </head>
 
-<body class = "backgroungImageEmployee">
+<body class = "backgroundImageEmployee">
 
 <div class = "pageTitleText pageTitleTextEmployee">
         Welcome to Employee Page
@@ -31,70 +31,56 @@
 <div class="itemsBlock">
     <div>
         <div>
-            <form action="EmployeeMenuPageController" method="post">
+            <form action="${pageContext.request.contextPath}/Employee/EmployeeMenuPageController" method="post">
                 <input type="hidden"  name="elementType" value="discipline">
-                <td colspan=2>
-                    <button onclick="submit"  class="topicButton topicButtonEmployeePage">Manage Discipline Credentials</button>
-                </td>
+                <button class="topicButton topicButtonEmployeePage">Manage Discipline Credentials</button>
             </form>
         </div>
         <br />
 
         <div>
-            <form action="EmployeeMenuPageController" method="post">
+            <form action="${pageContext.request.contextPath}/Employee/EmployeeMenuPageController" method="post">
                 <input type="hidden"  name="elementType" value="group">
-                <td colspan=2>
-                    <button onclick="submit"  class="topicButton topicButtonEmployeePage">Manage Group Credentials</button>
-                </td>
+                <button class="topicButton topicButtonEmployeePage">Manage Group Credentials</button>
             </form>
         </div>
         <br />
 
         <div>
-            <form action="EmployeeMenuPageController" method="post">
+            <form action="${pageContext.request.contextPath}/Employee/EmployeeMenuPageController" method="post">
                 <input type="hidden"  name="elementType" value="teacher">
-                <td colspan=2>
-                    <button onclick="submit"  class="topicButton topicButtonEmployeePage">Manage Teacher Credentials</button>
-                </td>
+                <button class="topicButton topicButtonEmployeePage">Manage Teacher Credentials</button>
             </form>
         </div>
         <br />
 
         <div>
-            <form action="EmployeeMenuPageController" method="post">
+            <form action="${pageContext.request.contextPath}/Employee/EmployeeMenuPageController" method="post">
                 <input type="hidden"  name="elementType" value="student">
-                <td colspan=2>
-                    <button onclick="submit"  class="topicButton topicButtonEmployeePage">Manage Student Credentials</button>
-                </td>
+                <button class="topicButton topicButtonEmployeePage">Manage Student Credentials</button>
             </form>
         </div>
         <br />
 
         <div>
-            <form action="EmployeeMenuPageController" method="post">
+            <form action="${pageContext.request.contextPath}/Employee/EmployeeMenuPageController" method="post">
                 <input type="hidden"  name="elementType" value="timetable">
-                <td colspan=2>
-                    <button onclick="submit"  class="topicButton topicButtonEmployeePage">Manage Timetable Credentials</button>
-                </td>
+                <button class="topicButton topicButtonEmployeePage">Manage Timetable Credentials</button>
             </form>
         </div>
         <br />
 
         <div>
-            <form action="EmployeeMenuPageController" method="post">
+            <form action="${pageContext.request.contextPath}/Employee/EmployeeMenuPageController" method="post">
                 <input type="hidden"  name="elementType" value="dayRequirements">
-                <td colspan=2>
-                    <button onclick="submit"  class="topicButton topicButtonEmployeePage">Set Day Requirements</button>
-                </td>
+                <button class="topicButton topicButtonEmployeePage">Set Day Requirements</button>
             </form>
         </div>
         <br />
 
         <div>
-            <form action="LogOutServlet" method="post">
-                <td colspan=2>
-                    <button onclick="submit"  class="controlButton controlButtonEmployeePage">Log Out</button>
-                </td>
+            <form action="${pageContext.request.contextPath}\LogOutServlet" method="post">
+                <button class="controlButton controlButtonEmployeePage">Log Out</button>
             </form>
         </div>
         <br />

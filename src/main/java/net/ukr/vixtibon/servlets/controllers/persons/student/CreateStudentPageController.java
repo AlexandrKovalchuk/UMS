@@ -30,7 +30,7 @@ public class CreateStudentPageController extends HttpServlet {
             if(request.getParameter("step").equals("step1")){
                 request.setAttribute("groupID", request.getParameter("groupID"));
                 request.setAttribute("selected", "yes");
-                request.getRequestDispatcher("Employee/Student/Operations/CreateStudentPage.jsp").forward(request, response);
+                request.getRequestDispatcher("Student/Operations/CreateStudentPage.jsp").forward(request, response);
             }else if(request.getParameter("step").equals("step2")) {
                 DAOStudent daos = new DAOStudent();
                 Student student = new Student();
@@ -83,13 +83,13 @@ public class CreateStudentPageController extends HttpServlet {
                     request.setAttribute("result", "unsuccess");
                 }
                 daos.closeConnection();
-                request.getRequestDispatcher("ActionResultEmployeeMenuPageController").forward(request, response);
+                request.getRequestDispatcher("/Employee/ActionResultEmployeeMenuPageController").forward(request, response);
             }else if(request.getParameter("step").equals("cancel")){
-                request.getRequestDispatcher("StudentPageController").forward(request, response);
+                request.getRequestDispatcher("/Employee/StudentPageController").forward(request, response);
             }else{
                 request.setAttribute("menu", "student");
                 request.setAttribute("error", "incorrectValue");
-                request.getRequestDispatcher("ActionResultEmployeeMenuPageController").forward(request, response);
+                request.getRequestDispatcher("/Employee/ActionResultEmployeeMenuPageController").forward(request, response);
             }
         }else{
             DAODepartment daod = new DAODepartment();
@@ -107,7 +107,7 @@ public class CreateStudentPageController extends HttpServlet {
             daoGroup.closeConnection();
             daod.closeConnection();
             request.setAttribute("department", department);
-            request.getRequestDispatcher("Employee/Student/Operations/CreateStudentPage.jsp").forward(request, response);
+            request.getRequestDispatcher("Student/Operations/CreateStudentPage.jsp").forward(request, response);
         }
     }
 }

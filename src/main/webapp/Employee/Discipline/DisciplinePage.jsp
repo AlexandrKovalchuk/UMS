@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: alex
@@ -9,10 +10,10 @@
 <html>
 <head>
     <title>Discipline Page</title>
-    <link rel="stylesheet" type="text/css" href="main_css\main_styles.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}\main_css\main_styles.css">
 </head>
 
-<body class = "backgroungImageEmployee">
+<body class = "backgroundImageEmployee">
 
 <div class = "pageTitleText pageTitleTextEmployee">
     Welcome to Discipline Page
@@ -27,61 +28,49 @@
 <div class="itemsBlock">
     <div>
         <div>
-            <form action="DisciplinePageController" method="post">
+            <form action="${pageContext.request.contextPath}/Employee/DisciplinePageController" method="post">
                 <input type="hidden"  name="operationType" value="create">
-                <td colspan=2>
-                    <button onclick="submit"  class="topicButton topicButtonEmployeePage">Create Discipline</button>
-                </td>
+                <button class="topicButton topicButtonEmployeePage">Create Discipline</button>
             </form>
         </div>
         <br />
 
         <div>
-            <form action="DisciplinePageController" method="post">
+            <form action="${pageContext.request.contextPath}/Employee/DisciplinePageController" method="post">
                 <input type="hidden"  name="operationType" value="update">
-                <td colspan=2>
-                    <button onclick="submit"  class="topicButton topicButtonEmployeePage">Update  Discipline</button>
-                </td>
+                <button class="topicButton topicButtonEmployeePage">Update  Discipline</button>
             </form>
         </div>
         <br />
 
         <div>
-            <form action="DisciplinePageController" method="post">
+            <form action="${pageContext.request.contextPath}/Employee/DisciplinePageController" method="post">
                 <input type="hidden"  name="operationType" value="delete">
-                <td colspan=2>
-                    <button onclick="submit"  class="topicButton topicButtonEmployeePage">Delete  Discipline</button>
-                </td>
+                <button class="topicButton topicButtonEmployeePage">Delete  Discipline</button>
             </form>
         </div>
         <br />
 
         <div>
-            <form action="DisciplinePageController" method="post">
+            <form action="${pageContext.request.contextPath}/Employee/DisciplinePageController" method="post">
                 <input type="hidden"  name="operationType" value="setDependency">
-                <td colspan=2>
-                    <button onclick="submit"  class="topicButton topicButtonEmployeePage">Set Discipline Dependency</button>
-                </td>
+                <button class="topicButton topicButtonEmployeePage">Set Discipline Dependency</button>
             </form>
         </div>
         <br />
 
         <div>
-            <form action="DisciplinePageController" method="post">
+            <form action="${pageContext.request.contextPath}/Employee/DisciplinePageController" method="post">
                 <input type="hidden"  name="operationType" value="showInfo">
-                <td colspan=2>
-                    <button onclick="submit"  class="topicButton topicButtonEmployeePage">Show Discipline Info</button>
-                </td>
+                <button class="topicButton topicButtonEmployeePage">Show Discipline Info</button>
             </form>
         </div>
         <br />
 
         <div>
-            <form action="DisciplinePageController" method="post">
+            <form action="${pageContext.request.contextPath}/Employee/DisciplinePageController" method="post">
                 <input type="hidden"  name="operationType" value="cancel">
-                <td colspan=2>
-                    <button onclick="submit"  class="controlButton controlButtonEmployeePage">Cancel</button>
-                </td>
+                <button class="controlButton controlButtonEmployeePage">Cancel</button>
             </form>
         </div>
         <br />

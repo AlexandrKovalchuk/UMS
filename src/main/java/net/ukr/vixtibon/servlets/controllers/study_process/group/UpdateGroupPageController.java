@@ -22,7 +22,7 @@ public class UpdateGroupPageController extends HttpServlet {
                 Group group = daog.getEntityById(Integer.parseInt(request.getParameter("groupID")));
                 request.setAttribute("selected", "yes");
                 request.setAttribute("group", group);
-                request.getRequestDispatcher("Employee/Group/Operations/UpdateGroupPage.jsp").forward(request, response);
+                request.getRequestDispatcher("Group/Operations/UpdateGroupPage.jsp").forward(request, response);
             }else if(request.getParameter("step").equals("step2")){
                 Group group = new Group();
                 group.setID(Integer.parseInt(request.getParameter("groupID")));
@@ -38,13 +38,13 @@ public class UpdateGroupPageController extends HttpServlet {
                     request.setAttribute("result", "unsuccess");
                 }
                 daog.closeConnection();
-                request.getRequestDispatcher("ActionResultEmployeeMenuPageController").forward(request, response);
+                request.getRequestDispatcher("/Employee/ActionResultEmployeeMenuPageController").forward(request, response);
             }else if(request.getParameter("step").equals("cancel")){
-                request.getRequestDispatcher("GroupPageController").forward(request, response);
+                request.getRequestDispatcher("/Employee/GroupPageController").forward(request, response);
             }else{
                 request.setAttribute("menu", "group");
                 request.setAttribute("error", "incorrectValue");
-                request.getRequestDispatcher("ActionResultEmployeeMenuPageController").forward(request, response);
+                request.getRequestDispatcher("/Employee/ActionResultEmployeeMenuPageController").forward(request, response);
             }
         }else{
             DAODepartment daod = new DAODepartment();
@@ -59,7 +59,7 @@ public class UpdateGroupPageController extends HttpServlet {
             daog.closeConnection();
             daod.closeConnection();
             request.setAttribute("departments", departments);
-            request.getRequestDispatcher("Employee/Group/Operations/UpdateGroupPage.jsp").forward(request, response);
+            request.getRequestDispatcher("Group/Operations/UpdateGroupPage.jsp").forward(request, response);
         }
     }
 }

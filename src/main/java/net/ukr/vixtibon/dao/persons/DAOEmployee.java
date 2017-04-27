@@ -10,9 +10,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by alex on 12/12/2016.
- */
 public class DAOEmployee extends AbstractController<Employee,Integer> {
     @Override
     public List<Employee> getAll() {
@@ -79,7 +76,7 @@ public class DAOEmployee extends AbstractController<Employee,Integer> {
         String Update_Employee_Statemet = "UPDATE employee SET name='" +entity.getName()+ "',lastName='"+entity.getSecondName()+"'," +
                 "fathersName='"+entity.getSurname()+"',personalID='"+entity.getPersonalID()+"',sex='"+entity.getSex()+"',email='"+entity.getEmail()+"'," +
                 "phoneNumber='"+entity.getPhoneNumber()+"',dateOfBorn='"+sqlDate+"'," +
-                "address='"+entity.getAddress()+"',pasport='"+entity.getPasport()+"',login='"+entity.getLogin()+"'," +
+                "address='"+entity.getAddress()+"',passport='"+entity.getPasport()+"',login='"+entity.getLogin()+"'," +
                 "office='"+entity.getOffice()+"',ID='"+entity.getID()+"' WHERE ID=" + entity.getID() + ";";
         PreparedStatement ps = getPrepareStatement(Update_Employee_Statemet);
         try {
@@ -148,7 +145,7 @@ public class DAOEmployee extends AbstractController<Employee,Integer> {
         ResultSet rs = null;
         try {
             rs = ps.executeQuery();
-            if(rs.next() == true){
+            if(rs.next()){
                 departmentID = rs.getInt(1);
             }
         } catch (SQLException e) {

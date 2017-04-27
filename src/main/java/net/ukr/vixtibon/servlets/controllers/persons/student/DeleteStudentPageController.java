@@ -24,7 +24,7 @@ public class DeleteStudentPageController extends HttpServlet {
                 ArrayList<Student> students = daos.getAllByGroupID(Integer.parseInt(request.getParameter("groupID")));
                 request.setAttribute("students", students);
                 request.setAttribute("selected", "yes");
-                request.getRequestDispatcher("Employee/Student/Operations/DeleteStudentPage.jsp").forward(request, response);
+                request.getRequestDispatcher("Student/Operations/DeleteStudentPage.jsp").forward(request, response);
             }else if(request.getParameter("step").equals("step2")) {
                 DAOStudent daos = new DAOStudent();
                 Student student = daos.getEntityById(Integer.parseInt(request.getParameter("studentID")));
@@ -32,7 +32,7 @@ public class DeleteStudentPageController extends HttpServlet {
                 daos.closeConnection();
                 request.setAttribute("student", student);
                 request.setAttribute("selected", "studentyes");
-                request.getRequestDispatcher("Employee/Student/Operations/DeleteStudentPage.jsp").forward(request, response);
+                request.getRequestDispatcher("Student/Operations/DeleteStudentPage.jsp").forward(request, response);
             }else if(request.getParameter("step").equals("step3")){
                 DAOStudent daos = new DAOStudent();
                 boolean result = daos.delete(Integer.parseInt(request.getParameter("studentID")));
@@ -44,13 +44,13 @@ public class DeleteStudentPageController extends HttpServlet {
                     request.setAttribute("result", "unsuccess");
                 }
                 daos.closeConnection();
-                request.getRequestDispatcher("ActionResultEmployeeMenuPageController").forward(request, response);
+                request.getRequestDispatcher("/Employee/ActionResultEmployeeMenuPageController").forward(request, response);
             }else if(request.getParameter("step").equals("cancel")){
-                request.getRequestDispatcher("StudentPageController").forward(request, response);
+                request.getRequestDispatcher("/Employee/StudentPageController").forward(request, response);
             }else{
                 request.setAttribute("menu", "student");
                 request.setAttribute("error", "incorrectValue");
-                request.getRequestDispatcher("ActionResultEmployeeMenuPageController").forward(request, response);
+                request.getRequestDispatcher("/Employee/ActionResultEmployeeMenuPageController").forward(request, response);
             }
         }else{
             DAODepartment daod = new DAODepartment();
@@ -69,7 +69,7 @@ public class DeleteStudentPageController extends HttpServlet {
             daod.closeConnection();
             request.setAttribute("department", department);
             request.setAttribute("selected", "no");
-            request.getRequestDispatcher("Employee/Student/Operations/DeleteStudentPage.jsp").forward(request, response);
+            request.getRequestDispatcher("Student/Operations/DeleteStudentPage.jsp").forward(request, response);
         }
     }
 }

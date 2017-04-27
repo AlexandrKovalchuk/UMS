@@ -10,10 +10,10 @@
 <html>
 <head>
     <title>Student Page</title>
-    <link rel="stylesheet" type="text/css" href="main_css\main_styles.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}\main_css\main_styles.css">
 </head>
 
-<body class = "backgroungImageStudent">
+<body class = "backgroundImageStudent">
 
 <div class = "pageTitleText pageTitleTextStudent">
     Welcome to Student Page
@@ -28,40 +28,32 @@
 <div class="itemsBlock">
     <div>
         <div>
-            <form action="StudentMenuPageController" method="post">
+            <form action="${pageContext.request.contextPath}/Student/StudentMenuPageController" method="post">
                 <input type="hidden"  name="operationType" value="attendance">
-                <td colspan=2>
-                    <button onclick="submit"  class="topicButton topicButtonStudentPage">Show Attendance</button>
-                </td>
+                <button class="topicButton topicButtonStudentPage">Show Attendance</button>
             </form>
         </div>
         <br />
 
         <div>
-            <form action="StudentMenuPageController" method="post">
+            <form action="${pageContext.request.contextPath}/Student/StudentMenuPageController" method="post">
                 <input type="hidden"  name="operationType" value="progress">
-                <td colspan=2>
-                    <button onclick="submit"  class="topicButton topicButtonStudentPage">Show Progress</button>
-                </td>
+                <button class="topicButton topicButtonStudentPage">Show Progress</button>
             </form>
         </div>
         <br />
 
         <div>
-            <form action="StudentMenuPageController" method="post">
+            <form action="${pageContext.request.contextPath}/Student/StudentMenuPageController" method="post">
                 <input type="hidden"  name="operationType" value="timeTable">
-                <td colspan=2>
-                    <button onclick="submit"  class="topicButton topicButtonStudentPage">Time Table</button>
-                </td>
+                <button class="topicButton topicButtonStudentPage">Time Table</button>
             </form>
         </div>
         <br />
 
         <div>
-            <form action="LogOutServlet" method="post">
-                <td colspan=2>
-                    <button onclick="submit"  class="controlButton controlButtonStudentPage">Log Out</button>
-                </td>
+            <form action="${pageContext.request.contextPath}\LogOutServlet" method="post">
+                <button class="controlButton controlButtonStudentPage">Log Out</button>
             </form>
         </div>
         <br />

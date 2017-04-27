@@ -27,16 +27,16 @@ public class CreateInstitutePageController extends HttpServlet {
                     request.setAttribute("result", "unsuccess");
                 }
                 d.closeConnection();
-                request.getRequestDispatcher("ActionResultPageController").forward(request, response);
+                request.getRequestDispatcher("/Admin/ActionResultPageController").forward(request, response);
             }else if(request.getParameter("fillForm").equals("cancel")){
-                request.getRequestDispatcher("InstitutePageController").forward(request, response);
+                request.getRequestDispatcher("/Admin/InstitutePageController").forward(request, response);
             }else{
                 request.setAttribute("menu", "institute");
                 request.setAttribute("error", "incorrectValue");
-                request.getRequestDispatcher("ActionResultPageController").forward(request, response);
+                request.getRequestDispatcher("/Admin/ActionResultPageController").forward(request, response);
             }
         }else{
-            request.getRequestDispatcher("Admin/Institute/Operations/CreateInstitutePage.jsp").forward(request, response);
+            request.getRequestDispatcher("Institute/Operations/CreateInstitutePage.jsp").forward(request, response);
         }
     }
 }

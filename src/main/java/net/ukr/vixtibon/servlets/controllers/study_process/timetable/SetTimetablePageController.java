@@ -16,17 +16,12 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
-/**
- * Created by alex on 24/02/2017.
- */
 public class SetTimetablePageController  extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session=request.getSession();
         if(request.getParameterMap().containsKey("step")){
             if(request.getParameter("step").equals("step1")){
-                boolean result = false;
                 DAOLesson daoLesson = new DAOLesson();
                 DAODepartment daoDepartment = new DAODepartment();
                 DAOGroup daoGroup = new DAOGroup();
@@ -38,8 +33,7 @@ public class SetTimetablePageController  extends HttpServlet {
                 }
 
                 Department department = new Department();
-                DayRequirementsObject dayRequirementsObject = new DayRequirementsObject();
-                dayRequirementsObject = daoDayRequirements.getEntityByDepartmentID((int) session.getAttribute("departmentID"));
+                DayRequirementsObject dayRequirementsObject = daoDayRequirements.getEntityByDepartmentID((int) session.getAttribute("departmentID"));
 
                 department.setGroups1(daoGroup.getAllByDepartmentID((int) session.getAttribute("departmentID"),1));
                 department.setGroups2(daoGroup.getAllByDepartmentID((int) session.getAttribute("departmentID"), 2));
@@ -125,22 +119,18 @@ public class SetTimetablePageController  extends HttpServlet {
                     }
                 }
 
-                if(result){
-                    request.setAttribute("result", "success");
-                }else{
-                    request.setAttribute("result", "unsuccess");
-                }
-
                 daoDayRequirements.closeConnection();
                 daoGroup.closeConnection();
                 daoDepartment.closeConnection();
                 daoLesson.closeConnection();
                 request.setAttribute("menu", "timetable");
-                request.getRequestDispatcher("ActionResultEmployeeMenuPageController").forward(request, response);
+                request.getRequestDispatcher("/Employee/ActionResultEmployeeMenuPageController").forward(request, response);
             }else if(request.getParameter("step").equals("cancel")){
-                request.getRequestDispatcher("TimetablePageController").forward(request, response);
+                request.getRequestDispatcher("/Employee/TimetablePageController").forward(request, response);
             }else{
-                //error page
+                request.setAttribute("menu", "timetable");
+                request.setAttribute("error", "incorrectValue");
+                request.getRequestDispatcher("/Employee/ActionResultEmployeeMenuPageController").forward(request, response);
             }
         }else{
             DAOLesson daoLesson = new DAOLesson();
@@ -152,7 +142,7 @@ public class SetTimetablePageController  extends HttpServlet {
             }
             request.setAttribute("step", "step0");
             daoLesson.closeConnection();
-            request.getRequestDispatcher("Employee/Timetable/Operations/SetTimetablePage.jsp").forward(request, response);
+            request.getRequestDispatcher("Timetable/Operations/SetTimetablePage.jsp").forward(request, response);
         }
     }
 }

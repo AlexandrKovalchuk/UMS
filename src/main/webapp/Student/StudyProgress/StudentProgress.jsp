@@ -10,10 +10,10 @@
 <html>
 <head>
     <title>Student Progress Page</title>
-    <link rel="stylesheet" type="text/css" href="main_css\main_styles.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}\main_css\main_styles.css">
 </head>
 
-<body class = "backgroungImageStudent">
+<body class = "backgroundImageStudent">
 
 <div class = "pageTitleText pageTitleTextStudent">
     Welcome to Student Progress Page
@@ -30,10 +30,10 @@
             Course #<c:out value="${count}"/>
         </div>
         <table  class = "studentTable">
-            <c:forEach var="saoItem" items="${student.getProgress()}">
-                <c:if test = "${student.getDisciplines().get(saoItem.value.getDisciplineID()).getCourseNumber() == count}">
+            <c:forEach var="saoItem" items="${requestScope.student.getProgress()}">
+                <c:if test = "${requestScope.student.getDisciplines().get(saoItem.value.getDisciplineID()).getCourseNumber() == count}">
                     <tr  class = "studentTable">
-                        <td class = "textLabel textLabelStudentPage studentTable"><c:out value="${student.getDisciplines().get(saoItem.value.getDisciplineID()).getNameOfDiscipline()}"/></td>
+                        <td class = "textLabel textLabelStudentPage studentTable"><c:out value="${requestScope.student.getDisciplines().get(saoItem.value.getDisciplineID()).getNameOfDiscipline()}"/></td>
                         <c:forEach var="progress" items="${saoItem.value.getProgress()}">
                             <td class = "textLabel textLabelStudentPage studentTable studentTableWidth"><c:out value="${progress}"/></td>
                         </c:forEach>
@@ -48,11 +48,9 @@
 </div>
 
 <div>
-    <form action="ShowProgressPageController" method="post">
+    <form action="${pageContext.request.contextPath}/Student/ShowProgressPageController" method="post">
         <input type="hidden"  name="step" value="ok">
-        <td colspan=2>
-            <button onclick="submit"  class="controlButton controlButtonStudentPage">OK</button>
-        </td>
+        <button class="controlButton controlButtonStudentPage">OK</button>
     </form>
 </div>
 

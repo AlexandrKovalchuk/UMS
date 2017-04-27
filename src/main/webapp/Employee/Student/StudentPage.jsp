@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: alex
@@ -9,10 +10,10 @@
 <html>
 <head>
     <title>Student Page</title>
-    <link rel="stylesheet" type="text/css" href="main_css\main_styles.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}\main_css\main_styles.css">
 </head>
 
-<body class = "backgroungImageEmployee">
+<body class = "backgroundImageEmployee">
 
 <div class = "pageTitleText pageTitleTextEmployee">
     Welcome to Student Page
@@ -27,61 +28,49 @@
 <div class="itemsBlock">
     <div>
         <div>
-            <form action="StudentPageController" method="post">
+            <form action="${pageContext.request.contextPath}/Employee/StudentPageController" method="post">
                 <input type="hidden"  name="operationType" value="create">
-                <td colspan=2>
-                    <button onclick="submit"  class="topicButton topicButtonEmployeePage">Create Student</button>
-                </td>
+                <button class="topicButton topicButtonEmployeePage">Create Student</button>
             </form>
         </div>
         <br />
 
         <div>
-            <form action="StudentPageController" method="post">
+            <form action="${pageContext.request.contextPath}/Employee/StudentPageController" method="post">
                 <input type="hidden"  name="operationType" value="update">
-                <td colspan=2>
-                    <button onclick="submit"  class="topicButton topicButtonEmployeePage">Update  Student</button>
-                </td>
+                <button class="topicButton topicButtonEmployeePage">Update  Student</button>
             </form>
         </div>
         <br />
 
         <div>
-            <form action="StudentPageController" method="post">
+            <form action="${pageContext.request.contextPath}/Employee/StudentPageController" method="post">
                 <input type="hidden"  name="operationType" value="delete">
-                <td colspan=2>
-                    <button onclick="submit"  class="topicButton topicButtonEmployeePage">Delete  Student</button>
-                </td>
+                <button class="topicButton topicButtonEmployeePage">Delete  Student</button>
             </form>
         </div>
         <br />
 
         <div>
-            <form action="StudentPageController" method="post">
+            <form action="${pageContext.request.contextPath}/Employee/StudentPageController" method="post">
                 <input type="hidden"  name="operationType" value="move">
-                <td colspan=2>
-                    <button onclick="submit"  class="topicButton topicButtonEmployeePage">Move Student</button>
-                </td>
+                <button class="topicButton topicButtonEmployeePage">Move Student</button>
             </form>
         </div>
         <br />
 
         <div>
-            <form action="StudentPageController" method="post">
+            <form action="${pageContext.request.contextPath}/Employee/StudentPageController" method="post">
                 <input type="hidden"  name="operationType" value="showInfo">
-                <td colspan=2>
-                    <button onclick="submit"  class="topicButton topicButtonEmployeePage">Show Student Info</button>
-                </td>
+                <button class="topicButton topicButtonEmployeePage">Show Student Info</button>
             </form>
         </div>
         <br />
 
         <div>
-            <form action="StudentPageController" method="post">
+            <form action="${pageContext.request.contextPath}/Employee/StudentPageController" method="post">
                 <input type="hidden"  name="operationType" value="cancel">
-                <td colspan=2>
-                    <button onclick="submit"  class="controlButton controlButtonEmployeePage">Cancel</button>
-                </td>
+                <button class="controlButton controlButtonEmployeePage">Cancel</button>
             </form>
         </div>
         <br />

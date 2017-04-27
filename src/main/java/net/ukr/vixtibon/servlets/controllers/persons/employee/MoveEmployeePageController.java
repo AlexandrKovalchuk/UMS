@@ -27,42 +27,42 @@ public class MoveEmployeePageController   extends HttpServlet {
                 ArrayList<Faculty> f = daof.getAllByInstituteID(Integer.parseInt(request.getParameter("instituteID")));
                 request.setAttribute("facultiesList", f);
                 request.setAttribute("step", "step1");
-                request.getRequestDispatcher("Admin/Employee/Operations/MoveEmployeePage.jsp").forward(request, response);
+                request.getRequestDispatcher("Employee/Operations/MoveEmployeePage.jsp").forward(request, response);
             }else if(request.getParameter("step").equals("step2")){
                 ArrayList<Department> departments = daod.getAllByfacultyID(Integer.parseInt(request.getParameter("facultyID")));
                 request.setAttribute("step", "step2");
                 request.setAttribute("departmentsList", departments);
-                request.getRequestDispatcher("Admin/Employee/Operations/MoveEmployeePage.jsp").forward(request, response);
+                request.getRequestDispatcher("Employee/Operations/MoveEmployeePage.jsp").forward(request, response);
             }else if(request.getParameter("step").equals("step3")){
                 ArrayList<Employee> employees = daoe.getAllByDepartmentID(Integer.parseInt(request.getParameter("departmentID")));
                 request.setAttribute("step", "step3");
                 request.setAttribute("employeesList", employees);
-                request.getRequestDispatcher("Admin/Employee/Operations/MoveEmployeePage.jsp").forward(request, response);
+                request.getRequestDispatcher("Employee/Operations/MoveEmployeePage.jsp").forward(request, response);
             }else if(request.getParameter("step").equals("step4")){
                 ArrayList<Institute> i = daoi.getAll();
                 request.setAttribute("institutesList", i);
                 request.setAttribute("employeeID", Integer.parseInt(request.getParameter("employeeID")));
                 request.setAttribute("step", "step4");
-                request.getRequestDispatcher("Admin/Employee/Operations/MoveEmployeePage.jsp").forward(request, response);
+                request.getRequestDispatcher("Employee/Operations/MoveEmployeePage.jsp").forward(request, response);
             }else if(request.getParameter("step").equals("step5")){
                 ArrayList<Faculty> faculties = daof.getAllByInstituteID(Integer.parseInt(request.getParameter("instituteID")));
                 request.setAttribute("facultiesList", faculties);
                 request.setAttribute("employeeID", Integer.parseInt(request.getParameter("employeeID")));
                 request.setAttribute("step", "step5");
-                request.getRequestDispatcher("Admin/Employee/Operations/MoveEmployeePage.jsp").forward(request, response);
+                request.getRequestDispatcher("Employee/Operations/MoveEmployeePage.jsp").forward(request, response);
             }else if(request.getParameter("step").equals("step6")){
                 ArrayList<Department> departments = daod.getAllByfacultyID(Integer.parseInt(request.getParameter("facultyID")));
                 request.setAttribute("departmentsList", departments);
                 request.setAttribute("employeeID", Integer.parseInt(request.getParameter("employeeID")));
                 request.setAttribute("step", "step6");
-                request.getRequestDispatcher("Admin/Employee/Operations/MoveEmployeePage.jsp").forward(request, response);
+                request.getRequestDispatcher("Employee/Operations/MoveEmployeePage.jsp").forward(request, response);
             }else if(request.getParameter("step").equals("step7")){
                 Department department = daod.getEntityById(Integer.parseInt(request.getParameter("departmentID")));
                 Employee employee = daoe.getEntityById(Integer.parseInt(request.getParameter("employeeID")));
                 request.setAttribute("department", department);
                 request.setAttribute("employee", employee);
                 request.setAttribute("step", "step7");
-                request.getRequestDispatcher("Admin/Employee/Operations/MoveEmployeePage.jsp").forward(request, response);
+                request.getRequestDispatcher("Employee/Operations/MoveEmployeePage.jsp").forward(request, response);
             }else if(request.getParameter("step").equals("step8")){
                 boolean result = daoe.updateEmployeeLocation(Integer.parseInt(request.getParameter("departmentID")),Integer.parseInt(request.getParameter("employeeID")));
                 if(result){
@@ -73,19 +73,19 @@ public class MoveEmployeePageController   extends HttpServlet {
                     request.setAttribute("result", "unsuccess");
                 }
                 daod.closeConnection();
-                request.getRequestDispatcher("ActionResultPageController").forward(request, response);
+                request.getRequestDispatcher("/Admin/ActionResultPageController").forward(request, response);
             }else if(request.getParameter("step").equals("cancel")){
-                request.getRequestDispatcher("EmployeePageController").forward(request, response);
+                request.getRequestDispatcher("/Admin/EmployeePageController").forward(request, response);
             }else{
                 request.setAttribute("menu", "employee");
                 request.setAttribute("error", "incorrectValue");
-                request.getRequestDispatcher("ActionResultPageController").forward(request, response);
+                request.getRequestDispatcher("/Admin/ActionResultPageController").forward(request, response);
             }
         }else{
             ArrayList<Institute> i = daoi.getAll();
             request.setAttribute("institutesList", i);
             request.setAttribute("step", "step0");
-            request.getRequestDispatcher("Admin/Employee/Operations/MoveEmployeePage.jsp").forward(request, response);
+            request.getRequestDispatcher("Employee/Operations/MoveEmployeePage.jsp").forward(request, response);
         }
         daoe.closeConnection();
         daod.closeConnection();

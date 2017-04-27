@@ -10,9 +10,9 @@
 <head lang="en">
     <meta charset="UTF-8">
     <title>Main Info Page</title>
-    <link rel="stylesheet" type="text/css" href="main_css\main_styles.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}\main_css\main_styles.css">
 </head>
-<body class = "backgroungImageAdmin">
+<body class = "backgroundImageAdmin">
 
 <div class = "pageTitleText pageTitleTextAdmin">
     Welcome to Main Info Page
@@ -21,16 +21,13 @@
 
 <div class="itemsBlock">
     <div>
-        <form action="MainInfoPageController" method="post">
+        <form action="${pageContext.request.contextPath}/Admin/MainInfoPageController" method="post">
             <input type="hidden"  name="step" value="cancel">
-            <td colspan=2>
-                <button onclick="submit"  class="controlButton controlButtonAdminPage">Done</button>
-            </td>
+            <button class="controlButton controlButtonAdminPage">Done</button>
         </form>
     </div>
     <br />
 
-</div>
 </div>
 </body>
 </html>

@@ -31,7 +31,7 @@ public class DeleteGroupPageController extends HttpServlet {
                     request.setAttribute("possible_to_remove", "yes");
                 }
                 request.setAttribute("group", group);
-                request.getRequestDispatcher("Employee/Group/Operations/DeleteGroupPage.jsp").forward(request, response);
+                request.getRequestDispatcher("Group/Operations/DeleteGroupPage.jsp").forward(request, response);
             } else if (request.getParameter("step").equals("step2")) {
                 boolean result = daog.delete(Integer.parseInt(request.getParameter("groupID")));
                 if (result) {
@@ -42,13 +42,13 @@ public class DeleteGroupPageController extends HttpServlet {
                     request.setAttribute("result", "unsuccess");
                 }
                 daog.closeConnection();
-                request.getRequestDispatcher("ActionResultEmployeeMenuPageController").forward(request, response);
+                request.getRequestDispatcher("/Employee/ActionResultEmployeeMenuPageController").forward(request, response);
             } else if (request.getParameter("step").equals("cancel")) {
-                request.getRequestDispatcher("GroupPageController").forward(request, response);
+                request.getRequestDispatcher("/Employee/GroupPageController").forward(request, response);
             } else {
                 request.setAttribute("menu", "group");
                 request.setAttribute("error", "incorrectValue");
-                request.getRequestDispatcher("ActionResultEmployeeMenuPageController").forward(request, response);
+                request.getRequestDispatcher("/Employee/ActionResultEmployeeMenuPageController").forward(request, response);
             }
         } else{
             DAODepartment daod = new DAODepartment();
@@ -63,7 +63,7 @@ public class DeleteGroupPageController extends HttpServlet {
             daog.closeConnection();
             daod.closeConnection();
             request.setAttribute("departments", departments);
-            request.getRequestDispatcher("Employee/Group/Operations/DeleteGroupPage.jsp").forward(request, response);
+            request.getRequestDispatcher("Group/Operations/DeleteGroupPage.jsp").forward(request, response);
         }
     }
 }

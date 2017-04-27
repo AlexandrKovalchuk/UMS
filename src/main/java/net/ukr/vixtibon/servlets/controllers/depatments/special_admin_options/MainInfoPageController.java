@@ -10,14 +10,14 @@ public class MainInfoPageController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if(request.getParameterMap().containsKey("step")){
             if(request.getParameter("step").equals("cancel")){
-                request.getRequestDispatcher("AdminPageController").forward(request, response);
+                request.getRequestDispatcher("/Admin/AdminPageController").forward(request, response);
             }else{
                 request.setAttribute("menu", "admin");
                 request.setAttribute("error", "incorrectValue");
-                request.getRequestDispatcher("ActionResultPageController").forward(request, response);
+                request.getRequestDispatcher("/Admin/ActionResultPageController").forward(request, response);
             }
         }else{
-            request.getRequestDispatcher("Admin/MainInfoPage.jsp").forward(request, response);
+            request.getRequestDispatcher("MainInfoPage.jsp").forward(request, response);
         }
     }
 }

@@ -10,80 +10,80 @@
 <html>
 <head>
     <title>Delete Student Page</title>
-    <link rel="stylesheet" type="text/css" href="main_css\main_styles.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}\main_css\main_styles.css">
 </head>
-<body class = "backgroungImageEmployee">
+<body class = "backgroundImageEmployee">
 
 <div class = "pageTitleText pageTitleTextEmployee">
     Delete Student Page
 </div>
 <br />
 
-<c:if test = "${selected eq 'no'}">
+<c:if test = "${requestScope.selected eq 'no'}">
     <div class = "pageTitleText pageTitleTextEmployee">
         Select Group to delete student:
     </div>
 
     <div class = "pageContent pageContentEmployeePages pageContentAdminPages500px">
-        <div class = "textLabelParagraph textLabelEmployeePage"><c:out value="${department.getLongName()}"/></div>
+        <div class = "textLabelParagraph textLabelEmployeePage"><c:out value="${requestScope.department.getLongName()}"/></div>
 
         <div class = "textLabelParagraph textLabelEmployeePage">Course 1:</div>
-        <c:forEach items="${department.getGroups1()}" var="group">
+        <c:forEach items="${requestScope.department.getGroups1()}" var="group">
             <div>
-                <form action="DeleteStudentPageController" method="post" accept-charset="UTF-8">
+                <form action="${pageContext.request.contextPath}/Employee/DeleteStudentPageController" method="post" accept-charset="UTF-8">
                     <input type="hidden"  name="step" value="step1">
                     <input type="hidden"  name="groupID" value="${group.getID()}">
-                    <button onclick="submit" class="itemButton itemButtonEmployeePages" ><c:out value="${group.getFullGroupName()}"/></button>
+                    <button class="itemButton itemButtonEmployeePages" ><c:out value="${group.getFullGroupName()}"/></button>
                 </form>
             </div>
         </c:forEach>
         <div class = "textLabelParagraph textLabelEmployeePage">Course 2:</div>
-        <c:forEach items="${department.getGroups2()}" var="group">
+        <c:forEach items="${requestScope.department.getGroups2()}" var="group">
             <div>
-                <form action="DeleteStudentPageController" method="post" accept-charset="UTF-8">
+                <form action="${pageContext.request.contextPath}/Employee/DeleteStudentPageController" method="post" accept-charset="UTF-8">
                     <input type="hidden"  name="step" value="step1">
                     <input type="hidden"  name="groupID" value="${group.getID()}">
-                    <button onclick="submit" class="itemButton itemButtonEmployeePages" ><c:out value="${group.getFullGroupName()}"/></button>
+                    <button class="itemButton itemButtonEmployeePages" ><c:out value="${group.getFullGroupName()}"/></button>
                 </form>
             </div>
         </c:forEach>
         <div class = "textLabelParagraph textLabelEmployeePage">Course 3:</div>
-        <c:forEach items="${department.getGroups3()}" var="group">
+        <c:forEach items="${requestScope.department.getGroups3()}" var="group">
             <div>
-                <form action="DeleteStudentPageController" method="post" accept-charset="UTF-8">
+                <form action="${pageContext.request.contextPath}/Employee/DeleteStudentPageController" method="post" accept-charset="UTF-8">
                     <input type="hidden"  name="step" value="step1">
                     <input type="hidden"  name="groupID" value="${group.getID()}">
-                    <button onclick="submit" class="itemButton itemButtonEmployeePages" ><c:out value="${group.getFullGroupName()}"/></button>
+                    <button class="itemButton itemButtonEmployeePages" ><c:out value="${group.getFullGroupName()}"/></button>
                 </form>
             </div>
         </c:forEach>
         <div class = "textLabelParagraph textLabelEmployeePage">Course 4:</div>
-        <c:forEach items="${department.getGroups4()}" var="group">
+        <c:forEach items="${requestScope.department.getGroups4()}" var="group">
             <div>
-                <form action="DeleteStudentPageController" method="post" accept-charset="UTF-8">
+                <form action="${pageContext.request.contextPath}/Employee/DeleteStudentPageController" method="post" accept-charset="UTF-8">
                     <input type="hidden"  name="step" value="step1">
                     <input type="hidden"  name="groupID" value="${group.getID()}">
-                    <button onclick="submit" class="itemButton itemButtonEmployeePages" ><c:out value="${group.getFullGroupName()}"/></button>
+                    <button class="itemButton itemButtonEmployeePages" ><c:out value="${group.getFullGroupName()}"/></button>
                 </form>
             </div>
         </c:forEach>
         <div class = "textLabelParagraph textLabelEmployeePage">Course 5:</div>
-        <c:forEach items="${department.getGroups5()}" var="group">
+        <c:forEach items="${requestScope.department.getGroups5()}" var="group">
             <div>
-                <form action="DeleteStudentPageController" method="post" accept-charset="UTF-8">
+                <form action="${pageContext.request.contextPath}/Employee/DeleteStudentPageController" method="post" accept-charset="UTF-8">
                     <input type="hidden"  name="step" value="step1">
                     <input type="hidden"  name="groupID" value="${group.getID()}">
-                    <button onclick="submit" class="itemButton itemButtonEmployeePages" ><c:out value="${group.getFullGroupName()}"/></button>
+                    <button class="itemButton itemButtonEmployeePages" ><c:out value="${group.getFullGroupName()}"/></button>
                 </form>
             </div>
         </c:forEach>
         <div class = "textLabelParagraph textLabelEmployeePage">Course 6:</div>
-        <c:forEach items="${department.getGroups6()}" var="group">
+        <c:forEach items="${requestScope.department.getGroups6()}" var="group">
             <div>
-                <form action="DeleteStudentPageController" method="post" accept-charset="UTF-8">
+                <form action="${pageContext.request.contextPath}/Employee/DeleteStudentPageController" method="post" accept-charset="UTF-8">
                     <input type="hidden"  name="step" value="step1">
                     <input type="hidden"  name="groupID" value="${group.getID()}">
-                    <button onclick="submit" class="itemButton itemButtonEmployeePages" ><c:out value="${group.getFullGroupName()}"/></button>
+                    <button class="itemButton itemButtonEmployeePages" ><c:out value="${group.getFullGroupName()}"/></button>
                 </form>
             </div>
         </c:forEach>
@@ -91,18 +91,19 @@
 
 </c:if>
 
-<c:if test = "${selected eq 'yes'}">
+<c:if test = "${requestScope.selected eq 'yes'}">
     <div class = "pageTitleText pageTitleTextEmployee">
         Select Student to delete:
     </div>
 
     <div class = "pageContent pageContentEmployeePages pageContentAdminPages500px">
+        <jsp:useBean id="students" scope="request" type="java.util.List"/>
         <c:forEach items="${students}" var="student">
             <div>
-                <form action="DeleteStudentPageController" method="post" accept-charset="UTF-8">
+                <form action="${pageContext.request.contextPath}/Employee/DeleteStudentPageController" method="post" accept-charset="UTF-8">
                     <input type="hidden"  name="step" value="step2">
                     <input type="hidden"  name="studentID" value="${student.getID()}">
-                    <button onclick="submit" class="itemButton itemButtonEmployeePages" > <c:out value="${student.getSecondName()}"/> <c:out value="${student.getName()}"/></button>
+                    <button class="itemButton itemButtonEmployeePages" > <c:out value="${student.getSecondName()}"/> <c:out value="${student.getName()}"/></button>
                 </form>
             </div>
         </c:forEach>
@@ -110,20 +111,20 @@
     </div>
 </c:if>
 
-<c:if test = "${selected eq 'studentyes'}">
+<c:if test = "${requestScope.selected eq 'studentyes'}">
     <div class = "pageContent pageContentEmployeePages pageContentAdminPagesTwoFieldsSize">
         <div class = "textLabelParagraph textLabelEmployeePage">
-            Please Confirm Delete: <c:out value="${student.getSecondName()}"/> <c:out value="${student.getName()}"/>
+            Please Confirm Delete: <c:out value="${requestScope.student.getSecondName()}"/> <c:out value="${requestScope.student.getName()}"/>
         </div>
 
         <div>
-            <form action="DeleteStudentPageController" method="post" accept-charset="UTF-8">
+            <form action="${pageContext.request.contextPath}/Employee/DeleteStudentPageController" method="post" accept-charset="UTF-8">
+                <input type="hidden"  name="step" value="step3">
+                <input type="hidden"  name="studentID" value="${requestScope.student.getID()}">
                 <table>
-                    <input type="hidden"  name="step" value="step3">
-                    <input type="hidden"  name="studentID" value="${student.getID()}">
                     <tr>
                         <td colspan=2>
-                            <button onclick="submit"  class="controlButton controlButtonEmployeePage">Delete</button>
+                            <button class="controlButton controlButtonEmployeePage">Delete</button>
                         </td>
                     </tr>
                 </table>
@@ -133,11 +134,9 @@
 </c:if>
 
 <div>
-    <form action="DeleteStudentPageController" method="post">
+    <form action="${pageContext.request.contextPath}/Employee/DeleteStudentPageController" method="post">
         <input type="hidden"  name="step" value="cancel">
-        <td colspan=2>
-            <button onclick="submit"  class="controlButton controlButtonEmployeePage">Cancel</button>
-        </td>
+        <button class="controlButton controlButtonEmployeePage">Cancel</button>
     </form>
 </div>
 

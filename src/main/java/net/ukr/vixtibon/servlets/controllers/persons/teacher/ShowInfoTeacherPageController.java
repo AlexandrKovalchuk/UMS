@@ -36,13 +36,13 @@ public class ShowInfoTeacherPageController extends HttpServlet {
                 daod.closeConnection();
                 request.setAttribute("selected", "yes");
                 request.setAttribute("teacher", teacher);
-                request.getRequestDispatcher("Employee/Teacher/Operations/ShowTeacherInfoPage.jsp").forward(request, response);
+                request.getRequestDispatcher("Teacher/Operations/ShowTeacherInfoPage.jsp").forward(request, response);
             }else if(request.getParameter("step").equals("cancel")){
-                request.getRequestDispatcher("TeacherPageController").forward(request, response);
+                request.getRequestDispatcher("/Employee/TeacherPageController").forward(request, response);
             }else{
                 request.setAttribute("menu", "teacher");
                 request.setAttribute("error", "incorrectValue");
-                request.getRequestDispatcher("ActionResultEmployeeMenuPageController").forward(request, response);
+                request.getRequestDispatcher("/Employee/ActionResultEmployeeMenuPageController").forward(request, response);
             }
         }else{
             DAODepartment daod = new DAODepartment();
@@ -57,7 +57,7 @@ public class ShowInfoTeacherPageController extends HttpServlet {
             daot.closeConnection();
             daod.closeConnection();
             request.setAttribute("departments", departments);
-            request.getRequestDispatcher("Employee/Teacher/Operations/ShowTeacherInfoPage.jsp").forward(request, response);
+            request.getRequestDispatcher("Teacher/Operations/ShowTeacherInfoPage.jsp").forward(request, response);
         }
     }
 }

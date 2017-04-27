@@ -10,30 +10,31 @@
 <html>
 <head lang="en">
     <title>Show Teacher Info Page</title>
-    <link rel="stylesheet" type="text/css" href="main_css\main_styles.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}\main_css\main_styles.css">
 </head>
 
-<body class = "backgroungImageEmployee">
+<body class = "backgroundImageEmployee">
 
 <div class = "pageTitleText pageTitleTextEmployee">
     Show Teacher Info Page
 </div>
 <br />
 
-<c:if test = "${selected ne 'yes'}">
+<c:if test = "${requestScope.selected ne 'yes'}">
     <div class = "pageTitleText pageTitleTextEmployee">
         Select Teacher :
     </div>
 
     <div class = "pageContent pageContentEmployeePages pageContentAdminPages500px">
+        <jsp:useBean id="departments" scope="request" type="java.util.List"/>
         <c:forEach items="${departments}" var="department">
             <div class = "textLabelParagraph textLabelEmployeePage"><c:out value="${department.getLongName()}"/></div>
             <c:forEach items="${department.getTeachers()}" var="teacher">
                 <div>
-                    <form action="ShowInfoTeacherPageController" method="post" accept-charset="UTF-8">
+                    <form action="${pageContext.request.contextPath}/Employee/ShowInfoTeacherPageController" method="post" accept-charset="UTF-8">
                         <input type="hidden"  name="step" value="step1">
                         <input type="hidden"  name="teacherID" value="${teacher.getID()}">
-                        <button onclick="submit" class="itemButton itemButtonEmployeePages" ><c:out value="${teacher.getSecondName()}"/> <c:out value="${teacher.getName()}"/></button>
+                        <button class="itemButton itemButtonEmployeePages" ><c:out value="${teacher.getSecondName()}"/> <c:out value="${teacher.getName()}"/></button>
                     </form>
                 </div>
             </c:forEach>
@@ -42,7 +43,7 @@
 
 </c:if>
 
-<c:if test = "${selected eq 'yes'}">
+<c:if test = "${requestScope.selected eq 'yes'}">
     <div class = "pageTitleText pageTitleTextEmployee">
         Teacher Info:
     </div>
@@ -51,55 +52,55 @@
         <table>
             <tr>
                 <td class = "textLabel textLabelEmployeePage">Name:</td>
-                <td class = "textLabel textLabelEmployeePage"><c:out value="${teacher.getName()}"/></td>
+                <td class = "textLabel textLabelEmployeePage"><c:out value="${requestScope.teacher.getName()}"/></td>
             </tr>
             <tr>
                 <td class = "textLabel textLabelEmployeePage">Surname:</td>
-                <td class = "textLabel textLabelEmployeePage"><c:out value="${teacher.getSecondName()}"/></td>
+                <td class = "textLabel textLabelEmployeePage"><c:out value="${requestScope.teacher.getSecondName()}"/></td>
             </tr>
             <tr>
                 <td class = "textLabel textLabelEmployeePage">Middle Name:</td>
-                <td class = "textLabel textLabelEmployeePage"><c:out value="${teacher.getSurname()}"/></td>
+                <td class = "textLabel textLabelEmployeePage"><c:out value="${requestScope.teacher.getSurname()}"/></td>
             </tr>
             <tr>
                 <td class = "textLabel textLabelEmployeePage">Identification code:</td>
-                <td class = "textLabel textLabelEmployeePage"><c:out value="${teacher.getPersonalID()}"/></td>
+                <td class = "textLabel textLabelEmployeePage"><c:out value="${requestScope.teacher.getPersonalID()}"/></td>
             </tr>
             <tr>
                 <td class = "textLabel textLabelEmployeePage">Sex:</td>
-                <td class = "textLabel textLabelEmployeePage"><c:if test = "${teacher.getSex() eq 'm'}">Male</c:if><c:if test = "${teacher.getSex() eq 'f'}">Female</c:if></td>
+                <td class = "textLabel textLabelEmployeePage"><c:if test = "${requestScope.teacher.getSex() eq 'm'}">Male</c:if><c:if test = "${requestScope.teacher.getSex() eq 'f'}">Female</c:if></td>
             </tr>
             <tr>
                 <td class = "textLabel textLabelEmployeePage">Date of birth:</td>
-                <td class = "textLabel textLabelEmployeePage"><c:out value="${teacher.getDayOfBorn()}"/> - <c:out value="${teacher.getMonthOfBorn()}"/> - <c:out value="${teacher.getYearOfBorn()}"/></td>
+                <td class = "textLabel textLabelEmployeePage"><c:out value="${requestScope.teacher.getDayOfBorn()}"/> - <c:out value="${requestScope.teacher.getMonthOfBorn()}"/> - <c:out value="${requestScope.teacher.getYearOfBorn()}"/></td>
             </tr>
             <tr>
                 <td class = "textLabel textLabelEmployeePage">Email:</td>
-                <td class = "textLabel textLabelEmployeePage"><c:out value="${teacher.getEmail()}"/></td>
+                <td class = "textLabel textLabelEmployeePage"><c:out value="${requestScope.teacher.getEmail()}"/></td>
             </tr>
             <tr>
                 <td class = "textLabel textLabelEmployeePage">Phone Number:</td>
-                <td class = "textLabel textLabelEmployeePage"><c:out value="${teacher.getPhoneNumber()}"/></td>
+                <td class = "textLabel textLabelEmployeePage"><c:out value="${requestScope.teacher.getPhoneNumber()}"/></td>
             </tr>
             <tr>
                 <td class = "textLabel textLabelEmployeePage">Address:</td>
-                <td class = "textLabel textLabelEmployeePage"><c:out value="${teacher.getAddress()}"/></td>
+                <td class = "textLabel textLabelEmployeePage"><c:out value="${requestScope.teacher.getAddress()}"/></td>
             </tr>
             <tr>
                 <td class = "textLabel textLabelEmployeePage">Passport data:</td>
-                <td class = "textLabel textLabelEmployeePage"><c:out value="${teacher.getPasport()}"/></td>
+                <td class = "textLabel textLabelEmployeePage"><c:out value="${requestScope.teacher.getPasport()}"/></td>
             </tr>
             <tr>
                 <td class = "textLabel textLabelEmployeePage">Position:</td>
-                <td class = "textLabel textLabelEmployeePage"><c:out value="${teacher.getOffice()}"/></td>
+                <td class = "textLabel textLabelEmployeePage"><c:out value="${requestScope.teacher.getOffice()}"/></td>
             </tr>
             <tr>
                 <td class = "textLabel textLabelEmployeePage">Academic Title:</td>
-                <td class = "textLabel textLabelEmployeePage"><c:out value="${teacher.getLevel()}"/></td>
+                <td class = "textLabel textLabelEmployeePage"><c:out value="${requestScope.teacher.getLevel()}"/></td>
             </tr>
             <tr>
                 <td class = "textLabel textLabelEmployeePage">LogIn:</td>
-                <td class = "textLabel textLabelEmployeePage"><c:out value="${teacher.getLogin()}"/></td>
+                <td class = "textLabel textLabelEmployeePage"><c:out value="${requestScope.teacher.getLogin()}"/></td>
             </tr>
 
             <tr>
@@ -108,7 +109,7 @@
 
             <tr>
                 <td  class = "textLabel textLabelEmployeePage">
-                    <c:forEach items="${teacher.getDisciplines()}" var="discipline">
+                    <c:forEach items="${requestScope.teacher.getDisciplines()}" var="discipline">
                         - <c:out value="${discipline.getNameOfDiscipline()}"/><br>
                     </c:forEach>
                 </td>
@@ -119,11 +120,9 @@
 
 
 <div>
-    <form action="ShowInfoTeacherPageController" method="post">
+    <form action="${pageContext.request.contextPath}/Employee/ShowInfoTeacherPageController" method="post">
         <input type="hidden"  name="step" value="cancel">
-        <td colspan=2>
-            <button onclick="submit"  class="controlButton controlButtonEmployeePage">Cancel</button>
-        </td>
+        <button class="controlButton controlButtonEmployeePage">Cancel</button>
     </form>
 </div>
 </body>

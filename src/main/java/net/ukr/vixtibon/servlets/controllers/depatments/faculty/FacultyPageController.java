@@ -10,24 +10,24 @@ public class FacultyPageController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if(request.getParameterMap().containsKey("operationType")){
             if(request.getParameter("operationType").equals("create")){
-                request.getRequestDispatcher("CreateFacultyPageController").forward(request, response);
+                request.getRequestDispatcher("/Admin/CreateFacultyPageController").forward(request, response);
             }else if(request.getParameter("operationType").equals("update")){
-                request.getRequestDispatcher("UpdateFacultyPageController").forward(request, response);
+                request.getRequestDispatcher("/Admin/UpdateFacultyPageController").forward(request, response);
             }else if(request.getParameter("operationType").equals("delete")){
-                request.getRequestDispatcher("DeleteFacultyPageController").forward(request, response);
+                request.getRequestDispatcher("/Admin/DeleteFacultyPageController").forward(request, response);
             }else if(request.getParameter("operationType").equals("move")){
-                request.getRequestDispatcher("MoveFacultyPageController").forward(request, response);
+                request.getRequestDispatcher("/Admin/MoveFacultyPageController").forward(request, response);
             }else if(request.getParameter("operationType").equals("showInfo")){
-                request.getRequestDispatcher("ShowInfoFacultyPageController").forward(request, response);
+                request.getRequestDispatcher("/Admin/ShowInfoFacultyPageController").forward(request, response);
             }else if(request.getParameter("operationType").equals("cancel")){
-                request.getRequestDispatcher("AdminPageController").forward(request, response);
+                request.getRequestDispatcher("/Admin/AdminPageController").forward(request, response);
             }else{
                 request.setAttribute("menu", "admin");
                 request.setAttribute("error", "incorrectValue");
-                request.getRequestDispatcher("ActionResultPageController").forward(request, response);
+                request.getRequestDispatcher("/Admin/ActionResultPageController").forward(request, response);
             }
         }else{
-            request.getRequestDispatcher("Admin/Faculty/FacultyPage.jsp").forward(request, response);
+            request.getRequestDispatcher("Faculty/FacultyPage.jsp").forward(request, response);
         }
     }
 }

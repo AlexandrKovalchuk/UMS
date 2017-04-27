@@ -6,25 +6,24 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-/**
- * Created by alex on 30/01/2017.
- */
 public class TimetablePageController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if(request.getParameterMap().containsKey("operationType")){
             if(request.getParameter("operationType").equals("create")){
-                request.getRequestDispatcher("SetTimetablePageController").forward(request, response);
+                request.getRequestDispatcher("/Employee/SetTimetablePageController").forward(request, response);
             }else if(request.getParameter("operationType").equals("update")){
-                request.getRequestDispatcher("UpdateTimetablePageController").forward(request, response);
+                request.getRequestDispatcher("/Employee/UpdateTimetablePageController").forward(request, response);
             }else if(request.getParameter("operationType").equals("generateHTML")){
-                request.getRequestDispatcher("GenerateTimeTableInHTMLPageController").forward(request, response);
+                request.getRequestDispatcher("/Employee/GenerateTimeTableInHTMLPageController").forward(request, response);
             }else if(request.getParameter("operationType").equals("cancel")){
-                request.getRequestDispatcher("EmployeeMenuPageController").forward(request, response);
+                request.getRequestDispatcher("/Employee/EmployeeMenuPageController").forward(request, response);
             }else{
-                //error page
+                request.setAttribute("menu", "employee");
+                request.setAttribute("error", "incorrectValue");
+                request.getRequestDispatcher("/Employee/ActionResultEmployeeMenuPageController").forward(request, response);
             }
         }else{
-            request.getRequestDispatcher("Employee/Timetable/TimetablePage.jsp").forward(request, response);
+            request.getRequestDispatcher("Timetable/TimetablePage.jsp").forward(request, response);
         }
     }
 }

@@ -30,20 +30,20 @@ public class ShowInstituteInfoPageController extends HttpServlet {
                 institute.setFacultys(faculties);
                 request.setAttribute("selected", "yes");
                 request.setAttribute("institute", institute);
-                request.getRequestDispatcher("Admin/Institute/Operations/ShowInstituteInfoPage.jsp").forward(request, response);
+                request.getRequestDispatcher("Institute/Operations/ShowInstituteInfoPage.jsp").forward(request, response);
             }else if(request.getParameter("step").equals("cancel")){
-                request.getRequestDispatcher("InstitutePageController").forward(request, response);
+                request.getRequestDispatcher("/Admin/InstitutePageController").forward(request, response);
             }else{
                 request.setAttribute("menu", "institute");
                 request.setAttribute("error", "incorrectValue");
-                request.getRequestDispatcher("ActionResultPageController").forward(request, response);
+                request.getRequestDispatcher("/Admin/ActionResultPageController").forward(request, response);
             }
         }else{
             DAOInstitute daoi = new DAOInstitute();
             ArrayList<Institute> i = daoi.getAll();
             daoi.closeConnection();
             request.setAttribute("institutesList", i);
-            request.getRequestDispatcher("Admin/Institute/Operations/ShowInstituteInfoPage.jsp").forward(request, response);
+            request.getRequestDispatcher("Institute/Operations/ShowInstituteInfoPage.jsp").forward(request, response);
         }
     }
 }

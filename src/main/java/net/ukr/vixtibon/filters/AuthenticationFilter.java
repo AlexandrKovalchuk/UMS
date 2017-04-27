@@ -14,9 +14,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-/**
- * Created by alex on 31/01/2017.
- */
 
 @WebFilter("/AuthenticationFilter")
 public class AuthenticationFilter implements Filter {
@@ -36,17 +33,16 @@ public class AuthenticationFilter implements Filter {
 
         String uri = req.getRequestURI();
         this.context.log("Requested Resource::"+uri);
+        System.out.println("AuthenticationFilter::");
         System.out.println("Requested Resource::"+uri);
 
         HttpSession session = req.getSession(false);
 
-        if(session == null && !(uri.endsWith("jsp") || uri.endsWith("/") || uri.endsWith("html") || uri.endsWith("LogInServlet"))){
+        if(session == null && !(uri.endsWith("jsp") || uri.endsWith("/") || uri.endsWith("css") || uri.endsWith("jpg") || uri.endsWith("html") || uri.endsWith("LogInServlet"))){
             this.context.log("Unauthorized access request");
-            System.out.println("Unauthorized access request");
             res.sendRedirect("LogIn.jsp");
         }else{
             // pass the request along the filter chain
-            System.out.println("2 Unauthorized access request");
             chain.doFilter(request, response);
         }
 

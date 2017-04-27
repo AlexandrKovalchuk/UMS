@@ -52,13 +52,13 @@ public class ShowInfoDisciplinePageController  extends HttpServlet {
                 request.setAttribute("teachersDependency", teachersDependency);
                 request.setAttribute("selected", "yes");
                 request.setAttribute("discipline", discipline);
-                request.getRequestDispatcher("Employee/Discipline/Operations/ShowInfoDisciplinePage.jsp").forward(request, response);
+                request.getRequestDispatcher("Discipline/Operations/ShowInfoDisciplinePage.jsp").forward(request, response);
             }else if(request.getParameter("step").equals("cancel")){
                 request.getRequestDispatcher("DisciplinePageController").forward(request, response);
             }else{
                 request.setAttribute("menu", "discipline");
                 request.setAttribute("error", "incorrectValue");
-                request.getRequestDispatcher("ActionResultEmployeeMenuPageController").forward(request, response);
+                request.getRequestDispatcher("/Employee/ActionResultEmployeeMenuPageController").forward(request, response);
             }
         }else{
             DAODepartment daod = new DAODepartment();
@@ -94,7 +94,7 @@ public class ShowInfoDisciplinePageController  extends HttpServlet {
             request.setAttribute("department", department);
             request.setAttribute("disciplinesConnectedWithDepartment", disciplinesConnectedWithDepartment);
             request.setAttribute(" disciplinesNotConnectedWithDepartment",  disciplinesNotConnectedWithDepartment);
-            request.getRequestDispatcher("Employee/Discipline/Operations/ShowInfoDisciplinePage.jsp").forward(request, response);
+            request.getRequestDispatcher("Discipline/Operations/ShowInfoDisciplinePage.jsp").forward(request, response);
         }
     }
 }

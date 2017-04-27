@@ -8,13 +8,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-/**
- * Created by alex on 20/01/2017.
- */
 public class ClearAllDateController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Generator generator = new Generator();
-        boolean result = false;
+        boolean result ;
         result = generator.deleteDate();
         if(result){
             request.setAttribute("result", "success");
@@ -23,6 +20,6 @@ public class ClearAllDateController extends HttpServlet {
             request.setAttribute("menu", "admin");
             request.setAttribute("result", "unsuccess");
         }
-        request.getRequestDispatcher("ActionResultPageController").forward(request, response);
+        request.getRequestDispatcher("/Admin/ActionResultPageController").forward(request, response);
     }
 }

@@ -29,22 +29,22 @@ public class UpdateEmployeePageController  extends HttpServlet {
                 ArrayList<Faculty> f = daof.getAllByInstituteID(Integer.parseInt(request.getParameter("instituteID")));
                 request.setAttribute("facultiesList", f);
                 request.setAttribute("step", "step1");
-                request.getRequestDispatcher("Admin/Employee/Operations/UpdateEmployeePage.jsp").forward(request, response);
+                request.getRequestDispatcher("Employee/Operations/UpdateEmployeePage.jsp").forward(request, response);
             }else if(request.getParameter("step").equals("step2")){
                 ArrayList<Department> departments = daod.getAllByfacultyID(Integer.parseInt(request.getParameter("facultyID")));
                 request.setAttribute("step", "step2");
                 request.setAttribute("departmentsList", departments);
-                request.getRequestDispatcher("Admin/Employee/Operations/UpdateEmployeePage.jsp").forward(request, response);
+                request.getRequestDispatcher("Employee/Operations/UpdateEmployeePage.jsp").forward(request, response);
             }else if(request.getParameter("step").equals("step3")){
                 ArrayList<Employee> employees = daoe.getAllByDepartmentID(Integer.parseInt(request.getParameter("departmentID")));
                 request.setAttribute("step", "step3");
                 request.setAttribute("employeesList", employees);
-                request.getRequestDispatcher("Admin/Employee/Operations/UpdateEmployeePage.jsp").forward(request, response);
+                request.getRequestDispatcher("Employee/Operations/UpdateEmployeePage.jsp").forward(request, response);
             }else if(request.getParameter("step").equals("step4")){
                 Employee employee = daoe.getEntityById(Integer.parseInt(request.getParameter("employeeID")));
                 request.setAttribute("step", "step4");
                 request.setAttribute("employee", employee);
-                request.getRequestDispatcher("Admin/Employee/Operations/UpdateEmployeePage.jsp").forward(request, response);
+                request.getRequestDispatcher("Employee/Operations/UpdateEmployeePage.jsp").forward(request, response);
             }else if(request.getParameter("step").equals("step5")){
                 Employee em = new Employee();
                 em.setID(Integer.parseInt(request.getParameter("employeeID")));
@@ -80,13 +80,13 @@ public class UpdateEmployeePageController  extends HttpServlet {
                 daod.closeConnection();
                 daof.closeConnection();
                 daoe.closeConnection();
-                request.getRequestDispatcher("ActionResultPageController").forward(request, response);
+                request.getRequestDispatcher("/Admin/ActionResultPageController").forward(request, response);
             }else if(request.getParameter("step").equals("cancel")){
-                request.getRequestDispatcher("EmployeePageController").forward(request, response);
+                request.getRequestDispatcher("/Admin/EmployeePageController").forward(request, response);
             }else{
                 request.setAttribute("menu", "employee");
                 request.setAttribute("error", "incorrectValue");
-                request.getRequestDispatcher("ActionResultPageController").forward(request, response);
+                request.getRequestDispatcher("/Admin/ActionResultPageController").forward(request, response);
             }
         }else{
             DAOInstitute daoi = new DAOInstitute();
@@ -94,7 +94,7 @@ public class UpdateEmployeePageController  extends HttpServlet {
             daoi.closeConnection();
             request.setAttribute("institutesList", i);
             request.setAttribute("step", "step0");
-            request.getRequestDispatcher("Admin/Employee/Operations/UpdateEmployeePage.jsp").forward(request, response);
+            request.getRequestDispatcher("Employee/Operations/UpdateEmployeePage.jsp").forward(request, response);
         }
     }
 }

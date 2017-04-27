@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: alex
@@ -9,37 +10,43 @@
 <html>
 <head lang="en">
     <title>Create Group Page</title>
-    <link rel="stylesheet" type="text/css" href="main_css\main_styles.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}\main_css\main_styles.css">
 </head>
 
-<body class = "backgroungImageEmployee">
+<body class = "backgroundImageEmployee">
 
 <div class = "pageTitleText pageTitleTextEmployee">
-    Create Group Page (<c:out value="${department.getLongName()}"/>)
+    Create Group Page (<c:out value="${requestScope.department.getLongName()}"/>)
     <br />
     Please fill form:
 </div>
 <br />
 
 <div class = "pageContent pageContentEmployeePages pageContentEmployeePages300px">
-    <form action="CreateGroupPageController" method="post" accept-charset="UTF-8">
+    <form action="${pageContext.request.contextPath}/Employee/CreateGroupPageController" method="post" accept-charset="UTF-8">
+        <input type="hidden"  name="fillForm" value="yes">
         <table>
-            <input type="hidden"  name="fillForm" value="yes">
             <tr>
                 <td class = "textLabel textLabelEmployeePage">Group name:</td>
                 <td>
-                    <input class = "inputSettings inputEmployee inputAdminPageLongNames" type="text" name="fullGroupName" maxlength="30" required/>
+                    <label>
+                        <input class="inputSettings inputEmployee inputAdminPageLongNames" type="text"
+                               name="fullGroupName" maxlength="30" required/>
+                    </label>
                 </td>
             </tr>
             <tr>
                 <td class = "textLabel textLabelEmployeePage">Course Number:</td>
                 <td>
-                    <input class = "inputSettings inputEmployee numericInput2" type="number" name="courseNumber" maxlength="1" required/>
+                    <label>
+                        <input class="inputSettings inputEmployee numericInput2" type="number" name="courseNumber"
+                               maxlength="1" required/>
+                    </label>
                 </td>
             </tr>
             <tr>
                 <td colspan=2>
-                    <button onclick="submit"  class="controlButton controlButtonEmployeePage">Create</button>
+                    <button class="controlButton controlButtonEmployeePage">Create</button>
                 </td>
             </tr>
         </table>
@@ -47,11 +54,9 @@
 </div>
 
 <div>
-    <form action="CreateGroupPageController" method="post">
+    <form action="${pageContext.request.contextPath}/Employee/CreateGroupPageController" method="post">
         <input type="hidden"  name="fillForm" value="cancel">
-        <td colspan=2>
-            <button onclick="submit"  class="controlButton controlButtonEmployeePage">Cancel</button>
-        </td>
+        <button class="controlButton controlButtonEmployeePage">Cancel</button>
     </form>
 </div>
 

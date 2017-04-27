@@ -10,30 +10,31 @@
 <html>
 <head lang="en">
     <title>Show Discipline Info Page</title>
-    <link rel="stylesheet" type="text/css" href="main_css\main_styles.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}\main_css\main_styles.css">
 </head>
 
-<body class = "backgroungImageEmployee">
+<body class = "backgroundImageEmployee">
 
 <div class = "pageTitleText pageTitleTextEmployee">
     Show Discipline Info Page
 </div>
 <br />
 
-<c:if test = "${selected ne 'yes'}">
+<c:if test = "${requestScope.selected ne 'yes'}">
     <div class = "pageTitleText pageTitleTextEmployee">
         Select Discipline :
     </div>
 
     <div class = "pageContent pageContentEmployeePages pageContentAdminPages500px">
+        <jsp:useBean id="departments" scope="request" type="java.util.List"/>
         <c:forEach items="${departments}" var="department">
             <div class = "textLabelParagraph textLabelEmployeePage"><c:out value="${department.getLongName()}"/></div>
             <c:forEach items="${department.getDisciplines()}" var="discipline">
                 <div>
-                    <form action="ShowInfoDisciplinePageController" method="post" accept-charset="UTF-8">
+                    <form action="${pageContext.request.contextPath}/Employee/ShowInfoDisciplinePageController" method="post" accept-charset="UTF-8">
                         <input type="hidden"  name="step" value="step1">
                         <input type="hidden"  name="disciplineID" value="${discipline.getID()}">
-                        <button onclick="submit" class="itemButton itemButtonEmployeePages" ><c:out value="${discipline.getNameOfDiscipline()}"/></button>
+                        <button class="itemButton itemButtonEmployeePages" ><c:out value="${discipline.getNameOfDiscipline()}"/></button>
                     </form>
                 </div>
             </c:forEach>
@@ -42,30 +43,30 @@
 
 </c:if>
 
-<c:if test = "${selected eq 'yes'}">
+<c:if test = "${requestScope.selected eq 'yes'}">
     <div class = "pageTitleText pageTitleTextEmployee">
-        Discipline Info: <c:out value="${discipline.getNameOfDiscipline()}"/>
+        Discipline Info: <c:out value="${requestScope.discipline.getNameOfDiscipline()}"/>
     </div>
 
     <div class = "pageContent pageContentEmployeePages pageContentEmployeePages300px">
         <table>
             <tr>
                 <td class = "textLabel textLabelEmployeePage">Discipline name:</td>
-                <td class = "textLabel textLabelEmployeePage"><c:out value="${discipline.getNameOfDiscipline()}"/></td>
+                <td class = "textLabel textLabelEmployeePage"><c:out value="${requestScope.discipline.getNameOfDiscipline()}"/></td>
             </tr>
             <tr>
                 <td class = "textLabel textLabelEmployeePage">Count Of Lessons:</td>
-                <td class = "textLabel textLabelEmployeePage"><c:out value="${discipline.getCountOfLessons()}"/></td>
+                <td class = "textLabel textLabelEmployeePage"><c:out value="${requestScope.discipline.getCountOfLessons()}"/></td>
             </tr>
             <tr>
                 <td class = "textLabel textLabelEmployeePage">Exam:</td>
-                <td class = "textLabel textLabelEmployeePage"><c:out value="${discipline.isExam()}"/></td>
+                <td class = "textLabel textLabelEmployeePage"><c:out value="${requestScope.discipline.isExam()}"/></td>
             </tr>
             <tr>
                 <td class = "textLabel textLabelEmployeePage">Department Dependency:</td>
             </tr>
 
-            <c:forEach items="${departmentsDependency}" var="department">
+            <c:forEach items="${requestScope.departmentsDependency}" var="department">
                 <tr>
                     <td class = "textLabel textLabelEmployeePage"><c:out value="${department.getLongName()}"/></td>
                 </tr>
@@ -75,7 +76,7 @@
                 <td class = "textLabel textLabelEmployeePage">Teacher Dependency:</td>
             </tr>
 
-            <c:forEach items="${teachersDependency}" var="teacher">
+            <c:forEach items="${requestScope.teachersDependency}" var="teacher">
                 <tr>
                     <td class = "textLabel textLabelEmployeePage"><c:out value="${teacher.getSecondName()}"/> <c:out value="${teacher.getName()}"/></td>
                 </tr>
@@ -87,11 +88,9 @@
 
 
 <div>
-    <form action="ShowInfoDisciplinePageController" method="post">
+    <form action="${pageContext.request.contextPath}/Employee/ShowInfoDisciplinePageController" method="post">
         <input type="hidden"  name="step" value="cancel">
-        <td colspan=2>
-            <button onclick="submit"  class="controlButton controlButtonEmployeePage">Cancel</button>
-        </td>
+        <button class="controlButton controlButtonEmployeePage">Cancel</button>
     </form>
 </div>
 </body>

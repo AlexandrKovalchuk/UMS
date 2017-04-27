@@ -30,12 +30,12 @@ public class ShowInfoDepartmentPageController   extends HttpServlet {
                 ArrayList<Faculty> f = daof.getAllByInstituteID(Integer.parseInt(request.getParameter("instituteID")));
                 request.setAttribute("facultiesList", f);
                 request.setAttribute("step", "step1");
-                request.getRequestDispatcher("Admin/Department/Operations/ShowInfoDepartmentPage.jsp").forward(request, response);
+                request.getRequestDispatcher("Department/Operations/ShowInfoDepartmentPage.jsp").forward(request, response);
             }else if(request.getParameter("step").equals("step2")){
                 ArrayList<Department> departments = daod.getAllByfacultyID(Integer.parseInt(request.getParameter("facultyID")));
                 request.setAttribute("step", "step2");
                 request.setAttribute("departmentsList", departments);
-                request.getRequestDispatcher("Admin/Department/Operations/ShowInfoDepartmentPage.jsp").forward(request, response);
+                request.getRequestDispatcher("Department/Operations/ShowInfoDepartmentPage.jsp").forward(request, response);
             }else if(request.getParameter("step").equals("step3")){
                 DAOEmployee daoe = new DAOEmployee();
                 DAOTeacher daoTeacher = new DAOTeacher();
@@ -68,13 +68,13 @@ public class ShowInfoDepartmentPageController   extends HttpServlet {
                 daoGroup.closeConnection();
                 request.setAttribute("step", "step3");
                 request.setAttribute("department", department);
-                request.getRequestDispatcher("Admin/Department/Operations/ShowInfoDepartmentPage.jsp").forward(request, response);
+                request.getRequestDispatcher("Department/Operations/ShowInfoDepartmentPage.jsp").forward(request, response);
             }else if(request.getParameter("step").equals("cancel")){
-                request.getRequestDispatcher("DepartmentPageController").forward(request, response);
+                request.getRequestDispatcher("/Admin/DepartmentPageController").forward(request, response);
             }else{
                 request.setAttribute("menu", "department");
                 request.setAttribute("error", "incorrectValue");
-                request.getRequestDispatcher("ActionResultPageController").forward(request, response);
+                request.getRequestDispatcher("/Admin/ActionResultPageController").forward(request, response);
             }
             daof.closeConnection();
             daod.closeConnection();
@@ -84,7 +84,7 @@ public class ShowInfoDepartmentPageController   extends HttpServlet {
             daoi.closeConnection();
             request.setAttribute("institutesList", i);
             request.setAttribute("step", "step0");
-            request.getRequestDispatcher("Admin/Department/Operations/ShowInfoDepartmentPage.jsp").forward(request, response);
+            request.getRequestDispatcher("Department/Operations/ShowInfoDepartmentPage.jsp").forward(request, response);
         }
     }
 }

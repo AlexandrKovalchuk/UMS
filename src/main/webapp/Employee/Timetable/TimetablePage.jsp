@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: alex
@@ -9,10 +10,10 @@
 <html>
 <head>
     <title>Timetable Page</title>
-    <link rel="stylesheet" type="text/css" href="main_css\main_styles.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}\main_css\main_styles.css">
 </head>
 
-<body class = "backgroungImageEmployee">
+<body class = "backgroundImageEmployee">
 
 <div class = "pageTitleText pageTitleTextEmployee">
     Welcome to Timetable Page
@@ -27,41 +28,33 @@
 <div class="itemsBlock">
     <div>
         <div>
-            <form action="TimetablePageController" method="post">
+            <form action="${pageContext.request.contextPath}/Employee/TimetablePageController" method="post">
                 <input type="hidden"  name="operationType" value="create">
-                <td colspan=2>
-                    <button onclick="submit"  class="topicButton topicButtonEmployeePage">Create Timetable</button>
-                </td>
+                <button class="topicButton topicButtonEmployeePage">Create Timetable</button>
             </form>
         </div>
         <br />
 
         <div>
-            <form action="TimetablePageController" method="post">
+            <form action="${pageContext.request.contextPath}/Employee/TimetablePageController" method="post">
                 <input type="hidden"  name="operationType" value="update">
-                <td colspan=2>
-                    <button onclick="submit"  class="topicButton topicButtonEmployeePage">Update  Timetable</button>
-                </td>
+                <button class="topicButton topicButtonEmployeePage">Update  Timetable</button>
             </form>
         </div>
         <br />
 
         <div>
-            <form action="TimetablePageController" method="post">
+            <form action="${pageContext.request.contextPath}/Employee/TimetablePageController" method="post">
                 <input type="hidden"  name="operationType" value="generateHTML">
-                <td colspan=2>
-                    <button onclick="submit"  class="topicButton topicButtonEmployeePage">Generate Timetable in HTML</button>
-                </td>
+                <button class="topicButton topicButtonEmployeePage">Generate Timetable in HTML</button>
             </form>
         </div>
         <br />
 
         <div>
-            <form action="TimetablePageController" method="post">
+            <form action="${pageContext.request.contextPath}/Employee/TimetablePageController" method="post">
                 <input type="hidden"  name="operationType" value="cancel">
-                <td colspan=2>
-                    <button onclick="submit"  class="controlButton controlButtonEmployeePage">Cancel</button>
-                </td>
+                <button class="controlButton controlButtonEmployeePage">Cancel</button>
             </form>
         </div>
         <br />

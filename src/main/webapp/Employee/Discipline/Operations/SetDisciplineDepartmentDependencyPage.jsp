@@ -10,43 +10,43 @@
 <html>
 <head lang="en">
     <title>Set Discipline Department Dependency Page</title>
-    <link rel="stylesheet" type="text/css" href="main_css\main_styles.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}\main_css\main_styles.css">
 </head>
 
-<body class = "backgroungImageEmployee">
+<body class = "backgroundImageEmployee">
 
 <div class = "pageTitleText pageTitleTextEmployee">
-    Set Discipline Department Dependency Page (<c:out value="${department.getLongName()}"/>)
+    Set Discipline Department Dependency Page (<c:out value="${requestScope.department.getLongName()}"/>)
 </div>
 <br />
 
-<c:if test = "${selected ne 'yes'}">
+<c:if test = "${requestScope.selected ne 'yes'}">
     <div class = "pageTitleText pageTitleTextEmployee">
         Select Discipline to Set Dependency:
     </div>
 
     <div class = "pageContent pageContentEmployeePages pageContentAdminPages500px">
         <div class = "textLabelParagraph textLabelEmployeePage">Connected with current department</div>
-        <c:forEach items="${disciplinesConnectedWithDepartment}" var="discipline">
+        <c:forEach items="${requestScope.disciplinesConnectedWithDepartment}" var="discipline">
             <div>
-                <form action="SetDisciplineDepartmentDependencyPageController" method="post" accept-charset="UTF-8">
+                <form action="${pageContext.request.contextPath}/Employee/SetDisciplineDepartmentDependencyPageController" method="post" accept-charset="UTF-8">
                     <input type="hidden"  name="step" value="step1">
                     <input type="hidden"  name="state" value="connected">
                     <input type="hidden"  name="disciplineID" value="${discipline.getID()}">
-                    <button onclick="submit" class="itemButton itemButtonEmployeePages" ><c:out value="${discipline.getNameOfDiscipline()}"/></button>
+                    <button class="itemButton itemButtonEmployeePages" ><c:out value="${discipline.getNameOfDiscipline()}"/></button>
                 </form>
             </div>
         </c:forEach>
 
         <div class = "textLabelParagraph textLabelEmployeePage">Not connected with current department</div>
 
-        <c:forEach items="${disciplinesNotConnectedWithDepartment}" var="discipline">
+        <c:forEach items="${requestScope.disciplinesNotConnectedWithDepartment}" var="discipline">
             <div>
-                <form action="SetDisciplineDepartmentDependencyPageController" method="post" accept-charset="UTF-8">
+                <form action="${pageContext.request.contextPath}/Employee/SetDisciplineDepartmentDependencyPageController" method="post" accept-charset="UTF-8">
                     <input type="hidden"  name="step" value="step1">
                     <input type="hidden"  name="state" value="notConnected">
                     <input type="hidden"  name="disciplineID" value="${discipline.getID()}">
-                    <button onclick="submit" class="itemButton itemButtonEmployeePages" ><c:out value="${discipline.getNameOfDiscipline()}"/></button>
+                    <button class="itemButton itemButtonEmployeePages" ><c:out value="${discipline.getNameOfDiscipline()}"/></button>
                 </form>
             </div>
         </c:forEach>
@@ -54,73 +54,83 @@
 
 </c:if>
 
-<c:if test = "${selected eq 'yes'}">
+<c:if test = "${requestScope.selected eq 'yes'}">
     <div class = "pageTitleText pageTitleTextEmployee">
         Please fill form:
     </div>
 
     <div class = "pageContent pageContentEmployeePages pageContentEmployeePages300px">
-    <c:if test = "${state eq 'connected'}">
-        <form action="SetDisciplineDepartmentDependencyPageController" method="post" accept-charset="UTF-8">
+    <c:if test = "${requestScope.state eq 'connected'}">
+        <form action="${pageContext.request.contextPath}/Employee/SetDisciplineDepartmentDependencyPageController" method="post" accept-charset="UTF-8">
+            <input type="hidden"  name="step" value="step2">
+            <input type="hidden"  name="action" value="update">
+            <input type="hidden"  name="disciplineID" value="${requestScope.discipline.getID()}" >
             <table>
-                <input type="hidden"  name="step" value="step2">
-                <input type="hidden"  name="action" value="update">
-                <input type="hidden"  name="disciplineID" value="${discipline.getID()}" >
-
                 <tr>
                     <td class = "textLabel textLabelEmployeePage">Course Number:</td>
                     <td>
-                        <input class = "inputSettings inputEmployee" type="number" name="courseNumber"  maxlength="1" value="${dependencyObject.getCourseNumber()}" required/>
+                        <label>
+                            <input class="inputSettings inputEmployee" type="number" name="courseNumber" maxlength="1"
+                                   value="${requestScope.dependencyObject.getCourseNumber()}" required/>
+                        </label>
                     </td>
                 </tr>
                 <tr>
                     <td class = "textLabel textLabelEmployeePage">Semester Number:</td>
                     <td>
-                        <input class = "inputSettings inputEmployee" type="number" name="semesterNumber"  maxlength="1" value="${dependencyObject.getSemesterNumber()}" required/>
+                        <label>
+                            <input class="inputSettings inputEmployee" type="number" name="semesterNumber" maxlength="1"
+                                   value="${requestScope.dependencyObject.getSemesterNumber()}" required/>
+                        </label>
                     </td>
                 </tr>
                 <tr>
                     <td colspan=2>
-                        <button onclick="submit"  class="controlButton controlButtonEmployeePage">Update</button>
+                        <button class="controlButton controlButtonEmployeePage">Update</button>
                     </td>
                 </tr>
             </table>
         </form>
-        <form action="SetDisciplineDepartmentDependencyPageController" method="post" accept-charset="UTF-8">
+        <form action="${pageContext.request.contextPath}/Employee/SetDisciplineDepartmentDependencyPageController" method="post" accept-charset="UTF-8">
+            <input type="hidden"  name="step" value="step2">
+            <input type="hidden"  name="action" value="remove">
+            <input type="hidden"  name="disciplineID" value="${requestScope.discipline.getID()}" >
             <table>
-                <input type="hidden"  name="step" value="step2">
-                <input type="hidden"  name="action" value="remove">
-                <input type="hidden"  name="disciplineID" value="${discipline.getID()}" >
                 <tr>
                     <td colspan=2>
-                        <button onclick="submit"  class="controlButton controlButtonEmployeePage">Remove</button>
+                        <button class="controlButton controlButtonEmployeePage">Remove</button>
                     </td>
                 </tr>
             </table>
         </form>
     </c:if>
-    <c:if test = "${state eq 'notConnected'}">
-        <form action="SetDisciplineDepartmentDependencyPageController" method="post" accept-charset="UTF-8">
+    <c:if test = "${requestScope.state eq 'notConnected'}">
+        <form action="${pageContext.request.contextPath}/Employee/SetDisciplineDepartmentDependencyPageController" method="post" accept-charset="UTF-8">
+            <input type="hidden"  name="step" value="step2">
+            <input type="hidden"  name="action" value="new">
+            <input type="hidden"  name="disciplineID" value="${requestScope.discipline.getID()}" >
             <table>
-                <input type="hidden"  name="step" value="step2">
-                <input type="hidden"  name="action" value="new">
-                <input type="hidden"  name="disciplineID" value="${discipline.getID()}" >
-
-                <tr>
+               <tr>
                     <td class = "textLabel textLabelEmployeePage">Course Number:</td>
                     <td>
-                        <input class = "inputSettings inputEmployee" type="number" name="courseNumber"  maxlength="1" required/>
+                        <label>
+                            <input class="inputSettings inputEmployee" type="number" name="courseNumber" maxlength="1"
+                                   required/>
+                        </label>
                     </td>
                 </tr>
                 <tr>
                     <td class = "textLabel textLabelEmployeePage">Semester Number:</td>
                     <td>
-                        <input class = "inputSettings inputEmployee" type="number" name="semesterNumber"  maxlength="1" required/>
+                        <label>
+                            <input class="inputSettings inputEmployee" type="number" name="semesterNumber" maxlength="1"
+                                   required/>
+                        </label>
                     </td>
                 </tr>
                 <tr>
                     <td colspan=2>
-                        <button onclick="submit"  class="controlButton controlButtonEmployeePage">Set</button>
+                        <button class="controlButton controlButtonEmployeePage">Set</button>
                     </td>
                 </tr>
             </table>
@@ -130,11 +140,9 @@
 </c:if>
 
 <div>
-    <form action="SetDisciplineDepartmentDependencyPageController" method="post">
+    <form action="${pageContext.request.contextPath}/Employee/SetDisciplineDepartmentDependencyPageController" method="post">
         <input type="hidden"  name="step" value="cancel">
-        <td colspan=2>
-            <button onclick="submit"  class="controlButton controlButtonEmployeePage">Cancel</button>
-        </td>
+        <button class="controlButton controlButtonEmployeePage">Cancel</button>
     </form>
 </div>
 

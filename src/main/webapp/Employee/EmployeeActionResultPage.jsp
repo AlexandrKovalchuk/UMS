@@ -10,37 +10,38 @@
 <html>
 
 <head>
-    <link rel="stylesheet" type="text/css" href="main_css\main_styles.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}\main_css\main_styles.css">
     <title>Action Result Page</title>
 </head>
 
-<body class = "backgroungImageEmployee">
+<body class = "backgroundImageEmployee">
 
 <div class = "pageTitleText pageTitleTextEmployee">
     Action Result Page
 </div>
 <br />
 
-<c:if test = "${result eq 'success'}">
+<c:if test = "${requestScope.result eq 'success'}">
     <div class = "pageTitleText pageTitleTextGood">
         Operation was success!
     </div>
 </c:if>
 
-<c:if test = "${result eq 'unsuccess'}">
+<c:if test = "${requestScope.result eq 'unsuccess'}">
     <div class = "pageTitleText pageTitleTextBad">
         Operation was not success!
     </div>
 </c:if>
 
-<form action="ActionResultEmployeeMenuPageController" method="post">
-    <input type="hidden"  name="redirectTo" value="${menu}">
-    <tr>
-        <td >
-            <button onclick="submit"  class="controlButton controlButtonEmployeePage">OK</button>
-            <br>
-        </td>
-    </tr>
+<c:if test = "${requestScope.result eq 'noAccessToArea'}">
+    <div class = "pageTitleText pageTitleTextBad">
+        No access to area!
+    </div>
+</c:if>
+
+<form action="${pageContext.request.contextPath}/Employee/ActionResultEmployeeMenuPageController" method="post">
+    <input type="hidden"  name="redirectTo" value="${requestScope.menu}">
+    <button class="controlButton controlButtonEmployeePage">OK</button>
 </form>
 
 </body>

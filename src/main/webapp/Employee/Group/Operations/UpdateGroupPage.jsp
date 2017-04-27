@@ -10,81 +10,82 @@
 <html>
 <head lang="en">
     <title>Update Group Page</title>
-    <link rel="stylesheet" type="text/css" href="main_css\main_styles.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}\main_css\main_styles.css">
 </head>
 
-<body class = "backgroungImageEmployee">
+<body class = "backgroundImageEmployee">
 
 <div class = "pageTitleText pageTitleTextEmployee">
-    Update Group Page (<c:out value="${department.getLongName()}"/>)
+    Update Group Page (<c:out value="${requestScope.department.getLongName()}"/>)
 </div>
 <br />
 
-<c:if test = "${selected ne 'yes'}">
+<c:if test = "${requestScope.selected ne 'yes'}">
     <div class = "pageTitleText pageTitleTextEmployee">
         Select Group to update:
     </div>
 
     <div class = "pageContent pageContentEmployeePages pageContentAdminPages500px">
+        <jsp:useBean id="departments" scope="request" type="java.util.List"/>
         <c:forEach items="${departments}" var="department">
             <div class = "textLabelParagraph textLabelEmployeePage"><c:out value="${department.getLongName()}"/></div>
             <div class = "textLabelParagraph textLabelEmployeePage">Course #1</div>
             <c:forEach items="${department.getGroups1()}" var="group">
                 <div>
-                    <form action="UpdateGroupPageController" method="post" accept-charset="UTF-8">
+                    <form action="${pageContext.request.contextPath}/Employee/UpdateGroupPageController" method="post" accept-charset="UTF-8">
                         <input type="hidden"  name="step" value="step1">
                         <input type="hidden"  name="groupID" value="${group.getID()}">
-                        <button onclick="submit" class="itemButton itemButtonEmployeePages" ><c:out value="${group.getFullGroupName()}"/></button>
+                        <button class="itemButton itemButtonEmployeePages" ><c:out value="${group.getFullGroupName()}"/></button>
                     </form>
                 </div>
             </c:forEach>
             <div class = "textLabelParagraph textLabelEmployeePage">Course #2</div>
             <c:forEach items="${department.getGroups2()}" var="group">
                 <div>
-                    <form action="UpdateGroupPageController" method="post" accept-charset="UTF-8">
+                    <form action="${pageContext.request.contextPath}/Employee/UpdateGroupPageController" method="post" accept-charset="UTF-8">
                         <input type="hidden"  name="step" value="step1">
                         <input type="hidden"  name="groupID" value="${group.getID()}">
-                        <button onclick="submit" class="itemButton itemButtonEmployeePages" ><c:out value="${group.getFullGroupName()}"/></button>
+                        <button class="itemButton itemButtonEmployeePages" ><c:out value="${group.getFullGroupName()}"/></button>
                     </form>
                 </div>
             </c:forEach>
             <div class = "textLabelParagraph textLabelEmployeePage">Course #3</div>
             <c:forEach items="${department.getGroups3()}" var="group">
                 <div>
-                    <form action="UpdateGroupPageController" method="post" accept-charset="UTF-8">
+                    <form action="${pageContext.request.contextPath}/Employee/UpdateGroupPageController" method="post" accept-charset="UTF-8">
                         <input type="hidden"  name="step" value="step1">
                         <input type="hidden"  name="groupID" value="${group.getID()}">
-                        <button onclick="submit" class="itemButton itemButtonEmployeePages" ><c:out value="${group.getFullGroupName()}"/></button>
+                        <button class="itemButton itemButtonEmployeePages" ><c:out value="${group.getFullGroupName()}"/></button>
                     </form>
                 </div>
             </c:forEach>
             <div class = "textLabelParagraph textLabelEmployeePage">Course #4</div>
             <c:forEach items="${department.getGroups4()}" var="group">
                 <div>
-                    <form action="UpdateGroupPageController" method="post" accept-charset="UTF-8">
+                    <form action="${pageContext.request.contextPath}/Employee/UpdateGroupPageController" method="post" accept-charset="UTF-8">
                         <input type="hidden"  name="step" value="step1">
                         <input type="hidden"  name="groupID" value="${group.getID()}">
-                        <button onclick="submit" class="itemButton itemButtonEmployeePages" ><c:out value="${group.getFullGroupName()}"/></button>
+                        <button class="itemButton itemButtonEmployeePages" ><c:out value="${group.getFullGroupName()}"/></button>
                     </form>
                 </div>
             </c:forEach>
             <div class = "textLabelParagraph textLabelEmployeePage">Course #5</div>
             <c:forEach items="${department.getGroups5()}" var="group">
                 <div>
-                    <form action="UpdateGroupPageController" method="post" accept-charset="UTF-8">
+                    <form action="${pageContext.request.contextPath}/Employee/UpdateGroupPageController" method="post" accept-charset="UTF-8">
                         <input type="hidden"  name="step" value="step1">
                         <input type="hidden"  name="groupID" value="${group.getID()}">
-                        <button onclick="submit" class="itemButton itemButtonEmployeePages" ><c:out value="${group.getFullGroupName()}"/></button>
+                        <button class="itemButton itemButtonEmployeePages" ><c:out value="${group.getFullGroupName()}"/></button>
                     </form>
                 </div>
             </c:forEach>
             <div class = "textLabelParagraph textLabelEmployeePage">Course #6</div>
             <c:forEach items="${department.getGroups6()}" var="group">
                 <div>
-                    <form action="UpdateGroupPageController" method="post" accept-charset="UTF-8">
+                    <form action="${pageContext.request.contextPath}/Employee/UpdateGroupPageController" method="post" accept-charset="UTF-8">
                         <input type="hidden"  name="step" value="step1">
                         <input type="hidden"  name="groupID" value="${group.getID()}">
-                        <button onclick="submit" class="itemButton itemButtonEmployeePages" ><c:out value="${group.getFullGroupName()}"/></button>
+                        <button class="itemButton itemButtonEmployeePages" ><c:out value="${group.getFullGroupName()}"/></button>
                     </form>
                 </div>
             </c:forEach>
@@ -93,31 +94,37 @@
 
 </c:if>
 
-<c:if test = "${selected eq 'yes'}">
+<c:if test = "${requestScope.selected eq 'yes'}">
     <div class = "pageTitleText pageTitleTextEmployee">
         Please fill form:
     </div>
 
     <div class = "pageContent pageContentEmployeePages pageContentEmployeePages300px">
-        <form action="UpdateGroupPageController" method="post" accept-charset="UTF-8">
+        <form action="${pageContext.request.contextPath}/Employee/UpdateGroupPageController" method="post" accept-charset="UTF-8">
+            <input type="hidden"  name="step" value="step2">
+            <input type="hidden"  name="groupID" value="${requestScope.group.getID()}" >
             <table>
-                <input type="hidden"  name="step" value="step2">
-                <input type="hidden"  name="groupID" value="${group.getID()}" >
                 <tr>
                     <td class = "textLabel textLabelEmployeePage">Group name:</td>
                     <td>
-                        <input class = "inputSettings inputEmployee inputAdminPageLongNames" type="text" name="fullGroupName" maxlength="30" value="${group.getFullGroupName()}" required/>
+                        <label>
+                            <input class="inputSettings inputEmployee inputAdminPageLongNames" type="text"
+                                   name="fullGroupName" maxlength="30" value="${requestScope.group.getFullGroupName()}" required/>
+                        </label>
                     </td>
                 </tr>
                 <tr>
                     <td class = "textLabel textLabelEmployeePage">Course Number:</td>
                     <td>
-                        <input class = "inputSettings inputEmployee numericInput2" type="number" name="courseNumber" maxlength="1" value="${group.getCourseNumber()}" required/>
+                        <label>
+                            <input class="inputSettings inputEmployee numericInput2" type="number" name="courseNumber"
+                                   maxlength="1" value="${requestScope.group.getCourseNumber()}" required/>
+                        </label>
                     </td>
                 </tr>
                 <tr>
                     <td colspan=2>
-                        <button onclick="submit"  class="controlButton controlButtonEmployeePage">Update</button>
+                        <button class="controlButton controlButtonEmployeePage">Update</button>
                     </td>
                 </tr>
             </table>
@@ -126,11 +133,9 @@
 </c:if>
 
 <div>
-    <form action="UpdateGroupPageController" method="post">
+    <form action="${pageContext.request.contextPath}/Employee/UpdateGroupPageController" method="post">
         <input type="hidden"  name="step" value="cancel">
-        <td colspan=2>
-            <button onclick="submit"  class="controlButton controlButtonEmployeePage">Cancel</button>
-        </td>
+        <button class="controlButton controlButtonEmployeePage">Cancel</button>
     </form>
 </div>
 

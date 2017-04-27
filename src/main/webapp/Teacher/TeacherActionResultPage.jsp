@@ -10,28 +10,32 @@
 <html>
 <head>
     <title>Teacher Action Result Page</title>
-    <link rel="stylesheet" type="text/css" href="main_css\main_styles.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}\main_css\main_styles.css">
 </head>
 
-<body class = "backgroungImageTeacher">
+<body class = "backgroundImageTeacher">
 
 <div class = "pageTitleText pageTitleTextTeacher">
     Teacher Action Result Page
 </div>
 <br />
 
-<c:if test = "${result eq 'wrongParameter'}">
+<c:if test = "${requestScope.result eq 'wrongParameter'}">
     <div class = "pageTitleText pageTitleTextBad">
         Wrong Parameter. Please contact Your Admin!
     </div>
 </c:if>
 
+<c:if test = "${requestScope.result eq 'noAccessToArea'}">
+    <div class = "pageTitleText pageTitleTextBad">
+        No access to area!
+    </div>
+</c:if>
+
 <div>
-    <form action="ActionResultTeacherMenuPageController" method="post">
-        <input type="hidden"  name="redirectTo" value="${menu}">
-        <td colspan=2>
-            <button onclick="submit"  class="controlButton controlButtonTeacherPage">Ok</button>
-        </td>
+    <form action="${pageContext.request.contextPath}/Teacher/ActionResultTeacherMenuPageController" method="post">
+        <input type="hidden"  name="redirectTo" value="${requestScope.menu}">
+        <button class="controlButton controlButtonTeacherPage">Ok</button>
     </form>
 </div>
 <br />

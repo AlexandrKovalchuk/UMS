@@ -9,9 +9,9 @@
 <html>
 <head lang="en">
     <title>Create Institute Page</title>
-    <link rel="stylesheet" type="text/css" href="main_css\main_styles.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}\main_css\main_styles.css">
 </head>
-<body class = "backgroungImageAdmin">
+<body class = "backgroundImageAdmin">
 <div class = "pageTitleText pageTitleTextAdmin">
     Create Institute Page
     <br />
@@ -19,36 +19,39 @@
 </div>
 <br />
 <div class = "pageContent pageContentAdminPages pageContentAdminPagesTwoFieldsSize">
-    <form action="CreateInstitutePageController" method="post" accept-charset="UTF-8">
+    <form action="${pageContext.request.contextPath}/Admin/CreateInstitutePageController" method="post" accept-charset="UTF-8">
+        <input type="hidden"  name="fillForm" value="yes">
         <table>
-            <input type="hidden"  name="fillForm" value="yes">
             <tr>
                 <td class = "textLabel textLabelAdminPage">Long name:</td>
                 <td>
-                    <input class = "inputSettings inputAdminPage inputAdminPageLongNames" type="text" name="longName" maxlength="70" required/>
+                    <label>
+                        <input class="inputSettings inputAdminPage inputAdminPageLongNames" type="text" name="longName"
+                               maxlength="70" required/>
+                    </label>
                 </td>
             </tr>
             <tr>
                 <td class = "textLabel textLabelAdminPage">Short name:</td>
                 <td>
-                    <input class = "inputSettings inputAdminPage" type="text" name="shortName" maxlength="10" required/>
+                    <label>
+                        <input class="inputSettings inputAdminPage" type="text" name="shortName" maxlength="10"
+                               required/>
+                    </label>
                 </td>
             </tr>
             <tr>
                 <td colspan=2>
-                    <button onclick="submit"  class="controlButton controlButtonAdminPage">Create</button>
+                    <button class="controlButton controlButtonAdminPage">Create</button>
                 </td>
             </tr>
         </table>
     </form>
 </div>
 <div>
-    <form action="CreateInstitutePageController" method="post">
+    <form action="${pageContext.request.contextPath}/Admin/CreateInstitutePageController" method="post">
         <input type="hidden"  name="fillForm" value="cancel">
-        <td colspan=2>
-            <button onclick="submit"  class="controlButton controlButtonAdminPage">Cancel</button>
-
-        </td>
+        <button class="controlButton controlButtonAdminPage">Cancel</button>
     </form>
 </div>
 <br />

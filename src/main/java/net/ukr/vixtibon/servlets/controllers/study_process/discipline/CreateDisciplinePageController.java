@@ -37,20 +37,20 @@ public class CreateDisciplinePageController  extends HttpServlet {
                     request.setAttribute("result", "unsuccess");
                 }
                 daodi.closeConnection();
-                request.getRequestDispatcher("ActionResultEmployeeMenuPageController").forward(request, response);
+                request.getRequestDispatcher("/Employee/ActionResultEmployeeMenuPageController").forward(request, response);
             }else if(request.getParameter("fillForm").equals("cancel")){
-                request.getRequestDispatcher("DisciplinePageController").forward(request, response);
+                request.getRequestDispatcher("/Employee/DisciplinePageController").forward(request, response);
             }else{
                 request.setAttribute("menu", "discipline");
                 request.setAttribute("error", "incorrectValue");
-                request.getRequestDispatcher("ActionResultEmployeeMenuPageController").forward(request, response);
+                request.getRequestDispatcher("/Employee/ActionResultEmployeeMenuPageController").forward(request, response);
             }
         }else{
             DAODepartment daod = new DAODepartment();
             Department department = daod.getEntityById((int) session.getAttribute("departmentID"));
             daod.closeConnection();
             request.setAttribute("department", department);
-            request.getRequestDispatcher("Employee/Discipline/Operations/CreateDisciplinePage.jsp").forward(request, response);
+            request.getRequestDispatcher("Discipline/Operations/CreateDisciplinePage.jsp").forward(request, response);
         }
     }
 }

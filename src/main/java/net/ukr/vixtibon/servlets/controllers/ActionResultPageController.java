@@ -7,25 +7,32 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class ActionResultPageController extends HttpServlet {
+
+    protected void doGet(HttpServletRequest request,HttpServletResponse response) throws IOException,ServletException{
+        this.doPost(request,response);
+    }
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if(request.getParameterMap().containsKey("redirectTo")){
             if(request.getParameter("redirectTo").equals("institute")){
-                request.getRequestDispatcher("InstitutePageController").forward(request, response);
+                request.getRequestDispatcher("/Admin/InstitutePageController").forward(request, response);
             }else if (request.getParameter("redirectTo").equals("faculty")){
-                request.getRequestDispatcher("FacultyPageController").forward(request, response);
+                request.getRequestDispatcher("/Admin/FacultyPageController").forward(request, response);
             }else if (request.getParameter("redirectTo").equals("department")){
-                request.getRequestDispatcher("DepartmentPageController").forward(request, response);
+                request.getRequestDispatcher("/Admin/DepartmentPageController").forward(request, response);
             }else if (request.getParameter("redirectTo").equals("employee")){
-                request.getRequestDispatcher("EmployeePageController").forward(request, response);
+                request.getRequestDispatcher("/Admin/EmployeePageController").forward(request, response);
             }else if (request.getParameter("redirectTo").equals("admin")){
-                request.getRequestDispatcher("AdminPageController").forward(request, response);
+                request.getRequestDispatcher("/Admin/AdminPageController").forward(request, response);
+            }else if (request.getParameter("redirectTo").equals("")){
+                request.getRequestDispatcher("/Admin/AdminPageController").forward(request, response);
             }else {
-                request.getRequestDispatcher("AdminPageController").forward(request, response);
+                request.getRequestDispatcher("/Admin/AdminPageController").forward(request, response);
             }
         }else{
             request.setAttribute("result", request.getAttribute("result"));
             request.setAttribute("menu", request.getAttribute("menu"));
-            request.getRequestDispatcher("Admin/AdminActionResultPage.jsp").forward(request, response);
+            request.getRequestDispatcher("AdminActionResultPage.jsp").forward(request, response);
         }
     }
 }
