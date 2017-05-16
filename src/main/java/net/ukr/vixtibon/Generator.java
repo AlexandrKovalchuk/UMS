@@ -23,9 +23,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-/**
- * Created by akovalchuk on 5/21/2015.
- */
 public class Generator {
     private ArrayList<String> FemaleNames = openStringsArray("C:\\Users\\alex\\IdeaProjects\\UMS\\UMS\\FemaleNames.txt");
     private ArrayList<String> MaleNames = openStringsArray("C:\\Users\\alex\\IdeaProjects\\UMS\\UMS\\MaleNames.txt");
@@ -37,19 +34,11 @@ public class Generator {
     private ArrayList<String> City = openStringsArray("C:\\Users\\alex\\IdeaProjects\\UMS\\UMS\\City.txt");
     private ArrayList<String> gumvs = openStringsArray("C:\\Users\\alex\\IdeaProjects\\UMS\\UMS\\gumvs.txt");
     private ArrayList<String> Street = openStringsArray("C:\\Users\\alex\\IdeaProjects\\UMS\\UMS\\Street.txt");
-    private ArrayList<String> month = openStringsArray("C:\\Users\\alex\\IdeaProjects\\UMS\\UMS\\month.txt");
+    //private ArrayList<String> month = openStringsArray("C:\\Users\\alex\\IdeaProjects\\UMS\\UMS\\month.txt");
 
-    int insrituteIDCounter = 1;
-    int facultyIDCounter = 1;
-    int chairIDCounter = 1;
     int groupIDCounter = 1;
 
-    int studentIDCounter = 1;
     int emploeeIDCounter = 1;
-    int teacherIDCounter = 1;
-
-    int disciplineIDCounter = 1;
-    int timeTableIDcounter = 1;
 
 
     String[] tapleParametersList = {
@@ -88,6 +77,8 @@ public class Generator {
         DAOStudent daoStudent = new DAOStudent();
         DAOLesson daoLesson = new DAOLesson();
         DAODisciplineTeacherDependencyObject daoDisciplineTeacherDependencyObject = new DAODisciplineTeacherDependencyObject();
+        DAOStudentAttendance daoStudentAttendance = new DAOStudentAttendance();
+        DAOStudentProgress daoStudentProgress = new DAOStudentProgress();
 
         boolean result = true;
         daoInstitute.createNONE();
@@ -145,7 +136,7 @@ public class Generator {
 
                 daoDayRequirements.updateLessonArray(dayRequirementsObject);
 
-                int countOfDisciplines = 30 + rn.nextInt(10);
+                int countOfDisciplines = 90 + rn.nextInt(10);
                 d.setDisciplines(generateDisciplinesList(countOfDisciplines,d));
                 ArrayList<Integer> disciplinesID = new ArrayList<>();
 
@@ -177,13 +168,14 @@ public class Generator {
                     disciplineDepartmentDependencyObject.setCourseNumber(courseCounter);
                     disciplineDepartmentDependencyObject.setSemesterNumber(semecterCounter);
                     daoDisciplineDepartmentDependency.create(disciplineDepartmentDependencyObject);
+
                     if(courseCounter == 6){
-                        courseCounter = 0;
+                        courseCounter = 1;
                     }
                     if(semecterCounter == 2){
                         semecterCounter = 0;
+                        courseCounter++;
                     }
-                    courseCounter++;
                     semecterCounter++;
                 }
 
@@ -258,8 +250,51 @@ public class Generator {
                         lb.setLogIn(student.getLogin());
                         lb.setAccessID(student.getID());
                         daoLogin.create(lb);
+                        HashMap<Integer, StudentAttendanceObject> saoa = daoStudentAttendance.getAllByStudentID(studentID);
+                        for(Map.Entry<Integer, StudentAttendanceObject> entry : saoa.entrySet()) {
+                            if(daoDisciplineDepartmentDependency.getByDisciplineIDDepartmentID(entry.getValue().getDisciplineID(),group.getDepartmentID()).getCourseNumber() == 1){
+                                for(int i = 0; i < entry.getValue().getAttendance().size() - 3; i++){
+                                    int value = rn.nextInt(10);
+                                    if(value > 3){
+                                        entry.getValue().getAttendance().set(i,"p");
+                                    }else{
+                                        entry.getValue().getAttendance().set(i,"a");
+                                    }
+                                }
+                                for(int i = entry.getValue().getAttendance().size() - 3; i < entry.getValue().getAttendance().size(); i++){
+                                    entry.getValue().getAttendance().set(i,"");
+                                }
+                                daoStudentAttendance.update(entry.getValue());
+                            }
+                        }
+
+                        HashMap<Integer, StudentProgressObject> spoa = daoStudentProgress.getAllByStudentID(studentID);
+                        for(Map.Entry<Integer, StudentProgressObject> entry : spoa.entrySet()) {
+                            if(daoDisciplineDepartmentDependency.getByDisciplineIDDepartmentID(entry.getValue().getDisciplineID(),group.getDepartmentID()).getCourseNumber() == 1){
+                                for(int i = 0; i < entry.getValue().getProgress().size() - 3; i++){
+                                    int value = rn.nextInt(10);
+                                    if(value == 10){
+                                        entry.getValue().getProgress().set(i,"A");
+                                    }else if((value < 10) & (value >= 8)){
+                                        entry.getValue().getProgress().set(i,"B");
+                                    }else if((value < 8) & (value >= 5)){
+                                        entry.getValue().getProgress().set(i,"C");
+                                    }else if((value < 5) & (value >= 3)){
+                                        entry.getValue().getProgress().set(i,"D");
+                                    }else{
+                                        entry.getValue().getProgress().set(i,"D");
+                                    }
+                                }
+
+                                for(int i = entry.getValue().getProgress().size() - 3; i < entry.getValue().getProgress().size() ; i++){
+                                    entry.getValue().getProgress().set(i,"");
+                                }
+                                daoStudentProgress.update(entry.getValue());
+                            }
+                        }
                     }
                 }
+                System.out.println("--------------Groups 1 COMPLETED");
                 for(Group group: d.getGroups2()){
                     group.setStudents(generateStudentList(group));
                     for(Student student: group.getStudents()) {
@@ -273,8 +308,82 @@ public class Generator {
                         lb.setLogIn(student.getLogin());
                         lb.setAccessID(student.getID());
                         daoLogin.create(lb);
+                        HashMap<Integer, StudentAttendanceObject> saoa = daoStudentAttendance.getAllByStudentID(studentID);
+                        for(Map.Entry<Integer, StudentAttendanceObject> entry : saoa.entrySet()) {
+                            if(daoDisciplineDepartmentDependency.getByDisciplineIDDepartmentID(entry.getValue().getDisciplineID(),group.getDepartmentID()).getCourseNumber() == 1){
+                                for(int i = 0; i < entry.getValue().getAttendance().size(); i++){
+                                    int value = rn.nextInt(10);
+                                    if(value > 3){
+                                        entry.getValue().getAttendance().set(i,"p");
+                                    }else{
+                                        entry.getValue().getAttendance().set(i,"a");
+                                    }
+                                }
+                                daoStudentAttendance.update(entry.getValue());
+                            }
+                        }
+                        for(Map.Entry<Integer, StudentAttendanceObject> entry : saoa.entrySet()) {
+                            if(daoDisciplineDepartmentDependency.getByDisciplineIDDepartmentID(entry.getValue().getDisciplineID(),group.getDepartmentID()).getCourseNumber() == 2){
+                                for(int i = 0; i < entry.getValue().getAttendance().size() - 3; i++){
+                                    int value = rn.nextInt(10);
+                                    if(value > 3){
+                                        entry.getValue().getAttendance().set(i,"p");
+                                    }else{
+                                        entry.getValue().getAttendance().set(i,"a");
+                                    }
+                                }
+                                for(int i = entry.getValue().getAttendance().size() - 3; i < entry.getValue().getAttendance().size(); i++){
+                                    entry.getValue().getAttendance().set(i,"");
+                                }
+                                daoStudentAttendance.update(entry.getValue());
+                            }
+                        }
+                        HashMap<Integer, StudentProgressObject> spoa = daoStudentProgress.getAllByStudentID(studentID);
+                        for(Map.Entry<Integer, StudentProgressObject> entry : spoa.entrySet()) {
+                            if(daoDisciplineDepartmentDependency.getByDisciplineIDDepartmentID(entry.getValue().getDisciplineID(),group.getDepartmentID()).getCourseNumber() == 1){
+                                for(int i = 0; i < entry.getValue().getProgress().size(); i++){
+                                    int value = rn.nextInt(10);
+                                    if(value == 10){
+                                        entry.getValue().getProgress().set(i,"A");
+                                    }else if((value < 10) & (value >= 8)){
+                                        entry.getValue().getProgress().set(i,"B");
+                                    }else if((value < 8) & (value >= 5)){
+                                        entry.getValue().getProgress().set(i,"C");
+                                    }else if((value < 5) & (value >= 3)){
+                                        entry.getValue().getProgress().set(i,"D");
+                                    }else{
+                                        entry.getValue().getProgress().set(i,"D");
+                                    }
+                                }
+                                daoStudentProgress.update(entry.getValue());
+                            }
+                        }
+                        for(Map.Entry<Integer, StudentProgressObject> entry : spoa.entrySet()) {
+                            if(daoDisciplineDepartmentDependency.getByDisciplineIDDepartmentID(entry.getValue().getDisciplineID(),group.getDepartmentID()).getCourseNumber() == 2){
+                                for(int i = 0; i < entry.getValue().getProgress().size() - 3; i++){
+                                    int value = rn.nextInt(10);
+                                    if(value == 10){
+                                        entry.getValue().getProgress().set(i,"A");
+                                    }else if((value < 10) & (value >= 8)){
+                                        entry.getValue().getProgress().set(i,"B");
+                                    }else if((value < 8) & (value >= 5)){
+                                        entry.getValue().getProgress().set(i,"C");
+                                    }else if((value < 5) & (value >= 3)){
+                                        entry.getValue().getProgress().set(i,"D");
+                                    }else{
+                                        entry.getValue().getProgress().set(i,"D");
+                                    }
+                                }
+
+                                for(int i = entry.getValue().getProgress().size() - 3; i < entry.getValue().getProgress().size() ; i++){
+                                    entry.getValue().getProgress().set(i,"");
+                                }
+                                daoStudentProgress.update(entry.getValue());
+                            }
+                        }
                     }
                 }
+                System.out.println("--------------Groups 2 COMPLETED");
                 for(Group group: d.getGroups3()){
                     group.setStudents(generateStudentList(group));
                     for(Student student: group.getStudents()) {
@@ -288,8 +397,84 @@ public class Generator {
                         lb.setLogIn(student.getLogin());
                         lb.setAccessID(student.getID());
                         daoLogin.create(lb);
+                        HashMap<Integer, StudentAttendanceObject> saoa = daoStudentAttendance.getAllByStudentID(studentID);
+                        for(Map.Entry<Integer, StudentAttendanceObject> entry : saoa.entrySet()) {
+                            if((daoDisciplineDepartmentDependency.getByDisciplineIDDepartmentID(entry.getValue().getDisciplineID(),group.getDepartmentID()).getCourseNumber() == 2)||
+                                    (daoDisciplineDepartmentDependency.getByDisciplineIDDepartmentID(entry.getValue().getDisciplineID(),group.getDepartmentID()).getCourseNumber() == 1)){
+                                for(int i = 0; i < entry.getValue().getAttendance().size(); i++){
+                                    int value = rn.nextInt(10);
+                                    if(value > 3){
+                                        entry.getValue().getAttendance().set(i,"p");
+                                    }else{
+                                        entry.getValue().getAttendance().set(i,"a");
+                                    }
+                                }
+                                daoStudentAttendance.update(entry.getValue());
+                            }
+                        }
+                        for(Map.Entry<Integer, StudentAttendanceObject> entry : saoa.entrySet()) {
+                            if(daoDisciplineDepartmentDependency.getByDisciplineIDDepartmentID(entry.getValue().getDisciplineID(),group.getDepartmentID()).getCourseNumber() == 3){
+                                for(int i = 0; i < entry.getValue().getAttendance().size() - 3; i++){
+                                    int value = rn.nextInt(10);
+                                    if(value > 3){
+                                        entry.getValue().getAttendance().set(i,"p");
+                                    }else{
+                                        entry.getValue().getAttendance().set(i,"a");
+                                    }
+                                }
+                                for(int i = entry.getValue().getAttendance().size() - 3; i < entry.getValue().getAttendance().size(); i++){
+                                    entry.getValue().getAttendance().set(i,"");
+                                }
+                                daoStudentAttendance.update(entry.getValue());
+                            }
+                        }
+                        HashMap<Integer, StudentProgressObject> spoa = daoStudentProgress.getAllByStudentID(studentID);
+                        for(Map.Entry<Integer, StudentProgressObject> entry : spoa.entrySet()) {
+                            if((daoDisciplineDepartmentDependency.getByDisciplineIDDepartmentID(entry.getValue().getDisciplineID(),group.getDepartmentID()).getCourseNumber() == 2)||
+                                    (daoDisciplineDepartmentDependency.getByDisciplineIDDepartmentID(entry.getValue().getDisciplineID(),group.getDepartmentID()).getCourseNumber() == 1)){
+                                for(int i = 0; i < entry.getValue().getProgress().size(); i++){
+                                    int value = rn.nextInt(10);
+                                    if(value == 10){
+                                        entry.getValue().getProgress().set(i,"A");
+                                    }else if((value < 10) & (value >= 8)){
+                                        entry.getValue().getProgress().set(i,"B");
+                                    }else if((value < 8) & (value >= 5)){
+                                        entry.getValue().getProgress().set(i,"C");
+                                    }else if((value < 5) & (value >= 3)){
+                                        entry.getValue().getProgress().set(i,"D");
+                                    }else{
+                                        entry.getValue().getProgress().set(i,"D");
+                                    }
+                                }
+                                daoStudentProgress.update(entry.getValue());
+                            }
+                        }
+                        for(Map.Entry<Integer, StudentProgressObject> entry : spoa.entrySet()) {
+                            if(daoDisciplineDepartmentDependency.getByDisciplineIDDepartmentID(entry.getValue().getDisciplineID(),group.getDepartmentID()).getCourseNumber() == 3){
+                                for(int i = 0; i < entry.getValue().getProgress().size() - 3; i++){
+                                    int value = rn.nextInt(10);
+                                    if(value == 10){
+                                        entry.getValue().getProgress().set(i,"A");
+                                    }else if((value < 10) & (value >= 8)){
+                                        entry.getValue().getProgress().set(i,"B");
+                                    }else if((value < 8) & (value >= 5)){
+                                        entry.getValue().getProgress().set(i,"C");
+                                    }else if((value < 5) & (value >= 3)){
+                                        entry.getValue().getProgress().set(i,"D");
+                                    }else{
+                                        entry.getValue().getProgress().set(i,"D");
+                                    }
+                                }
+
+                                for(int i = entry.getValue().getProgress().size() - 3; i < entry.getValue().getProgress().size() ; i++){
+                                    entry.getValue().getProgress().set(i,"");
+                                }
+                                daoStudentProgress.update(entry.getValue());
+                            }
+                        }
                     }
                 }
+                System.out.println("--------------Groups 4 COMPLETED");
                 for(Group group: d.getGroups4()){
                     group.setStudents(generateStudentList(group));
                     for(Student student: group.getStudents()) {
@@ -303,8 +488,86 @@ public class Generator {
                         lb.setLogIn(student.getLogin());
                         lb.setAccessID(student.getID());
                         daoLogin.create(lb);
+                        HashMap<Integer, StudentAttendanceObject> saoa = daoStudentAttendance.getAllByStudentID(studentID);
+                        for(Map.Entry<Integer, StudentAttendanceObject> entry : saoa.entrySet()) {
+                            if((daoDisciplineDepartmentDependency.getByDisciplineIDDepartmentID(entry.getValue().getDisciplineID(),group.getDepartmentID()).getCourseNumber() == 3)||
+                                    (daoDisciplineDepartmentDependency.getByDisciplineIDDepartmentID(entry.getValue().getDisciplineID(),group.getDepartmentID()).getCourseNumber() == 2)||
+                                    (daoDisciplineDepartmentDependency.getByDisciplineIDDepartmentID(entry.getValue().getDisciplineID(),group.getDepartmentID()).getCourseNumber() == 1)){
+                                for(int i = 0; i < entry.getValue().getAttendance().size(); i++){
+                                    int value = rn.nextInt(10);
+                                    if(value > 3){
+                                        entry.getValue().getAttendance().set(i,"p");
+                                    }else{
+                                        entry.getValue().getAttendance().set(i,"a");
+                                    }
+                                }
+                                daoStudentAttendance.update(entry.getValue());
+                            }
+                        }
+                        for(Map.Entry<Integer, StudentAttendanceObject> entry : saoa.entrySet()) {
+                            if(daoDisciplineDepartmentDependency.getByDisciplineIDDepartmentID(entry.getValue().getDisciplineID(),group.getDepartmentID()).getCourseNumber() == 4){
+                                for(int i = 0; i < entry.getValue().getAttendance().size() - 3; i++){
+                                    int value = rn.nextInt(10);
+                                    if(value > 3){
+                                        entry.getValue().getAttendance().set(i,"p");
+                                    }else{
+                                        entry.getValue().getAttendance().set(i,"a");
+                                    }
+                                }
+                                for(int i = entry.getValue().getAttendance().size() - 3; i < entry.getValue().getAttendance().size(); i++){
+                                    entry.getValue().getAttendance().set(i,"");
+                                }
+                                daoStudentAttendance.update(entry.getValue());
+                            }
+                        }
+                        HashMap<Integer, StudentProgressObject> spoa = daoStudentProgress.getAllByStudentID(studentID);
+                        for(Map.Entry<Integer, StudentProgressObject> entry : spoa.entrySet()) {
+                            if((daoDisciplineDepartmentDependency.getByDisciplineIDDepartmentID(entry.getValue().getDisciplineID(),group.getDepartmentID()).getCourseNumber() == 3)||
+                                    (daoDisciplineDepartmentDependency.getByDisciplineIDDepartmentID(entry.getValue().getDisciplineID(),group.getDepartmentID()).getCourseNumber() == 2)||
+                                    (daoDisciplineDepartmentDependency.getByDisciplineIDDepartmentID(entry.getValue().getDisciplineID(),group.getDepartmentID()).getCourseNumber() == 1)){
+                                for(int i = 0; i < entry.getValue().getProgress().size(); i++){
+                                    int value = rn.nextInt(10);
+                                    if(value == 10){
+                                        entry.getValue().getProgress().set(i,"A");
+                                    }else if((value < 10) & (value >= 8)){
+                                        entry.getValue().getProgress().set(i,"B");
+                                    }else if((value < 8) & (value >= 5)){
+                                        entry.getValue().getProgress().set(i,"C");
+                                    }else if((value < 5) & (value >= 3)){
+                                        entry.getValue().getProgress().set(i,"D");
+                                    }else{
+                                        entry.getValue().getProgress().set(i,"D");
+                                    }
+                                }
+                                daoStudentProgress.update(entry.getValue());
+                            }
+                        }
+                        for(Map.Entry<Integer, StudentProgressObject> entry : spoa.entrySet()) {
+                            if(daoDisciplineDepartmentDependency.getByDisciplineIDDepartmentID(entry.getValue().getDisciplineID(),group.getDepartmentID()).getCourseNumber() == 4){
+                                for(int i = 0; i < entry.getValue().getProgress().size() - 3; i++){
+                                    int value = rn.nextInt(10);
+                                    if(value == 10){
+                                        entry.getValue().getProgress().set(i,"A");
+                                    }else if((value < 10) & (value >= 8)){
+                                        entry.getValue().getProgress().set(i,"B");
+                                    }else if((value < 8) & (value >= 5)){
+                                        entry.getValue().getProgress().set(i,"C");
+                                    }else if((value < 5) & (value >= 3)){
+                                        entry.getValue().getProgress().set(i,"D");
+                                    }else{
+                                        entry.getValue().getProgress().set(i,"D");
+                                    }
+                                }
+
+                                for(int i = entry.getValue().getProgress().size() - 3; i < entry.getValue().getProgress().size() ; i++){
+                                    entry.getValue().getProgress().set(i,"");
+                                }
+                                daoStudentProgress.update(entry.getValue());
+                            }
+                        }
                     }
                 }
+                System.out.println("--------------Groups 4 COMPLETED");
                 for(Group group: d.getGroups5()){
                     group.setStudents(generateStudentList(group));
                     for(Student student: group.getStudents()) {
@@ -318,8 +581,88 @@ public class Generator {
                         lb.setLogIn(student.getLogin());
                         lb.setAccessID(student.getID());
                         daoLogin.create(lb);
+                        HashMap<Integer, StudentAttendanceObject> saoa = daoStudentAttendance.getAllByStudentID(studentID);
+                        for(Map.Entry<Integer, StudentAttendanceObject> entry : saoa.entrySet()) {
+                            if((daoDisciplineDepartmentDependency.getByDisciplineIDDepartmentID(entry.getValue().getDisciplineID(),group.getDepartmentID()).getCourseNumber() == 4)||
+                                    (daoDisciplineDepartmentDependency.getByDisciplineIDDepartmentID(entry.getValue().getDisciplineID(),group.getDepartmentID()).getCourseNumber() == 3)||
+                                    (daoDisciplineDepartmentDependency.getByDisciplineIDDepartmentID(entry.getValue().getDisciplineID(),group.getDepartmentID()).getCourseNumber() == 2)||
+                                    (daoDisciplineDepartmentDependency.getByDisciplineIDDepartmentID(entry.getValue().getDisciplineID(),group.getDepartmentID()).getCourseNumber() == 1)){
+                                for(int i = 0; i < entry.getValue().getAttendance().size(); i++){
+                                    int value = rn.nextInt(10);
+                                    if(value > 3){
+                                        entry.getValue().getAttendance().set(i,"p");
+                                    }else{
+                                        entry.getValue().getAttendance().set(i,"a");
+                                    }
+                                }
+                                daoStudentAttendance.update(entry.getValue());
+                            }
+                        }
+                        for(Map.Entry<Integer, StudentAttendanceObject> entry : saoa.entrySet()) {
+                            if(daoDisciplineDepartmentDependency.getByDisciplineIDDepartmentID(entry.getValue().getDisciplineID(),group.getDepartmentID()).getCourseNumber() == 5){
+                                for(int i = 0; i < entry.getValue().getAttendance().size() - 3; i++){
+                                    int value = rn.nextInt(10);
+                                    if(value > 3){
+                                        entry.getValue().getAttendance().set(i,"p");
+                                    }else{
+                                        entry.getValue().getAttendance().set(i,"a");
+                                    }
+                                }
+                                for(int i = entry.getValue().getAttendance().size() - 3; i < entry.getValue().getAttendance().size(); i++){
+                                    entry.getValue().getAttendance().set(i,"");
+                                }
+                                daoStudentAttendance.update(entry.getValue());
+                            }
+                        }
+                        HashMap<Integer, StudentProgressObject> spoa = daoStudentProgress.getAllByStudentID(studentID);
+                        for(Map.Entry<Integer, StudentProgressObject> entry : spoa.entrySet()) {
+                            if((daoDisciplineDepartmentDependency.getByDisciplineIDDepartmentID(entry.getValue().getDisciplineID(),group.getDepartmentID()).getCourseNumber() == 4)||
+                                    (daoDisciplineDepartmentDependency.getByDisciplineIDDepartmentID(entry.getValue().getDisciplineID(),group.getDepartmentID()).getCourseNumber() == 3)||
+                                    (daoDisciplineDepartmentDependency.getByDisciplineIDDepartmentID(entry.getValue().getDisciplineID(),group.getDepartmentID()).getCourseNumber() == 2)||
+                                    (daoDisciplineDepartmentDependency.getByDisciplineIDDepartmentID(entry.getValue().getDisciplineID(),group.getDepartmentID()).getCourseNumber() == 1)){
+                                for(int i = 0; i < entry.getValue().getProgress().size(); i++){
+                                    int value = rn.nextInt(10);
+                                    if(value == 10){
+                                        entry.getValue().getProgress().set(i,"A");
+                                    }else if((value < 10) & (value >= 8)){
+                                        entry.getValue().getProgress().set(i,"B");
+                                    }else if((value < 8) & (value >= 5)){
+                                        entry.getValue().getProgress().set(i,"C");
+                                    }else if((value < 5) & (value >= 3)){
+                                        entry.getValue().getProgress().set(i,"D");
+                                    }else{
+                                        entry.getValue().getProgress().set(i,"D");
+                                    }
+                                }
+                                daoStudentProgress.update(entry.getValue());
+                            }
+                        }
+                        for(Map.Entry<Integer, StudentProgressObject> entry : spoa.entrySet()) {
+                            if(daoDisciplineDepartmentDependency.getByDisciplineIDDepartmentID(entry.getValue().getDisciplineID(),group.getDepartmentID()).getCourseNumber() == 5){
+                                for(int i = 0; i < entry.getValue().getProgress().size() - 3; i++){
+                                    int value = rn.nextInt(10);
+                                    if(value == 10){
+                                        entry.getValue().getProgress().set(i,"A");
+                                    }else if((value < 10) & (value >= 8)){
+                                        entry.getValue().getProgress().set(i,"B");
+                                    }else if((value < 8) & (value >= 5)){
+                                        entry.getValue().getProgress().set(i,"C");
+                                    }else if((value < 5) & (value >= 3)){
+                                        entry.getValue().getProgress().set(i,"D");
+                                    }else{
+                                        entry.getValue().getProgress().set(i,"D");
+                                    }
+                                }
+
+                                for(int i = entry.getValue().getProgress().size() - 3; i < entry.getValue().getProgress().size() ; i++){
+                                    entry.getValue().getProgress().set(i,"");
+                                }
+                                daoStudentProgress.update(entry.getValue());
+                            }
+                        }
                     }
                 }
+                System.out.println("--------------Groups 5 COMPLETED");
                 for(Group group: d.getGroups6()){
                     group.setStudents(generateStudentList(group));
                     for(Student student: group.getStudents()) {
@@ -333,85 +676,347 @@ public class Generator {
                         lb.setLogIn(student.getLogin());
                         lb.setAccessID(student.getID());
                         daoLogin.create(lb);
+                        HashMap<Integer, StudentAttendanceObject> saoa = daoStudentAttendance.getAllByStudentID(studentID);
+                        for(Map.Entry<Integer, StudentAttendanceObject> entry : saoa.entrySet()) {
+                            if((daoDisciplineDepartmentDependency.getByDisciplineIDDepartmentID(entry.getValue().getDisciplineID(),group.getDepartmentID()).getCourseNumber() == 5)||
+                                    (daoDisciplineDepartmentDependency.getByDisciplineIDDepartmentID(entry.getValue().getDisciplineID(),group.getDepartmentID()).getCourseNumber() == 4)||
+                                    (daoDisciplineDepartmentDependency.getByDisciplineIDDepartmentID(entry.getValue().getDisciplineID(),group.getDepartmentID()).getCourseNumber() == 3)||
+                                    (daoDisciplineDepartmentDependency.getByDisciplineIDDepartmentID(entry.getValue().getDisciplineID(),group.getDepartmentID()).getCourseNumber() == 2)||
+                                    (daoDisciplineDepartmentDependency.getByDisciplineIDDepartmentID(entry.getValue().getDisciplineID(),group.getDepartmentID()).getCourseNumber() == 1)){
+                                for(int i = 0; i < entry.getValue().getAttendance().size(); i++){
+                                    int value = rn.nextInt(10);
+                                    if(value > 3){
+                                        entry.getValue().getAttendance().set(i,"p");
+                                    }else{
+                                        entry.getValue().getAttendance().set(i,"a");
+                                    }
+                                }
+                                daoStudentAttendance.update(entry.getValue());
+                            }
+                        }
+                        for(Map.Entry<Integer, StudentAttendanceObject> entry : saoa.entrySet()) {
+                            if(daoDisciplineDepartmentDependency.getByDisciplineIDDepartmentID(entry.getValue().getDisciplineID(),group.getDepartmentID()).getCourseNumber() == 6){
+                                for(int i = 0; i < entry.getValue().getAttendance().size() - 3; i++){
+                                    int value = rn.nextInt(10);
+                                    if(value > 3){
+                                        entry.getValue().getAttendance().set(i,"p");
+                                    }else{
+                                        entry.getValue().getAttendance().set(i,"a");
+                                    }
+                                }
+                                for(int i = entry.getValue().getAttendance().size() - 3; i < entry.getValue().getAttendance().size(); i++){
+                                    entry.getValue().getAttendance().set(i,"");
+                                }
+                                daoStudentAttendance.update(entry.getValue());
+                            }
+                        }
+                        HashMap<Integer, StudentProgressObject> spoa = daoStudentProgress.getAllByStudentID(studentID);
+                        for(Map.Entry<Integer, StudentProgressObject> entry : spoa.entrySet()) {
+                            if((daoDisciplineDepartmentDependency.getByDisciplineIDDepartmentID(entry.getValue().getDisciplineID(),group.getDepartmentID()).getCourseNumber() == 5)||
+                                    (daoDisciplineDepartmentDependency.getByDisciplineIDDepartmentID(entry.getValue().getDisciplineID(),group.getDepartmentID()).getCourseNumber() == 4)||
+                                    (daoDisciplineDepartmentDependency.getByDisciplineIDDepartmentID(entry.getValue().getDisciplineID(),group.getDepartmentID()).getCourseNumber() == 3)||
+                                    (daoDisciplineDepartmentDependency.getByDisciplineIDDepartmentID(entry.getValue().getDisciplineID(),group.getDepartmentID()).getCourseNumber() == 2)||
+                                    (daoDisciplineDepartmentDependency.getByDisciplineIDDepartmentID(entry.getValue().getDisciplineID(),group.getDepartmentID()).getCourseNumber() == 1)){
+                                for(int i = 0; i < entry.getValue().getProgress().size(); i++){
+                                    int value = rn.nextInt(10);
+                                    if(value == 10){
+                                        entry.getValue().getProgress().set(i,"A");
+                                    }else if((value < 10) & (value >= 8)){
+                                        entry.getValue().getProgress().set(i,"B");
+                                    }else if((value < 8) & (value >= 5)){
+                                        entry.getValue().getProgress().set(i,"C");
+                                    }else if((value < 5) & (value >= 3)){
+                                        entry.getValue().getProgress().set(i,"D");
+                                    }else{
+                                        entry.getValue().getProgress().set(i,"D");
+                                    }
+                                }
+                                daoStudentProgress.update(entry.getValue());
+                            }
+                        }
+                        for(Map.Entry<Integer, StudentProgressObject> entry : spoa.entrySet()) {
+                            if(daoDisciplineDepartmentDependency.getByDisciplineIDDepartmentID(entry.getValue().getDisciplineID(),group.getDepartmentID()).getCourseNumber() == 6){
+                                for(int i = 0; i < entry.getValue().getProgress().size() - 3; i++){
+                                    int value = rn.nextInt(10);
+                                    if(value == 10){
+                                        entry.getValue().getProgress().set(i,"A");
+                                    }else if((value < 10) & (value >= 8)){
+                                        entry.getValue().getProgress().set(i,"B");
+                                    }else if((value < 8) & (value >= 5)){
+                                        entry.getValue().getProgress().set(i,"C");
+                                    }else if((value < 5) & (value >= 3)){
+                                        entry.getValue().getProgress().set(i,"D");
+                                    }else{
+                                        entry.getValue().getProgress().set(i,"D");
+                                    }
+                                }
+
+                                for(int i = entry.getValue().getProgress().size() - 3; i < entry.getValue().getProgress().size() ; i++){
+                                    entry.getValue().getProgress().set(i,"");
+                                }
+                                daoStudentProgress.update(entry.getValue());
+                            }
+                        }
+                    }
+                }
+                System.out.println("--------------Groups 6 COMPLETED");
+
+
+
+                        ArrayList<Discipline> disciplines1 = new ArrayList<>();
+                        for(DisciplineDepartmentDependencyObject dddo : daoDisciplineDepartmentDependency.getAllByDepartmentIDCourseAndSemectesrNumber(d.getID(),1,2)){
+                            disciplines1.add(daoDiscipline.getEntityById(dddo.getDisciplineID()));
+                        }
+                System.out.println("--------------lessons 1  started" + disciplines1.size());
+                        int counter = 0;
+                        int disciplineCounter = 0;
+                        for(int j = 1; j < dayRequirementsObject.getCountOfLessonsInADay() + 1; j++) {
+                            for (int i = 1; i < dayRequirementsObject.getCountOfDaysInWeek() + 1; i++) {
+                                for (Group g : d.getGroups1()) {
+                                    Lesson lesson = new Lesson();
+                                    lesson.setDepartmentID(d.getID());
+                                    lesson.setDayNumber(i);
+                                    lesson.setLessonNumberInDay(j);
+                                    lesson.setGroupID(g.getID());
+
+                                    if(disciplineCounter < disciplines1.size()) {
+                                        if ((disciplineCounter + counter) <= (disciplines1.size() - 1)) {
+                                            lesson.setDiscipline(disciplines1.get(disciplineCounter + counter));
+                                        } else {
+                                            lesson.setDiscipline(disciplines1.get((disciplineCounter + counter) - (disciplines1.size() - 1)));
+                                        }
+                                        lesson.setTeacher(daoTeacher.getEntityById(daoDisciplineTeacherDependencyObject.getAllByDisciplineID(lesson.getDiscipline().getID()).get(0).getTeacherID()));
+                                        try {
+                                            daoLesson.createFullData(lesson);
+                                        } catch (SQLException e) {
+                                            e.printStackTrace();
+                                        }
+                                        counter++;
+                                    }else{
+                                        try {
+                                            daoLesson.create(lesson);
+                                        } catch (SQLException e) {
+                                            e.printStackTrace();
+                                        }
+                                    }
+                                    counter++;
+                                }
+                                disciplineCounter++;
+                                counter = 0;
+                            }
+                        }
+
+                ArrayList<Discipline> disciplines2 = new ArrayList<>();
+                for(DisciplineDepartmentDependencyObject dddo : daoDisciplineDepartmentDependency.getAllByDepartmentIDCourseAndSemectesrNumber(d.getID(),2,2)){
+                    disciplines2.add(daoDiscipline.getEntityById(dddo.getDisciplineID()));
+                }
+                System.out.println("--------------lessons 2  started" + disciplines2.size());
+                int counter2 = 0;
+                int disciplineCounter2 = 0;
+                for(int j = 1; j < dayRequirementsObject.getCountOfLessonsInADay() + 1; j++) {
+                    for (int i = 1; i < dayRequirementsObject.getCountOfDaysInWeek() + 1; i++) {
+                        for (Group g : d.getGroups2()) {
+                            Lesson lesson = new Lesson();
+                            lesson.setDepartmentID(d.getID());
+                            lesson.setDayNumber(i);
+                            lesson.setLessonNumberInDay(j);
+                            lesson.setGroupID(g.getID());
+                            if(disciplineCounter2 < disciplines2.size()) {
+                                if ((disciplineCounter2 + counter2) <= (disciplines2.size() - 1)) {
+                                    lesson.setDiscipline(disciplines2.get(disciplineCounter2 + counter2));
+                                } else {
+                                    lesson.setDiscipline(disciplines2.get((disciplineCounter2 + counter2) - (disciplines2.size() - 1)));
+                                }
+                                lesson.setTeacher(daoTeacher.getEntityById(daoDisciplineTeacherDependencyObject.getAllByDisciplineID(lesson.getDiscipline().getID()).get(0).getTeacherID()));
+                                try {
+                                    daoLesson.createFullData(lesson);
+                                } catch (SQLException e) {
+                                    e.printStackTrace();
+                                }
+
+                            }else{
+                                try {
+                                    daoLesson.create(lesson);
+                                } catch (SQLException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                            counter2++;
+                        }
+                        disciplineCounter2++;
+                        counter2 = 0;
                     }
                 }
 
-                for(int i = 1; i < dayRequirementsObject.getCountOfDaysInWeek() + 1; i++){
-                    for(int j = 1; j < dayRequirementsObject.getCountOfLessonsInADay() + 1; j++){
-                        for(Group g: d.getGroups1()){
+                ArrayList<Discipline> disciplines3 = new ArrayList<>();
+                for(DisciplineDepartmentDependencyObject dddo : daoDisciplineDepartmentDependency.getAllByDepartmentIDCourseAndSemectesrNumber(d.getID(),3,2)){
+                    disciplines3.add(daoDiscipline.getEntityById(dddo.getDisciplineID()));
+                }
+                System.out.println("--------------lessons 3  started" + disciplines3.size());
+                int counter3 = 0;
+                int disciplineCounter3 = 0;
+                for(int j = 1; j < dayRequirementsObject.getCountOfLessonsInADay() + 1; j++) {
+                    for (int i = 1; i < dayRequirementsObject.getCountOfDaysInWeek() + 1; i++) {
+                        for (Group g : d.getGroups3()) {
                             Lesson lesson = new Lesson();
                             lesson.setDepartmentID(d.getID());
                             lesson.setDayNumber(i);
                             lesson.setLessonNumberInDay(j);
                             lesson.setGroupID(g.getID());
-                            try {
-                                daoLesson.create(lesson);
-                            } catch (SQLException e) {
-                                e.printStackTrace();
+                            if(disciplineCounter3 < disciplines3.size()) {
+                                if ((disciplineCounter3 + counter3) <= (disciplines3.size() - 1)) {
+                                    lesson.setDiscipline(disciplines3.get(disciplineCounter3 + counter3));
+                                } else {
+                                    lesson.setDiscipline(disciplines3.get((disciplineCounter3 + counter3) - (disciplines3.size() - 1)));
+                                }
+                                lesson.setTeacher(daoTeacher.getEntityById(daoDisciplineTeacherDependencyObject.getAllByDisciplineID(lesson.getDiscipline().getID()).get(0).getTeacherID()));
+                                try {
+                                    daoLesson.createFullData(lesson);
+                                } catch (SQLException e) {
+                                    e.printStackTrace();
+                                }
+
+                            }else{
+                                try {
+                                    daoLesson.create(lesson);
+                                } catch (SQLException e) {
+                                    e.printStackTrace();
+                                }
                             }
+                            counter3++;
                         }
-                        for(Group g: d.getGroups2()){
-                            Lesson lesson = new Lesson();
-                            lesson.setDepartmentID(d.getID());
-                            lesson.setDayNumber(i);
-                            lesson.setLessonNumberInDay(j);
-                            lesson.setGroupID(g.getID());
-                            try {
-                                daoLesson.create(lesson);
-                            } catch (SQLException e) {
-                                e.printStackTrace();
-                            }
-                        }
-                        for(Group g: d.getGroups3()){
-                            Lesson lesson = new Lesson();
-                            lesson.setDepartmentID(d.getID());
-                            lesson.setDayNumber(i);
-                            lesson.setLessonNumberInDay(j);
-                            lesson.setGroupID(g.getID());
-                            try {
-                                daoLesson.create(lesson);
-                            } catch (SQLException e) {
-                                e.printStackTrace();
-                            }
-                        }
-                        for(Group g: d.getGroups4()){
-                            Lesson lesson = new Lesson();
-                            lesson.setDepartmentID(d.getID());
-                            lesson.setDayNumber(i);
-                            lesson.setLessonNumberInDay(j);
-                            lesson.setGroupID(g.getID());
-                            try {
-                                daoLesson.create(lesson);
-                            } catch (SQLException e) {
-                                e.printStackTrace();
-                            }
-                        }
-                        for(Group g: d.getGroups5()){
-                            Lesson lesson = new Lesson();
-                            lesson.setDepartmentID(d.getID());
-                            lesson.setDayNumber(i);
-                            lesson.setLessonNumberInDay(j);
-                            lesson.setGroupID(g.getID());
-                            try {
-                                daoLesson.create(lesson);
-                            } catch (SQLException e) {
-                                e.printStackTrace();
-                            }
-                        }
-                        for(Group g: d.getGroups6()){
-                            Lesson lesson = new Lesson();
-                            lesson.setDepartmentID(d.getID());
-                            lesson.setDayNumber(i);
-                            lesson.setLessonNumberInDay(j);
-                            lesson.setGroupID(g.getID());
-                            try {
-                                daoLesson.create(lesson);
-                            } catch (SQLException e) {
-                                e.printStackTrace();
-                            }
-                        }
+                        disciplineCounter3++;
+                        counter3 = 0;
                     }
                 }
+
+                ArrayList<Discipline> disciplines4 = new ArrayList<>();
+                for(DisciplineDepartmentDependencyObject dddo : daoDisciplineDepartmentDependency.getAllByDepartmentIDCourseAndSemectesrNumber(d.getID(),4,2)){
+                    disciplines4.add(daoDiscipline.getEntityById(dddo.getDisciplineID()));
+                }
+                System.out.println("--------------lessons 4  started" + disciplines4.size());
+                int counter4 = 0;
+                int disciplineCounter4 = 0;
+                for(int j = 1; j < dayRequirementsObject.getCountOfLessonsInADay() + 1; j++) {
+                    for (int i = 1; i < dayRequirementsObject.getCountOfDaysInWeek() + 1; i++) {
+                        for (Group g : d.getGroups4()) {
+                            Lesson lesson = new Lesson();
+                            lesson.setDepartmentID(d.getID());
+                            lesson.setDayNumber(i);
+                            lesson.setLessonNumberInDay(j);
+                            lesson.setGroupID(g.getID());
+                            if(disciplineCounter4 < disciplines4.size()) {
+                                if ((disciplineCounter4 + counter4) <= (disciplines4.size() - 1)) {
+                                    lesson.setDiscipline(disciplines4.get(disciplineCounter4 + counter4));
+                                } else {
+                                    lesson.setDiscipline(disciplines4.get((disciplineCounter4 + counter4) - (disciplines4.size() - 1)));
+                                }
+                                lesson.setTeacher(daoTeacher.getEntityById(daoDisciplineTeacherDependencyObject.getAllByDisciplineID(lesson.getDiscipline().getID()).get(0).getTeacherID()));
+                                try {
+                                    daoLesson.createFullData(lesson);
+                                } catch (SQLException e) {
+                                    e.printStackTrace();
+                                }
+
+                            }else{
+                                try {
+                                    daoLesson.create(lesson);
+                                } catch (SQLException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                            counter4++;
+                        }
+                        disciplineCounter4++;
+                        counter4 = 0;
+                    }
+                }
+
+                ArrayList<Discipline> disciplines5 = new ArrayList<>();
+                for(DisciplineDepartmentDependencyObject dddo : daoDisciplineDepartmentDependency.getAllByDepartmentIDCourseAndSemectesrNumber(d.getID(),5,2)){
+                    disciplines5.add(daoDiscipline.getEntityById(dddo.getDisciplineID()));
+                }
+                System.out.println("--------------lessons 5  started" + disciplines5.size());
+                int counter5 = 0;
+                int disciplineCounter5 = 0;
+                for(int j = 1; j < dayRequirementsObject.getCountOfLessonsInADay() + 1; j++) {
+                    for (int i = 1; i < dayRequirementsObject.getCountOfDaysInWeek() + 1; i++) {
+                        for (Group g : d.getGroups5()) {
+                            Lesson lesson = new Lesson();
+                            lesson.setDepartmentID(d.getID());
+                            lesson.setDayNumber(i);
+                            lesson.setLessonNumberInDay(j);
+                            lesson.setGroupID(g.getID());
+                            if(disciplineCounter5 < disciplines5.size()) {
+                                if ((disciplineCounter5 + counter5) <= (disciplines5.size() - 1)) {
+                                    lesson.setDiscipline(disciplines5.get(disciplineCounter5 + counter5));
+                                } else {
+                                    lesson.setDiscipline(disciplines5.get((disciplineCounter5 + counter5) - (disciplines5.size() - 1)));
+                                }
+                                lesson.setTeacher(daoTeacher.getEntityById(daoDisciplineTeacherDependencyObject.getAllByDisciplineID(lesson.getDiscipline().getID()).get(0).getTeacherID()));
+                                try {
+                                    daoLesson.createFullData(lesson);
+                                } catch (SQLException e) {
+                                    e.printStackTrace();
+                                }
+
+                            }else{
+                                try {
+                                    daoLesson.create(lesson);
+                                } catch (SQLException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                            counter5++;
+                        }
+                        disciplineCounter5++;
+                        counter5 = 0;
+                    }
+                }
+
+                ArrayList<Discipline> disciplines6 = new ArrayList<>();
+                for(DisciplineDepartmentDependencyObject dddo : daoDisciplineDepartmentDependency.getAllByDepartmentIDCourseAndSemectesrNumber(d.getID(),6,2)){
+                    disciplines6.add(daoDiscipline.getEntityById(dddo.getDisciplineID()));
+                }
+                System.out.println("--------------lessons 6  started" + disciplines6.size());
+                int counter6 = 0;
+                int disciplineCounter6 = 0;
+                for(int j = 1; j < dayRequirementsObject.getCountOfLessonsInADay() + 1; j++) {
+                    for (int i = 1; i < dayRequirementsObject.getCountOfDaysInWeek() + 1; i++) {
+                        for (Group g : d.getGroups6()) {
+                            Lesson lesson = new Lesson();
+                            lesson.setDepartmentID(d.getID());
+                            lesson.setDayNumber(i);
+                            lesson.setLessonNumberInDay(j);
+                            lesson.setGroupID(g.getID());
+                            if(disciplineCounter6 < disciplines6.size()) {
+                                if ((disciplineCounter6 + counter6) <= (disciplines6.size() - 1)) {
+                                    lesson.setDiscipline(disciplines6.get(disciplineCounter6 + counter6));
+                                } else {
+                                    lesson.setDiscipline(disciplines6.get((disciplineCounter6 + counter6) - (disciplines6.size() - 1)));
+                                }
+                                lesson.setTeacher(daoTeacher.getEntityById(daoDisciplineTeacherDependencyObject.getAllByDisciplineID(lesson.getDiscipline().getID()).get(0).getTeacherID()));
+                                try {
+                                    daoLesson.createFullData(lesson);
+                                } catch (SQLException e) {
+                                    e.printStackTrace();
+                                }
+
+                            }else{
+                                try {
+                                    daoLesson.create(lesson);
+                                } catch (SQLException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                            counter6++;
+                        }
+                        disciplineCounter6++;
+                        counter6 = 0;
+                    }
+                }
+
+                        System.out.println("--------------lessons  COMPLETED");
 
             }
         }

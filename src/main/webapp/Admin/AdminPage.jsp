@@ -60,7 +60,7 @@
     <div>
         <form action="${pageContext.request.contextPath}/Admin/AdminPageController" method="post">
             <input type="hidden"  name="elementType" value="generateBaseDate">
-            <button disabled class="topicButton topicButtonAdminPage">Generate base date</button>
+            <button class="topicButton topicButtonAdminPage">Generate base date</button>
 
             <div class = "pageTitleTextBad">
                 Option disabled!
@@ -72,7 +72,7 @@
     <div>
         <form action="${pageContext.request.contextPath}/Admin/AdminPageController" method="post">
             <input type="hidden"  name="elementType" value="clearAllDate">
-            <button disabled class="topicButton topicButtonAdminPage">Clear all date</button>
+            <button  class="topicButton topicButtonAdminPage">Clear all date</button>
 
             <div class = "pageTitleTextBad">
                 Option disabled!

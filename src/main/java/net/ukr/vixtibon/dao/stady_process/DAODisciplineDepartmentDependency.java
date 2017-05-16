@@ -10,9 +10,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by alex on 07/02/2017.
- */
 public class DAODisciplineDepartmentDependency extends AbstractController<DisciplineDepartmentDependencyObject,Integer> {
     @Override
     public List<DisciplineDepartmentDependencyObject> getAll() {
@@ -44,7 +41,7 @@ public class DAODisciplineDepartmentDependency extends AbstractController<Discip
 
     public ArrayList<DisciplineDepartmentDependencyObject> getAllByDisciplineIDDepartmentID(int disciplineID, int departmentID){
         String Select_All_Discipline_Statemet = "SELECT * FROM disciplineDepartmentDependency WHERE disciplineID="+ disciplineID +" and departmentID="+ departmentID +";";
-        ArrayList<DisciplineDepartmentDependencyObject> dddos = new ArrayList<DisciplineDepartmentDependencyObject>();
+        ArrayList<DisciplineDepartmentDependencyObject> dddos = new ArrayList<>();
         PreparedStatement ps = getPrepareStatement(Select_All_Discipline_Statemet);
         ResultSet rs = null;
         try {
@@ -70,7 +67,7 @@ public class DAODisciplineDepartmentDependency extends AbstractController<Discip
 
     public ArrayList<DisciplineDepartmentDependencyObject> getAllByDepartmentID(int departmentID){
         String Select_All_DisciplineDepartmentDependencyObject_Statemet = "SELECT * FROM disciplineDepartmentDependency WHERE departmentID="+ departmentID +";";
-        ArrayList<DisciplineDepartmentDependencyObject> dtdos = new ArrayList<DisciplineDepartmentDependencyObject>();
+        ArrayList<DisciplineDepartmentDependencyObject> dtdos = new ArrayList<>();
         PreparedStatement ps = getPrepareStatement(Select_All_DisciplineDepartmentDependencyObject_Statemet);
         ResultSet rs = null;
         try {
@@ -93,10 +90,11 @@ public class DAODisciplineDepartmentDependency extends AbstractController<Discip
         return dtdos;
     }
 
-    public ArrayList<DisciplineDepartmentDependencyObject> getAllByDepartmentIDCourseAndSemectesrNumber(int departmentID,int coutseNumber, int semesterNumber){
+    public ArrayList<DisciplineDepartmentDependencyObject> getAllByDepartmentIDCourseAndSemectesrNumber(int departmentID,int courseNumber, int semesterNumber){
         String Select_All_DisciplineDepartmentDependency_Statemet = "SELECT * FROM disciplineDepartmentDependency " +
-                "WHERE (departmentID="+ departmentID +" AND coutseNumber="+ coutseNumber +" AND semesterNumber="+ semesterNumber +";";
-        ArrayList<DisciplineDepartmentDependencyObject> dtdos = new ArrayList<DisciplineDepartmentDependencyObject>();
+                "WHERE (departmentID="+ departmentID +" AND courseNumber="+ courseNumber +" AND semesterNumber="+ semesterNumber +");";
+        ArrayList<DisciplineDepartmentDependencyObject> dtdos = new ArrayList<>();
+        System.out.println(Select_All_DisciplineDepartmentDependency_Statemet);
         PreparedStatement ps = getPrepareStatement(Select_All_DisciplineDepartmentDependency_Statemet);
         ResultSet rs = null;
         try {

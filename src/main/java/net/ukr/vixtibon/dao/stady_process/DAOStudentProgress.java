@@ -2,7 +2,6 @@ package net.ukr.vixtibon.dao.stady_process;
 
 import net.ukr.vixtibon.QueryStack;
 import net.ukr.vixtibon.base_objects.study_process.Discipline;
-import net.ukr.vixtibon.base_objects.study_process.StudentAttendanceObject;
 import net.ukr.vixtibon.base_objects.study_process.StudentProgressObject;
 import net.ukr.vixtibon.dao.AbstractController;
 
@@ -12,9 +11,6 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 
-/**
- * Created by alex on 19/02/2017.
- */
 public class DAOStudentProgress  extends AbstractController<StudentProgressObject,Integer> {
     @Override
     public List<StudentProgressObject> getAll() {
@@ -24,7 +20,7 @@ public class DAOStudentProgress  extends AbstractController<StudentProgressObjec
     public HashMap<Integer, StudentProgressObject> getAllByStudentID(int studentID){
         System.out.println("DAOStudentProgress getAllByStudentID");
         String Select_getAllByStudentID_Statemet = "SELECT * FROM progress WHERE studentID="+ studentID +";";
-        HashMap<Integer, StudentProgressObject> spoList = new HashMap<Integer, StudentProgressObject>();
+        HashMap<Integer, StudentProgressObject> spoList = new HashMap<>();
         PreparedStatement ps = getPrepareStatement(Select_getAllByStudentID_Statemet);
         ResultSet rs = null;
         try {
@@ -36,8 +32,7 @@ public class DAOStudentProgress  extends AbstractController<StudentProgressObjec
                 spo.setStudentID(rs.getInt(3));
                 spo.setExamResult(rs.getString(4));
                 DAODiscipline daodi = new DAODiscipline();
-                Discipline discipline = new Discipline();
-                discipline = daodi.getEntityById(spo.getDisciplineID());
+                Discipline discipline = daodi.getEntityById(spo.getDisciplineID());
                 for(int i = 1; i <= discipline.getCountOfLessons(); i++){
                     spo.getProgress().add(rs.getString(4 + i));
                 }
@@ -56,7 +51,7 @@ public class DAOStudentProgress  extends AbstractController<StudentProgressObjec
     public HashMap<Integer, StudentProgressObject> getByStudentIDDisciplineID(int studentID, int disciplineID){
         System.out.println("DAOStudentProgress getAllByStudentID");
         String Select_getAllByStudentID_Statemet = "SELECT * FROM progress WHERE studentID="+ studentID +" and disciplineID=" + disciplineID + ";";
-        HashMap<Integer, StudentProgressObject> spoList = new HashMap<Integer, StudentProgressObject>();
+        HashMap<Integer, StudentProgressObject> spoList = new HashMap<>();
         PreparedStatement ps = getPrepareStatement(Select_getAllByStudentID_Statemet);
         ResultSet rs = null;
         try {
@@ -68,8 +63,7 @@ public class DAOStudentProgress  extends AbstractController<StudentProgressObjec
                 spo.setStudentID(rs.getInt(3));
                 spo.setExamResult(rs.getString(4));
                 DAODiscipline daodi = new DAODiscipline();
-                Discipline discipline = new Discipline();
-                discipline = daodi.getEntityById(spo.getDisciplineID());
+                Discipline discipline = daodi.getEntityById(spo.getDisciplineID());
                 for(int i = 1; i <= discipline.getCountOfLessons(); i++){
                     spo.getProgress().add(rs.getString(4 + i));
                 }
@@ -97,7 +91,7 @@ public class DAOStudentProgress  extends AbstractController<StudentProgressObjec
             counter++;
         }
         String Update_StudentAttendanceObject_Statemet = "UPDATE progress SET examResult='" + entity.getExamResult() + "', " + list + " WHERE ID=" + entity.getId() + ";";
-        System.out.println("Update_StudentAttendanceObject_Statemet " + Update_StudentAttendanceObject_Statemet);
+        //System.out.println("Update_StudentAttendanceObject_Statemet " + Update_StudentAttendanceObject_Statemet);
         PreparedStatement ps = getPrepareStatement(Update_StudentAttendanceObject_Statemet);
         try {
             ps.executeUpdate();

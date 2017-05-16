@@ -5,9 +5,6 @@ import net.ukr.vixtibon.MyCalendar;
 import java.io.Serializable;
 import java.util.Calendar;
 
-/**
- * Created by akovalchuk on 5/22/2015.
- */
 public class Timetable implements Serializable {
     private static final long serialVersionUID = 1L;
     private int groupID;

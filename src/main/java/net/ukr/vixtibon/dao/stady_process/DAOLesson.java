@@ -1,8 +1,6 @@
 package net.ukr.vixtibon.dao.stady_process;
 
 import net.ukr.vixtibon.QueryStack;
-import net.ukr.vixtibon.base_objects.persons.Teacher;
-import net.ukr.vixtibon.base_objects.study_process.Discipline;
 import net.ukr.vixtibon.base_objects.study_process.Lesson;
 import net.ukr.vixtibon.dao.AbstractController;
 import net.ukr.vixtibon.dao.persons.DAOTeacher;
@@ -13,9 +11,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by alex on 27/02/2017.
- */
 public class DAOLesson extends AbstractController<Lesson,Integer> {
     @Override
     public List<Lesson> getAll() {
@@ -85,10 +80,10 @@ public class DAOLesson extends AbstractController<Lesson,Integer> {
                 lesson.setLessonNumberInDay(rs.getInt(3));
                 lesson.setDepartmentID(rs.getInt(4));
                 lesson.setGroupID(rs.getInt(5));
-                if(checkIfFieldNULL(id,"disciplineID") == false) {
+                if(!checkIfFieldNULL(id, "disciplineID")) {
                     lesson.setDiscipline(daoDiscipline.getEntityByIdNameOnly(rs.getInt(6)));
                 }
-                if(checkIfFieldNULL(id,"teacherID") == false) {
+                if(!checkIfFieldNULL(id, "teacherID")) {
                     lesson.setTeacher(daoTeacher.getEntityByIdNameAndSurnameOnly(rs.getInt(7)));
                 }
             }
@@ -106,7 +101,7 @@ public class DAOLesson extends AbstractController<Lesson,Integer> {
     public ArrayList<Lesson> getAllByDepartmentDayNumber(int departmentID, int dayNumber, int lessonNumber){
         String Select_getAllByDepartmentDayNumber_Statemet = "SELECT * FROM timetable WHERE departmentID=" +departmentID+ " and dayNumber=" + dayNumber +
                 " and lessonNumberInDay=" + lessonNumber + ";";
-        ArrayList<Lesson> lessons = new ArrayList<Lesson>();
+        ArrayList<Lesson> lessons = new ArrayList<>();
         PreparedStatement ps = getPrepareStatement(Select_getAllByDepartmentDayNumber_Statemet);
         ResultSet rs = null;
         DAODiscipline daoDiscipline = new DAODiscipline();
@@ -120,10 +115,10 @@ public class DAOLesson extends AbstractController<Lesson,Integer> {
                 lesson.setLessonNumberInDay(rs.getInt(3));
                 lesson.setDepartmentID(rs.getInt(4));
                 lesson.setGroupID(rs.getInt(5));
-                if(checkIfFieldNULL(lesson.getID(),"disciplineID") == false) {
+                if(!checkIfFieldNULL(lesson.getID(), "disciplineID")) {
                     lesson.setDiscipline(daoDiscipline.getEntityByIdNameOnly(rs.getInt(6)));
                 }
-                if(checkIfFieldNULL(lesson.getID(),"teacherID") == false) {
+                if(!checkIfFieldNULL(lesson.getID(), "teacherID")) {
                     lesson.setTeacher(daoTeacher.getEntityByIdNameAndSurnameOnly(rs.getInt(7)));
                 }
                 lessons.add(lesson);
@@ -141,7 +136,7 @@ public class DAOLesson extends AbstractController<Lesson,Integer> {
 
     public ArrayList<Lesson> getAllByDepartmentID(int departmentID){
         String Select_getAllByDepartmentDayNumber_Statemet = "SELECT * FROM timetable WHERE departmentID=" +departmentID+ ";";
-        ArrayList<Lesson> lessons = new ArrayList<Lesson>();
+        ArrayList<Lesson> lessons = new ArrayList<>();
         PreparedStatement ps = getPrepareStatement(Select_getAllByDepartmentDayNumber_Statemet);
         ResultSet rs = null;
         DAODiscipline daoDiscipline = new DAODiscipline();
@@ -155,10 +150,10 @@ public class DAOLesson extends AbstractController<Lesson,Integer> {
                 lesson.setLessonNumberInDay(rs.getInt(3));
                 lesson.setDepartmentID(rs.getInt(4));
                 lesson.setGroupID(rs.getInt(5));
-                if(checkIfFieldNULL(lesson.getID(),"disciplineID") == false) {
+                if(!checkIfFieldNULL(lesson.getID(), "disciplineID")) {
                     lesson.setDiscipline(daoDiscipline.getEntityByIdNameOnly(rs.getInt(6)));
                 }
-                if(checkIfFieldNULL(lesson.getID(),"teacherID") == false) {
+                if(!checkIfFieldNULL(lesson.getID(), "teacherID")) {
                     lesson.setTeacher(daoTeacher.getEntityByIdNameAndSurnameOnly(rs.getInt(7)));
                 }
                 lessons.add(lesson);
@@ -218,6 +213,26 @@ public class DAOLesson extends AbstractController<Lesson,Integer> {
                 "VALUES ('" + findFreeID("timetable") + "','" + entity.getDayNumber()  + "','" + entity.getLessonNumberInDay() +
                 "','" +entity.getDepartmentID()+ "','" + entity.getGroupID() +"');";
         //System.out.println(Create_Lesson_Statemet);
+        QueryStack qs = new QueryStack();
+        qs.queries.add(Create_Lesson_Statemet);
+        PreparedStatement ps = getPrepareStatement(Create_Lesson_Statemet);
+        try {
+            ps.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        } finally {
+            if (ps != null) try { ps.close(); } catch (SQLException logOrIgnore) {}
+        }
+
+    }
+
+    public boolean createFullData(Lesson entity) throws SQLException {
+        String Create_Lesson_Statemet = "INSERT INTO timetable (id,dayNumber,lessonNumberInDay,departmentID, groupID, disciplineID, teacherID) " +
+                "VALUES ('" + findFreeID("timetable") + "','" + entity.getDayNumber()  + "','" + entity.getLessonNumberInDay() +
+                "','" +entity.getDepartmentID()+ "','" + entity.getGroupID() + "','" + entity.getDiscipline().getID() + "','" + entity.getTeacher().getID() +"');";
+        System.out.println(Create_Lesson_Statemet);
         QueryStack qs = new QueryStack();
         qs.queries.add(Create_Lesson_Statemet);
         PreparedStatement ps = getPrepareStatement(Create_Lesson_Statemet);
