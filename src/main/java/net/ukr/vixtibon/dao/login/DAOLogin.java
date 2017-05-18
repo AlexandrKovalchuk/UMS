@@ -59,9 +59,9 @@ public class DAOLogin extends AbstractController<LogInBody,Integer> {
         changeIncorrectSymbols(entity);
         String Create_Login_loginpass_Statemet = "INSERT INTO loginpass (ID,login,password,access_type, accessID) VALUES " +
                 "('"+findFreeID("loginpass")+"','"+entity.getLogIn()+"','"+entity.getPassword()+"','"+entity.getAccess()+"','" + entity.getAccessID() + "');";
-        //System.out.println(Create_Login_loginpass_Statemet);
-        QueryStack qs = new QueryStack();
-        qs.queries.add(Create_Login_loginpass_Statemet);
+
+        //QueryStack qs = new QueryStack();
+        //qs.queries.add(Create_Login_loginpass_Statemet);
         PreparedStatement ps = getPrepareStatement(Create_Login_loginpass_Statemet);
         try {
             ps.executeUpdate();
@@ -99,7 +99,6 @@ public class DAOLogin extends AbstractController<LogInBody,Integer> {
 
     public boolean deleteDate(String tableName){
         String DELETE_DATE = "DELETE from " + tableName +";";
-        System.out.println("DELETE_DATE :" + DELETE_DATE);
         PreparedStatement ps = getPrepareStatement(DELETE_DATE);
         try {
             ps.executeUpdate();

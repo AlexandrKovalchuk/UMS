@@ -39,7 +39,6 @@ public abstract class Person implements Serializable {
         Calendar cal = Calendar.getInstance();
         cal.setTime(dateOfBorn);
         int year = cal.get(Calendar.YEAR);
-        System.out.println("getYearOfBorn: " + year);
 
         return year;
     }
@@ -48,7 +47,6 @@ public abstract class Person implements Serializable {
         Calendar cal = Calendar.getInstance();
         cal.setTime(dateOfBorn);
         int month = cal.get(Calendar.MONTH);
-        System.out.println("getMonthOfBorn: " + month);
         return month;
     }
 
@@ -56,7 +54,6 @@ public abstract class Person implements Serializable {
         Calendar cal = Calendar.getInstance();
         cal.setTime(dateOfBorn);
         int day = cal.get(Calendar.DAY_OF_MONTH);
-        System.out.println("getDayOfBorn: " + day);
         return day;
     }
 
@@ -84,10 +81,8 @@ public abstract class Person implements Serializable {
         Calendar outdate = Calendar.getInstance();
         String[] splitedData = new String[3];
         int i = 0;
-        System.out.println("stringToDate " + i );
         for(String input: str.split("#")){
             splitedData[i] = input;
-            System.out.println("stringToDate " + i + " " + splitedData[i]);
             i++;
         }
         outdate.set(Integer.parseInt(splitedData[2]), Integer.parseInt(splitedData[1]), Integer.parseInt(splitedData[0]));
@@ -108,7 +103,6 @@ public abstract class Person implements Serializable {
     }
 
     public String getFirstLetter(String s){
-        //System.out.println("getFirstLetter " + s);
         String l = "";
         if(s.length()!=0){
             l = s.substring(0,1);

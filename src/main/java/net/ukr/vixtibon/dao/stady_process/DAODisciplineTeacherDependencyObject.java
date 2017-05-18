@@ -1,6 +1,5 @@
 package net.ukr.vixtibon.dao.stady_process;
 
-import net.ukr.vixtibon.QueryStack;
 import net.ukr.vixtibon.base_objects.study_process.DisciplineTeacherDependencyObject;
 import net.ukr.vixtibon.dao.AbstractController;
 
@@ -21,7 +20,7 @@ public class DAODisciplineTeacherDependencyObject  extends AbstractController<Di
 
     public ArrayList<DisciplineTeacherDependencyObject> getAllByDisciplineID(int disciplineID){
         String Select_All_Discipline_Statemet = "SELECT * FROM disciplineTeacherDependency WHERE disciplineID="+ disciplineID +";";
-        ArrayList<DisciplineTeacherDependencyObject> dtdos = new ArrayList<DisciplineTeacherDependencyObject>();
+        ArrayList<DisciplineTeacherDependencyObject> dtdos = new ArrayList<>();
         PreparedStatement ps = getPrepareStatement(Select_All_Discipline_Statemet);
         ResultSet rs = null;
         try {
@@ -45,7 +44,7 @@ public class DAODisciplineTeacherDependencyObject  extends AbstractController<Di
 
     public ArrayList<DisciplineTeacherDependencyObject> getAllByTeacherID(int teacherID){
         String Select_All_Teacher_Statemet = "SELECT * FROM disciplineTeacherDependency WHERE teacherID="+ teacherID +";";
-        ArrayList<DisciplineTeacherDependencyObject> dtdos = new ArrayList<DisciplineTeacherDependencyObject>();
+        ArrayList<DisciplineTeacherDependencyObject> dtdos = new ArrayList<>();
         PreparedStatement ps = getPrepareStatement(Select_All_Teacher_Statemet);
         ResultSet rs = null;
         try {
@@ -115,9 +114,9 @@ public class DAODisciplineTeacherDependencyObject  extends AbstractController<Di
     public boolean create(DisciplineTeacherDependencyObject entity) throws SQLException {
         String Create_Discipline_Teacher_Dependency_Statemet = "INSERT INTO disciplineTeacherDependency (ID,disciplineID,teacherID) " +
                 "VALUES ('"+findFreeID("disciplineTeacherDependency")+"','"+entity.getDisciplineID() + "','" + entity.getTeacherID()+"');";
-        //System.out.println(Create_Discipline_Teacher_Dependency_Statemet);
-        QueryStack qs = new QueryStack();
-        qs.queries.add(Create_Discipline_Teacher_Dependency_Statemet);
+
+        //QueryStack qs = new QueryStack();
+        //qs.queries.add(Create_Discipline_Teacher_Dependency_Statemet);
         PreparedStatement ps = getPrepareStatement(Create_Discipline_Teacher_Dependency_Statemet);
         try {
             ps.executeUpdate();

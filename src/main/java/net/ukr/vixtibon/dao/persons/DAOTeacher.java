@@ -1,7 +1,5 @@
 package net.ukr.vixtibon.dao.persons;
 
-import net.ukr.vixtibon.QueryStack;
-import net.ukr.vixtibon.base_objects.persons.Employee;
 import net.ukr.vixtibon.base_objects.persons.Teacher;
 import net.ukr.vixtibon.base_objects.study_process.Discipline;
 import net.ukr.vixtibon.base_objects.study_process.DisciplineTeacherDependencyObject;
@@ -67,7 +65,6 @@ public class DAOTeacher extends AbstractController<Teacher,Integer> {
                 "phoneNumber='"+entity.getPhoneNumber()+"',dateOfBorn='"+sqlDate+"'," +
                 "address='"+entity.getAddress()+"',passport='"+entity.getPasport()+"',login='"+entity.getLogin()+"'," +
                 "office='"+entity.getOffice()+"',level='"+entity.getLevel()+"',ID='"+entity.getID()+"' WHERE ID=" + entity.getID() + ";";
-        System.out.println(Update_Teacher_Statemet);
 
         DAODisciplineTeacherDependencyObject ddtdo = new DAODisciplineTeacherDependencyObject();
         ArrayList<DisciplineTeacherDependencyObject> dtdos = ddtdo.getAllByTeacherID(entity.getID());
@@ -152,11 +149,11 @@ public class DAOTeacher extends AbstractController<Teacher,Integer> {
         String Select_DepartmentID_By_Username = "SELECT departmentID FROM teacher WHERE ID=" + userID + ";";
         int departmentID = 0;
         PreparedStatement ps = getPrepareStatement(Select_DepartmentID_By_Username);
-        //System.out.println("Select_DepartmentID_By_Username " + Select_DepartmentID_By_Username);
+
         ResultSet rs = null;
         try {
             rs = ps.executeQuery();
-            if(rs.next() == true){
+            if(rs.next()){
                 departmentID = rs.getInt(1);
             }
         } catch (SQLException e) {
@@ -172,11 +169,11 @@ public class DAOTeacher extends AbstractController<Teacher,Integer> {
         String Select_DepartmentID_By_Username = "SELECT ID FROM teacher WHERE login='" + username + "';";
         int departmentID = 0;
         PreparedStatement ps = getPrepareStatement(Select_DepartmentID_By_Username);
-        //System.out.println("Select_DepartmentID_By_Username " + Select_DepartmentID_By_Username);
+
         ResultSet rs = null;
         try {
             rs = ps.executeQuery();
-            if(rs.next() == true){
+            if(rs.next()){
                 departmentID = rs.getInt(1);
             }
         } catch (SQLException e) {
@@ -265,9 +262,9 @@ public class DAOTeacher extends AbstractController<Teacher,Integer> {
                 + "','" + sqlDate + "','" + entity.getAddress() + "','" + entity.getPasport() + "','" +
                 entity.getLogin() + "','" + entity.getOffice() + "','" + entity.getLevel() + "','" + entityID +"','" + entity.getDepartmentID()+"');";
 
-        //System.out.println(Create_Teacher_Statemet);
-        QueryStack qs = new QueryStack();
-        qs.queries.add(Create_Teacher_Statemet);
+
+        //QueryStack qs = new QueryStack();
+        //qs.queries.add(Create_Teacher_Statemet);
         DAODisciplineTeacherDependencyObject ddtdo = new DAODisciplineTeacherDependencyObject();
         for (Discipline d: entity.getDisciplines()){
             DisciplineTeacherDependencyObject dtdo = new DisciplineTeacherDependencyObject();

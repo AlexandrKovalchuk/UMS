@@ -21,54 +21,41 @@ public class AreaAccessFilter implements Filter {
 
         String uri = req.getRequestURI();
         this.context.log("Requested Resource::"+uri);
-        System.out.println("AreaAccessFilter::");
-        System.out.println("Requested Resource::"+uri);
 
         HttpSession session = req.getSession(false);
 
         if(session != null) {
-            System.out.println("session not null");
             Enumeration<String> names = session.getAttributeNames();
             boolean flag = ifParameterExist(names,"type");
             if (flag) {
                 if(!(uri.endsWith("LogOutServlet"))) {
                     if ((session.getAttribute("type").equals("admin")) && !(uri.contains("/Admin/") || uri.endsWith("css") || uri.endsWith("jpg"))) {
                         this.context.log("Unauthorized access request");
-                        System.out.println("noAccessToArea");
                         req.setAttribute("result", "noAccessToArea");
                         req.getRequestDispatcher("/Admin/ActionResultPageController").forward(request, response);
                     } else if ((session.getAttribute("type").equals("employee")) && !(uri.contains("/Employee/") || uri.endsWith("css") || uri.endsWith("jpg"))) {
                         this.context.log("Unauthorized access request");
-                        System.out.println("noAccessToArea");
                         req.setAttribute("result", "noAccessToArea");
                         req.getRequestDispatcher("/Employee/ActionResultEmployeeMenuPageController").forward(request, response);
                     } else if ((session.getAttribute("type").equals("teacher")) && !(uri.contains("/Teacher/") || uri.endsWith("css") || uri.endsWith("jpg"))) {
                         this.context.log("Unauthorized access request");
-                        System.out.println("noAccessToArea");
                         req.setAttribute("result", "noAccessToArea");
                         req.getRequestDispatcher("/Teacher/ActionResultTeacherMenuPageController").forward(request, response);
                     } else if ((session.getAttribute("type").equals("student")) && !(uri.contains("/Student/") || uri.endsWith("css") || uri.endsWith("jpg"))) {
                         this.context.log("Unauthorized access request");
-                        System.out.println("(student) noAccessToArea");
                         req.setAttribute("result", "noAccessToArea");
                         req.getRequestDispatcher("/Student/ActionResultStudentMenuPageController").forward(request, response);
                     } else {
-                        // pass the request along the filter chain
-                        System.out.println("AccessToArea");
                         chain.doFilter(request, response);
                     }
                 }else{
-                    System.out.println("AccessToArea");
                     chain.doFilter(request, response);
                 }
 
             } else {
-                System.out.println("AccessToArea");
                 chain.doFilter(request, response);
             }
         }else{
-            System.out.println("session null");
-            System.out.println("AccessToArea");
             chain.doFilter(request, response);
         }
 

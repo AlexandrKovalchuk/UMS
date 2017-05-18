@@ -2,7 +2,6 @@ package net.ukr.vixtibon.base_objects.study_process;
 
 import net.ukr.vixtibon.ClassReadyForTest;
 import net.ukr.vixtibon.Test;
-import net.ukr.vixtibon.base_objects.persons.Teacher;
 
 import java.io.Serializable;
 
@@ -17,11 +16,7 @@ public class Discipline  implements Serializable {
     int courseNumber ; // Can contain only 1-6 and no other numbers, no negative numbers
     int semesterNumber; // Can contain only 1 or 2 and no other numbers, no negative numbers
     private int countOfLessons; //Can contain 0,1,2... ,no negative numbers
-    //private int countOfPractice;//Can contain 0,1,2... ,no negative numbers
     boolean exam;// Exam in the end of semester or not can be thrue of false
-    //private Teacher teacher;
-
-    //private int departmentID;
 
     public  Discipline(){}
 
@@ -58,7 +53,7 @@ public class Discipline  implements Serializable {
     }
 
     public void setNameOfDiscipline(String nameOfDiscipline) {
-        if(nameOfDiscipline == "/"){
+        if(nameOfDiscipline.equals("/")){
             this.nameOfDiscipline = "";
         }else{
             this.nameOfDiscipline = nameOfDiscipline;
@@ -87,12 +82,10 @@ public class Discipline  implements Serializable {
         Discipline d = new Discipline();
 
         String testData = "/";
-        System.out.println("Inserted data for test: " + testData);
 
         d.setNameOfDiscipline(testData);
 
         boolean result = d.getNameOfDiscipline().equals(null);
-        System.out.println("Name of discipline: " + d.getNameOfDiscipline());
         return result;
     }
 
@@ -106,15 +99,11 @@ public class Discipline  implements Serializable {
         String[] testData = {"A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"};
 
         for(String letter:testData){
-            System.out.println("Point 0 ");
             d.setNameOfDiscipline(letter);
             result = d.getNameOfDiscipline().equals(letter);
-            System.out.println("Inserted data for test: " + letter);
             if(!result){
-                System.out.println("Point 1 ");
                 break;
             }
-            System.out.println("Point 2 ");
 
         }
         return result;

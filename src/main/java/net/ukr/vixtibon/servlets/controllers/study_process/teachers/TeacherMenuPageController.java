@@ -10,7 +10,6 @@ public class TeacherMenuPageController extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if(request.getParameterMap().containsKey("operationType")){
-            System.out.println(request.getParameter("operationType"));
             if(request.getParameter("operationType").equals("attendance")){
                 request.getRequestDispatcher("/Teacher/SetAttendancePageController").forward(request, response);
             }else if(request.getParameter("operationType").equals("progress")){

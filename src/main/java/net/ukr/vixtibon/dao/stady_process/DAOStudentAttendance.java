@@ -1,6 +1,5 @@
 package net.ukr.vixtibon.dao.stady_process;
 
-import net.ukr.vixtibon.QueryStack;
 import net.ukr.vixtibon.base_objects.study_process.Discipline;
 import net.ukr.vixtibon.base_objects.study_process.StudentAttendanceObject;
 import net.ukr.vixtibon.dao.AbstractController;
@@ -18,7 +17,6 @@ public class DAOStudentAttendance  extends AbstractController<StudentAttendanceO
     }
 
     public HashMap<Integer, StudentAttendanceObject> getAllByStudentID(int studentID){
-        System.out.println("DAOStudentAttendance getAllByStudentID");
         String Select_getAllByStudentID_Statemet = "SELECT * FROM attendance WHERE studentID="+ studentID +";";
         HashMap<Integer, StudentAttendanceObject> saoList = new HashMap<>();
         PreparedStatement ps = getPrepareStatement(Select_getAllByStudentID_Statemet);
@@ -48,9 +46,8 @@ public class DAOStudentAttendance  extends AbstractController<StudentAttendanceO
     }
 
     public HashMap<Integer, StudentAttendanceObject> getByStudentIDDisciplineID(int studentID, int disciplineID){
-        System.out.println("DAOStudentAttendance getAllByStudentID");
         String Select_getAllByStudentID_Statemet = "SELECT * FROM attendance WHERE studentID="+ studentID +" and disciplineID=" + disciplineID+ ";";
-        System.out.println("Select_getAllByStudentID_Statemet" + Select_getAllByStudentID_Statemet);
+
         HashMap<Integer, StudentAttendanceObject> saoList = new HashMap<>();
         PreparedStatement ps = getPrepareStatement(Select_getAllByStudentID_Statemet);
         ResultSet rs = null;
@@ -90,7 +87,7 @@ public class DAOStudentAttendance  extends AbstractController<StudentAttendanceO
             counter++;
         }
         String Update_StudentAttendanceObject_Statemet = "UPDATE attendance SET " + list + " WHERE ID=" + entity.getId() + ";";
-        //System.out.println("Update_StudentAttendanceObject_Statemet " + Update_StudentAttendanceObject_Statemet);
+
         PreparedStatement ps = getPrepareStatement(Update_StudentAttendanceObject_Statemet);
         try {
             ps.executeUpdate();
@@ -146,9 +143,9 @@ public class DAOStudentAttendance  extends AbstractController<StudentAttendanceO
     public boolean create(StudentAttendanceObject entity) throws SQLException {
         String Create_StudentAttendanceObject_Statemet = "INSERT INTO attendance (id,disciplineID, studentID) " +
                 "VALUES ('" + findFreeID("attendance") + "','" + entity.getDisciplineID()  + "','" + entity.getStudentID() + "');";
-        //System.out.println(Create_StudentAttendanceObject_Statemet);
-        QueryStack qs = new QueryStack();
-        qs.queries.add(Create_StudentAttendanceObject_Statemet);
+
+        //QueryStack qs = new QueryStack();
+        //qs.queries.add(Create_StudentAttendanceObject_Statemet);
         PreparedStatement ps = getPrepareStatement(Create_StudentAttendanceObject_Statemet);
         try {
             ps.executeUpdate();

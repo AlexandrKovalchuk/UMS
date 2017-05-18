@@ -88,10 +88,6 @@ public class SetDisciplineDepartmentDependencyPageController extends HttpServlet
             }
 
             disciplinesNotConnectedWithDepartment = daodi.getAll();
-
-            System.out.println("disciplinesConnectedWithDepartment " + disciplinesConnectedWithDepartment.size());
-            System.out.println("disciplinesNotConnectedWithDepartment " + disciplinesNotConnectedWithDepartment.size());
-
             for(DisciplineDepartmentDependencyObject dddo: dddos){
                 for(Discipline d: disciplinesNotConnectedWithDepartment){
                     if(dddo.getDisciplineID() == d.getID()){
@@ -100,9 +96,6 @@ public class SetDisciplineDepartmentDependencyPageController extends HttpServlet
                     }
                 }
             }
-            System.out.println("disciplinesNotConnectedWithDepartment " + disciplinesNotConnectedWithDepartment.size());
-            System.out.println("disciplinesNotConnectedWithDepartment " + disciplinesNotConnectedWithDepartment.get(0).getNameOfDiscipline());
-
             Department department = daod.getEntityById((int) session.getAttribute("departmentID"));
 
             daoddd.closeConnection();

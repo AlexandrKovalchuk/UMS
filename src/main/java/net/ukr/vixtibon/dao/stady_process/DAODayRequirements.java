@@ -52,10 +52,10 @@ public class DAODayRequirements  extends AbstractController<DayRequirementsObjec
             }
             count++;
         }
-        //System.out.println(array);
+
         String Update_LessonArray_Statemet = "UPDATE dayRequirements " + array +
                 " WHERE departmentID=" + entity.getDepartmentID() + ";";
-        //System.out.println(Update_LessonArray_Statemet);
+
         QueryStack qs = new QueryStack();
         qs.queries.add(Update_LessonArray_Statemet);
         PreparedStatement ps = getPrepareStatement(Update_LessonArray_Statemet);
@@ -129,9 +129,9 @@ public class DAODayRequirements  extends AbstractController<DayRequirementsObjec
         String Create_DayRequirements_Statemet = "INSERT INTO dayRequirements (id,departmentID,countOfDaysInWeek,countOfLessonsInADay) " +
                 "VALUES ('" + findFreeID("dayRequirements") + "','" + entity.getDepartmentID()  + "','" + entity.getCountOfDaysInWeek() +
                 "','" +entity.getCountOfLessonsInADay()+ "');";
-        //System.out.println(Create_DayRequirements_Statemet);
-        QueryStack qs = new QueryStack();
-        qs.queries.add(Create_DayRequirements_Statemet);
+
+        //QueryStack qs = new QueryStack();
+        //qs.queries.add(Create_DayRequirements_Statemet);
         PreparedStatement ps = getPrepareStatement(Create_DayRequirements_Statemet);
         try {
             ps.executeUpdate();

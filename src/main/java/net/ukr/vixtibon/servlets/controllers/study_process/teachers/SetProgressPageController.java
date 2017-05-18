@@ -29,9 +29,7 @@ public class SetProgressPageController extends HttpServlet {
             if(request.getParameter("step").equals("step1")){
                 session.setAttribute("disciplineID", Integer.parseInt(request.getParameter("disciplineID")));
                 DisciplineDepartmentDependencyObject disciplineDepartmentDependency = daoDisciplineDepartmentDependency.getByDisciplineIDDepartmentID((int) session.getAttribute("disciplineID"), (int) session.getAttribute("departmentID"));
-                //System.out.println("disciplineDepartmentDependency" + disciplineDepartmentDependency.getDisciplineID() + " " + disciplineDepartmentDependency.getDepartmentID());
                 ArrayList<Group> groups = daoGroup.getAllByDepartmentID((int) session.getAttribute("departmentID"), disciplineDepartmentDependency.getCourseNumber());
-                //System.out.println("groups" + groups.size());
                 request.setAttribute("select", "select1");
                 request.setAttribute("groups", groups);
                 request.getRequestDispatcher("StudyProgress/SetProgressPage.jsp").forward(request, response);

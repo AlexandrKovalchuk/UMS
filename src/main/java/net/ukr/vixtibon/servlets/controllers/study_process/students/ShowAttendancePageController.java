@@ -35,7 +35,6 @@ public class ShowAttendancePageController extends HttpServlet {
 
             Student student = daoStudent.getEntityById((int) session.getAttribute("studentID"));
             student.setAttendance(daoStudentAttendance.getAllByStudentID(student.getID()));
-            System.out.println("Attendance size" + student.getAttendance().size());
 
             for(Map.Entry<Integer, StudentAttendanceObject> a: student.getAttendance().entrySet()){
                 Discipline discipline = daoDiscipline.getEntityById(a.getValue().getDisciplineID());

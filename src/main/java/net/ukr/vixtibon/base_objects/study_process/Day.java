@@ -16,15 +16,13 @@ public class Day implements Serializable {
     private int dayLessons;
     private int eveningLessons;
     private int maxCountOfLessons = 7;
-    ArrayList<Lesson> Lessons = new ArrayList<Lesson>();
+    ArrayList<Lesson> Lessons = new ArrayList<>();
 
     public Day(boolean dayOff, int dayNumber, Calendar date, int maxCountOfLessons) {
-        //System.out.println("Day 1 :");
         this.dayOff = dayOff;
         this.dayNumber = dayNumber;
         this.date = date;
         this.maxCountOfLessons = maxCountOfLessons;
-        //fillDay();
 
     }
 
@@ -75,59 +73,6 @@ public class Day implements Serializable {
     public int getEveningLessons() {
         return eveningLessons;
     }
-    /*
-    public void fillDay(){
-        for(int i = 0; i < maxCountOfLessons ; i++){
-            int index = i + 1;
-            Lessons.add(new Lesson(index));
-        }
-    }
-
-
-
-    public boolean lessonTimeIsFree(int number){
-        if(Lessons.get(number-1).getDiscipline() == null){
-            return true;
-        }else{
-            return false;
-        }
-    }
-
-    public void setLesson(int number, Discipline disciplineName){
-        if(lessonTimeIsFree(number)){
-            Lessons.get(number).setDiscipline(disciplineName);
-        }else{
-            System.out.println("Error this time is not free");
-        }
-
-    }
-
-    public void freeLesson(int number){
-        if(lessonTimeIsFree(number)){
-            System.out.println("Error this lesson is already free");
-        }else{
-            Lessons.get(number).setDiscipline(null);
-        }
-    }
-    public void showFreeLessons(){
-        System.out.println("free time is");
-        for(int i = 0; i < Lessons.size() ; i++){
-            if(lessonTimeIsFree(i+1)){
-                System.out.println(Lessons.get(i).getTimeStart());
-            }
-        }
-    }
-
-    public ArrayList<Lesson> getFreeLessons(){
-        ArrayList<Lesson> FreeLessons = new ArrayList<Lesson>();
-        for(int i = 0; i < Lessons.size() ; i++){
-            if(lessonTimeIsFree(i+1)){
-                FreeLessons.add(Lessons.get(i));
-            }
-        }
-        return FreeLessons;
-    }
-    */
 
     public void showDay(){
         System. out .println(" showDay ");

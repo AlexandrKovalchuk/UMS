@@ -56,7 +56,6 @@ public class DayRequirementsPageController  extends HttpServlet {
                     String fieldName = "timeForLesson" + i;
                     String value = request.getParameter(fieldName);
                     dro.getLessonsTime().set(i-1,value);
-                    System.out.println("fieldName " + fieldName + "  " + dro.getLessonsTime().get(i-1));
                 }
 
                 result = daoDayRequirements.updateLessonArray(dro);
@@ -84,11 +83,9 @@ public class DayRequirementsPageController  extends HttpServlet {
                 request.setAttribute("step", "step0");
                 request.setAttribute("requirementsPresent", "yes");
                 request.setAttribute("dayRequirementsObject", dro);
-                System.out.println("present");
             }else{
                 request.setAttribute("step", "step0");
                 request.setAttribute("requirementsPresent", "no");
-                System.out.println("absent");
             }
             daodr.closeConnection();
             request.getRequestDispatcher("DayRequirements/DayRequirementsPage.jsp").forward(request, response);

@@ -1,7 +1,5 @@
 package net.ukr.vixtibon.dao.stady_process;
 
-import net.ukr.vixtibon.QueryStack;
-import net.ukr.vixtibon.base_objects.persons.Employee;
 import net.ukr.vixtibon.base_objects.study_process.Discipline;
 import net.ukr.vixtibon.dao.AbstractController;
 
@@ -17,7 +15,7 @@ public class DAODiscipline  extends AbstractController<Discipline,Integer> {
     @Override
     public ArrayList<Discipline> getAll() {
         String Select_Disciplines_Statemet = "SELECT * FROM discipline;";
-        ArrayList<Discipline> disciplines = new ArrayList<Discipline>();
+        ArrayList<Discipline> disciplines = new ArrayList<>();
         PreparedStatement ps = getPrepareStatement(Select_Disciplines_Statemet);
         ResultSet rs = null;
         try {
@@ -136,9 +134,9 @@ public class DAODiscipline  extends AbstractController<Discipline,Integer> {
                 "countOfLessons,exam) " +
                 "VALUES ('" + findFreeID("discipline") + "','" + entity.getNameOfDiscipline()  + "','" + entity.getCountOfLessons() + "','" +entity.isExam()
                 + "');";
-        //System.out.println(Create_Discipline_Statemet);
-        QueryStack qs = new QueryStack();
-        qs.queries.add(Create_Discipline_Statemet);
+
+        //QueryStack qs = new QueryStack();
+        //qs.queries.add(Create_Discipline_Statemet);
         PreparedStatement ps = getPrepareStatement(Create_Discipline_Statemet);
         try {
             ps.executeUpdate();

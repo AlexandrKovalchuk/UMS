@@ -1,6 +1,5 @@
 package net.ukr.vixtibon.dao.stady_process;
 
-import net.ukr.vixtibon.QueryStack;
 import net.ukr.vixtibon.base_objects.study_process.Discipline;
 import net.ukr.vixtibon.base_objects.study_process.StudentProgressObject;
 import net.ukr.vixtibon.dao.AbstractController;
@@ -18,7 +17,6 @@ public class DAOStudentProgress  extends AbstractController<StudentProgressObjec
     }
 
     public HashMap<Integer, StudentProgressObject> getAllByStudentID(int studentID){
-        System.out.println("DAOStudentProgress getAllByStudentID");
         String Select_getAllByStudentID_Statemet = "SELECT * FROM progress WHERE studentID="+ studentID +";";
         HashMap<Integer, StudentProgressObject> spoList = new HashMap<>();
         PreparedStatement ps = getPrepareStatement(Select_getAllByStudentID_Statemet);
@@ -49,7 +47,6 @@ public class DAOStudentProgress  extends AbstractController<StudentProgressObjec
     }
 
     public HashMap<Integer, StudentProgressObject> getByStudentIDDisciplineID(int studentID, int disciplineID){
-        System.out.println("DAOStudentProgress getAllByStudentID");
         String Select_getAllByStudentID_Statemet = "SELECT * FROM progress WHERE studentID="+ studentID +" and disciplineID=" + disciplineID + ";";
         HashMap<Integer, StudentProgressObject> spoList = new HashMap<>();
         PreparedStatement ps = getPrepareStatement(Select_getAllByStudentID_Statemet);
@@ -91,7 +88,7 @@ public class DAOStudentProgress  extends AbstractController<StudentProgressObjec
             counter++;
         }
         String Update_StudentAttendanceObject_Statemet = "UPDATE progress SET examResult='" + entity.getExamResult() + "', " + list + " WHERE ID=" + entity.getId() + ";";
-        //System.out.println("Update_StudentAttendanceObject_Statemet " + Update_StudentAttendanceObject_Statemet);
+
         PreparedStatement ps = getPrepareStatement(Update_StudentAttendanceObject_Statemet);
         try {
             ps.executeUpdate();
@@ -147,9 +144,9 @@ public class DAOStudentProgress  extends AbstractController<StudentProgressObjec
     public boolean create(StudentProgressObject entity) throws SQLException {
         String Create_StudentProgressObject_Statemet = "INSERT INTO progress (id,disciplineID, studentID) " +
                 "VALUES ('" + findFreeID("progress") + "','" + entity.getDisciplineID()  + "','" + entity.getStudentID() + "');";
-        //System.out.println(Create_StudentProgressObject_Statemet);
-        QueryStack qs = new QueryStack();
-        qs.queries.add(Create_StudentProgressObject_Statemet);
+
+        //QueryStack qs = new QueryStack();
+        //qs.queries.add(Create_StudentProgressObject_Statemet);
         PreparedStatement ps = getPrepareStatement(Create_StudentProgressObject_Statemet);
         try {
             ps.executeUpdate();

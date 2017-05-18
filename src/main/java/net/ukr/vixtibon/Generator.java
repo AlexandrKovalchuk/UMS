@@ -113,7 +113,6 @@ public class Generator {
         departments = daoDepartment.getAll();
 
         for(Department d: departments){
-            System.out.println("d.getID() :" + d.getID());
             if(d.getID() == 0){
                 continue;
             }else {
@@ -197,7 +196,6 @@ public class Generator {
                 }
 
                 d.setEmployees(generateEmployeesList(d.getID()));
-                //System.out.println("d.getEmployees().size() :" + d.getEmployees().size());
                 for (Employee e : d.getEmployees()) {
                     int employeeID = daoEmployee.findFreeID("employee");
                     e.setID(employeeID);

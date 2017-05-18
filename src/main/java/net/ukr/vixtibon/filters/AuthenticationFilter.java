@@ -23,7 +23,6 @@ public class AuthenticationFilter implements Filter {
     public void init(FilterConfig fConfig) throws ServletException {
         this.context = fConfig.getServletContext();
         this.context.log("AuthenticationFilter initialized");
-        System.out.println("AuthenticationFilter initialized");
     }
 
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
@@ -33,8 +32,6 @@ public class AuthenticationFilter implements Filter {
 
         String uri = req.getRequestURI();
         this.context.log("Requested Resource::"+uri);
-        System.out.println("AuthenticationFilter::");
-        System.out.println("Requested Resource::"+uri);
 
         HttpSession session = req.getSession(false);
 

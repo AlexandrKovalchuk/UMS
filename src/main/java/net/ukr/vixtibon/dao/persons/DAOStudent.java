@@ -1,6 +1,5 @@
 package net.ukr.vixtibon.dao.persons;
 
-import net.ukr.vixtibon.QueryStack;
 import net.ukr.vixtibon.base_objects.persons.Student;
 import net.ukr.vixtibon.base_objects.study_process.Discipline;
 import net.ukr.vixtibon.base_objects.study_process.StudentAttendanceObject;
@@ -132,12 +131,12 @@ public class DAOStudent extends AbstractController<Student,Integer> {
         String Select_DepartmentID_By_Username = "SELECT groupID FROM student WHERE ID=" + userID + ";";
         int departmentID = 0;
         PreparedStatement ps = getPrepareStatement(Select_DepartmentID_By_Username);
-        //System.out.println("Select_DepartmentID_By_Username " + Select_DepartmentID_By_Username);
+
         DAOGroup daoGroup = new DAOGroup();
         ResultSet rs = null;
         try {
             rs = ps.executeQuery();
-            if(rs.next() == true){
+            if(rs.next()){
                 departmentID = daoGroup.getDepartmentIDByGroupID(rs.getInt(1));
             }
         } catch (SQLException e) {
@@ -179,9 +178,9 @@ public class DAOStudent extends AbstractController<Student,Integer> {
                 + entity.getPersonalID() + "','" + entity.getSex() + "','" + entity.getEmail() + "','" +entity.getPhoneNumber()
                 + "','" + sqlDate + "','" + entity.getAddress() + "','" + entity.getPasport() + "','" +
                 entity.getLogin() + "','" + entity.getIndexBook() + "','" + id +"','" + entity.getGroupID()+"');";
-        //System.out.println(Create_Student_Statemet);
-        QueryStack qs = new QueryStack();
-        qs.queries.add(Create_Student_Statemet);
+
+        //QueryStack qs = new QueryStack();
+        //qs.queries.add(Create_Student_Statemet);
         PreparedStatement ps = getPrepareStatement(Create_Student_Statemet);
 
         DAOStudentAttendance daosa = new DAOStudentAttendance();
