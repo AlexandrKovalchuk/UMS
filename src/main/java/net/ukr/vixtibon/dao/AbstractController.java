@@ -5,13 +5,11 @@ package net.ukr.vixtibon.dao;
  */
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Enumeration;
 import java.util.List;
 import java.util.Properties;
 
@@ -20,7 +18,7 @@ public abstract class AbstractController<E, K> {
     private ConnectionPool connectionPool;
 
     public AbstractController() {
-        connectionPool = new ConnectionPool("jdbc:mysql://localhost/institute?user=javatest&password=testpass","com.mysql.jdbc.Driver",1);
+        connectionPool = new ConnectionPool(setConnectionParameters(),"com.mysql.jdbc.Driver",1);
         connection = connectionPool.getConnection();
     }
 //  "jdbc:mysql://localhost/institute?user=javatest&password=testpass"
@@ -41,8 +39,8 @@ public abstract class AbstractController<E, K> {
         String password = "";
         Properties properties = new Properties();
 
-        //try{
-            //FileInputStream input = new FileInputStream("F:\\apache-tomcat-8.0.24-windows-x64\\apache-tomcat-8.0.24_TESTER\\webapps\\UMS\\WEB-INF\\config.properties");
+
+            //FileInputStream input = new FileInputStream("WEB-INF\\config.properties");
             //FileInputStream input = new FileInputStream("");
             //input.toString();
             try {
@@ -57,9 +55,7 @@ public abstract class AbstractController<E, K> {
             baseLocation = properties.getProperty("baseLocation");
             user = properties.getProperty("user");
             password = properties.getProperty("password");
-        //}catch (IOException ex){
-           // ex.printStackTrace();
-       // }
+
 
         connectionParameters = connectionParameters + baseLocation + "?user=" + user + "&password=" + password;
         return connectionParameters;
