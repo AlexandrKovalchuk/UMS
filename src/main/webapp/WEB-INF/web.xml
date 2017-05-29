@@ -718,7 +718,6 @@
         <param-value>config.properties</param-value>
     </context-param>
 
-
     <filter>
         <filter-name>AuthenticationFilter</filter-name>
         <filter-class>net.ukr.vixtibon.filters.AuthenticationFilter</filter-class>
@@ -738,5 +737,6 @@
         <filter-name>AreaAccessFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
+
 
 </web-app>

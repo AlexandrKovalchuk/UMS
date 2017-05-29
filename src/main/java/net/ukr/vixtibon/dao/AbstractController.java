@@ -3,9 +3,7 @@ package net.ukr.vixtibon.dao;
 /**
  * Created by alex on 15/11/2016.
  */
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.net.URL;
+import java.io.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -33,31 +31,29 @@ public abstract class AbstractController<E, K> {
     }
 
     private String setConnectionParameters(){
+        System.out.println("setConnectionParameters ");
         String connectionParameters = "";
         String baseLocation = "";
         String user = "";
         String password = "";
         Properties properties = new Properties();
 
-
-            //FileInputStream input = new FileInputStream("WEB-INF\\config.properties");
-            //FileInputStream input = new FileInputStream("");
-            //input.toString();
             try {
-                URL url  = this.getClass().getClassLoader().getResource("config.properties");
-                System.out.println("WAY " + url.getPath());
-                FileInputStream input = new FileInputStream(url.getPath());
+                System.out.println("setConnectionParameters 1");
+                InputStream input  = AbstractController.class.getClassLoader().getResourceAsStream("net\\ukr\\vixtibon\\dao\\config.properties");
+                System.out.println("setConnectionParameters 2");
                 properties.load(input);
+                System.out.println("setConnectionParameters 3");
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            //properties.load(input);
             baseLocation = properties.getProperty("baseLocation");
             user = properties.getProperty("user");
             password = properties.getProperty("password");
 
 
         connectionParameters = connectionParameters + baseLocation + "?user=" + user + "&password=" + password;
+        System.out.println("connectionParameters" + connectionParameters);
         return connectionParameters;
     }
 
