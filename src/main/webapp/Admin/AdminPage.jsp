@@ -50,45 +50,47 @@
         </form>
     </div>
     <br />
-    <div>
-        <form action="${pageContext.request.contextPath}/Admin/AdminPageController" method="post">
-            <input type="hidden"  name="elementType" value="mainInfo">
-            <button class="topicButton topicButtonAdminPage">Main Info</button>
-        </form>
-    </div>
-    <br />
-    <div>
-        <form action="${pageContext.request.contextPath}/Admin/AdminPageController" method="post">
-            <input type="hidden"  name="elementType" value="generateBaseDate">
-            <button class="topicButton topicButtonAdminPage">Generate base date</button>
+<%--
+<div>
+    <form action="${pageContext.request.contextPath}/Admin/AdminPageController" method="post">
+        <input type="hidden"  name="elementType" value="mainInfo">
+        <button class="topicButton topicButtonAdminPage">Main Info</button>
+    </form>
+</div>
+<br />
+<div>
+    <form action="${pageContext.request.contextPath}/Admin/AdminPageController" method="post">
+        <input type="hidden"  name="elementType" value="generateBaseDate">
+        <button class="topicButton topicButtonAdminPage">Generate base date</button>
 
-            <div class = "pageTitleTextBad">
-                Option disabled!
-            </div>
-
-        </form>
-    </div>
-    <br />
-    <div>
-        <form action="${pageContext.request.contextPath}/Admin/AdminPageController" method="post">
-            <input type="hidden"  name="elementType" value="clearAllDate">
-            <button  class="topicButton topicButtonAdminPage">Clear all date</button>
-
-            <div class = "pageTitleTextBad">
-                Option disabled!
-            </div>
-
-        </form>
-    </div>
-    <br />
-
-        <div>
-            <form action="${pageContext.request.contextPath}\LogOutServlet" method="post">
-                <button class="controlButton controlButtonAdminPage">Log Out</button>
-            </form>
+        <div class = "pageTitleTextBad">
+            Option disabled!
         </div>
-        <br />
 
+    </form>
+</div>
+<br />
+<div>
+    <form action="${pageContext.request.contextPath}/Admin/AdminPageController" method="post">
+        <input type="hidden"  name="elementType" value="clearAllDate">
+        <button  class="topicButton topicButtonAdminPage">Clear all date</button>
+
+        <div class = "pageTitleTextBad">
+            Option disabled!
+        </div>
+
+    </form>
+</div>
+<br />
+--%>
+
+    <div>
+        <form action="${pageContext.request.contextPath}\LogOutServlet" method="post">
+            <button class="controlButton controlButtonAdminPage">Log Out</button>
+        </form>
     </div>
+    <br />
+
+</div>
 </body>
 </html>

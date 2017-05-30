@@ -31,7 +31,6 @@ public abstract class AbstractController<E, K> {
     }
 
     private String setConnectionParameters(){
-        System.out.println("setConnectionParameters ");
         String connectionParameters = "";
         String baseLocation = "";
         String user = "";
@@ -39,11 +38,8 @@ public abstract class AbstractController<E, K> {
         Properties properties = new Properties();
 
             try {
-                System.out.println("setConnectionParameters 1");
                 InputStream input  = AbstractController.class.getClassLoader().getResourceAsStream("net\\ukr\\vixtibon\\dao\\config.properties");
-                System.out.println("setConnectionParameters 2");
                 properties.load(input);
-                System.out.println("setConnectionParameters 3");
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -53,7 +49,6 @@ public abstract class AbstractController<E, K> {
 
 
         connectionParameters = connectionParameters + baseLocation + "?user=" + user + "&password=" + password;
-        System.out.println("connectionParameters" + connectionParameters);
         return connectionParameters;
     }
 

@@ -42,7 +42,7 @@
             </form>
         </div>
         <br />
-
+<%--
         <div>
             <form action="${pageContext.request.contextPath}/Employee/TimetablePageController" method="post">
                 <input type="hidden"  name="operationType" value="generateHTML">
@@ -50,7 +50,7 @@
             </form>
         </div>
         <br />
-
+--%>
         <div>
             <form action="${pageContext.request.contextPath}/Employee/TimetablePageController" method="post">
                 <input type="hidden"  name="operationType" value="cancel">
