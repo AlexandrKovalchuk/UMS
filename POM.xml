@@ -48,7 +48,7 @@
 
 
     <build>
-        <finalName>UMS</finalName>
+        <finalName>ROOT</finalName>
 
 
         <plugins>
@@ -59,7 +59,7 @@
                 <artifactId>tomcat8-maven-plugin</artifactId>
                 <version>2.3-SNAPSHOT</version>
                 <configuration>
-                    <path>/UMS</path>
+                    <path>/</path>
                     <url>http://localhost:8080/manager/text</url>
                     <encoding>UTF-8</encoding>
                 </configuration>
