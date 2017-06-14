@@ -48,7 +48,7 @@
 
 
     <build>
-        <finalName>UMS</finalName>
+        <finalName>ROOT</finalName>
     </build>
 
 </project>
