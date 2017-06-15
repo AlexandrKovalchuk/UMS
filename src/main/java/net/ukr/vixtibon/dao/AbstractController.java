@@ -14,10 +14,18 @@ import java.util.Properties;
 public abstract class AbstractController<E, K> {
     private Connection connection;
     private ConnectionPool connectionPool;
+    public Boolean connectionPresent = false;
 
     public AbstractController() {
+        System.out.println("AbstractController0");
         connectionPool = new ConnectionPool(setConnectionParameters(),"com.mysql.jdbc.Driver",1);
-        connection = connectionPool.getConnection();
+        if(connectionPool.getConnection()==null) {
+            connectionPresent = false;
+            System.out.println("AbstractController1");
+        }else{
+            connection = connectionPool.getConnection();
+            System.out.println("AbstractController2");
+        }
     }
 //  "jdbc:mysql://localhost/institute?user=javatest&password=testpass"
     public abstract List<E> getAll();

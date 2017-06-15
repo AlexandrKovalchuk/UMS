@@ -77,22 +77,31 @@ public class DAOLogin extends AbstractController<LogInBody,Integer> {
     public LogInBody getEntityByLogIn(String logIn) {
         String SELECT_LogInBody_BY_LogIn = "SELECT * FROM LogInPass WHERE LogIn='" + logIn +"'";
         LogInBody lib = new LogInBody();
-        PreparedStatement ps = getPrepareStatement(SELECT_LogInBody_BY_LogIn);
-        ResultSet rs = null;
-        try {
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                lib.setID(rs.getInt(1));
-                lib.setLogIn(rs.getString(2));
-                lib.setPassword(rs.getString(3));
-                lib.setAccess(rs.getString(4));
-                lib.setAccessID(rs.getInt(5));
+        if(connectionPresent) {
+            PreparedStatement ps = getPrepareStatement(SELECT_LogInBody_BY_LogIn);
+            ResultSet rs = null;
+            try {
+                rs = ps.executeQuery();
+                while (rs.next()) {
+                    lib.setID(rs.getInt(1));
+                    lib.setLogIn(rs.getString(2));
+                    lib.setPassword(rs.getString(3));
+                    lib.setAccess(rs.getString(4));
+                    lib.setAccessID(rs.getInt(5));
+                }
+                return lib;
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } finally {
+                if (rs != null) try {
+                    rs.close();
+                } catch (SQLException logOrIgnore) {
+                }
+                if (ps != null) try {
+                    ps.close();
+                } catch (SQLException logOrIgnore) {
+                }
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-                if (rs != null) try { rs.close(); } catch (SQLException logOrIgnore) {}
-                if (ps != null) try { ps.close(); } catch (SQLException logOrIgnore) {}
         }
         return lib;
     }

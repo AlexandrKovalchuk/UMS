@@ -21,6 +21,10 @@ public class LogInServlet extends HttpServlet {
 
         DAOLogin dl = new DAOLogin();
         LogInBody lib = dl.getEntityByLogIn(username);
+        if(!dl.connectionPresent){
+            request.setAttribute("wrongPasswordOrLogIn", "absentConnectionToDataBase");
+            request.getRequestDispatcher("LogIn.jsp").forward(request, response);
+        }
         if(lib.getID()== -1){
             request.setAttribute("wrongPasswordOrLogIn", "absentInBase");
             request.getRequestDispatcher("LogIn.jsp").forward(request, response);
