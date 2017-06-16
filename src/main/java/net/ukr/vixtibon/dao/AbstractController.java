@@ -24,6 +24,7 @@ public abstract class AbstractController<E, K> {
             System.out.println("AbstractController1");
         }else{
             connection = connectionPool.getConnection();
+            connectionPresent = true;
             System.out.println("AbstractController2");
         }
     }
