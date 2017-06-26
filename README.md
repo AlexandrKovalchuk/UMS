@@ -47,7 +47,7 @@ Employee area:
 Teacher area:
 - Update Attendance;
 - Update Progress;
--Time Table;
+- Time Table;
 
 Student area:
 - Show Attendance;
