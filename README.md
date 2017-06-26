@@ -29,11 +29,13 @@ Areas:
 - Student area;
 
 Main sections by areas:
+
 Admin Area:
 - Manage University Credentials (Create, Update, Delete, Show Info);
 - Manage Faculty Credentials (Create, Update, Move, Delete, Show Info);
 - Manage Department Credentials (Create, Update, Move, Delete, Show Info);
 - Manage Employee Credentials (Create, Update, Move, Delete, Show Info);
+
 Employee area:
 - Manage Discipline Credentials (Create, Update,Set Dependency, Delete, Show Info);
 - Manage Group Credentials (Create, Update, Move, Delete, Show Info);
@@ -41,10 +43,12 @@ Employee area:
 - Manage Student Credentials (Create, Update, Move, Delete, Show Info);
 - Manage Timetable Credentials (Create, Update);
 - Set Day Requirements;
+
 Teacher area:
 - Update Attendance;
 - Update Progress;
 -Time Table;
+
 Student area:
 - Show Attendance;
 - Show Progress;
