@@ -1,4 +1,4 @@
-Project ame:
+Project name:
 University Management System (UMS).
 
 Description:
