@@ -1,5 +1,5 @@
-Project name:
-Umiversity Management System (UMS).
+Project ame:
+University Management System (UMS).
 
 Description:
 This is a demo project which is called to help in managing a structure like university.
@@ -15,8 +15,8 @@ Data Base setup:
 - set up base using file base_setup.sql;
 
 Installation:
-- make package via maven;
-- launch app via tomcat;
+- mvn clean package;
+- launch via tomcat;
 
 Functions:
 App has different access areas for different users, each area has own functions.
